@@ -216,6 +216,6 @@ public sealed partial class DesktopModel : Observable, IDisposable
             .Select(value => value.Type == JTokenType.String ? value.Value<string>() : null)
             .FirstOrDefault(value => value != null && (value.StartsWith("http", StringComparison.OrdinalIgnoreCase) || value.StartsWith("//", StringComparison.Ordinal)));
     }
-    public void Dispose() { Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
+    public void Dispose() { Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
     private async Task DisposeClientAsync() { await requests.WaitAsync(); client?.Dispose(); requests.Release(); }
 }

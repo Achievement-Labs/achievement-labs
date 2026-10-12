@@ -2,6 +2,14 @@
 
 Download **AchievementLabs.exe** below for the updated Windows app. This release includes the application updates as well as the corrected event catalog.
 
+## Automatic app updates
+
+- The standalone EXE checks for newer releases on launch and downloads them in the background.
+- Downloads are checked against the published asset size and SHA-256 before replacement. Choose **Install and restart** when ready; active operations and pending profile edits block installation.
+- The previous EXE is kept as a backup and restored if the updated app fails to start. Events and saved settings remain in their existing folders.
+- Settings includes a manual update check and an option to disable automatic checks/downloads.
+- This refreshed v1.0.6 download is build **1.0.6.1**. Users running the earlier EXE need to download it once to receive future automatic updates.
+
 ## Xbox 360 profiles and achievements
 
 - Discover Xbox 360 profiles on USB, extract a backed-up working copy, and browse local profiles, games, and achievements.
@@ -92,7 +100,7 @@ Download **AchievementLabs.exe** below for the updated Windows app. This release
 ## Download details
 
 - Windows x64, self-contained standalone EXE.
-- Size: 108,940,862 bytes.
-- SHA-256: `f67444015900105af06a0837acccece8e1f1be787d8cf6b69584612334f6509c`
+- Size: 108,949,202 bytes.
+- SHA-256: `0b34e60f760f8b230e3ada3d086d5fefd67641d85622c3dfb5f7f0eaa5e0e1b2`
 - Authenticode: unsigned (no signing certificate available).
-- Automatic app updates are not implemented in this release; download the new EXE and replace your existing copy. Local user data stays in its existing folders.
+- Automatic updates are included in the refreshed build 1.0.6.1.

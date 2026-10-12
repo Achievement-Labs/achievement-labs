@@ -49,7 +49,11 @@ public partial class MainWindow : Window
                 Close();
                 return;
             }
-            if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) { await model.LoadPreferencesAsync(); await model.AttachXboxPcAppAsync(); return; }
+            if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
+                var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
+                if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
+                await model.LoadPreferencesAsync(); _ = model.CheckForUpdatesAsync(); await model.AttachXboxPcAppAsync(); return;
+            }
             try
             {
                 var args = Environment.GetCommandLineArgs();
@@ -271,6 +275,8 @@ public partial class MainWindow : Window
     private void ApplyAccent() => Application.Current!.Resources["Accent"] = new SolidColorBrush(Color.Parse(model.MintAccent ? "#8AD7A0" : "#70C98A"));
     private void ShowSettings(object? s, RoutedEventArgs e) => model.Navigate("Settings");
     private void ShowDiagnostics(object? s, RoutedEventArgs e) => model.Navigate("Diagnostics");
+    private async void CheckUpdates(object? s, RoutedEventArgs e) => await model.CheckForUpdatesAsync(true);
+    private void InstallUpdate(object? s, RoutedEventArgs e) { if (model.InstallUpdate()) Close(); }
     private async void SaveSettings(object? s, RoutedEventArgs e) => await model.SavePreferencesAsync();
     private async void SaveEventToken(object? s, RoutedEventArgs e) => await model.SaveEventTokenAsync();
     private void ClearEventToken(object? s, RoutedEventArgs e) => model.ClearEventToken();

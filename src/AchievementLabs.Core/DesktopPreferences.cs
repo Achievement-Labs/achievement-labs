@@ -14,6 +14,7 @@ public sealed record DesktopPreferences
     public bool AutoLaunchXboxApp { get; init; }
     public bool LaunchXboxAppHidden { get; init; }
     public bool MintAccent { get; init; }
+    public bool AutomaticallyCheckUpdates { get; init; } = true;
 }
 public sealed class DesktopPreferencesStore(string path)
 {

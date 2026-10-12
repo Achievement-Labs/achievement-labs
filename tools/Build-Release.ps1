@@ -3,6 +3,7 @@
 param(
     [Parameter(Mandatory)][string]$Version,
     [switch]$RefreshCatalog,
+    [ValidateRange(0,65534)][int]$BuildRevision = 0,
     [string]$SigningThumbprint = $env:ACHIEVEMENT_LABS_SIGNING_THUMBPRINT,
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )
@@ -30,7 +31,7 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:Version=$Version" "-p:FileVersion=$Version.0" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }
@@ -63,6 +64,7 @@ if (-not [string]::IsNullOrWhiteSpace($SigningThumbprint)) {
     $taskSigned = $true
 }
 $taskHash = (Get-FileHash -LiteralPath $taskExe.FullName -Algorithm SHA256).Hash
+[ordered]@{ version="$Version.$BuildRevision"; bytes=$taskExe.Length; sha256=$taskHash.ToLowerInvariant() } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskWork 'update.json')
 [ordered]@{ version=$Version; file=$taskExe.FullName; bytes=$taskExe.Length; sha256=$taskHash; selfContained=$true; privateEventsIncluded=$false; signed=$taskSigned; liveLicensingVerified=$false } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskWork 'release-manifest.json')
 Write-Output "Release candidate: $($taskExe.FullName)"
 Write-Output "SHA256: $taskHash"
