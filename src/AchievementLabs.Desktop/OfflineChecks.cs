@@ -1,8 +1,58 @@
 using AchievementLabs.Core;
+using AchievementLabs.Services.Gfwl;
+using System.IO.MemoryMappedFiles;
 using System.Diagnostics;
 namespace AchievementLabs.Desktop;
 internal static class OfflineChecks
 {
+    private static async Task CheckGfwlProtocolAsync()
+    {
+        var name = "AchievementLabs.GfwlFixture." + Guid.NewGuid().ToString("N");
+        using var session = new GfwlAchievementSession(Environment.ProcessId, name);
+        using var mapping = MemoryMappedFile.OpenExisting(name);
+        using var view = mapping.CreateViewAccessor();
+        using var stop = new CancellationTokenSource(TimeSpan.FromSeconds(8));
+        var unlocked = false;
+        var engine = Task.Run(async () =>
+        {
+            while (!stop.IsCancellationRequested)
+            {
+                var command = view.ReadInt32(0);
+                if (command == 0x1000)
+                {
+                    view.Write(4, 1);
+                    view.Write(8, 7);
+                    var title = System.Text.Encoding.Unicode.GetBytes("Offline achievement\0");
+                    view.WriteArray(12, title, 0, title.Length);
+                    var description = System.Text.Encoding.Unicode.GetBytes("Fixture description\0");
+                    view.WriteArray(8 + 0x804, description, 0, description.Length);
+                    view.Write(8 + 0x1808, 15);
+                    view.Write(8 + 0x1814, unlocked ? 0x20000 : 0);
+                    view.Write(0, 0x2000);
+                }
+                else if (command == 0x1001)
+                {
+                    unlocked = view.ReadInt32(4) == 7;
+                    view.Write(0, unlocked ? 0x2002 : 0x2003);
+                }
+                await Task.Delay(5, stop.Token);
+            }
+        }, stop.Token);
+        try
+        {
+            var catalog = await session.ReadAchievementsAsync(stop.Token);
+            if (catalog.Count != 1 || catalog[0].Id != 7 || catalog[0].Name != "Offline achievement" || catalog[0].Gamerscore != 15 || catalog[0].Unlocked)
+                throw new Exception("GFWL shared-memory catalog decode failed.");
+            var earned = await session.EarnAsync(7, stop.Token);
+            if (!earned.Unlocked || earned.UnlockedOnline || earned.State != "Achieved offline")
+                throw new Exception("GFWL shared-memory write or verification failed.");
+        }
+        finally
+        {
+            stop.Cancel();
+            try { await engine; } catch (OperationCanceledException) { }
+        }
+    }
     private static async Task CheckWindows8Async(string root)
     {
         using var key = System.Security.Cryptography.ECDsa.Create(System.Security.Cryptography.ECCurve.NamedCurves.nistP256);
@@ -30,6 +80,12 @@ internal static class OfflineChecks
         using var catalogVm = new Workflows.Windows8ViewModel(() => ("XBL3.0 x=test;fake", "123"), new Windows8CatalogServer()) { TitleId = "1515264857" };
         await catalogVm.LoadAchievementsCommand.ExecuteAsync(null);
         if (catalogVm.Achievements.Count != 3 || catalogVm.Achievements.Count(a => a.Unlocked) != 1 || catalogVm.Achievements[0].Name != "Catalog name") throw new Exception("Win8 partial unlock history hid full catalog or overwrote metadata.");
+        using var mainHttp = new System.Net.Http.HttpClient(new Windows8CatalogServer());
+        var mainRows = await Windows8Achievements.ReadAsync(mainHttp, "XBL3.0 x=test;fake", "123", "1515264857", CancellationToken.None);
+        if (mainRows.Length != 3 || mainRows.Count(a => a.Unlocked) != 1 || mainRows[0].Name != "Catalog name") throw new Exception("Main editor did not merge Windows 8 unlock history with its catalog.");
+        using var historyHttp = new System.Net.Http.HttpClient(new Windows8HistoryOnlyServer());
+        var historyRows = await Windows8Achievements.ReadAsync(historyHttp, "XBL3.0 x=test;fake", "123", "1297292136", CancellationToken.None);
+        if (historyRows.Length != 1 || !historyRows[0].Unlocked) throw new Exception("Windows 8 history was not loaded when the title catalog returned 404.");
         catalogVm.StateFilter = "Locked";
         if (catalogVm.VisibleAchievements.Count() != 2) throw new Exception("Win8 locked filter failed.");
         catalogVm.Search = "3";
@@ -49,6 +105,15 @@ internal static class OfflineChecks
                 : "{\"achievements\":[{\"id\":\"1\",\"name\":\"History name\",\"unlocked\":true}]}";
             return Task.FromResult(new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.OK) { Content = new System.Net.Http.StringContent(json) });
         }
+    }
+
+    private sealed class Windows8HistoryOnlyServer : System.Net.Http.HttpMessageHandler
+    {
+        protected override Task<System.Net.Http.HttpResponseMessage> SendAsync(System.Net.Http.HttpRequestMessage request, CancellationToken token) =>
+            Task.FromResult(request.RequestUri!.Host == "progress.xboxlive.com"
+                ? new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.NotFound)
+                : new System.Net.Http.HttpResponseMessage(System.Net.HttpStatusCode.OK)
+                { Content = new System.Net.Http.StringContent("{\"achievements\":[{\"id\":\"1\",\"name\":\"From history\",\"unlocked\":true}]} ") });
     }
 
     private sealed class Windows8FakeServer : System.Net.Http.HttpMessageHandler
@@ -101,11 +166,25 @@ internal static class OfflineChecks
     }
     public static async Task RunAsync(string output)
     {
+        await CheckGfwlProtocolAsync();
         if (Workflows.StatsEditorViewModel.GetCatalogStatMode("322252289") != "Event" ||
             Workflows.StatsEditorViewModel.GetCatalogStatMode("309062877") != "Title")
             throw new Exception("Bundled stat-mode catalogs did not distinguish event-based and title-based titles.");
         if (DesktopModel.ConvertTitleIdToDecimal("0D174C79") != "219630713")
             throw new Exception("Title search did not convert the hexadecimal Xbox title ID to decimal.");
+        if (DesktopModel.NormalizeLookalikes("Lord of the Сlick") != "Lord of the Click" ||
+            !DesktopModel.SearchSpellings("Lord of the Click").Contains("Lord of the Сlick"))
+            throw new Exception("Title search did not handle mixed-script lookalike letters.");
+        var darkSoulsGfwl = new Game(Convert.ToUInt32("4E4D0FA1", 16).ToString(), "Dark Souls: Prepare to Die Edition", "GFWL", 0, 0, 0);
+        if (!DesktopModel.IsKnownGfwlTitle(darkSoulsGfwl.Id) ||
+            !DesktopModel.MatchesPlatform(darkSoulsGfwl, "GFWL") ||
+            DesktopModel.MatchesPlatform(darkSoulsGfwl, "Xbox 360"))
+            throw new Exception("GFWL title classification or library filter failed.");
+        if (!DesktopModel.IsKnownWindows8Title("1297292136") ||
+            !DesktopModel.IsKnownWindows8Title("1679995514") ||
+            DesktopModel.ResolveWindows8TitleId("1679995514") != "1297292136" ||
+            !DesktopModel.IsKnownWindows8Title("1297292157"))
+            throw new Exception("Known Windows 8 titles were not recognized.");
         var root = Path.Combine(Path.GetFullPath(output), "fixtures-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
         await CheckWindows8Async(root);

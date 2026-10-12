@@ -7,7 +7,7 @@ namespace AchievementLabs.Services.Gfwl;
 public interface IGfwlAchievementManagerService
 {
     GfwlBinaryStatus GetBinaryStatus();
-    IReadOnlyList<GfwlProcessItem> GetCandidateProcesses();
+    IReadOnlyList<GfwlProcessItem> GetCandidateProcesses(bool showAll = false);
     Task<GfwlInjectionResult> InjectAdapterAsync(GfwlProcessItem process, CancellationToken cancellationToken);
 }
 
@@ -29,7 +29,7 @@ public sealed class GfwlAchievementManagerService : IGfwlAchievementManagerServi
             managerPath);
     }
 
-    public IReadOnlyList<GfwlProcessItem> GetCandidateProcesses()
+    public IReadOnlyList<GfwlProcessItem> GetCandidateProcesses(bool showAll = false)
     {
         var results = new List<GfwlProcessItem>();
 
@@ -48,7 +48,7 @@ public sealed class GfwlAchievementManagerService : IGfwlAchievementManagerServi
                 status = ex.Message;
             }
 
-            if (hasXlive || LooksLikeGameProcess(process))
+            if (showAll || hasXlive || LooksLikeGameProcess(process))
                 results.Add(GfwlProcessItem.FromProcess(process, hasXlive, status));
         }
 
@@ -162,10 +162,10 @@ public sealed record GfwlBinaryStatus(
     string EnginePath,
     string ManagerPath)
 {
-    public bool IsComplete => EngineFound && ManagerFound;
+    public bool IsComplete => EngineFound;
     public string Summary => IsComplete
-        ? "Imported GFWLAM binaries found"
-        : "Imported GFWLAM binaries incomplete";
+        ? "GFWLAM engine ready for native Achievement Labs controls"
+        : "GFWLAM engine.dll is missing";
 }
 
 public sealed record GfwlInjectionResult(bool Success, string Message)

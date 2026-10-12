@@ -1,4 +1,5 @@
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using AchievementLabs.Models;
 
@@ -25,7 +26,7 @@ public sealed class Xbox360PackageService : IXbox360PackageService
             throw new FileNotFoundException("The selected Xbox 360 package was not found.", filePath);
 
         var header = ReadHeader(file);
-        var magic = ReadAscii(header, 0x0, 4);
+        var magic = Encoding.ASCII.GetString(header, 0x0, 4);
         var looksLikeStfs = magic is "CON " or "LIVE" or "PIRS";
         var headerSize = (int)ReadUInt32BE(header, 0x340);
         var contentType = ReadUInt32BE(header, 0x344);
@@ -60,6 +61,40 @@ public sealed class Xbox360PackageService : IXbox360PackageService
             Probes = probes,
             Entries = entries
         };
+    }
+
+    public byte[] ReadEntryBytes(string filePath, string entryPath)
+    {
+        var info = InspectPackage(filePath);
+        var entry = info.Entries.FirstOrDefault(item => !item.IsDirectory &&
+            item.Path.Equals(entryPath, StringComparison.OrdinalIgnoreCase));
+        if (entry == null) throw new FileNotFoundException("The package entry was not found.", entryPath);
+        if (entry.Size < 0 || entry.Size > 64L * 1024 * 1024)
+            throw new InvalidDataException("The package entry exceeds the supported size.");
+
+        using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+        var header = new byte[Math.Min(MaxHeaderBytes, (int)Math.Min(stream.Length, MaxHeaderBytes))];
+        stream.ReadExactly(header);
+        var headerSize = (int)ReadUInt32BE(header, 0x340);
+        var descriptor = ReadVolumeDescriptor(header);
+        var magic = Encoding.ASCII.GetString(header, 0, 4);
+        var result = new byte[checked((int)entry.Size)];
+        var visited = new HashSet<int>();
+        var block = entry.StartBlock;
+        for (var offset = 0; offset < result.Length; offset += StfsBlockSize)
+        {
+            if (block < 0 || !visited.Add(block) || block >= descriptor.AllocatedBlockCount)
+                throw new InvalidDataException("The package entry has an invalid block chain.");
+            var physicalOffset = BlockToOffset(block, headerSize, descriptor.BlockSeparation, magic);
+            var length = Math.Min(StfsBlockSize, result.Length - offset);
+            if (physicalOffset < 0 || physicalOffset + length > stream.Length)
+                throw new InvalidDataException("The package entry extends past the package.");
+            stream.Position = physicalOffset;
+            stream.ReadExactly(result, offset, length);
+            if (offset + length < result.Length)
+                block = ReadNextBlock(stream, block, headerSize, descriptor.BlockSeparation, magic);
+        }
+        return result;
     }
 
     private static byte[] ReadHeader(FileInfo file)
@@ -109,20 +144,24 @@ public sealed class Xbox360PackageService : IXbox360PackageService
         if (descriptor.FileTableBlockCount <= 0 || descriptor.FileTableBlockNumber < 0)
             yield break;
 
-        var tableOffset = BlockToOffset(descriptor.FileTableBlockNumber, headerSize, descriptor.BlockSeparation, magic);
         var tableLength = Math.Min(descriptor.FileTableBlockCount * StfsBlockSize, 0x100000);
-        if (tableOffset < 0 || tableOffset >= file.Length)
-            yield break;
-
-        tableLength = (int)Math.Min(tableLength, file.Length - tableOffset);
         if (tableLength < FileEntrySize)
             yield break;
 
         var table = new byte[tableLength];
         using (var stream = File.Open(file.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
         {
-            stream.Position = tableOffset;
-            _ = stream.Read(table, 0, table.Length);
+            var block = descriptor.FileTableBlockNumber;
+            var visited = new HashSet<int>();
+            for (var offset = 0; offset < table.Length; offset += StfsBlockSize)
+            {
+                if (block < 0 || !visited.Add(block)) break;
+                var tableOffset = BlockToOffset(block, headerSize, descriptor.BlockSeparation, magic);
+                if (tableOffset < 0 || tableOffset + StfsBlockSize > stream.Length) break;
+                stream.Position = tableOffset;
+                stream.ReadExactly(table, offset, StfsBlockSize);
+                block = ReadNextBlock(stream, block, headerSize, descriptor.BlockSeparation, magic);
+            }
         }
 
         var parsed = new List<MutableFileEntry>();
@@ -183,17 +222,68 @@ public sealed class Xbox360PackageService : IXbox360PackageService
         {
             Size = ReadByte(data, offset),
             BlockSeparation = ReadByte(data, offset + 0x02),
-            FileTableBlockCount = ReadInt16BE(data, offset + 0x03),
-            FileTableBlockNumber = ReadInt24BE(data, offset + 0x05),
+            FileTableBlockCount = ReadUInt16LE(data, offset + 0x03),
+            FileTableBlockNumber = ReadInt24LE(data, offset + 0x05),
             AllocatedBlockCount = ReadInt32BE(data, offset + 0x1C)
         };
     }
 
-    private static long BlockToOffset(int blockNumber, int headerSize, byte blockSeparation, string magic)
+    internal static long BlockToOffset(int blockNumber, int headerSize, byte blockSeparation, string magic)
     {
+        if (magic == "CON " && headerSize == 0x971A)
+        {
+            var adjustment = blockNumber >= 0xAA ? ((blockNumber / 0xAA) + 1) * 2 : 0;
+            if (blockNumber >= 0x70E4)
+                adjustment += ((blockNumber / 0x70E4) + 1) * 2;
+            return 0xC000L + ((long)blockNumber + adjustment) * StfsBlockSize;
+        }
         var baseOffset = ComputeHeaderBase(headerSize);
         var physicalBlock = ComputePhysicalBlockNumber(blockNumber, headerSize, blockSeparation, magic);
         return baseOffset + ((long)physicalBlock * StfsBlockSize);
+    }
+
+    internal static int ReadNextBlock(Stream stream, int blockNumber, int headerSize, byte blockSeparation, string magic)
+    {
+        if (magic != "CON " || headerSize != 0x971A) return blockNumber + 1;
+        var tableBlock = (blockNumber / 0xAA) * 0xAC - 2;
+        if (blockNumber >= 0xAA)
+            tableBlock += ((blockNumber / 0x70E4) + 1) * 2;
+        if (blockNumber >= 0x70E4)
+            tableBlock += 2;
+        var tableOffset = 0xC000L + (long)tableBlock * StfsBlockSize;
+        var group = blockNumber / 0xAA;
+        if (group < 0xAA)
+        {
+            var topHash = new byte[20];
+            stream.Position = 0x381;
+            stream.ReadExactly(topHash);
+            var levelOneOffset = SelectHashTable(stream, 0xB6000, topHash);
+            var levelZeroHash = new byte[20];
+            stream.Position = levelOneOffset + group * 0x18L;
+            stream.ReadExactly(levelZeroHash);
+            tableOffset = SelectHashTable(stream, tableOffset, levelZeroHash);
+        }
+        var recordOffset = tableOffset + (blockNumber % 0xAA) * 0x18 + 0x15;
+        if (recordOffset < 0 || recordOffset + 3 > stream.Length) return -1;
+        stream.Position = recordOffset;
+        Span<byte> next = stackalloc byte[3];
+        stream.ReadExactly(next);
+        var value = (next[0] << 16) | (next[1] << 8) | next[2];
+        return value == 0xFFFFFF ? -1 : value;
+    }
+
+    private static long SelectHashTable(Stream stream, long firstOffset, byte[] expectedHash)
+    {
+        var table = new byte[StfsBlockSize];
+        for (var copy = 0; copy < 2; copy++)
+        {
+            var offset = firstOffset + copy * StfsBlockSize;
+            if (offset < 0 || offset + StfsBlockSize > stream.Length) continue;
+            stream.Position = offset;
+            stream.ReadExactly(table);
+            if (SHA1.HashData(table).SequenceEqual(expectedHash)) return offset;
+        }
+        throw new InvalidDataException("The profile's active STFS hash table could not be verified.");
     }
 
     private static int ComputePhysicalBlockNumber(int blockNumber, int headerSize, byte blockSeparation, string magic)
@@ -264,6 +354,14 @@ public sealed class Xbox360PackageService : IXbox360PackageService
             return 0;
 
         return (short)((data[offset] << 8) | data[offset + 1]);
+    }
+
+    private static int ReadUInt16LE(byte[] data, int offset)
+    {
+        if (offset < 0 || offset + 2 > data.Length)
+            return 0;
+
+        return data[offset] | (data[offset + 1] << 8);
     }
 
     private static int ReadInt24BE(byte[] data, int offset)

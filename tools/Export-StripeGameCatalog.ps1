@@ -35,15 +35,19 @@ $rows = foreach ($titleId in $data.Keys | Where-Object { $_ -match '^\d+$' }) {
     $block = $data[$titleId]
     $record = $byId[$titleId]
     $fallback = $manual[$titleId]
-    $title = if ($block.TitleName) { $block.TitleName } elseif ($record.Name) { $record.Name } else { $fallback.Title }
+    $title = if ($block.TitleName) { $block.TitleName } elseif ($record.Name) { $record.Name } elseif ($block.Name) { $block.Name } elseif ($fallback.Title) { $fallback.Title } else { "Title $titleId" }
     $devices = if ($block.Devices) { @($block.Devices) } elseif ($record.Devices) { @($record.Devices) } else { @($fallback.Devices) }
+    # Match hosted catalog eligibility; a block alone does not make it available.
+    $available = $block.Enabled -ne $false -and
+        $titleId -in @($data.SupportedTitleIDs | ForEach-Object { [string]$_ }) -and
+        (Test-Path -LiteralPath (Join-Path $repo "src/AchievementLabs.App/Events/$titleId.json"))
     [pscustomobject][ordered]@{
         Title = $title
         Platform = Get-PlatformLabel $devices
         TitleId = $titleId
-        SupportStatus = if ([bool]$block.FullySupported) {
+        SupportStatus = if ($available -and [bool]$block.FullySupported) {
             'Fully supported'
-        } elseif (-not $block.ContainsKey('Enabled') -or $block.Enabled -ne $false) {
+        } elseif ($available) {
             'Testing'
         } else {
             'Draft'

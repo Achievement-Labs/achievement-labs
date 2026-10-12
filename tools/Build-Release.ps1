@@ -1,7 +1,8 @@
 # Creates a new, isolated release candidate; never deletes old builds or research.
 [CmdletBinding()]
 param(
-    [string]$Version = '1.0.3',
+    [Parameter(Mandatory)][string]$Version,
+    [switch]$RefreshCatalog,
     [string]$SigningThumbprint = $env:ACHIEVEMENT_LABS_SIGNING_THUMBPRINT,
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )
@@ -9,9 +10,12 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
     throw 'Build-Release.ps1 requires PowerShell 7 or newer. Run it with: pwsh -File tools/Build-Release.ps1'
 }
 $ErrorActionPreference = 'Stop'
-if ($Version -notmatch '^[A-Za-z0-9.-]+$') { throw 'Invalid version.' }
+if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable version such as 1.0.6.' }
 $taskRoot = Split-Path -Parent $PSScriptRoot
-& (Join-Path $PSScriptRoot 'Build-SiteGameData.ps1')
+if ($RefreshCatalog) { & (Join-Path $PSScriptRoot 'Build-SiteGameData.ps1') }
+if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'site/assets/games.json'))) {
+    throw 'Public catalog metadata is missing. Prepare it before building or use -RefreshCatalog.'
+}
 $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskOutput = Join-Path $taskRoot "releases/$Version-$taskStamp"
 $taskWork = Join-Path $taskRoot "artifacts/release-work/$taskStamp"
@@ -26,7 +30,7 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:Version=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:Version=$Version" "-p:FileVersion=$Version.0" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }
@@ -59,6 +63,6 @@ if (-not [string]::IsNullOrWhiteSpace($SigningThumbprint)) {
     $taskSigned = $true
 }
 $taskHash = (Get-FileHash -LiteralPath $taskExe.FullName -Algorithm SHA256).Hash
-[ordered]@{ version=$Version; file=$taskExe.FullName; bytes=$taskExe.Length; sha256=$taskHash; selfContained=$true; privateEventsIncluded=$false; signed=$taskSigned; liveLicensingVerified=$true } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskWork 'release-manifest.json')
+[ordered]@{ version=$Version; file=$taskExe.FullName; bytes=$taskExe.Length; sha256=$taskHash; selfContained=$true; privateEventsIncluded=$false; signed=$taskSigned; liveLicensingVerified=$false } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $taskWork 'release-manifest.json')
 Write-Output "Release candidate: $($taskExe.FullName)"
 Write-Output "SHA256: $taskHash"

@@ -1,4 +1,5 @@
 using Avalonia.Input.Platform;
+using Avalonia.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -29,7 +30,7 @@ public partial class MainWindow : Window
                 Directory.CreateDirectory(reportDirectory);
                 try
                 {
-                    foreach (var relative in new[] { "steam-idle/AchievementLabs.SteamIdle.exe", "gfwl/AchievementLabs.GfwlInjector.exe", "gfwlam/gfwlam.exe" })
+                    foreach (var relative in new[] { "steam-idle/AchievementLabs.SteamIdle.exe", "gfwl/AchievementLabs.GfwlInjector.exe", "gfwlam/engine.dll" })
                         if (!File.Exists(Path.Combine(AppContext.BaseDirectory, relative))) throw new Exception("Missing extracted helper: " + relative);
                     if (Directory.Exists(Path.Combine(AppContext.BaseDirectory, "Events"))) throw new Exception("Private Events directory found in release.");
                     model.ToggleApiServer();
@@ -68,7 +69,7 @@ public partial class MainWindow : Window
                 model.Navigate("Library"); await Task.Delay(100); bitmap.Render(root); bitmap.Save(Path.Combine(output, "native-library.png"), new PngBitmapEncoderOptions());
                                 model.Navigate("Settings"); await Task.Delay(150); bitmap.Render(root); bitmap.Save(Path.Combine(output, "native-settings.png"), new PngBitmapEncoderOptions());
                 model.EventsDirectory = Path.GetFullPath("src/AchievementLabs.App/Events"); await model.InspectCatalogAsync(); model.Navigate("Diagnostics"); await Task.Delay(150); bitmap.Render(root); bitmap.Save(Path.Combine(output, "native-catalog.png"), new PngBitmapEncoderOptions());
-                foreach (var page in new[] { "SteamLibrary", "SteamAchievements", "Epic", "Ubisoft", "Stats", "Legacy", "Queues", "Tools" })
+                foreach (var page in new[] { "SteamLibrary", "SteamAchievements", "Epic", "Ubisoft", "Stats", "Legacy", "Gfwl", "Queues", "Tools" })
                 {
                     model.Navigate(page); await Task.Delay(100); bitmap.Render(root); bitmap.Save(Path.Combine(output, "native-" + page.ToLowerInvariant() + ".png"), new PngBitmapEncoderOptions());
                 }
@@ -84,6 +85,16 @@ public partial class MainWindow : Window
     private void GoBack(object? s, RoutedEventArgs e) => model.GoBack();
     private void ShowAbout(object? s, RoutedEventArgs e) => model.Navigate("About");
     private void ShowLibrary(object? s, RoutedEventArgs e) => model.Navigate("Library");
+    private void ShowXbox360Profiles(object? s, RoutedEventArgs e) => model.OpenXbox360Profiles();
+    private void ShowGfwl(object? s, RoutedEventArgs e) => model.OpenGfwlWorkspace();
+    private void OpenGpdFolder(object? s, RoutedEventArgs e) => model.OpenGpdFolder();
+    private async void AddXbox360Gpd(object? s, RoutedEventArgs e) => await model.AddXbox360GameAsync(model.GpdTitleId);
+    private async void AddTitleSearchGpd(object? s, RoutedEventArgs e)
+    {
+        if ((s as Button)?.Tag is not TitleSearchResult result || !result.CanAddXbox360Gpd) return;
+        if (!uint.TryParse(result.TitleId, out var id)) { model.Notice = "The title search result has an invalid Xbox 360 ID."; return; }
+        await model.AddXbox360GameAsync(id.ToString("X8"), result.Name);
+    }
     private async void ChooseWindows8State(object? s, RoutedEventArgs e)
     {
         var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Select current XCT bridge_state.json", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Bridge state") { Patterns = ["bridge_state.json"] }] });
@@ -92,11 +103,23 @@ public partial class MainWindow : Window
     private async void ShowHome(object? s, RoutedEventArgs e) => await model.RefreshHomeProfilesAsync();
     private void ShowAchievements(object? s, RoutedEventArgs e) => model.Navigate("Achievements");
     private void ShowSpoofer(object? s, RoutedEventArgs e) => model.OpenSpoofer();
-    private async void ChooseGame(object? s, RoutedEventArgs e) { if (s is Button { Tag: Game game }) { try { await model.SelectGameAsync(game); } catch (OperationCanceledException) { } } }
+    private async void ChooseGame(object? s, RoutedEventArgs e)
+    {
+        if (s is not Button { Tag: Game game }) return;
+        try
+        {
+            if (await model.IsGfwlTitleAsync(game)) model.OpenGfwlTitle(game);
+            else if (DesktopModel.HasDevice(game, "Xbox360")) await model.OpenXbox360TitleAsync(game);
+            else await model.SelectGameAsync(game);
+        }
+        catch (OperationCanceledException) { }
+    }
     private async void OpenSelectedXboxGame(object? s, RoutedEventArgs e)
     {
         var game = (s as Button)?.Tag as Game ?? model.SelectedLibraryGame;
         if (game == null) return;
+        if (await model.IsGfwlTitleAsync(game)) { model.OpenGfwlTitle(game); return; }
+        if (DesktopModel.HasDevice(game, "Xbox360")) { await model.OpenXbox360TitleAsync(game); return; }
         try { await model.SelectGameAsync(game); } catch (OperationCanceledException) { }
     }
     private async void CopyTitleId(object? s, RoutedEventArgs e)
@@ -111,6 +134,14 @@ public partial class MainWindow : Window
         if ((s as Button)?.Tag is not TitleSearchResult result || Clipboard == null) return;
         await Clipboard.SetTextAsync(result.TitleId);
         model.Notice = $"Copied title ID {result.TitleId}.";
+    }
+    private async void OpenSearchTitle(object? s, RoutedEventArgs e)
+    {
+        if ((s as Button)?.Tag is not TitleSearchResult result || !model.CanQuery) return;
+        var known = model.Games.FirstOrDefault(game => game.Id == result.TitleId);
+        var game = known ?? new Game(result.TitleId, result.Name, result.Platform == "GFWL" ? "GFWL" : DesktopModel.IsKnownWindows8Title(result.TitleId) ? "Windows8" : result.CanAddXbox360Gpd ? "Xbox360" : "XboxOne", 0, 0, 0, false, result.ImageUrl);
+        if (await model.IsGfwlTitleAsync(game)) { model.OpenGfwlTitle(game); return; }
+        await model.SelectGameAsync(game);
     }
     private void FilterAll(object? s, RoutedEventArgs e) => model.Filter("All");
     private void FilterLocked(object? s, RoutedEventArgs e) => model.Filter("Locked");
@@ -154,10 +185,23 @@ public partial class MainWindow : Window
     private async void PrepareSave(object? s, RoutedEventArgs e) => await model.RunSaveToolAsync("Prepare");
     private async void PrepareAllSave(object? s, RoutedEventArgs e) => await model.RunSaveToolAsync("PrepareAll");
     private async void InspectPackage(object? s, RoutedEventArgs e) => await model.InspectPackageAsync();
+    private async void ExtractUsbProfile(object? s, RoutedEventArgs e) => await model.ExtractUsbProfileAsync();
+    private async void RefreshXbox360EditorProfile(object? s, RoutedEventArgs e) => await model.RefreshXbox360EditorProfileAsync();
+    private void RefreshLocalXbox360Profiles(object? s, RoutedEventArgs e) => model.RefreshLocalXbox360Profiles();
+    private async void LoadSelectedXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadSelectedXbox360ProfileAsync();
+    private async void LoadXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadXbox360ProfileAsync();
+    private async void LoadXbox360Achievements(object? s, RoutedEventArgs e) => await model.LoadXbox360AchievementsAsync();
+    private void SetXbox360Achievement(object? s, RoutedEventArgs e) => model.SetXbox360Achievement();
+    private async void SaveXbox360Edits(object? s, RoutedEventArgs e) => await model.SaveXbox360EditsAsync();
+    private async void InjectXbox360Profile(object? s, RoutedEventArgs e) => await model.InjectXbox360ProfileAsync();
+    private void OpenProfilesFolder(object? s, RoutedEventArgs e) => model.OpenProfilesFolder();
     private void RefreshHorizon(object? s, RoutedEventArgs e) => model.RefreshHorizonStatus();
     private void OpenHorizon(object? s, RoutedEventArgs e) => model.OpenHorizonFolder();
     private async void ScanGfwl(object? s, RoutedEventArgs e) => await model.ScanGfwlAsync();
     private async void InjectGfwl(object? s, RoutedEventArgs e) => await model.InjectGfwlAsync();
+    private async void RefreshGfwlAchievements(object? s, RoutedEventArgs e) => await model.RefreshGfwlAchievementsAsync();
+    private async void EarnGfwlAchievement(object? s, RoutedEventArgs e) => await model.EarnSelectedGfwlAchievementAsync();
+    private async void EarnGfwlFromDoubleTap(object? s, TappedEventArgs e) => await model.EarnSelectedGfwlAchievementAsync();
     private async void ChoosePackage(object? s, RoutedEventArgs e)
     {
         var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Select Xbox 360 package", AllowMultiple = false });
