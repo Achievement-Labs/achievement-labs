@@ -1,6 +1,6 @@
 # Event title catalogue
 
-442 titles: **267 Supported**, **169 Testing**, **6 Coming Soon**. This is the author-maintained catalogue included in v1.0.7 and synchronized to the hosted catalogue.
+445 titles: **267 Supported**, **170 Testing**, **8 Coming Soon**. This is the author-maintained catalogue included in v1.0.7 and synchronized to the hosted catalogue.
 
 Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.
 
@@ -244,6 +244,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Forza Motorsport 6 | Xbox One, Xbox Series X|S | `1694054782` | 95 | Testing | [1694054782.json](1694054782.json) |
 | Forza Motorsport 6: Apex | Windows PC | `981972052` | 24 | Supported | [981972052.json](981972052.json) |
 | Forza Motorsport 7 | Windows PC, Xbox One, Xbox Series X|S | `1999574456` | 62 | Testing | [1999574456.json](1999574456.json) |
+| FRU | Xbox One, Xbox Series X\|S | `1013213714` | 16 | Testing | Unavailable |
 | Game of Thrones - Episode 1: Iron from Ice | Xbox One, Xbox Series X|S | `1856172970` | 48 | Supported | [1856172970.json](1856172970.json) |
 | Gears of War 4 | Windows PC, Xbox One, Xbox Series X|S | `552499398` | 164 | Testing | [552499398.json](552499398.json) |
 | Gears of War: Ultimate Edition | Xbox One, Xbox Series X|S | `1475571605` | 56 | Testing | [1475571605.json](1475571605.json) |
@@ -253,6 +254,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Goat Simulator | Xbox One, Xbox Series X|S | `791545701` | 85 | Supported | [791545701.json](791545701.json) |
 | Goat Simulator Windows 10 | Windows PC | `1696012554` | 85 | Supported | [1696012554.json](1696012554.json) |
 | Goat Simulator: Mmore Goatz Edition | Xbox One, Xbox Series X|S | `886146124` | 30 | Supported | [886146124.json](886146124.json) |
+| GoldenEye 007 | Xbox One, Xbox Series X\|S | `1766089184` | 49 | Coming Soon | [1766089184.json](1766089184.json) |
 | Grand Theft Auto Online (Xbox Series X/S) | Xbox Series X|S | `1778348973` | 77 | Testing | [1778348973.json](1778348973.json) |
 | Grand Theft Auto V | Xbox One, Xbox Series X|S | `1050025307` | 77 | Testing | [1050025307.json](1050025307.json) |
 | Grand Theft Auto V (Xbox One) | Xbox One, Xbox Series X|S | `972249091` | 77 | Testing | [972249091.json](972249091.json) |
@@ -354,6 +356,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Project CARS 3 | Xbox One, Xbox Series X|S | `572054432` | 61 | Supported | [572054432.json](572054432.json) |
 | Project Spark | Xbox One, Xbox Series X|S | `1624350228` | 137 | Testing | [1624350228.json](1624350228.json) |
 | Quantum Break | Windows PC | `333628240` | 19 | Testing | [333628240.json](333628240.json) |
+| Rare Replay | Xbox One, Xbox Series X\|S | `515050978` | 0 | Coming Soon | [515050978.json](515050978.json) |
 | Rayman Legends | Xbox One, Xbox Series X|S | `666757656` | 8 | Testing | [666757656.json](666757656.json) |
 | ReCore: Definitive Edition | Windows PC, Xbox One, Xbox Series X|S | `852431422` | 74 | Supported | [852431422.json](852431422.json) |
 | Resident Evil | Xbox One, Xbox Series X|S | `1278031123` | 11 | Testing | [1278031123.json](1278031123.json) |
@@ -371,7 +374,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Rise of the Tomb Raider | Xbox One, Xbox Series X|S | `1046363979` | 124 | Testing | [1046363979.json](1046363979.json) |
 | Roblox - Xbox | Xbox One, Xbox Series X|S | `342226876` | 11 | Supported | [342226876.json](342226876.json) |
 | Rock Band 4 | Durango | `767263759` | 61 | Testing | [767263759.json](767263759.json) |
-| Rocket League® | Xbox One, Xbox Series X|S | `558797228` | 1 | Testing | [558797228.json](558797228.json) |
+| Rocket League® | Xbox One, Xbox Series X|S | `558797228` | 77 | Testing | [558797228.json](558797228.json) |
 | Rocket Riot | Windows PC, Mobile | `351450132` | 12 | Supported | [351450132.json](351450132.json) |
 | Seasons after Fall | Xbox One, Xbox Series X|S | `816667289` | 21 | Supported | [816667289.json](816667289.json) |
 | Shape Up | Xbox One | `1147540192` | 54 | Testing | [1147540192.json](1147540192.json) |
