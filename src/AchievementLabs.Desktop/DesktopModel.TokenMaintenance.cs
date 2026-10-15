@@ -151,9 +151,7 @@ public sealed partial class DesktopModel
     }
 
     private bool IsEventTokenUsable()
-        => session != null && !eventTokenRejected && EventTokenValidator.TryValidate(savedEventsToken, out _, out _)
-            && EventTokenValidator.GetUserHash(session.Authorization) is { } hash
-            && EventTokenValidator.GetUserHash(savedEventsToken) == hash;
+        => session != null && !eventTokenRejected && EventTokenValidator.TryValidate(savedEventsToken, out _, out _);
 
     private Task EnsureEventTokenAsync(CancellationToken token)
     {
