@@ -464,6 +464,8 @@ public class OneCoreAchievementResponse // Xbox One Achievements
 
 public class Xbox360AchievementEntry
 {
+    public bool? unlocked {get; set;}
+    public bool? unlockedOnline {get; set;}
     public int id {get; set;}
     public long titleId {get; set;}
     public string name {get; set;}

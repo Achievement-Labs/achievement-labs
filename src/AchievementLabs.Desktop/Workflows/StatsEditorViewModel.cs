@@ -18,11 +18,25 @@ namespace AchievementLabs.Desktop.Workflows
         private XboxApiClient? _xboxRestAPI;
         private string _lastKnownXauth = "";
         private static readonly Lazy<StatModeCatalog> StatCatalog = new(LoadStatModeCatalog);
+        private readonly Func<string, XboxApiClient> clientFactory;
+        private readonly bool allowRemoteCatalog;
+        internal string? DebugRootDirectory { get; set; }
+        private string loadedTitleId = "", loadedXuid = "";
+        private string migratedStatsDirectory = "";
+        private void EnsureStatsFileReady()
+        {
+            var directory = Path.GetFullPath(account.EventsDirectory);
+            if (migratedStatsDirectory == directory) return;
+            AchievementLabs.Core.StatCatalogStore.MigrateLegacy(directory);
+            migratedStatsDirectory = directory;
+        }
 
-        public StatsEditorViewModel(NativeNotices snackbarService, NativeAccountContext account)
+        public StatsEditorViewModel(NativeNotices snackbarService, NativeAccountContext account, Func<string, XboxApiClient>? clientFactory = null, bool allowRemoteCatalog = true)
         {
             this.account = account;
             _snackbarService = snackbarService;
+            this.clientFactory = clientFactory ?? (authorization => new XboxApiClient(authorization));
+            this.allowRemoteCatalog = allowRemoteCatalog;
         }
 
         private XboxApiClient GetRestAPI()
@@ -31,14 +45,14 @@ namespace AchievementLabs.Desktop.Workflows
             {
                 _xboxRestAPI?.Dispose();
                 _lastKnownXauth = account.XAUTH;
-                _xboxRestAPI = new XboxApiClient(account.XAUTH);
+                _xboxRestAPI = clientFactory(account.XAUTH);
             }
             return _xboxRestAPI;
         }
 
         public void ReleaseClient()
         {
-            if (IsLoading || UpdateAllStatsCommand.IsRunning) return;
+            if (IsBusy) return;
             _xboxRestAPI?.Dispose();
             _xboxRestAPI = null;
             _lastKnownXauth = "";
@@ -51,6 +65,49 @@ namespace AchievementLabs.Desktop.Workflows
         [ObservableProperty] private string _statusText = "Enter a Title ID and click Load Stats.";
         [ObservableProperty] private string _gameName = "Game: None";
         [ObservableProperty] private bool _isLoading = false;
+        [ObservableProperty] private bool _isUpdating;
+        public bool IsBusy => IsLoading || IsUpdating;
+        public bool CanEditTitle => !IsBusy;
+        partial void OnIsLoadingChanged(bool value) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(CanEditTitle)); }
+        partial void OnIsUpdatingChanged(bool value) { OnPropertyChanged(nameof(IsBusy)); OnPropertyChanged(nameof(CanEditTitle)); }
+        partial void OnTitleIdChanged(string value)
+        {
+            loadedTitleId = loadedXuid = "";
+            StatItems.Clear(); _eventsDataForTitle = null;
+            HasEditableStats = HasEventData = HasEditableEventData = false;
+            EventDataInfo = TitleMetadataInfo = "";
+            StatusText = "Load stats for the selected title before editing.";
+            RefreshSupport();
+        }
+        public string StatModeLabel { get; private set; } = "Stats type: Unknown";
+        public string StatSupportLabel { get; private set; } = "Choose a title to check stat support.";
+        private string CurrentStatMode => GetCatalogStatMode(TitleId) is var mode && mode != "Unknown" ? mode
+            : _eventsDataForTitle?["StatsMode"]?.ToString() is "Event" or "EventBased" ? "Event"
+            : _eventsDataForTitle?["StatsMode"]?.ToString() is "Title" or "TitleBased" ? "Title"
+            : HasEditableEventData ? "Event" : "Unknown";
+        private string? ReadStatTemplate()
+        {
+            var path = Path.Combine(account.EventsDirectory, TitleId + ".json");
+            if (File.Exists(path)) return File.ReadAllText(path);
+            using var stream = typeof(AchievementLabs.Core.StatCatalogStore).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents." + TitleId + ".json");
+            if (stream == null) return null;
+            using var reader = new StreamReader(stream); return reader.ReadToEnd();
+        }
+        public void RefreshSupport()
+        {
+            if (!uint.TryParse(TitleId, out var id) || id == 0) { StatModeLabel = "Stats type: Unknown"; StatSupportLabel = "Enter a decimal Xbox Title ID."; }
+            else
+            {
+                CheckEventData();
+                var mode = CurrentStatMode;
+                StatModeLabel = "Stats type: " + (mode == "Event" ? "Event-based" : mode == "Title" ? "Title-based" : "Unknown");
+                StatSupportLabel = mode == "Title" ? "Supported · title-based stats (available writable stats are checked when loaded)."
+                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported · mapped event stats in Stats.json."
+                    : mode == "Event" ? "Not Supported · Stats.json needs event-stat recipes and a standalone title template."
+                    : "Not Supported · no known stat mode or mapped event-stat recipes.";
+            }
+            OnPropertyChanged(nameof(StatModeLabel)); OnPropertyChanged(nameof(StatSupportLabel));
+        }
         [ObservableProperty] private bool _hasEventData = false;
         [ObservableProperty] private bool _hasEditableEventData = false;
         [ObservableProperty] private bool _hasEditableStats = false;
@@ -126,6 +183,7 @@ namespace AchievementLabs.Desktop.Workflows
 
             public string? Scid { get; set; }
             public string? TitleId { get; set; }
+            public string OwnerXuid { get; set; } = "";
             public bool IsTitleBasedStat { get; set; }
             public bool IsEventBasedStat { get; set; }
             public string Source { get; set; } = "";
@@ -185,6 +243,7 @@ namespace AchievementLabs.Desktop.Workflows
         [RelayCommand]
         public async Task LoadStats()
         {
+            if (IsBusy || !account.InitComplete) return;
             if (string.IsNullOrWhiteSpace(TitleId))
             {
                 _snackbarService.Show("Error", "Please enter a Title ID.",
@@ -202,18 +261,25 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             TitleId = parsedTitleId.ToString(CultureInfo.InvariantCulture);
-            if (GetCatalogStatMode(TitleId) == "Event")
+            loadedTitleId = loadedXuid = "";
+            var loadingTitleId = TitleId;
+            var loadingXuid = account.XUIDOnly;
+            RefreshSupport();
+            if (CurrentStatMode == "Event")
             {
                 StatItems.Clear();
-                HasEventData = false;
-                HasEditableEventData = false;
-                HasEditableStats = false;
                 GameName = $"Title ID: {TitleId}";
-                TitleMetadataInfo = "Stats mode: Event-based catalog";
-                EventDataInfo = "Event-based stat templates have not been implemented for this title.";
-                StatusText = "Title not supported. Event-based stats require a dedicated stat template.";
-                _snackbarService.Show("Title not supported", StatusText,
-                    NoticeAppearance.Caution, new NoticeIcon(NoticeSymbol.Warning24), TimeSpan.FromSeconds(6));
+                if (HasEditableEventData && ReadStatTemplate() != null && _eventsDataForTitle?["Enabled"]?.Value<bool>() != false)
+                {
+                    foreach (var stat in ((JObject)_eventsDataForTitle!["Stats"]!).Properties())
+                        StatItems.Add(new StatDisplayItem { Name = stat.Name, Type = (string?)stat.Value["Type"] ?? "Unknown", CurrentValue = "Not loaded",
+                            IsEditable = IsEditableStatDefinition(stat.Value), IsEventBasedStat = true, TitleId = TitleId, OwnerXuid = loadingXuid,
+                            Source = "Stats.json", EditStatus = IsEditableStatDefinition(stat.Value) ? "Mapped event stat" : "Not Supported" });
+                    loadedTitleId = loadingTitleId; loadedXuid = loadingXuid;
+                    HasEditableStats = StatItems.Any(s => s.IsEditable);
+                    StatusText = $"Loaded {StatItems.Count} event-stat definitions from Stats.json. Current values are not confirmed.";
+                }
+                else { HasEditableStats = false; StatusText = StatSupportLabel; }
                 return;
             }
 
@@ -224,6 +290,7 @@ namespace AchievementLabs.Desktop.Workflows
 
             try
             {
+                if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(CancellationToken.None);
                 // Get game info
                 var gameInfo = await GetRestAPI().GetGameTitleAsync(account.XUIDOnly, TitleId);
                 var titleInfo = gameInfo?.Titles?.FirstOrDefault();
@@ -302,11 +369,11 @@ namespace AchievementLabs.Desktop.Workflows
                         if (StatItems.Any(item => string.Equals(item.Name, stat.Name, StringComparison.OrdinalIgnoreCase)))
                             continue;
 
-                        var isEventEditable = editableStatNames.Contains(stat.Name);
+                        var isEventEditable = statCatalogMode == "Event" && editableStatNames.Contains(stat.Name);
                         var isCatalogEventBased = statCatalogMode == "Event";
                         var isCatalogTitleBased = statCatalogMode == "Title";
                         var hasScid = !string.IsNullOrWhiteSpace(stat.Scid) || !string.IsNullOrWhiteSpace(serviceConfigId);
-                        var isTitleEditable = hasScid && !isEventEditable && !isCatalogEventBased;
+                        var isTitleEditable = statCatalogMode == "Title" && hasScid && !isEventEditable;
                         StatItems.Add(new StatDisplayItem
                         {
                             Name = stat.Name,
@@ -354,10 +421,10 @@ namespace AchievementLabs.Desktop.Workflows
                             if (StatItems.Any(item => string.Equals(item.Name, stat.Name, StringComparison.OrdinalIgnoreCase)))
                                 continue;
 
-                            var isEventEditable = editableStatNames.Contains(stat.Name);
+                            var isEventEditable = statCatalogMode == "Event" && editableStatNames.Contains(stat.Name);
                             var isCatalogEventBased = statCatalogMode == "Event";
                             var isCatalogTitleBased = statCatalogMode == "Title";
-                            var isTitleEditable = !isCatalogEventBased;
+                            var isTitleEditable = statCatalogMode == "Title";
                             var isEditable = isEventEditable || isTitleEditable;
                             var editStatus = isEventEditable
                                 ? "Editable (Events)"
@@ -407,11 +474,11 @@ namespace AchievementLabs.Desktop.Workflows
                             if (StatItems.Any(item => string.Equals(item.Name, statName, StringComparison.OrdinalIgnoreCase)))
                                 continue;
 
-                            var isEventEditable = editableStatNames.Contains(statName);
+                            var isEventEditable = statCatalogMode == "Event" && editableStatNames.Contains(statName);
                             var isCatalogEventBased = statCatalogMode == "Event";
                             var isCatalogTitleBased = statCatalogMode == "Title";
                             var hasScid = !string.IsNullOrWhiteSpace(stat.Scid) || !string.IsNullOrWhiteSpace(serviceConfigId);
-                            var isTitleEditable = hasScid && !isEventEditable && !isCatalogEventBased;
+                            var isTitleEditable = statCatalogMode == "Title" && hasScid && !isEventEditable;
                             var isEditable = isEventEditable || isTitleEditable;
                             var isMetadataOnly = !isEditable && metadataStatNames.Contains(statName);
                             var editStatus = isEventEditable
@@ -460,14 +527,14 @@ namespace AchievementLabs.Desktop.Workflows
                         Type = definition.Type,
                         CurrentValue = "0",
                         NewValue = "",
-                        IsEditable = hasScid && !isCatalogEventBased,
+                        IsEditable = hasScid && statCatalogMode == "Title",
                         EditStatus = hasScid && !isCatalogEventBased ? "Editable (Title)" : "Read-Only (missing SCID)",
                         Source = definition.Source,
                         SuggestedValue = definition.SuggestedValue,
                         Confidence = definition.Confidence,
                         Scid = serviceConfigId,
                         TitleId = TitleId,
-                        IsTitleBasedStat = hasScid && !isCatalogEventBased,
+                        IsTitleBasedStat = hasScid && statCatalogMode == "Title",
                         IsEventBasedStat = isCatalogEventBased
                     });
                 }
@@ -477,7 +544,7 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     if (!StatItems.Any(s => s.Name == statName))
                     {
-                        var isEditable = editableStatNames.Contains(statName);
+                        var isEditable = statCatalogMode == "Event" && editableStatNames.Contains(statName);
                         StatItems.Add(new StatDisplayItem
                         {
                             Name = statName,
@@ -495,11 +562,21 @@ namespace AchievementLabs.Desktop.Workflows
                     }
                 }
 
+                foreach (var item in StatItems)
+                    if (!item.IsEditable) item.EditStatus = "Not Supported";
                 var editableCount = StatItems.Count(s => s.IsEditable);
-                var metadataOnlyCount = StatItems.Count(s => s.EditStatus == "Metadata only");
+                var notSupportedCount = StatItems.Count(s => !s.IsEditable);
                 var titleBasedCount = StatItems.Count(s => s.IsTitleBasedStat);
                 HasEditableStats = editableCount > 0;
-                StatusText = $"Loaded {StatItems.Count} stat(s). {titleBasedCount} title-based editable, {editableCount - titleBasedCount} event-based editable, {metadataOnlyCount} metadata-only.";
+                if (TitleId != loadingTitleId || account.XUIDOnly != loadingXuid)
+                {
+                    StatItems.Clear(); HasEditableStats = false;
+                    StatusText = "The title or account changed while loading. Load stats again.";
+                    return;
+                }
+                loadedTitleId = loadingTitleId; loadedXuid = loadingXuid;
+                foreach (var item in StatItems) { item.OwnerXuid = loadedXuid; item.TitleId ??= loadedTitleId; }
+                StatusText = $"Loaded {StatItems.Count} stat(s). {titleBasedCount} title-based editable, {editableCount - titleBasedCount} event-based editable, {notSupportedCount} Not Supported.";
             }
             catch (Exception ex)
             {
@@ -516,6 +593,7 @@ namespace AchievementLabs.Desktop.Workflows
         [RelayCommand]
         public void SaveDiscoveredStats()
         {
+            if (IsBusy) return;
             if (string.IsNullOrWhiteSpace(TitleId))
             {
                 _snackbarService.Show("Error", "Load a title before saving discovered stats.",
@@ -534,10 +612,11 @@ namespace AchievementLabs.Desktop.Workflows
                 return;
             }
 
-            var dataPath = Path.Combine(account.EventsDirectory, "Data.json");
+            var dataPath = Path.Combine(account.EventsDirectory, "Stats.json");
 
             try
             {
+                EnsureStatsFileReady();
                 Directory.CreateDirectory(Path.GetDirectoryName(dataPath)!);
                 var original = File.Exists(dataPath) ? File.ReadAllText(dataPath) : null;
                 var root = original != null
@@ -589,10 +668,6 @@ namespace AchievementLabs.Desktop.Workflows
                     }
                 }
 
-                EnsureSupportedTitleIdsLast(root);
-                root["SupportedTitleIDs"] ??= new JArray();
-                EnsureSupportedTitleIdsLast(root);
-                if (root.Properties().Last().Name != "SupportedTitleIDs") throw new InvalidDataException("Catalog ordering check failed.");
                 if ((File.Exists(dataPath) ? File.ReadAllText(dataPath) : null) != original) throw new IOException("Catalog changed while saving. Reload and try again.");
                 if (original != null) File.Copy(dataPath, dataPath + "." + Guid.NewGuid().ToString("N") + ".bak");
                 var temporary = dataPath + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -602,7 +677,7 @@ namespace AchievementLabs.Desktop.Workflows
                 _eventsDataForTitle = titleObject;
                 EventDataInfo = $"Saved discovered stats: {added} added, {updated} updated";
                 TitleMetadataInfo = BuildTitleMetadataInfo(titleObject);
-                StatusText = $"Saved {added + updated} discovered stat metadata entr{(added + updated == 1 ? "y" : "ies")} to Data.json.";
+                StatusText = $"Saved {added + updated} discovered stat metadata entr{(added + updated == 1 ? "y" : "ies")} to Stats.json.";
                 _snackbarService.Show("Stats Saved", StatusText,
                     NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.CheckmarkCircle24), TimeSpan.FromSeconds(4));
             }
@@ -622,23 +697,22 @@ namespace AchievementLabs.Desktop.Workflows
             EventDataInfo = "";
             TitleMetadataInfo = "";
 
-            string dataPath = Path.Combine(account.EventsDirectory, "Data.json");
-            if (!File.Exists(dataPath)) return;
+            string dataPath = Path.Combine(account.EventsDirectory, "Stats.json");
 
             try
             {
-                var allData = JObject.Parse(File.ReadAllText(dataPath));
-                _eventsDataForTitle = allData[TitleId] as JObject;
-                if (_eventsDataForTitle == null)
+                string json;
+                if (File.Exists(dataPath)) json = File.ReadAllText(dataPath);
+                else
                 {
-                    var supportedGames = ((JArray?)allData["SupportedTitleIDs"])?.ToObject<List<int>>() ?? new List<int>();
-                    if (!supportedGames.Contains(int.Parse(TitleId)))
-                        return;
-
-                    _eventsDataForTitle = allData[TitleId] as JObject;
+                    using var stream = typeof(AchievementLabs.Core.StatCatalogStore).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents.Stats.json");
+                    if (stream == null) return;
+                    using var reader = new StreamReader(stream); json = reader.ReadToEnd();
                 }
+                var allData = JObject.Parse(json);
+                _eventsDataForTitle = allData[TitleId] as JObject;
 
-                if (_eventsDataForTitle != null)
+                if (_eventsDataForTitle != null && _eventsDataForTitle["Enabled"]?.Value<bool>() != false)
                 {
                     AddCandidateReplacementStats(_eventsDataForTitle);
                     var statsSection = _eventsDataForTitle["Stats"] as JObject;
@@ -735,8 +809,7 @@ namespace AchievementLabs.Desktop.Workflows
 
             var titleObject = new JObject
             {
-                ["FullySupported"] = false,
-                ["StatsMode"] = "TitleBased",
+                ["StatsMode"] = GetCatalogStatMode(titleId),
                 ["Stats"] = new JObject(),
                 ["Notes"] = new JArray
                 {
@@ -849,7 +922,8 @@ namespace AchievementLabs.Desktop.Workflows
         private static StatModeCatalog LoadStatModeCatalog()
         {
             var catalog = new StatModeCatalog();
-            foreach (var root in GetStatCatalogRoots())
+            // Supported modes come from the shipped lists, not similarly named Downloads files.
+            foreach (var root in GetStatCatalogRoots().Take(1))
             {
                 LoadStatModeFile(Path.Combine(root, "EventBasedStats.txt"), catalog.EventBasedTitleIds);
                 LoadStatModeFile(Path.Combine(root, "TitleBasedStats.txt"), catalog.TitleBasedTitleIds);
@@ -1096,10 +1170,12 @@ namespace AchievementLabs.Desktop.Workflows
 
         private async Task<IEnumerable<string>> TryLoadPluginStatsCatalogAsync(string titleId, string gameName)
         {
+            if (!allowRemoteCatalog) return [];
             var discovered = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             const string baseUrl = "https://raw.githubusercontent.com/nacliaf/xau-plugin/master/Stats/";
 
             using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(8) };
+            using var deadline = new CancellationTokenSource(TimeSpan.FromSeconds(8));
             var candidates = new List<string>
             {
                 $"{titleId}.json",
@@ -1111,7 +1187,8 @@ namespace AchievementLabs.Desktop.Workflows
 
             foreach (var candidate in candidates)
             {
-                var json = await TryGetJsonAsync(client, baseUrl + candidate);
+                if (deadline.IsCancellationRequested) break;
+                var json = await TryGetJsonAsync(client, baseUrl + candidate, deadline.Token);
                 if (json == null)
                     continue;
 
@@ -1121,7 +1198,8 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     foreach (var fileCandidate in new[] { fileId, $"{fileId}.json" }.Distinct(StringComparer.OrdinalIgnoreCase))
                     {
-                        var fileJson = await TryGetJsonAsync(client, baseUrl + fileCandidate);
+                        if (deadline.IsCancellationRequested) break;
+                        var fileJson = await TryGetJsonAsync(client, baseUrl + fileCandidate, deadline.Token);
                         if (fileJson != null)
                             AddStatNames(discovered, ExtractStatNamesFromCatalogJson(fileJson));
                     }
@@ -1131,11 +1209,11 @@ namespace AchievementLabs.Desktop.Workflows
             return discovered;
         }
 
-        private static async Task<JToken?> TryGetJsonAsync(HttpClient client, string url)
+        private static async Task<JToken?> TryGetJsonAsync(HttpClient client, string url, CancellationToken cancellationToken)
         {
             try
             {
-                var response = await client.GetAsync(url);
+                using var response = await client.GetAsync(url, cancellationToken);
                 if (!response.IsSuccessStatusCode)
                     return null;
 
@@ -1601,9 +1679,11 @@ namespace AchievementLabs.Desktop.Workflows
             return "String";
         }
 
-        private static JToken BuildStatValue(string newValue, string type, string currentValue)
+        internal static JToken BuildStatValue(string newValue, string type, string currentValue)
         {
-            var typeHint = $"{type} {InferStatType(currentValue)}".ToLowerInvariant();
+            var typeHint = string.IsNullOrWhiteSpace(type) || type.Equals("Unknown", StringComparison.OrdinalIgnoreCase)
+                ? InferStatType(currentValue).ToLowerInvariant() : type.ToLowerInvariant();
+            if (typeHint.Contains("string")) return new JValue(newValue);
 
             if (typeHint.Contains("bool") && bool.TryParse(newValue, out var boolValue))
                 return new JValue(boolValue);
@@ -1614,32 +1694,55 @@ namespace AchievementLabs.Desktop.Workflows
                 return new JValue(longValue);
             }
 
-            if ((typeHint.Contains("double") || typeHint.Contains("float") || typeHint.Contains("single") || typeHint.Contains("decimal")) &&
-                double.TryParse(newValue, NumberStyles.Float, CultureInfo.InvariantCulture, out var doubleValue))
+            if ((typeHint.Contains("double") || typeHint.Contains("float") || typeHint.Contains("single") || typeHint.Contains("decimal") || typeHint.Contains("number")) &&
+                double.TryParse(newValue, NumberStyles.Float, CultureInfo.InvariantCulture, out var doubleValue) && double.IsFinite(doubleValue))
             {
                 return new JValue(doubleValue);
             }
 
-            if (long.TryParse(newValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out var fallbackLong))
-                return new JValue(fallbackLong);
-
-            if (double.TryParse(newValue, NumberStyles.Float, CultureInfo.InvariantCulture, out var fallbackDouble))
-                return new JValue(fallbackDouble);
-
-            if (bool.TryParse(newValue, out var fallbackBool))
-                return new JValue(fallbackBool);
-
-            return new JValue(newValue);
+            throw new FormatException($"Enter a valid {typeHint} value using an invariant decimal point.");
         }
 
         public async Task UpdateSingleStat(StatDisplayItem item)
         {
+            if (IsBusy) return;
+            IsUpdating = true;
+            try { await UpdateSingleStatCoreAsync(item); }
+            finally { IsUpdating = false; }
+        }
+
+        private async Task UpdateSingleStatCoreAsync(StatDisplayItem item)
+        {
+            if (!StatItems.Contains(item) || loadedTitleId != TitleId || loadedXuid != account.XUIDOnly
+                || item.OwnerXuid != loadedXuid || string.IsNullOrEmpty(loadedXuid)
+                || item.TitleId != loadedTitleId || !(CurrentStatMode == "Title" && item.IsTitleBasedStat || CurrentStatMode == "Event" && item.IsEventBasedStat && HasEditableEventData))
+            {
+                item.EditStatus = "Reload required";
+                StatusText = "Load a supported title's stats for the connected account before updating.";
+                return;
+            }
             if (!item.IsEditable || string.IsNullOrWhiteSpace(item.NewValue))
             {
                 _snackbarService.Show("Error", "Enter a new value for the stat.",
                     NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
                 return;
             }
+
+            try
+            {
+                if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(CancellationToken.None);
+                if (!item.IsTitleBasedStat && account.EnsureEventTokenAsync != null) await account.EnsureEventTokenAsync(CancellationToken.None);
+            }
+            catch
+            {
+                item.EditStatus = "Current token required";
+                _snackbarService.Show("Token required", "Paste and save a current token in Settings before updating stats.",
+                    NoticeAppearance.Caution, new NoticeIcon(NoticeSymbol.Warning24), _snackbarDuration);
+                return;
+            }
+
+            if (loadedXuid != account.XUIDOnly || loadedTitleId != TitleId || !StatItems.Contains(item))
+            { item.EditStatus = "Reload required"; return; }
 
             if (item.IsTitleBasedStat)
             {
@@ -1672,8 +1775,8 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             // Load template
-            string templatePath = Path.Combine(account.EventsDirectory, $"{TitleId}.json");
-            if (!File.Exists(templatePath))
+            var templateBody = ReadStatTemplate();
+            if (templateBody == null)
             {
                 _snackbarService.Show("Error", $"Event template {TitleId}.json not found.",
                     NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
@@ -1684,7 +1787,6 @@ namespace AchievementLabs.Desktop.Workflows
 
             try
             {
-                var templateBody = File.ReadAllText(templatePath);
                 DateTime timestamp = DateTime.UtcNow;
 
                 // Detect multi-request vs single-request format
@@ -1735,6 +1837,15 @@ namespace AchievementLabs.Desktop.Workflows
                     requestBodies.Add(requestbody);
                 }
 
+                // Validate every payload before the first request; no unresolved or wrong-title data is submitted.
+                for (var i = 0; i < requestBodies.Count; i++)
+                {
+                    if (Regex.IsMatch(requestBodies[i], @"REPLACE[A-Z0-9_]+")) throw new InvalidDataException("Unresolved stat event placeholder.");
+                    var parsed = JObject.Parse(requestBodies[i]);
+                    if (parsed["data"]?["baseData"]?["titleId"]?.ToString() != TitleId) throw new InvalidDataException("Stat event title mismatch.");
+                    requestBodies[i] = parsed.ToString(Formatting.None);
+                    using var strict = System.Text.Json.JsonDocument.Parse(requestBodies[i]);
+                }
                 // Send request(s)
                 bool allSucceeded = true;
                 var debugDir = CreateStatDebugDirectory(item.Name);
@@ -1762,6 +1873,7 @@ namespace AchievementLabs.Desktop.Workflows
 
                     if (result.StatusCode < 200 || result.StatusCode >= 300)
                     {
+                        if (result.StatusCode is 401 or 403) account.EventTokenRejected?.Invoke();
                         var truncated = result.ResponseBody.Length > 200 ? result.ResponseBody.Substring(0, 200) + "..." : result.ResponseBody;
                         _snackbarService.Show($"Error: HTTP {result.StatusCode}",
                             truncated, NoticeAppearance.Danger,
@@ -1783,11 +1895,10 @@ namespace AchievementLabs.Desktop.Workflows
 
                 if (allSucceeded)
                 {
-                    item.CurrentValue = item.NewValue;
                     item.NewValue = "";
-                    item.EditStatus = "Updated!";
-                    _snackbarService.Show("Stat Updated",
-                        $"{item.Name} set to {item.CurrentValue}",
+                    item.EditStatus = "Submitted; refresh to verify";
+                    _snackbarService.Show("Stat event submitted",
+                        $"Refresh {item.Name} to verify the value.",
                         NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
                 }
                 else
@@ -1805,13 +1916,17 @@ namespace AchievementLabs.Desktop.Workflows
 
         private async Task UpdateTitleBasedStat(StatDisplayItem item)
         {
+            var requestedValue = item.NewValue;
+            JToken typedValue;
+            try { typedValue = BuildStatValue(requestedValue, item.Type, item.CurrentValue); }
+            catch (FormatException error) { item.EditStatus = "Invalid value"; StatusText = error.Message; return; }
             var serviceConfigId = item.Scid;
             if (string.IsNullOrWhiteSpace(serviceConfigId))
                 serviceConfigId = await GetRestAPI().GetTitleServiceConfigIdAsync(account.XUIDOnly, item.TitleId ?? TitleId);
 
-            if (string.IsNullOrWhiteSpace(serviceConfigId))
+            if (!Guid.TryParse(serviceConfigId, out var validScid) || validScid == Guid.Empty)
             {
-                item.EditStatus = "Missing SCID";
+                item.EditStatus = "Not Supported"; item.IsEditable = false;
                 _snackbarService.Show("Missing SCID",
                     "Could not resolve this title's service config id.",
                     NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
@@ -1819,35 +1934,20 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             item.EditStatus = "Sending...";
-            var debugDir = CreateStatDebugDirectory(item.Name);
-            var typedValue = BuildStatValue(item.NewValue, item.Type, item.CurrentValue);
-            var requestBody = new JObject
-            {
-                ["$schema"] = "http://stats.xboxlive.com/2017-1/schema#previousRevision4",
-                ["revision"] = 0,
-                ["stats"] = new JArray
-                {
-                    new JObject
-                    {
-                        ["name"] = item.Name,
-                        ["value"] = typedValue
-                    }
-                }
-            };
-            File.WriteAllText(Path.Combine(debugDir, "request_title_stat.json"), requestBody.ToString(Formatting.Indented));
-
+            string? debugDir = null;
             try
             {
+                try { debugDir = CreateStatDebugDirectory(item.Name); } catch { /* Diagnostics must not block a stat write. */ }
                 var result = await GetRestAPI().WriteTitleStatWithDiagnosticsAsync(account.XUIDOnly, serviceConfigId, item.Name, typedValue);
                 if (!string.IsNullOrWhiteSpace(result.RequestBody))
                 {
-                    File.WriteAllText(Path.Combine(debugDir, "request_title_stat_actual.json"), FormatJsonForDebug(result.RequestBody));
+                    WriteStatDiagnostic(debugDir, "request_title_stat_actual.json", FormatJsonForDebug(result.RequestBody));
                 }
 
-                File.WriteAllText(Path.Combine(debugDir, "response_title_stat.txt"),
+                WriteStatDiagnostic(debugDir, "response_title_stat.txt",
                     $"HTTP {result.StatusCode} {result.ReasonPhrase}{Environment.NewLine}{result.RequestUri}{Environment.NewLine}{Environment.NewLine}{result.ResponseBody}");
 
-                File.WriteAllText(Path.Combine(debugDir, "summary.json"), new JObject
+                WriteStatDiagnostic(debugDir, "summary.json", new JObject
                 {
                     ["completedUtc"] = DateTime.UtcNow.ToString("O"),
                     ["titleId"] = item.TitleId ?? TitleId,
@@ -1864,16 +1964,30 @@ namespace AchievementLabs.Desktop.Workflows
 
                 if (result.StatusCode >= 200 && result.StatusCode < 300)
                 {
-                    item.CurrentValue = item.NewValue;
                     item.NewValue = "";
-                    item.EditStatus = "Updated!";
-                    _snackbarService.Show("Stat Updated",
-                        $"{item.Name} set to {item.CurrentValue}",
+                    item.EditStatus = "Accepted; refresh to verify";
+                    try
+                    {
+                        var readback = await GetRestAPI().GetTitleStatRawAsync(account.XUIDOnly, serviceConfigId, item.Name);
+                        if (readback.StatusCode >= 200 && readback.StatusCode < 300)
+                        {
+                            var observed = ExtractRawTitleStats(readback.Body, serviceConfigId)
+                                .FirstOrDefault(stat => stat.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
+                            if (observed != null)
+                            {
+                                item.CurrentValue = NormalizeStatValueForDisplay(observed.Value);
+                                if (StatValueMatches(observed.Value, typedValue)) item.EditStatus = "Verified";
+                            }
+                        }
+                    }
+                    catch { /* Accepted writes may not be visible immediately; preserve their status. */ }
+                    _snackbarService.Show("Stat request accepted", $"{item.Name}: {item.EditStatus}",
                         NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
                 }
                 else
                 {
-                    item.EditStatus = $"HTTP {result.StatusCode}";
+                    item.EditStatus = result.StatusCode is 400 or 403 or 404 or 405 or 422 ? "Not Supported" : $"HTTP {result.StatusCode}";
+                    if (item.EditStatus == "Not Supported") item.IsEditable = false;
                     var truncated = Truncate(result.ResponseBody ?? "", 200);
                     _snackbarService.Show($"Statswrite HTTP {result.StatusCode}",
                         string.IsNullOrWhiteSpace(truncated) ? result.ReasonPhrase : truncated,
@@ -1883,15 +1997,23 @@ namespace AchievementLabs.Desktop.Workflows
             catch (Exception ex)
             {
                 item.EditStatus = "Error";
-                File.WriteAllText(Path.Combine(debugDir, "exception.txt"), ex.ToString());
+                WriteStatDiagnostic(debugDir, "exception.txt", ex.ToString());
                 _snackbarService.Show("Error", $"Failed to update title stat: {ex.Message}",
                     NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
             }
         }
 
+        private static bool StatValueMatches(string observed, JToken expected)
+        {
+            if (expected.Type == JTokenType.String) return observed == expected.Value<string>();
+            try { return JToken.DeepEquals(BuildStatValue(observed, expected.Type.ToString(), observed), expected); }
+            catch { return false; }
+        }
+
         [RelayCommand]
         public async Task UpdateAllStats()
         {
+            if (IsBusy) return;
             var editableItems = StatItems.Where(s => s.IsEditable && !string.IsNullOrWhiteSpace(s.NewValue)).ToList();
             if (editableItems.Count == 0)
             {
@@ -1901,29 +2023,40 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             StatusText = $"Updating {editableItems.Count} stat(s)...";
-
+            IsUpdating = true;
+            try
+            {
             int successCount = 0;
             foreach (var item in editableItems)
             {
-                await UpdateSingleStat(item);
-                if (item.EditStatus == "Updated!")
+                await UpdateSingleStatCoreAsync(item);
+                if (item.EditStatus is "Verified" or "Accepted; refresh to verify")
                     successCount++;
             }
 
-            StatusText = $"Updated {successCount}/{editableItems.Count} stat(s).";
+            StatusText = $"Accepted {successCount}/{editableItems.Count} stat request(s). Readback status is shown on each row.";
+            }
+            finally { IsUpdating = false; }
         }
 
         #region Replacement Helpers
 
         private string CreateStatDebugDirectory(string statName)
         {
-            var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Debug", "StatEdits");
+            var root = DebugRootDirectory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Debug", "StatEdits");
             Directory.CreateDirectory(root);
 
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
             var dir = Path.Combine(root, $"{timestamp}_{SanitizeFilePart(TitleId)}_{SanitizeFilePart(statName)}");
             Directory.CreateDirectory(dir);
             return dir;
+        }
+
+        private static void WriteStatDiagnostic(string? directory, string fileName, string contents)
+        {
+            if (directory == null) return;
+            try { File.WriteAllText(Path.Combine(directory, fileName), contents); }
+            catch { /* Logging failure must not alter acceptance or readback status. */ }
         }
 
         private static string SanitizeFilePart(string value)

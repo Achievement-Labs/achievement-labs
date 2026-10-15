@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>../AchievementLabs.App/app.ico</ApplicationIcon>
@@ -12,7 +12,9 @@
     <InformationalVersion>1.0.6</InformationalVersion>
   </PropertyGroup>
 
+  <ItemGroup><ProjectReference Include="../AchievementLabs.Enhancements/AchievementLabs.Enhancements.csproj" /></ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
     <PackageReference Include="Avalonia" Version="12.1.2" />
     <PackageReference Include="Avalonia.Desktop" Version="12.1.2" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.2" />
@@ -25,7 +27,7 @@
 <AvaloniaResource Include="../../Epic_Games_Store_logo_2023_vertical_black.png" Link="Assets/epic-logo.png"/>
 <AvaloniaResource Include="../../Ubisoft_logo.png" Link="Assets/ubisoft-logo.png"/>
 <EmbeddedResource Include="../../site/assets/games.json" LogicalName="AchievementLabs.PublicCatalog.json"/>
-<!-- Private event recipes are served by the licensing API, never packaged. -->
+<!-- The public 1.0.5 event snapshot is embedded by Core; private service data is not packaged. -->
 <Content Include="../AchievementLabs.App/StatsCatalog/**/*.*" LinkBase="StatsCatalog" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../gfwlam/**/*.*" LinkBase="gfwlam" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../tools/Submit-ColdAlleyAchievements.ps1" Link="tools/Submit-ColdAlleyAchievements.ps1" CopyToOutputDirectory="PreserveNewest"/>

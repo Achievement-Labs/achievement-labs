@@ -15,7 +15,12 @@ public sealed class RemoteImage : Avalonia.Controls.Image
 
     public string? Url { get => GetValue(UrlProperty); set => SetValue(UrlProperty, value); }
 
-    private void BeginLoad() => _ = LoadAsync(Url, ++loadVersion);
+    private void BeginLoad()
+    {
+        var version = ++loadVersion;
+        ReplaceBitmap(null, version);
+        _ = LoadAsync(Url, version);
+    }
 
     private async Task LoadAsync(string? value, int version)
     {

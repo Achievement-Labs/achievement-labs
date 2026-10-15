@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -21,6 +22,51 @@ namespace AchievementLabs.Desktop.Workflows
 
         private CancellationTokenSource? _cancellationTokenSource;
         private AutoUnlockState? _state;
+        private long lastPresenceHeartbeat;
+        public string StatePath { get; set; } = AutoUnlockState.GetSavePath();
+        public AutoUnlockState? PreparedState => _state;
+        public bool HadFailure { get; private set; }
+        public bool PresenceCleanupSucceeded { get; private set; } = true;
+        public bool QueueReady { get; private set; }
+        public bool ContinueAfterFailure { get; set; } = true;
+        public event Action<bool>? WaitingForToken;
+
+        private void SaveState()
+        {
+            if (_state == null) return;
+            _state.LastSaved = DateTime.UtcNow;
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(StatePath))!);
+            var temporary = StatePath + ".tmp";
+            File.WriteAllText(temporary, JsonConvert.SerializeObject(_state, Formatting.Indented));
+            File.Move(temporary, StatePath, true);
+        }
+
+        private AutoUnlockState? LoadState() => File.Exists(StatePath)
+            ? JsonConvert.DeserializeObject<AutoUnlockState>(File.ReadAllText(StatePath)) : null;
+
+        public async Task<AchievementLabs.Core.BuildQueueItemStatus> RunPreparedAsync(CancellationToken token)
+        {
+            if (IsRunning) throw new InvalidOperationException("This title is already running.");
+            _state = LoadState() ?? throw new InvalidDataException("This game's saved progress is missing.");
+            if (_state.OwnerXuid != account.XUIDOnly) throw new InvalidOperationException("The saved queue belongs to another account. Rebuild it for this account.");
+            if (_state.Queue == null || _state.CurrentIndex < 0 || _state.CurrentIndex > _state.Queue.Count
+                || !double.IsFinite(_state.SpeedMultiplier) || _state.SpeedMultiplier <= 0
+                || !double.IsFinite(_state.RemainingDelaySeconds) || _state.RemainingDelaySeconds < 0
+                || _state.Queue.Any(i => i.EventRequestIndex < 0 || !double.IsFinite(i.DelaySeconds) || i.DelaySeconds < 0))
+                throw new InvalidDataException("This game's checkpoint is invalid. Rebuild the game queue.");
+            GameName = _state.GameName; TitleId = _state.TitleId;
+            SpeedMultiplier = _state.SpeedMultiplier;
+            PopulateQueueDisplay(); UpdateProgressText();
+            await StartAutoUnlockProcess(token);
+            if (!PresenceCleanupSucceeded)
+                throw new AchievementLabs.Core.BuildQueueHandoffException("The previous title's presence could not be stopped. The build queue is paused; check the Xbox connection before resuming.");
+            return token.IsCancellationRequested ? AchievementLabs.Core.BuildQueueItemStatus.Paused
+                : HadFailure ? AchievementLabs.Core.BuildQueueItemStatus.Failed
+                : _state.Queue.All(i => i.Completed) ? AchievementLabs.Core.BuildQueueItemStatus.Completed
+                : AchievementLabs.Core.BuildQueueItemStatus.Paused;
+        }
+
+        public void Stop() => _cancellationTokenSource?.Cancel();
 
         /// <summary>
         /// Gets the current XboxApiClient instance, recreating it if the XAUTH token has changed.
@@ -53,6 +99,38 @@ namespace AchievementLabs.Desktop.Workflows
 
         #region Observable Properties
 
+        // Desktop supplies the same connected-session sender used by the achievement tab.
+        public Func<string, string, CancellationToken, Task<bool>>? SendEventAchievementAsync { get; set; }
+        public Func<string, CancellationToken, Task<AchievementsResponse?>>? ReadQueueAchievementsAsync { get; set; }
+        public static bool UsesEvents(IEnumerable<OneCoreAchievementResponse> achievements) =>
+            achievements.Any(a => a.progression?.requirements?.Any(r =>
+                !string.IsNullOrWhiteSpace(r.id) && r.id != Guid.Empty.ToString()) == true);
+
+        public void ValidateQueueMetadata(AchievementsResponse response)
+        {
+            if (_state == null) return;
+            if (response.achievements.Count == 0)
+                throw new InvalidOperationException("Could not verify the saved queue's achievement metadata. Refresh the game and try again.");
+            _state.IsEventBased = UsesEvents(response.achievements);
+            var scid = response.achievements.Select(a => a.serviceConfigId)
+                .FirstOrDefault(id => !string.IsNullOrWhiteSpace(id) && id != Guid.Empty.ToString());
+            if (scid != null) _state.ServiceConfigId = scid;
+        }
+
+        public async Task PrepareEventMappingsAsync(CancellationToken ct)
+        {
+            if (_state?.IsEventBased != true) return;
+            if (EventCatalog == null) throw new InvalidOperationException("Event catalog is unavailable.");
+            // Mapping shape is process-local, not part of the saved queue. Load it after every restart.
+            await EventCatalog.GetTitleAsync(_state.TitleId, ct);
+        }
+
+        public Func<CancellationToken, Task<bool>> RefreshEventTokenAsync { get; set; } = _ => Task.FromResult(false);
+        [ObservableProperty] private bool _refreshTokenOnFailure = false;
+        public Action<string>? FailureNotification { get; set; }
+        [ObservableProperty] private bool _notifyOnFailure = true;
+        [ObservableProperty] private bool _stopOnFailure = false;
+
         [ObservableProperty] private bool _isInitialized = false;
         [ObservableProperty] private string _referenceGamertag = "";
         [ObservableProperty] private string _titleId = "";
@@ -65,6 +143,8 @@ namespace AchievementLabs.Desktop.Workflows
         [ObservableProperty] private string _progressText = "Progress: 0/0";
         [ObservableProperty] private string _nextUnlockText = "Next Unlock: N/A";
         [ObservableProperty] private string _timeRemainingText = "Time Until Next: N/A";
+        [ObservableProperty] private string _completionRemainingText = "Time to completion: N/A";
+        [ObservableProperty] private string _estimatedCompletionText = "Estimated finish: N/A";
         [ObservableProperty] private double _speedMultiplier = 1.0;
         [ObservableProperty] private string _speedDisplay = "Speed: 1.0x (Real Time)";
         [ObservableProperty] private ObservableCollection<AutoUnlockQueueDisplay> _queueItems = new();
@@ -73,7 +153,7 @@ namespace AchievementLabs.Desktop.Workflows
 
         #endregion
 
-        public class AutoUnlockQueueDisplay
+        public class AutoUnlockQueueDisplay : ObservableObject
         {
             private decimal _delayMinutes;
 
@@ -81,7 +161,8 @@ namespace AchievementLabs.Desktop.Workflows
             public string AchievementName { get; set; } = "";
             public string AchievementId { get; set; } = "";
             public int Gamerscore { get; set; }
-            public bool CanEditDelay { get; set; }
+            private bool canEditDelay;
+            public bool CanEditDelay { get => canEditDelay; set => SetProperty(ref canEditDelay, value); }
             internal Action<int, decimal>? DelayChanged { get; set; }
             public decimal DelayMinutes
             {
@@ -95,6 +176,38 @@ namespace AchievementLabs.Desktop.Workflows
                 }
             }
             public string Status { get; set; } = "Pending";
+            public string RowBackground => Status == "Unlocked" ? "#245C38" : "Transparent";
+        }
+
+        public Func<bool> ExternalPresenceActive { get; set; } = () => false;
+        partial void OnIsRunningChanged(bool value)
+        {
+            foreach (var item in QueueItems) item.CanEditDelay = !value;
+            UpdateCompletionEstimate();
+        }
+        public SemaphoreSlim PresenceGate { get; set; } = new(1, 1);
+        public string ActiveTitleId => _state?.TitleId ?? TitleId;
+
+        private async Task UpdatePresenceAsync(bool stop = false)
+        {
+            await PresenceGate.WaitAsync();
+            try
+            {
+                if (ExternalPresenceActive()) return;
+                if (stop)
+                {
+                    var response = await GetRestAPI().StopHeartbeatAsync(account.XUIDOnly);
+                    if (response.StatusCode < 200 || response.StatusCode >= 300)
+                        throw new InvalidOperationException($"Presence stop rejected: HTTP {response.StatusCode}.");
+                }
+                else
+                {
+                    var response = await GetRestAPI().SendHeartbeatAsync(account.XUIDOnly, ActiveTitleId);
+                    if (response.StatusCode < 200 || response.StatusCode >= 300)
+                        throw new InvalidOperationException($"Queue presence heartbeat: HTTP {response.StatusCode}");
+                }
+            }
+            finally { PresenceGate.Release(); }
         }
 
         public void OnNavigatedTo()
@@ -115,7 +228,7 @@ namespace AchievementLabs.Desktop.Workflows
 
         private void CheckForExistingState()
         {
-            var state = AutoUnlockState.Load();
+            var state = LoadState();
             if (state != null && state.Queue.Count > 0 && state.CurrentIndex < state.Queue.Count)
             {
                 HasExistingState = true;
@@ -132,7 +245,8 @@ namespace AchievementLabs.Desktop.Workflows
         [RelayCommand]
         public async Task ResumeExistingSession()
         {
-            var state = AutoUnlockState.Load();
+            if (IsRunning) return;
+            var state = LoadState();
             if (state == null)
             {
                 _snackbarService.Show("Error", "No saved session found.", NoticeAppearance.Danger,
@@ -141,6 +255,10 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             _state = state;
+            if (state.OwnerXuid != account.XUIDOnly) { StatusText = "Rebuild this saved queue for the connected account before resuming."; return; }
+            RefreshTokenOnFailure = state.RefreshTokenOnFailure;
+            NotifyOnFailure = state.NotifyOnFailure;
+            StopOnFailure = state.StopOnFailure;
             ReferenceGamertag = state.ReferenceGamertag;
             TitleId = state.TitleId;
             GameName = $"Game: {state.GameName}";
@@ -150,16 +268,17 @@ namespace AchievementLabs.Desktop.Workflows
             PopulateQueueDisplay();
             UpdateProgressText();
 
-            _snackbarService.Show("Session Restored", $"Resuming auto unlock for {state.GameName}",
+            _snackbarService.Show("Session Restored", $"Loaded saved queue for {state.GameName}",
                 NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
 
-            await StartAutoUnlockProcess();
+            await AchievementLabs.MultiSelect.QueueTools.LoadedOnly(this);
         }
 
         [RelayCommand]
         public Task ClearExistingSession()
         {
-            AutoUnlockState.Delete();
+            if (IsRunning) return Task.CompletedTask;
+            if (File.Exists(StatePath)) File.Delete(StatePath);
             HasExistingState = false;
             ExistingStateInfo = "";
             QueueItems.Clear();
@@ -170,6 +289,7 @@ namespace AchievementLabs.Desktop.Workflows
             ProgressText = "Progress: 0/0";
             NextUnlockText = "Next Unlock: N/A";
             TimeRemainingText = "Time Until Next: N/A";
+            UpdateCompletionEstimate();
 
             _snackbarService.Show("Session Cleared", "Saved auto unlock session has been deleted.",
                 NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
@@ -179,6 +299,8 @@ namespace AchievementLabs.Desktop.Workflows
         [RelayCommand]
         public async Task BuildQueue()
         {
+            if (IsRunning) return;
+            QueueReady = false;
             if (string.IsNullOrWhiteSpace(ReferenceGamertag) || string.IsNullOrWhiteSpace(TitleId))
             {
                 _snackbarService.Show("Error", "Please enter both a reference gamertag and a title ID.",
@@ -191,6 +313,7 @@ namespace AchievementLabs.Desktop.Workflows
 
             try
             {
+                if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(CancellationToken.None);
                 // Step 1: Resolve reference gamertag to XUID
                 var profileData = await GetRestAPI().GetGamertagProfileAsync(ReferenceGamertag);
                 if (profileData == null)
@@ -232,21 +355,14 @@ namespace AchievementLabs.Desktop.Workflows
                 // Get service config ID from achievements
                 var serviceConfigId = refAchievements.achievements[0].serviceConfigId;
 
-                // Detect event-based game: if the first achievement's requirement ID is not the zero GUID, it's event-based
-                bool isEventBased = false;
-                var firstAch = refAchievements.achievements[0];
-                if (firstAch.progression?.requirements?.Count > 0 &&
-                    firstAch.progression.requirements[0].id != Guid.Empty.ToString())
-                {
-                    isEventBased = true;
-                }
+                bool isEventBased = UsesEvents(refAchievements.achievements);
 
                 HashSet<string> licensedIds = [];
                 if (isEventBased)
                 {
                     if (EventCatalog == null) throw new InvalidOperationException("The event template service is unavailable.");
                     var catalog = await EventCatalog.GetCatalogAsync(CancellationToken.None);
-                    if (!catalog.TitleIds.Contains(TitleId)) throw new InvalidOperationException("This event-based title is not supported.");
+                    if (!catalog.TitleIds.Contains(TitleId) && !(catalog.TestingTitleIds ?? []).Contains(TitleId)) throw new InvalidOperationException("This event-based title is not supported.");
                     licensedIds = (await EventCatalog.GetTitleAsync(TitleId, CancellationToken.None)).AchievementIds.ToHashSet();
                 }
 
@@ -350,6 +466,7 @@ namespace AchievementLabs.Desktop.Workflows
                 // Step 7: Save state
                 _state = new AutoUnlockState
                 {
+                    OwnerXuid = account.XUIDOnly,
                     ReferenceGamertag = refGamertagResolved,
                     ReferenceXuid = refXuid,
                     TitleId = TitleId,
@@ -359,16 +476,20 @@ namespace AchievementLabs.Desktop.Workflows
                     CurrentIndex = 0,
                     RemainingDelaySeconds = queue[0].DelaySeconds,
                     IsRunning = false,
+                    RefreshTokenOnFailure = RefreshTokenOnFailure,
+                    NotifyOnFailure = NotifyOnFailure,
+                    StopOnFailure = StopOnFailure,
                     SpeedMultiplier = SpeedMultiplier,
                     UseFakeSignature = account.Settings.FakeSignatureEnabled,
                     IsEventBased = isEventBased
                 };
-                _state.Save();
+                SaveState();
 
                 PopulateQueueDisplay();
                 UpdateProgressText();
 
                 StatusText = $"Queue built: {queue.Count} achievements to unlock. Press Start to begin.";
+                QueueReady = true;
                 IsConfigEnabled = true;
                 HasExistingState = true;
                 ExistingStateInfo = $"Saved session: {gameName} ({refGamertagResolved}) - 0/{queue.Count} completed";
@@ -393,15 +514,7 @@ namespace AchievementLabs.Desktop.Workflows
             {
                 // Stop
                 _cancellationTokenSource?.Cancel();
-                IsRunning = false;
-                IsConfigEnabled = true;
-                StartStopButtonText = "Start Auto Unlock";
-                StatusText = "Stopped.";
-                if (_state != null)
-                {
-                    _state.IsRunning = false;
-                    _state.Save();
-                }
+                StatusText = "Stopping…";
                 return;
             }
 
@@ -415,32 +528,57 @@ namespace AchievementLabs.Desktop.Workflows
             await StartAutoUnlockProcess();
         }
 
-        private async Task StartAutoUnlockProcess()
+        public Action<string>? CompletionNotification { get; set; }
+        public void StopForSpoofFailure(string reason)
         {
-            if (_state == null) return;
+            if (!IsRunning) return;
+            _cancellationTokenSource?.Cancel();
+            StatusText = $"Auto unlock stopped because spoofing failed: {reason}. Click Start to resume.";
+            if (_state != null) { _state.IsRunning = false; SaveState(); }
+        }
+        public void NotifyQueueCompletion()
+        {
+            if (_state == null || _state.Queue.Count == 0 || _state.CurrentIndex < _state.Queue.Count
+                || _cancellationTokenSource?.IsCancellationRequested == true) return;
+            var failed = _state.Queue.Count(e => !e.Completed);
+            CompletionNotification?.Invoke($"{_state.GameName}: {_state.Queue.Count - failed}/{_state.Queue.Count} achievements unlocked"
+                + (failed == 0 ? "." : $"; {failed} failed."));
+        }
+        private async Task StartAutoUnlockProcess(CancellationToken cancellationToken = default)
+        {
+            if (_state == null || IsRunning) return;
+            if (_state.OwnerXuid != account.XUIDOnly) { StatusText = "Rebuild this queue for the connected account."; return; }
+            HadFailure = false;
+            PresenceCleanupSucceeded = true;
 
+            _state.RefreshTokenOnFailure = RefreshTokenOnFailure;
+            _state.NotifyOnFailure = NotifyOnFailure;
+            _state.StopOnFailure = StopOnFailure;
             _state.SpeedMultiplier = SpeedMultiplier;
             IsRunning = true;
             IsConfigEnabled = false;
             StartStopButtonText = "Stop Auto Unlock";
             _state.IsRunning = true;
-            _state.Save();
 
-            // Start spoofing - send initial heartbeat so it shows as playing the game
-            account.SpoofedTitleID = _state.TitleId;
-            account.SpoofingStatus = 1;
-            var hbResult = await GetRestAPI().SendHeartbeatAsync(account.XUIDOnly, _state.TitleId);
-            if (hbResult.StatusCode < 200 || hbResult.StatusCode >= 300)
-            {
-                StatusText = $"Heartbeat failed: HTTP {hbResult.StatusCode} - {(hbResult.Body.Length > 150 ? hbResult.Body.Substring(0, 150) : hbResult.Body)}";
-            }
-
-            _cancellationTokenSource = new CancellationTokenSource();
+            _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var token = _cancellationTokenSource.Token;
 
             try
             {
-                await Task.Run(async () => await RunAutoUnlockLoop(token), token);
+                // Recheck old saved queues before sending; older versions checked only the first requirement.
+                var metadata = ReadQueueAchievementsAsync != null
+                    ? await ReadQueueAchievementsAsync(_state.TitleId, token)
+                    : await GetRestAPI().GetAchievementsForTitleAsync(account.XUIDOnly, _state.TitleId);
+                if (metadata == null) throw new InvalidOperationException("Unable to verify queue achievement metadata.");
+                ValidateQueueMetadata(metadata);
+                await PrepareEventMappingsAsync(token);
+                SaveState();
+                await WaitForCredentialsAsync(_state.IsEventBased, token);
+                account.SpoofedTitleID = _state.TitleId;
+                account.SpoofingStatus = 1;
+                await UpdatePresenceAsync();
+                lastPresenceHeartbeat = Stopwatch.GetTimestamp();
+                await RunAutoUnlockLoop(token);
             }
             catch (OperationCanceledException)
             {
@@ -448,6 +586,7 @@ namespace AchievementLabs.Desktop.Workflows
             }
             catch (Exception ex)
             {
+                HadFailure = true;
                 StatusText = $"Error: {ex.Message}";
                 _snackbarService.Show("Error", $"Auto unlock error: {ex.Message}",
                     NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
@@ -455,35 +594,44 @@ namespace AchievementLabs.Desktop.Workflows
             finally
             {
                 // Stop spoofing
-                await GetRestAPI().StopHeartbeatAsync(account.XUIDOnly);
+                try
+                {
+                    if (account.SpoofingStatus == 1)
+                    {
+                        await UpdatePresenceAsync(stop: true);
+                    }
+                }
+                catch { PresenceCleanupSucceeded = false; StatusText = "Presence stop failed; the service may retain presence until it expires."; }
                 account.SpoofingStatus = 0;
                 account.SpoofedTitleID = "0";
+                lastPresenceHeartbeat = 0;
 
                 IsRunning = false;
                 IsConfigEnabled = true;
                 StartStopButtonText = "Start Auto Unlock";
+                _cancellationTokenSource.Dispose(); _cancellationTokenSource = null;
+                WaitingForToken?.Invoke(false);
                 if (_state != null)
                 {
                     _state.IsRunning = false;
-                    _state.Save();
+                    SaveState();
                 }
             }
         }
 
         private async Task RunAutoUnlockLoop(CancellationToken token)
         {
-            int heartbeatCounter = 0; // Counts seconds since last heartbeat
-
             while (_state != null && _state.CurrentIndex < _state.Queue.Count)
             {
                 token.ThrowIfCancellationRequested();
+                await EnsurePresenceHeartbeatAsync(token);
 
                 var entry = _state.Queue[_state.CurrentIndex];
 
                 if (entry.Completed)
                 {
                     _state.CurrentIndex++;
-                    _state.Save();
+                    SaveState();
                     continue;
                 }
 
@@ -507,34 +655,36 @@ namespace AchievementLabs.Desktop.Workflows
                         token.ThrowIfCancellationRequested();
 
                         var remaining = delayEnd - DateTime.UtcNow;
+                        _state.RemainingDelaySeconds = Math.Max(0, remaining.TotalSeconds) * (_state.SpeedMultiplier > 0 ? _state.SpeedMultiplier : 1.0);
                         Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
                         {
+                            UpdateCompletionEstimate();
                             TimeRemainingText = $"Time Until Next: {remaining:hh\\:mm\\:ss}";
                             StatusText = $"Waiting to unlock: {entry.AchievementName}...";
                         });
 
                         // Save remaining delay periodically (every 10s) for resume capability
-                        _state.RemainingDelaySeconds = remaining.TotalSeconds * (_state.SpeedMultiplier > 0 ? _state.SpeedMultiplier : 1.0);
                         if ((int)remaining.TotalSeconds % 10 == 0)
                         {
-                            _state.Save();
+                            SaveState();
                         }
 
-                        // Re-send heartbeat every 300 seconds to keep presence alive
-                        heartbeatCounter++;
-                        if (heartbeatCounter >= 300)
-                        {
-                            await GetRestAPI().SendHeartbeatAsync(account.XUIDOnly, _state.TitleId);
-                            heartbeatCounter = 0;
-                        }
+                        await EnsurePresenceHeartbeatAsync(token);
 
                         await Task.Delay(1000, token);
                     }
                 }
 
+                token.ThrowIfCancellationRequested();
+                _state.RemainingDelaySeconds = 0;
                 // Unlock the achievement
+                await WaitForCredentialsAsync(_state.IsEventBased, token);
+                token.ThrowIfCancellationRequested();
+                _state.RemainingDelaySeconds = 0;
+                SaveState();
                 Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
                 {
+                    UpdateCompletionEstimate();
                     StatusText = $"Unlocking: {entry.AchievementName}...";
                     TimeRemainingText = "Time Until Next: Unlocking...";
                 });
@@ -546,12 +696,14 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     if (_state.IsEventBased)
                     {
-                        unlockSuccess = await UnlockEventBasedAchievementAsync(entry.AchievementId);
+                        unlockSuccess = await UnlockEventBasedAchievementAsync(entry, token);
                         if (!unlockSuccess)
                             unlockError = "Event-based unlock failed (see snackbar for details)";
                     }
                     else
                     {
+                        if (string.IsNullOrWhiteSpace(_state.ServiceConfigId) || _state.ServiceConfigId == Guid.Empty.ToString())
+                            throw new InvalidDataException("This title is missing its service configuration. Rebuild the queue.");
                         await GetRestAPI().UnlockTitleBasedAchievementAsync(
                             _state.ServiceConfigId,
                             _state.TitleId,
@@ -561,6 +713,7 @@ namespace AchievementLabs.Desktop.Workflows
                         unlockSuccess = true;
                     }
                 }
+                catch (OperationCanceledException) when (token.IsCancellationRequested) { throw; }
                 catch (Exception ex)
                 {
                     unlockError = ex.Message;
@@ -577,7 +730,7 @@ namespace AchievementLabs.Desktop.Workflows
                         _state.RemainingDelaySeconds = _state.Queue[_state.CurrentIndex].DelaySeconds;
                     }
 
-                    _state.Save();
+                    SaveState();
 
                     Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
                     {
@@ -590,36 +743,62 @@ namespace AchievementLabs.Desktop.Workflows
                 }
                 else
                 {
-                    Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                    {
-                        StatusText = $"Failed to unlock {entry.AchievementName}: {unlockError}";
-                        UpdateQueueItemStatus(_state.CurrentIndex, "Failed");
-                        _snackbarService.Show("Unlock Failed",
-                            $"Failed to unlock {entry.AchievementName}: {unlockError}",
-                            NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
-                    });
-
-                    // Skip failed achievement and continue
+                    bool stop = false;
+                    Avalonia.Threading.Dispatcher.UIThread.Invoke(() => stop = HandleUnlockFailure(entry, unlockError));
+                    HadFailure = true;
+                    if (stop || !ContinueAfterFailure) { _state.IsRunning = false; SaveState(); return; }
                     _state.CurrentIndex++;
-                    if (_state.CurrentIndex < _state.Queue.Count)
-                    {
-                        _state.RemainingDelaySeconds = _state.Queue[_state.CurrentIndex].DelaySeconds;
-                    }
-                    _state.Save();
+                    _state.RemainingDelaySeconds = _state.CurrentIndex < _state.Queue.Count ? _state.Queue[_state.CurrentIndex].DelaySeconds : 0;
+                    SaveState();
                 }
             }
 
+            token.ThrowIfCancellationRequested();
             // All done
             Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
             {
-                StatusText = "Auto unlock complete!";
+                var failures = _state?.Queue.Count(e => !e.Completed) ?? 0;
+                StatusText = failures == 0 ? "Auto unlock complete!" : $"Queue finished with {failures} failed achievement(s).";
                 NextUnlockText = "Next Unlock: N/A";
                 TimeRemainingText = "Time Until Next: N/A";
                 UpdateProgressText();
+                NotifyQueueCompletion();
                 _snackbarService.Show("Complete",
                     "All queued achievements have been processed.",
                     NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
             });
+        }
+
+        public bool HandleUnlockFailure(AutoUnlockQueueEntry entry, string error)
+        {
+            var message = $"Failed to unlock {entry.AchievementName}: {error}";
+            StatusText = StopOnFailure ? message + " Queue stopped. Click Start to retry this achievement." : message;
+            if (_state != null) UpdateQueueItemStatus(_state.CurrentIndex, "Failed");
+            if (NotifyOnFailure)
+            {
+                _snackbarService.Show("Unlock Failed", message, NoticeAppearance.Danger,
+                    new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
+                FailureNotification?.Invoke(message);
+            }
+            return StopOnFailure;
+        }
+
+        [RelayCommand]
+        public void SaveQueue()
+        {
+            if (IsRunning || !IsConfigEnabled) return;
+            if (_state == null) { StatusText = "Build or load a queue before saving."; return; }
+            try
+            {
+                _state.SpeedMultiplier = SpeedMultiplier;
+                _state.RefreshTokenOnFailure = RefreshTokenOnFailure;
+                _state.NotifyOnFailure = NotifyOnFailure;
+                _state.StopOnFailure = StopOnFailure;
+                _state.IsRunning = false;
+                SaveState();
+                StatusText = $"Queue saved for {_state.GameName}, including custom delays and failure settings.";
+            }
+            catch { StatusText = "Could not save the queue. Your edits are still available here."; }
         }
 
         private void PopulateQueueDisplay()
@@ -636,7 +815,7 @@ namespace AchievementLabs.Desktop.Workflows
                     AchievementName = entry.AchievementName,
                     AchievementId = entry.AchievementId,
                     Gamerscore = entry.Gamerscore,
-                    CanEditDelay = true,
+                    CanEditDelay = !IsRunning,
                     DelayMinutes = (decimal)(entry.DelaySeconds / 60.0),
                     Status = entry.Completed ? "Unlocked" : (i < _state.CurrentIndex ? "Skipped" : "Pending")
                 };
@@ -648,6 +827,7 @@ namespace AchievementLabs.Desktop.Workflows
 
         private void UpdateProgressText()
         {
+            UpdateCompletionEstimate();
             if (_state == null)
             {
                 ProgressText = "Progress: 0/0";
@@ -656,6 +836,25 @@ namespace AchievementLabs.Desktop.Workflows
 
             var completed = _state.Queue.Count(q => q.Completed);
             ProgressText = $"Progress: {completed}/{_state.Queue.Count}";
+        }
+
+        public static TimeSpan EstimateRemaining(AutoUnlockState state, double speed)
+        {
+            var seconds = 0.0;
+            for (var i = state.CurrentIndex; i < state.Queue.Count; i++)
+                if (!state.Queue[i].Completed)
+                    seconds += Math.Max(0, i == state.CurrentIndex ? state.RemainingDelaySeconds : state.Queue[i].DelaySeconds);
+            return TimeSpan.FromSeconds(seconds / (double.IsFinite(speed) && speed > 0 ? speed : 1));
+        }
+
+        private void UpdateCompletionEstimate()
+        {
+            if (_state == null) { CompletionRemainingText = "Time to completion: N/A"; EstimatedCompletionText = "Estimated finish: N/A"; return; }
+            var remaining = EstimateRemaining(_state, IsRunning ? _state.SpeedMultiplier : SpeedMultiplier);
+            CompletionRemainingText = $"Time to completion: {remaining.Days}d {remaining:hh\\:mm\\:ss}";
+            EstimatedCompletionText = _state.CurrentIndex >= _state.Queue.Count
+                ? "Queue finished"
+                : $"Estimated finish{(IsRunning ? "" : " if started now")}: {DateTimeOffset.UtcNow.Add(remaining).ToLocalTime():dddd, dd MMM yyyy HH:mm:ss zzz} (local time; request time may add delay)";
         }
 
         private void UpdateQueueItemStatus(int index, string status)
@@ -697,7 +896,8 @@ namespace AchievementLabs.Desktop.Workflows
             _state.Queue[queueIndex].DelaySeconds = delaySeconds;
             if (_state.CurrentIndex == queueIndex)
                 _state.RemainingDelaySeconds = delaySeconds;
-            _state.Save();
+            SaveState();
+            UpdateCompletionEstimate();
         }
 
         public void UpdateSpeed(double newSpeed)
@@ -706,9 +906,17 @@ namespace AchievementLabs.Desktop.Workflows
             if (_state != null)
             {
                 _state.SpeedMultiplier = newSpeed;
-                _state.Save();
+                SaveState();
             }
             UpdateSpeedDisplay();
+            UpdateCompletionEstimate();
+        }
+
+        partial void OnSpeedMultiplierChanged(double value)
+        {
+            if (!IsRunning && _state != null) { _state.SpeedMultiplier = value; SaveState(); }
+            UpdateSpeedDisplay();
+            UpdateCompletionEstimate();
         }
 
         private void UpdateSpeedDisplay()
@@ -728,45 +936,87 @@ namespace AchievementLabs.Desktop.Workflows
         /// Unlocks a single event-based achievement by building and sending telemetry request(s).
         /// Returns true if all requests succeeded.
         /// </summary>
-        private async Task<bool> UnlockEventBasedAchievementAsync(string achievementId)
+        private async Task<bool> UnlockEventBasedAchievementAsync(AutoUnlockQueueEntry entry, CancellationToken token)
         {
             if (_state == null) return false;
 
-            var eventsToken = account.EventsToken;
-            if (string.IsNullOrWhiteSpace(eventsToken))
-            {
-                Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                {
-                    _snackbarService.Show("Error: No Events Token",
-                        "Event-based unlocking requires an events token. Use OAuth login or set it manually.",
-                        NoticeAppearance.Danger, new NoticeIcon(NoticeSymbol.ErrorCircle24), _snackbarDuration);
-                });
-                return false;
-            }
-
             if (EventCatalog == null) return false;
-            var requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, achievementId, account.XUIDOnly, CancellationToken.None)).Payloads.ToList();
+            var requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, entry.AchievementId, account.XUIDOnly, token)).Payloads.ToList();
+            if (requestBodies.Count == 0) return false;
+            if (entry.EventRequestIndex > requestBodies.Count) throw new InvalidDataException("The event checkpoint no longer matches this achievement's payloads.");
 
             // Send all request(s)
-            for (int reqIdx = 0; reqIdx < requestBodies.Count; reqIdx++)
+            for (int reqIdx = entry.EventRequestIndex; reqIdx < requestBodies.Count; reqIdx++)
             {
-                var content = new StringContent(requestBodies[reqIdx], Encoding.UTF8, "application/x-json-stream");
-                var (statusCode, responseBody) = await GetRestAPI().UnlockEventBasedAchievement(eventsToken, content);
+                await WaitForCredentialsAsync(true, token);
+                token.ThrowIfCancellationRequested();
+                using var content = new StringContent(requestBodies[reqIdx], Encoding.UTF8, "application/x-json-stream");
+                var (statusCode, responseBody) = await GetRestAPI().UnlockEventBasedAchievement(account.EventsToken, content);
+
+                if (statusCode is 401 or 403 && account.EventTokenRejected != null)
+                {
+                    account.EventTokenRejected();
+                    await WaitForCredentialsAsync(true, token);
+                    reqIdx--; // Retry only the explicitly rejected request, after replacement.
+                    continue;
+                }
 
                 if (statusCode < 200 || statusCode >= 300)
                 {
-                    var truncated = responseBody.Length > 200 ? responseBody.Substring(0, 200) + "..." : responseBody;
-                    Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
-                    {
-                        _snackbarService.Show($"Error: Request {reqIdx + 1}/{requestBodies.Count} HTTP {statusCode}",
-                            truncated, NoticeAppearance.Danger,
-                            new NoticeIcon(NoticeSymbol.ErrorCircle24), TimeSpan.FromSeconds(5));
-                    });
-                    return false;
+                    throw new HttpRequestException($"Event request {reqIdx + 1}/{requestBodies.Count} failed: HTTP {statusCode}.", null, (System.Net.HttpStatusCode)statusCode);
                 }
+                entry.EventRequestIndex = reqIdx + 1;
+                SaveState();
             }
 
             return true;
+        }
+
+        private async Task WaitForCredentialsAsync(bool needsEvents, CancellationToken token)
+        {
+            var waiting = false;
+            var refreshAttempted = false;
+            try
+            {
+                while (true)
+                {
+                    token.ThrowIfCancellationRequested();
+                    try
+                    {
+                        if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(token);
+                        if (needsEvents && account.EnsureEventTokenAsync != null) await account.EnsureEventTokenAsync(token);
+                        await EnsurePresenceHeartbeatAsync(token);
+                        return;
+                    }
+                    catch (OperationCanceledException) when (token.IsCancellationRequested) { throw; }
+                    catch
+                    {
+                        if (needsEvents && RefreshTokenOnFailure && !refreshAttempted)
+                        {
+                            refreshAttempted = true;
+                            if (await RefreshEventTokenAsync(token)) continue;
+                        }
+                        if (!waiting) { WaitingForToken?.Invoke(true); waiting = true; }
+                        StatusText = "Waiting for a current token. Paste and save a token in Settings, or Stop to pause.";
+                        // Missing event authorization need not end otherwise valid title presence.
+                        try { await EnsurePresenceHeartbeatAsync(token); }
+                        catch (OperationCanceledException) when (token.IsCancellationRequested) { throw; }
+                        catch { /* Resume heartbeat maintenance when authorization/network recovers. */ }
+                        await Task.Delay(TimeSpan.FromSeconds(5), token);
+                    }
+                }
+            }
+            finally { if (waiting) WaitingForToken?.Invoke(false); }
+        }
+
+        private async Task EnsurePresenceHeartbeatAsync(CancellationToken token)
+        {
+            if (_state == null || account.SpoofingStatus != 1 || lastPresenceHeartbeat == 0
+                || Stopwatch.GetElapsedTime(lastPresenceHeartbeat) < TimeSpan.FromMinutes(5)) return;
+            if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(token);
+            token.ThrowIfCancellationRequested();
+            await UpdatePresenceAsync();
+            lastPresenceHeartbeat = Stopwatch.GetTimestamp();
         }
 
         private bool ApplyReplacement(ref string requestbody, dynamic ReplacementData)

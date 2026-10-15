@@ -1,53 +1,51 @@
 {
-  "ver": "4.0",
-  "name": "Microsoft.XboxLive.T1047964830.REPLACEEVENTNAME",
-  "time": "REPLACETIME",
-  "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
-  "ext": {
-    "utc": {
-      "shellId": 1,
-      "eventFlags": 514,
-      "pgName": "XBOX",
-      "dvcSample": 42.97,
-      "flags": 51875152432,
-      "edition": 48,
-      "epoch": "1",
-      "seq": REPLACESEQ
+    "ver": "4.0",
+    "name": "REPLACEEVENTNAME",
+    "time": "REPLACETIME",
+    "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
+    "ext": {
+        "utc": {
+            "shellId": 1,
+            "eventFlags": 1,
+            "pgName": "XBOX",
+            "flags": 1,
+            "epoch": "1",
+            "seq": REPLACESEQ
+        },
+        "privacy": {
+            "isRequired": false
+        },
+        "metadata": REPLACEMETADATA,
+        "os": {
+            "bootId": 1,
+            "name": "Windows",
+            "ver": "1",
+            "expId": "1"
+        },
+        "app": {
+            "id": "U:Microsoft.MicrosoftBingo_8wekyb3d8bbwe!frima.MicrosoftBingo",
+            "ver": "2.6.10262.0",
+            "is1P": 1,
+            "asId": 1
+        },
+        "device": {
+            "localId": "s:5F885A49-7DE3-47FE-8CFD-B9E228D065FE",
+            "deviceClass": "Windows.Desktop"
+        },
+        "protocol": {
+            "devMake": "1",
+            "devModel": "1",
+            "ticketKeys": [
+                "1",
+                "1"
+            ]
+        },
+        "user": {
+            "localId": "m:1111111111111111"
+        },
+        "loc": {
+            "tz": "00:00"
+        }
     },
-    "privacy": {
-      "dataType": 33554432,
-      "isRequired": false
-    },
-    REPLACEMETADATA
-    "os": {
-      "bootId": 1,
-      "name": "Windows",
-      "ver": "10.0.19045.0.amd64fre",
-      "expId": "1"
-    },
-    "app": {
-      "id": "U:Microsoft.MicrosoftBingo_2.6.10262.0_x86__8wekyb3d8bbwe!frima.MicrosoftBingo",
-      "ver": "2.6.10262.0_x86_!MsBingo.exe",
-      "is1P": 2,
-      "asId": 3219
-    },
-    "device": {
-      "localId": "s:11111111-1111-1111-1111-111111111111",
-      "deviceClass": "Windows.Desktop"
-    },
-    "protocol": {
-      "devMake": "1",
-      "devModel": "1",
-      "ticketKeys": [
-        "1"
-      ]
-    },
-    "user": {
-      "localId": "m:1111111111111111"
-    },
-    "loc": {
-      "tz": "00:00"
-    }
-  },
-  "data": REPLACEDATA
+    "data": REPLACEDATA
 }

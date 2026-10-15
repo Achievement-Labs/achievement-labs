@@ -36,6 +36,12 @@ public static class EventTokenStore
 
 public static class EventTokenValidator
 {
+    public static string? GetUserHash(string value)
+    {
+        var match = System.Text.RegularExpressions.Regex.Match(value, @"^(?:x:)?XBL3\.0 x=(?<hash>[0-9]+);");
+        return match.Success ? match.Groups["hash"].Value : null;
+    }
+
     public static bool TryNormalize(string? token, out string normalized)
     {
         normalized = "";

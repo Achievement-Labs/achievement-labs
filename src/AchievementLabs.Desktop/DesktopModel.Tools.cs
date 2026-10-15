@@ -236,7 +236,7 @@ public sealed partial class DesktopModel
         try
         {
             if (destination == "Steam converter") RefreshConverterStatus();
-            var target = destination switch { "Discord" => "https://discord.gg/EY6AJpNfVu", "GitHub" => "https://github.com/trippyelephant/achievement-labs", "Original XAU" => "https://github.com/Fumo-Unlockers/Xbox-Achievement-Unlocker", "Steam converter" => steam.GetConverterPath(), _ => throw new InvalidOperationException() };
+            var target = destination switch { "Discord" => "https://discord.gg/EY6AJpNfVu", "GitHub" => "https://github.com/ethanwp28/achievement-labs/", "Original XAU" => "https://github.com/Fumo-Unlockers/Xbox-Achievement-Unlocker", "Steam converter" => steam.GetConverterPath(), _ => throw new InvalidOperationException() };
             Process.Start(new ProcessStartInfo(target) { UseShellExecute = true });
         }
         catch { Notice = "Could not open the requested link or workspace."; }

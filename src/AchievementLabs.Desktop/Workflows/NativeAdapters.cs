@@ -20,6 +20,9 @@ public sealed class NativeAccountContext
     public int SpoofingStatus { get; set; }
     public NativeAccountSettings Settings { get; } = new();
     public string EventsDirectory { get; set; } = "";
+    public Func<CancellationToken, Task>? EnsureAuthorizationAsync { get; set; }
+    public Func<CancellationToken, Task>? EnsureEventTokenAsync { get; set; }
+    public Action? EventTokenRejected { get; set; }
 }
 public sealed class NativeAccountSettings { public bool FakeSignatureEnabled { get; set; } }
 

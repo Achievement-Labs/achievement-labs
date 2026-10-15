@@ -16,11 +16,43 @@ public sealed class EventCatalogClient : IDisposable
         Timeout = TimeSpan.FromSeconds(25)
     };
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
+    private readonly bool useLocal;
+    private readonly Func<string?>? directory;
+    private LocalEventCatalogue? local;
+    private UpstreamEventCatalogue? additions;
+    private string? loadedPath;
+    private DateTime loadedTimestamp;
+    public EventCatalogClient() { }
+    public EventCatalogClient(bool useBundledCatalog, Func<string?>? eventsDirectory = null) { useLocal = useBundledCatalog; directory = eventsDirectory; }
+    private LocalEventCatalogue? Local
+    {
+        get
+        {
+            if (!useLocal) return null;
+            var path = directory?.Invoke();
+            var stamp = path == null ? default : File.GetLastWriteTimeUtc(Path.Combine(path, "Data.json"));
+            if (local == null || path != loadedPath || stamp != loadedTimestamp) { local = new(path); loadedPath = path; loadedTimestamp = stamp; additions = null; }
+            return local;
+        }
+    }
+    private UpstreamEventCatalogue? Additions => Local is { } catalog ? additions ??= new(AchievementLabsPaths.LocalFile("upstream-event-additions.json"), catalog.ReservedTitleIds) : null;
+    public string UpstreamStatus => Additions?.Status ?? "New-title updates unavailable.";
+    public string[] BundledTitleIds => Local?.TitleIds ?? [];
+    public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct) { if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct); }
 
-    public Task<EventCatalogStatus> GetCatalogAsync(CancellationToken ct) => SendAsync<EventCatalogStatus>(HttpMethod.Get, "catalog", null, ct);
-    public Task<EventTitleMapping> GetTitleAsync(string id, CancellationToken ct) => SendAsync<EventTitleMapping>(HttpMethod.Get, "titles/" + Uri.EscapeDataString(id), null, ct);
+    public Task<EventCatalogStatus> GetCatalogAsync(CancellationToken ct)
+    {
+        ct.ThrowIfCancellationRequested();
+        if (Local is not { } catalog) return SendAsync<EventCatalogStatus>(HttpMethod.Get, "catalog", null, ct);
+        var status = catalog.Status();
+        return Task.FromResult(status with { TestingTitleIds = (status.TestingTitleIds ?? []).Concat(Additions!.TitleIds).Distinct().ToArray() });
+    }
+    public Task<EventTitleMapping> GetTitleAsync(string id, CancellationToken ct) => AchievementLabs.MultiSelect.EventIdMapping.NormalizeCatalog(
+        Local?.Contains(id) == true ? Local.TitleAsync(id, ct) : Additions?.Contains(id) == true ? Task.FromResult(Additions.Title(id)) : SendAsync<EventTitleMapping>(HttpMethod.Get, "titles/" + Uri.EscapeDataString(id), null, ct), id);
     public Task<EventPayloads> GetPayloadsAsync(string id, string achievementId, string xuid, CancellationToken ct) =>
-        SendAsync<EventPayloads>(HttpMethod.Post, "titles/" + Uri.EscapeDataString(id) + "/payloads", new { achievementId, xuid }, ct);
+        Local?.Contains(id) == true ? Local.PayloadsAsync(id, AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId), xuid, ct)
+        : Additions?.Contains(id) == true ? Additions.PayloadsAsync(id, achievementId, xuid, ct)
+        : SendAsync<EventPayloads>(HttpMethod.Post, "titles/" + Uri.EscapeDataString(id) + "/payloads", new { achievementId = AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId), xuid }, ct);
 
     private async Task<T> SendAsync<T>(HttpMethod method, string path, object? body, CancellationToken ct)
     {

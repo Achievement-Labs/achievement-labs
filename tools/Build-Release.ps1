@@ -3,6 +3,7 @@
 param(
     [Parameter(Mandatory)][string]$Version,
     [switch]$RefreshCatalog,
+    [string]$EventsSource = (Join-Path $PSScriptRoot '../src/AchievementLabs.App/Events'),
     [ValidateRange(0,65534)][int]$BuildRevision = 0,
     [string]$SigningThumbprint = $env:ACHIEVEMENT_LABS_SIGNING_THUMBPRINT,
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
@@ -31,7 +32,7 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$([System.IO.Path]::GetFullPath($EventsSource))" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }

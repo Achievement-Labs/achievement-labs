@@ -21,7 +21,7 @@ dotnet build .\src\AchievementLabs.Desktop\AchievementLabs.Desktop.csproj -c Rel
 Create the self-contained single-file release candidate with:
 
 ```powershell
-pwsh -File .\tools\Build-Release.ps1
+pwsh -File .\tools\Build-Release.ps1 -Version 1.0.7
 ```
 
 The release script builds the Avalonia desktop application, the x86 GFWL helper,
@@ -37,7 +37,6 @@ and the Steam idle helper. Its output stays under `releases/` and is not committ
 - `server/licensing/` — self-hosted event catalog and account service.
 - `site/assets/games.json` — generated public game catalog embedded in the desktop client.
 - `tools/` — release and catalog build tools required by the current application.
-- `bot/` — Discord game-request voting bot; see [Discord setup](discord/README.md).
 - `SteamAchievementManager-7.0.41/` — vendored upstream dependency with its license retained.
 
 ## Event support states

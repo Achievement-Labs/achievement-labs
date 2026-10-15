@@ -78,7 +78,9 @@ public sealed partial class DesktopModel
     public bool CanEditXbox360UnlockTime => Xbox360UnlockMode == "Unlocked Online";
     public string Xbox360UnlockTimeText { get => xbox360UnlockTimeText; set { xbox360UnlockTimeText = value; Changed(); } }
     public int PendingXbox360EditCount => pendingXbox360Edits.Count;
-    public bool CanSaveXbox360Edits => pendingXbox360Edits.Count > 0;
+    public bool CanModifyXbox360Profile => true;
+    public string Xbox360SigningStatus => "Profile editing uses the existing upstream signing implementation.";
+    public bool CanSaveXbox360Edits => CanModifyXbox360Profile && pendingXbox360Edits.Count > 0;
     public bool CanInjectXbox360Profile => !string.IsNullOrWhiteSpace(loadedXbox360Profile) && pendingXbox360Edits.Count == 0;
     public string ProfilesDirectory => profiles.ProfilesDirectory;
     public string UsbProfileStatus => $"{profiles.FindUsbProfiles().Count} Xbox 360 profile(s) found on connected drives. Extracted profiles: {ProfilesDirectory}";
@@ -106,6 +108,7 @@ public sealed partial class DesktopModel
     }
     public async Task AddXbox360GameAsync(string titleId, string? titleName = null)
     {
+        if (!CanModifyXbox360Profile) { GpdAddStatus = LookupOutput = Xbox360SigningStatus; return; }
         if (busy) return;
         if (pendingXbox360Edits.Count > 0)
         {
@@ -300,6 +303,7 @@ public sealed partial class DesktopModel
     });
     public void SetXbox360Achievement()
     {
+        if (!CanModifyXbox360Profile) { Notice = Xbox360SigningStatus; return; }
         var selected = SelectedXbox360Achievement;
         if (selected == null) return;
         DateTimeOffset? timestamp = null;
@@ -335,6 +339,7 @@ public sealed partial class DesktopModel
     }
     public async Task SaveXbox360EditsAsync()
     {
+        if (!CanModifyXbox360Profile) { Notice = Xbox360SigningStatus; return; }
         if (busy || pendingXbox360Edits.Count == 0) return;
         var edits = pendingXbox360Edits.Values.ToArray();
         var path = loadedXbox360Profile;

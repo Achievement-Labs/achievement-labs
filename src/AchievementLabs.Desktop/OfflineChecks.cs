@@ -3,7 +3,7 @@ using AchievementLabs.Services.Gfwl;
 using System.IO.MemoryMappedFiles;
 using System.Diagnostics;
 namespace AchievementLabs.Desktop;
-internal static class OfflineChecks
+internal static partial class OfflineChecks
 {
     private static async Task CheckGfwlProtocolAsync()
     {
@@ -187,6 +187,7 @@ internal static class OfflineChecks
             throw new Exception("Known Windows 8 titles were not recognized.");
         var root = Path.Combine(Path.GetFullPath(output), "fixtures-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(root);
+        await CheckStatsEditorAsync(root);
         await CheckWindows8Async(root);
         var preferences = new DesktopPreferencesStore(Path.Combine(root, "settings.json"));
         var expected = new DesktopPreferences { EventsDirectory = root, SessionPath = Path.Combine(root, "auth.json"), MintAccent = true, RegionOverride = true };
@@ -207,9 +208,12 @@ internal static class OfflineChecks
         await File.WriteAllTextAsync(Path.Combine(root, "Data.json"), "{\"SupportedTitleIDs\":[\"1\"],\"1\":{}}");
         if ((await CatalogInspector.InspectAsync(root)).SupportedLast) throw new Exception("Catalog ordering check failed.");
         var nativeStats = new Workflows.StatsEditorViewModel(new Workflows.NativeNotices(_ => { }), new Workflows.NativeAccountContext { EventsDirectory = root });
+        var beforeStatsSave = await File.ReadAllTextAsync(Path.Combine(root, "Data.json"));
         nativeStats.TitleId = "9"; nativeStats.StatItems.Add(new Workflows.StatsEditorViewModel.StatDisplayItem { Name = "TestStat", Type = "Integer", CurrentValue = "1" }); nativeStats.SaveDiscoveredStats();
-        var savedCatalog = Newtonsoft.Json.Linq.JObject.Parse(await File.ReadAllTextAsync(Path.Combine(root, "Data.json")));
-        if (savedCatalog.Properties().Last().Name != "SupportedTitleIDs" || savedCatalog["1"] == null || savedCatalog["9"]?["Stats"]?["TestStat"] == null || Directory.GetFiles(root, "Data.json.*.bak").Length != 1) throw new Exception("Discovered-stat save did not preserve ordering, existing data, or backup.");
+        var savedCatalog = Newtonsoft.Json.Linq.JObject.Parse(await File.ReadAllTextAsync(Path.Combine(root, "Stats.json")));
+        if (savedCatalog["9"]?["Stats"]?["TestStat"] == null || savedCatalog["SupportedTitleIDs"] != null
+            || await File.ReadAllTextAsync(Path.Combine(root, "Data.json")) != beforeStatsSave)
+            throw new Exception("Discovered stats were not isolated from achievement data.");
         var export = Path.Combine(root, "achievements.json");
         await File.WriteAllTextAsync(export, "{\"achievements\":[{\"id\":\"1\",\"name\":\"Completed\",\"progressState\":\"Achieved\",\"rewards\":[{\"type\":\"Gamerscore\",\"value\":\"15\"}]},{\"id\":\"2\",\"name\":\"Pending\",\"progressState\":\"NotStarted\"},{\"id\":\"3\",\"name\":\"Unknown\"}]}");
         using var model = new DesktopModel();

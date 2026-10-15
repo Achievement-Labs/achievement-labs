@@ -5,14 +5,27 @@ public sealed record DesktopPreferences
 {
     public string EventsDirectory { get; init; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Events");
     public string SessionPath { get; init; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "auth.json");
+    public bool RememberWindowSize { get; init; }
+    public bool AutoMaximize { get; init; } = true;
     public bool RegionOverride { get; init; }
     public bool UnlockAllEnabled { get; init; }
     public string OAuthProfile { get; init; } = "Xbox App PC";
     public bool FakeSignature { get; init; }
     public bool PrivacyMode { get; init; }
     public bool AutoSpoof { get; init; }
+    public double BuildQueueBufferSeconds { get; init; } = 60;
     public bool AutoLaunchXboxApp { get; init; }
     public bool LaunchXboxAppHidden { get; init; }
+    public bool WindowsNotificationsEnabled { get; init; } = true;
+    public bool StopAutoUnlockOnSpoofFailure { get; init; }
+    public bool NotifyAutoUnlockCompletion { get; init; } = true;
+    public bool NotifySpooferStops { get; init; } = true;
+    public bool AutoRefreshEvents { get; init; } = true;
+    public bool AutoRefreshDlc { get; init; } = true;
+    public bool ShowMythicIcon { get; init; } = true;
+    public bool HighlightCompletedDlcs { get; init; } = true;
+    public string MythicColour { get; init; } = "#70C98A";
+    public string CompletedDlcColour { get; init; } = "#183A27";
     public bool MintAccent { get; init; }
     public bool AutomaticallyCheckUpdates { get; init; } = true;
 }

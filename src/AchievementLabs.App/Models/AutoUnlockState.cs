@@ -29,10 +29,12 @@ namespace AchievementLabs.Models
         /// Whether this achievement has already been unlocked by the auto unlocker
         /// </summary>
         public bool Completed { get; set; }
+        public int EventRequestIndex { get; set; }
     }
 
     public class AutoUnlockState
     {
+        public string OwnerXuid { get; set; } = "";
         /// <summary>
         /// Reference gamertag used to build the queue
         /// </summary>
@@ -77,6 +79,9 @@ namespace AchievementLabs.Models
         /// Whether the auto unlock process is actively running
         /// </summary>
         public bool IsRunning { get; set; }
+        public bool RefreshTokenOnFailure { get; set; }
+        public bool NotifyOnFailure { get; set; } = true;
+        public bool StopOnFailure { get; set; }
 
         /// <summary>
         /// Timestamp when the state was last saved

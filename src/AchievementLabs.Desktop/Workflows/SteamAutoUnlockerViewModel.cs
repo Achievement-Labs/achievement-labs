@@ -27,6 +27,9 @@ public partial class SteamAutoUnlockerViewModel : ObservableObject, INativePageL
     [ObservableProperty] private int _completedCount;
 
     public ObservableCollection<SteamAutoUnlockQueueItem> QueueItems { get; } = new();
+    public string ProgressText => $"{CompletedCount} / {CompletedCount + QueuedCount} achievements completed";
+    partial void OnCompletedCountChanged(int value) => OnPropertyChanged(nameof(ProgressText));
+    partial void OnQueuedCountChanged(int value) => OnPropertyChanged(nameof(ProgressText));
 
     public SteamAutoUnlockerViewModel(ISteamAchievementService steamAchievementService, NativeNotices snackbarService)
     {

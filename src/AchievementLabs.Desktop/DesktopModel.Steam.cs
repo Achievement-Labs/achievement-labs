@@ -9,7 +9,7 @@ public sealed partial class DesktopModel
     private SteamGameItem? selectedSteamGame;
     private string steamSearch = "", steamAppId = "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
     private string? steamAvatarUrl;
-    public bool IsSteam => page is "SteamLibrary" or "SteamAchievements";
+    public bool IsSteam => page is "SteamLibrary" or "SteamAchievements" or "SteamQueue";
     public bool IsSteamLibrary => page == "SteamLibrary";
     public bool IsSteamAchievements => page == "SteamAchievements";
     public string SteamProfileName { get => steamProfileName; private set { steamProfileName = value; Changed(); Changed(nameof(HomeSteamSummary)); } }

@@ -1,49 +1,31 @@
 {
   "ver": "4.0",
-  "name": "Microsoft.XboxLive.T949699803.AchievementUnlock",
+  "name": "Microsoft.XboxLive.T949699803.REPLACEEVENTNAME",
   "time": "REPLACETIME",
   "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
   "ext": {
     "utc": {
-      "shellId": 281587075381460992,
+      "shellId": 1,
       "eventFlags": 514,
       "pgName": "XBOX",
-      "dvcSample": 42.97,
-      "flags": 52412023344,
-      "edition": 48,
-      "epoch": "7700330",
+      "flags": 1,
+      "epoch": "1",
       "seq": REPLACESEQ
     },
     "privacy": {
-      "dataType": 33554432,
       "isRequired": false
     },
-    "metadata": {
-      "f": {
-        "baseData": {
-          "f": {
-            "properties": {
-              "f": {
-                "AchievementId": 4
-              }
-            },
-            "ver": 2
-          }
-        }
-      },
-      "privTags": 33554432,
-      "policies": 0
-    },
+    "metadata": REPLACEMETADATA,
     "os": {
-      "bootId": 79,
+      "bootId": 1,
       "name": "Windows",
-      "ver": "10.0.26300.9550.amd64fre.ge_release.240331-1435",
-      "expId": "NG:25E274,MD:283BAEF,ME:3A53D55,ME:3A53F1C,MD:3A53F34,ME:3536BD9,MD:2FE0A31,MD:2FE0A40,MD:2FE0A4F,MD:37B239D,PD:3536CF8,PD:33CDA4D,MD:36AF640,MD:9999,CD:2608D"
+      "ver": "1",
+      "expId": "1"
     },
     "app": {
       "id": "U:505GAMESS.P.A.a74b523b-7acb-435f-acba-aa38493d1f8c_tefn33qh9azfc!App",
       "ver": "1",
-      "is1P": 2,
+      "is1P": 0,
       "asId": 1
     },
     "device": {
@@ -51,33 +33,18 @@
       "deviceClass": "Windows.Desktop"
     },
     "protocol": {
-      "devMake": "System manufacturer",
-      "devModel": "System Product Name",
+      "devMake": "1",
+      "devModel": "1",
       "ticketKeys": [
-        "335666354",
-        "335666359"
+        "1"
       ]
     },
     "user": {
-      "localId": "m:1111111111111111"
+      "localId": "w:11111111-1111-1111-1111-111111111111"
     },
     "loc": {
-      "tz": "-04:00"
+      "tz": "00:00"
     }
   },
-  "data": {
-    "baseType": "Microsoft.XboxLive.InGame",
-    "baseData": {
-      "measurements": {},
-      "name": "AchievementUnlock",
-      "playerSessionId": "11111111-1111-1111-1111-111111111111",
-      "properties": {
-        "AchievementId": REPLACEID
-      },
-      "serviceConfigId": "685b0100-c29b-4e86-813b-6201389b44db",
-      "titleId": 949699803,
-      "userId": "REPLACEXUID",
-      "ver": 1
-    }
-  }
+  "data": REPLACEDATA
 }

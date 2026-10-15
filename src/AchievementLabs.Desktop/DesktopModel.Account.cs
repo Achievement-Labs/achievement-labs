@@ -14,7 +14,7 @@ public sealed partial class DesktopModel
 
     public void RefreshXboxPcAppPresence()
     {
-        var process = Process.GetProcessesByName("XboxPcApp").FirstOrDefault();
+        using var process = Process.GetProcessesByName("XboxPcApp").FirstOrDefault();
         XboxPcAppDetected = process != null;
         if (XboxPcAttached && process == null)
         {
@@ -44,7 +44,7 @@ public sealed partial class DesktopModel
             if (!XboxPcAppDetected) throw new InvalidOperationException("XboxPcApp is not running.");
 
             Notice = "Attaching to the Xbox PC app…";
-            var authorization = await XboxPcAppAuthorizationReader.TryReadAsync(lifetime.Token);
+            var authorization = await XboxPcAppAuthorizationReader.TryReadValidatedAsync(null, RegionOverride, lifetime.Token);
             if (string.IsNullOrWhiteSpace(authorization)) throw new InvalidDataException("No active Xbox authorization was found in XboxPcApp.");
             candidate = new XboxApiClient(authorization, RegionOverride);
             var profile = await Task.Run(candidate.GetBasicProfileAsync, lifetime.Token);
@@ -130,6 +130,7 @@ public sealed partial class DesktopModel
         try
         {
             savedEventsToken = await EventTokenStore.ReadAsync(lifetime.Token);
+            ResetEventTokenFreshness();
             EventTokenInput = savedEventsToken;
             EventTokenValidator.TryValidate(savedEventsToken, out _, out var message);
             EventTokenStatus = message;
@@ -141,11 +142,18 @@ public sealed partial class DesktopModel
     {
         if (!EventTokenValidator.TryNormalize(EventTokenInput, out var value)) { EventTokenStatus = "The event token format could not be recognized. Copy the complete x:XBL3.0 value."; return; }
         if (!EventTokenValidator.TryValidate(value, out _, out var message)) { EventTokenStatus = message; return; }
+        if (value == rejectedEventsToken) { EventTokenStatus = "This token was rejected by Xbox. Save a different token."; return; }
+        if (session != null && EventTokenValidator.GetUserHash(value) != EventTokenValidator.GetUserHash(session.Authorization))
+        { EventTokenStatus = "This event token belongs to a different account than the attached Xbox session."; return; }
+        await eventTokenWrites.WaitAsync(lifetime.Token);
         try
         {
             await EventTokenStore.SaveAsync(value, lifetime.Token);
             savedEventsToken = value;
+            ResetEventTokenFreshness();
+            queueAccount.EventsToken = value;
             if (session != null) session = session with { EventsToken = value };
+            queueAccount.EventsToken = value;
             // Keep the masked value visible so Save does not look like it failed.
             EventTokenInput = value;
             EventTokenValidator.TryValidate(value, out _, out message);
@@ -153,15 +161,21 @@ public sealed partial class DesktopModel
             Notice = "Event token saved securely for this Windows user.";
         }
         catch { EventTokenStatus = "The event token could not be saved."; }
+        finally { eventTokenWrites.Release(); }
     }
-    public void ClearEventToken()
+    public async Task ClearEventTokenAsync()
     {
-        try { EventTokenStore.Delete(); savedEventsToken = ""; EventTokenInput = ""; if (session != null) session = session with { EventsToken = "" }; EventTokenStatus = "No manual event token is saved."; }
+        await eventTokenWrites.WaitAsync(lifetime.Token);
+        try { EventTokenStore.Delete(); savedEventsToken = ""; ResetEventTokenFreshness(); queueAccount.EventsToken = ""; EventTokenInput = ""; if (session != null) session = session with { EventsToken = "" }; EventTokenStatus = "No manual event token is saved."; }
         catch { EventTokenStatus = "The saved event token could not be removed."; }
+        finally { eventTokenWrites.Release(); }
     }
     private void MarkEventTokenRejected()
     {
+        eventTokenRejected = true;
+        rejectedEventsToken = savedEventsToken;
         EventTokenStatus = "The saved event token was rejected by Xbox. It may be expired; paste a current token.";
+        Notice = EventTokenStatus;
     }
     public async Task AttachManualAsync()
     {
@@ -179,6 +193,7 @@ public sealed partial class DesktopModel
             lifetime.Token.ThrowIfCancellationRequested();
             session = new(authorization, user.Id, savedEventsToken); client = candidate; candidate = null;
             connectionMethod = "manual authorization"; XboxPcAttached = false; OAuthFallbackAvailable = false;
+            BeginTokenMaintenance();
             ApplyXboxProfile(user);
             ManualAuthorization = ""; Changed(nameof(ConnectionLabel));
         }
@@ -231,6 +246,7 @@ public sealed partial class DesktopModel
             lifetime.Token.ThrowIfCancellationRequested();
             client = candidate; candidate = null; session = connected;
             connectionMethod = "Microsoft OAuth"; XboxPcAttached = false; OAuthFallbackAvailable = false;
+            BeginTokenMaintenance();
             ApplyXboxProfile(profile?.ProfileUsers.FirstOrDefault());
             Changed(nameof(ConnectionLabel)); Notice = "Signed in for this app session.";
             if (RememberBrowserSession && connected.OAuthResponse != null)
@@ -239,6 +255,7 @@ public sealed partial class DesktopModel
                 {
                     await NativeSessionStore.SaveAsync(NativeSessionStore.DefaultPath, new(browserProfileName, connected.OAuthResponse), lifetime.Token);
                     SessionPath = NativeSessionStore.DefaultPath;
+                    activeOAuthSessionPath = NativeSessionStore.DefaultPath;
                     await SavePreferencesAsync();
                     Notice = "Signed in. Session saved for this Windows user; use Connect saved session next time.";
                 }
