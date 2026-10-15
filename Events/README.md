@@ -244,7 +244,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Forza Motorsport 6 | Xbox One, Xbox Series X|S | `1694054782` | 95 | Testing | [1694054782.json](1694054782.json) |
 | Forza Motorsport 6: Apex | Windows PC | `981972052` | 24 | Supported | [981972052.json](981972052.json) |
 | Forza Motorsport 7 | Windows PC, Xbox One, Xbox Series X|S | `1999574456` | 62 | Testing | [1999574456.json](1999574456.json) |
-| FRU | Xbox One, Xbox Series X\|S | `1013213714` | 16 | Testing | Unavailable |
+| FRU | Xbox One, Xbox Series X\|S | `1013213714` | 16 | Testing | [1013213714.json](1013213714.json) |
 | Game of Thrones - Episode 1: Iron from Ice | Xbox One, Xbox Series X|S | `1856172970` | 48 | Supported | [1856172970.json](1856172970.json) |
 | Gears of War 4 | Windows PC, Xbox One, Xbox Series X|S | `552499398` | 164 | Testing | [552499398.json](552499398.json) |
 | Gears of War: Ultimate Edition | Xbox One, Xbox Series X|S | `1475571605` | 56 | Testing | [1475571605.json](1475571605.json) |
