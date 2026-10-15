@@ -17,6 +17,7 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}
   if(args.Contains("--queue-tools")){DlcCatalogueTests.Run();CompletionPresentationTests.Run();GameDetailsTests.Run();QueueToolTests.Run();return;}
   if(args.Contains("--playtime")){PlaytimeTests.Run();return;}

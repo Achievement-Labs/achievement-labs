@@ -21,7 +21,7 @@ dotnet build .\src\AchievementLabs.Desktop\AchievementLabs.Desktop.csproj -c Rel
 Create the self-contained single-file release candidate with:
 
 ```powershell
-pwsh -File .\tools\Build-Release.ps1 -Version 1.0.7
+pwsh -File .\tools\Build-Release.ps1 -Version 1.0.8
 ```
 
 The release script builds the Avalonia desktop application, the x86 GFWL helper,
