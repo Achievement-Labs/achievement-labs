@@ -143,8 +143,7 @@ public sealed partial class DesktopModel
         if (!EventTokenValidator.TryNormalize(EventTokenInput, out var value)) { EventTokenStatus = "The event token format could not be recognized. Copy the complete x:XBL3.0 value."; return; }
         if (!EventTokenValidator.TryValidate(value, out _, out var message)) { EventTokenStatus = message; return; }
         if (value == rejectedEventsToken) { EventTokenStatus = "This token was rejected by Xbox. Save a different token."; return; }
-        if (session != null && EventTokenValidator.GetUserHash(value) != EventTokenValidator.GetUserHash(session.Authorization))
-        { EventTokenStatus = "This event token belongs to a different account than the attached Xbox session."; return; }
+        var hashMismatch = session != null && EventTokenValidator.IsDifferentUser(value, session.Authorization);
         await eventTokenWrites.WaitAsync(lifetime.Token);
         try
         {
@@ -157,7 +156,8 @@ public sealed partial class DesktopModel
             // Keep the masked value visible so Save does not look like it failed.
             EventTokenInput = value;
             EventTokenValidator.TryValidate(value, out _, out message);
-            EventTokenStatus = "Saved securely · " + message;
+            EventTokenStatus = "Saved securely · " + message
+                + (hashMismatch ? " · Note: its user hash differs from the attached Xbox session; Xbox will reject it if it is for another account." : "");
             Notice = "Event token saved securely for this Windows user.";
         }
         catch { EventTokenStatus = "The event token could not be saved."; }

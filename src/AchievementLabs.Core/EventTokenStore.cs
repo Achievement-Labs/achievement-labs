@@ -38,9 +38,15 @@ public static class EventTokenValidator
 {
     public static string? GetUserHash(string value)
     {
-        var match = System.Text.RegularExpressions.Regex.Match(value, @"^(?:x:)?XBL3\.0 x=(?<hash>[0-9]+);");
-        return match.Success ? match.Groups["hash"].Value : null;
+        var match = Regex.Match(value?.Trim().Trim('"') ?? "", @"^(?:x:)?XBL3\.0\s+x=(?<hash>[^;\s]+);", RegexOptions.IgnoreCase);
+        return match.Success && match.Groups["hash"].Value != "-" ? match.Groups["hash"].Value : null;
     }
+
+    // Only a definite mismatch counts: an unreadable or redacted hash on either side
+    // is not proof of a different account, and Xbox rejects a wrong token anyway.
+    public static bool IsDifferentUser(string token, string authorization)
+        => GetUserHash(token) is { } tokenHash && GetUserHash(authorization) is { } sessionHash
+            && !string.Equals(tokenHash, sessionHash, StringComparison.Ordinal);
 
     public static bool TryNormalize(string? token, out string normalized)
     {
