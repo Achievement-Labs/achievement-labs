@@ -1,82 +1,50 @@
 {
-    "ver": "4.0",
-    "name": "Microsoft.XboxLive.T558797228.UnlockAchievement",
-    "time": "REPLACETIME",
-    "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
-    "ext": {
-        "utc": {
-            "shellId": 1,
-            "eventFlags": 1,
-            "pgName": "XBOX",
-            "flags": 1,
-            "epoch": "1",
-            "seq": REPLACESEQ
-        },
-        "privacy": {
-            "dataType": 1,
-            "isRequired": false
-        },
-        "metadata": {
-            "f": {
-                "baseData": {
-                    "f": {
-                        "properties": {
-                            "f": {
-                                "AchievementIndex": 4
-                            }
-                        },
-                        "ver": 2
-                    }
-                }
-            },
-            "privTags": 1,
-            "policies": 1
-        },
-        "os": {
-            "bootId": 1,
-            "name": "Windows",
-            "ver": "1",
-            "expId": "1"
-        },
-        "app": {
-            "id": "U:PsyonixInc.RocketLeague_24yhbbr7hv30r!AppRocketLeagueShipping",
-            "ver": "1",
-            "is1P": 1,
-            "asId": 1
-        },
-        "device": {
-            "localId": "s:11111111-1111-1111-1111-111111111111",
-            "deviceClass": "Windows.Desktop"
-        },
-        "protocol": {
-            "devMake": "1",
-            "devModel": "1",
-            "ticketKeys": [
-                "1",
-                "1"
-            ]
-        },
-        "user": {
-            "localId": "m:1111111111111111"
-        },
-        "loc": {
-            "tz": "00:00"
-        }
+  "ver": "4.0",
+  "name": "Microsoft.XboxLive.T558797228.REPLACEEVENTNAME",
+  "time": "REPLACETIME",
+  "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
+  "ext": {
+    "utc": {
+      "shellId": 1,
+      "eventFlags": 1,
+      "pgName": "XBOX",
+      "flags": 1,
+      "epoch": "1",
+      "seq": REPLACESEQ
     },
-    "data": {
-        "baseType": "Microsoft.XboxLive.InGame",
-        "baseData": {
-            "measurements": {},
-            "name": "UnlockAchievement",
-            "playerSessionId": "11111111-1111-1111-1111-111111111111",
-            "properties": {
-                "AchievementIndex": REPLACEID,
-                "MultiplayerCorrelationId": "00000000-0000-0000-0000-000000000000"
-            },
-            "serviceConfigId": "90c40100-9123-47d6-bc6b-35d3214e91ac",
-            "titleId": 558797228,
-            "userId": "REPLACEXUID",
-            "ver": 1
-        }
+    "privacy": {
+      "isRequired": false
+    },
+    "metadata": REPLACEMETADATA,
+    "os": {
+      "bootId": 1,
+      "name": "1",
+      "ver": "1",
+      "expId": "1"
+    },
+    "app": {
+      "id": "U:PsyonixInc.RocketLeague_24yhbbr7hv30r!TAGameDingoShipping",
+      "ver": "1.1.4.3_x64_!TAGame-Dingo-Shipping.exe",
+      "is1P": 1,
+      "asId": 1
+    },
+    "device": {
+      "localId": "s:11111111-1111-1111-1111-111111111111",
+      "deviceClass": "Windows.Desktop"
+    },
+    "protocol": {
+      "devMake": "1",
+      "devModel": "1",
+      "ticketKeys": [
+        "1"
+      ]
+    },
+    "user": {
+      "localId": "m:11111111111111111"
+    },
+    "loc": {
+      "tz": "00:00"
     }
+  },
+  "data": REPLACEDATA
 }
