@@ -17,6 +17,7 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}
   if(args.Contains("--queue-tools")){DlcCatalogueTests.Run();CompletionPresentationTests.Run();GameDetailsTests.Run();QueueToolTests.Run();return;}
@@ -51,6 +52,8 @@ static class Test
        Assert(!routeClient.BundledTitleIds.Contains("345903534"),"Legacy Minecraft uses upstream route rather than Bedrock bundled data");
        Assert(routeClient.BundledTitleIds.Contains("1828326430"),"Other Minecraft editions retain bundled route");
    }
+   Assert(Desc<ProgressBar>(window).Any(p=>p.Name=="LibraryRefreshProgressBar"),"Library refresh progress control present");
+   Assert(Desc<TextBlock>(window).Any(p=>p.Name=="LibraryRefreshStatusText"),"Library refresh stage/stats present");
    Assert(Desc<ComboBox>(window).Any(c=>c.Name=="AchievementNameSort"),"Sort in real window");
    Assert(Desc<ComboBox>(window).Single(c=>c.Name=="AchievementNameSort").Parent is StackPanel { Name: "AchievementSortToolbar" },"Achievement sort sits in the top toolbar");
    Assert(!Desc<TabItem>(window).Any(t=>Equals(t.Header,"Steam")),"Steam queue is not a tab of the Xbox queue");

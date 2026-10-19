@@ -112,31 +112,52 @@ public sealed partial class DesktopModel
     {
         if (CanQuery && SelectedGame is { } game) await SelectGameAsync(game);
     }
+    private bool libraryRefreshing, libraryRefreshIndeterminate;
+    private double libraryRefreshPercent;
+    private string libraryRefreshStatus = "";
+    public bool LibraryRefreshing { get => libraryRefreshing; private set { libraryRefreshing=value; Changed(); } }
+    public bool LibraryRefreshIndeterminate { get => libraryRefreshIndeterminate; private set { libraryRefreshIndeterminate=value; Changed(); } }
+    public double LibraryRefreshPercent { get => libraryRefreshPercent; private set { libraryRefreshPercent=value; Changed(); } }
+    public bool HasLibraryRefreshStatus => libraryRefreshStatus.Length > 0;
+    public string LibraryRefreshStatus { get => libraryRefreshStatus; private set { libraryRefreshStatus=value; Changed(); Changed(nameof(HasLibraryRefreshStatus)); } }
     public async Task RefreshLibraryAsync()
     {
-        if (!CanQuery) return;
-        Busy(true);
+        if (!CanQuery || LibraryRefreshing) return;
+        Busy(true); LibraryRefreshing=true; LibraryRefreshPercent=0; LibraryRefreshIndeterminate=true;
+        var elapsed = System.Diagnostics.Stopwatch.StartNew();
+        LibraryRefreshStatus="Checking account authorization…";
         try
         {
             await EnsureAuthorizationFreshAsync(lifetime.Token);
+            LibraryRefreshStatus="Refreshing shared totals and DLC metadata…";
             await RefreshSharedTotalsAsync(lifetime.Token);
             LoadLibraryTotals();
+            LibraryRefreshStatus="Waiting to read the Xbox library…";
             await requests.WaitAsync(lifetime.Token);
             try
             {
                 if (client == null || session == null) return;
-                totalsReport.Clear();
-        var api = client; var xuid = session.Xuid;
-                var result = await Task.Run(() => api.GetGamesListAsync(xuid), lifetime.Token) ?? throw new InvalidDataException();
+                totalsReport.Clear(); var api=client; var xuid=session.Xuid;
+                var progress = new Progress<AchievementLabs.Core.LibraryRefreshProgress>(p => {
+                    if (!LibraryRefreshing) return;
+                    LibraryRefreshIndeterminate=p.TotalBytes is not > 0;
+                    LibraryRefreshPercent=p.TotalBytes is > 0 ? Math.Clamp(p.BytesRead*100d/p.TotalBytes.Value,0,100) : 0;
+                    LibraryRefreshStatus=$"Downloading library · {p.BytesRead/1024d:N0} KB"
+                        + (p.TotalBytes is > 0 ? $" of {p.TotalBytes.Value/1024d:N0} KB" : "")
+                        + (p.Titles>0 ? $" · {p.Titles:N0} titles received" : "") + $" · {elapsed.Elapsed.TotalSeconds:N0}s";
+                });
+                var result = await Task.Run(() => api.GetGamesListAsync(xuid,progress,lifetime.Token), lifetime.Token) ?? throw new InvalidDataException();
                 lifetime.Token.ThrowIfCancellationRequested();
+                LibraryRefreshStatus="Applying library progress and completion metadata…";
                 Games = result.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
-                Notice = $"Refreshed {Games.Length} titles.";
+                LibraryRefreshStatus=$"Refreshed {Games.Length:N0} titles · {Games.Count(g=>g.ProgressKnown):N0} with achievement counts · {elapsed.Elapsed.TotalSeconds:N1}s";
+                LibraryRefreshPercent=100; Notice=LibraryRefreshStatus;
             }
             finally { requests.Release(); }
         }
-        catch (OperationCanceledException) { }
-        catch { Notice = "Could not refresh the library. Your previous list is still available."; }
-        finally { Busy(false); }
+        catch (OperationCanceledException) { LibraryRefreshStatus="Library refresh cancelled; previous list retained."; }
+        catch { LibraryRefreshStatus="Library refresh failed; previous list retained. Check your connection and retry."; Notice=LibraryRefreshStatus; }
+        finally { LibraryRefreshing=false; LibraryRefreshIndeterminate=false; Busy(false); }
     }
     private readonly AchievementLabs.Core.SharedAchievementTotals sharedLibraryTotals = AchievementLabs.Core.SharedAchievementTotals.Bundled();
     private readonly Dictionary<string, int> knownLibraryTotals = new();

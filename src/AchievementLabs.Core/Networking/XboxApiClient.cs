@@ -221,7 +221,7 @@ public class XboxApiClient : IDisposable
         return JsonConvert.DeserializeObject<Gamepass>(gpuResponse);
     }
 
-    public async Task<TitlesList?> GetGamesListAsync(string xuid)
+    public async Task<TitlesList?> GetGamesListAsync(string xuid, IProgress<AchievementLabs.Core.LibraryRefreshProgress>? progress = null, CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(xuid))
         {
@@ -233,9 +233,24 @@ public class XboxApiClient : IDisposable
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.ContractVersion, HeaderValues.ContractVersion2);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Host, Hosts.TitleHub);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Connection, HeaderValues.KeepAlive);
-        var responseString = await _httpClient.GetStringAsync(string.Format(InterpolatedXboxAPIUrls.TitlesUrl, xuid));
+        using var response = await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.TitlesUrl, xuid), HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        response.EnsureSuccessStatusCode();
+        var length = response.Content.Headers.ContentLength;
+        if (length > 128L * 1024 * 1024) throw new InvalidDataException("Library response exceeds the size limit.");
+        using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+        using var received = new MemoryStream(); var buffer = new byte[65536];
+        progress?.Report(new(0, length));
+        while (true) {
+            var count = await stream.ReadAsync(buffer, cancellationToken);
+            if (count == 0) break;
+            if (received.Length + count > 128L * 1024 * 1024) throw new InvalidDataException("Library response exceeds the size limit.");
+            received.Write(buffer,0,count); progress?.Report(new(received.Length,length));
+        }
+        var responseString = Encoding.UTF8.GetString(received.ToArray());
         WriteGamesListDebugLog(responseString);
-        return JsonConvert.DeserializeObject<TitlesList>(responseString);
+        var result = JsonConvert.DeserializeObject<TitlesList>(responseString);
+        progress?.Report(new(received.Length, length, result?.Titles?.Count ?? 0));
+        return result;
     }
 
     private void WriteGamesListDebugLog(string responseBody)
