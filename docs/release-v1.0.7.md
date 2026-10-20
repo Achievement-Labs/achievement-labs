@@ -78,47 +78,47 @@ These **42** new title blocks are listed with their release classification; addi
 | Title | Platform | Title ID | Status |
 |---|---|---|---|
 | Age of Empires®: Castle Siege | Windows PC | `614295058` | Testing |
-| Battleborn | Xbox One, Xbox Series X|S | `1863651407` | Testing |
-| DOOM | Xbox One, Xbox Series X|S | `1327376519` | Testing |
-| EA SPORTS™ NBA LIVE 15 | Xbox One, Xbox Series X|S | `419391420` | Testing |
-| EA SPORTS™ NBA LIVE 16 | Xbox One, Xbox Series X|S | `2067761315` | Testing |
-| EA SPORTS™ NHL® 16 | Xbox One, Xbox Series X|S | `242301355` | Testing |
-| EA SPORTS™ NHL™ 17 | Xbox One, Xbox Series X|S | `492699383` | Coming Soon |
-| EA SPORTS™ UFC® | Xbox One, Xbox Series X|S | `548464799` | Testing |
-| EA SPORTS™ UFC® 2 | Xbox One, Xbox Series X|S | `552778408` | Testing |
-| EA SPORTS™ UFC® 3 | Xbox One, Xbox Series X|S | `722006140` | Testing |
+| Battleborn | Xbox One, Xbox Series X\|S | `1863651407` | Testing |
+| DOOM | Xbox One, Xbox Series X\|S | `1327376519` | Testing |
+| EA SPORTS™ NBA LIVE 15 | Xbox One, Xbox Series X\|S | `419391420` | Testing |
+| EA SPORTS™ NBA LIVE 16 | Xbox One, Xbox Series X\|S | `2067761315` | Testing |
+| EA SPORTS™ NHL® 16 | Xbox One, Xbox Series X\|S | `242301355` | Testing |
+| EA SPORTS™ NHL™ 17 | Xbox One, Xbox Series X\|S | `492699383` | Coming Soon |
+| EA SPORTS™ UFC® | Xbox One, Xbox Series X\|S | `548464799` | Testing |
+| EA SPORTS™ UFC® 2 | Xbox One, Xbox Series X\|S | `552778408` | Testing |
+| EA SPORTS™ UFC® 3 | Xbox One, Xbox Series X\|S | `722006140` | Testing |
 | EVERSPACE™ | Windows PC | `968775939` | Testing |
-| FINAL FANTASY TYPE-0 HD | Xbox One, Xbox Series X|S | `1079518187` | Supported |
-| FINAL FANTASY TYPE-0 HD (Asian version) | Xbox One, Xbox Series X|S | `708445180` | Supported |
-| FINAL FANTASY TYPE-0™ HD | Xbox One, Xbox Series X|S | `585022010` | Supported |
-| FINAL FANTASY XV MULTIPLAYER: COMRADES | Xbox One, Xbox Series X|S | `136671143` | Supported |
-| FINAL FANTASY XVI | Windows PC, Xbox Series X|S | `1663711933` | Supported |
-| FINAL FANTASY 零式 HD | Xbox One, Xbox Series X|S | `1342420348` | Supported |
-| Grand Theft Auto Online (Xbox Series X/S) | Xbox Series X|S | `1778348973` | Testing |
-| Guitar Hero Live | Xbox One, Xbox Series X|S | `453673951` | Testing |
-| METAL GEAR SOLID V: THE PHANTOM PAIN | Xbox One, Xbox Series X|S | `148020354` | Testing |
-| METAL GEAR SURVIVE | Xbox One, Xbox Series X|S | `888477147` | Testing |
-| NBA LIVE 14 | Xbox One, Xbox Series X|S | `1616270757` | Coming Soon |
-| NBA LIVE 18: The One Edition | Xbox One, Xbox Series X|S | `83029588` | Testing |
-| NHL® 15 Full Game | Xbox One, Xbox Series X|S | `1907337607` | Testing |
-| NHL™ 94 REWIND | Xbox One, Xbox Series X|S | `1634565765` | Testing |
-| Overcooked | Xbox One, Xbox Series X|S | `340920273` | Testing |
-| Peggle 2 | Xbox One, Xbox Series X|S | `848717329` | Testing |
-| Project Spark | Xbox One, Xbox Series X|S | `1624350228` | Testing |
-| Rayman Legends | Xbox One, Xbox Series X|S | `666757656` | Testing |
+| FINAL FANTASY TYPE-0 HD | Xbox One, Xbox Series X\|S | `1079518187` | Supported |
+| FINAL FANTASY TYPE-0 HD (Asian version) | Xbox One, Xbox Series X\|S | `708445180` | Supported |
+| FINAL FANTASY TYPE-0™ HD | Xbox One, Xbox Series X\|S | `585022010` | Supported |
+| FINAL FANTASY XV MULTIPLAYER: COMRADES | Xbox One, Xbox Series X\|S | `136671143` | Supported |
+| FINAL FANTASY XVI | Windows PC, Xbox Series X\|S | `1663711933` | Supported |
+| FINAL FANTASY 零式 HD | Xbox One, Xbox Series X\|S | `1342420348` | Supported |
+| Grand Theft Auto Online (Xbox Series X/S) | Xbox Series X\|S | `1778348973` | Testing |
+| Guitar Hero Live | Xbox One, Xbox Series X\|S | `453673951` | Testing |
+| METAL GEAR SOLID V: THE PHANTOM PAIN | Xbox One, Xbox Series X\|S | `148020354` | Testing |
+| METAL GEAR SURVIVE | Xbox One, Xbox Series X\|S | `888477147` | Testing |
+| NBA LIVE 14 | Xbox One, Xbox Series X\|S | `1616270757` | Coming Soon |
+| NBA LIVE 18: The One Edition | Xbox One, Xbox Series X\|S | `83029588` | Testing |
+| NHL® 15 Full Game | Xbox One, Xbox Series X\|S | `1907337607` | Testing |
+| NHL™ 94 REWIND | Xbox One, Xbox Series X\|S | `1634565765` | Testing |
+| Overcooked | Xbox One, Xbox Series X\|S | `340920273` | Testing |
+| Peggle 2 | Xbox One, Xbox Series X\|S | `848717329` | Testing |
+| Project Spark | Xbox One, Xbox Series X\|S | `1624350228` | Testing |
+| Rayman Legends | Xbox One, Xbox Series X\|S | `666757656` | Testing |
 | Rise of Nations: Extended Edition | Windows PC | `326835485` | Testing |
 | Rock Band 4 | Durango | `767263759` | Testing |
 | Shape Up | Xbox One | `1147540192` | Testing |
-| Slender: The Arrival (2015) | Xbox One, Xbox Series X|S | `1166935255` | Testing |
-| Slime Rancher | Windows PC, Xbox One, Xbox Series X|S | `625948041` | Testing |
-| SUBJECT 13 | Windows PC, Xbox One, Xbox Series X|S | `208741763` | Testing |
+| Slender: The Arrival (2015) | Xbox One, Xbox Series X\|S | `1166935255` | Testing |
+| Slime Rancher | Windows PC, Xbox One, Xbox Series X\|S | `625948041` | Testing |
+| SUBJECT 13 | Windows PC, Xbox One, Xbox Series X\|S | `208741763` | Testing |
 | Tapping Skill Test | Xbox One | `875079140` | Testing |
-| Titanfall | Xbox One, Xbox Series X|S | `1292135256` | Testing |
-| Transformers: Rise of the Dark Spark | Xbox One, Xbox Series X|S | `1529724759` | Testing |
-| UFC® 4 | Xbox One, Xbox Series X|S | `465979625` | Testing |
-| Zoo Tycoon | Xbox One, Xbox Series X|S | `711381438` | Testing |
-| Zoo Tycoon: Ultimate Animal Collection | Windows PC, Xbox One, Xbox Series X|S | `33936946` | Testing |
-| ブリッジコンストラクター：ウォーキング・デッド | Xbox One, Xbox Series X|S | `1787967632` | Supported |
+| Titanfall | Xbox One, Xbox Series X\|S | `1292135256` | Testing |
+| Transformers: Rise of the Dark Spark | Xbox One, Xbox Series X\|S | `1529724759` | Testing |
+| UFC® 4 | Xbox One, Xbox Series X\|S | `465979625` | Testing |
+| Zoo Tycoon | Xbox One, Xbox Series X\|S | `711381438` | Testing |
+| Zoo Tycoon: Ultimate Animal Collection | Windows PC, Xbox One, Xbox Series X\|S | `33936946` | Testing |
+| ブリッジコンストラクター：ウォーキング・デッド | Xbox One, Xbox Series X\|S | `1787967632` | Supported |
 
 ## Every newly Supported title since v1.0.6
 
@@ -126,49 +126,49 @@ These **43** titles are newly Supported compared with v1.0.6, including promotio
 
 | Title | Platform | Title ID | Status |
 |---|---|---|---|
-| 8-bit Adventure Anthology: Volume I | Xbox One, Xbox Series X|S | `506071367` | Supported |
-| Cuphead | Windows PC, Xbox One, Xbox Series X|S | `623325843` | Supported |
-| Don't Starve Together: Console Edition | Xbox One, Xbox Series X|S | `1033937373` | Supported |
-| Don't Starve: Giant Edition | Windows PC, Xbox One, Xbox Series X|S | `2061746629` | Supported |
-| Dungeon of the Endless | Xbox One, Xbox Series X|S | `429018095` | Supported |
+| 8-bit Adventure Anthology: Volume I | Xbox One, Xbox Series X\|S | `506071367` | Supported |
+| Cuphead | Windows PC, Xbox One, Xbox Series X\|S | `623325843` | Supported |
+| Don't Starve Together: Console Edition | Xbox One, Xbox Series X\|S | `1033937373` | Supported |
+| Don't Starve: Giant Edition | Windows PC, Xbox One, Xbox Series X\|S | `2061746629` | Supported |
+| Dungeon of the Endless | Xbox One, Xbox Series X\|S | `429018095` | Supported |
 | Dungeon of the ENDLESS™ | Windows PC | `1959656817` | Supported |
-| EA SPORTS FC™ 24 Xbox One | Xbox One, Xbox Series X|S | `2098741842` | Supported |
-| EA SPORTS FC™ 24 Xbox Series X/S | Xbox Series X|S | `1852502655` | Supported |
-| EA SPORTS FC™ 25 Xbox One | Xbox One, Xbox Series X|S | `1882096658` | Supported |
-| EA SPORTS FC™ 25 Xbox Series X/S | Xbox Series X|S | `1653663875` | Supported |
-| EA SPORTS FC™ 26 Xbox One | Xbox One, Xbox Series X|S | `1852068331` | Supported |
-| EA SPORTS FC™ 26 Xbox Series X/S | Xbox Series X|S | `1909324253` | Supported |
-| EA SPORTS™ FIFA 16 | Xbox One, Xbox Series X|S | `2052426459` | Supported |
-| EA SPORTS™ FIFA 17 | Xbox One, Xbox Series X|S | `69094388` | Supported |
-| EA SPORTS™ FIFA 20 | Xbox One, Xbox Series X|S | `196631666` | Supported |
-| EA SPORTS™ FIFA 23 Standard Edition Xbox One | Xbox One, Xbox Series X|S | `1994003829` | Supported |
-| EA SPORTS™ FIFA 23 Standard Edition Xbox Series X/S | Xbox Series X|S | `2071676002` | Supported |
-| Enter The Gungeon | Windows PC, Xbox One, Xbox Series X|S | `401515813` | Supported |
-| FIFA 14 | Xbox One, Xbox Series X|S | `1813362885` | Supported |
-| FIFA 18 | Xbox One, Xbox Series X|S | `433376346` | Supported |
-| FIFA 21 Xbox One | Xbox One, Xbox Series X|S | `1761289795` | Supported |
-| FIFA 21 Xbox Series X/S | Xbox Series X|S | `2137885631` | Supported |
-| FIFA 22 Xbox One | Xbox One, Xbox Series X|S | `1808064759` | Supported |
-| FIFA 22 Xbox Series X/S | Xbox Series X|S | `1847979820` | Supported |
-| FINAL FANTASY TYPE-0 HD | Xbox One, Xbox Series X|S | `1079518187` | Supported |
-| FINAL FANTASY TYPE-0 HD (Asian version) | Xbox One, Xbox Series X|S | `708445180` | Supported |
-| FINAL FANTASY TYPE-0™ HD | Xbox One, Xbox Series X|S | `585022010` | Supported |
-| FINAL FANTASY XV MULTIPLAYER: COMRADES | Xbox One, Xbox Series X|S | `136671143` | Supported |
-| FINAL FANTASY XVI | Windows PC, Xbox Series X|S | `1663711933` | Supported |
-| FINAL FANTASY 零式 HD | Xbox One, Xbox Series X|S | `1342420348` | Supported |
-| Just Cause 3 | Xbox One, Xbox Series X|S | `1175562227` | Supported |
-| Mega Man™ Legacy Collection | Xbox One, Xbox Series X|S | `1535750831` | Supported |
-| OCCULTIC;NINE | Xbox One, Xbox Series X|S | `500760956` | Supported |
-| Ori and the Blind Forest | Xbox One, Xbox Series X|S | `264259050` | Supported |
-| Party Hard | Xbox One, Xbox Series X|S | `916339986` | Supported |
-| Project Cars | Xbox One, Xbox Series X|S | `1907381044` | Supported |
-| Project CARS 2 | Xbox One, Xbox Series X|S | `200732952` | Supported |
-| Project CARS 3 | Xbox One, Xbox Series X|S | `572054432` | Supported |
-| Roblox - Xbox | Xbox One, Xbox Series X|S | `342226876` | Supported |
-| Stardew Valley | Xbox One, Xbox Series X|S | `306230746` | Supported |
-| The Witcher 3: Wild Hunt | Xbox One, Xbox Series X|S | `1799887933` | Supported |
-| The Witcher 3: Wild Hunt – Complete Edition | Xbox One, Xbox Series X|S | `530462567` | Supported |
-| ブリッジコンストラクター：ウォーキング・デッド | Xbox One, Xbox Series X|S | `1787967632` | Supported |
+| EA SPORTS FC™ 24 Xbox One | Xbox One, Xbox Series X\|S | `2098741842` | Supported |
+| EA SPORTS FC™ 24 Xbox Series X/S | Xbox Series X\|S | `1852502655` | Supported |
+| EA SPORTS FC™ 25 Xbox One | Xbox One, Xbox Series X\|S | `1882096658` | Supported |
+| EA SPORTS FC™ 25 Xbox Series X/S | Xbox Series X\|S | `1653663875` | Supported |
+| EA SPORTS FC™ 26 Xbox One | Xbox One, Xbox Series X\|S | `1852068331` | Supported |
+| EA SPORTS FC™ 26 Xbox Series X/S | Xbox Series X\|S | `1909324253` | Supported |
+| EA SPORTS™ FIFA 16 | Xbox One, Xbox Series X\|S | `2052426459` | Supported |
+| EA SPORTS™ FIFA 17 | Xbox One, Xbox Series X\|S | `69094388` | Supported |
+| EA SPORTS™ FIFA 20 | Xbox One, Xbox Series X\|S | `196631666` | Supported |
+| EA SPORTS™ FIFA 23 Standard Edition Xbox One | Xbox One, Xbox Series X\|S | `1994003829` | Supported |
+| EA SPORTS™ FIFA 23 Standard Edition Xbox Series X/S | Xbox Series X\|S | `2071676002` | Supported |
+| Enter The Gungeon | Windows PC, Xbox One, Xbox Series X\|S | `401515813` | Supported |
+| FIFA 14 | Xbox One, Xbox Series X\|S | `1813362885` | Supported |
+| FIFA 18 | Xbox One, Xbox Series X\|S | `433376346` | Supported |
+| FIFA 21 Xbox One | Xbox One, Xbox Series X\|S | `1761289795` | Supported |
+| FIFA 21 Xbox Series X/S | Xbox Series X\|S | `2137885631` | Supported |
+| FIFA 22 Xbox One | Xbox One, Xbox Series X\|S | `1808064759` | Supported |
+| FIFA 22 Xbox Series X/S | Xbox Series X\|S | `1847979820` | Supported |
+| FINAL FANTASY TYPE-0 HD | Xbox One, Xbox Series X\|S | `1079518187` | Supported |
+| FINAL FANTASY TYPE-0 HD (Asian version) | Xbox One, Xbox Series X\|S | `708445180` | Supported |
+| FINAL FANTASY TYPE-0™ HD | Xbox One, Xbox Series X\|S | `585022010` | Supported |
+| FINAL FANTASY XV MULTIPLAYER: COMRADES | Xbox One, Xbox Series X\|S | `136671143` | Supported |
+| FINAL FANTASY XVI | Windows PC, Xbox Series X\|S | `1663711933` | Supported |
+| FINAL FANTASY 零式 HD | Xbox One, Xbox Series X\|S | `1342420348` | Supported |
+| Just Cause 3 | Xbox One, Xbox Series X\|S | `1175562227` | Supported |
+| Mega Man™ Legacy Collection | Xbox One, Xbox Series X\|S | `1535750831` | Supported |
+| OCCULTIC;NINE | Xbox One, Xbox Series X\|S | `500760956` | Supported |
+| Ori and the Blind Forest | Xbox One, Xbox Series X\|S | `264259050` | Supported |
+| Party Hard | Xbox One, Xbox Series X\|S | `916339986` | Supported |
+| Project Cars | Xbox One, Xbox Series X\|S | `1907381044` | Supported |
+| Project CARS 2 | Xbox One, Xbox Series X\|S | `200732952` | Supported |
+| Project CARS 3 | Xbox One, Xbox Series X\|S | `572054432` | Supported |
+| Roblox - Xbox | Xbox One, Xbox Series X\|S | `342226876` | Supported |
+| Stardew Valley | Xbox One, Xbox Series X\|S | `306230746` | Supported |
+| The Witcher 3: Wild Hunt | Xbox One, Xbox Series X\|S | `1799887933` | Supported |
+| The Witcher 3: Wild Hunt – Complete Edition | Xbox One, Xbox Series X\|S | `530462567` | Supported |
+| ブリッジコンストラクター：ウォーキング・デッド | Xbox One, Xbox Series X\|S | `1787967632` | Supported |
 
 ## Existing title blocks updated
 
@@ -176,99 +176,99 @@ Recipe, metadata or support-classification changes are included for these existi
 
 | Title | Platform | Title ID | Status |
 |---|---|---|---|
-| 7 Days to Die | Xbox One, Xbox Series X|S | `60633334` | Testing |
+| 7 Days to Die | Xbox One, Xbox Series X\|S | `60633334` | Testing |
 | 7 Days to Die (Game Preview) | Windows PC | `1745806870` | Testing |
-| 8-bit Adventure Anthology: Volume I | Xbox One, Xbox Series X|S | `506071367` | Supported |
-| A KING'S TALE: FINAL FANTASY XV | Xbox One, Xbox Series X|S | `88086791` | Testing |
+| 8-bit Adventure Anthology: Volume I | Xbox One, Xbox Series X\|S | `506071367` | Supported |
+| A KING'S TALE: FINAL FANTASY XV | Xbox One, Xbox Series X\|S | `88086791` | Testing |
 | ABZU | Windows PC | `2143725369` | Testing |
-| ABZU | Xbox One, Xbox Series X|S | `949699803` | Testing |
-| Axiom Verge | Xbox One, Xbox Series X|S | `55549300` | Coming Soon |
-| Burnout Paradise Remastered | Xbox One, Xbox Series X|S | `1037514907` | Testing |
-| Call of Duty: Black Ops III | Xbox One, Xbox Series X|S | `80579825` | Testing |
-| Call of Duty®: Advanced Warfare | Xbox One, Xbox Series X|S | `875417719` | Testing |
-| Call of Duty®: Ghosts | Xbox One, Xbox Series X|S | `572802557` | Supported |
-| Call of Duty®: Modern Warfare® 2 Campaign Remastered | Xbox One, Xbox Series X|S | `59903186` | Testing |
-| Call of Duty®: WWII | Xbox One, Xbox Series X|S | `545844082` | Testing |
-| CHAOS;CHILD | Xbox One, Xbox Series X|S | `1835818566` | Testing |
-| Cuphead | Windows PC, Xbox One, Xbox Series X|S | `623325843` | Supported |
-| DARK SOULS: REMASTERED | Xbox One, Xbox Series X|S | `125226722` | Testing |
-| Dishonored® Definitive Edition | Xbox One, Xbox Series X|S | `1100121502` | Supported |
-| Don't Starve Together: Console Edition | Xbox One, Xbox Series X|S | `1033937373` | Supported |
-| Don't Starve: Giant Edition | Windows PC, Xbox One, Xbox Series X|S | `2061746629` | Supported |
-| Dungeon of the Endless | Xbox One, Xbox Series X|S | `429018095` | Supported |
+| ABZU | Xbox One, Xbox Series X\|S | `949699803` | Testing |
+| Axiom Verge | Xbox One, Xbox Series X\|S | `55549300` | Coming Soon |
+| Burnout Paradise Remastered | Xbox One, Xbox Series X\|S | `1037514907` | Testing |
+| Call of Duty: Black Ops III | Xbox One, Xbox Series X\|S | `80579825` | Testing |
+| Call of Duty®: Advanced Warfare | Xbox One, Xbox Series X\|S | `875417719` | Testing |
+| Call of Duty®: Ghosts | Xbox One, Xbox Series X\|S | `572802557` | Supported |
+| Call of Duty®: Modern Warfare® 2 Campaign Remastered | Xbox One, Xbox Series X\|S | `59903186` | Testing |
+| Call of Duty®: WWII | Xbox One, Xbox Series X\|S | `545844082` | Testing |
+| CHAOS;CHILD | Xbox One, Xbox Series X\|S | `1835818566` | Testing |
+| Cuphead | Windows PC, Xbox One, Xbox Series X\|S | `623325843` | Supported |
+| DARK SOULS: REMASTERED | Xbox One, Xbox Series X\|S | `125226722` | Testing |
+| Dishonored® Definitive Edition | Xbox One, Xbox Series X\|S | `1100121502` | Supported |
+| Don't Starve Together: Console Edition | Xbox One, Xbox Series X\|S | `1033937373` | Supported |
+| Don't Starve: Giant Edition | Windows PC, Xbox One, Xbox Series X\|S | `2061746629` | Supported |
+| Dungeon of the Endless | Xbox One, Xbox Series X\|S | `429018095` | Supported |
 | Dungeon of the ENDLESS™ | Windows PC | `1959656817` | Supported |
-| EA SPORTS FC™ 24 Xbox One | Xbox One, Xbox Series X|S | `2098741842` | Supported |
-| EA SPORTS FC™ 24 Xbox Series X/S | Xbox Series X|S | `1852502655` | Supported |
-| EA SPORTS FC™ 25 Xbox One | Xbox One, Xbox Series X|S | `1882096658` | Supported |
-| EA SPORTS FC™ 25 Xbox Series X/S | Xbox Series X|S | `1653663875` | Supported |
-| EA SPORTS FC™ 26 Xbox One | Xbox One, Xbox Series X|S | `1852068331` | Supported |
-| EA SPORTS FC™ 26 Xbox Series X/S | Xbox Series X|S | `1909324253` | Supported |
-| EA SPORTS™ FIFA 16 | Xbox One, Xbox Series X|S | `2052426459` | Supported |
-| EA SPORTS™ FIFA 17 | Xbox One, Xbox Series X|S | `69094388` | Supported |
-| EA SPORTS™ FIFA 20 | Xbox One, Xbox Series X|S | `196631666` | Supported |
-| EA SPORTS™ FIFA 23 Standard Edition Xbox One | Xbox One, Xbox Series X|S | `1994003829` | Supported |
-| EA SPORTS™ FIFA 23 Standard Edition Xbox Series X/S | Xbox Series X|S | `2071676002` | Supported |
-| EA SPORTS™ NHL® 18 | Xbox One, Xbox Series X|S | `134413498` | Testing |
-| EA SPORTS™ NHL® 18 | Xbox One, Xbox Series X|S | `374274123` | Testing |
-| Enter The Gungeon | Windows PC, Xbox One, Xbox Series X|S | `401515813` | Supported |
-| FIFA 14 | Xbox One, Xbox Series X|S | `1813362885` | Supported |
-| FIFA 18 | Xbox One, Xbox Series X|S | `433376346` | Supported |
-| FIFA 21 Xbox One | Xbox One, Xbox Series X|S | `1761289795` | Supported |
-| FIFA 21 Xbox Series X/S | Xbox Series X|S | `2137885631` | Supported |
-| FIFA 22 Xbox One | Xbox One, Xbox Series X|S | `1808064759` | Supported |
-| FIFA 22 Xbox Series X/S | Xbox Series X|S | `1847979820` | Supported |
-| Forza Horizon 2 Presents Fast & Furious | Xbox One, Xbox Series X|S | `1519874468` | Testing |
-| Forza Motorsport 5 | Xbox One, Xbox Series X|S | `2067126551` | Testing |
-| Gears of War 4 | Windows PC, Xbox One, Xbox Series X|S | `552499398` | Testing |
-| Gears of War: Ultimate Edition | Xbox One, Xbox Series X|S | `1475571605` | Testing |
+| EA SPORTS FC™ 24 Xbox One | Xbox One, Xbox Series X\|S | `2098741842` | Supported |
+| EA SPORTS FC™ 24 Xbox Series X/S | Xbox Series X\|S | `1852502655` | Supported |
+| EA SPORTS FC™ 25 Xbox One | Xbox One, Xbox Series X\|S | `1882096658` | Supported |
+| EA SPORTS FC™ 25 Xbox Series X/S | Xbox Series X\|S | `1653663875` | Supported |
+| EA SPORTS FC™ 26 Xbox One | Xbox One, Xbox Series X\|S | `1852068331` | Supported |
+| EA SPORTS FC™ 26 Xbox Series X/S | Xbox Series X\|S | `1909324253` | Supported |
+| EA SPORTS™ FIFA 16 | Xbox One, Xbox Series X\|S | `2052426459` | Supported |
+| EA SPORTS™ FIFA 17 | Xbox One, Xbox Series X\|S | `69094388` | Supported |
+| EA SPORTS™ FIFA 20 | Xbox One, Xbox Series X\|S | `196631666` | Supported |
+| EA SPORTS™ FIFA 23 Standard Edition Xbox One | Xbox One, Xbox Series X\|S | `1994003829` | Supported |
+| EA SPORTS™ FIFA 23 Standard Edition Xbox Series X/S | Xbox Series X\|S | `2071676002` | Supported |
+| EA SPORTS™ NHL® 18 | Xbox One, Xbox Series X\|S | `134413498` | Testing |
+| EA SPORTS™ NHL® 18 | Xbox One, Xbox Series X\|S | `374274123` | Testing |
+| Enter The Gungeon | Windows PC, Xbox One, Xbox Series X\|S | `401515813` | Supported |
+| FIFA 14 | Xbox One, Xbox Series X\|S | `1813362885` | Supported |
+| FIFA 18 | Xbox One, Xbox Series X\|S | `433376346` | Supported |
+| FIFA 21 Xbox One | Xbox One, Xbox Series X\|S | `1761289795` | Supported |
+| FIFA 21 Xbox Series X/S | Xbox Series X\|S | `2137885631` | Supported |
+| FIFA 22 Xbox One | Xbox One, Xbox Series X\|S | `1808064759` | Supported |
+| FIFA 22 Xbox Series X/S | Xbox Series X\|S | `1847979820` | Supported |
+| Forza Horizon 2 Presents Fast & Furious | Xbox One, Xbox Series X\|S | `1519874468` | Testing |
+| Forza Motorsport 5 | Xbox One, Xbox Series X\|S | `2067126551` | Testing |
+| Gears of War 4 | Windows PC, Xbox One, Xbox Series X\|S | `552499398` | Testing |
+| Gears of War: Ultimate Edition | Xbox One, Xbox Series X\|S | `1475571605` | Testing |
 | Gears of War: Ultimate Edition for Windows 10 | Windows PC | `1751973977` | Testing |
-| Grand Theft Auto V | Xbox One, Xbox Series X|S | `1050025307` | Testing |
-| Grand Theft Auto V (Xbox One) | Xbox One, Xbox Series X|S | `972249091` | Testing |
-| Halo 5: Guardians | Xbox One, Xbox Series X|S | `219630713` | Testing |
+| Grand Theft Auto V | Xbox One, Xbox Series X\|S | `1050025307` | Testing |
+| Grand Theft Auto V (Xbox One) | Xbox One, Xbox Series X\|S | `972249091` | Testing |
+| Halo 5: Guardians | Xbox One, Xbox Series X\|S | `219630713` | Testing |
 | Happy Dungeons | Xbox One | `928096970` | Testing |
 | Happy Wars | Windows PC | `1761060600` | Testing |
-| Just Cause 3 | Xbox One, Xbox Series X|S | `1175562227` | Supported |
-| LEGO Batman 3: Beyond Gotham | Xbox One, Xbox Series X|S | `101393300` | Testing |
-| LEGO Bricktales | Xbox One, Xbox Series X|S | `2005013689` | Testing |
-| LEGO City Undercover | Xbox One, Xbox Series X|S | `668438210` | Testing |
-| LEGO Dimensions | Xbox One, Xbox Series X|S | `389571069` | Testing |
-| LEGO Jurassic World | Xbox One, Xbox Series X|S | `1029888556` | Testing |
-| LEGO Marvel Super Heroes | Xbox One, Xbox Series X|S | `470244957` | Testing |
-| LEGO Marvel Super Heroes 2 | Xbox One, Xbox Series X|S | `813411968` | Testing |
-| LEGO Marvel's Avengers | Xbox One, Xbox Series X|S | `640703885` | Testing |
-| LEGO STAR WARS: The Force Awakens | Xbox One, Xbox Series X|S | `565406974` | Testing |
-| LEGO The Hobbit | Xbox One, Xbox Series X|S | `1764536463` | Testing |
-| LEGO Worlds | Xbox One, Xbox Series X|S | `867642949` | Testing |
-| Madden NFL 15 | Xbox One, Xbox Series X|S | `2147358433` | Testing |
-| Madden NFL 16 | Xbox One, Xbox Series X|S | `1249526091` | Testing |
-| Madden NFL 17 | Xbox One, Xbox Series X|S | `2014880780` | Testing |
-| Madden NFL 25 | Xbox One, Xbox Series X|S | `142841733` | Testing |
-| Mega Man™ Legacy Collection | Xbox One, Xbox Series X|S | `1535750831` | Supported |
-| Metal Gear Solid V: Ground Zeroes | Xbox One, Xbox Series X|S | `650249872` | Supported |
+| Just Cause 3 | Xbox One, Xbox Series X\|S | `1175562227` | Supported |
+| LEGO Batman 3: Beyond Gotham | Xbox One, Xbox Series X\|S | `101393300` | Testing |
+| LEGO Bricktales | Xbox One, Xbox Series X\|S | `2005013689` | Testing |
+| LEGO City Undercover | Xbox One, Xbox Series X\|S | `668438210` | Testing |
+| LEGO Dimensions | Xbox One, Xbox Series X\|S | `389571069` | Testing |
+| LEGO Jurassic World | Xbox One, Xbox Series X\|S | `1029888556` | Testing |
+| LEGO Marvel Super Heroes | Xbox One, Xbox Series X\|S | `470244957` | Testing |
+| LEGO Marvel Super Heroes 2 | Xbox One, Xbox Series X\|S | `813411968` | Testing |
+| LEGO Marvel's Avengers | Xbox One, Xbox Series X\|S | `640703885` | Testing |
+| LEGO STAR WARS: The Force Awakens | Xbox One, Xbox Series X\|S | `565406974` | Testing |
+| LEGO The Hobbit | Xbox One, Xbox Series X\|S | `1764536463` | Testing |
+| LEGO Worlds | Xbox One, Xbox Series X\|S | `867642949` | Testing |
+| Madden NFL 15 | Xbox One, Xbox Series X\|S | `2147358433` | Testing |
+| Madden NFL 16 | Xbox One, Xbox Series X\|S | `1249526091` | Testing |
+| Madden NFL 17 | Xbox One, Xbox Series X\|S | `2014880780` | Testing |
+| Madden NFL 25 | Xbox One, Xbox Series X\|S | `142841733` | Testing |
+| Mega Man™ Legacy Collection | Xbox One, Xbox Series X\|S | `1535750831` | Supported |
+| Metal Gear Solid V: Ground Zeroes | Xbox One, Xbox Series X\|S | `650249872` | Supported |
 | Microsoft Bingo | Windows PC, Mobile | `1047964830` | Testing |
 | Minecraft: Xbox One Edition | Durango | `345903534` | Testing |
-| Mirror's Edge Catalyst | Xbox One, Xbox Series X|S | `1824138520` | Testing |
-| OCCULTIC;NINE | Xbox One, Xbox Series X|S | `500760956` | Supported |
-| Ori and the Blind Forest | Xbox One, Xbox Series X|S | `264259050` | Supported |
-| Party Hard | Xbox One, Xbox Series X|S | `916339986` | Supported |
-| Pixel Piracy | Xbox One, Xbox Series X|S | `819060983` | Testing |
-| Project Cars | Xbox One, Xbox Series X|S | `1907381044` | Supported |
-| Project CARS 2 | Xbox One, Xbox Series X|S | `200732952` | Supported |
-| Project CARS 3 | Xbox One, Xbox Series X|S | `572054432` | Supported |
-| Roblox - Xbox | Xbox One, Xbox Series X|S | `342226876` | Supported |
-| Rocket League® | Xbox One, Xbox Series X|S | `558797228` | Testing |
+| Mirror's Edge Catalyst | Xbox One, Xbox Series X\|S | `1824138520` | Testing |
+| OCCULTIC;NINE | Xbox One, Xbox Series X\|S | `500760956` | Supported |
+| Ori and the Blind Forest | Xbox One, Xbox Series X\|S | `264259050` | Supported |
+| Party Hard | Xbox One, Xbox Series X\|S | `916339986` | Supported |
+| Pixel Piracy | Xbox One, Xbox Series X\|S | `819060983` | Testing |
+| Project Cars | Xbox One, Xbox Series X\|S | `1907381044` | Supported |
+| Project CARS 2 | Xbox One, Xbox Series X\|S | `200732952` | Supported |
+| Project CARS 3 | Xbox One, Xbox Series X\|S | `572054432` | Supported |
+| Roblox - Xbox | Xbox One, Xbox Series X\|S | `342226876` | Supported |
+| Rocket League® | Xbox One, Xbox Series X\|S | `558797228` | Testing |
 | Songbringer | Windows PC | `908546367` | Supported |
-| Sonic Forces | Xbox One, Xbox Series X|S | `129325438` | Testing |
-| Stardew Valley | Xbox One, Xbox Series X|S | `306230746` | Supported |
-| State of Decay 2: Juggernaut Edition | Windows PC, Xbox One, Xbox Series X|S | `1938834516` | Testing |
-| Terraria | Xbox One, Xbox Series X|S | `389597738` | Testing |
-| The Crew | Xbox One, Xbox Series X|S | `1979014977` | Testing |
-| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X|S | `1285166951` | Testing |
+| Sonic Forces | Xbox One, Xbox Series X\|S | `129325438` | Testing |
+| Stardew Valley | Xbox One, Xbox Series X\|S | `306230746` | Supported |
+| State of Decay 2: Juggernaut Edition | Windows PC, Xbox One, Xbox Series X\|S | `1938834516` | Testing |
+| Terraria | Xbox One, Xbox Series X\|S | `389597738` | Testing |
+| The Crew | Xbox One, Xbox Series X\|S | `1979014977` | Testing |
+| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | `1285166951` | Testing |
 | The Escapists | Xbox One | `1128640842` | Testing |
 | The Escapists 2 | Xbox One | `759485819` | Testing |
-| The LEGO Movie Videogame | Xbox One, Xbox Series X|S | `1755825192` | Testing |
-| The Witcher 3: Wild Hunt | Xbox One, Xbox Series X|S | `1799887933` | Supported |
-| The Witcher 3: Wild Hunt – Complete Edition | Xbox One, Xbox Series X|S | `530462567` | Supported |
+| The LEGO Movie Videogame | Xbox One, Xbox Series X\|S | `1755825192` | Testing |
+| The Witcher 3: Wild Hunt | Xbox One, Xbox Series X\|S | `1799887933` | Supported |
+| The Witcher 3: Wild Hunt – Complete Edition | Xbox One, Xbox Series X\|S | `530462567` | Supported |
 
 ## Validation and testing scope
 
