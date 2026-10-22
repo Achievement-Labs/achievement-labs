@@ -1,51 +1,50 @@
-﻿{
-    "ver": "4.0",
-    "name": "REPLACEEVENTNAME",
-    "time": "REPLACETIME",
-    "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
-    "ext": {
-        "utc": {
-            "shellId": 1,
-            "eventFlags": 1,
-            "pgName": "XBOX",
-            "flags": 1,
-            "epoch": "1",
-            "seq": REPLACESEQ
-        },
-        "privacy": {
-            "isRequired": false
-        },
-        "os": {
-            "bootId": 1,
-            "name": "1",
-            "ver": "1",
-            "expId": "1"
-        },
-        "app": {
-            "id": "U:38985CA0.CallofDutyBlackOps3-BaseGame_5bkah9njm3e9g!App",
-            "ver": "10.5.0.2_x64_!2023/03/30:07:55:18!0!re7.exe",
-            "is1P": 1,
-            "asId": 1
-        },
-        "metadata": REPLACEMETADATA,
-        "device": {
-            "localId": "s:11111111-1111-1111-1111-111111111111",
-            "deviceClass": "Windows.Desktop"
-        },
-        "protocol": {
-            "devMake": "1",
-            "devModel": "1",
-            "ticketKeys": [
-                "1",
-                "1"
-            ]
-        },
-        "user": {
-            "localId": "m:11111111111111111"
-        },
-        "loc": {
-            "tz": "00:00"
-        }
+{
+  "ver": "4.0",
+  "name": "Microsoft.XboxLive.T80579825.REPLACEEVENTNAME",
+  "time": "REPLACETIME",
+  "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
+  "ext": {
+    "utc": {
+      "shellId": 1,
+      "eventFlags": 1,
+      "pgName": "XBOX",
+      "flags": 1,
+      "epoch": "1",
+      "seq": REPLACESEQ
     },
-    "data": REPLACEDATA
+    "privacy": {
+      "isRequired": false
+    },
+    "metadata": REPLACEMETADATA,
+    "os": {
+      "bootId": 1,
+      "name": "1",
+      "ver": "1",
+      "expId": "1"
+    },
+    "app": {
+      "id": "U:bo3Submission_ht1qfjb0gaftw!codShip",
+      "ver": "1.0.34.0_x64_!cod_ship.exe",
+      "is1P": 1,
+      "asId": 1
+    },
+    "device": {
+      "localId": "s:00000000-0000-0000-0000-000000000000",
+      "deviceClass": "Windows.Desktop"
+    },
+    "protocol": {
+      "devMake": "1",
+      "devModel": "1",
+      "ticketKeys": [
+        "1"
+      ]
+    },
+    "user": {
+      "localId": "m:REPLACEXUID"
+    },
+    "loc": {
+      "tz": "00:00"
+    }
+  },
+  "data": REPLACEDATA
 }
