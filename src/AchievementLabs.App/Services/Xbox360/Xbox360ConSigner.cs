@@ -13,11 +13,11 @@ public static class Xbox360ConSigner
 
     public static void SignFile(string path)
     {
+        var certificate = Xbox360ConSigningMaterial.Certificate;
         using (var stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
         {
             var header = ReadHeader(stream);
             VerifyContentId(stream, header);
-            var certificate = Xbox360ConSigningMaterial.Certificate;
             if (certificate.Length != CertificateLength || Xbox360ConSigningMaterial.PrimeP.Length != 64 ||
                 Xbox360ConSigningMaterial.PrimeQ.Length != 64)
                 throw new InvalidDataException("The CON signing material is incomplete.");

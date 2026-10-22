@@ -1,0 +1,25 @@
+name: Windows repository migration checks
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Check public event-source migration and existing behavior
+        run: ./tools/Test-Enhancements.ps1
+      - name: Check executable updates
+        run: dotnet run --project tools/UpdaterChecks -c Release

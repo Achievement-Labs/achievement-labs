@@ -12,7 +12,7 @@ internal sealed record UpdatePlan(int ParentPid, long ParentStartTicks, string T
 
 internal sealed class AppUpdater(HttpClient? client = null, string? directory = null) : IDisposable
 {
-    internal const string Repository = "https://github.com/ethanwp28/achievement-labs";
+    internal const string Repository = "https://github.com/Achievement-Labs/achievement-labs";
     internal static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs", "Updates");
     internal static Version CurrentVersion => typeof(AppUpdater).Assembly.GetName().Version!;
     private readonly HttpClient http = client ?? new() { Timeout = TimeSpan.FromMinutes(10) };
@@ -21,7 +21,7 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
 
     internal async Task<AvailableUpdate?> CheckAsync(Version current, CancellationToken ct)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/ethanwp28/achievement-labs/releases/latest");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases/latest");
         request.Headers.UserAgent.ParseAdd("AchievementLabs/" + current);
         using var response = await http.SendAsync(request, ct);
         response.EnsureSuccessStatusCode();

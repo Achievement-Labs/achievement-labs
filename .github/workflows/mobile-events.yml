@@ -1,0 +1,26 @@
+name: Mobile public event feed
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mobile-events.yml'
+      - 'tools/mobile/publish_events.py'
+      - 'src/AchievementLabs.App/Events/**'
+permissions:
+  contents: write
+concurrency:
+  group: mobile-public-event-feed
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate public upstream archive and publish additions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/mobile/publish_events.py

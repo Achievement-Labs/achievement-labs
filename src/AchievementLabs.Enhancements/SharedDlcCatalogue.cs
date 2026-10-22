@@ -11,8 +11,8 @@ public sealed class SharedDlcCatalogue
     public sealed record Document(int SchemaVersion, Title[] Titles);
     static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     public static SharedDlcCatalogue Current { get; } = Bundled();
-    public static readonly Uri PublishedUri = new("https://raw.githubusercontent.com/thevampirebat/achievement-labs/main/catalog/achievement-packs.json");
-    public static readonly Uri PublishedHubsUri = new("https://raw.githubusercontent.com/thevampirebat/achievement-labs/main/catalog/achievement-hubs.json");
+    public static readonly Uri PublishedUri = new("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/main/catalog/achievement-packs.json");
+    public static readonly Uri PublishedHubsUri = new("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/main/catalog/achievement-hubs.json");
     public int Count => titles.Length;
     public DateTimeOffset? LastSuccessfulRefresh { get; private set; }
     public string LastRefreshStatus { get; private set; } = "Bundled catalogue loaded";

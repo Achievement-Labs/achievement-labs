@@ -13,7 +13,7 @@ public sealed partial class DesktopModel
     {
         if (eventRefreshRunning || !force && !AutoRefreshEvents || OfflineChecks) return;
         eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue));
-        EventCatalogueStatus = "Checking the original repository for new event titles…";
+        EventCatalogueStatus = "Checking the official repository for new event titles…";
         try {
             using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(2) };
             await eventCatalog.RefreshUpstreamAsync(http, force, lifetime.Token);
@@ -68,7 +68,7 @@ public sealed partial class DesktopModel
     {
         var file = review == "bulk" ? "bulk-dlc-2026-10-08.json" : "dlc-corrections-2026-10-08.json";
         try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(
-            "https://github.com/thevampirebat/achievement-labs/blob/main/catalog/reviews/" + file) { UseShellExecute = true }); }
+            "https://github.com/Achievement-Labs/achievement-labs/blob/main/catalog/reviews/" + file) { UseShellExecute = true }); }
         catch { Notice = "Could not open the catalogue review."; }
     }
 }

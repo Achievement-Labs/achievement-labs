@@ -17,6 +17,7 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}

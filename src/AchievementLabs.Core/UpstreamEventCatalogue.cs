@@ -9,7 +9,7 @@ namespace AchievementLabs.Core;
 public sealed class UpstreamEventCatalogue
 {
     public const string BundledSourceCommit = "938a9ba0f746fcb20cee3588f992356df92bf38b";
-    private const string SourceRoot = "https://raw.githubusercontent.com/ethanwp28/achievement-labs/";
+    private const string SourceRoot = "https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/";
     private readonly string cachePath;
     private readonly HashSet<string> reserved;
     private readonly SemaphoreSlim refreshGate = new(1, 1);
@@ -69,7 +69,7 @@ public sealed class UpstreamEventCatalogue
         {
             var previous = Volatile.Read(ref current);
             if (!force && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
-            var head = Parse(await ReadAsync(http, "https://api.github.com/repos/ethanwp28/achievement-labs/commits/main", 1024 * 1024, ct).ConfigureAwait(false));
+            var head = Parse(await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/commits/main", 1024 * 1024, ct).ConfigureAwait(false));
             var commit = (string?)head["sha"] ?? "";
             if (!Regex.IsMatch(commit, "^[a-f0-9]{40}$")) throw new InvalidDataException("Invalid upstream commit.");
             var data = (JObject)previous.Data.DeepClone();

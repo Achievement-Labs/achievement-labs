@@ -79,3 +79,11 @@ node_modules/
 
 # Private licensing service (maintained in the backup repository only)
 /server/licensing/
+
+# Generated Android packages and account-free catalogue copies
+/android/.gradle/
+/android/**/build/
+/android/local.properties
+/android/app/src/main/assets/catalogue/
+/android/app/src/main/res/drawable/app_icon.png
+/android/artifacts/

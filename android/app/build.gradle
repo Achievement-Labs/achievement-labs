@@ -1,0 +1,17 @@
+plugins { id 'com.android.application' }
+android {
+ namespace 'org.achievementlabs.mobile'
+ compileSdk 35
+ defaultConfig { applicationId 'org.achievementlabs.mobile'; minSdk 26; targetSdk 35; versionCode 10; versionName '0.6.2'; testInstrumentationRunner 'android.test.InstrumentationTestRunner' }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+ buildFeatures { buildConfig true }
+ testOptions { unitTests.all { testLogging { events "passed", "failed", "skipped"; exceptionFormat "full" } } }
+ lint { abortOnError true; disable 'OldTargetApi','GradleDependency','ObsoleteSdkInt','SetJavaScriptEnabled','JavascriptInterface','Deprecated','UnusedResources','MissingTranslation' }
+}
+dependencies {
+ implementation 'androidx.webkit:webkit:1.12.1'
+ implementation 'androidx.core:core:1.15.0'
+ implementation 'com.google.zxing:core:3.5.3'
+ testImplementation 'junit:junit:4.13.2'
+ testImplementation 'org.json:json:20240303'
+}

@@ -15,6 +15,7 @@ public static class UpstreamEventCatalogueTests
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
         {
             var path = request.RequestUri!.AbsolutePath; Paths.Add(path);
+            Assert(request.RequestUri.AbsoluteUri.StartsWith("https://api.github.com/repos/Achievement-Labs/achievement-labs/", StringComparison.Ordinal) || request.RequestUri.AbsoluteUri.StartsWith("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/", StringComparison.Ordinal), "Event metadata and templates use the canonical repository");
             Assert(request.Method == HttpMethod.Get, "Event updates only read public data");
             Assert(!request.Headers.Contains("Authorization") && !request.Headers.Contains("tickets"), "No account tokens in upstream request");
             var text = path.EndsWith("commits/main") ? new JObject { ["sha"] = Commit }.ToString()
