@@ -20,7 +20,8 @@ def prepare():
     if OUTPUT.exists(): shutil.rmtree(OUTPUT)
     (OUTPUT / 'Events').mkdir(parents=True)
     guarded = {g['TitleId'] for g in json.loads((ROOT / 'src/AchievementLabs.Enhancements/EditionMappings.json').read_text())}
-    guarded.add('345903534')  # Desktop intentionally uses hosted Minecraft routing.
+    # Preserve the released mobile edition guards even when desktop guard metadata differs.
+    guarded.update({'345903534', '796798669', '125965001', '2154930'})
     supported = {str(x) for x in data['SupportedTitleIDs']}
     index, failures = {}, collections.Counter()
     for tid, block in data.items():

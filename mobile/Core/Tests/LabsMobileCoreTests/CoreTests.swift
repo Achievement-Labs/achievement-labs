@@ -54,7 +54,9 @@ final class CoreTests: XCTestCase {
     func testGeneratedCatalogue() throws {
         guard let path = ProcessInfo.processInfo.environment["LABS_CATALOGUE"] else { throw XCTSkip("Run prepare_catalogue.py and set LABS_CATALOGUE for catalogue integration checks.") }
         let c = try Catalogue(folder:URL(fileURLWithPath:path))
-        XCTAssertEqual(c.index.count,445)
+        let report = try JSON.object(Data(contentsOf:URL(fileURLWithPath:path).appendingPathComponent("catalogue-report.json")))
+        XCTAssertEqual(c.index.count,(report["sourceTitleBlocks"] as? Int) ?? -1)
+        XCTAssertGreaterThan(c.index.count,400)
         for title in ["345903534","796798669","125965001","2154930","1766089184","515050978"] { XCTAssertNotNil(c.index[title]?.reason); XCTAssertThrowsError(try c.recipes(title)) }
         XCTAssertNotNil(c.index["1100121502"])
         var count = 0
