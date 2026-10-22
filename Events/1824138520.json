@@ -1,82 +1,51 @@
 {
-    "ver": "4.0",
-    "name": "Microsoft.XboxLive.T1824138520.AchievementProgress",
-    "time": "REPLACETIME",
-    "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
-    "ext": {
-        "utc": {
-            "shellId": 1,
-            "eventFlags": 1,
-            "pgName": "XBOX",
-            "flags": 1,
-            "epoch": "1",
-            "seq": REPLACESEQ
-        },
-        "privacy": {
-            "dataType": 1,
-            "isRequired": false
-        },
-        "metadata": {
-            "f": {
-                "baseData": {
-                    "f": {
-                        "properties": {
-                            "f": {
-                                "PercentComplete": 4
-                            }
-                        },
-                        "ver": 2
-                    }
-                }
-            },
-            "privTags": 1,
-            "policies": 0
-        },
-        "os": {
-            "bootId": 1,
-            "name": "Windows",
-            "ver": "1",
-            "expId": "1"
-        },
-        "app": {
-            "id": "U:ElectronicArtsMobile.MirrorsEdgeCatalystmaingame_q5ha1ztykcgvj!Pamplona.App",
-            "ver": "1.0.3.46492_x64_!0!0!pamplona.main_gen4a_retail.exe",
-            "is1P": 1,
-            "asId": 1
-        },
-        "device": {
-            "localId": "s:11111111-1111-1111-1111-111111111111",
-            "deviceClass": "Windows.Desktop"
-        },
-        "protocol": {
-            "devMake": "1",
-            "devModel": "1",
-            "ticketKeys": [
-                "1",
-                "1"
-            ]
-        },
-        "user": {
-            "localId": "m:1111111111111111"
-        },
-        "loc": {
-            "tz": "00:00"
-        }
+  "ver": "4.0",
+  "name": "Microsoft.XboxLive.T1824138520.REPLACEEVENTNAME",
+  "time": "REPLACETIME",
+  "iKey": "o:0890af88a9ed4cc886a14f5e174a2827",
+  "ext": {
+    "utc": {
+      "shellId": 1,
+      "eventFlags": 1,
+      "pgName": "XBOX",
+      "flags": 1,
+      "epoch": "1",
+      "seq": REPLACESEQ
     },
-    "data": {
-        "baseType": "Microsoft.XboxLive.InGame",
-        "baseData": {
-            "name": "AchievementProgress",
-            "serviceConfigId": "51930100-3e76-423c-a3f5-78026cba2518",
-            "titleId": 1824138520,
-            "userId": "REPLACEXUID",
-            "playerSessionId": "REPLACESESSIONGUID",
-            "ver": 1,
-            "properties": {
-                "AchievementId": "REPLACEID",
-                "PercentComplete": 100
-            },
-            "measurements": {}
-        }
+    "privacy": {
+      "dataType": 1,
+      "isRequired": false
+    },
+    "metadata": REPLACEMETADATA,
+    "os": {
+      "bootId": 1,
+      "name": "Windows",
+      "ver": "1",
+      "expId": "1"
+    },
+    "app": {
+      "id": "U:ElectronicArtsMobile.MirrorsEdgeCatalystmaingame_q5ha1ztykcgvj!REPLACEAPPSUFFIX",
+      "ver": "!REPLACEAPPSUFFIX",
+      "is1P": 1,
+      "asId": 1
+    },
+    "device": {
+      "localId": "s:11111111-1111-1111-1111-111111111111",
+      "deviceClass": "Windows.Desktop"
+    },
+    "protocol": {
+      "devMake": "1",
+      "devModel": "1",
+      "ticketKeys": [
+        "1"
+      ]
+    },
+    "user": {
+      "localId": "m:1111111111111111"
+    },
+    "loc": {
+      "tz": "00:00"
     }
+  },
+  "data": REPLACEDATA
 }
