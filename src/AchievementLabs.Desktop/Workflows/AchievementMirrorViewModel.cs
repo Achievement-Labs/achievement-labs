@@ -188,8 +188,10 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     }
     public bool HasGlobalSummary => GlobalSummary.Length > 0;
 
+    private bool refreshingPairs;
     partial void OnSelectedPairChanged(MirrorPair? value)
     {
+        if (refreshingPairs) return;
         if (value != null)
         {
             SteamAppIdText = value.SteamAppId > 0 ? value.SteamAppId.ToString() : "";
@@ -307,7 +309,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             var source = pair.Direction == MirrorDirection.SteamToXbox ? steamList : xboxList;
             var already = source.Count(a => a.Unlocked);
             SourceAlreadyUnlockedText = already > 0 ? $"{already} achievement(s) you already earned on {pair.Source} won't be copied." : "";
-            Save(); RebuildRows();
+            Save(); RefreshPairName(pair); RebuildRows();
             Status = pair.UnresolvedCount == 0
                 ? $"Scanned {pair.DisplayName}: every achievement is matched. Review the list, then start mirroring."
                 : $"Scanned {pair.DisplayName}: {pair.UnresolvedCount} achievement(s) need review before mirroring can start.";
@@ -619,6 +621,16 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         OnPropertyChanged(nameof(PendingText)); OnPropertyChanged(nameof(StateLabel)); OnPropertyChanged(nameof(StateBackground));
         OnPropertyChanged(nameof(StateForeground)); OnPropertyChanged(nameof(StartStopLabel)); OnPropertyChanged(nameof(MatchSummary));
         OnPropertyChanged(nameof(GlobalSummary)); OnPropertyChanged(nameof(HasGlobalSummary));
+    }
+
+    /// <summary>Re-inserts the pair so the picker shows its new name after a scan.</summary>
+    private void RefreshPairName(MirrorPair pair)
+    {
+        var index = Pairs.IndexOf(pair);
+        if (index < 0) return;
+        refreshingPairs = true;
+        try { Pairs.RemoveAt(index); Pairs.Insert(index, pair); SelectedPair = pair; }
+        finally { refreshingPairs = false; }
     }
 
     private void Save()

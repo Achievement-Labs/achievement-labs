@@ -51,7 +51,10 @@ public sealed class MirrorMatch
 
 public sealed record MirrorNamedId(string Id, string Name);
 
-public sealed record MirrorLogEntry(DateTimeOffset At, string Message, bool IsError = false);
+public sealed record MirrorLogEntry(DateTimeOffset At, string Message, bool IsError = false)
+{
+    [JsonIgnore] public string Line => $"{At.LocalDateTime:HH:mm:ss}  {Message}";
+}
 
 /// <summary>An unlock detected while the pair was stopped. Never sent unless the user chooses to.</summary>
 public sealed record MirrorPendingUnlock(string SourceId, string Name, DateTimeOffset DetectedAt);
@@ -80,7 +83,10 @@ public sealed class MirrorPair
 
     [JsonIgnore] public MirrorPlatform Source => Direction == MirrorDirection.SteamToXbox ? MirrorPlatform.Steam : MirrorPlatform.Xbox;
     [JsonIgnore] public MirrorPlatform Target => Direction == MirrorDirection.SteamToXbox ? MirrorPlatform.Xbox : MirrorPlatform.Steam;
-    [JsonIgnore] public string DisplayName => string.IsNullOrWhiteSpace(XboxName) ? (string.IsNullOrWhiteSpace(SteamName) ? $"App {SteamAppId}" : SteamName) : XboxName;
+    [JsonIgnore] public string DisplayName =>
+        !string.IsNullOrWhiteSpace(XboxName) ? XboxName
+        : !string.IsNullOrWhiteSpace(SteamName) ? SteamName
+        : SteamAppId > 0 ? $"Steam app {SteamAppId}" : "New pair";
 
     /// <summary>One row per source achievement; the matcher builds them for the pair's direction.</summary>
     public IEnumerable<MirrorMatch> SourceRows => Matches.Where(m => m.SourceId(Direction).Length > 0);
