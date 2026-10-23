@@ -34,6 +34,7 @@ public partial class MainWindow : Window
             if (!WindowsNotifications.TryShow(title, message)) model.Notice = "Windows notification could not be sent. Check Windows notification settings for Achievement Labs.";
         };
         AchievementLabs.MultiSelect.BatchPicker.Attach(this);
+        Presentation.GameSessionWorkspace.Attach(this);
         AchievementLabs.MultiSelect.SearchClearButtons.Attach(this);
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
         xboxPresenceTimer.Tick += (_, _) => model.RefreshXboxPcAppPresence();
@@ -213,6 +214,11 @@ public partial class MainWindow : Window
         catch (Exception) { model.Notice = "The action could not be completed. Check the field and connection, then try again."; }
     }
     private async void RefreshEventCatalogue(object? sender, RoutedEventArgs e) => await model.RefreshEventCatalogueAsync();
+    private async void ImportEventPack(object? sender, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Import event pack JSON", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Event pack JSON") { Patterns = ["*.json"] }] });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) await model.ImportEventPackAsync(path);
+    }
     private void GoBack(object? s, RoutedEventArgs e) => model.GoBack();
     private void ShowAbout(object? s, RoutedEventArgs e) => model.Navigate("About");
     private void ShowLibrary(object? s, RoutedEventArgs e) => model.Navigate("Library");
@@ -444,9 +450,95 @@ public partial class MainWindow : Window
     private void ShowSettings(object? s, RoutedEventArgs e) => model.Navigate("Settings");
     private void ShowDiagnostics(object? s, RoutedEventArgs e) => model.Navigate("Diagnostics");
     private void TestWindowsNotification(object? s, RoutedEventArgs e) => model.TestWindowsNotification();
+    private async void ShowMobileSync(object? sender, RoutedEventArgs args)
+    {
+        if (!model.CanQuery) return;
+        try {
+            var frames = AchievementLabs.Core.MobileTransfer.QrFrames(model.CreateMobileTransfer());
+            var eventOnly=false; var signInOnly=false;
+            var dialog = new Window { Title="Mobile sync · iPhone / iPad / Android",Width=570,Height=800,MinWidth=500,MinHeight=600,WindowStartupLocation=WindowStartupLocation.CenterOwner };
+            var image = new Avalonia.Controls.Image { Width=410,Height=410,Stretch=Avalonia.Media.Stretch.Uniform };
+            var status = new TextBlock { TextWrapping=TextWrapping.Wrap,HorizontalAlignment=Avalonia.Layout.HorizontalAlignment.Center };
+            var close = new Button { Content="Close" }; close.Click += (_,_)=>dialog.Close();
+            var previous = new Button { Content="Previous" }; var next = new Button { Content="Next" };
+            var automatic = new CheckBox { Content="Cycle automatically",IsChecked=true };
+            var index=0; var expires=DateTimeOffset.UtcNow.AddMinutes(10);
+            Avalonia.Media.Imaging.Bitmap? bitmap=null;
+            void ShowFrame() {
+                using var generator = new QRCoder.QRCodeGenerator();
+                using var data = generator.CreateQrCode(frames[index],QRCoder.QRCodeGenerator.ECCLevel.M);
+                using var qr = new QRCoder.PngByteQRCode(data);
+                using var stream = new MemoryStream(qr.GetGraphic(5));
+                var old=bitmap; bitmap=new Avalonia.Media.Imaging.Bitmap(stream); image.Source=bitmap; old?.Dispose();
+                status.Text=$"{(eventOnly ? "Event token only" : signInOnly ? "Sign-in only" : "Sign-in + event token")} · code {index+1} of {frames.Length} · expires {expires.LocalDateTime:t}";
+            }
+            var timer=new Avalonia.Threading.DispatcherTimer { Interval=TimeSpan.FromSeconds(0.5) };
+            var accountMode = new RadioButton { Content="Sign-in + event token",GroupName="MobileTransferMode",IsChecked=true };
+            var signInMode = new RadioButton { Content="Sign-in only",GroupName="MobileTransferMode" };
+            var eventMode = new RadioButton { Content="Event token only",GroupName="MobileTransferMode" };
+            var modeHeading = new TextBlock { Text="SIGN-IN + EVENT TOKEN",FontSize=20,FontWeight=Avalonia.Media.FontWeight.Bold,Foreground=Avalonia.Media.Brushes.LimeGreen };
+            var speed = new ComboBox { ItemsSource=new[]{"Fast · 0.5 seconds","Balanced · 0.8 seconds","Slow · 1.2 seconds"},SelectedIndex=0,MinWidth=220 };
+            speed.SelectionChanged += (_,_)=> { timer.Interval=TimeSpan.FromSeconds(speed.SelectedIndex==0 ? 0.5 : speed.SelectedIndex==1 ? 0.8 : 1.2); };
+            void ChangeMode(bool only, bool signOnly=false) {
+                modeHeading.Text=only ? "EVENT TOKEN ONLY" : signOnly ? "SIGN-IN ONLY" : "SIGN-IN + EVENT TOKEN";
+                try { var replacement=AchievementLabs.Core.MobileTransfer.QrFrames(model.CreateMobileTransfer(only,signOnly)); Array.Clear(frames); frames=replacement; eventOnly=only; signInOnly=signOnly; index=0; expires=DateTimeOffset.UtcNow.AddMinutes(10); previous.IsEnabled=true; next.IsEnabled=true; ShowFrame(); timer.Start(); }
+                catch { timer.Stop(); image.Source=null; previous.IsEnabled=false; next.IsEnabled=false; status.Text="Save an event token in PC Settings before creating an event-token QR."; }
+            }
+            signInMode.Click += (_,_)=>ChangeMode(false,true); accountMode.Click += (_,_)=>ChangeMode(false); eventMode.Click += (_,_)=>ChangeMode(true);
+            previous.Click += (_,_)=>{ index=(index+frames.Length-1)%frames.Length; ShowFrame(); };
+            next.Click += (_,_)=>{ index=(index+1)%frames.Length; ShowFrame(); };
+            timer.Tick += (_,_)=>{ if(DateTimeOffset.UtcNow>=expires) { image.Source=null; status.Text="Expired. Close and generate a new code."; timer.Stop(); previous.IsEnabled=false; next.IsEnabled=false; }
+                else if(automatic.IsChecked==true) { index=(index+1)%frames.Length; ShowFrame(); } };
+            dialog.Content = new ScrollViewer { Content = new StackPanel { Margin=new Thickness(20),Spacing=12,Children={
+                new TextBlock { Text="On iPhone / iPad, open Home → Sync from PC → Scan PC QR codes. Keep the camera pointed here until every code is collected.",TextWrapping=TextWrapping.Wrap },
+                new StackPanel { Orientation=Avalonia.Layout.Orientation.Horizontal,Spacing=18,Children={accountMode,signInMode,eventMode} },
+                modeHeading,
+                new StackPanel { Orientation=Avalonia.Layout.Orientation.Horizontal,Spacing=10,Children={new TextBlock { Text="QR speed",VerticalAlignment=Avalonia.Layout.VerticalAlignment.Center },speed} },
+                image,status,new StackPanel { Orientation=Avalonia.Layout.Orientation.Horizontal,Spacing=12,Children={previous,next,automatic} },
+                new TextBlock { Text="Private sign-in codes: do not share screenshots. Sign-in-only mode excludes the event token. Event-token mode excludes account authorization. Microsoft renewal credentials always stay on PC.",TextWrapping=TextWrapping.Wrap },close } } };
+            ShowFrame(); timer.Start();
+            try { await dialog.ShowDialog(this); } finally { timer.Stop(); image.Source=null; bitmap?.Dispose(); Array.Clear(frames); }
+        } catch { model.Notice="Could not create mobile QR transfer. Connect an Xbox account first."; }
+    }
+    private async void ExportMobileTransfer(object? sender, RoutedEventArgs args)
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title="Export encrypted mobile sign-in",SuggestedFileName="AchievementLabs-PC.labslink",DefaultExtension="labslink" });
+        if (file?.TryGetLocalPath() is not { } path) return;
+        try {
+            var transfer = model.CreateMobileTransfer();
+            await File.WriteAllBytesAsync(path,transfer.Bytes);
+            var dialog = new Window { Title="Mobile sync · iPhone / iPad / Android",Width=580,Height=340,CanResize=false,WindowStartupLocation=WindowStartupLocation.CenterOwner };
+            var copy = new Button { Content="Copy pairing key" }; var close = new Button { Content="Close" };
+            copy.Click += async (_,_) => { if (Clipboard != null) await Clipboard.SetTextAsync(transfer.PairingKey); };
+            close.Click += (_,_) => dialog.Close();
+            dialog.Content = new StackPanel { Margin=new Thickness(24),Spacing=14,Children={
+                new TextBlock { Text="Encrypted file saved. Import it in the mobile app's Settings → PC sync, then enter this key. The file expires in 10 minutes.",TextWrapping=Avalonia.Media.TextWrapping.Wrap },
+                new SelectableTextBlock { Text=transfer.PairingKey,TextWrapping=Avalonia.Media.TextWrapping.Wrap,FontSize=17 },
+                new TextBlock { Text="Keep the file and key private. This exports the current authorization and event token, not Microsoft renewal credentials.",TextWrapping=Avalonia.Media.TextWrapping.Wrap },copy,close } };
+            await dialog.ShowDialog(this); model.Notice="Encrypted mobile transfer exported.";
+        } catch { model.Notice="Could not export mobile sign-in. Connect Xbox and check the destination."; }
+    }
+    private async void DeleteSavedGameQueue(object? sender, RoutedEventArgs e)
+    {
+        if (model.QueueActive || model.XboxQueue.IsRunning || model.XboxBuildQueue.IsAdding) { model.Notice = "Pause Auto Unlock before deleting saved queues."; return; }
+        var saved = model.XboxQueue.SelectedSavedGameQueue;
+        if (saved == null) { model.Notice = "Choose a saved game queue first."; return; }
+        var owner = model.QueueOwnerXuid;
+        var dialog = new Window { Title = "Delete saved queue?", Width = 460, Height = 240, CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var remove = new Button { Content = "Delete saved queue" };
+        var cancel = new Button { Content = "Cancel" };
+        remove.Click += (_, _) => dialog.Close(true); cancel.Click += (_, _) => dialog.Close(false);
+        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = {
+            new TextBlock { Text = "Delete " + saved.Name + "?", FontSize = 20, TextWrapping = TextWrapping.Wrap },
+            new TextBlock { Text = "This also removes its loaded Auto Unlock queue. Other games and Xbox achievements are unchanged.", TextWrapping = TextWrapping.Wrap },
+            new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { cancel, remove } }
+        } } };
+        if (await dialog.ShowDialog<bool>(this)) await model.XboxQueue.DeleteSavedGameQueueAsync(saved.TitleId, owner);
+    }
     private async void CheckUpdates(object? s, RoutedEventArgs e) => await model.CheckForUpdatesAsync(true);
     private void InstallUpdate(object? s, RoutedEventArgs e) { if (model.InstallUpdate()) Close(); }
     private async void SaveSettings(object? s, RoutedEventArgs e) => await model.SavePreferencesAsync();
+    private async void AcquireAccountEventToken(object? sender, RoutedEventArgs e) => await model.AcquireAccountEventTokenAsync(this);
     private async void SaveEventToken(object? s, RoutedEventArgs e) => await model.SaveEventTokenAsync();
     private async void ClearEventToken(object? s, RoutedEventArgs e) => await model.ClearEventTokenAsync();
     private async Task ShowEventTokenRequiredAsync()
@@ -472,6 +564,24 @@ public partial class MainWindow : Window
     {
         var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Select saved Xbox session", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("JSON") { Patterns = ["*.json"] }] });
         if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) model.SessionPath = path;
+    }
+    private async void ExportQueueSync(object? sender,RoutedEventArgs e)
+    {
+        try {
+            var json=model.XboxQueue.ExportQueueSyncFile();
+            var file=await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title="Export queue sync file",SuggestedFileName="AchievementLabs-Queues.json",DefaultExtension="json",FileTypeChoices=[new FilePickerFileType("JSON") { Patterns=["*.json"] }] });
+            if(file==null)return;await using var stream=await file.OpenWriteAsync();stream.SetLength(0);await using var writer=new System.IO.StreamWriter(stream);await writer.WriteAsync(json);model.Notice="Queue sync file exported. Contains game progress and delays, with no sign-in credentials.";
+        } catch(Exception error) { model.Notice=error.Message; }
+    }
+    private async void ImportQueueSync(object? sender,RoutedEventArgs e)
+    {
+        try {
+            var files=await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title="Import queue sync file",AllowMultiple=false,FileTypeFilter=[new FilePickerFileType("JSON") { Patterns=["*.json"] }] });
+            if(files.FirstOrDefault() is not { } file)return;await using var stream=await file.OpenReadAsync();
+            using var bytes=new System.IO.MemoryStream();var buffer=new byte[8192];int count;
+            while((count=await stream.ReadAsync(buffer))>0) { if(bytes.Length+count>8*1024*1024)throw new System.IO.InvalidDataException("Queue sync file exceeds 8 MB.");await bytes.WriteAsync(buffer.AsMemory(0,count)); }
+            await model.XboxQueue.ImportQueueSyncFileAsync(System.Text.Encoding.UTF8.GetString(bytes.ToArray()));model.Notice=model.XboxQueue.StatusText;
+        } catch(Exception error) { model.Notice=error.Message; }
     }
     private void ToggleAccent(object? s, RoutedEventArgs e)
     {

@@ -74,75 +74,43 @@ public sealed partial class DesktopModel
     }
     private async Task SubmitAchievementsAsync(string[] ids)
     {
-        if (client == null || session == null || SelectedGame == null) return;
-        var game = SelectedGame;
-        var source = definitions; var useEvents = eventBased; var directory = EventsDirectory;
-        Busy(true); ActionReports.Clear(); ActionSummary = "Submitting achievement actions…";
-        try
-        {
+        if(client==null || session==null || SelectedGame==null)return;
+        var game=SelectedGame;var source=definitions;var useEvents=eventBased;
+        Busy(true);ActionReports.Clear();ActionSummary="Sending selected achievements together…";
+        try {
             await EnsureAuthorizationFreshAsync(lifetime.Token);
-            if (useEvents)
-            {
-                try { await EnsureEventTokenAsync(lifetime.Token); }
-                catch (InvalidOperationException error)
-                {
-                    ActionSummary = error.Message;
-                    if (EventTokenRequired != null) await EventTokenRequired();
-                    return;
-                }
-            }
+            if(useEvents) { try { await EnsureEventTokenAsync(lifetime.Token); } catch(InvalidOperationException error) { ActionSummary=error.Message;if(EventTokenRequired!=null)await EventTokenRequired();return; } }
             await requests.WaitAsync(lifetime.Token);
-            try
-            {
-                if (client == null || session == null) return;
-                var api = client; var account = session;
-                foreach (var id in ids)
-                {
-                    lifetime.Token.ThrowIfCancellationRequested();
-                    var definition = source[id];
-                    try
-                    {
-                        var transportDetails = new List<string>();
-                        if (useEvents)
-                        {
-                            var response = await eventCatalog.GetPayloadsAsync(game.Id, id, account.Xuid, lifetime.Token);
-                            foreach (var payload in response.Payloads)
-                            {
-                                lifetime.Token.ThrowIfCancellationRequested();
-                                var result = await Task.Run(() => api.UnlockEventBasedAchievementWithDiagnostics(account.EventsToken, payload), lifetime.Token);
-                                if (result.StatusCode is 401 or 403)
-                                {
-                                    MarkEventTokenRejected();
-                                    ActionSummary = $"Xbox rejected the event token (HTTP {result.StatusCode} {result.ReasonPhrase}). Paste a current token in Settings.";
-                                    if (EventTokenRequired != null) await EventTokenRequired();
-                                    return;
-                                }
-                                transportDetails.Add($"HTTP {result.StatusCode} · {EventCollectorResponse.Read(result.ResponseBody).Summary}");
-                                if (result.StatusCode < 200 || result.StatusCode >= 300)
-                                {
-                                    var detail = SummarizeEventError(result.ResponseBody);
-                                    throw new HttpRequestException($"HTTP {result.StatusCode} {result.ReasonPhrase}{detail}");
-                                }
+            try {
+                var account=session;if(account==null)return;
+                async Task<(string Name,string Message,bool Rejected)> Send(string id) {
+                    var definition=source[id];using var api=new XboxApiClient(account.Authorization);
+                    try {
+                        if(session?.Xuid!=account.Xuid)throw new OperationCanceledException();
+                        if(useEvents) {
+                            var payloads=await eventCatalog.GetPayloadsAsync(game.Id,id,account.Xuid,lifetime.Token);
+                            foreach(var payload in payloads.Payloads) {
+                                lifetime.Token.ThrowIfCancellationRequested();var result=await api.UnlockEventBasedAchievementWithDiagnostics(account.EventsToken,payload);
+                                if(result.StatusCode is 401 or 403)return(definition.name,"Authorization rejected; refresh the event token.",true);
+                                if(result.StatusCode<200 || result.StatusCode>=300)throw new HttpRequestException($"HTTP {result.StatusCode} {result.ReasonPhrase}");
                             }
+                        } else {
+                            if(string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId==Guid.Empty.ToString())throw new InvalidDataException("Missing service configuration.");
+                            await api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId,game.Id,account.Xuid,id,FakeSignature);
                         }
-                        else
-                        {
-                            if (string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId == Guid.Empty.ToString()) throw new InvalidDataException("Missing service configuration.");
-                            await Task.Run(() => api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId, game.Id, account.Xuid, id, FakeSignature), lifetime.Token);
-                        }
-                        ActionReports.Add(new(definition.name, useEvents
-                            ? string.Join(" | ", transportDetails) + " · Event submitted; achievement unlock is not confirmed. Refresh to verify progress."
-                            : "Request accepted; refresh to verify progress"));
-                    }
-                    catch (OperationCanceledException) { throw; }
-                    catch (Exception ex) { ActionReports.Add(new(definition.name, "Failed · " + ex.Message)); }
+                        return(definition.name,"Request accepted; refresh Xbox progress to verify.",false);
+                    } catch(OperationCanceledException) { throw; }
+                    catch(Exception error) { return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }
                 }
-            }
-            finally { requests.Release(); }
-            ActionSummary = $"Finished {ActionReports.Count} actions. Refresh achievements to verify account progress.";
-        }
-        catch (OperationCanceledException) { ActionSummary = "Stopped before the next request. Requests already sent may have completed."; }
-        catch (InvalidOperationException error) { ActionSummary = error.Message; }
+                foreach(var batch in ids.Distinct().Chunk(3)) {
+                    var results=await Task.WhenAll(batch.Select(Send));
+                    foreach(var result in results)ActionReports.Add(new(result.Name,result.Message));
+                    if(results.Any(x=>x.Rejected)) { MarkEventTokenRejected();if(EventTokenRequired!=null)await EventTokenRequired();break; }
+                }
+            } finally { requests.Release(); }
+            ActionSummary=$"Finished {ActionReports.Count} selected actions. Refresh to verify Xbox progress.";
+        } catch(OperationCanceledException) { ActionSummary="Stopped. Previously sent requests may have completed; refresh before retrying."; }
+        catch(Exception error) { ActionSummary=error.Message; }
         finally { Busy(false); }
     }
     private static string SummarizeEventError(string? responseBody)
@@ -153,3 +121,4 @@ public sealed partial class DesktopModel
         return " · " + singleLine;
     }
 }
+

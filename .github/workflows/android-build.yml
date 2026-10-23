@@ -1,0 +1,86 @@
+name: Android standalone beta
+on:
+  pull_request:
+    branches: [main]
+    paths: [android/**, mobile/tools/prepare_catalogue.py, Events/**, .github/workflows/android-build.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      LABS_CATALOGUE: ${{ github.workspace }}/mobile/Catalogue
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Prepare the shared deterministic mobile catalogue and Android icon
+        run: |
+          python3 mobile/tools/prepare_catalogue.py
+          cp -R mobile/Catalogue android/app/src/main/assets/catalogue
+          mkdir -p android/app/src/main/res/drawable
+          cp src/AchievementLabs.App/Assets/achievement-labs-icon.png android/app/src/main/res/drawable/app_icon.png
+      - name: Check JavaScript and build the signed test APK
+        run: |
+          node --check android/app/src/main/assets/app.js
+          node android/ui-checks.cjs
+          gradle -p android testDebugUnitTest assembleDebug lintDebug --stacktrace
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Verify standalone launch and offline screens
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: python3 android/smoke.py
+      - name: Package APK and checksums
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          LABS_ANDROID_KEYSTORE_BASE64: ${{ secrets.LABS_ANDROID_KEYSTORE_BASE64 }}
+          LABS_ANDROID_KEY_ALIAS: ${{ secrets.LABS_ANDROID_KEY_ALIAS }}
+          LABS_ANDROID_STORE_PASSWORD: ${{ secrets.LABS_ANDROID_STORE_PASSWORD }}
+          LABS_ANDROID_KEY_PASSWORD: ${{ secrets.LABS_ANDROID_KEY_PASSWORD }}
+        run: |
+          mkdir -p android/artifacts
+          if [ -n "$LABS_ANDROID_KEYSTORE_BASE64" ] && [ -n "$LABS_ANDROID_KEY_ALIAS" ] && [ -n "$LABS_ANDROID_STORE_PASSWORD" ] && [ -n "$LABS_ANDROID_KEY_PASSWORD" ]; then
+            trap 'rm -f "$RUNNER_TEMP/labs-release.keystore"' EXIT
+            printf '%s' "$LABS_ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/labs-release.keystore"
+            "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign --ks "$RUNNER_TEMP/labs-release.keystore" --ks-key-alias "$LABS_ANDROID_KEY_ALIAS" --ks-pass env:LABS_ANDROID_STORE_PASSWORD --key-pass env:LABS_ANDROID_KEY_PASSWORD --out android/artifacts/AchievementLabs-Android-0.6.3.apk android/app/build/outputs/apk/debug/app-debug.apk
+            rm -f "$RUNNER_TEMP/labs-release.keystore"
+            echo 'Signed with the configured permanent release key.' > android/artifacts/SIGNING-NOTE.txt
+          else
+            echo 'Permanent Android signing secrets are required. Add all four LABS_ANDROID_* repository secrets before rebuilding.' >&2
+            exit 1
+          fi
+          cp android/README.md android/artifacts/
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs android/artifacts/AchievementLabs-Android-0.6.3.apk > android/artifacts/APK-SIGNATURE.txt
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging android/artifacts/AchievementLabs-Android-0.6.3.apk > android/artifacts/APK-INFO.txt
+          sha256sum android/artifacts/AchievementLabs-Android-0.6.3.apk > android/artifacts/SHA256.txt
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          name: AchievementLabs-Android-Beta
+          path: android/artifacts/
+          retention-days: 30
+          if-no-files-found: error

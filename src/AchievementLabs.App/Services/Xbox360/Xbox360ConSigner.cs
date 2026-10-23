@@ -11,8 +11,11 @@ public static class Xbox360ConSigner
     private const int CertificateLength = 0x1A8;
     private static readonly byte[] Sha1DigestInfo = Convert.FromHexString("3021300906052B0E03021A05000414");
 
+    public static bool SigningAvailable => false;
+
     public static void SignFile(string path)
     {
+        if (!SigningAvailable) throw new NotSupportedException("Xbox 360 profile signing is unavailable in this source build. No profile was modified.");
         using (var stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
         {
             var header = ReadHeader(stream);

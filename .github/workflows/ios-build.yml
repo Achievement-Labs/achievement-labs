@@ -1,0 +1,100 @@
+name: iOS standalone beta
+on:
+  pull_request:
+    branches: [main]
+    paths: [mobile/**, .github/workflows/ios-build.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ios-build-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  network-probe:
+    runs-on: macos-15
+    timeout-minutes: 5
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Probe public TLS endpoints without credentials or event data
+        run: |
+          cat mobile/Core/Sources/LabsMobileCore/CollectorTrust.swift mobile/tools/tls_probe.swift > /tmp/collector-probe.swift
+          swift /tmp/collector-probe.swift
+        # The core tests below also exercise the scoped collector trust.
+  build:
+    runs-on: macos-15
+    timeout-minutes: 35
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.2.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify iOS 26 SDK
+        run: xcodebuild -version
+      - name: Prepare mobile catalogue without changing desktop data
+        run: python3 mobile/tools/prepare_catalogue.py
+      - name: Run synthetic core and generated catalogue checks
+        env:
+          LABS_CATALOGUE: ${{ github.workspace }}/mobile/Catalogue
+        run: swift test --package-path mobile/Core
+      - name: Render native Live Activity layouts without booting a simulator
+        run: |
+          mkdir -p mobile/layout-previews
+          cat mobile/App/ActiveSessionStyle.swift mobile/Widget/SessionActivityCard.swift mobile/tools/render_session_card.swift > /tmp/session-card-preview.swift
+          swift /tmp/session-card-preview.swift
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AchievementLabs-iOS-Live-Activity-Layouts
+          path: mobile/layout-previews/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Install project generator
+        run: brew list xcodegen >/dev/null 2>&1 || brew install xcodegen
+      - name: Prepare existing application icon
+        run: swift mobile/tools/prepare_icon.swift
+      - name: Generate Xcode project
+        run: cd mobile && xcodegen generate
+      - name: Build iPhone and iPad device app without a signing identity
+        run: |
+          xcodebuild -project mobile/AchievementLabsMobile.xcodeproj -scheme AchievementLabsMobile -configuration Release -sdk iphoneos -destination 'generic/platform=iOS' -derivedDataPath mobile/build CODE_SIGNING_ALLOWED=NO build
+          /usr/libexec/PlistBuddy -c 'Print :BGTaskSchedulerPermittedIdentifiers' mobile/build/Build/Products/Release-iphoneos/AchievementLabsMobile.app/Info.plist
+          /usr/libexec/PlistBuddy -c 'Print :UIBackgroundModes' mobile/build/Build/Products/Release-iphoneos/AchievementLabsMobile.app/Info.plist
+      - name: Build for simulator
+        timeout-minutes: 6
+        run: |
+          xcodebuild -project mobile/AchievementLabsMobile.xcodeproj -scheme AchievementLabsMobile -configuration Debug -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' -derivedDataPath mobile/simulator CODE_SIGNING_ALLOWED=YES CODE_SIGN_IDENTITY=- CODE_SIGN_ENTITLEMENTS="$PWD/mobile/Simulator.entitlements" build
+          codesign --verify --deep --strict mobile/simulator/Build/Products/Debug-iphonesimulator/AchievementLabsMobile.app
+          codesign -d --entitlements :- mobile/simulator/Build/Products/Debug-iphonesimulator/AchievementLabsMobile.app
+      - name: Package unsigned IPA for user signing
+        run: |
+          mkdir -p mobile/artifacts/Payload
+          cp -R mobile/build/Build/Products/Release-iphoneos/AchievementLabsMobile.app mobile/artifacts/Payload/
+          cd mobile/artifacts
+          /usr/bin/zip -qry AchievementLabs-iOS-0.12.5-UNSIGNED.ipa Payload
+          shasum -a 256 AchievementLabs-iOS-0.12.5-UNSIGNED.ipa > SHA256.txt
+          cp ../Catalogue/catalogue-report.json .
+          cp ../README.md .
+          cp ../WIDGETS.md .
+          cp ../QUEUE-QR.md .
+          cp ../App/Assets.xcassets/AppIcon.appiconset/Icon.png AppIcon.png
+          rm -rf Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AchievementLabs-iOS-Standalone-Unsigned
+          path: mobile/artifacts/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Verify iOS 26 simulator screens and safe background request
+        timeout-minutes: 12
+        run: python3 -u mobile/tools/simulator_smoke.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AchievementLabs-iOS-Simulator-Checks
+          path: mobile/artifacts/iPhone-*.png
+          retention-days: 7
+          if-no-files-found: ignore

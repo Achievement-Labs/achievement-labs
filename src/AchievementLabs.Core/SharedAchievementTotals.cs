@@ -7,7 +7,7 @@ public sealed class SharedAchievementTotals
     public sealed record Entry(string TitleId, string Name, string[] Platforms, int Total, DateTimeOffset CheckedAt, string Endpoint);
     public sealed record Catalogue(int SchemaVersion, Entry[] Entries);
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web) { WriteIndented = true };
-    public static readonly Uri PublishedUri = new("https://raw.githubusercontent.com/thevampirebat/achievement-labs/main/catalog/achievement-totals.json");
+    public static readonly Uri PublishedUri = new("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/main/catalog/achievement-totals.json");
     private readonly Dictionary<string, Entry> entries = new(StringComparer.Ordinal);
     public int Count => entries.Count;
 

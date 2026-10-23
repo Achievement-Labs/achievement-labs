@@ -76,6 +76,24 @@ public partial class BuildQueueViewModel : ObservableObject
         finally { IsAdding = false; builder.ReleaseClient(); Refresh(); }
     }
 
+    public Task AddSavedGameAsync(AchievementLabs.Models.AutoUnlockState state)
+    {
+        if (coordinator == null || state.OwnerXuid != account.XUIDOnly || !CanAdd)
+            throw new InvalidOperationException("Connect the saved queue's account before appending.");
+        var id = Guid.NewGuid(); var path = coordinator.CheckpointPath(id);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        state.IsRunning = false;
+        File.WriteAllText(path,Newtonsoft.Json.JsonConvert.SerializeObject(state));
+        try
+        {
+            if (!coordinator.Enqueue(new BuildQueueItem(id,state.OwnerXuid,state.TitleId,state.GameName,state.ReferenceXuid,state.SpeedMultiplier,DateTimeOffset.UtcNow)))
+                throw new InvalidOperationException("This game is already pending in the build queue.");
+        }
+        catch { if (File.Exists(path)) File.Delete(path); throw; }
+        Status = $"Saved queue for {state.GameName} added. Review before starting."; Refresh();
+        return Task.CompletedTask;
+    }
+
     [RelayCommand]
     public void RemoveSelected()
     {
@@ -116,3 +134,4 @@ public partial class BuildQueueViewModel : ObservableObject
 
     public void Stop() { coordinator?.Stop(); ActiveGame?.Stop(); Status = "Stopping build queue; progress will be kept."; }
 }
+
