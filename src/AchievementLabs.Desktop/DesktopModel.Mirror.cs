@@ -108,6 +108,57 @@ public sealed partial class DesktopModel : IMirrorHost
     async Task IMirrorHost.StartSteamIdleAsync(long appId, CancellationToken cancellationToken) => await steam.StartSpoofSessionAsync(appId, cancellationToken);
     void IMirrorHost.StopSteamIdle() => steam.StopSpoofSession();
 
+    private string runningPresenceTitleId = "";
+    private DateTimeOffset? presenceHeartbeatAt;
+    private string? mirrorPresenceTitle;
+
+    long IMirrorHost.SteamRunningAppId
+    {
+        get
+        {
+            try { return Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "RunningAppID", 0) is int id ? id : 0; }
+            catch { return 0; }
+        }
+    }
+
+    string? IMirrorHost.MirrorPresenceTitle => mirrorPresenceTitle != null && PresenceRunning && runningPresenceTitleId == mirrorPresenceTitle ? mirrorPresenceTitle : null;
+
+    string? IMirrorHost.XboxPresenceConflict(string titleId)
+    {
+        if (PresenceRunning && runningPresenceTitleId.Length > 0 && runningPresenceTitleId != titleId && runningPresenceTitleId != mirrorPresenceTitle)
+            return $"The Title spoofer is showing {ActiveSpoofTitle} on Xbox.";
+        if (queueAccount.SpoofingStatus == 1 && queueAccount.SpoofedTitleID is { Length: > 0 } queued && queued != "0" && queued != titleId)
+            return $"Auto Unlock is showing title ID {queued} on Xbox.";
+        return null;
+    }
+
+    bool IMirrorHost.XboxPresenceShows(string titleId) =>
+        PresenceRunning && runningPresenceTitleId == titleId || queueAccount.SpoofingStatus == 1 && queueAccount.SpoofedTitleID == titleId;
+
+    async Task<bool> IMirrorHost.StartMirrorPresenceAsync(string titleId, CancellationToken cancellationToken)
+    {
+        var started = await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            if (PresenceRunning || !CanStartPresence) return false;
+            mirrorPresenceTitle = titleId; PresenceTitleId = titleId;
+            _ = StartPresenceAsync();
+            return PresenceRunning;
+        });
+        if (!started) { mirrorPresenceTitle = null; return false; }
+        // Wait for the first heartbeat so an unlock sent right after lands while Xbox shows the game.
+        for (var i = 0; i < 40 && presenceHeartbeatAt == null && PresenceRunning; i++) await Task.Delay(250, cancellationToken);
+        return presenceHeartbeatAt != null;
+    }
+
+    void IMirrorHost.StopMirrorPresence()
+    {
+        Avalonia.Threading.Dispatcher.UIThread.Post(() =>
+        {
+            if (mirrorPresenceTitle != null && PresenceRunning && runningPresenceTitleId == mirrorPresenceTitle) StopPresence();
+            mirrorPresenceTitle = null;
+        });
+    }
+
     void IMirrorHost.Alert(string title, string message)
     {
         Avalonia.Threading.Dispatcher.UIThread.Post(() =>

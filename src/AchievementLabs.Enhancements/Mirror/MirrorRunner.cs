@@ -226,6 +226,18 @@ public sealed class MirrorRunner
         finally { sending.Release(); }
     }
 
+    /// <summary>Stops a monitoring pair for an outside reason (e.g. conflicting Xbox presence). Later unlocks become pending.</summary>
+    public void Halt(string reason)
+    {
+        lock (gate)
+        {
+            if (Status != MirrorStatus.Monitoring) return;
+            Status = MirrorStatus.Stopped; StopReason = reason;
+        }
+        Write("Stopped: " + reason, isError: true);
+        Stopped?.Invoke($"Achievement Mirror stopped · {Pair.DisplayName}", reason);
+    }
+
     private bool Fail(string sourceId, string name, string reason)
     {
         lock (gate)

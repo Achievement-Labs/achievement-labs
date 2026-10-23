@@ -142,6 +142,14 @@ public static class MirrorTests
         Assert(!await r8.ReportAppUnlockAsync("ACH_3", "Third Act"), "App unlock that can't be mirrored returns false so Auto Unlock stops");
         Assert(!await r8.ReportAppUnlockAsync("ACH_1", "First Steps") && t8.Sent.Count == 4, "While stopped, app unlocks are pending and return false");
 
+        // Halt (e.g. another title's Xbox presence): later unlocks pending, resume sends them.
+        var (_, t10, r10) = Setup();
+        string? haltAlert = null; r10.Stopped += (_, m) => haltAlert = m;
+        r10.Start([]); r10.Halt("Other presence active.");
+        Assert(r10.Status == MirrorStatus.Stopped && r10.StopReason == "Other presence active." && haltAlert != null, "Halt stops with the reason and alerts");
+        Assert(!await r10.ObserveSourceAsync([A("ACH_1", "First Steps", true)], "test") && t10.Sent.Count == 0 && r10.Pending.Count == 1, "Unlock while halted is pending, not sent");
+        Assert(await r10.ResumeAsync(true) && t10.Unlocked.Contains("1"), "Resume after halt sends pending");
+
         // User stop: nothing more is sent.
         var (_, t9, r9) = Setup();
         r9.Start([]); r9.Stop();
@@ -160,6 +168,8 @@ public static class MirrorTests
         Assert(SteamWebApi.AccountId("76561198012345678") == 52079950, "Account number for local stats file");
         Assert(!SteamWebApi.BuildUrl("k&y", "1", 2).Contains("k&y") && SteamWebApi.BuildUrl("k", "1", 3669870).Contains("appid=3669870"), "URL escapes the key");
 
+        Assert(SteamWebApi.ParsePlayingAppId("""{"response":{"players":[{"steamid":"1","gameid":"870780","gameextrainfo":"Control"}]}}""") == 870780, "Current Steam game read");
+        Assert(SteamWebApi.ParsePlayingAppId("""{"response":{"players":[{"steamid":"1"}]}}""") == 0 && SteamWebApi.ParsePlayingAppId("""{"response":{"players":[]}}""") == 0, "Not in a game");
         var presence = """{"xuid":"1","state":"Online","devices":[{"type":"PC","titles":[{"id":"750323071","name":"Home","state":"Active"},{"id":"1653280174","name":"CONTROL Resonant","placement":"Full","state":"Active"}]}]}""";
         Assert(XboxPresence.IsInTitle(presence, "1653280174") && !XboxPresence.IsInTitle(presence, "1828326430"), "Presence finds the active title");
         Assert(!XboxPresence.IsInTitle("""{"devices":[{"titles":[{"id":"1653280174","state":"Inactive"}]}]}""", "1653280174"), "Inactive title doesn't count");

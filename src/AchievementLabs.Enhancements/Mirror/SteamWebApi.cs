@@ -37,6 +37,26 @@ public sealed class SteamWebApi(HttpClient http)
         return Parse(body);
     }
 
+    public const string SummariesUrl = "https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/";
+
+    /// <summary>App ID the player is currently in on any device, or 0. Needs a profile Steam lets the key read.</summary>
+    public async Task<long> GetPlayingAppIdAsync(string key, string steamId, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(key) || !IsSteamId64(steamId)) return 0;
+        using var response = await http.GetAsync($"{SummariesUrl}?key={Uri.EscapeDataString(key.Trim())}&steamids={Uri.EscapeDataString(steamId.Trim())}", cancellationToken);
+        if (!response.IsSuccessStatusCode) throw new SteamWebApiException($"Steam Web API returned HTTP {(int)response.StatusCode} for your current game.", response.StatusCode);
+        return ParsePlayingAppId(await response.Content.ReadAsStringAsync(cancellationToken));
+    }
+
+    public static long ParsePlayingAppId(string json)
+    {
+        using var document = JsonDocument.Parse(json);
+        if (!document.RootElement.TryGetProperty("response", out var root) || !root.TryGetProperty("players", out var players)
+            || players.ValueKind != JsonValueKind.Array || players.GetArrayLength() == 0) return 0;
+        var player = players[0];
+        return player.TryGetProperty("gameid", out var game) && long.TryParse(game.GetString(), NumberStyles.None, CultureInfo.InvariantCulture, out var id) ? id : 0;
+    }
+
     public static IReadOnlyList<MirrorAchievement> Parse(string json)
     {
         using var document = JsonDocument.Parse(json);

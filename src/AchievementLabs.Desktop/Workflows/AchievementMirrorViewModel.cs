@@ -330,6 +330,12 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         var clash = runners.Values.FirstOrDefault(r => r.Pair != pair && r.Status != MirrorStatus.Idle
             && (r.Pair.SteamAppId == pair.SteamAppId || r.Pair.XboxTitleId == pair.XboxTitleId));
         if (clash != null) { Status = $"{clash.Pair.DisplayName} already mirrors this game. Stop it first."; return; }
+        if (PresenceConflictMessage(pair) is { } conflict)
+        {
+            Status = conflict;
+            host.Alert("Achievement Mirror can't start", conflict);
+            return;
+        }
         Status = "Reading the current unlocks so nothing already earned is copied…";
         try
         {
@@ -379,6 +385,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     {
         var runner = SelectedRunner;
         if (runner == null || runner.Status != MirrorStatus.Stopped) return;
+        if (PresenceConflictMessage(runner.Pair) is { } conflict) { Status = conflict; return; }
         try { await runner.ResumeAsync(send, lifetime.Token); }
         catch (InvalidOperationException error) { Status = error.Message; }
         EnsureLoop(); UpdateWatcher(); RefreshRunnerState();
@@ -397,6 +404,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     {
         foreach (var runner in runners.Values) runner.Stop();
         if (idleStartedByMirror != 0) { host.StopSteamIdle(); idleStartedByMirror = 0; }
+        host.StopMirrorPresence();
         UpdateWatcher();
     }
 
@@ -447,7 +455,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     private MirrorRunner CreateRunner(MirrorPair pair)
     {
         IMirrorTarget target = pair.Direction == MirrorDirection.SteamToXbox
-            ? new XboxTarget(host, pair.XboxTitleId) : new SteamTarget(host, pair.SteamAppId);
+            ? new XboxTarget(host, pair.XboxTitleId, token => EnsurePresenceForUnlockAsync(pair, token)) : new SteamTarget(host, pair.SteamAppId);
         var runner = new MirrorRunner(pair, target);
         runner.Changed += () => Dispatcher.UIThread.Post(RefreshRunnerState);
         runner.Logged += entry =>
@@ -476,7 +484,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         while (!token.IsCancellationRequested)
         {
             var active = runners.Values.Where(r => r.Status != MirrorStatus.Idle).ToArray();
-            if (active.Length == 0) { await UpdateIdleAsync(token); return; }
+            if (active.Length == 0) { await UpdateIdleAsync(token); await UpdateXboxPresenceAsync(token); return; }
             foreach (var runner in active)
             {
                 foreach (var kind in KindsFor(runner.Pair))
@@ -486,6 +494,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
                     await PollAsync(runner, kind, "checked", token);
                 }
             }
+            await UpdateXboxPresenceAsync(token);
             if (DateTimeOffset.Now >= nextPresenceCheck)
             {
                 nextPresenceCheck = DateTimeOffset.Now + PresencePollInterval;
@@ -680,6 +689,104 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         });
     }
 
+    private static readonly TimeSpan PresenceBurst = TimeSpan.FromMinutes(2);
+    private static readonly TimeSpan PlayingWebInterval = TimeSpan.FromSeconds(15);
+    private readonly ConcurrentDictionary<Guid, DateTimeOffset> presenceBurstUntil = new();
+    private readonly SemaphoreSlim presenceGate = new(1, 1);
+    private DateTimeOffset nextPlayingWebCheck, presenceRetryAfter;
+    private long webPlayingAppId;
+    private string? playingSource;
+
+    private string? PresenceConflictMessage(MirrorPair pair) =>
+        pair.Direction == MirrorDirection.SteamToXbox && host.XboxPresenceConflict(pair.XboxTitleId) is { } other
+            ? $"{other} Achievement Mirror shows you in {pair.DisplayName} on Xbox while you play on Steam, and Xbox can only show one game at a time. Stop that first, then {(runners.TryGetValue(pair.Id, out var r) && r.Status == MirrorStatus.Stopped ? "resume" : "start")} mirroring."
+            : null;
+
+    /// <summary>Before each Steam → Xbox unlock: make sure Xbox shows you in the game, if only briefly.</summary>
+    private async Task EnsurePresenceForUnlockAsync(MirrorPair pair, CancellationToken token)
+    {
+        if (PresenceConflictMessage(pair) is { } conflict) throw new InvalidOperationException(conflict);
+        presenceBurstUntil[pair.Id] = DateTimeOffset.Now + PresenceBurst;
+        if (host.XboxPresenceShows(pair.XboxTitleId)) return;
+        await presenceGate.WaitAsync(token);
+        try
+        {
+            if (host.XboxPresenceShows(pair.XboxTitleId)) return;
+            if (host.MirrorPresenceTitle != null) host.StopMirrorPresence();
+            if (await host.StartMirrorPresenceAsync(pair.XboxTitleId, token)) Log(pair, $"Showing you in {pair.DisplayName} on Xbox for this unlock.");
+            else Log(pair, "Couldn't show you in the game on Xbox (another operation is busy). Unlocking anyway.", isError: true);
+        }
+        finally { presenceGate.Release(); }
+    }
+
+    /// <summary>
+    /// Steam → Xbox pairs show you in the game on Xbox only while Steam shows you playing it (on this PC or,
+    /// through the Web API, on another device), plus a short burst around each mirrored unlock. Presence
+    /// another feature sends for a different title is never overridden: the pair stops and says why.
+    /// </summary>
+    private async Task UpdateXboxPresenceAsync(CancellationToken token)
+    {
+        if (!await presenceGate.WaitAsync(0, token)) return;
+        try
+        {
+            var monitoring = runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && r.Pair.Direction == MirrorDirection.SteamToXbox).ToArray();
+            foreach (var runner in monitoring)
+                if (PresenceConflictMessage(runner.Pair) is { } conflict) runner.Halt(conflict);
+            monitoring = monitoring.Where(r => r.Status == MirrorStatus.Monitoring).ToArray();
+
+            var local = monitoring.Length > 0 ? host.SteamRunningAppId : 0;
+            if (monitoring.Length > 0 && DateTimeOffset.Now >= nextPlayingWebCheck && apiKey.Length > 0)
+            {
+                nextPlayingWebCheck = DateTimeOffset.Now + PlayingWebInterval;
+                try
+                {
+                    using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(15) };
+                    webPlayingAppId = await new SteamWebApi(http).GetPlayingAppIdAsync(apiKey, monitoring[0].Pair.SteamId, token);
+                }
+                catch (OperationCanceledException) { throw; }
+                catch { /* Keep the last answer; the local check still works. */ }
+            }
+            var now = DateTimeOffset.Now;
+            MirrorRunner? wanted = null; string? reason = null;
+            foreach (var runner in monitoring)
+            {
+                var appId = runner.Pair.SteamAppId;
+                if (local == appId) { wanted = runner; reason = "Steam on this PC shows you playing"; break; }
+                if (webPlayingAppId == appId) { wanted = runner; reason = "Steam shows you playing on another device"; break; }
+                if (presenceBurstUntil.TryGetValue(runner.Pair.Id, out var until) && until > now) { wanted = runner; reason = null; break; }
+            }
+
+            var current = host.MirrorPresenceTitle;
+            if (wanted == null)
+            {
+                if (current != null)
+                {
+                    host.StopMirrorPresence();
+                    Log(runners.Values.FirstOrDefault(r => r.Pair.XboxTitleId == current)?.Pair, "Steam no longer shows you playing · Xbox presence stopped.");
+                }
+                playingSource = null;
+                return;
+            }
+            var pair = wanted.Pair;
+            if (current == pair.XboxTitleId || host.XboxPresenceShows(pair.XboxTitleId))
+            {
+                if (reason != null && reason != playingSource) { playingSource = reason; if (current == pair.XboxTitleId) Log(pair, reason + "."); }
+                return;
+            }
+            if (now < presenceRetryAfter) return;
+            if (current != null) host.StopMirrorPresence();
+            if (await host.StartMirrorPresenceAsync(pair.XboxTitleId, token))
+            {
+                playingSource = reason;
+                Log(pair, (reason ?? "Mirrored unlock") + $" · showing you in {pair.DisplayName} on Xbox.");
+            }
+            else presenceRetryAfter = now + TimeSpan.FromSeconds(60);
+        }
+        catch (OperationCanceledException) { }
+        catch (Exception error) { Dispatcher.UIThread.Post(() => Status = "Xbox presence couldn't be updated: " + error.Message); }
+        finally { presenceGate.Release(); }
+    }
+
     /// <summary>
     /// Xbox → Steam pairs idle the game on Steam only while the Xbox status shows you in that title,
     /// so Steam playtime follows real play.
@@ -780,10 +887,14 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
 
     public void Dispose() { lifetime.Cancel(); StopAll(); statsWatcher?.Dispose(); }
 
-    private sealed class XboxTarget(IMirrorHost host, string titleId) : IMirrorTarget
+    private sealed class XboxTarget(IMirrorHost host, string titleId, Func<CancellationToken, Task> ensurePresence) : IMirrorTarget
     {
         public async Task<IReadOnlyList<MirrorAchievement>> ReadAsync(CancellationToken cancellationToken) => (await host.ReadXboxAsync(titleId, cancellationToken)).Achievements;
-        public Task UnlockAsync(string achievementId, CancellationToken cancellationToken) => host.UnlockXboxAsync(titleId, achievementId, cancellationToken);
+        public async Task UnlockAsync(string achievementId, CancellationToken cancellationToken)
+        {
+            await ensurePresence(cancellationToken);
+            await host.UnlockXboxAsync(titleId, achievementId, cancellationToken);
+        }
     }
 
     private sealed class SteamTarget(IMirrorHost host, long appId) : IMirrorTarget
