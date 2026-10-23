@@ -17,9 +17,9 @@ public static class UpstreamEventCatalogueTests
             Calls++;
             Assert(request.RequestUri!.AbsoluteUri.StartsWith("https://api.github.com/repos/Achievement-Labs/achievement-labs/",StringComparison.Ordinal) || request.RequestUri.AbsoluteUri.StartsWith("https://github.com/Achievement-Labs/achievement-labs/releases/download/",StringComparison.Ordinal), "Event metadata and archives use the canonical repository");
             Assert(request.Method==HttpMethod.Get && !request.Headers.Contains("Authorization") && !request.Headers.Contains("tickets"),"Public read only; no tokens");
-            var metadata=request.RequestUri!.AbsolutePath.EndsWith("releases/latest");
+            var metadata=request.RequestUri!.AbsolutePath.EndsWith("/releases");
             var digest=BadDigest ? new string('0',64) : Convert.ToHexString(SHA256.HashData(Archive)).ToLowerInvariant();
-            HttpContent content=metadata ? new StringContent(new JObject { ["tag_name"]="v1.0.8",["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]="Events.zip",["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/v1.0.8/Events.zip" }) }.ToString()) : new ByteArrayContent(Archive);
+            HttpContent content=metadata ? new StringContent(new JArray(new JObject { ["tag_name"]="v99.0.0",["draft"]=false,["prerelease"]=false,["assets"]=new JArray() }, new JObject { ["tag_name"]="v1.0.8",["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]="Events.zip",["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/v1.0.8/Events.zip" }) }).ToString()) : new ByteArrayContent(Archive);
             return Task.FromResult(new HttpResponseMessage(Fail?HttpStatusCode.Forbidden:HttpStatusCode.OK){Content=content});
         }
     }

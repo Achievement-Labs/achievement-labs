@@ -2,6 +2,9 @@ package org.achievementlabs.mobile;
 import org.junit.Test;import static org.junit.Assert.*;import org.json.*;import java.nio.file.*;import java.util.*;import javax.crypto.*;import javax.crypto.spec.*;
 public class CoreTests {
  @Test public void androidUpdaterIgnoresOtherPlatformsAndUntrustedDownloads()throws Exception{
+  assertEquals("https://github.com/Achievement-Labs/achievement-labs",Updater.REPOSITORY);
+  assertEquals("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",Updater.RELEASES_API);
+  assertEquals("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/mobile-event-feed/catalogue.json",SessionEngine.EVENT_FEED);
   String page="https://github.com/Achievement-Labs/achievement-labs/releases/tag/android-v0.3.0";
   String download="https://github.com/Achievement-Labs/achievement-labs/releases/download/android-v0.3.0/AchievementLabs-Android-0.3.0.apk";
   JSONObject asset=new JSONObject().put("name","AchievementLabs-Android-0.3.0.apk").put("browser_download_url",download).put("size",100).put("digest","sha256:"+"a".repeat(64));

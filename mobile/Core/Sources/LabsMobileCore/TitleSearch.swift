@@ -2,6 +2,11 @@ import Foundation
 
 /// Public discovery only. Account credentials are used separately by XboxService.
 public enum TitleSearch {
+    public static func applyingProgress(_ game: Game, rows: [Achievement]) -> Game {
+        let unlocked = rows.filter(\.unlocked).count
+        guard !rows.isEmpty, !game.legacy || unlocked >= game.unlocked else { return game }
+        var updated = game; updated.unlocked = unlocked; updated.total = rows.count; return updated
+    }
     public static func query(_ input: String) throws -> String {
         let value = input.trimmingCharacters(in:.whitespacesAndNewlines)
         guard !value.isEmpty, value.count <= 200 else { throw LabsError.message("Enter a game name or decimal Xbox Title ID (up to 200 characters).") }

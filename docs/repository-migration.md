@@ -15,3 +15,5 @@ All three apps now also offer a local event pack JSON import in Settings, indepe
 The official public source was missing its private Xbox 360 CON-signing dependency and did not compile. A key-free fallback now reports signing unavailable before opening a profile for writing; installations supplying the private source retain that implementation. Offline checks also use a temporary saved-queue path instead of the user's queue.
 
 Android and iOS now also provide Library > Find any game, accepting a game name or decimal Xbox Title ID independently of profile history. See [game lookup](mobile-game-lookup.md).
+
+Application and event update selection was also audited across platforms. Checks scan the official release list for their required assets so a mobile-only release does not hide the Windows update or Events.zip. See [update repository audit](update-repository-audit.md).

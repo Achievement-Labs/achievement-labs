@@ -275,6 +275,10 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             if loaded.contains(where: \.eventBased) { for i in loaded.indices { loaded[i].eventBased = true } }
             guard version == generation else { return }
             rows = loaded; selectedGame = game; rowResults = [:]
+            if !games.contains(where:{ $0.id == game.id }) {
+                let found = TitleSearch.applyingProgress(game,rows:loaded)
+                titleDetails[game.id] = found; selectedGame = found
+            }
             rememberCompletion(loaded, game:game)
             // Never overwrite valid legacy/library progress with an empty response.
             if !loaded.isEmpty, (!game.legacy || loaded.filter(\.unlocked).count >= game.unlocked), let i = games.firstIndex(where: { $0.id == game.id }) { games[i].unlocked = loaded.filter(\.unlocked).count; games[i].total = loaded.count }

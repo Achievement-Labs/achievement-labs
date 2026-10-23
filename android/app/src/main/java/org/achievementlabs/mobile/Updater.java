@@ -2,6 +2,8 @@ package org.achievementlabs.mobile;
 import android.app.*;import android.content.*;import android.content.pm.*;import android.net.Uri;import android.os.*;import android.provider.Settings;import androidx.core.content.FileProvider;
 import org.json.*;import java.io.*;import java.util.*;import java.util.concurrent.*;
 final class Updater {
+ static final String REPOSITORY="https://github.com/Achievement-Labs/achievement-labs";
+ static final String RELEASES_API="https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100";
  static volatile JSONObject candidate;static volatile boolean downloading,ready;static volatile String status="";
  static final ExecutorService worker=Executors.newSingleThreadExecutor();
  static JSONObject snapshot()throws Exception{return new JSONObject().put("downloading",downloading).put("ready",ready).put("status",status);}
@@ -9,13 +11,13 @@ final class Updater {
   JSONObject best=null;
   for(int i=0;i<releases.length();i++){JSONObject release=releases.getJSONObject(i);if(release.optBoolean("draft"))continue;JSONArray assets=release.optJSONArray("assets");if(assets==null)continue;
    for(int z=0;z<assets.length();z++){JSONObject asset=assets.getJSONObject(z);String name=asset.optString("name"),prefix="AchievementLabs-Android-";if(!name.matches("AchievementLabs-Android-\\d+\\.\\d+\\.\\d+\\.apk"))continue;String version=name.substring(prefix.length(),name.length()-4);String page=release.optString("html_url"),url=asset.optString("browser_download_url"),digest=asset.optString("digest");long size=asset.optLong("size");
-    if(!page.startsWith("https://github.com/Achievement-Labs/achievement-labs/releases/tag/")||!url.startsWith("https://github.com/Achievement-Labs/achievement-labs/releases/download/")||!url.endsWith("/"+name)||size<1||size>128*1024*1024)continue;
+    if(!page.startsWith(REPOSITORY+"/releases/tag/")||!url.startsWith(REPOSITORY+"/releases/download/")||!url.endsWith("/"+name)||size<1||size>128*1024*1024)continue;
     if(best==null||Core.newer(version,best.getString("version")))best=new JSONObject().put("version",version).put("url",page).put("download",url).put("sha256",digest.matches("sha256:[0-9a-fA-F]{64}")?digest.substring(7).toLowerCase(Locale.ROOT):"").put("size",size);
    }
   }return best;
  }
  static JSONObject check(SessionEngine e)throws Exception{
-  JSONArray releases=new JSONArray(Net.read("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100","GET",null,null,null,null,4*1024*1024));
+  JSONArray releases=new JSONArray(Net.read(RELEASES_API,"GET",null,null,null,null,4*1024*1024));
   candidate=choose(releases);boolean newer=candidate!=null&&Core.newer(candidate.getString("version"),BuildConfig.VERSION_NAME);
   e.notice=candidate==null?"No published Android release yet; Windows and iOS releases ignored.":newer?"Android "+candidate.getString("version")+" is available.":"Android app is up to date.";
   return new JSONObject().put("message",e.notice).put("url",newer?candidate.getString("url"):"").put("canInstall",newer&&!candidate.getString("sha256").isEmpty());

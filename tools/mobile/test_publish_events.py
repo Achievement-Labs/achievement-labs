@@ -1,7 +1,13 @@
 import hashlib,io,json,unittest,zipfile
-from publish_events import build,parse
+from publish_events import build,parse,select_release
 from export_event_pack import export
 class FeedChecks(unittest.TestCase):
+    def test_mixed_platform_releases(self):
+        events={'tag_name':'v1.0.8','draft':False,'prerelease':False,'assets':[{'name':'Events.zip'}]}
+        mobile={'tag_name':'ios-v0.12.5','draft':False,'prerelease':False,'assets':[{'name':'App.ipa'}]}
+        draft=dict(events,draft=True);beta=dict(events,prerelease=True)
+        self.assertEqual(select_release([mobile,draft,beta,events]),events)
+        with self.assertRaises(ValueError): select_release([mobile,draft,beta])
     def archive(self,data,extra=None):
         buffer=io.BytesIO()
         with zipfile.ZipFile(buffer,'w') as z:

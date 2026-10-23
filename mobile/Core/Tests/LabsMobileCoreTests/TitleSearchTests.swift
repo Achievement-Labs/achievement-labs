@@ -2,6 +2,13 @@ import XCTest
 @testable import LabsMobileCore
 
 final class TitleSearchTests: XCTestCase {
+    func testDiscoveredCountsUseAchievementRowsAndRetainEmptyResponses() throws {
+        let original = try TitleSearch.direct("7")!
+        let rows = try [Achievement(["id":"1","progressState":"Achieved"]),Achievement(["id":"2","progressState":"NotStarted"])]
+        let loaded = TitleSearch.applyingProgress(original,rows:rows)
+        XCTAssertEqual(loaded.unlocked,1); XCTAssertEqual(loaded.total,2)
+        XCTAssertEqual(original.total,0); XCTAssertEqual(TitleSearch.applyingProgress(loaded,rows:[]),loaded)
+    }
     func testIDsBoundsAndEncodedPublicQuery() throws {
         XCTAssertEqual(try TitleSearch.direct(" 0007 ")?.id,"7")
         XCTAssertEqual(try TitleSearch.direct("4294967295")?.id,"4294967295")

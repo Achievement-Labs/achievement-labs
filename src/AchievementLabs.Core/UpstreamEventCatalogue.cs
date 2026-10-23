@@ -126,7 +126,14 @@ public sealed class UpstreamEventCatalogue
         {
             var previous = Volatile.Read(ref current);
             if (!force && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
-            var release = Parse(await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases/latest", 1024 * 1024, ct).ConfigureAwait(false));
+            var releaseText = await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100", 4 * 1024 * 1024, ct).ConfigureAwait(false);
+            using var releaseReader = new JsonTextReader(new StringReader(releaseText)) { MaxDepth = 64 };
+            var releases = JArray.Load(releaseReader, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
+            if (releases.Count > 100) throw new InvalidDataException("Release list limit exceeded.");
+            var release = releases.OfType<JObject>().FirstOrDefault(r => (bool?)r["draft"] == false && (bool?)r["prerelease"] == false
+                && Regex.IsMatch((string?)r["tag_name"] ?? "", @"^v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")
+                && r["assets"] is JArray list && list.OfType<JObject>().Any(a => (string?)a["name"] == "Events.zip"))
+                ?? throw new InvalidDataException("No stable release containing Events.zip was found.");
             if ((bool?)release["draft"] != false || (bool?)release["prerelease"] != false) throw new InvalidDataException("No stable published release.");
             var tag = (string?)release["tag_name"] ?? "";
             if (!Regex.IsMatch(tag, "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")) throw new InvalidDataException("Unexpected release tag.");

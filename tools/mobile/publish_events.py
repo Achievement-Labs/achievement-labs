@@ -19,6 +19,14 @@ def unique(pairs):
     return result
 
 def parse(data): return json.loads(data.decode('utf-8-sig'),object_pairs_hook=unique)
+def select_release(releases):
+    if not isinstance(releases,list) or len(releases)>100: raise ValueError('Release list limit')
+    for release in releases:
+        if not isinstance(release,dict) or release.get('draft') or release.get('prerelease'): continue
+        if not re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?',release.get('tag_name','')): continue
+        if sum(a.get('name')=='Events.zip' for a in release.get('assets',[]) if isinstance(a,dict))==1: return release
+    raise ValueError('No stable release containing Events.zip')
+
 def normalize(tid,block,template):
     if len(template.encode())>1024*1024: raise ValueError('Template limit')
     result={};achievements=block.get('Achievements',{})
@@ -94,7 +102,7 @@ def publish(feed,pack=None):
     else: call('/git/refs','POST',{'ref':'refs/heads/mobile-event-feed','sha':commit['sha']})
 
 def main():
-    release=parse(read('https://api.github.com/repos/Achievement-Labs/achievement-labs/releases/latest',1024*1024));tag=release['tag_name']
+    release=select_release(parse(read('https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100',4*1024*1024)));tag=release['tag_name']
     asset=next(a for a in release['assets'] if a['name']=='Events.zip')
     expected='https://github.com/Achievement-Labs/achievement-labs/releases/download/'+tag+'/Events.zip'
     if asset['browser_download_url']!=expected: raise ValueError('Unexpected archive location')

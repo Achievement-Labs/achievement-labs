@@ -3,6 +3,14 @@ import org.json.*;
 import java.util.*;
 
 final class TitleSearch {
+ static JSONObject progress(JSONObject game,JSONArray rows)throws Exception{
+  JSONObject result=new JSONObject(game.toString());if(rows.length()==0)return result;
+  int unlocked=0;for(int i=0;i<rows.length();i++)if(rows.getJSONObject(i).optBoolean("isUnlocked"))unlocked++;
+  String platforms=result.optJSONArray("devices")==null?"":result.getJSONArray("devices").toString();
+  JSONObject previous=result.optJSONObject("achievement");
+  if((platforms.contains("Xbox360")||platforms.contains("GFWL"))&&previous!=null&&unlocked<previous.optInt("currentAchievements"))return result;
+  return result.put("achievement",new JSONObject().put("currentAchievements",unlocked).put("totalAchievements",rows.length()));
+ }
  static String query(String input)throws Exception{
   String q=input.trim();if(q.isEmpty()||q.length()>200)throw new Exception("Enter a game name or decimal Xbox Title ID (up to 200 characters).");
   if(q.matches("[0-9]+")){try{long id=Long.parseLong(q);if(id<1||id>4294967295L)throw new Exception();}catch(Exception e){throw new Exception("Enter a Title ID from 1 to 4294967295.");}}

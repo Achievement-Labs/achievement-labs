@@ -1,6 +1,12 @@
 package org.achievementlabs.mobile;
 import org.junit.Test;import static org.junit.Assert.*;import org.json.*;
 public class TitleSearchTests {
+ @Test public void discoveredProgressUsesXboxRowsWithoutMutatingTheProfile()throws Exception{
+  JSONObject found=TitleSearch.direct("7");JSONArray rows=new JSONArray().put(new JSONObject().put("isUnlocked",true)).put(new JSONObject().put("isUnlocked",false));
+  JSONObject updated=TitleSearch.progress(found,rows);assertFalse(found.has("achievement"));
+  assertEquals(1,updated.getJSONObject("achievement").getInt("currentAchievements"));assertEquals(2,updated.getJSONObject("achievement").getInt("totalAchievements"));
+  assertEquals(updated.toString(),TitleSearch.progress(updated,new JSONArray()).toString());
+ }
  @Test public void selectedXboxTitleMustMatchRequestedEdition()throws Exception{
   JSONArray titles=new JSONArray().put(new JSONObject().put("titleId","99")).put(new JSONObject().put("titleId","7"));
   assertEquals("7",Net.selectedTitle(titles,"7").getString("titleId"));
