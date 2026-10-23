@@ -463,6 +463,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     /// <summary>Achievement Labs unlocked a Steam achievement. Returns false if mirroring it failed.</summary>
     public Task<bool> ReportSteamAppUnlockAsync(long appId, string apiName, string name, CancellationToken cancellationToken)
     {
+        if (idleStartedByMirror == appId) { restartIdleAfterSave = true; nextPresenceCheck = DateTimeOffset.Now + TimeSpan.FromSeconds(3); idleRetryAfter = DateTimeOffset.MinValue; }
         var runner = runners.Values.FirstOrDefault(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.SteamToXbox && r.Pair.SteamAppId == appId);
         return runner == null ? Task.FromResult(true) : runner.ReportAppUnlockAsync(apiName, name, cancellationToken);
     }
@@ -872,6 +873,23 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             if (wanted == 0)
                 foreach (var runner in runners.Values.Where(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.XboxToSteam && !r.Pair.ShowInGame))
                     if (await host.IsXboxPresenceInTitleAsync(runner.Pair.XboxTitleId, token)) { wanted = runner.Pair.SteamAppId; why = "Xbox shows you in this game"; break; }
+            if (wanted != 0 && wanted == idleStartedByMirror)
+            {
+                // Keep idling alive: the helper may have exited, or Steam may have ended the game's session (a separate
+                // short connection as the same game, such as a Steam-tab save, closes it on Steam's side).
+                var alive = host.SteamIdleAppId == wanted;
+                if (alive && running == wanted) idleSeenBySteam = true;
+                var lost = !alive || idleSeenBySteam && running != wanted || restartIdleAfterSave;
+                if (!lost || DateTimeOffset.Now < idleRetryAfter) return;
+                var afterSave = restartIdleAfterSave; restartIdleAfterSave = false;
+                idleRetryAfter = DateTimeOffset.Now + TimeSpan.FromSeconds(30);
+                host.StopSteamIdle();
+                await host.StartSteamIdleAsync(wanted, token);
+                Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == wanted)?.Pair,
+                    afterSave ? "Steam save finished · idling restarted so Steam keeps showing you in the game."
+                    : alive ? "Steam stopped showing you in the game · idling restarted." : "The Steam idle helper stopped · idling restarted.");
+                return;
+            }
             if (wanted == idleStartedByMirror) return;
             // Never replace Steam idling another feature started (Steam tab presence).
             if (wanted != 0 && host.SteamIdleAppId is var other && other != 0 && other != idleStartedByMirror && other != wanted)
@@ -884,7 +902,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
                 host.StopSteamIdle();
                 Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == idleStartedByMirror)?.Pair, "Steam idling stopped.");
             }
-            idleStartedByMirror = 0;
+            idleStartedByMirror = 0; idleSeenBySteam = false;
             if (wanted != 0)
             {
                 await host.StartSteamIdleAsync(wanted, token);
@@ -895,6 +913,9 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         catch (OperationCanceledException) { }
         catch (Exception error) { Dispatcher.UIThread.Post(() => Status = "Steam idling couldn't be updated: " + error.Message); }
     }
+
+    private bool idleSeenBySteam, restartIdleAfterSave;
+    private DateTimeOffset idleRetryAfter;
 
     private readonly ConcurrentDictionary<(Guid, string), string> loggedOnce = new();
 
