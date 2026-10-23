@@ -130,6 +130,13 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         if (SelectedPair == null) NewPair();
     }
 
+    /// <summary>The running build, so test builds can't be mistaken for each other.</summary>
+    public static string BuildVersion { get; } = typeof(AchievementMirrorViewModel).Assembly
+        .GetCustomAttributes(typeof(System.Reflection.AssemblyInformationalVersionAttribute), false)
+        .OfType<System.Reflection.AssemblyInformationalVersionAttribute>().FirstOrDefault()?.InformationalVersion.Split('+')[0] ?? "unknown";
+
+    public static string BuildLabel => "Achievement Labs build " + BuildVersion;
+
     public ObservableCollection<MirrorPair> Pairs { get; } = [];
     public ObservableCollection<MirrorRowViewModel> Rows { get; } = [];
     public ObservableCollection<MirrorLogEntry> LogEntries { get; } = [];
@@ -387,7 +394,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             runner.Start(baseline);
             UpdateUnlockStates(pair, pair.Source, baseline);
             _ = RefreshTargetStatesAsync(pair);
-            Log(pair, $"Baseline read from {baselineSource}.");
+            Log(pair, $"Baseline read from {baselineSource} · Achievement Labs build {BuildVersion}.");
             if (pair.Direction == MirrorDirection.SteamToXbox && !sources.ContainsKey((pair.Id, SourceKind.SteamLocal)))
                 Log(pair, "No Steam stats file for this game on this PC yet, so only the Steam Web API is used. It can lag behind by a minute or more.");
             var now = DateTimeOffset.Now;
