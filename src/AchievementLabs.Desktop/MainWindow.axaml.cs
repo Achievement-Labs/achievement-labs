@@ -390,7 +390,7 @@ public partial class MainWindow : Window
     }
     private async void ShowSteam(object? s, RoutedEventArgs e) => await model.RefreshSteamAsync();
     private async void LoadSteam(object? s, RoutedEventArgs e) => await model.LoadSteamAchievementsAsync();
-    private void ShowSteamAchievements(object? s, RoutedEventArgs e) => model.Navigate("SteamAchievements");
+    private async void ShowSteamAchievements(object? s, RoutedEventArgs e) => await model.OpenSteamAchievementsAsync();
     private async void OpenSteamAchievements(object? s, RoutedEventArgs e)
     {
         if (s is Button { Tag: AchievementLabs.Models.SteamGameItem game }) { model.SelectedSteamGame = game; await model.LoadSteamAchievementsAsync(); }

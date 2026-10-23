@@ -51,11 +51,39 @@ public sealed partial class DesktopModel
         finally { Busy(false); }
     }
     private long loadedSteamAppId;
+    private static readonly string lastSteamAppPath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("steam-last-app.txt");
+    private bool lastSteamAppRestored;
+
+    /// <summary>App ID of the last game whose Steam achievements loaded, kept across restarts.</summary>
+    private static long ReadLastSteamApp()
+    {
+        try { return File.Exists(lastSteamAppPath) && long.TryParse(File.ReadAllText(lastSteamAppPath).Trim(), out var id) && id > 0 ? id : 0; }
+        catch { return 0; }
+    }
+
+    private static void SaveLastSteamApp(long id)
+    {
+        try { Directory.CreateDirectory(Path.GetDirectoryName(lastSteamAppPath)!); File.WriteAllText(lastSteamAppPath, id.ToString(System.Globalization.CultureInfo.InvariantCulture)); }
+        catch { /* Convenience only. */ }
+    }
+
+    /// <summary>Opens Steam achievements and, the first time after a restart, reloads the last game.</summary>
+    public async Task OpenSteamAchievementsAsync()
+    {
+        Navigate("SteamAchievements");
+        if (lastSteamAppRestored || SteamAchievements.Length > 0) return;
+        lastSteamAppRestored = true;
+        var last = ReadLastSteamApp();
+        if (last == 0) return;
+        if (SteamAppId.Length == 0) SteamAppId = last.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        if (SteamAppId == last.ToString(System.Globalization.CultureInfo.InvariantCulture)) await LoadSteamAchievementsAsync();
+    }
     public async Task LoadSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
         SteamAchievements = []; loadedSteamAppId = 0;
         var loaded = await Task.Run(() => steam.LoadAchievementsAsync(id, lifetime.Token), lifetime.Token);
         SteamAchievements = loaded.ToArray(); loadedSteamAppId = id; SteamStatus = $"Loaded {loaded.Count} achievements for app {id}."; Navigate("SteamAchievements");
+        if (loaded.Count > 0) { SaveLastSteamApp(id); lastSteamAppRestored = true; }
     });
     public async Task StoreSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
