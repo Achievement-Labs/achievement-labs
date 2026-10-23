@@ -32,8 +32,17 @@ public sealed partial class MirrorRowViewModel : ObservableObject
     public string SourceName => Direction == MirrorDirection.SteamToXbox ? Match.SteamName : Match.XboxName;
     [ObservableProperty] private MirrorOption? selectedOption;
     [ObservableProperty] private string lastMirrored = "";
+    [ObservableProperty] private bool steamUnlocked;
+    [ObservableProperty] private bool xboxUnlocked;
     public bool NeedsConfirm => Match.State == MirrorMatchState.Suggested;
-    public string StatusLabel => LastMirrored.Length > 0 ? LastMirrored : Match.State switch
+    private bool Paired => Match.State is MirrorMatchState.Matched or MirrorMatchState.Confirmed;
+    private string Unlocks => SteamUnlocked && XboxUnlocked ? "both" : XboxUnlocked ? "xbox" : SteamUnlocked ? "steam" : "";
+    public string StatusLabel => Paired && Unlocks.Length > 0 ? Unlocks switch
+    {
+        "both" => "Unlocked on both",
+        "xbox" => "Unlocked on Xbox",
+        _ => "Unlocked on Steam"
+    } : Match.State switch
     {
         MirrorMatchState.Matched => "Matched",
         MirrorMatchState.Confirmed => "Confirmed",
@@ -41,18 +50,21 @@ public sealed partial class MirrorRowViewModel : ObservableObject
         MirrorMatchState.Ignored => "Not mirrored",
         _ => "Needs review"
     };
-    public string StatusBackground => LastMirrored.Length > 0 ? "#1E3348" : Match.State switch
+    // Xbox green, Steam's dark navy-black, gold for both.
+    public string StatusBackground => Paired && Unlocks.Length > 0 ? Unlocks switch { "both" => "#C9A227", "xbox" => "#107C10", _ => "#171A21" } : Match.State switch
     {
         MirrorMatchState.Matched or MirrorMatchState.Confirmed => "#21352E",
         MirrorMatchState.Ignored => "#2A303B",
         _ => "#40331A"
     };
-    public string StatusForeground => LastMirrored.Length > 0 ? "#8EC1F0" : Match.State switch
+    public string StatusForeground => Paired && Unlocks.Length > 0 ? Unlocks switch { "both" => "#241B00", "xbox" => "#FFFFFF", _ => "#C7D5E0" } : Match.State switch
     {
         MirrorMatchState.Matched or MirrorMatchState.Confirmed => "#91CFB1",
         MirrorMatchState.Ignored => "#B9BEC8",
         _ => "#F0C674"
     };
+    public string StatusBorder => Paired && Unlocks == "steam" ? "#3D4450" : "Transparent";
+    public string? StatusTip => LastMirrored.Length > 0 ? LastMirrored : null;
 
     partial void OnSelectedOptionChanged(MirrorOption? value)
     {
@@ -63,6 +75,8 @@ public sealed partial class MirrorRowViewModel : ObservableObject
         Refresh(); changed();
     }
     partial void OnLastMirroredChanged(string value) => Refresh();
+    partial void OnSteamUnlockedChanged(bool value) => Refresh();
+    partial void OnXboxUnlockedChanged(bool value) => Refresh();
 
     [RelayCommand]
     private void Confirm()
@@ -76,6 +90,7 @@ public sealed partial class MirrorRowViewModel : ObservableObject
     {
         OnPropertyChanged(nameof(NeedsConfirm)); OnPropertyChanged(nameof(StatusLabel));
         OnPropertyChanged(nameof(StatusBackground)); OnPropertyChanged(nameof(StatusForeground));
+        OnPropertyChanged(nameof(StatusBorder)); OnPropertyChanged(nameof(StatusTip));
     }
 }
 
@@ -127,6 +142,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     [ObservableProperty] private string apiKeyInput = "";
     [ObservableProperty] private bool isSteamToXbox = true;
     [ObservableProperty] private bool mirrorAppUnlocks;
+    [ObservableProperty] private bool showInGame = true;
     [ObservableProperty] private string status = "Pair a Steam game with an Xbox title, then scan to match achievements.";
     [ObservableProperty] private bool isScanning;
     [ObservableProperty] private string sourceAlreadyUnlockedText = "";
@@ -197,6 +213,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             XboxTitleIdText = value.XboxTitleId;
             IsSteamToXbox = value.Direction == MirrorDirection.SteamToXbox;
             MirrorAppUnlocks = value.MirrorAppUnlocks;
+            ShowInGame = value.ShowInGame;
         }
         SteamIdText = value != null && value.SteamId.Length > 0 ? value.SteamId : host.LocalSteamId;
         SourceAlreadyUnlockedText = "";
@@ -215,6 +232,13 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         Save(); RebuildRows();
         Status = "Direction changed. Scan again to match achievements for this direction.";
     }
+    partial void OnShowInGameChanged(bool value)
+    {
+        if (SelectedPair == null || SelectedPair.ShowInGame == value) return;
+        SelectedPair.ShowInGame = value; Save();
+        nextPresenceCheck = DateTimeOffset.MinValue; // Apply right away if mirroring is running.
+    }
+
     partial void OnMirrorAppUnlocksChanged(bool value)
     {
         if (SelectedPair == null || SelectedPair.MirrorAppUnlocks == value) return;
@@ -302,8 +326,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             pair.SteamName = host.SteamAppName(appId) ?? pair.SteamName;
             if (xboxName.Length > 0) pair.XboxName = xboxName;
             pair.Matches = MirrorMatcher.Build(pair.Direction, steamList, xboxList, pair.Matches);
-            pair.SteamList = steamList.Select(a => new MirrorNamedId(a.Id, a.Name)).ToList();
-            pair.XboxList = xboxList.Select(a => new MirrorNamedId(a.Id, a.Name)).ToList();
+            pair.SteamList = steamList.Select(a => new MirrorNamedId(a.Id, a.Name, a.Unlocked)).ToList();
+            pair.XboxList = xboxList.Select(a => new MirrorNamedId(a.Id, a.Name, a.Unlocked)).ToList();
             pair.LastScanned = DateTimeOffset.Now;
             var source = pair.Direction == MirrorDirection.SteamToXbox ? steamList : xboxList;
             var already = source.Count(a => a.Unlocked);
@@ -361,6 +385,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             }
             var runner = runners.GetOrAdd(pair.Id, _ => CreateRunner(pair));
             runner.Start(baseline);
+            UpdateUnlockStates(pair, pair.Source, baseline);
+            _ = RefreshTargetStatesAsync(pair);
             Log(pair, $"Baseline read from {baselineSource}.");
             if (pair.Direction == MirrorDirection.SteamToXbox && !sources.ContainsKey((pair.Id, SourceKind.SteamLocal)))
                 Log(pair, "No Steam stats file for this game on this PC yet, so only the Steam Web API is used. It can lag behind by a minute or more.");
@@ -465,9 +491,10 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         };
         runner.Mirrored += (sourceId, at) => Dispatcher.UIThread.Post(() =>
         {
+            if (pair.FindBySource(sourceId)?.TargetId(pair.Direction) is { Length: > 0 } targetId) MarkUnlocked(pair, pair.Target, targetId);
             if (SelectedPair != pair) return;
             var row = Rows.FirstOrDefault(r => r.Match.SourceId(pair.Direction) == sourceId);
-            if (row != null) row.LastMirrored = $"To {pair.Target} {at.LocalDateTime:HH:mm}";
+            if (row != null) row.LastMirrored = $"Mirrored to {pair.Target} at {at.LocalDateTime:HH:mm:ss}";
         });
         runner.Stopped += (title, message) => { host.Alert(title, message); Dispatcher.UIThread.Post(RefreshRunnerState); };
         return runner;
@@ -538,6 +565,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     {
         foreach (var key in sources.Keys.Where(k => k.Item1 == pair.Id).ToArray()) sources.TryRemove(key, out _);
         foreach (var key in nextPoll.Keys.Where(k => k.Item1 == pair.Id).ToArray()) nextPoll.TryRemove(key, out _);
+        foreach (var key in loggedOnce.Keys.Where(k => k.Item1 == pair.Id).ToArray()) loggedOnce.TryRemove(key, out _);
     }
 
     private SourceState SetBaseline(MirrorPair pair, SourceKind kind, IReadOnlyList<MirrorAchievement> list)
@@ -563,6 +591,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         try
         {
             var list = await ReadSourceAsync(pair, kind, token);
+            // The status column follows this PC's stats file when there is one; the Web API lags behind it.
+            if (kind != SourceKind.SteamWeb || !sources.ContainsKey((pair.Id, SourceKind.SteamLocal))) UpdateUnlockStates(pair, pair.Source, list);
             if (!sources.TryGetValue(key, out var state))
             {
                 // First successful read of this source (e.g. the local file appeared later): it becomes its baseline.
@@ -697,9 +727,12 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     private long webPlayingAppId;
     private string? playingSource;
 
+    /// <summary>Steam → Xbox pairs show the game on Xbox; with "Show me in the game" on, Xbox → Steam pairs do too.</summary>
+    private static bool UsesXboxPresence(MirrorPair pair) => pair.Direction == MirrorDirection.SteamToXbox || pair.ShowInGame;
+
     private string? PresenceConflictMessage(MirrorPair pair) =>
-        pair.Direction == MirrorDirection.SteamToXbox && host.XboxPresenceConflict(pair.XboxTitleId) is { } other
-            ? $"{other} Achievement Mirror shows you in {pair.DisplayName} on Xbox while you play on Steam, and Xbox can only show one game at a time. Stop that first, then {(runners.TryGetValue(pair.Id, out var r) && r.Status == MirrorStatus.Stopped ? "resume" : "start")} mirroring."
+        UsesXboxPresence(pair) && host.XboxPresenceConflict(pair.XboxTitleId) is { } other
+            ? $"{other} Achievement Mirror needs to show you in {pair.DisplayName} on Xbox, and Xbox can only show one game at a time. Stop that first, then {(runners.TryGetValue(pair.Id, out var r) && r.Status == MirrorStatus.Stopped ? "resume" : "start")} mirroring."
             : null;
 
     /// <summary>Before each Steam → Xbox unlock: make sure Xbox shows you in the game, if only briefly.</summary>
@@ -729,7 +762,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         if (!await presenceGate.WaitAsync(0, token)) return;
         try
         {
-            var monitoring = runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && r.Pair.Direction == MirrorDirection.SteamToXbox).ToArray();
+            var monitoring = runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && UsesXboxPresence(r.Pair)).ToArray();
             foreach (var runner in monitoring)
                 if (PresenceConflictMessage(runner.Pair) is { } conflict) runner.Halt(conflict);
             monitoring = monitoring.Where(r => r.Status == MirrorStatus.Monitoring).ToArray();
@@ -751,6 +784,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             foreach (var runner in monitoring)
             {
                 var appId = runner.Pair.SteamAppId;
+                if (runner.Pair.ShowInGame) { wanted = runner; reason = "Mirroring is on"; break; }
                 if (local == appId) { wanted = runner; reason = "Steam on this PC shows you playing"; break; }
                 if (webPlayingAppId == appId) { wanted = runner; reason = "Steam Web API shows you playing (another device, or Steam hasn't caught up after you quit)"; break; }
                 if (presenceBurstUntil.TryGetValue(runner.Pair.Id, out var until) && until > now) { wanted = runner; reason = null; break; }
@@ -762,7 +796,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
                 if (current != null)
                 {
                     host.StopMirrorPresence();
-                    Log(runners.Values.FirstOrDefault(r => r.Pair.XboxTitleId == current)?.Pair, "Steam no longer shows you playing · Xbox presence stopped.");
+                    Log(runners.Values.FirstOrDefault(r => r.Pair.XboxTitleId == current)?.Pair,
+                        runners.Values.Any(r => r.Pair.XboxTitleId == current && r.Status == MirrorStatus.Monitoring) ? "Steam no longer shows you playing · Xbox presence stopped." : "Xbox presence stopped.");
                 }
                 playingSource = null;
                 return;
@@ -795,27 +830,49 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     {
         try
         {
-            long wanted = 0;
-            foreach (var runner in runners.Values.Where(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.XboxToSteam))
+            long wanted = 0; string why = "";
+            var running = host.SteamRunningAppId;
+            foreach (var runner in runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && r.Pair.ShowInGame))
             {
-                if (await host.IsXboxPresenceInTitleAsync(runner.Pair.XboxTitleId, token)) { wanted = runner.Pair.SteamAppId; break; }
+                // The real game (or SAM) already shows you playing on Steam; a second session isn't needed.
+                if (running == runner.Pair.SteamAppId && idleStartedByMirror != runner.Pair.SteamAppId) { LogOnce(runner.Pair, "realgame", "Steam already shows you playing this game · not idling it."); continue; }
+                wanted = runner.Pair.SteamAppId; why = "Mirroring is on"; break;
             }
+            if (wanted == 0)
+                foreach (var runner in runners.Values.Where(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.XboxToSteam && !r.Pair.ShowInGame))
+                    if (await host.IsXboxPresenceInTitleAsync(runner.Pair.XboxTitleId, token)) { wanted = runner.Pair.SteamAppId; why = "Xbox shows you in this game"; break; }
             if (wanted == idleStartedByMirror) return;
+            // Never replace Steam idling another feature started (Steam tab presence).
+            if (wanted != 0 && host.SteamIdleAppId is var other && other != 0 && other != idleStartedByMirror && other != wanted)
+            {
+                LogOnce(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == wanted)?.Pair, "steamidle", $"Steam presence for app {other} is already running in Achievement Labs · not idling this game. Stop it to let the Mirror idle.");
+                return;
+            }
             if (idleStartedByMirror != 0 && host.SteamIdleAppId == idleStartedByMirror)
             {
                 host.StopSteamIdle();
-                Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == idleStartedByMirror)?.Pair, "Xbox no longer shows this game · Steam idling stopped.");
+                Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == idleStartedByMirror)?.Pair, "Steam idling stopped.");
             }
             idleStartedByMirror = 0;
             if (wanted != 0)
             {
                 await host.StartSteamIdleAsync(wanted, token);
                 idleStartedByMirror = wanted;
-                Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == wanted)?.Pair, "Xbox shows you in this game · Steam idling started.");
+                Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == wanted)?.Pair, $"{why} · idling the game on Steam.");
             }
         }
         catch (OperationCanceledException) { }
         catch (Exception error) { Dispatcher.UIThread.Post(() => Status = "Steam idling couldn't be updated: " + error.Message); }
+    }
+
+    private readonly ConcurrentDictionary<(Guid, string), string> loggedOnce = new();
+
+    /// <summary>Logs a recurring condition only when its message changes.</summary>
+    private void LogOnce(MirrorPair? pair, string key, string message)
+    {
+        if (pair == null || loggedOnce.TryGetValue((pair.Id, key), out var previous) && previous == message) return;
+        loggedOnce[(pair.Id, key)] = message;
+        Log(pair, message);
     }
 
     private void Log(MirrorPair? pair, string message, bool isError = false)
@@ -842,10 +899,60 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         {
             var options = TargetOptions(pair);
             foreach (var match in pair.SourceRows) Rows.Add(new MirrorRowViewModel(match, pair.Direction, options, OnRowChanged));
+            ApplyUnlockStates(pair);
         }
         LogEntries.Clear();
         if (SelectedRunner is { } runner) foreach (var entry in runner.Log.Reverse()) LogEntries.Add(entry);
         OnPropertyChanged(nameof(MatchSummary));
+    }
+
+    /// <summary>Stores which achievements are unlocked on one platform and refreshes the status column.</summary>
+    private void UpdateUnlockStates(MirrorPair pair, MirrorPlatform platform, IReadOnlyList<MirrorAchievement> list)
+    {
+        var unlocked = list.Where(a => a.Unlocked).Select(a => a.Id).ToHashSet(StringComparer.Ordinal);
+        Dispatcher.UIThread.Post(() =>
+        {
+            var current = platform == MirrorPlatform.Steam ? pair.SteamList : pair.XboxList;
+            var next = current.Count == 0 ? list.Select(a => new MirrorNamedId(a.Id, a.Name, a.Unlocked)).ToList()
+                : current.Select(a => a with { Unlocked = unlocked.Contains(a.Id) }).ToList();
+            if (current.Count > 0 && current.SequenceEqual(next)) return;
+            if (platform == MirrorPlatform.Steam) pair.SteamList = next; else pair.XboxList = next;
+            Save();
+            if (SelectedPair == pair) ApplyUnlockStates(pair);
+        });
+    }
+
+    private void MarkUnlocked(MirrorPair pair, MirrorPlatform platform, string id)
+    {
+        var list = platform == MirrorPlatform.Steam ? pair.SteamList : pair.XboxList;
+        var next = list.Select(a => a.Id == id ? a with { Unlocked = true } : a).ToList();
+        if (platform == MirrorPlatform.Steam) pair.SteamList = next; else pair.XboxList = next;
+        Save();
+        if (SelectedPair == pair) ApplyUnlockStates(pair);
+    }
+
+    /// <summary>Reads the target platform once so the status column shows what is already unlocked there.</summary>
+    private async Task RefreshTargetStatesAsync(MirrorPair pair)
+    {
+        try
+        {
+            var list = pair.Target == MirrorPlatform.Xbox
+                ? (await host.ReadXboxAsync(pair.XboxTitleId, lifetime.Token)).Achievements
+                : await host.ReadSteamLocalAsync(pair.SteamAppId, lifetime.Token);
+            UpdateUnlockStates(pair, pair.Target, list);
+        }
+        catch { /* Status only; mirroring verifies the target itself. */ }
+    }
+
+    private void ApplyUnlockStates(MirrorPair pair)
+    {
+        var steam = pair.SteamList.Where(a => a.Unlocked).Select(a => a.Id).ToHashSet(StringComparer.Ordinal);
+        var xbox = pair.XboxList.Where(a => a.Unlocked).Select(a => a.Id).ToHashSet(StringComparer.Ordinal);
+        foreach (var row in Rows)
+        {
+            row.SteamUnlocked = row.Match.SteamId.Length > 0 && steam.Contains(row.Match.SteamId);
+            row.XboxUnlocked = !string.IsNullOrEmpty(row.Match.XboxId) && xbox.Contains(row.Match.XboxId);
+        }
     }
 
     private static List<MirrorOption> TargetOptions(MirrorPair pair)

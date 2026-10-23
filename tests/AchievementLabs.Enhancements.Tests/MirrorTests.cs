@@ -235,11 +235,11 @@ public static class MirrorTests
         try
         {
             var (pair, _, _) = Setup(appUnlocks: true);
-            pair.Direction = MirrorDirection.XboxToSteam; pair.SteamList = [new("ACH_1", "First Steps")];
+            pair.Direction = MirrorDirection.XboxToSteam; pair.SteamList = [new("ACH_1", "First Steps", true)];
             AchievementLabs.Core.MirrorStore.SavePairs([pair], path);
             var loaded = AchievementLabs.Core.MirrorStore.LoadPairs(path).Single();
             Assert(loaded.Id == pair.Id && loaded.Direction == MirrorDirection.XboxToSteam && loaded.MirrorAppUnlocks && loaded.Matches.Count == pair.Matches.Count
-                && loaded.Matches[3].State == MirrorMatchState.Ignored && loaded.SteamList.Single().Name == "First Steps", "Pairs round-trip");
+                && loaded.Matches[3].State == MirrorMatchState.Ignored && loaded.SteamList.Single().Name == "First Steps" && loaded.SteamList.Single().Unlocked && loaded.ShowInGame, "Pairs round-trip, unlock state and presence setting kept");
             Assert(File.ReadAllText(path).Contains("\"SteamToXbox\"") == false && File.ReadAllText(path).Contains("XboxToSteam"), "Enums saved as readable names");
         }
         finally { try { Directory.Delete(Path.GetDirectoryName(path)!, true); } catch { } }

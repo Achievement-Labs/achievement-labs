@@ -49,7 +49,7 @@ public sealed class MirrorMatch
     public string? TargetId(MirrorDirection direction) => direction == MirrorDirection.SteamToXbox ? XboxId : SteamId;
 }
 
-public sealed record MirrorNamedId(string Id, string Name);
+public sealed record MirrorNamedId(string Id, string Name, bool Unlocked = false);
 
 public sealed record MirrorLogEntry(DateTimeOffset At, string Message, bool IsError = false)
 {
@@ -75,6 +75,11 @@ public sealed class MirrorPair
     /// makes on the source platform are skipped, so experimenting can't cause a permanent Xbox unlock.
     /// </summary>
     public bool MirrorAppUnlocks { get; set; }
+    /// <summary>
+    /// "Show me in the game on Steam and Xbox while mirroring": idle the game on Steam and show it on Xbox for the
+    /// whole session. Off: presence only while you actually play (turn off when playing on a Steam Deck).
+    /// </summary>
+    public bool ShowInGame { get; set; } = true;
     public List<MirrorMatch> Matches { get; set; } = [];
     /// <summary>Every achievement each side returned at the last scan, so any of them can be picked by hand.</summary>
     public List<MirrorNamedId> SteamList { get; set; } = [];
