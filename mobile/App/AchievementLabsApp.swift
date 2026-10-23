@@ -56,7 +56,7 @@ struct LibraryView: View {
     @State private var findingGames = false
     @AppStorage("librarySort") private var sort = "Last played"
     var visible: [Game] {
-        let filtered = m.games.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || $0.id.contains(search) }
+        let filtered = m.games.filter { TitleSearch.matches($0.name,query:search) || $0.id.contains(search) }
         return filtered.sorted { a,b in
             if sort == "Last played", a.lastPlayed != b.lastPlayed { return a.lastPlayed > b.lastPlayed }
             let comparison = a.name.localizedStandardCompare(b.name)

@@ -18,6 +18,7 @@ static class Test
  public static void Main(string[] args)
  {
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}
@@ -44,6 +45,12 @@ static class Test
    AppBuilder.Configure(()=> (Application)Activator.CreateInstance(appType)!).UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();
    var window=(Window)Activator.CreateInstance(assembly.GetTypes().Single(t=>t.Name=="MainWindow"))!;
    var saveAll = Desc<Button>(window).Single(b=>b.Name=="SaveAllSettings");
+   var platformFilters = Desc<ItemsControl>(window).Single(c=>c.Name=="TitleSearchPlatformFilters");
+   Assert(platformFilters.Items.Count==9,"Nine title-search platforms available");
+   Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsNone"));
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>!p.Selected),"None clears all platform toggles");
+   Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsAll"));
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>p.Selected),"All restores platform toggles");
    Assert(saveAll.Parent is Grid settingsPanel && Grid.GetRow(saveAll)==0 && settingsPanel.Children.OfType<TabControl>().Any(t=>Grid.GetRow(t)==1),"Save all settings remains above the category tabs");
    Assert(Desc<CheckBox>(window).Any(c=>Equals(c.Content,"Remember window size and position")),"Window size setting present");
    Assert(Desc<CheckBox>(window).Any(c=>Equals(c.Content,"Always open maximized")),"Maximize setting present");

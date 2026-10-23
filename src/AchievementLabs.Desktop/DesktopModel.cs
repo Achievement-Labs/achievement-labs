@@ -79,7 +79,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     {
         get
         {
-            var filtered = CombinedXboxGames.Where(g => MatchesPlatform(g, PlatformFilter) && (g.Name.Contains(LibrarySearch, StringComparison.OrdinalIgnoreCase) || g.Id == LibrarySearch.Trim()));
+            var filtered = CombinedXboxGames.Where(g => MatchesPlatform(g, PlatformFilter) && (AchievementLabs.Core.TitleSearchText.Matches(g.Name, LibrarySearch) || g.Id == LibrarySearch.Trim()));
             return LibrarySort switch
             {
                 "Z-A" => filtered.OrderByDescending(g => g.Name, StringComparer.OrdinalIgnoreCase).ThenBy(g => g.Id),
