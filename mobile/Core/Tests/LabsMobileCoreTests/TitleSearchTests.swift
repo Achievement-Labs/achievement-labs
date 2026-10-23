@@ -8,7 +8,7 @@ final class TitleSearchTests: XCTestCase {
         for value in ["0","4294967296","",String(repeating:"x",count:201)] { XCTAssertThrowsError(try TitleSearch.direct(value)) }
         XCTAssertNil(try TitleSearch.direct("Halo"))
         let url = try TitleSearch.url("Halo & Gears/测试")
-        XCTAssertEqual(url.host,"dbox.tools"); XCTAssertEqual(url.path,"/api/title_ids/")
+        XCTAssertEqual(url.host,"dbox.tools"); XCTAssertTrue(url.absoluteString.hasPrefix("https://dbox.tools/api/title_ids/?"))
         XCTAssertEqual(URLComponents(url:url,resolvingAgainstBaseURL:false)?.queryItems?.first?.value,"Halo & Gears/测试")
     }
     func testPublicHexIDsPlatformsDuplicatesAndNoFakeProgress() throws {
