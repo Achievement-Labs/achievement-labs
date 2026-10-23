@@ -39,6 +39,7 @@ namespace AchievementLabs.Desktop.Workflows
             var temporary = StatePath + ".tmp";
             File.WriteAllText(temporary, JsonConvert.SerializeObject(_state, Formatting.Indented));
             File.Move(temporary, StatePath, true);
+            SaveGameQueueSnapshot(_state);
         }
 
         private AutoUnlockState? LoadState() => File.Exists(StatePath)
@@ -212,6 +213,7 @@ namespace AchievementLabs.Desktop.Workflows
 
         public void OnNavigatedTo()
         {
+            RefreshSavedGameQueues();
             if (!IsInitialized && account.InitComplete)
                 InitializeViewModel();
         }
@@ -1079,3 +1081,4 @@ namespace AchievementLabs.Desktop.Workflows
         #endregion
     }
 }
+

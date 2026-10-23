@@ -12,6 +12,7 @@ class Program
     public static void Main(string[] args)
     {
         if (args.Length == 2 && args[0] == "--apply-update") { Environment.ExitCode = AppUpdater.Apply(args[1]); return; }
+        if (args.Contains("--visual-preview")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
         BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
     }
 

@@ -14,6 +14,7 @@ public sealed partial class DesktopModel
     {
         if (!CanOpenGameSpoofer || SelectedGame == null) return;
         PresenceTitleId = SelectedGame.Id; OpenSpoofer();
+        Presentation.SpooferTitleLoader.Begin(this);
     }
     private async Task LoadGamePlaytimeAsync(Game game, int version)
     {

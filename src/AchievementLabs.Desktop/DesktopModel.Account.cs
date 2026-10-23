@@ -138,6 +138,23 @@ public sealed partial class DesktopModel
         }
         catch { savedEventsToken = ""; EventTokenStatus = "The saved event token could not be read."; }
     }
+    private bool acquiringAccountEventToken;
+    public bool CanAcquireAccountEventToken => session != null && !acquiringAccountEventToken;
+    public async Task AcquireAccountEventTokenAsync(Avalonia.Controls.Window owner)
+    {
+        if (!CanAcquireAccountEventToken || session == null) return;
+        var xuid=session.Xuid;var generation=sessionGeneration;
+        acquiringAccountEventToken=true;Changed(nameof(CanAcquireAccountEventToken));
+        EventTokenStatus="Requesting an event token for the connected Xbox account…";
+        try {
+            var grant=await WamEventTokens.AcquireAsync(owner,xuid,lifetime.Token);
+            if(session?.Xuid!=xuid || sessionGeneration!=generation) { EventTokenStatus="Account changed; retrieved token discarded.";return; }
+            if(grant==null) { EventTokenStatus="No matching event token was retrieved. You can paste a current token manually.";return; }
+            EventTokenInput=grant.Value;await SaveEventTokenAsync();
+        } catch(OperationCanceledException) { }
+        catch { EventTokenStatus="Could not retrieve a matching event token. Paste a current token manually."; }
+        finally { acquiringAccountEventToken=false;Changed(nameof(CanAcquireAccountEventToken)); }
+    }
     public async Task SaveEventTokenAsync()
     {
         if (!EventTokenValidator.TryNormalize(EventTokenInput, out var value)) { EventTokenStatus = "The event token format could not be recognized. Copy the complete x:XBL3.0 value."; return; }

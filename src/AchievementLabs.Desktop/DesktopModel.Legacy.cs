@@ -78,8 +78,8 @@ public sealed partial class DesktopModel
     public bool CanEditXbox360UnlockTime => Xbox360UnlockMode == "Unlocked Online";
     public string Xbox360UnlockTimeText { get => xbox360UnlockTimeText; set { xbox360UnlockTimeText = value; Changed(); } }
     public int PendingXbox360EditCount => pendingXbox360Edits.Count;
-    public bool CanModifyXbox360Profile => true;
-    public string Xbox360SigningStatus => "Profile editing uses the existing upstream signing implementation.";
+    public bool CanModifyXbox360Profile => AchievementLabs.Services.Xbox360.Xbox360ConSigner.SigningAvailable;
+    public string Xbox360SigningStatus => "Profile browsing and backups are available. Achievement edits and GPD addition are disabled because the upstream public source omits its signing dependency.";
     public bool CanSaveXbox360Edits => CanModifyXbox360Profile && pendingXbox360Edits.Count > 0;
     public bool CanInjectXbox360Profile => !string.IsNullOrWhiteSpace(loadedXbox360Profile) && pendingXbox360Edits.Count == 0;
     public string ProfilesDirectory => profiles.ProfilesDirectory;

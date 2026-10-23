@@ -18,8 +18,8 @@ public sealed partial class DesktopModel
     public bool WindowsNotificationsEnabled { get => windowsNotificationsEnabled; set { windowsNotificationsEnabled = value; Changed(); } }
     public bool NotifySpooferStops { get => notifySpooferStops; set { notifySpooferStops = value; Changed(); } }
     private bool stopAutoUnlockOnSpoofFailure, notifyAutoUnlockCompletion = true;
-    public bool StopAutoUnlockOnSpoofFailure { get => stopAutoUnlockOnSpoofFailure; set { stopAutoUnlockOnSpoofFailure = value; Changed(); } }
-    public bool NotifyAutoUnlockCompletion { get => notifyAutoUnlockCompletion; set { notifyAutoUnlockCompletion = value; Changed(); } }
+    public bool StopAutoUnlockOnSpoofFailure { get => stopAutoUnlockOnSpoofFailure; set { stopAutoUnlockOnSpoofFailure = value; Changed(); SaveAutoUnlockPreferences(); } }
+    public bool NotifyAutoUnlockCompletion { get => notifyAutoUnlockCompletion; set { notifyAutoUnlockCompletion = value; Changed(); SaveAutoUnlockPreferences(); } }
     public Action<string>? AutoUnlockCompleted { get; set; }
     public Action<string, string>? WindowsNotification { get; set; }
     public Action<string>? SpooferFailure { get; set; }
@@ -55,6 +55,7 @@ public sealed partial class DesktopModel
             if (AutoLaunchXboxApp) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(@"shell:appsFolder\Microsoft.GamingApp_8wekyb3d8bbwe!Microsoft.Xbox.App") { UseShellExecute = true, WindowStyle = LaunchXboxAppHidden ? System.Diagnostics.ProcessWindowStyle.Hidden : System.Diagnostics.ProcessWindowStyle.Normal }); }
         catch (OperationCanceledException) { }
         catch { Notice = "Native settings could not be read. Defaults are in use; save only after reviewing them."; }
+        LoadAutoUnlockPreferences();
     }
     public async Task SavePreferencesAsync()
     {
