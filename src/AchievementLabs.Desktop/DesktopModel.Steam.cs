@@ -7,7 +7,7 @@ public sealed partial class DesktopModel
     private SteamGameItem[] steamGames = [];
     private SteamAchievementItem[] steamAchievements = [];
     private SteamGameItem? selectedSteamGame;
-    private string steamSearch = "", steamAppId = "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
+    private string steamSearch = "", steamAppId = ReadLastSteamApp() is var lastApp and > 0 ? lastApp.ToString(System.Globalization.CultureInfo.InvariantCulture) : "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
     private string? steamAvatarUrl;
     public bool IsSteam => page is "SteamLibrary" or "SteamAchievements" or "SteamQueue";
     public bool IsSteamLibrary => page == "SteamLibrary";
@@ -28,6 +28,11 @@ public sealed partial class DesktopModel
     {
         try { ApplySteamProfile(steam.GetProfileSummary()); }
         catch { SteamProfileName = "Steam unavailable"; SteamLevel = "Unknown"; SteamAvatarUrl = null; }
+    }
+    public async Task RefreshSteamProfileOnStartupAsync()
+    {
+        try { ApplySteamProfile(await Task.Run(steam.GetProfileSummary, lifetime.Token)); }
+        catch { /* Keep the placeholder; clicking Home retries. */ }
     }
     public async Task RefreshHomeProfilesAsync()
     {
@@ -67,16 +72,23 @@ public sealed partial class DesktopModel
         catch { /* Convenience only. */ }
     }
 
-    /// <summary>Opens Steam achievements and, the first time after a restart, reloads the last game.</summary>
-    public async Task OpenSteamAchievementsAsync()
+    public Task OpenSteamAchievementsAsync() { Navigate("SteamAchievements"); return Task.CompletedTask; }
+
+    /// <summary>
+    /// The first time the Steam achievements page is shown after a restart (by any route), reload the last game.
+    /// Waits for startup work to finish instead of skipping, since loading is refused while the app is busy.
+    /// </summary>
+    private async Task RestoreLastSteamGameAsync()
     {
-        Navigate("SteamAchievements");
         if (lastSteamAppRestored || SteamAchievements.Length > 0) return;
         lastSteamAppRestored = true;
         var last = ReadLastSteamApp();
         if (last == 0) return;
-        if (SteamAppId.Length == 0) SteamAppId = last.ToString(System.Globalization.CultureInfo.InvariantCulture);
-        if (SteamAppId == last.ToString(System.Globalization.CultureInfo.InvariantCulture)) await LoadSteamAchievementsAsync();
+        var text = last.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        if (SteamAppId.Length == 0) SteamAppId = text;
+        if (SteamAppId != text) return;
+        for (var i = 0; i < 120 && !CanInteract && !lifetime.IsCancellationRequested; i++) await Task.Delay(250);
+        if (page == "SteamAchievements" && SteamAchievements.Length == 0 && SteamAppId == text) await LoadSteamAchievementsAsync();
     }
     public async Task LoadSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {

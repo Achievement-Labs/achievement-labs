@@ -176,6 +176,7 @@ public sealed class SteamAchievementService : ISteamAchievementService
         EnrichGameNamesFromSteamStore(games, fetchMissing: false);
         EnrichMissingGameNamesFromSteamAppList(games);
         ScrubBadSteamNames(games);
+        EnrichGameNamesFromSchemas(games, steamPath);
 
         return games.Values
             .OrderBy(game => game.DisplayName, StringComparer.OrdinalIgnoreCase)
@@ -1112,6 +1113,52 @@ public sealed class SteamAchievementService : ISteamAchievementService
 
         return false;
     }
+
+    /// <summary>
+    /// Fills names still shown as "App 123" from the game's local achievement schema, which carries its name
+    /// ("gamename"). Works offline; results are cached by file time so the library stays fast.
+    /// </summary>
+    private static void EnrichGameNamesFromSchemas(Dictionary<long, SteamGameItem> games, string steamPath)
+    {
+        var cachePath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("steam-schema-names.json");
+        Dictionary<string, SchemaNameCacheEntry> cache;
+        try { cache = File.Exists(cachePath) ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, SchemaNameCacheEntry>>(File.ReadAllText(cachePath)) ?? [] : []; }
+        catch { cache = []; }
+        var changed = false;
+        foreach (var pair in games.ToList())
+        {
+            if (!string.Equals(pair.Value.Name, $"App {pair.Key.ToString(CultureInfo.InvariantCulture)}", StringComparison.Ordinal) && !string.IsNullOrWhiteSpace(pair.Value.Name))
+                continue;
+            var schemaPath = GetSchemaPath(steamPath, pair.Key);
+            if (!File.Exists(schemaPath)) continue;
+            var key = pair.Key.ToString(CultureInfo.InvariantCulture);
+            var stamp = File.GetLastWriteTimeUtc(schemaPath).Ticks;
+            string name;
+            if (cache.TryGetValue(key, out var hit) && hit.Ticks == stamp) name = hit.Name;
+            else
+            {
+                try
+                {
+                    var root = AchievementLabs.Mirror.SteamLocalStats.KeyValues.Parse(File.ReadAllBytes(schemaPath));
+                    var game = root.Child(key) ?? root.Children.FirstOrDefault();
+                    name = game?.Child("gamename")?.AsString()?.Trim() ?? "";
+                }
+                catch { name = ""; }
+                cache[key] = new SchemaNameCacheEntry(stamp, name);
+                changed = true;
+            }
+            if (name.Length > 0 && !IsLikelyBadSteamName(name)) games[pair.Key] = CopySteamGame(pair.Value, name);
+        }
+        if (!changed) return;
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(cachePath)!);
+            File.WriteAllText(cachePath, System.Text.Json.JsonSerializer.Serialize(cache));
+        }
+        catch { /* Cache only. */ }
+    }
+
+    private sealed record SchemaNameCacheEntry(long Ticks, string Name);
 
     private static void ScrubBadSteamNames(Dictionary<long, SteamGameItem> games)
     {

@@ -85,6 +85,8 @@ public partial class MainWindow : Window
         {
             // Headless regression tests must never attach to a real account.
             if (offlineChecks) return;
+            // The Home Steam card was only filled in after clicking Home; read the local Steam profile at startup too.
+            if (!startupWindowCheck) _ = model.RefreshSteamProfileOnStartupAsync();
             if (startupWindowCheck)
             {
                 var initial = WindowState;
