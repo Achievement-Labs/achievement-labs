@@ -337,6 +337,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             var baseline = await ReadSourceAsync(pair, lifetime.Token);
             var runner = runners.GetOrAdd(pair.Id, _ => CreateRunner(pair));
             runner.Start(baseline);
+            lastUnlockedCount[pair.Id] = baseline.Count(a => a.Unlocked);
+            lastPollError.TryRemove(pair.Id, out _);
             nextPoll[pair.Id] = DateTimeOffset.Now + (pair.Direction == MirrorDirection.SteamToXbox ? SteamPollInterval : XboxPollInterval);
             nextPresenceCheck = DateTimeOffset.MinValue;
             EnsureLoop(); UpdateWatcher();
@@ -470,23 +472,47 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         }
     }
 
-    private async Task PollAsync(MirrorRunner runner, string detectedBy, CancellationToken token)
+    private readonly ConcurrentDictionary<Guid, int> lastUnlockedCount = new();
+
+    private async Task PollAsync(MirrorRunner runner, string detectedBy, CancellationToken token, bool alwaysReport = false)
     {
         try
         {
             var snapshot = await ReadSourceAsync(runner.Pair, token);
-            if (lastPollError.TryRemove(runner.Pair.Id, out _)) Dispatcher.UIThread.Post(() => Status = $"Reading {runner.Pair.Source} works again for {runner.Pair.DisplayName}.");
+            if (lastPollError.TryRemove(runner.Pair.Id, out _))
+            {
+                Log(runner.Pair, $"Reading {runner.Pair.Source} works again.");
+                Dispatcher.UIThread.Post(() => Status = $"Reading {runner.Pair.Source} works again for {runner.Pair.DisplayName}.");
+            }
+            // Report what the source says whenever it changes (and on request), so a missed unlock is visible.
+            var unlocked = snapshot.Count(a => a.Unlocked);
+            var changed = !lastUnlockedCount.TryGetValue(runner.Pair.Id, out var before) || before != unlocked;
+            lastUnlockedCount[runner.Pair.Id] = unlocked;
+            if (changed || alwaysReport)
+                Log(runner.Pair, $"{runner.Pair.Source} reports {unlocked} of {snapshot.Count} unlocked ({detectedBy}).");
             await runner.ObserveSourceAsync(snapshot, detectedBy, token);
         }
         catch (OperationCanceledException) { }
         catch (Exception error)
         {
             // A failed read never unlocks anything; it is reported once until it recovers.
-            var message = $"Couldn't read {runner.Pair.Source} for {runner.Pair.DisplayName}: {error.Message}";
-            if (lastPollError.TryGetValue(runner.Pair.Id, out var previous) && previous == message) return;
+            var message = $"Couldn't read {runner.Pair.Source}: {error.Message}";
+            if (!alwaysReport && lastPollError.TryGetValue(runner.Pair.Id, out var previous) && previous == message) return;
             lastPollError[runner.Pair.Id] = message;
-            Dispatcher.UIThread.Post(() => Status = message + " The Mirror keeps trying.");
+            Log(runner.Pair, message + " The Mirror keeps trying.", isError: true);
+            Dispatcher.UIThread.Post(() => Status = $"{runner.Pair.DisplayName}: {message} The Mirror keeps trying.");
         }
+    }
+
+    /// <summary>Reads the source right now and writes the result to the activity log.</summary>
+    [RelayCommand]
+    public async Task CheckNowAsync()
+    {
+        var runner = SelectedRunner;
+        if (runner == null || runner.Status == MirrorStatus.Idle) { Status = "Start mirroring first."; return; }
+        Status = $"Checking {runner.Pair.Source} now…";
+        await PollAsync(runner, "checked now", lifetime.Token, alwaysReport: true);
+        Status = $"Checked {runner.Pair.Source}. See the activity log.";
     }
 
     private Task<IReadOnlyList<MirrorAchievement>> ReadSourceAsync(MirrorPair pair, CancellationToken token) =>
@@ -511,16 +537,28 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         var wanted = runners.Values.Any(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.SteamToXbox);
         if (!wanted) { statsWatcher?.Dispose(); statsWatcher = null; return; }
         if (statsWatcher != null) return;
+        var pair = runners.Values.First(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.SteamToXbox).Pair;
         try
         {
             var folder = Path.Combine(host.SteamInstallPath, "appcache", "stats");
-            if (host.SteamInstallPath.Length == 0 || !Directory.Exists(folder)) return;
+            if (host.SteamInstallPath.Length == 0 || !Directory.Exists(folder))
+            {
+                Log(pair, "Steam's local stats folder wasn't found, so only the Steam Web API is checked (every 15 seconds).");
+                return;
+            }
             statsWatcher = new FileSystemWatcher(folder, "UserGameStats_*.bin") { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName };
             statsWatcher.Changed += OnStatsFileChanged; statsWatcher.Created += OnStatsFileChanged; statsWatcher.Renamed += OnStatsFileChanged;
             statsWatcher.EnableRaisingEvents = true;
+            Log(pair, "Watching Steam's stats files on this PC, plus the Steam Web API every 15 seconds.");
         }
-        catch { statsWatcher?.Dispose(); statsWatcher = null; }
+        catch (Exception error)
+        {
+            statsWatcher?.Dispose(); statsWatcher = null;
+            Log(pair, "Couldn't watch Steam's stats files (" + error.Message + "). The Steam Web API is still checked every 15 seconds.", isError: true);
+        }
     }
+
+    private DateTimeOffset lastFileNotice;
 
     private void OnStatsFileChanged(object sender, FileSystemEventArgs e)
     {
@@ -530,6 +568,10 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         var runner = runners.Values.FirstOrDefault(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.SteamToXbox && r.Pair.SteamAppId == appId);
         if (runner == null) return;
         if (SteamWebApi.IsSteamId64(runner.Pair.SteamId) && parts[1] != SteamWebApi.AccountId(runner.Pair.SteamId).ToString()) return;
+        var now = DateTimeOffset.Now;
+        if (now - lastFileNotice < TimeSpan.FromSeconds(3)) return; // Steam writes the file several times per save.
+        lastFileNotice = now;
+        Log(runner.Pair, "Steam updated this game's stats file on this PC · checking Steam now.");
         _ = Task.Run(async () =>
         {
             // Steam may take a moment to upload the unlock, so check a few times.
@@ -572,10 +614,10 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         catch (Exception error) { Dispatcher.UIThread.Post(() => Status = "Steam idling couldn't be updated: " + error.Message); }
     }
 
-    private void Log(MirrorPair? pair, string message)
+    private void Log(MirrorPair? pair, string message, bool isError = false)
     {
         if (pair == null) return;
-        var entry = new MirrorLogEntry(DateTimeOffset.Now, message);
+        var entry = new MirrorLogEntry(DateTimeOffset.Now, message, isError);
         MirrorStore.AppendLog(pair.DisplayName, entry);
         Dispatcher.UIThread.Post(() => { if (SelectedPair == pair) AddLog(entry); });
     }

@@ -272,6 +272,7 @@
        <StackPanel Orientation="Horizontal" Spacing="10">
         <Button Content="{Binding StartStopLabel}" Classes="primary" Command="{Binding StartStopCommand}"/>
         <Button Content="Rescan" Command="{Binding ScanCommand}" IsEnabled="{Binding CanEditPair}"/>
+        <Button Content="Check now" Command="{Binding CheckNowCommand}" IsVisible="{Binding IsRunning}" ToolTip.Tip="Read the source platform immediately and write what it reports to the activity log"/>
        </StackPanel>
        <Border Classes="panel" Padding="14">
         <StackPanel Spacing="4">

@@ -88,7 +88,7 @@ public sealed partial class DesktopModel
         Busy(true);
         try { await operation(id); }
         catch (OperationCanceledException) { SteamStatus = "Steam operation cancelled."; }
-        catch { SteamStatus = "Steam operation failed. Ensure Steam is running and the selected app is available."; }
+        catch (Exception error) { SteamStatus = "Steam operation failed. Ensure Steam is running and the selected app is available. (" + error.Message + ")"; }
         finally { Busy(false); }
     }
 }
