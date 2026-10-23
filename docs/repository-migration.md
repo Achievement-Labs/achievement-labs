@@ -10,4 +10,6 @@ Before publishing mobile updates, initialize the official mobile event feed and 
 
 Existing installed apps with the old fork URL need this application update once to switch locations. Changing a repository URL in source does not rewrite installed binaries. Each future release should link its PR in this repository.
 
+All three apps now also offer a local event pack JSON import in Settings, independent of the repository location. See [offline import instructions](event-pack-import.md). It adds validated new titles without replacing bundled mappings or starting queues. The event-feed workflow publishes `EventPack.json` alongside the automatic feed.
+
 The official public source was missing its private Xbox 360 CON-signing dependency and did not compile. A key-free fallback now reports signing unavailable before opening a profile for writing; installations supplying the private source retain that implementation. Offline checks also use a temporary saved-queue path instead of the user's queue.

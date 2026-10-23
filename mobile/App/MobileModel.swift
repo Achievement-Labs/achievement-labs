@@ -798,6 +798,16 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             lastEventsCheck = Date(); eventSyncStatus = "\(feed.upstreamRelease) · \(added) new titles added · checked " + Date().formatted(date:.abbreviated,time:.shortened)
         } catch { eventSyncStatus = error.localizedDescription + " Existing mappings retained." }
     }
+    func importEventPack(_ data: Data) {
+        guard !eventsSyncing, !running else { eventSyncStatus = "Pause Auto Unlock before importing event data."; return }
+        eventsSyncing = true; defer { eventsSyncing = false }
+        do {
+            guard data.count <= 32*1024*1024, let catalogue else { throw LabsError.message("Event pack exceeds 32 MB or catalogue is unavailable.") }
+            let feed = try JSONDecoder().decode(EventFeed.self,from:data)
+            let added = try catalogue.merge(feed,cache:directory.appendingPathComponent("synced-events.json"))
+            eventSyncStatus = "Imported \(added) new titles from event pack (Testing). Existing mappings retained."
+        } catch { eventSyncStatus = "Could not import event pack: " + error.localizedDescription + " Existing data retained. Choose a pack containing templates and mappings." }
+    }
     func checkForMobileUpdates() async {
         guard !updateChecking else { return }; updateChecking = true; defer { updateChecking = false }
         updateStatus = "Checking published iOS releases…"

@@ -253,6 +253,8 @@
       <CheckBox Content="Automatically check the original repo for new event games" IsChecked="{Binding AutoRefreshEvents, Mode=TwoWay}"/>
       <TextBlock Text="Checks at startup and hourly. New validated titles are cached and labelled Testing. Existing local mappings and edition fixes are preserved. Refresh a game's achievement page after new data arrives." TextWrapping="Wrap" Classes="muted"/>
       <Button Content="Check for new event games now" Click="RefreshEventCatalogue" IsEnabled="{Binding CanRefreshEventCatalogue}"/>
+      <Button Content="Import event pack JSON…" Click="ImportEventPack" IsEnabled="{Binding CanRefreshEventCatalogue}"/>
+      <TextBlock Text="Import adds new event games offline. Existing mappings and edition fixes are retained." TextWrapping="Wrap"/>
       <TextBlock Text="{Binding EventCatalogueStatus}" TextWrapping="Wrap" Classes="muted"/>
      </StackPanel></Border>
      <Border Classes="panel" Padding="24"><StackPanel Spacing="12">

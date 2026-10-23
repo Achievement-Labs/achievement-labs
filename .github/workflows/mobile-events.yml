@@ -8,6 +8,7 @@ on:
     paths:
       - '.github/workflows/mobile-events.yml'
       - 'tools/mobile/publish_events.py'
+      - 'tools/mobile/export_event_pack.py'
       - 'src/AchievementLabs.App/Events/**'
 permissions:
   contents: write

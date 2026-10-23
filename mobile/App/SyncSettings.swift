@@ -20,6 +20,7 @@ struct SyncSettings: View {
     let category: SettingsCategory
     @State private var pcSync = false
     @State private var scanImmediately = false
+    @State private var importingEvents = false
     var body: some View {
         Group {
             if category == .app {
@@ -49,11 +50,20 @@ struct SyncSettings: View {
             Section("Event data sync") {
                 Toggle("Sync new event games automatically",isOn:$m.autoSyncEvents)
                 Button("Sync event data now") { Task { await m.syncEvents() } }.disabled(m.eventsSyncing || m.running)
+                Button("Import event pack JSON…",systemImage:"square.and.arrow.down") { importingEvents = true }.disabled(m.eventsSyncing || m.running)
                 Text(m.eventSyncStatus).font(.caption).foregroundStyle(.secondary)
-                Text("The public feed checks the original repo hourly. New validated titles are marked Testing. Existing mappings and edition fixes are retained.").font(.caption2).foregroundStyle(.secondary)
+                Text("The public feed checks the official repository hourly. Import a saved event pack to add new titles offline. New titles are marked Testing; existing mappings and edition fixes are retained.").font(.caption2).foregroundStyle(.secondary)
             }
             }
         }.sheet(isPresented:$pcSync) { PCSyncView(startScanning:scanImmediately) }
+        .fileImporter(isPresented:$importingEvents,allowedContentTypes:[.json],allowsMultipleSelection:false) { result in
+            do {
+                guard let url = try result.get().first else { return }
+                let access = url.startAccessingSecurityScopedResource(); defer { if access { url.stopAccessingSecurityScopedResource() } }
+                guard try url.resourceValues(forKeys:[.fileSizeKey]).fileSize ?? 0 <= 32*1024*1024 else { throw LabsError.message("Event pack exceeds 32 MB.") }
+                m.importEventPack(try Data(contentsOf:url))
+            } catch { m.eventSyncStatus = "Could not read event pack. Existing data retained. " + error.localizedDescription }
+        }
     }
 }
 struct PCSyncView: View {

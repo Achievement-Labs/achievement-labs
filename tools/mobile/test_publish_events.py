@@ -1,5 +1,6 @@
 import hashlib,io,json,unittest,zipfile
 from publish_events import build,parse
+from export_event_pack import export
 class FeedChecks(unittest.TestCase):
     def archive(self,data,extra=None):
         buffer=io.BytesIO()
@@ -14,6 +15,18 @@ class FeedChecks(unittest.TestCase):
     def test_digest_and_paths(self):
         r,b=self.archive(self.data());r['assets'][0]['digest']='sha256:'+'0'*64
         with self.assertRaises(ValueError): build(r,b,set())
+    def test_offline_pack(self):
+        _,archive=self.archive(self.data());encoded,count,skipped=export(archive)
+        self.assertEqual(count,0);self.assertEqual(skipped,1)
+        pack=parse(encoded);self.assertEqual(pack['schemaVersion'],1)
+        buffer=io.BytesIO()
+        with zipfile.ZipFile(io.BytesIO(archive)) as source,zipfile.ZipFile(buffer,'w') as target:
+            for name in source.namelist():
+                body=source.read(name)
+                if name=='Events/7.json': body=body.replace(b'{"data":',b'{"name":"Microsoft.XboxLive.T7.Test","data":').replace(b'"id":REPLACEID',b'"name":"Test","id":REPLACEID')
+                target.writestr(name,body)
+        encoded,count,skipped=export(buffer.getvalue());self.assertEqual(count,1)
+        self.assertEqual(parse(encoded)['titles']['7']['recipes']['recipes']['1'][0][0]['target'],'REPLACEID')
         r,b=self.archive(self.data(),'Events/../bad')
         with self.assertRaises(ValueError): build(r,b,set())
     def test_order_duplicates_and_unsupported(self):

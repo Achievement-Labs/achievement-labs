@@ -37,6 +37,7 @@ public sealed class EventCatalogClient : IDisposable
     }
     private UpstreamEventCatalogue? Additions => Local is { } catalog ? additions ??= new(AchievementLabsPaths.LocalFile("upstream-event-additions.json"), catalog.ReservedTitleIds) : null;
     public string UpstreamStatus => Additions?.Status ?? "New-title updates unavailable.";
+    public Task<int> ImportEventPackAsync(string text, CancellationToken ct) => (Additions ?? throw new InvalidOperationException("Local event data is unavailable.")).ImportPackAsync(text, ct);
     public string[] BundledTitleIds => Local?.TitleIds ?? [];
     public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct) { if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct); }
 

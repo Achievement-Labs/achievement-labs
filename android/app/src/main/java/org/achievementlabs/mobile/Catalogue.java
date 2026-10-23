@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 final class Catalogue {
  final Context context;final JSONObject index;final JSONArray packs;JSONObject synced=new JSONObject();
+ Catalogue(JSONObject bundledIndex){context=null;index=bundledIndex;packs=new JSONArray();}
  Catalogue(Context c)throws Exception{context=c;index=new JSONObject(asset("MobileIndex.json"));packs=new JSONObject(asset("achievement-packs.json")).getJSONArray("titles");JSONArray hubs=new JSONObject(asset("achievement-hubs.json")).getJSONArray("titles");for(int i=0;i<hubs.length();i++)packs.put(hubs.getJSONObject(i));}
  String asset(String path)throws Exception{try(InputStream in=context.getAssets().open("catalogue/"+path);ByteArrayOutputStream b=new ByteArrayOutputStream()){byte[] buf=new byte[8192];int n;while((n=in.read(buf))!=-1)b.write(buf,0,n);return Core.text(b.toByteArray());}}
  boolean matches(JSONObject game,JSONObject definition){JSONArray platforms=definition.optJSONArray("platforms"),devices=game.optJSONArray("devices");if(platforms==null||platforms.length()==0)return true;if(devices==null)return false;for(int i=0;i<platforms.length();i++)for(int x=0;x<devices.length();x++)if(platforms.optString(i).equals(devices.optString(x)))return true;return false;}

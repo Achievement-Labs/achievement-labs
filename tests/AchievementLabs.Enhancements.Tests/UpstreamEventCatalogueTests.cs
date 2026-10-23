@@ -63,12 +63,30 @@ public static class UpstreamEventCatalogueTests
             fixture.BadJson=false; fixture.Fail=true;
             catalogue.RefreshAsync(http, true).GetAwaiter().GetResult();
             Assert(catalogue.Contains("101") && catalogue.Status.Contains("retained"), "Network failure keeps last valid additions");
+            JObject PackTitle(string id) => new() { ["template"] = Template(id), ["recipes"] = new JObject { ["recipes"] = new JObject { ["1"] = new JArray { new JArray { new JObject { ["target"] = "REPLACEACH", ["value"] = "1" } } } } } };
+            var pack = new JObject { ["schemaVersion"] = 1, ["titles"] = new JObject { ["105"] = PackTitle("105"), ["99"] = PackTitle("999") } };
+            Assert(catalogue.ImportPackAsync(pack.ToString()).GetAwaiter().GetResult() == 1, "Offline pack adds new titles and preserves reserved editions");
+            Assert(new UpstreamEventCatalogue(path, new[]{"99"}).Contains("105"), "Offline imported titles survive restart");
+            Assert(catalogue.ImportPackAsync(pack.ToString()).GetAwaiter().GetResult() == 0, "Repeated pack import is idempotent");
+            var beforeImport = File.ReadAllText(path);
+            pack["titles"]!["106"] = PackTitle("999");
+            bool rejected = false;
+            try { catalogue.ImportPackAsync(pack.ToString()).GetAwaiter().GetResult(); } catch(InvalidDataException) { rejected = true; }
+            Assert(rejected && File.ReadAllText(path) == beforeImport && !catalogue.Contains("106"), "Bad pack identity leaves memory and disk unchanged");
+            Assert(JObject.Parse(beforeImport)["data"]!.Children<JProperty>().Last().Name == "SupportedTitleIDs", "Pack import preserves catalogue ordering");
             using var cancelled = new CancellationTokenSource(); cancelled.Cancel();
             before=fixture.Paths.Count; bool stopped=false;
             try { catalogue.RefreshAsync(http,true,cancelled.Token).GetAwaiter().GetResult(); } catch(OperationCanceledException) { stopped=true; }
             Assert(stopped && fixture.Paths.Count==before, "Cancellation causes no requests or cache mutation");
             File.WriteAllText(path,"invalid cache");
             Assert(new UpstreamEventCatalogue(path,new[]{"99"}).TitleIds.Length==0, "Corrupt cache fails closed");
+            if (Environment.GetEnvironmentVariable("LABS_EVENT_PACK") is { Length: > 0 } packPath)
+            {
+                var full = new UpstreamEventCatalogue(Path.Combine(directory,"full-pack.json"), Array.Empty<string>());
+                var added = full.ImportPackAsync(File.ReadAllText(packPath)).GetAwaiter().GetResult();
+                Assert(added > 0 && new UpstreamEventCatalogue(Path.Combine(directory,"full-pack.json"), Array.Empty<string>()).TitleIds.Length == added, "Generated event pack validates in full and survives restart");
+                Console.WriteLine($"PASS: generated offline event pack · {added} titles validated and reloaded.");
+            }
         }
         finally { Directory.Delete(directory,true); }
         Console.WriteLine("PASS: additive upstream event updates, reserved edition protection, title/schema validation, missing-template skips, cache restart, ordering, throttling, rollback and cancellation. Only fixture HTTP reads; no account calls.");

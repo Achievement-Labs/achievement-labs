@@ -21,5 +21,7 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Check public event-source migration and existing behavior
         run: ./tools/Test-Enhancements.ps1
+      - name: Check offline event pack conversion
+        run: python tools/mobile/test_publish_events.py
       - name: Check executable updates
         run: dotnet run --project tools/UpdaterChecks -c Release

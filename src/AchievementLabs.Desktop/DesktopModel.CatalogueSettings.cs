@@ -8,6 +8,18 @@ public sealed partial class DesktopModel
     private bool eventRefreshRunning;
     private string eventCatalogueStatus = "Bundled event data loaded. Automatic upstream checks add new titles only.";
     public bool CanRefreshEventCatalogue => !eventRefreshRunning;
+    public async Task ImportEventPackAsync(string path)
+    {
+        if (eventRefreshRunning || !CanInteract) return;
+        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue));
+        try {
+            if (new FileInfo(path).Length > 32 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 32 MB.");
+            await eventCatalog.ImportEventPackAsync(await File.ReadAllTextAsync(path, lifetime.Token), lifetime.Token);
+            EventCatalogueStatus = eventCatalog.UpstreamStatus;
+        } catch (OperationCanceledException) { }
+        catch { EventCatalogueStatus = "Could not import event pack. Choose a pack containing templates and mappings (up to 32 MB). Existing data retained."; }
+        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); }
+    }
     public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
     public async Task RefreshEventCatalogueAsync(bool force = true)
     {

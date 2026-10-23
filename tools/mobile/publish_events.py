@@ -79,14 +79,16 @@ def build(release,archive,reserved):
             except (KeyError,TypeError,ValueError,UnicodeError): skipped+=1
     return {'schemaVersion':1,'upstreamRelease':tag,'archiveSHA256':digest[7:].lower(),'generatedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'titles':titles},skipped
 
-def publish(feed):
+def publish(feed,pack=None):
     repo=os.environ['GITHUB_REPOSITORY'];token=os.environ['GH_TOKEN'];api='https://api.github.com/repos/'+repo
     def call(path,method='GET',body=None): return parse(read(api+path,40*1024*1024,token,method,body))
     parent=None
     try: parent=call('/git/ref/heads/mobile-event-feed')['object']['sha']
     except urllib.error.HTTPError as e:
         if e.code!=404: raise
-    tree=call('/git/trees','POST',{'tree':[{'path':'catalogue.json','mode':'100644','type':'blob','content':json.dumps(feed,separators=(',',':'))}]})
+    entries=[{'path':'catalogue.json','mode':'100644','type':'blob','content':json.dumps(feed,separators=(',',':'))}]
+    if pack is not None: entries.append({'path':'EventPack.json','mode':'100644','type':'blob','content':pack.decode('utf-8')})
+    tree=call('/git/trees','POST',{'tree':entries})
     commit=call('/git/commits','POST',{'message':'Refresh public mobile additions from '+feed['upstreamRelease'],'tree':tree['sha'],'parents':[] if parent is None else [parent]})
     if parent: call('/git/refs/heads/mobile-event-feed','PATCH',{'sha':commit['sha']})
     else: call('/git/refs','POST',{'ref':'refs/heads/mobile-event-feed','sha':commit['sha']})
@@ -100,5 +102,7 @@ def main():
     if list(data)[-1]!='SupportedTitleIDs': raise ValueError('Bundled SupportedTitleIDs must be last')
     feed,skipped=build(release,archive,set(data));encoded=json.dumps(feed,separators=(',',':')).encode()
     if len(encoded)>32*1024*1024: raise ValueError('Feed limit')
-    publish(feed);print(json.dumps({'release':feed['upstreamRelease'],'newMobileTitles':len(feed['titles']),'skipped':skipped,'bytes':len(encoded)}))
+    from export_event_pack import export
+    pack,pack_titles,_=export(archive,tag)
+    publish(feed,pack);print(json.dumps({'release':feed['upstreamRelease'],'newMobileTitles':len(feed['titles']),'packTitles':pack_titles,'skipped':skipped,'bytes':len(encoded)}))
 if __name__=='__main__': main()

@@ -213,6 +213,11 @@ public partial class MainWindow : Window
         catch (Exception) { model.Notice = "The action could not be completed. Check the field and connection, then try again."; }
     }
     private async void RefreshEventCatalogue(object? sender, RoutedEventArgs e) => await model.RefreshEventCatalogueAsync();
+    private async void ImportEventPack(object? sender, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Import event pack JSON", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Event pack JSON") { Patterns = ["*.json"] }] });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) await model.ImportEventPackAsync(path);
+    }
     private void GoBack(object? s, RoutedEventArgs e) => model.GoBack();
     private void ShowAbout(object? s, RoutedEventArgs e) => model.Navigate("About");
     private void ShowLibrary(object? s, RoutedEventArgs e) => model.Navigate("Library");
