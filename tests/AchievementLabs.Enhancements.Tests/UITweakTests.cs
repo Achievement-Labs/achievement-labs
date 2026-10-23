@@ -15,7 +15,7 @@ public static class UITweakTests
         var rarityRows = new[] { new Achievement("unknown","Unknown","",0,false), new Achievement("common","Common","",0,false){GlobalUnlockPercentage=90}, new Achievement("rare","Rare","",0,false){GlobalUnlockPercentage=0} };
         Check(AchievementView.Arrange(rarityRows,false,3,"All packs").Cast<Achievement>().Select(a=>a.Id).SequenceEqual(new[]{"rare","common","unknown"}),"Global % ascending keeps unknown last and includes zero.");
         Check(AchievementView.Arrange(rarityRows,false,4,"All packs").Cast<Achievement>().Select(a=>a.Id).SequenceEqual(new[]{"common","rare","unknown"}),"Global % descending keeps unknown last.");
-        Check(new AchievementLabs.Core.DesktopPreferences().AutoMaximize,"Fresh installs default to maximized.");
+        Check(!new AchievementLabs.Core.DesktopPreferences().AutoMaximize,"Fork fresh installs retain the normal-window default.");
         Check(System.Text.Json.JsonSerializer.Deserialize<AchievementLabs.Core.DesktopPreferences>("{\"AutoMaximize\":false}")!.AutoMaximize==false,"An explicit saved off setting remains respected.");
         using var model = new DesktopModel();
         model.Navigate("SteamQueue"); Check(model.IsSteamQueue && model.IsSteam && !model.IsQueues, "Steam queue has an independent page.");
