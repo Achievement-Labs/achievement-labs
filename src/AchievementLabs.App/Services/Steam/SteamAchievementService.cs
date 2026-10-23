@@ -278,8 +278,17 @@ public sealed class SteamAchievementService : ISteamAchievementService
             var communityStates = new Dictionary<string, SteamCommunityAchievementState>(StringComparer.OrdinalIgnoreCase);
             try
             {
-                var steamId = ReadLocalLoginProfile(GetSteamInstallPath()).SteamId;
-                if (!string.IsNullOrWhiteSpace(steamId) && steamId != "Unknown")
+                var steamPath = GetSteamInstallPath();
+                var steamId = ReadLocalLoginProfile(steamPath).SteamId;
+                // Steam's own stats file on this PC is current the moment an unlock is saved (as SAM sees it);
+                // the public profile page lags, so it is only used when there is no local file.
+                var local = AchievementLabs.Mirror.SteamWebApi.IsSteamId64(steamId)
+                    ? AchievementLabs.Mirror.SteamLocalStats.TryRead(steamPath, AchievementLabs.Mirror.SteamWebApi.AccountId(steamId), appId)
+                    : null;
+                if (local is { Count: > 0 })
+                    communityStates = local.ToDictionary(a => a.Id, a => new SteamCommunityAchievementState(a.Unlocked,
+                        a.UnlockedAt is { } at ? (uint)at.ToUnixTimeSeconds() : 0u), StringComparer.OrdinalIgnoreCase);
+                else if (!string.IsNullOrWhiteSpace(steamId) && steamId != "Unknown")
                     communityStates = LoadCommunityAchievementStates(steamId, appId);
             }
             catch

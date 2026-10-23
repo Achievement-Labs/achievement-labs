@@ -316,7 +316,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         try
         {
             var titleId = titleNumber.ToString();
-            var steamTask = ReadSteamWebAsync(appId, SteamIdText.Trim(), lifetime.Token);
+            var steamTask = ReadSteamForScanAsync(appId, SteamIdText.Trim(), lifetime.Token);
             var xboxTask = host.ReadXboxAsync(titleId, lifetime.Token);
             await Task.WhenAll(steamTask, xboxTask);
             var steamList = steamTask.Result; var (xboxList, xboxName) = xboxTask.Result;
@@ -658,6 +658,20 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     }
 
     private async Task<IReadOnlyList<MirrorAchievement>> ReadXboxListAsync(string titleId, CancellationToken token) => (await host.ReadXboxAsync(titleId, token)).Achievements;
+
+    /// <summary>Scan reads this PC's Steam stats file (instant, like SAM) and uses the Web API only without one.</summary>
+    private async Task<IReadOnlyList<MirrorAchievement>> ReadSteamForScanAsync(long appId, string steamId, CancellationToken token)
+    {
+        try
+        {
+            if (host.SteamInstallPath.Length > 0 && SteamWebApi.IsSteamId64(steamId)
+                && await Task.Run(() => SteamLocalStats.TryRead(host.SteamInstallPath, SteamWebApi.AccountId(steamId), appId), token) is { Count: > 0 } local)
+                return local;
+        }
+        catch (OperationCanceledException) { throw; }
+        catch { /* Unreadable local file: fall back to the Web API. */ }
+        return await ReadSteamWebAsync(appId, steamId, token);
+    }
 
     private async Task<IReadOnlyList<MirrorAchievement>> ReadSteamWebAsync(long appId, string steamId, CancellationToken token)
     {
