@@ -3,7 +3,7 @@ import subprocess,time,pathlib,json
 root=pathlib.Path('android/artifacts');root.mkdir(exist_ok=True)
 def run(*args):return subprocess.check_output(args,text=True)
 subprocess.run(['adb','install','-r','android/app/build/outputs/apk/debug/app-debug.apk'],check=True)
-for page in ['home','library','queue','spoof','settings']:
+for page in ['home','library','find','queue','spoof','settings']:
  subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
  subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--es','page',page],check=True)
  time.sleep(6)
@@ -35,7 +35,7 @@ assert 'isForeground=true' not in run('adb','shell','dumpsys','activity','servic
 print('Offline foreground session survived backgrounding and Activity replacement; timeout paused it.')
 log=run('adb','logcat','-d','-s','AndroidRuntime:E')
 assert 'FATAL EXCEPTION' not in log,log
-print('Five offline Android screens launched without credentials or Xbox requests.')
+print('Six offline Android screens launched without credentials or Xbox requests.')
 
 
 # Inflate the shipped RemoteViews and exercise both native timer bases and next-item transitions.

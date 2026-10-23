@@ -750,6 +750,19 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         do { let game = try await readWithAccount { try await api.game(id,account:$0) }; guard !Task.isCancelled, version == generation else { return }; titleDetails[id] = withTotal(game) }
         catch { /* Keep typed IDs usable when title lookup is unavailable. */ }
     }
+    func resolveFoundGame(_ candidate: Game) async throws -> Game {
+        guard account != nil else { throw LabsError.message("Sign in to Xbox to open achievements.") }
+        let version = generation
+        var game = gameForTitle(candidate.id) ?? candidate
+        do { game = try await readWithAccount { try await api.game(candidate.id,account:$0) } }
+        catch { try Task.checkCancellation() /* Public metadata remains usable when TitleHub has no history row. */ }
+        guard version == generation else { throw LabsError.message("Account changed. Open the game again.") }
+        if game.name.isEmpty { game.name = candidate.name }
+        if game.platforms.isEmpty { game.platforms = candidate.platforms }
+        if candidate.legacy { game.platforms = candidate.platforms }
+        game = withTotal(game); titleDetails[game.id] = game
+        return game
+    }
     func readPlaytime(_ title: String) async {
         guard let account, JSON.numeric(title) else { return }; let version = generation
         do { if let minutes = try await readWithAccount({ try await api.playedMinutes(title,account:$0) }), version == generation, !Task.isCancelled { playedHours[title] = minutes / 60 } }

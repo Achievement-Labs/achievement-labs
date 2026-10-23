@@ -53,6 +53,7 @@ import UniformTypeIdentifiers
 struct LibraryView: View {
     @EnvironmentObject var m: MobileModel
     @State private var search = ""
+    @State private var findingGames = false
     @AppStorage("librarySort") private var sort = "Last played"
     var visible: [Game] {
         let filtered = m.games.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || $0.id.contains(search) }
@@ -86,7 +87,16 @@ struct LibraryView: View {
             .navigationDestination(for: Game.self) { AchievementView(game: $0) }
             .searchable(text: $search, prompt: "Game name or Title ID")
             .refreshable { await m.refreshGames() }
-            .toolbar { Button { Task { await m.refreshGames() } } label: { Image(systemName: "arrow.clockwise") }.disabled(m.account == nil || m.busy).accessibilityLabel("Refresh library") }
+            .toolbar {
+                Button("Find any game") { findingGames = true }
+                Button { Task { await m.refreshGames() } } label: { Image(systemName: "arrow.clockwise") }.disabled(m.account == nil || m.busy).accessibilityLabel("Refresh library")
+            }
+            .sheet(isPresented:$findingGames) { FindGamesView() }
+            .onAppear {
+                #if DEBUG
+                if ProcessInfo.processInfo.arguments.contains("--ui-preview=lookup") { findingGames = true }
+                #endif
+            }
             .overlay { if m.games.isEmpty && !m.busy { ContentUnavailableView("Your Xbox library", systemImage: "gamecontroller", description: Text(m.account == nil ? "Open Settings to connect your account." : "Pull down or tap Refresh to load your games.")) } }
         }
     }

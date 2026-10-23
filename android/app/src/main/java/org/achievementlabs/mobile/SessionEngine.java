@@ -4,6 +4,7 @@ import java.util.*;import java.util.concurrent.*;import java.io.*;import java.ti
 final class SessionEngine extends ContextWrapper {
  final Handler main=new Handler(Looper.getMainLooper());volatile WeakReference<MainActivity> screen=new WeakReference<>(null);
  Vault vault;Catalogue catalogue;JSONObject disk=new JSONObject(),account,prefs=new JSONObject(),pending;JSONObject savedQueues=new JSONObject();JSONArray previousQueue=new JSONArray();JSONArray games=new JSONArray(),queue=new JSONArray();
+ final Map<String,JSONObject> foundTitles=new LinkedHashMap<>();
  final ExecutorService work=Executors.newSingleThreadExecutor(),sessions=Executors.newFixedThreadPool(2);
  volatile boolean foreground,backgroundReady,queueRunning,spoofRunning,preview;volatile long nextAt,spoofStarted,queueStarted;
  volatile String nextQueueName="",nextQueueGame="";
@@ -32,7 +33,14 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
  void push(){SessionService.refresh(this);SessionWidget.refresh(this);if(!foreground)return;try{JSONObject state=publicState(false);main.post(()->{MainActivity ui=screen.get();if(ui!=null)ui.runtime(state);});}catch(Exception ignored){}}
  void replaceAccount(JSONObject next)throws Exception{if(queueGate.busy()||spoofGate.busy())throw new Exception("Pause sessions before changing accounts.");save();account=next;loadAccountCache();save();}
  void refresh()throws Exception{JSONObject a=auth(),profile=Net.connect(a.getString("authorization"));for(String k:new String[]{"gamertag","gamerpic","gamerscore"})a.put(k,profile.optString(k));JSONArray loaded=Net.games(a);JSONArray totals=new JSONObject(catalogue.asset("achievement-totals.json")).getJSONArray("entries");JSONObject completed=disk.optJSONObject("completion");JSONObject own=completed==null?null:completed.optJSONObject(a.getString("xuid"));for(int i=0;i<loaded.length();i++){JSONObject game=loaded.getJSONObject(i);JSONObject achievement=game.optJSONObject("achievement");if(achievement==null){achievement=new JSONObject();game.put("achievement",achievement);}String id=game.getString("titleId");for(int x=0;x<totals.length();x++){JSONObject t=totals.getJSONObject(x);if(t.getString("titleId").equals(id)&&catalogue.matches(game,t)&&achievement.optInt("totalAchievements",0)<=0)achievement.put("totalAchievements",t.getInt("total"));}if(own!=null&&own.optJSONObject(id)!=null){JSONObject c=own.getJSONObject(id);game.put("mythic",c.optBoolean("mythic"));if(achievement.optInt("totalAchievements",0)<=0)achievement.put("totalAchievements",c.optInt("total"));}}synchronized(stateLock){if(account==null||!account.getString("xuid").equals(a.getString("xuid")))throw new Exception("Account changed during refresh.");for(String field:new String[]{"gamertag","gamerpic","gamerscore"})account.put(field,profile.optString(field));games=loaded;save();}notice="Library refreshed: "+games.length()+" games.";}
- JSONObject lookup(String id)throws Exception{Core.numeric(id);for(int i=0;i<games.length();i++)if(games.getJSONObject(i).getString("titleId").equals(id))return games.getJSONObject(i);return Net.game(auth(),id);}
+ JSONObject lookup(String id)throws Exception{
+  JSONObject candidate=TitleSearch.direct(id);if(candidate==null)throw new Exception("Enter a numeric Xbox Title ID.");id=candidate.getString("titleId");
+  for(int i=0;i<games.length();i++)if(games.getJSONObject(i).getString("titleId").equals(id))return games.getJSONObject(i);
+  JSONObject accountCopy=auth(),found=foundTitles.get(id);if(found!=null)candidate=found;
+  try{JSONObject resolved=Net.game(accountCopy,id);if(candidate.optJSONArray("devices")!=null&&candidate.getJSONArray("devices").toString().contains("Xbox360"))resolved.put("devices",candidate.getJSONArray("devices"));return resolved;}
+  catch(Net.HttpFailure e){if(e.status!=404)throw e;return new JSONObject(candidate.toString());}
+  catch(org.json.JSONException e){return new JSONObject(candidate.toString());}
+ }
  boolean legacy(JSONObject g){String d=g.optJSONArray("devices")==null?"":g.optJSONArray("devices").toString();return d.contains("Xbox360")||d.contains("GFWL");}
  boolean unlocked(JSONObject row){return "achieved".equalsIgnoreCase(row.optString("progressState"))||row.optBoolean("unlocked");}
  JSONArray rows(JSONObject g,String target)throws Exception{JSONArray rows=Net.achievements(auth(),g,target);boolean event=false;for(int i=0;i<rows.length();i++){JSONObject p=rows.getJSONObject(i).optJSONObject("progression");JSONArray req=p==null?null:p.optJSONArray("requirements");if(Core.eventRequirements(req))event=true;}
@@ -118,6 +126,7 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
   if(action.equals("state")){JSONObject value=publicState(true);MainActivity ui=screen.get();if(ui!=null&&ui.getIntent().hasExtra("widgetPage"))value.put("startPage",ui.getIntent().getStringExtra("widgetPage"));return value;}if(action.equals("runtime"))return publicState(false);
   if(preview){if(action.equals("achievements"))return new JSONObject().put("game",games.getJSONObject(1)).put("rows",new JSONArray().put(new JSONObject().put("id","1").put("name","First steps").put("lockedDescription","Complete the first mission.").put("pack","Base game").put("unavailable","").put("isUnlocked",false)));throw new Exception("Offline preview: network and account actions are disabled.");}
   switch(action){
+   case "findTitles":{JSONArray matches=TitleSearch.search(p.getString("query"));for(int i=0;i<matches.length();i++){JSONObject g=matches.getJSONObject(i);foundTitles.put(g.getString("titleId"),g);if(foundTitles.size()>256)foundTitles.remove(foundTitles.keySet().iterator().next());}return new JSONObject().put("results",matches);}
    case "refresh":refresh();return publicState(true);
    case "scan":launch(ScanActivity.class,20);return new JSONObject();
    case "login":launch(LoginActivity.class,21);return new JSONObject();

@@ -55,6 +55,10 @@ public struct PublicSync {
         let data = try await get("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/mobile-event-feed/catalogue.json",limit:32*1024*1024)
         return try JSONDecoder().decode(EventFeed.self,from:data)
     }
+    public func searchTitles(_ input: String) async throws -> [Game] {
+        if let direct = try TitleSearch.direct(input) { return [direct] }
+        return try TitleSearch.parse(await get(TitleSearch.url(input).absoluteString,limit:2*1024*1024))
+    }
     public func release() async throws -> MobileRelease? {
         try MobileRelease.latest(await get("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",limit:4*1024*1024))
     }
