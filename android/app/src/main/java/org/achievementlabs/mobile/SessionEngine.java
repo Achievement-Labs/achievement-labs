@@ -38,7 +38,7 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
   for(int i=0;i<games.length();i++)if(games.getJSONObject(i).getString("titleId").equals(id))return games.getJSONObject(i);
   JSONObject accountCopy=auth(),found=foundTitles.get(id);if(found!=null)candidate=found;
   try{JSONObject resolved=Net.game(accountCopy,id);if(candidate.optJSONArray("devices")!=null&&candidate.getJSONArray("devices").toString().contains("Xbox360"))resolved.put("devices",candidate.getJSONArray("devices"));return resolved;}
-  catch(Net.HttpFailure e){if(e.status!=404)throw e;return new JSONObject(candidate.toString());}
+  catch(Net.HttpFailure e){if(e.status==401)throw e;return new JSONObject(candidate.toString());}
   catch(org.json.JSONException e){return new JSONObject(candidate.toString());}
  }
  boolean legacy(JSONObject g){String d=g.optJSONArray("devices")==null?"":g.optJSONArray("devices").toString();return d.contains("Xbox360")||d.contains("GFWL");}
