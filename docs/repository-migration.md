@@ -2,7 +2,7 @@
 
 Windows, Android and iOS now use `Achievement-Labs/achievement-labs` for event updates and application release discovery. Windows also reads shared achievement totals, DLC packs, hubs and review links there.
 
-Windows checks the official `main` commit and reads event data/templates pinned to that commit. Android and iOS read the validated `mobile-event-feed/catalogue.json` branch in the official repository. The mobile-feed workflow verifies the official release's `Events.zip` checksum and preserves recipe operation order before publishing new-title additions. Existing bundled mappings are retained.
+Windows reads the official stable release metadata and downloads its SHA-256-verified `Events.zip`. It retains the existing 128 MiB catalogue limit, ZIP path/expansion checks and digest-based caches. The previous repository URL redirects to the official repository, so old builds reject the returned archive address; the updated build expects the official address directly. Android and iOS read the validated `mobile-event-feed/catalogue.json` branch in the official repository. The mobile-feed workflow verifies the official release's `Events.zip` checksum and preserves recipe operation order before publishing new-title additions. Existing bundled mappings are retained.
 
 The Android and iOS sources and their checks were brought from the previously released fork at `c113b920492b34494d3b928575b34c08f837b227` so all three platforms can be maintained and released here. The next mobile build versions are Android 0.6.2 (10) and iOS 0.12.4 (22). The desktop migration changes repository locations without replacing its existing UI or event recipes.
 

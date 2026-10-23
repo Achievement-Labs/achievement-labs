@@ -1,3 +1,5 @@
+using System.IO.Compression;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
@@ -8,13 +10,13 @@ namespace AchievementLabs.Core;
 /// <summary>Additive public data updates. Author-maintained mappings always win.</summary>
 public sealed class UpstreamEventCatalogue
 {
-    public const string BundledSourceCommit = "938a9ba0f746fcb20cee3588f992356df92bf38b";
-    private const string SourceRoot = "https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/";
+    public const string BundledSourceCommit = "1a76574db3ca4d5ee02f162a63cf0ce3123b3db9";
+    private const string BundledArchiveDigest = "f763e3048d7fda9d9e226dec0f40211937d0ffd454083aa29a7cd3f5af67b159";
     private readonly string cachePath;
     private readonly HashSet<string> reserved;
     private readonly SemaphoreSlim refreshGate = new(1, 1);
     private sealed record Snapshot(string Commit, DateTime CheckedUtc, JObject Data, Dictionary<string, string> Templates);
-    private Snapshot current = new(BundledSourceCommit, DateTime.MinValue, new JObject { ["SupportedTitleIDs"] = new JArray() }, new());
+    private Snapshot current = new(BundledArchiveDigest, DateTime.MinValue, new JObject { ["SupportedTitleIDs"] = new JArray() }, new());
     public string Status { get; private set; } = "Bundled event data loaded; upstream checks add new titles only.";
     public string[] TitleIds => Volatile.Read(ref current).Templates.Keys.OrderBy(x => x, StringComparer.Ordinal).ToArray();
 
@@ -26,10 +28,10 @@ public sealed class UpstreamEventCatalogue
         {
             if (!File.Exists(path)) return;
             var info = new FileInfo(path);
-            if (info.Length > 64 * 1024 * 1024) throw new InvalidDataException();
+            if (info.Length > 128 * 1024 * 1024) throw new InvalidDataException();
             var saved = Parse(File.ReadAllText(path));
             var commit = (string?)saved["commit"] ?? "";
-            if (!Regex.IsMatch(commit, "^[a-f0-9]{40}$")) throw new InvalidDataException();
+            if (!Regex.IsMatch(commit, "^(?:[a-f0-9]{40}|[a-f0-9]{64})$")) throw new InvalidDataException();
             var data = saved["data"] as JObject ?? throw new InvalidDataException();
             var rawTemplates = saved["templates"] as JObject ?? throw new InvalidDataException();
             var templates = new Dictionary<string, string>();
@@ -119,66 +121,102 @@ public sealed class UpstreamEventCatalogue
     public async Task RefreshAsync(HttpClient http, bool force = false, CancellationToken ct = default)
     {
         await refreshGate.WaitAsync(ct).ConfigureAwait(false);
+        var stage = "reading release metadata";
         try
         {
             var previous = Volatile.Read(ref current);
             if (!force && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
-            var head = Parse(await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/commits/main", 1024 * 1024, ct).ConfigureAwait(false));
-            var commit = (string?)head["sha"] ?? "";
-            if (!Regex.IsMatch(commit, "^[a-f0-9]{40}$")) throw new InvalidDataException("Invalid upstream commit.");
+            var release = Parse(await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases/latest", 1024 * 1024, ct).ConfigureAwait(false));
+            if ((bool?)release["draft"] != false || (bool?)release["prerelease"] != false) throw new InvalidDataException("No stable published release.");
+            var tag = (string?)release["tag_name"] ?? "";
+            if (!Regex.IsMatch(tag, "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")) throw new InvalidDataException("Unexpected release tag.");
+            var assets = (release["assets"] as JArray ?? throw new InvalidDataException("Release assets are missing."))
+                .OfType<JObject>().Where(a => (string?)a["name"] == "Events.zip").ToArray();
+            if (assets.Length != 1) throw new InvalidDataException("The release does not contain one Events.zip.");
+            var asset = assets[0]; var digest = (string?)asset["digest"] ?? "";
+            if (!Regex.IsMatch(digest, "^sha256:[a-fA-F0-9]{64}$")) throw new InvalidDataException("Events.zip SHA-256 digest is missing.");
+            var revision = digest[7..].ToLowerInvariant();
+            var url = "https://github.com/Achievement-Labs/achievement-labs/releases/download/" + tag + "/Events.zip";
+            if ((string?)asset["browser_download_url"] != url) throw new InvalidDataException("Unexpected archive location.");
             var data = (JObject)previous.Data.DeepClone();
             var templates = new Dictionary<string, string>(previous.Templates, StringComparer.Ordinal);
             int added = 0, skipped = 0;
-            if (commit != previous.Commit || force)
+            if (revision != previous.Commit || force)
             {
-                var upstream = Parse(await ReadAsync(http, SourceRoot + commit + "/src/AchievementLabs.App/Events/Data.json", 64 * 1024 * 1024, ct).ConfigureAwait(false));
-                var ids = upstream["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Upstream supported-title list is missing.");
-                if (ids.Count > 5000) throw new InvalidDataException("Upstream title limit exceeded.");
+                stage = "downloading Events.zip";
+                var bytes = await ReadBytesAsync(http, url, 32 * 1024 * 1024, ct).ConfigureAwait(false);
+                if (Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() != revision) throw new InvalidDataException("Archive checksum mismatch.");
+                stage = "reading Events.zip";
+                using var archive = new ZipArchive(new MemoryStream(bytes), ZipArchiveMode.Read);
+                if (archive.Entries.Count > 2500 || archive.Entries.Sum(e => e.Length) > 256L * 1024 * 1024) throw new InvalidDataException("Archive expansion limit exceeded.");
+                var entries = new Dictionary<string, ZipArchiveEntry>(StringComparer.OrdinalIgnoreCase);
+                foreach (var entry in archive.Entries) {
+                    var name = entry.FullName.Replace('\\', '/');
+                    if (name.StartsWith('/') || name.Split('/').Any(part => part is ".." or ".") || !name.StartsWith("Events/", StringComparison.Ordinal)) throw new InvalidDataException("Unexpected archive path.");
+                    if (name.EndsWith('/')) continue;
+                    if (name[7..].Contains('/') || !entries.TryAdd(name[7..], entry)) throw new InvalidDataException("Ambiguous archive entry.");
+                }
+                if (!entries.TryGetValue("Data.json", out var sourceData)) throw new InvalidDataException("Events/Data.json is missing.");
+                var upstream = Parse(ReadZip(sourceData, 128 * 1024 * 1024));
+                if (upstream.Properties().Last().Name != "SupportedTitleIDs") throw new InvalidDataException("SupportedTitleIDs must be last in Data.json.");
+                var ids = upstream["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Supported-title list is missing.");
+                if (ids.Count > 5000) throw new InvalidDataException("Title limit exceeded.");
+                stage = "validating new titles";
                 foreach (var id in ids.Select(i => i.ToString()).Distinct(StringComparer.Ordinal))
                 {
                     ct.ThrowIfCancellationRequested();
                     if (reserved.Contains(id) || templates.ContainsKey(id)) continue;
-                    if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || upstream[id] is not JObject block || (bool?)block["Enabled"] == false) { skipped++; continue; }
-                    string template;
-                    try { template = await ReadAsync(http, SourceRoot + commit + "/src/AchievementLabs.App/Events/" + id + ".json", 1024 * 1024, ct).ConfigureAwait(false); }
-                    catch (HttpRequestException e) when (e.StatusCode == System.Net.HttpStatusCode.NotFound) { skipped++; continue; }
+                    if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || upstream[id] is not JObject block || (bool?)block["Enabled"] == false || !entries.TryGetValue(id + ".json", out var entry)) { skipped++; continue; }
+                    var template = ReadZip(entry, 1024 * 1024);
                     try { await ValidateAsync(id, block, template, ct).ConfigureAwait(false); }
                     catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException) { skipped++; continue; }
-                    data.Remove("SupportedTitleIDs");
-                    data[id] = block.DeepClone(); templates.Add(id, template); added++;
+                    data.Remove("SupportedTitleIDs"); data[id] = block.DeepClone(); templates.Add(id, template); added++;
                 }
             }
             data.Remove("SupportedTitleIDs"); data["SupportedTitleIDs"] = new JArray(templates.Keys);
-            var next = new Snapshot(commit, DateTime.UtcNow, data, templates);
-            var saved = new JObject { ["commit"] = commit, ["checkedUtc"] = next.CheckedUtc, ["data"] = data, ["templates"] = JObject.FromObject(templates) };
+            var next = new Snapshot(revision, DateTime.UtcNow, data, templates);
+            var saved = new JObject { ["commit"] = revision, ["release"] = tag, ["checkedUtc"] = next.CheckedUtc, ["data"] = data, ["templates"] = JObject.FromObject(templates) };
+            stage = "saving the validated cache";
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(cachePath))!);
             var temporary = cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
             try { await File.WriteAllTextAsync(temporary, saved.ToString(Formatting.None), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
-            Status = $"Checked upstream {commit[..7]} · {added:N0} new titles added · {templates.Count:N0} cached titles (Testing) · {skipped:N0} entries skipped · {next.CheckedUtc.ToLocalTime():g}";
+            Status = $"Checked {tag} Events.zip · {added:N0} new titles added · {templates.Count:N0} cached titles (Testing) · {skipped:N0} entries skipped · {next.CheckedUtc.ToLocalTime():g}";
         }
         catch (OperationCanceledException) { throw; }
-        catch { Status = "Could not update upstream event data. Existing mappings and cached titles retained; retry with Check now."; }
+        catch (HttpRequestException e) { Status = $"Could not update event data while {stage}: HTTP {(int?)e.StatusCode}. Existing mappings and cache retained; retry Check now."; }
+        catch (InvalidDataException e) { Status = $"Could not update event data while {stage}: {e.Message} Existing mappings and cache retained."; }
+        catch (JsonException) { Status = $"Could not update event data while {stage}: invalid catalogue JSON. Existing mappings and cache retained."; }
+        catch { Status = $"Could not update event data while {stage}. Existing mappings and cache retained; retry Check now."; }
         finally { refreshGate.Release(); }
     }
 
+    private static string ReadZip(ZipArchiveEntry entry, int limit)
+    {
+        if (entry.Length > limit) throw new InvalidDataException("Archive entry exceeds its size limit.");
+        using var input = entry.Open(); using var output = new MemoryStream(); var buffer = new byte[81920];
+        while (true) { var read = input.Read(buffer); if (read == 0) break; if (output.Length + read > limit) throw new InvalidDataException("Archive entry exceeds its size limit."); output.Write(buffer,0,read); }
+        return new UTF8Encoding(false,true).GetString(output.ToArray()).TrimStart('\uFEFF');
+    }
     private static JObject Parse(string text)
     {
         using var reader = new JsonTextReader(new StringReader(text)) { MaxDepth = 64, DateParseHandling = DateParseHandling.None };
         return JObject.Load(reader, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
     }
-    private static async Task<string> ReadAsync(HttpClient http, string uri, int limit, CancellationToken ct)
+    private static async Task<string> ReadAsync(HttpClient http, string uri, int limit, CancellationToken ct) =>
+        Encoding.UTF8.GetString(await ReadBytesAsync(http, uri, limit, ct).ConfigureAwait(false)).TrimStart('\uFEFF');
+    private static async Task<byte[]> ReadBytesAsync(HttpClient http, string uri, int limit, CancellationToken ct)
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, uri);
-        request.Headers.UserAgent.ParseAdd("AchievementLabs-EventUpdater/1.0");
+        request.Headers.UserAgent.ParseAdd("AchievementLabs-Fork-EventUpdater/1.0");
         using var response = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, ct).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
         if (response.Content.Headers.ContentLength > limit) throw new InvalidDataException("Event download exceeds limit.");
         using var input = await response.Content.ReadAsStreamAsync(ct).ConfigureAwait(false);
         using var buffer = new MemoryStream(); var bytes = new byte[81920];
         while (true) { var count = await input.ReadAsync(bytes, ct).ConfigureAwait(false); if (count == 0) break; if (buffer.Length + count > limit) throw new InvalidDataException("Event download exceeds limit."); buffer.Write(bytes, 0, count); }
-        return Encoding.UTF8.GetString(buffer.ToArray()).TrimStart('\uFEFF');
+        return buffer.ToArray();
     }
     private static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct)
     {
