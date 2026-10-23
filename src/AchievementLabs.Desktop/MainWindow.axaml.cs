@@ -320,6 +320,8 @@ public partial class MainWindow : Window
     private void ShowSteamProfile(object? s, RoutedEventArgs e) => model.ShowSteamProfile();
     private void ShowTools(object? s, RoutedEventArgs e) => model.Navigate("Tools");
     private async void SearchTitles(object? s, RoutedEventArgs e) => await model.SearchTitlesAsync();
+    private void SelectAllTitlePlatforms(object? s, RoutedEventArgs e) => model.SelectAllTitleSearchPlatforms(true);
+    private void ClearTitlePlatforms(object? s, RoutedEventArgs e) => model.SelectAllTitleSearchPlatforms(false);
     private async void SearchGamertag(object? s, RoutedEventArgs e) => await model.SearchGamertagAsync();
     private void OpenUtilityLink(object? s, RoutedEventArgs e) { if (s is Button { Tag: string destination }) model.OpenUtilityLink(destination); }
     private void RefreshConverter(object? s, RoutedEventArgs e) => model.RefreshConverterStatus();
