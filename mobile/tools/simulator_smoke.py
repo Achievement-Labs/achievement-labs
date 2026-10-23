@@ -5,9 +5,9 @@ import time
 import re
 from pathlib import Path
 
-def run(*args):
+def run(*args, timeout=120):
     print('Checking: '+' '.join(args),flush=True)
-    return subprocess.check_output(args,text=True,timeout=120)
+    return subprocess.check_output(args,text=True,timeout=timeout)
 devices=json.loads(run('xcrun','simctl','list','devices','available','--json'))['devices']
 available=[(runtime,d) for runtime,group in devices.items() if 'iOS-26' in runtime for d in group if d['name'].startswith('iPhone')]
 assert available, 'No iOS 26 simulator for background API checks'
@@ -36,8 +36,11 @@ subprocess.run(['xcrun','simctl','bootstatus',device,'-b'],check=True,timeout=30
 app='mobile/simulator/Build/Products/Debug-iphonesimulator/AchievementLabsMobile.app'
 subprocess.run(['xcrun','simctl','install',device,app],check=True)
 try:
-    output=run('xcrun','simctl','launch',device,'org.achievementlabs.mobile','--storage-self-test')
-except subprocess.CalledProcessError:
+    # A fresh iOS 26 device can still be initializing launch services after
+    # bootstatus and install succeed. Allow that initial launch extra time;
+    # subsequent launches and all app assertions retain their normal limits.
+    output=run('xcrun','simctl','launch',device,'org.achievementlabs.mobile','--storage-self-test',timeout=300)
+except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
     subprocess.run(['xcrun','simctl','spawn',device,'log','show','--last','2m','--style','compact','--predicate','process == "AchievementLabsMobile" OR eventMessage CONTAINS "org.achievementlabs.mobile"'],check=False,timeout=120)
     raise
 print(output)
