@@ -25,6 +25,8 @@ public sealed class MirrorRunner
     private readonly SemaphoreSlim sending = new(1, 1);
     private readonly object gate = new();
     private readonly HashSet<string> handled = new(StringComparer.Ordinal);
+    /// <summary>Unlocks Achievement Labs is making with the setting off; claimed before the save so no detector mirrors them.</summary>
+    private readonly HashSet<string> skippedAppUnlocks = new(StringComparer.Ordinal);
     private readonly List<MirrorPendingUnlock> pending = [];
     private readonly List<MirrorLogEntry> log = [];
     private CancellationTokenSource session = new();
@@ -64,7 +66,7 @@ public sealed class MirrorRunner
         lock (gate)
         {
             session.Cancel(); session = new();
-            handled.Clear(); pending.Clear();
+            handled.Clear(); pending.Clear(); skippedAppUnlocks.Clear();
             foreach (var achievement in sourceNow.Where(a => a.Unlocked)) handled.Add(achievement.Id);
             already = handled.Count;
             Status = MirrorStatus.Monitoring; StopReason = ""; StartedAt = now(); MirroredCount = 0;
@@ -117,7 +119,7 @@ public sealed class MirrorRunner
     {
         lock (gate)
         {
-            if (Status == MirrorStatus.Idle || !handled.Add(sourceId)) return true;
+            if (Status == MirrorStatus.Idle || skippedAppUnlocks.Contains(sourceId) || !handled.Add(sourceId)) return true;
         }
         if (!Pair.MirrorAppUnlocks)
         {
@@ -126,6 +128,30 @@ public sealed class MirrorRunner
         }
         Write($"{name} was unlocked in Achievement Labs · sending immediately.");
         return await ProcessAsync(sourceId, name, cancellationToken);
+    }
+
+    /// <summary>
+    /// Call BEFORE Achievement Labs unlocks <paramref name="sourceId"/> on the source platform. With "Also mirror …
+    /// unlocks I make in Achievement Labs" off, the achievement is claimed now, so a detector that sees the change
+    /// first (Steam writes its stats file before the save call returns) can't mirror it.
+    /// </summary>
+    public void ExpectAppUnlock(string sourceId, string name)
+    {
+        lock (gate)
+        {
+            if (Status == MirrorStatus.Idle || Pair.MirrorAppUnlocks || handled.Contains(sourceId)) return;
+            handled.Add(sourceId); skippedAppUnlocks.Add(sourceId);
+        }
+        Write($"{name} is being unlocked in Achievement Labs · won't be mirrored (setting is off).");
+    }
+
+    /// <summary>The unlock announced with <see cref="ExpectAppUnlock"/> didn't happen; a later real unlock counts again.</summary>
+    public void CancelAppUnlock(string sourceId)
+    {
+        lock (gate)
+        {
+            if (skippedAppUnlocks.Remove(sourceId)) handled.Remove(sourceId);
+        }
     }
 
     /// <summary>Restarts a stopped pair. Pending unlocks are either sent in order or discarded.</summary>

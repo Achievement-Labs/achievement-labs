@@ -35,6 +35,11 @@ public sealed partial class DesktopModel : IMirrorHost
         return await MirrorPreflightReview(issues) && !issues.Any(i => i.Blocking);
     }
 
+    private void MirrorExpectXbox(string titleId, string achievementId, string name) => mirror?.ExpectXboxAppUnlock(titleId, achievementId, name);
+    private void MirrorCancelXbox(string titleId, string achievementId) => mirror?.CancelXboxAppUnlock(titleId, achievementId);
+    private void MirrorExpectSteam(long appId, string apiName, string name) => mirror?.ExpectSteamAppUnlock(appId, apiName, name);
+    private void MirrorCancelSteam(long appId, string apiName) => mirror?.CancelSteamAppUnlock(appId, apiName);
+
     private Task<bool> MirrorXboxAppUnlockAsync(string titleId, string achievementId, string name, CancellationToken cancellationToken) =>
         mirror == null ? Task.FromResult(true) : mirror.ReportXboxAppUnlockAsync(titleId, achievementId, name, cancellationToken);
 

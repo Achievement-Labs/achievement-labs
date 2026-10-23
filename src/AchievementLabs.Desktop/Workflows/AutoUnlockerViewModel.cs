@@ -30,6 +30,9 @@ namespace AchievementLabs.Desktop.Workflows
         /// Returning false means the unlock couldn't be mirrored, and the queue stops before the next one.
         /// </summary>
         public Func<string, string, string, CancellationToken, Task<bool>>? MirrorUnlockAsync { get; set; }
+        /// <summary>Called before each unlock (title ID, achievement ID, name) and, if it fails, to withdraw it.</summary>
+        public Action<string, string, string>? MirrorExpect { get; set; }
+        public Action<string, string>? MirrorCancel { get; set; }
         private string mirrorFailure = "";
         public bool HadFailure { get; private set; }
         public bool PresenceCleanupSucceeded { get; private set; } = true;
@@ -702,6 +705,7 @@ namespace AchievementLabs.Desktop.Workflows
 
                 bool unlockSuccess = false;
                 string unlockError = "";
+                MirrorExpect?.Invoke(_state.TitleId, entry.AchievementId, entry.AchievementName);
 
                 try
                 {
@@ -768,6 +772,7 @@ namespace AchievementLabs.Desktop.Workflows
                 }
                 else
                 {
+                    MirrorCancel?.Invoke(_state.TitleId, entry.AchievementId);
                     bool stop = false;
                     Avalonia.Threading.Dispatcher.UIThread.Invoke(() => stop = HandleUnlockFailure(entry, unlockError));
                     HadFailure = true;

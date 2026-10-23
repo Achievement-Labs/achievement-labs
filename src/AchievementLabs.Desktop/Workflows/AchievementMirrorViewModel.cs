@@ -436,6 +436,16 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
 
     // ---- Hooks for unlocks Achievement Labs makes itself ----
 
+    private MirrorRunner? AppUnlockRunner(MirrorDirection direction, string titleId, long appId) => runners.Values.FirstOrDefault(r =>
+        r.Status != MirrorStatus.Idle && r.Pair.Direction == direction && (direction == MirrorDirection.XboxToSteam ? r.Pair.XboxTitleId == titleId : r.Pair.SteamAppId == appId));
+
+    /// <summary>Call before Achievement Labs unlocks an Xbox achievement (see <see cref="MirrorRunner.ExpectAppUnlock"/>).</summary>
+    public void ExpectXboxAppUnlock(string titleId, string achievementId, string name) => AppUnlockRunner(MirrorDirection.XboxToSteam, titleId, 0)?.ExpectAppUnlock(achievementId, name);
+    public void CancelXboxAppUnlock(string titleId, string achievementId) => AppUnlockRunner(MirrorDirection.XboxToSteam, titleId, 0)?.CancelAppUnlock(achievementId);
+    /// <summary>Call before Achievement Labs unlocks a Steam achievement.</summary>
+    public void ExpectSteamAppUnlock(long appId, string apiName, string name) => AppUnlockRunner(MirrorDirection.SteamToXbox, "", appId)?.ExpectAppUnlock(apiName, name);
+    public void CancelSteamAppUnlock(long appId, string apiName) => AppUnlockRunner(MirrorDirection.SteamToXbox, "", appId)?.CancelAppUnlock(apiName);
+
     /// <summary>Achievement Labs unlocked an Xbox achievement. Returns false if mirroring it failed.</summary>
     public Task<bool> ReportXboxAppUnlockAsync(string titleId, string achievementId, string name, CancellationToken cancellationToken)
     {

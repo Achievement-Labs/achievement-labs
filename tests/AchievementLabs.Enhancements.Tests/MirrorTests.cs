@@ -142,6 +142,19 @@ public static class MirrorTests
         Assert(!await r8.ReportAppUnlockAsync("ACH_3", "Third Act"), "App unlock that can't be mirrored returns false so Auto Unlock stops");
         Assert(!await r8.ReportAppUnlockAsync("ACH_1", "First Steps") && t8.Sent.Count == 4, "While stopped, app unlocks are pending and return false");
 
+        // Race: Steam writes its stats file before Achievement Labs' save returns. With the setting off, the unlock is
+        // claimed beforehand, so a detector seeing it first still sends nothing.
+        var (_, t11, r11) = Setup(appUnlocks: false);
+        r11.Start([]); r11.ExpectAppUnlock("ACH_1", "First Steps");
+        Assert(await r11.ObserveSourceAsync([A("ACH_1", "First Steps", true)], "stats file") && t11.Sent.Count == 0, "Setting off: detector can't mirror an announced app unlock");
+        Assert(await r11.ReportAppUnlockAsync("ACH_1", "First Steps") && t11.Sent.Count == 0, "Setting off: the later report sends nothing");
+        r11.ExpectAppUnlock("ACH_2", "Second Wind"); r11.CancelAppUnlock("ACH_2");
+        Assert(await r11.ObserveSourceAsync([A("ACH_2", "Second Wind", true)], "game") && t11.Sent.SequenceEqual(["2"]), "A withdrawn app unlock doesn't block a later real unlock");
+        var (_, t12, r12) = Setup(appUnlocks: true);
+        r12.Start([]); r12.ExpectAppUnlock("ACH_1", "First Steps");
+        Assert(await r12.ObserveSourceAsync([A("ACH_1", "First Steps", true)], "stats file") && t12.Sent.SequenceEqual(["1"]), "Setting on: whichever path sees it first mirrors it");
+        Assert(await r12.ReportAppUnlockAsync("ACH_1", "First Steps") && t12.Sent.Count == 1, "Setting on: no double send");
+
         // Halt (e.g. another title's Xbox presence): later unlocks pending, resume sends them.
         var (_, t10, r10) = Setup();
         string? haltAlert = null; r10.Stopped += (_, m) => haltAlert = m;
