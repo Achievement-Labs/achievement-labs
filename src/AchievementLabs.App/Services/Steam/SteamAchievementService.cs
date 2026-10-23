@@ -210,6 +210,20 @@ public sealed class SteamAchievementService : ISteamAchievementService
         }
     }
 
+    /// <summary>SteamID64 of the account signed in to Steam on this PC, read from loginusers.vdf without any network call.</summary>
+    public string GetLocalSteamId()
+    {
+        try
+        {
+            var steamId = ReadLocalLoginProfile(GetSteamInstallPath()).SteamId;
+            return string.IsNullOrWhiteSpace(steamId) || steamId == "Unknown" ? string.Empty : steamId;
+        }
+        catch
+        {
+            return string.Empty;
+        }
+    }
+
     public SteamProfileSummary GetProfileSummary()
     {
         var steamPath = GetSteamInstallPath();

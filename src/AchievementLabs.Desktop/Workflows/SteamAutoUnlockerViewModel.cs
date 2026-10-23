@@ -10,6 +10,8 @@ public partial class SteamAutoUnlockerViewModel : ObservableObject, INativePageL
     private readonly NativeNotices _snackbarService;
     private readonly Random _random = new();
     private readonly TimeSpan _snackbarDuration = TimeSpan.FromSeconds(4);
+    /// <summary>Achievement Mirror hook (app ID, API name, name). False stops the queue before the next unlock.</summary>
+    public Func<long, string, string, CancellationToken, Task<bool>>? MirrorUnlockAsync { get; set; }
     private CancellationTokenSource? _operationCancellation;
 
     [ObservableProperty] private string _appId = string.Empty;
@@ -180,6 +182,8 @@ public partial class SteamAutoUnlockerViewModel : ObservableObject, INativePageL
                 item.Status = "Unlocked";
                 item.UnlockedAt = DateTime.Now;
                 UpdateCounts();
+                if (MirrorUnlockAsync != null && !await MirrorUnlockAsync(steamAppId, item.Achievement.Id, item.Name, _operationCancellation.Token))
+                    throw new InvalidOperationException($"Achievement Mirror couldn't copy {item.Name} to Xbox, so the Steam auto unlocker stopped. Resolve it in Achievement Mirror first.");
             }
 
             StatusText = $"Steam auto unlocker finished: {CompletedCount}/{QueueItems.Count} unlocked.";

@@ -100,7 +100,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool HasLibrarySelection => SelectedLibraryGame != null;
     public Achievement? SelectedAchievement { get => selectedAchievement; set { selectedAchievement = value; Changed(); Changed(nameof(HasSelection)); NotifyActions(); } }
     public string Search { get => search; set { search = value ?? ""; Changed(); Refresh(); } }
-    public string PageTitle => page switch { "About" => "About Achievement Labs", "Home" => "Home", "Tools" => "Tools and information", "Queues" => "Xbox auto unlock queues", "SteamQueue" => "Steam Auto Unlocker", "Legacy" => "Legacy tools", "Gfwl" => "Games for Windows LIVE", "Xbox360Profiles" => "Xbox 360 profiles", "Xbox360ProfileEditor" => "Xbox 360 achievement editor", "SteamLibrary" => "Steam library", "SteamAchievements" => "Steam achievements", "Spoofer" => "Xbox title spoofer", "Epic" => "Epic Games", "Ubisoft" => "Ubisoft Connect", "Stats" => "Stats editor", "Settings" => "Settings", "Diagnostics" => "Event catalog", "Library" => "Xbox library", _ => "Xbox achievements" };
+    public string PageTitle => page switch { "About" => "About Achievement Labs", "Home" => "Home", "Tools" => "Tools and information", "Queues" => "Xbox auto unlock queues", "SteamQueue" => "Steam Auto Unlocker", "Legacy" => "Legacy tools", "Gfwl" => "Games for Windows LIVE", "Xbox360Profiles" => "Xbox 360 profiles", "Xbox360ProfileEditor" => "Xbox 360 achievement editor", "SteamLibrary" => "Steam library", "SteamAchievements" => "Steam achievements", "Spoofer" => "Xbox title spoofer", "Epic" => "Epic Games", "Ubisoft" => "Ubisoft Connect", "Stats" => "Stats editor", "Settings" => "Settings", "Diagnostics" => "Event catalog", "Library" => "Xbox library", "Mirror" => "Achievement Mirror", _ => "Xbox achievements" };
     public bool IsHome => page == "Home";
     public bool IsSpoofer => page == "Spoofer";
     public bool IsAchievements => page == "Achievements";
@@ -131,7 +131,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         if (page == "Achievements" && autoPresenceTask != null) StopPresence();
         SetPage(pageHistory.Pop());
     }
-    private void SetPage(string destination) { page = destination; Changed(nameof(CanGoBack)); Changed(nameof(IsAbout)); Changed(nameof(PageTitle)); Changed(nameof(IsHome)); Changed(nameof(IsSpoofer)); Changed(nameof(IsAchievements)); Changed(nameof(IsLibrary)); Changed(nameof(IsSettings)); Changed(nameof(IsDiagnostics)); Changed(nameof(IsStats)); Changed(nameof(IsPlatform)); Changed(nameof(IsEpic)); Changed(nameof(IsUbisoft)); Changed(nameof(IsSteam)); Changed(nameof(IsSteamLibrary)); Changed(nameof(IsSteamAchievements)); Changed(nameof(IsLegacy)); Changed(nameof(IsGfwl)); Changed(nameof(IsXbox360Profiles)); Changed(nameof(IsXbox360ProfileEditor)); Changed(nameof(IsQueues)); Changed(nameof(IsSteamQueue)); Changed(nameof(IsTools)); }
+    private void SetPage(string destination) { page = destination; Changed(nameof(CanGoBack)); Changed(nameof(IsAbout)); Changed(nameof(PageTitle)); Changed(nameof(IsHome)); Changed(nameof(IsSpoofer)); Changed(nameof(IsAchievements)); Changed(nameof(IsLibrary)); Changed(nameof(IsSettings)); Changed(nameof(IsDiagnostics)); Changed(nameof(IsStats)); Changed(nameof(IsPlatform)); Changed(nameof(IsEpic)); Changed(nameof(IsUbisoft)); Changed(nameof(IsSteam)); Changed(nameof(IsSteamLibrary)); Changed(nameof(IsSteamAchievements)); Changed(nameof(IsLegacy)); Changed(nameof(IsGfwl)); Changed(nameof(IsXbox360Profiles)); Changed(nameof(IsXbox360ProfileEditor)); Changed(nameof(IsQueues)); Changed(nameof(IsSteamQueue)); Changed(nameof(IsTools)); Changed(nameof(IsMirror)); }
     private void ApplyXboxProfile(ProfileUser? user)
     {
         ProfileName = user?.Settings.FirstOrDefault(s => s.Id == "Gamertag")?.Value ?? "Xbox account";
@@ -274,6 +274,6 @@ public sealed partial class DesktopModel : Observable, IDisposable
             .Select(value => value.Type == JTokenType.String ? value.Value<string>() : null)
             .FirstOrDefault(value => value != null && (value.StartsWith("http", StringComparison.OrdinalIgnoreCase) || value.StartsWith("//", StringComparison.Ordinal)));
     }
-    public void Dispose() { completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
+    public void Dispose() { mirror?.Dispose(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
     private async Task DisposeClientAsync() { await requests.WaitAsync(); client?.Dispose(); requests.Release(); }
 }

@@ -98,6 +98,8 @@ public sealed partial class DesktopModel
                             if(string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId==Guid.Empty.ToString())throw new InvalidDataException("Missing service configuration.");
                             await api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId,game.Id,account.Xuid,id,FakeSignature);
                         }
+                        if(!await MirrorXboxAppUnlockAsync(game.Id,id,definition.name,lifetime.Token))
+                            return(definition.name,"Request accepted · Achievement Mirror couldn't copy it to Steam; see Achievement Mirror",false);
                         return(definition.name,"Request accepted; refresh Xbox progress to verify.",false);
                     } catch(OperationCanceledException) { throw; }
                     catch(Exception error) { return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }

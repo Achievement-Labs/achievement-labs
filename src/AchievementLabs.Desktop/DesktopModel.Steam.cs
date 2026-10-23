@@ -61,8 +61,11 @@ public sealed partial class DesktopModel
     {
         if (id != loadedSteamAppId) { SteamStatus = "Load achievements for this app ID before saving changes."; return; }
         var snapshot = SteamAchievements.ToArray();
+        var unlocking = snapshot.Where(a => a.IsModified && a.DesiredUnlocked).Select(a => (a.Id, a.Name)).ToArray();
         var count = await Task.Run(() => steam.StoreAchievementsAsync(id, snapshot, lifetime.Token), lifetime.Token);
         SteamStatus = $"Stored {count} changes. Reload to verify.";
+        foreach (var (apiName, name) in unlocking)
+            if (!await MirrorSteamAppUnlockAsync(id, apiName, name, lifetime.Token)) { SteamStatus = $"Stored {count} changes, but Achievement Mirror couldn't copy {name} to Xbox. See Achievement Mirror."; break; }
     });
     public void InvertSteam() { if (CanInteract) foreach (var item in SteamAchievements) item.DesiredUnlocked = !item.DesiredUnlocked; }
     public void RevertSteam() { if (CanInteract) foreach (var item in SteamAchievements) item.DesiredUnlocked = item.IsUnlocked; }
