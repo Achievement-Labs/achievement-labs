@@ -91,14 +91,13 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     public const string SteamHelpText = "\"Off\" is the cautious setting, so experimenting with Steam unlocks in the app can't accidentally cause a permanent Xbox unlock. Steam unlocks made with other tools, like Steam Achievement Manager, look exactly like game unlocks to the Mirror, so those will still be mirrored while it's running.";
     public const string XboxHelpText = "Turn this on to mirror Xbox unlocks you make in Achievement Labs, including Auto Unlock queues, to Steam as each one happens, so Steam gets the same spacing. \"Off\" skips them. Xbox unlocks made in other apps or in the game itself are always mirrored while the Mirror is running.";
     private static readonly TimeSpan SteamPollInterval = TimeSpan.FromSeconds(15);
+    private static readonly TimeSpan LocalPollInterval = TimeSpan.FromSeconds(2);
     private static readonly TimeSpan XboxPollInterval = TimeSpan.FromSeconds(10);
     private static readonly TimeSpan PresencePollInterval = TimeSpan.FromSeconds(20);
-    private static readonly TimeSpan[] FileTriggerDelays = [TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(4), TimeSpan.FromSeconds(10)];
+    private static readonly TimeSpan[] FileTriggerDelays = [TimeSpan.FromMilliseconds(250), TimeSpan.FromSeconds(2)];
 
     private readonly IMirrorHost host;
     private readonly ConcurrentDictionary<Guid, MirrorRunner> runners = new();
-    private readonly ConcurrentDictionary<Guid, DateTimeOffset> nextPoll = new();
-    private readonly ConcurrentDictionary<Guid, string> lastPollError = new();
     private readonly CancellationTokenSource lifetime = new();
     private FileSystemWatcher? statsWatcher;
     private Task? loop;
@@ -334,12 +333,33 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         Status = "Reading the current unlocks so nothing already earned is copied…";
         try
         {
-            var baseline = await ReadSourceAsync(pair, lifetime.Token);
+            ResetSources(pair);
+            IReadOnlyList<MirrorAchievement> baseline;
+            string baselineSource;
+            if (pair.Direction == MirrorDirection.SteamToXbox)
+            {
+                var local = await TryReadSourceAsync(pair, SourceKind.SteamLocal, lifetime.Token);
+                var web = await TryReadSourceAsync(pair, SourceKind.SteamWeb, lifetime.Token);
+                if (local.List == null && web.List == null) throw new InvalidOperationException(web.Error ?? local.Error ?? "Steam achievements couldn't be read.");
+                // This PC's own stats file is current; the Web API can lag, so it is only the baseline when there is no local file.
+                baseline = local.List ?? web.List!;
+                baselineSource = local.List != null ? "this PC" : "the Steam Web API";
+                if (local.List != null) SetBaseline(pair, SourceKind.SteamLocal, local.List);
+                if (web.List != null) SetBaseline(pair, SourceKind.SteamWeb, web.List);
+            }
+            else
+            {
+                baseline = await ReadSourceAsync(pair, SourceKind.Xbox, lifetime.Token);
+                baselineSource = "Xbox";
+                SetBaseline(pair, SourceKind.Xbox, baseline);
+            }
             var runner = runners.GetOrAdd(pair.Id, _ => CreateRunner(pair));
             runner.Start(baseline);
-            lastUnlockedCount[pair.Id] = baseline.Count(a => a.Unlocked);
-            lastPollError.TryRemove(pair.Id, out _);
-            nextPoll[pair.Id] = DateTimeOffset.Now + (pair.Direction == MirrorDirection.SteamToXbox ? SteamPollInterval : XboxPollInterval);
+            Log(pair, $"Baseline read from {baselineSource}.");
+            if (pair.Direction == MirrorDirection.SteamToXbox && !sources.ContainsKey((pair.Id, SourceKind.SteamLocal)))
+                Log(pair, "No Steam stats file for this game on this PC yet, so only the Steam Web API is used. It can lag behind by a minute or more.");
+            var now = DateTimeOffset.Now;
+            foreach (var kind in KindsFor(pair)) nextPoll[(pair.Id, kind)] = now + Interval(kind);
             nextPresenceCheck = DateTimeOffset.MinValue;
             EnsureLoop(); UpdateWatcher();
             Status = $"Mirroring {pair.DisplayName}. New unlocks on {pair.Source} will appear on {pair.Target}.";
@@ -459,9 +479,12 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             if (active.Length == 0) { await UpdateIdleAsync(token); return; }
             foreach (var runner in active)
             {
-                if (!nextPoll.TryGetValue(runner.Pair.Id, out var due) || DateTimeOffset.Now < due) continue;
-                nextPoll[runner.Pair.Id] = DateTimeOffset.Now + (runner.Pair.Direction == MirrorDirection.SteamToXbox ? SteamPollInterval : XboxPollInterval);
-                await PollAsync(runner, "checked", token);
+                foreach (var kind in KindsFor(runner.Pair))
+                {
+                    if (!nextPoll.TryGetValue((runner.Pair.Id, kind), out var due) || DateTimeOffset.Now < due) continue;
+                    nextPoll[(runner.Pair.Id, kind)] = DateTimeOffset.Now + Interval(kind);
+                    await PollAsync(runner, kind, "checked", token);
+                }
             }
             if (DateTimeOffset.Now >= nextPresenceCheck)
             {
@@ -472,53 +495,128 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         }
     }
 
-    private readonly ConcurrentDictionary<Guid, int> lastUnlockedCount = new();
+    private enum SourceKind { SteamLocal, SteamWeb, Xbox }
 
-    private async Task PollAsync(MirrorRunner runner, string detectedBy, CancellationToken token, bool alwaysReport = false)
+    private sealed class SourceState
     {
+        /// <summary>What this source said was unlocked (and when) the first time it was read after Start.</summary>
+        public Dictionary<string, DateTimeOffset?> Known { get; } = new(StringComparer.Ordinal);
+        public int LastUnlocked = -1;
+        public string? LastError;
+    }
+
+    private readonly ConcurrentDictionary<(Guid, SourceKind), SourceState> sources = new();
+    private readonly ConcurrentDictionary<(Guid, SourceKind), DateTimeOffset> nextPoll = new();
+
+    private static IEnumerable<SourceKind> KindsFor(MirrorPair pair) =>
+        pair.Direction == MirrorDirection.SteamToXbox ? [SourceKind.SteamLocal, SourceKind.SteamWeb] : [SourceKind.Xbox];
+
+    private static TimeSpan Interval(SourceKind kind) => kind switch
+    {
+        SourceKind.SteamLocal => LocalPollInterval,
+        SourceKind.SteamWeb => SteamPollInterval,
+        _ => XboxPollInterval
+    };
+
+    private static string Label(SourceKind kind) => kind switch
+    {
+        SourceKind.SteamLocal => "Steam on this PC",
+        SourceKind.SteamWeb => "Steam Web API",
+        _ => "Xbox"
+    };
+
+    private void ResetSources(MirrorPair pair)
+    {
+        foreach (var key in sources.Keys.Where(k => k.Item1 == pair.Id).ToArray()) sources.TryRemove(key, out _);
+        foreach (var key in nextPoll.Keys.Where(k => k.Item1 == pair.Id).ToArray()) nextPoll.TryRemove(key, out _);
+    }
+
+    private SourceState SetBaseline(MirrorPair pair, SourceKind kind, IReadOnlyList<MirrorAchievement> list)
+    {
+        var state = new SourceState { LastUnlocked = list.Count(a => a.Unlocked) };
+        foreach (var achievement in list.Where(a => a.Unlocked)) state.Known[achievement.Id] = achievement.UnlockedAt;
+        sources[(pair.Id, kind)] = state;
+        return state;
+    }
+
+    /// <summary>
+    /// Hides unlocks this source already reported when mirroring started, so a source that lags behind
+    /// (the Steam Web API) can't make an old or re-locked achievement look new. An achievement counts as
+    /// new only if it wasn't unlocked in this source's baseline, or was unlocked again at a different time.
+    /// </summary>
+    private static IReadOnlyList<MirrorAchievement> WithoutKnown(SourceState state, IReadOnlyList<MirrorAchievement> list) =>
+        list.Select(a => a.Unlocked && state.Known.TryGetValue(a.Id, out var at) && at == a.UnlockedAt ? a with { Unlocked = false } : a).ToArray();
+
+    private async Task PollAsync(MirrorRunner runner, SourceKind kind, string detectedBy, CancellationToken token, bool alwaysReport = false)
+    {
+        var pair = runner.Pair;
+        var key = (pair.Id, kind);
         try
         {
-            var snapshot = await ReadSourceAsync(runner.Pair, token);
-            if (lastPollError.TryRemove(runner.Pair.Id, out _))
+            var list = await ReadSourceAsync(pair, kind, token);
+            if (!sources.TryGetValue(key, out var state))
             {
-                Log(runner.Pair, $"Reading {runner.Pair.Source} works again.");
-                Dispatcher.UIThread.Post(() => Status = $"Reading {runner.Pair.Source} works again for {runner.Pair.DisplayName}.");
+                // First successful read of this source (e.g. the local file appeared later): it becomes its baseline.
+                SetBaseline(pair, kind, list);
+                Log(pair, $"{Label(kind)} is now available · {list.Count(a => a.Unlocked)} of {list.Count} unlocked, used as its starting point.");
+                return;
             }
-            // Report what the source says whenever it changes (and on request), so a missed unlock is visible.
-            var unlocked = snapshot.Count(a => a.Unlocked);
-            var changed = !lastUnlockedCount.TryGetValue(runner.Pair.Id, out var before) || before != unlocked;
-            lastUnlockedCount[runner.Pair.Id] = unlocked;
-            if (changed || alwaysReport)
-                Log(runner.Pair, $"{runner.Pair.Source} reports {unlocked} of {snapshot.Count} unlocked ({detectedBy}).");
-            await runner.ObserveSourceAsync(snapshot, detectedBy, token);
+            if (state.LastError != null) { state.LastError = null; Log(pair, $"Reading {Label(kind)} works again."); }
+            var unlocked = list.Count(a => a.Unlocked);
+            if (unlocked != state.LastUnlocked || alwaysReport)
+                Log(pair, $"{Label(kind)} reports {unlocked} of {list.Count} unlocked ({detectedBy}).");
+            state.LastUnlocked = unlocked;
+            await runner.ObserveSourceAsync(WithoutKnown(state, list), Label(kind), token);
         }
         catch (OperationCanceledException) { }
+        catch (FileNotFoundException) when (kind == SourceKind.SteamLocal) { /* No local file for this game yet. */ }
         catch (Exception error)
         {
             // A failed read never unlocks anything; it is reported once until it recovers.
-            var message = $"Couldn't read {runner.Pair.Source}: {error.Message}";
-            if (!alwaysReport && lastPollError.TryGetValue(runner.Pair.Id, out var previous) && previous == message) return;
-            lastPollError[runner.Pair.Id] = message;
-            Log(runner.Pair, message + " The Mirror keeps trying.", isError: true);
-            Dispatcher.UIThread.Post(() => Status = $"{runner.Pair.DisplayName}: {message} The Mirror keeps trying.");
+            var message = $"Couldn't read {Label(kind)}: {error.Message}";
+            var state = sources.GetOrAdd(key, _ => new SourceState());
+            if (!alwaysReport && state.LastError == message) return;
+            state.LastError = message;
+            Log(pair, message + " The Mirror keeps trying.", isError: true);
+            Dispatcher.UIThread.Post(() => Status = $"{pair.DisplayName}: {message} The Mirror keeps trying.");
         }
     }
 
-    /// <summary>Reads the source right now and writes the result to the activity log.</summary>
+    /// <summary>Reads every source right now and writes what each reports to the activity log.</summary>
     [RelayCommand]
     public async Task CheckNowAsync()
     {
         var runner = SelectedRunner;
         if (runner == null || runner.Status == MirrorStatus.Idle) { Status = "Start mirroring first."; return; }
         Status = $"Checking {runner.Pair.Source} now…";
-        await PollAsync(runner, "checked now", lifetime.Token, alwaysReport: true);
+        foreach (var kind in KindsFor(runner.Pair))
+        {
+            if (kind == SourceKind.SteamLocal && !sources.ContainsKey((runner.Pair.Id, kind))) { Log(runner.Pair, "Steam on this PC: no stats file for this game."); continue; }
+            await PollAsync(runner, kind, "checked now", lifetime.Token, alwaysReport: true);
+        }
         Status = $"Checked {runner.Pair.Source}. See the activity log.";
     }
 
-    private Task<IReadOnlyList<MirrorAchievement>> ReadSourceAsync(MirrorPair pair, CancellationToken token) =>
-        pair.Direction == MirrorDirection.SteamToXbox
-            ? ReadSteamWebAsync(pair.SteamAppId, pair.SteamId, token)
-            : ReadXboxListAsync(pair.XboxTitleId, token);
+    private async Task<(IReadOnlyList<MirrorAchievement>? List, string? Error)> TryReadSourceAsync(MirrorPair pair, SourceKind kind, CancellationToken token)
+    {
+        try { return (await ReadSourceAsync(pair, kind, token), null); }
+        catch (OperationCanceledException) { throw; }
+        catch (FileNotFoundException) { return (null, null); }
+        catch (Exception error) { return (null, error.Message); }
+    }
+
+    private Task<IReadOnlyList<MirrorAchievement>> ReadSourceAsync(MirrorPair pair, SourceKind kind, CancellationToken token) => kind switch
+    {
+        SourceKind.SteamLocal => Task.Run(() => ReadSteamLocal(pair), token),
+        SourceKind.SteamWeb => ReadSteamWebAsync(pair.SteamAppId, pair.SteamId, token),
+        _ => ReadXboxListAsync(pair.XboxTitleId, token)
+    };
+
+    private IReadOnlyList<MirrorAchievement> ReadSteamLocal(MirrorPair pair)
+    {
+        if (host.SteamInstallPath.Length == 0 || !SteamWebApi.IsSteamId64(pair.SteamId)) throw new FileNotFoundException();
+        return SteamLocalStats.TryRead(host.SteamInstallPath, SteamWebApi.AccountId(pair.SteamId), pair.SteamAppId) ?? throw new FileNotFoundException();
+    }
 
     private async Task<IReadOnlyList<MirrorAchievement>> ReadXboxListAsync(string titleId, CancellationToken token) => (await host.ReadXboxAsync(titleId, token)).Achievements;
 
@@ -543,13 +641,13 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             var folder = Path.Combine(host.SteamInstallPath, "appcache", "stats");
             if (host.SteamInstallPath.Length == 0 || !Directory.Exists(folder))
             {
-                Log(pair, "Steam's local stats folder wasn't found, so only the Steam Web API is checked (every 15 seconds).");
+                Log(pair, "Steam's local stats folder wasn't found, so only the Steam Web API is checked (every 15 seconds, and it can lag).");
                 return;
             }
             statsWatcher = new FileSystemWatcher(folder, "UserGameStats_*.bin") { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.FileName };
             statsWatcher.Changed += OnStatsFileChanged; statsWatcher.Created += OnStatsFileChanged; statsWatcher.Renamed += OnStatsFileChanged;
             statsWatcher.EnableRaisingEvents = true;
-            Log(pair, "Watching Steam's stats files on this PC, plus the Steam Web API every 15 seconds.");
+            Log(pair, "Watching Steam's stats file on this PC (instant), plus the Steam Web API every 15 seconds for other devices.");
         }
         catch (Exception error)
         {
@@ -569,16 +667,15 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         if (runner == null) return;
         if (SteamWebApi.IsSteamId64(runner.Pair.SteamId) && parts[1] != SteamWebApi.AccountId(runner.Pair.SteamId).ToString()) return;
         var now = DateTimeOffset.Now;
-        if (now - lastFileNotice < TimeSpan.FromSeconds(3)) return; // Steam writes the file several times per save.
+        if (now - lastFileNotice < TimeSpan.FromSeconds(1)) return; // Steam writes the file several times per save.
         lastFileNotice = now;
-        Log(runner.Pair, "Steam updated this game's stats file on this PC · checking Steam now.");
         _ = Task.Run(async () =>
         {
-            // Steam may take a moment to upload the unlock, so check a few times.
+            // Read once Steam has finished writing, then once more in case it saves in two steps.
             foreach (var wait in FileTriggerDelays)
             {
                 try { await Task.Delay(wait, lifetime.Token); } catch (OperationCanceledException) { return; }
-                await PollAsync(runner, "Steam stats file on this PC", lifetime.Token);
+                await PollAsync(runner, SourceKind.SteamLocal, "stats file changed", lifetime.Token);
             }
         });
     }

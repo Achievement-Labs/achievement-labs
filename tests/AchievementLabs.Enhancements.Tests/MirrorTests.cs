@@ -40,6 +40,7 @@ public static class MirrorTests
         Matching();
         Runtime().GetAwaiter().GetResult();
         Parsing();
+        LocalStats();
         Store();
         Console.WriteLine("PASS: Achievement Mirror matching (exact, ambiguous, close, kept decisions, both directions), no-backfill baseline, verify-after-unlock, already-unlocked skip, retries, stop-on-failure with ordered pending, resume send/discard, app-unlock toggle, ignored and unmatched rows, Steam Web API and Xbox presence parsing, pair storage. No network.");
     }
@@ -163,6 +164,59 @@ public static class MirrorTests
         Assert(XboxPresence.IsInTitle(presence, "1653280174") && !XboxPresence.IsInTitle(presence, "1828326430"), "Presence finds the active title");
         Assert(!XboxPresence.IsInTitle("""{"devices":[{"titles":[{"id":"1653280174","state":"Inactive"}]}]}""", "1653280174"), "Inactive title doesn't count");
         Assert(!XboxPresence.IsInTitle("""{"xuid":"1","state":"Offline"}""", "1653280174"), "Offline has no devices");
+    }
+
+    // Binary KeyValues writer for synthetic Steam stats fixtures.
+    static byte[] Kv(params (string Name, object Value)[] items)
+    {
+        var bytes = new List<byte>();
+        void Str(string text) { bytes.AddRange(System.Text.Encoding.UTF8.GetBytes(text)); bytes.Add(0); }
+        void Write((string Name, object Value)[] children)
+        {
+            foreach (var (name, value) in children)
+            {
+                switch (value)
+                {
+                    case (string Name, object Value)[] nested: bytes.Add(0); Str(name); Write(nested); bytes.Add(8); break;
+                    case string text: bytes.Add(1); Str(name); Str(text); break;
+                    case int number: bytes.Add(2); Str(name); bytes.AddRange(BitConverter.GetBytes(number)); break;
+                }
+            }
+        }
+        Write(items); bytes.Add(8);
+        return bytes.ToArray();
+    }
+    static (string, object)[] O(params (string, object)[] items) => items;
+
+    static void LocalStats()
+    {
+        var bit = (string id, string name) => O(("name", id), ("display", O(("name", O(("english", name))))));
+        var stat1 = O(("type", "ACHIEVEMENTS"), ("bits", O(("9", bit("HILT", "Choose to be Chosen")), ("10", bit("FRAMED", "Altered Manifestations")))));
+        var stat5 = O(("type", "INT"), ("name", "kills"));
+        var stat25 = O(("type", 4), ("bits", O(("0", bit("PROBLEM", "Crisis Management")))));
+        var game = O(("stats", O(("1", stat1), ("5", stat5), ("25", stat25))), ("gamename", "Control"));
+        var schema = Kv(("870780", game));
+        var user1 = O(("data", 512), ("AchievementTimes", O(("9", 1792791442))));
+        var stats = Kv(("cache", O(("crc", 1), ("PendingChanges", 0), ("1", user1))));
+        var list = AchievementLabs.Mirror.SteamLocalStats.Parse(stats, schema, 870780);
+        Assert(list.Count == 3, "All achievement bits read from the schema, other stats ignored");
+        var hilt = list.Single(a => a.Id == "HILT");
+        Assert(hilt.Unlocked && hilt.Name == "Choose to be Chosen" && hilt.UnlockedAt == DateTimeOffset.FromUnixTimeSeconds(1792791442), "Unlocked bit, name and time");
+        Assert(!list.Single(a => a.Id == "FRAMED").Unlocked && !list.Single(a => a.Id == "PROBLEM").Unlocked, "Other bits and stat blocks locked");
+        var cleared = O(("data", 0), ("AchievementTimes", O(("9", 1792791442))));
+        var relocked = Kv(("cache", O(("crc", 2), ("1", cleared))));
+        Assert(!AchievementLabs.Mirror.SteamLocalStats.Parse(relocked, schema, 870780).Single(a => a.Id == "HILT").Unlocked, "Cleared bit means locked even if a time remains");
+        try { AchievementLabs.Mirror.SteamLocalStats.Parse([0, 65, 66], schema, 870780); throw new Exception("Expected error"); } catch (InvalidDataException) { }
+
+        // Optional check against real files: set AL_STEAM_STATS_DIR, AL_STEAM_ACCOUNT and AL_STEAM_APP.
+        if (Environment.GetEnvironmentVariable("AL_STEAM_STATS_DIR") is { Length: > 0 } dir)
+        {
+            var app = long.Parse(Environment.GetEnvironmentVariable("AL_STEAM_APP")!);
+            var real = AchievementLabs.Mirror.SteamLocalStats.Parse(
+                File.ReadAllBytes(Path.Combine(dir, $"UserGameStats_{Environment.GetEnvironmentVariable("AL_STEAM_ACCOUNT")}_{app}.bin")),
+                File.ReadAllBytes(Path.Combine(dir, $"UserGameStatsSchema_{app}.bin")), app);
+            Console.WriteLine($"REAL: {real.Count} achievements, unlocked: " + string.Join(", ", real.Where(a => a.Unlocked).Select(a => $"{a.Id} '{a.Name}' {a.UnlockedAt:u}")));
+        }
     }
 
     static void Store()
