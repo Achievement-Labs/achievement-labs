@@ -94,6 +94,12 @@ public sealed partial class DesktopModel : IMirrorHost
 
     async Task<IReadOnlyList<MirrorAchievement>> IMirrorHost.ReadSteamLocalAsync(long appId, CancellationToken cancellationToken)
     {
+        // Steam's own stats file on this PC updates the moment a save lands; the profile page used by the
+        // Steam tab can lag, which would make a successful unlock look unverified.
+        var steamId = steam.GetLocalSteamId();
+        if (SteamWebApi.IsSteamId64(steamId) && steam.GetSteamInstallPath() is { Length: > 0 } steamPath
+            && await Task.Run(() => SteamLocalStats.TryRead(steamPath, SteamWebApi.AccountId(steamId), appId), cancellationToken) is { } local)
+            return local;
         var items = await steam.LoadAchievementsAsync(appId, cancellationToken);
         return items.Select(a => new MirrorAchievement(a.Id, a.Name, a.Description, a.IsUnlocked,
             a.UnlockTime is { } time ? new DateTimeOffset(time) : null)).ToArray();

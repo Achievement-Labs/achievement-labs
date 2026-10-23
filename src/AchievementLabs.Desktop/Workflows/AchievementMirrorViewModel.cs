@@ -752,7 +752,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
             {
                 var appId = runner.Pair.SteamAppId;
                 if (local == appId) { wanted = runner; reason = "Steam on this PC shows you playing"; break; }
-                if (webPlayingAppId == appId) { wanted = runner; reason = "Steam shows you playing on another device"; break; }
+                if (webPlayingAppId == appId) { wanted = runner; reason = "Steam Web API shows you playing (another device, or Steam hasn't caught up after you quit)"; break; }
                 if (presenceBurstUntil.TryGetValue(runner.Pair.Id, out var until) && until > now) { wanted = runner; reason = null; break; }
             }
 

@@ -463,23 +463,19 @@ public sealed class SteamAchievementService : ISteamAchievementService
         if (requested.Count == 0)
             return Task.FromResult(0);
 
+        // Changes run in the helper process: a fresh Steam connection tied to this game that waits for Steam to
+        // confirm the game's stats are loaded. Setting achievements in-process failed with "Steam refused to set
+        // achievement" because this process may already be tied to another game, and stats weren't confirmed.
         return Task.Run(() =>
         {
             cancellationToken.ThrowIfCancellationRequested();
-
-            using var client = CreateClient(appId);
-            PrepareStats(client);
-
+            var arguments = new List<string> { appId.ToString(CultureInfo.InvariantCulture) };
             foreach (var achievement in requested)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                if (!client.SteamUserStats.SetAchievement(achievement.Id, achievement.DesiredUnlocked))
-                    throw new InvalidOperationException($"Steam refused to set achievement '{achievement.Id}'.");
+                arguments.Add(achievement.DesiredUnlocked ? "--set" : "--clear");
+                arguments.Add(achievement.Id);
             }
-
-            if (!client.SteamUserStats.StoreStats())
-                throw new InvalidOperationException("Steam refused StoreStats for the active game.");
-
+            RunSteamHelper(arguments, TimeSpan.FromSeconds(45), "STORED ", cancellationToken);
             return requested.Count;
         }, cancellationToken);
     }
@@ -607,6 +603,40 @@ public sealed class SteamAchievementService : ISteamAchievementService
             _spoofProcess.Dispose();
             _spoofProcess = null;
         }
+    }
+
+    /// <summary>Runs the Steam helper to completion and throws with its own message if it fails.</summary>
+    private static void RunSteamHelper(IEnumerable<string> arguments, TimeSpan timeout, string successPrefix, CancellationToken cancellationToken)
+    {
+        var helperPath = GetSteamIdleHelperPath();
+        if (!File.Exists(helperPath))
+            throw new FileNotFoundException("Steam helper was not found. Rebuild or publish Achievement Labs, then try again.", helperPath);
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = helperPath,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            WindowStyle = ProcessWindowStyle.Hidden,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true
+        };
+        foreach (var argument in arguments) startInfo.ArgumentList.Add(argument);
+        using var process = Process.Start(startInfo) ?? throw new InvalidOperationException("Steam helper failed to start.");
+        var output = process.StandardOutput.ReadToEndAsync(cancellationToken);
+        var error = process.StandardError.ReadToEndAsync(cancellationToken);
+        try
+        {
+            if (!process.WaitForExitAsync(cancellationToken).Wait(timeout, cancellationToken))
+                throw new TimeoutException("Steam didn't respond in time. Make sure Steam is running and online.");
+        }
+        catch
+        {
+            try { if (!process.HasExited) process.Kill(entireProcessTree: true); } catch { }
+            throw;
+        }
+        var stdout = output.Result;
+        if (process.ExitCode == 0 && stdout.Contains(successPrefix, StringComparison.Ordinal)) return;
+        throw new InvalidOperationException(FirstNonEmpty(error.Result.Trim(), $"Steam helper exited with code {process.ExitCode}."));
     }
 
     private static string GetSteamIdleHelperPath()
