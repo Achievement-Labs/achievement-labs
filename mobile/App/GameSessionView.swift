@@ -3,6 +3,7 @@ import LabsMobileCore
 
 struct QueueView: View {
     @EnvironmentObject var m:MobileModel
+    @EnvironmentObject var appearance:MobileAppearance
     @State private var settings=false
     private var game:Game? { m.gameForTitle(m.presenceTitle) ?? m.gameForTitle(m.queueTitle) ?? m.nextQueueItem?.game }
     var body:some View {
@@ -24,7 +25,7 @@ struct QueueView: View {
                     }.padding(14).frame(maxWidth:900).frame(maxWidth:.infinity)
                 }.scrollDismissesKeyboard(.interactively)
             }.labsPage().navigationTitle("Game Session").navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement:.topBarTrailing) { Button("Session Settings",systemImage:"slider.horizontal.3") { settings=true }.labelStyle(.titleAndIcon).font(.subheadline) } }
+            .toolbar { ToolbarItem(placement:.topBarTrailing) { Button("Session Settings") { settings=true }.font(.caption) } }
             .sheet(isPresented:$settings) { SessionSettingsView() }
             .onAppear {
                 #if DEBUG
@@ -55,7 +56,7 @@ struct QueueView: View {
     private var queueTile:some View {
         VStack(alignment:.leading,spacing:10) {
             HStack { Text("Auto unlock").font(.headline);Spacer();Text(m.running ? "Running" : "Paused").font(.caption).foregroundStyle(.secondary) }
-            if let next=m.nextQueueItem { Text(next.achievement.name).font(.subheadline.weight(.semibold));Text(next.game.name).font(.caption).foregroundStyle(.secondary) }
+            if let next=m.nextQueueItem ?? m.queue.first(where:{$0.status == "Waiting"}) { Text(next.achievement.name).font(.subheadline.weight(.semibold));Text(next.game.name).font(.caption).foregroundStyle(.secondary) }
             TimelineView(.periodic(from:.now,by:1)) { timeline in
                 VStack(alignment:.leading,spacing:5) {
                     if let next=m.nextAction { HStack { Text("Next action");Spacer();Text(timerInterval:next.addingTimeInterval(-31_536_000)...next,countsDown:true).monospacedDigit().id(next) } }
@@ -64,7 +65,7 @@ struct QueueView: View {
                 }.font(.caption)
             }
             Button(m.running ? "Pause queue" : "Start / Resume queue",systemImage:m.running ? "pause.fill" : "play.fill") { if m.running { m.pauseQueue() } else { m.startQueue() } }
-                .buttonStyle(.borderedProminent).disabled(m.account == nil || m.busy || m.queue.isEmpty || m.editingQueueDelay)
+                .buttonStyle(.borderedProminent).foregroundStyle(appearance.accentInk).disabled(m.account == nil || m.busy || m.queue.isEmpty || m.editingQueueDelay)
             Text(m.status).font(.caption).foregroundStyle(.secondary)
             if m.continueQueueInBackground { Text(m.extendedAudio.active ? m.extendedAudio.status : m.continuedQueue.status).font(.caption2).foregroundStyle(.secondary) }
         }.labsTile()

@@ -20,6 +20,11 @@ import LabsMobileCore
     @Published var customRevision = 0
     private func save(_ key:String,_ value:Any) { UserDefaults.standard.set(value,forKey:"appearance."+key) }
     var accentColor: Color { Color(hex:accent) }
+    var accentInk: Color {
+        let hex=UInt64(accent,radix:16) ?? 0x80E69E
+        let components=[Double((hex>>16)&255)/255,Double((hex>>8)&255)/255,Double(hex&255)/255].map { $0 <= 0.04045 ? $0/12.92 : pow(($0+0.055)/1.055,2.4) }
+        return components[0]*0.2126+components[1]*0.7152+components[2]*0.0722 > 0.179 ? .black : .white
+    }
     var tintColor: Color { Color(hex:tint) }
     static var customURL: URL { FileManager.default.urls(for:.applicationSupportDirectory,in:.userDomainMask)[0].appendingPathComponent("LabsCustomBackground.jpg") }
     func importBackground(_ url:URL) throws {
