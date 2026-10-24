@@ -2,15 +2,15 @@ package org.achievementlabs.mobile;
 import org.junit.Test;import static org.junit.Assert.*;import org.json.*;import java.nio.file.*;import java.util.*;import javax.crypto.*;import javax.crypto.spec.*;
 public class CoreTests {
  @Test public void androidUpdaterIgnoresOtherPlatformsAndUntrustedDownloads()throws Exception{
-  assertEquals("https://github.com/Achievement-Labs/achievement-labs",Updater.REPOSITORY);
-  assertEquals("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",Updater.RELEASES_API);
+  assertEquals("https://github.com/thevampirebat/achievement-labs",Updater.REPOSITORY);
+  assertEquals("https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100",Updater.RELEASES_API);
   assertEquals("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/mobile-event-feed/catalogue.json",SessionEngine.EVENT_FEED);
-  String page="https://github.com/Achievement-Labs/achievement-labs/releases/tag/android-v0.3.0";
-  String download="https://github.com/Achievement-Labs/achievement-labs/releases/download/android-v0.3.0/AchievementLabs-Android-0.3.0.apk";
+  String page="https://github.com/thevampirebat/achievement-labs/releases/tag/android-v0.3.0";
+  String download="https://github.com/thevampirebat/achievement-labs/releases/download/android-v0.3.0/AchievementLabs-Android-0.3.0.apk";
   JSONObject asset=new JSONObject().put("name","AchievementLabs-Android-0.3.0.apk").put("browser_download_url",download).put("size",100).put("digest","sha256:"+"a".repeat(64));
   JSONObject release=new JSONObject().put("html_url",page).put("assets",new JSONArray().put(asset));
   assertEquals("0.3.0",Updater.choose(new JSONArray().put(release)).getString("version"));
-  asset.put("browser_download_url",download.replace("Achievement-Labs/achievement-labs","thevampirebat/achievement-labs"));assertNull(Updater.choose(new JSONArray().put(release)));
+  asset.put("browser_download_url",download.replace("thevampirebat/achievement-labs","Achievement-Labs/achievement-labs"));assertNull(Updater.choose(new JSONArray().put(release)));
   asset.put("browser_download_url","https://example.com/other.apk");assertNull(Updater.choose(new JSONArray().put(release)));
   asset.put("browser_download_url",download).put("name","AchievementLabs-Windows.exe");assertNull(Updater.choose(new JSONArray().put(release)));
   asset.put("name","AchievementLabs-Android-0.3.0.apk");release.put("draft",true);assertNull(Updater.choose(new JSONArray().put(release)));

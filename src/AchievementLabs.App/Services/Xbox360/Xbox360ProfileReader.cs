@@ -17,10 +17,13 @@ public sealed class Xbox360ProfileReader(Xbox360PackageService packages)
             var titleId = ReadU32(data, 0);
             if (titleId == 0) continue;
             var name = ReadString(data, 40);
+            DateTimeOffset? lastPlayed = null;
+            try { var stamp = ReadI64(data, 32); if (stamp > 0) lastPlayed = DateTimeOffset.FromFileTime(stamp); }
+            catch (ArgumentOutOfRangeException) { }
             games.Add(new Xbox360ProfileGame(
                 titleId.ToString("X8"), string.IsNullOrWhiteSpace(name) ? $"Title {titleId:X8}" : name,
                 ReadI32(data, 4), ReadI32(data, 8),
-                ReadI32(data, 12), ReadI32(data, 16)));
+                ReadI32(data, 12), ReadI32(data, 16), lastPlayed));
         }
         return games.OrderBy(game => game.Name, StringComparer.OrdinalIgnoreCase).ToArray();
     }

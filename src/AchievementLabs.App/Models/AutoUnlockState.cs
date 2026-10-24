@@ -14,6 +14,7 @@ namespace AchievementLabs.Models
         /// Achievement name for display
         /// </summary>
         public string AchievementName { get; set; } = "";
+        public string AchievementDescription { get; set; } = "";
 
         /// <summary>
         /// Gamerscore value of the achievement

@@ -77,10 +77,17 @@ print('Offline audio start/stop check: '+str(result),flush=True)
 assert result.get('playing') and result.get('stopped') and result['audioManifest'] and result['liveManifest'], 'Audio/session manifest check failed'
 subprocess.run(['xcrun','simctl','terminate',device,'org.achievementlabs.mobile'],check=True)
 
-for page in ['library','lookup','queue','spoof','settings','settings-sync','settings-library','settings-app','home']:
+for page in ['library','lookup','queue','spoof','settings','settings-sync','settings-library','settings-app','settings-appearance','session-settings','home','xbox360']:
     output=run('xcrun','simctl','launch',device,'org.achievementlabs.mobile','--ui-preview='+page)
     preview_pid=output.strip().rsplit(':',1)[-1].strip()
     time.sleep(3)
+    if page == 'xbox360':
+        marker=container/'Documents'/'Xbox360-self-test.json'
+        for attempt in range(45):
+            if marker.exists(): break
+            time.sleep(1)
+        assert marker.exists(), '360 WebView bridge test did not finish'
+        result=json.loads(marker.read_text()); assert result.get('passed'),result
     processes=run('xcrun','simctl','spawn',device,'launchctl','list')
     assert any(line.split() and line.split()[0] == preview_pid and 'org.achievementlabs.mobile' in line for line in processes.splitlines()), 'Preview exited: '+page
     subprocess.run(['xcrun','simctl','io',device,'screenshot','mobile/artifacts/iPhone-'+page+'.png'],check=True)

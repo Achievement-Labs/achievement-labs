@@ -12,7 +12,7 @@ internal sealed record UpdatePlan(int ParentPid, long ParentStartTicks, string T
 
 internal sealed class AppUpdater(HttpClient? client = null, string? directory = null) : IDisposable
 {
-    internal const string Repository = "https://github.com/Achievement-Labs/achievement-labs";
+    internal const string Repository = "https://github.com/thevampirebat/achievement-labs";
     internal static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs", "Updates");
     internal static Version CurrentVersion => typeof(AppUpdater).Assembly.GetName().Version!;
     private readonly HttpClient http = client ?? new() { Timeout = TimeSpan.FromMinutes(10) };
@@ -26,14 +26,14 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
     }
     internal async Task<AvailableUpdate?> CheckAsync(Version current, CancellationToken ct)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100");
+        using var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100");
         request.Headers.UserAgent.ParseAdd("AchievementLabs/" + current);
         using var response = await http.SendAsync(request, ct);
         response.EnsureSuccessStatusCode();
         using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync(ct));
         if (document.RootElement.ValueKind != JsonValueKind.Array || document.RootElement.GetArrayLength() > 100) throw new InvalidDataException("Invalid release list.");
         var candidates = document.RootElement.EnumerateArray()
-            .Where(r => !r.GetProperty("draft").GetBoolean() && !r.GetProperty("prerelease").GetBoolean())
+            .Where(r => !r.GetProperty("draft").GetBoolean())
             .Select(r => new { Release = r, Tag = r.GetProperty("tag_name").GetString()! })
             .Select(r => new { r.Release, r.Tag, Ceiling = TagCeiling(r.Tag) })
             .Where(r => r.Ceiling != null).OrderByDescending(r => r.Ceiling);

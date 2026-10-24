@@ -14,7 +14,7 @@ public static class SavedGameQueueTests
             AutoUnlockerViewModel Model(NativeAccountContext owner) => new(new NativeNotices(_ => {}),owner) { StatePath=Path.Combine(root,"active.json"), SavedGameQueuesRoot=Path.Combine(root,"games") };
             var model = Model(account);
             var field = typeof(AutoUnlockerViewModel).GetField("_state",BindingFlags.Instance|BindingFlags.NonPublic)!;
-            AutoUnlockState State(string title) => new() { OwnerXuid="42",TitleId=title,GameName="Game "+title,RemainingDelaySeconds=23,Queue=[new() { AchievementId="1",AchievementName="Example",DelaySeconds=120 }] };
+            AutoUnlockState State(string title) => new() { OwnerXuid="42",TitleId=title,GameName="Game "+title,RemainingDelaySeconds=23,Queue=[new() { AchievementId="1",AchievementName="Example",AchievementDescription="Complete the sample challenge.",DelaySeconds=120 }] };
             foreach (var title in new[]{"7","8"}) { field.SetValue(model,State(title)); model.SaveCurrentGameQueueCommand.Execute(null); }
             Assert(model.SavedGameQueues.Count==2,"Both title queues are retained independently");
             var restarted = Model(account); restarted.OnNavigatedTo();
@@ -22,6 +22,18 @@ public static class SavedGameQueueTests
             restarted.SelectedSavedGameQueue = restarted.SavedGameQueues.Single(x => x.TitleId=="7");
             restarted.LoadSelectedGameQueueCommand.ExecuteAsync(null).GetAwaiter().GetResult();
             Assert(restarted.PreparedState?.TitleId=="7" && restarted.PreparedState.RemainingDelaySeconds==23 && !restarted.IsRunning,"Loading preserves delay and requires explicit start");
+            Assert(restarted.QueueItems.Single().AchievementDescription=="Complete the sample challenge.","Descriptions survive saved-queue restart");
+            typeof(AutoUnlockerViewModel).GetMethod("UpdateQueueItemStatus",BindingFlags.Instance|BindingFlags.NonPublic)!.Invoke(restarted,new object[]{0,"Unlocked"});
+            Assert(restarted.QueueItems.Single().AchievementDescription=="Complete the sample challenge.","Status updates preserve descriptions");
+            var oldState=State("9");oldState.Queue[0].AchievementDescription="";
+            field.SetValue(model,oldState);model.SaveCurrentGameQueueCommand.Execute(null);
+            var legacy=Model(account);legacy.ReadQueueAchievementsAsync=(_,_)=>Task.FromResult<AchievementsResponse?>(new(){achievements=[new(){id="1",name="Example",lockedDescription="Loaded from current game metadata."}]});
+            legacy.ResumeExistingSession().GetAwaiter().GetResult();
+            Assert(legacy.QueueItems.Single().AchievementDescription=="Loaded from current game metadata." && legacy.PreparedState!.RemainingDelaySeconds==23 && !legacy.IsRunning,"Old queues gain display metadata without changing delays or starting");
+            legacy.OnNavigatedTo();
+            legacy.DeleteSavedGameQueueAsync("9","42").GetAwaiter().GetResult();
+            // Restore the checkpoint used by the remaining persistence checks.
+            field.SetValue(restarted,restarted.PreparedState);restarted.SaveCurrentGameQueueCommand.Execute(null);
             AutoUnlockState? appended = null;
             restarted.AppendSavedGameAsync = state => { appended=state; return Task.CompletedTask; };
             restarted.AppendSelectedGameQueueCommand.ExecuteAsync(null).GetAwaiter().GetResult();

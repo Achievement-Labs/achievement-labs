@@ -104,7 +104,7 @@ struct SpoofSummary: View {
                 else { Text(m.presenceRunning ? "Connecting…" : "Stopped").font(.caption2).foregroundStyle(.secondary) }
             }
             Spacer()
-            Button("Open") { m.selectedTab = 2 }.font(.caption)
+            Button("Open") { m.selectedTab = 1 }.font(.caption)
         }.activeSessionHighlight(m.presenceRunning)
     }
 }
