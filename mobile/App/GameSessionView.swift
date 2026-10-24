@@ -34,7 +34,7 @@ struct QueueView: View {
             .task(id:m.presenceTitle) {
                 do { try await Task.sleep(nanoseconds:400_000_000);try Task.checkCancellation();await m.lookupTitle(m.presenceTitle);await m.readPlaytime(m.presenceTitle) } catch {}
             }
-            .task(id:m.queueTitle) { await m.lookupTitle(m.queueTitle) }
+            .task(id:m.queueTitle) { do { try await Task.sleep(nanoseconds:400_000_000);try Task.checkCancellation();await m.lookupTitle(m.queueTitle) } catch {} }
         }
     }
     private var presenceTile:some View {

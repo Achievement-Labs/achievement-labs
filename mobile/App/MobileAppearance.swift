@@ -130,6 +130,7 @@ struct AppearanceSettings:View {
     @EnvironmentObject var a:MobileAppearance
     @State private var importing=false
     var body:some View {
+        Group {
         Section("Background") {
             Picker("Source",selection:$a.background) { Text("Current game artwork").tag("game");Text("Custom image").tag("custom");Text("Plain background").tag("none") }
             Toggle("Keep game art across the app",isOn:$a.persistent).disabled(a.background != "game")
@@ -151,6 +152,7 @@ struct AppearanceSettings:View {
             LabeledContent("Blur strength",value:"\(Int(a.blur*100))%")
             Slider(value:$a.blur,in:0...1).disabled(!a.glass || a.oled).accessibilityLabel("Glass blur strength")
         }.listRowBackground(LabsGlassSurface())
+        }
         .fileImporter(isPresented:$importing,allowedContentTypes:[.image]) { result in
             do { try a.importBackground(result.get()) } catch { m.error=error.localizedDescription }
         }
