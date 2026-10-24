@@ -184,7 +184,12 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
     /// Only read operations may be repeated after a 401; unlocks and failed heartbeats are never replayed here.
     func openGameSession(_ game:Game) {
         titleDetails[game.id] = game
-        if !running && !presenceRunning { queueTitle = game.id; presenceTitle = game.id }
+        if !running && !presenceRunning && !busy {
+            if queueBook.shouldRestore(game.id, current:queue, active:running || presenceRunning) {
+                loadGameQueue(game.id, append:false)
+            }
+            queueTitle = game.id; presenceTitle = game.id
+        }
         else if queueTitle != game.id || presenceTitle != game.id { status = "Stop active sessions before changing games." }
         selectedTab = 1
     }

@@ -151,6 +151,11 @@ public static class GameSessionWorkspace
         sidebar.Styles.Add(new Style(x=>x.OfType<Button>().Class("nav").Class("active")){Setters={new Setter(Button.BackgroundProperty,Brush("#405B9E89")),new Setter(Button.BorderBrushProperty,Brush("#507FE0B8")),new Setter(Button.BorderThicknessProperty,new Thickness(1)),new Setter(Button.ForegroundProperty,Brush("#B8F1D7"))}});
         LibraryPresentation.Attach(owner,model,all,preview);
         CompletionOverview.Attach(owner,model,all,preview);
+        foreach(var panel in all.OfType<Border>().Where(b=>b.Classes.Contains("panel") && b.GetLogicalAncestors().OfType<Grid>().Any(g=>g.Name is "Xbox360LibraryPage" or "Xbox360EditorPage"))) {
+            if(panel.Child is not Control child)continue;
+            panel.Child=null;var glassPanel=Glass(child,image,owner);glassPanel.Padding=panel.Padding;
+            panel.Padding=new Thickness(0);panel.Background=Brushes.Transparent;panel.BorderThickness=new Thickness(0);panel.Child=glassPanel;
+        }
         AppGlassTheme.Apply(owner);
         appearance.Configure(background,gameArt,image,backdrop,sideArt,all.OfType<Control>());
         _=new WideArtwork(owner,model,coverImage,gameArt,preview);

@@ -16,6 +16,9 @@ public struct SavedQueueBook: Codable {
     public var current: [QueueItem] = []
     public var games: [String: SavedGameQueue] = [:]
     public init() {}
+    public func shouldRestore(_ title: String, current: [QueueItem], active: Bool) -> Bool {
+        !active && games[title] != nil && !current.contains { $0.game.id == title }
+    }
     public var sorted: [SavedGameQueue] { games.values.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending } }
     public mutating func capture(_ items: [QueueItem]) {
         let affected = Set(current.map { $0.game.id } + items.map { $0.game.id })
