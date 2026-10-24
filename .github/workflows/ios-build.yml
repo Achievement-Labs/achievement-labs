@@ -40,6 +40,7 @@ jobs:
           python3 mobile/tools/prepare_catalogue.py
           python3 mobile/tools/prepare_360.py
           node mobile/Shared360/core-checks.cjs
+          node mobile/Shared360/ui-checks.cjs
       - name: Run synthetic core and generated catalogue checks
         env:
           LABS_CATALOGUE: ${{ github.workspace }}/mobile/Catalogue

@@ -34,6 +34,7 @@ jobs:
           python3 mobile/tools/prepare_catalogue.py
           python3 mobile/tools/prepare_360.py
           node mobile/Shared360/core-checks.cjs
+          node mobile/Shared360/ui-checks.cjs
           cp -R mobile/Catalogue android/app/src/main/assets/catalogue
           mkdir -p android/app/src/main/res/drawable
           cp src/AchievementLabs.App/Assets/achievement-labs-icon.png android/app/src/main/res/drawable/app_icon.png

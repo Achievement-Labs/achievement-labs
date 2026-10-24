@@ -17,7 +17,7 @@ function fixture(){
  for(let n=0;n<3;n++){const o=0xa000+n*24;sha(file.subarray(core.blockOffset(n),core.blockOffset(n)+4096)).copy(file,o);file[o+20]=128;file.writeUIntBE(0xffffff,o+21,3);}
  sha(file.subarray(0xa000,0xb000)).copy(file,0xb6000);sha(file.subarray(0xb8000,0xb9000)).copy(file,0xb6018);sha(file.subarray(0xb6000,0xb7000)).copy(file,0x381);sha(file.subarray(0x344,0xa000)).copy(file,0x32c);core.sign(file,core.signing(identity));return {file,identity,keys};
 }
-(async()=>{
+if(require.main!==module)module.exports={fixture};else (async()=>{
  for(const n of [0,1,55,56,63,64,65,4096,1048576]){const b=crypto.randomBytes(n);assert.deepEqual(Buffer.from(core.sha1(b)),sha(b));}
  const {file,identity,keys}=fixture(); if(process.argv[2]==='--fixture'){require('node:fs').writeFileSync(process.argv[3],file);return;} const snapshot=Buffer.from(file),p=await core.Profile.open(file);assert.equal(p.games.length,1);assert.equal(p.list('00000001').length,2);
  const fingerprint=sha(p.working);for(const ids of [[],[1,1],[99]])await assert.rejects(p.unlock('00000001',ids,{mode:'offline'},identity));
