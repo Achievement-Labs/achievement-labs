@@ -1,5 +1,5 @@
 <Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AchievementLabs.Desktop" xmlns:xbox360="clr-namespace:AchievementLabs.Services.Xbox360;assembly=AchievementLabs.Core" xmlns:workflows="using:AchievementLabs.Desktop.Workflows" xmlns:models="clr-namespace:AchievementLabs.Models;assembly=AchievementLabs.Core" xmlns:gfwl="clr-namespace:AchievementLabs.Services.Gfwl;assembly=AchievementLabs.Core" xmlns:core="clr-namespace:AchievementLabs.Core;assembly=AchievementLabs.Core"
-        x:Class="AchievementLabs.Desktop.MainWindow" x:CompileBindings="True" x:DataType="local:DesktopModel" Title="Achievement Labs 1.0.8.14" Width="1440" Height="920" MinWidth="1120" MinHeight="720" Background="#000000" FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter" WindowStartupLocation="CenterScreen">
+        x:Class="AchievementLabs.Desktop.MainWindow" x:CompileBindings="True" x:DataType="local:DesktopModel" Title="Achievement Labs" Width="1440" Height="920" MinWidth="1120" MinHeight="720" Background="#000000" FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter" WindowStartupLocation="CenterScreen">
  <Design.DataContext><local:DesktopModel/></Design.DataContext>
  <Grid x:Name="PreviewRoot" Background="#000000" ColumnDefinitions="240,*" RowDefinitions="*,38">
   <Border Grid.RowSpan="2" Background="#050606" BorderBrush="#24272A" BorderThickness="0,0,1,0">
@@ -23,7 +23,7 @@
 
     </StackPanel>
     </ScrollViewer><StackPanel Grid.Row="2" Spacing="14">
-      <Border Classes="panel" Padding="12"><StackPanel Spacing="6"><TextBlock Text="A space to experiment." FontSize="12"/><TextBlock Text="Achievement Labs 1.0.8.14" Classes="muted" FontSize="11"/></StackPanel></Border>
+      <Border Classes="panel" Padding="12"><StackPanel Spacing="6"><TextBlock Text="A space to experiment." FontSize="12"/><TextBlock Text="{Binding BuildVersionLabel}" Classes="muted" FontSize="11"/></StackPanel></Border>
      <Grid ColumnDefinitions="34,*"><Grid Width="34" Height="34"><Border Background="#303642" CornerRadius="17"><TextBlock Text="U" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border><Border CornerRadius="17" ClipToBounds="True"><local:RemoteImage Url="{Binding ProfileImageUrl}" Stretch="UniformToFill"/></Border></Grid><StackPanel Grid.Column="1" Margin="10,0,0,0"><TextBlock Text="{Binding ProfileName}" FontSize="12"/><TextBlock Text="{Binding ConnectionLabel}" Classes="muted" FontSize="10"/></StackPanel></Grid>
     </StackPanel>
    </Grid>
