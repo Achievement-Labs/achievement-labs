@@ -895,7 +895,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         queue = [QueueItem(game:second,achievement:row,delay:120)]
         referenceInfo = "Reference profile · 1 queued · 2 skipped"; status = "Timing queue loaded. Review delays, then start when ready."
         spoofStatus = "No heartbeat sent."; playedHours[second.id] = 12.5
-        selectedTab = page == "queue" ? 1 : page == "spoof" ? 1 : page == "xbox360" ? 5 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
+        selectedTab = (page == "queue" || page == "session-settings") ? 1 : page == "spoof" ? 1 : page == "xbox360" ? 5 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
     }
     #endif
     private struct CompletionCache: Codable { var mythic: Set<String>; var checked: Set<String>; var totals: [String:Int] }

@@ -33,7 +33,7 @@ run(`state={games:Array.from({length:1500},(_,i)=>({titleId:String(i),name:'Game
 assert.equal(run(`libraryGames()[2].name`),'Game 2');
 assert.equal(run(`let cached=libraryCache.ordered;libraryGames();cached===libraryCache.ordered`),true);
 for(const id of ['search','libraryResults','libraryCount','libraryMore'])nodes[id]={value:'',textContent:'',innerHTML:'',hidden:false};
-const input=nodes.search;input.value='Game 1499';listeners.input({target:{id:'search',value:input.value}});
+const input=nodes.search;input.value='Game 1499';listeners.input({target:{id:'search',value:input.value,dataset:{}}});
 assert.equal(nodes.libraryResults.innerHTML,'');
 for(const fn of timers.values())fn();
 assert.equal(nodes.search,input);assert.match(nodes.libraryResults.innerHTML,/Game 1499/);
@@ -57,9 +57,9 @@ console.log('Achievement status filters, sorting, preserved catalogue order, DLC
 
 
 run(`state.queue=[{game:{titleId:'7',name:'First game'},achievementId:'1',name:'First',delay:60,status:'Waiting'}];state.savedQueues=[{titleId:'8',name:'Separate game',count:2,updated:0}];state.prefs={}`);
-assert.match(run(`queuePage()`),/data-value="7\/1"/);
-assert.match(run(`queuePage()`),/data-delay="7\/1"/);
-assert.match(run(`queuePage()`),/Load separately/);
+assert.match(run(`queuedAchievements()`),/data-value="7\/1"/);
+assert.match(run(`queuedAchievements()`),/data-delay="7\/1"/);
+assert.match(run(`sessionSettingsPage()`),/Load separately/);
 assert.match(run(`savedQueueTile()`),/Separate game/);
 assert.match(run(`savedQueueTile()`),/Loading never starts unlocking/);
 console.log('Stable queue edit/removal identities and saved game controls passed.');
@@ -69,8 +69,8 @@ assert.equal(run(`minuteSeconds('0.5')`),30);
 assert.equal(run(`minuteSeconds('2')`),120);
 for(const bad of ['', '-1', 'Infinity', '525601', 'abc'])assert.equal(run(`minuteSeconds(${JSON.stringify(bad)})`),null);
 assert.equal(run(`duration(3661)`),'01:01:01');
-assert.match(run(`queuePage()`),/Delay, minutes/);
-assert.match(run(`queuePage()`),/Default delay, minutes/);
+assert.match(run(`queuedAchievements()`),/Delay, minutes/);
+assert.match(run(`sessionSettingsPage()`),/Default delay, minutes/);
 run(`state.queueRunning=true;state.queueStarted=Date.now()-60000;state.nextAt=Date.now()+90000;state.nextQueueGame='First game';state.nextQueueName='Next achievement';`);
 assert.match(run(`queueCountdown()`),/Next unlock in 00:01:30/);
 for(const name of ['queueCountdown','queueElapsed','nextQueueItem'])nodes[name]={textContent:''};
@@ -80,3 +80,28 @@ run(`state.nextAt=Date.now()+120000;state.nextQueueName='Second achievement';upd
 assert.match(nodes.queueCountdown.textContent,/00:02:00/);assert.match(nodes.nextQueueItem.textContent,/Second achievement/);
 run(`state.queueRunning=false;state.queueFinishing=false;updateRuntime()`);assert.match(nodes.queueCountdown.textContent,/Paused/);
 console.log('Minute conversion preserves stored seconds; fractional/bounded inputs and running/next-item/paused countdown transitions passed.');
+
+run(`state.prefs={};page='queue';spoofTitle='7';queueTitle='7';`);
+assert.match(run(`gameSessionPage()`),/Spoofing/);
+assert.match(run(`gameSessionPage()`),/Auto unlock/);
+assert.match(run(`gameSessionPage()`),/data-delay="7\/1"/);
+assert.doesNotMatch(run(`gameSessionPage()`),/Reference gamertag/);
+assert.match(run(`sessionSettingsPage()`),/Reference gamertag/);
+assert.doesNotMatch(run(`sessionSettingsPage()`),/Glass transparency/);
+assert.match(run(`appearanceSettings()`),/Glass transparency/);
+assert.match(run(`appearanceSettings()`),/Keep game art across the app/);
+assert.match(run(`appearanceSettings()`),/Pure dark OLED/);
+run(`var artFixtures=[{url:'https://store-images.s-microsoft.com/poster',width:1440,height:2160,purpose:'Poster'},{url:'https://store-images.s-microsoft.com/hero',width:1920,height:1080,purpose:'SuperHeroArt'}]`);
+assert.match(run(`selectStoreArtwork(artFixtures,390,844).url`),/poster$/);
+assert.match(run(`selectStoreArtwork(artFixtures,1024,768).url`),/hero$/);
+assert.match(run(`selectStoreArtwork(artFixtures,400,768).url`),/poster$/);
+assert.match(run(`selectStoreArtwork(artFixtures.slice(1),390,844).url`),/hero$/);
+assert.equal(run(`selectStoreArtwork([],390,844)`),null);
+assert.equal(run(`selectStoreArtwork(artFixtures,0,0)`),null);
+run(`state.prefs={glassTransparency:1000,glassBlur:-5,backgroundSource:'injected',glassTint:'red;bad',accentColour:'#abcdef',backgroundDim:NaN}`);
+assert.equal(run(`appearanceValues().transparency`),60);
+assert.equal(run(`appearanceValues().blur`),0);
+assert.equal(run(`appearanceValues().source`),'game');
+assert.equal(run(`appearanceValues().tint`),'#34594c');
+assert.equal(run(`appearanceValues().accent`),'#abcdef');
+console.log('Compact session controls, separate settings, poster/hero selection across rotation and Split View, missing-art fallbacks and appearance bounds passed.');

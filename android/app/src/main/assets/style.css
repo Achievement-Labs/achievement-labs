@@ -11,3 +11,18 @@ dialog{background:#202222;color:#fff;border:1px solid #555;border-radius:18px;ma
 .platform-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:12px}.platform-filters label{justify-content:flex-start;gap:8px;border:1px solid #444;border-radius:10px;padding:6px 8px;font-size:13px;min-height:44px}.platform-filters input{flex-shrink:0;margin:0}
 #lookupResults .grow>small{display:block;margin-top:4px}
 
+
+/* Shared artwork and glass surfaces. Android's Reduce Transparency fallback is solid. */
+:root{--glass-tint:#34594c;--glass-opacity:.84;--glass-blur:24px;--art-dim:.45;--art-blur:0px;--accent-text:#071a0b;--muted:#b5c7c4;--panel:#14262c}
+body{background:#091318}#appBackdrop{position:fixed;inset:0;pointer-events:none;z-index:-1;background:#091318;overflow:hidden}#backdropImage{width:100%;height:100%;object-fit:cover;object-position:center;filter:blur(var(--art-blur));transform:scale(1.03)}#appBackdrop:after{content:'';position:absolute;inset:0;background:rgba(0,0,0,var(--art-dim))}#appBackdrop[hidden]{display:none}
+.card,header,nav,.tabs{background:color-mix(in srgb,rgba(15,31,37,var(--glass-opacity)) 94%,var(--glass-tint));backdrop-filter:blur(var(--glass-blur));-webkit-backdrop-filter:blur(var(--glass-blur));border:1px solid #ffffff1c}
+header{border-width:0 0 1px;gap:10px;padding:10px 16px;min-height:64px}header h1{font-size:21px}#headerActions button{font-size:14px;min-height:44px;padding:8px}
+nav{border-width:1px 0 0}.tabs{overflow-x:auto;position:static}.tabs button{min-width:64px;min-height:44px;font-size:13px}.tabs button.active{background:#ffffff20}.card{padding:14px;margin:12px 0;border-radius:17px}h2{font-size:17px;margin:0 0 10px}.card.hero{background:color-mix(in srgb,rgba(15,31,37,var(--glass-opacity)) 94%,var(--glass-tint))}
+.glass-off .card,.glass-off header,.glass-off nav,.glass-off .tabs{background:color-mix(in srgb,#14262c 94%,var(--glass-tint));backdrop-filter:none;-webkit-backdrop-filter:none}
+.oled body,.oled #appBackdrop{background:#000}.oled .card,.oled .card.hero,.oled header,.oled nav,.oled .tabs{background:#000;backdrop-filter:none;-webkit-backdrop-filter:none}.oled #appBackdrop{display:none}
+input,select{background:#0b1d23;color:#f1f7f5;border-color:#405459}input[type=range]{padding:0;border:0;min-height:44px;accent-color:var(--green)}input[type=color]{width:60px;min-height:44px;padding:3px}button.primary{color:var(--accent-text)}.actions button{min-height:44px}button:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.session-tiles{display:grid;gap:12px}.session-tiles .card{margin:0}.tile-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.tile-heading h2{margin:0}.session-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}.session-metrics b{display:block;font-size:21px;font-weight:500;font-variant-numeric:tabular-nums;margin-top:4px}.session-tile>button{width:100%;min-height:44px}.session-tile p{font-size:13px;margin:10px 0}.session-tile .session-clock{font-size:20px}.block{display:block;margin-top:8px}.session-tile .tile-heading small{text-align:right}.achievement p{font-size:14px}.delay{min-width:110px;max-width:140px}.card details{border:0;margin:0}.card summary{padding:12px 0;color:var(--green);min-height:44px;font-size:15px}
+@media(min-width:650px) and (orientation:landscape){.session-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.session-tile{display:flex;flex-direction:column}.session-tile>button{margin-top:auto}}
+@media(prefers-reduced-transparency:reduce){.card,header,nav,.tabs{background:#14262c;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+body{isolation:isolate;min-height:100vh}

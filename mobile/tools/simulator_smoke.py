@@ -77,7 +77,7 @@ print('Offline audio start/stop check: '+str(result),flush=True)
 assert result.get('playing') and result.get('stopped') and result['audioManifest'] and result['liveManifest'], 'Audio/session manifest check failed'
 subprocess.run(['xcrun','simctl','terminate',device,'org.achievementlabs.mobile'],check=True)
 
-for page in ['library','lookup','queue','spoof','settings','settings-sync','settings-library','settings-app','home','xbox360']:
+for page in ['library','lookup','queue','spoof','settings','settings-sync','settings-library','settings-app','settings-appearance','session-settings','home','xbox360']:
     output=run('xcrun','simctl','launch',device,'org.achievementlabs.mobile','--ui-preview='+page)
     preview_pid=output.strip().rsplit(':',1)[-1].strip()
     time.sleep(3)

@@ -49,7 +49,7 @@ struct HomeView: View {
                     }
                 }
                 Section { Button("Settings and launch page",systemImage:"gear") { m.selectedTab = 3 } }
-            }.listSectionSpacing(.compact).navigationTitle("Home").navigationBarTitleDisplayMode(.inline)
+            }.listSectionSpacing(.compact).labsPage().navigationTitle("Home").navigationBarTitleDisplayMode(.inline)
             .refreshable { await m.refreshGames() }
             .toolbar { Button { Task { await m.refreshGames() } } label: { Image(systemName:"arrow.clockwise") }.disabled(m.account == nil || m.busy).accessibilityLabel("Refresh profile and library") }
             .sheet(isPresented:$sync) { PCSyncView() }

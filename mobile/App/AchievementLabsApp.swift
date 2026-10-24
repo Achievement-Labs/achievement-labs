@@ -4,6 +4,7 @@ import UniformTypeIdentifiers
 
 @main struct AchievementLabsApp: App {
     @StateObject private var model = MobileModel()
+    @StateObject private var appearance = MobileAppearance()
     @Environment(\.scenePhase) private var phase
     var body: some Scene {
         WindowGroup {
@@ -14,7 +15,10 @@ import UniformTypeIdentifiers
                 Xbox360View().tabItem { Label("Xbox 360", systemImage: "externaldrive") }.tag(5)
                 SettingsView().tabItem { Label("Settings", systemImage: "gear") }.tag(3)
             }
-            .environmentObject(model).tint(.green).preferredColorScheme(.dark)
+            .environmentObject(model).environmentObject(appearance).tint(appearance.accentColor).preferredColorScheme(.dark)
+            .onChange(of:model.presenceTitle) { _, value in if JSON.numeric(value) { appearance.title=value } }
+            .onChange(of:model.queueTitle) { _, value in if JSON.numeric(value) { appearance.title=value } }
+            .onChange(of:model.selectedGame?.id) { _, value in if let value { appearance.title=value } }
             .confirmationDialog("Add another game",isPresented:Binding(get:{ !model.pendingQueueItems.isEmpty },set:{ if !$0 { model.pendingQueueItems = [] } }),titleVisibility:.visible) {
                 Button("Add to end of current queue") { model.resolveQueueAddition(separate:false) }
                 Button("Save as a separate game queue") { model.resolveQueueAddition(separate:true) }
@@ -82,7 +86,7 @@ struct LibraryView: View {
                     }
                 }
             }
-            .listSectionSpacing(.compact).navigationTitle("Library").navigationBarTitleDisplayMode(.inline)
+            .labsPage().listSectionSpacing(.compact).navigationTitle("Library").navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Game.self) { AchievementView(game: $0) }
             .searchable(text: $search, prompt: "Game name or Title ID")
             .refreshable { await m.refreshGames() }
@@ -161,7 +165,7 @@ struct AchievementView: View {
                 }
             }
         }
-        .navigationTitle("Achievements").navigationBarTitleDisplayMode(.inline)
+        .labsPage().navigationTitle("Achievements").navigationBarTitleDisplayMode(.inline)
         .searchable(text: $search, prompt: "Search achievements")
         .task(id: game.id) { await m.load(game) }
         .refreshable { await m.load(game) }
@@ -169,7 +173,8 @@ struct AchievementView: View {
     }
 }
 
-struct QueueView: View {
+struct SessionSettingsView: View {
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var m: MobileModel
     @State private var options = false
     @State private var savedExpanded = false
@@ -182,7 +187,7 @@ struct QueueView: View {
     var body: some View {
         NavigationStack {
             List {
-                PresenceSections()
+                SessionTitleSettings()
                 Section("Timing source") {
                     TextField("Reference gamertag",text:$m.referenceGamertag).textInputAutocapitalization(.never).autocorrectionDisabled().submitLabel(.go).onSubmit { build() }.disabled(m.running || m.busy)
                     TextField("Title ID",text:$m.queueTitle).keyboardType(.numbersAndPunctuation).submitLabel(.go).onSubmit { build() }.disabled(m.running || m.busy)
@@ -191,33 +196,13 @@ struct QueueView: View {
                     if !m.referenceInfo.isEmpty { Text(m.referenceInfo).font(.caption).foregroundStyle(.secondary) }
                     Text("Uses intervals between the reference profile’s visible unlocks. Review the queue before starting; it does not copy past dates.").font(.caption2).foregroundStyle(.secondary)
                 }
-                Section("Queue") {
-                    VStack(alignment:.leading,spacing:8) {
-                        HStack { Label(m.running ? "Running" : "Paused",systemImage:m.running ? "play.fill" : "pause.fill"); Spacer(); Text("\(m.queue.count) items").foregroundStyle(.secondary) }.font(.subheadline)
-                        Text(m.status).font(.caption).foregroundStyle(.secondary).lineLimit(3)
-                        if let item = m.nextQueueItem { Text(item.game.name + " · " + item.achievement.name).font(.caption.weight(.semibold)) }
-                        if m.continueQueueInBackground { Text(m.extendedAudio.active ? m.extendedAudio.status : m.continuedQueue.status).font(.caption2).foregroundStyle(.secondary) }
-                        TimelineView(.periodic(from:.now,by:1)) { timeline in
-                            VStack(alignment:.leading,spacing:3) {
-                                if let next = m.nextAction { HStack { Text("Next action"); Spacer(); Text(timerInterval:next.addingTimeInterval(-31_536_000)...next,countsDown:true).monospacedDigit().id(next) } }
-                                let remaining = remaining(at:timeline.date)
-                                if remaining > 0 { Text("Estimated finish: " + timeline.date.addingTimeInterval(remaining).formatted(date:.abbreviated,time:.shortened)).foregroundStyle(.secondary) }
-                            }.font(.caption)
-                        }
-                        HStack {
-                            Button(m.running ? "Pause" : "Start / Resume",systemImage:m.running ? "pause.fill" : "play.fill") { if m.running { m.pauseQueue() } else { m.startQueue() } }.disabled(m.account == nil || m.busy || m.queue.isEmpty || m.editingQueueDelay)
-                            Spacer()
-                            Button("Remove completed") { Task { await m.removeCompleted() } }.disabled(m.running || m.busy)
-                        }.font(.subheadline).buttonStyle(.borderless)
-                    }.activeSessionHighlight(m.running)
-                }
                 Section {
                     DisclosureGroup("Queue options",isExpanded:$options) {
                         Toggle("Stop on failure",isOn:$m.stopOnFailure)
                         Toggle("Notify on unlock failure",isOn:$m.notifyUnlockFailure)
                         Toggle("Stop if spoofing fails",isOn:$m.stopOnPresenceFailure)
                         Toggle("Notify on completion",isOn:$m.notifyCompletion)
-                        Stepper("New item: \(Int(m.queueDelay)) sec",value:$m.queueDelay,in:0...86400,step:5)
+                        Stepper("New item: \((m.queueDelay / 60).formatted()) min",value:Binding(get:{m.queueDelay / 60},set:{m.queueDelay=$0*60}),in:0...525600,step:1)
                         Button("Save queue delays") { m.saveQueue() }.disabled(m.running)
                         Text(m.continueQueueInBackground ? "Background continuation is experimental. iOS can pause it; long delays may expire. Refresh Xbox to verify progress." : "Queues pause when you leave the app. Refresh achievements to verify accepted requests.").font(.caption2).foregroundStyle(.secondary)
                     }
@@ -245,11 +230,8 @@ struct QueueView: View {
                     Text("To sync: Export queue sync file → copy the JSON file to your other device → Import queue sync file there while signed into the same account. This is a manual transfer; loading requires Start.").font(.caption2).foregroundStyle(.secondary)
                     }
                 }
-                Section("Achievements") {
-                    ForEach(m.queue) { item in QueueRow(itemID:item.id) }
-                    if m.queue.isEmpty { Text("Build a timing queue above, or select achievements from Library.").font(.caption).foregroundStyle(.secondary) }
-                }
-            }.scrollDismissesKeyboard(.interactively).listSectionSpacing(.compact).navigationTitle("Game Session").navigationBarTitleDisplayMode(.inline)
+            }.scrollDismissesKeyboard(.interactively).listSectionSpacing(.compact).navigationTitle("Session Settings").navigationBarTitleDisplayMode(.inline).labsPage()
+            .toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { dismiss() } } }
             .confirmationDialog("Delete saved queue?",isPresented:Binding(get:{ deletingSaved != nil },set:{ if !$0 { deletingSaved = nil } }),titleVisibility:.visible) {
                 if let saved = deletingSaved {
                     Button("Delete " + saved.name,role:.destructive) { if m.account?.xuid == deletingOwner { m.deleteSavedGameQueue(saved.id) }; deletingSaved = nil }
@@ -292,6 +274,7 @@ struct QueueRow: View {
                     GameArt(url:item.game.image,size:30)
                     VStack(alignment:.leading,spacing:2) { Text(item.achievement.name).font(.subheadline.weight(.semibold)); Text(item.game.name).font(.caption2).foregroundStyle(.secondary).lineLimit(1) }
                 }
+                Text(item.achievement.detail).font(.caption).foregroundStyle(.secondary)
                 Text(item.status).font(.caption2).foregroundStyle(item.status == "Already unlocked" ? .green : .secondary)
                 if let source = item.referenceGamertag, let date = item.referenceDate { Text(source + " · " + date.formatted(date:.abbreviated,time:.shortened)).font(.caption2).foregroundStyle(.secondary) }
                 HStack {
@@ -368,14 +351,15 @@ struct SettingsView: View {
             VStack(spacing:0) {
                 Picker("Settings category",selection:$category) {
                     ForEach(SettingsCategory.allCases) { Text($0.rawValue).tag($0) }
-                }.pickerStyle(.segmented).padding(.horizontal).padding(.vertical,8)
+                }.pickerStyle(.menu).frame(maxWidth:.infinity,alignment:.leading).padding(.horizontal).padding(.vertical,8)
                 Form {
                     if category == .account { accountSettings }
                     SyncSettings(category:category)
                     if category == .library { librarySettings }
                     if category == .app { appSettings }
+                    if category == .appearance { AppearanceSettings() }
                 }
-            }.navigationTitle("Settings").navigationBarTitleDisplayMode(.inline)
+            }.navigationTitle("Settings").navigationBarTitleDisplayMode(.inline).labsPage()
             .toolbar { Button { pcSync = true } label: { Label("Scan PC QR",systemImage:"qrcode.viewfinder") }.disabled(m.busy || m.running || m.presenceRunning) }
             .sheet(isPresented:$pcSync) { PCSyncView(startScanning:true) }
             .sheet(item:$embeddedLogin) { page in

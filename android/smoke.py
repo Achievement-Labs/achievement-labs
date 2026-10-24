@@ -3,7 +3,7 @@ import subprocess,time,pathlib,json
 root=pathlib.Path('android/artifacts');root.mkdir(exist_ok=True)
 def run(*args):return subprocess.check_output(args,text=True)
 subprocess.run(['adb','install','-r','android/app/build/outputs/apk/debug/app-debug.apk'],check=True)
-for page in ['home','library','find','queue','spoof','settings']:
+for page in ['home','library','find','queue','spoof','session-settings','settings']:
  subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
  subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--es','page',page],check=True)
  time.sleep(6)
