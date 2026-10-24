@@ -127,7 +127,7 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
   if(action.equals("state")){JSONObject value=publicState(true);MainActivity ui=screen.get();if(ui!=null&&ui.getIntent().hasExtra("widgetPage"))value.put("startPage",ui.getIntent().getStringExtra("widgetPage"));return value;}if(action.equals("runtime"))return publicState(false);
   if(preview){if(action.equals("achievements"))return new JSONObject().put("game",games.getJSONObject(1)).put("rows",new JSONArray().put(new JSONObject().put("id","1").put("name","First steps").put("lockedDescription","Complete the first mission.").put("pack","Base game").put("unavailable","").put("isUnlocked",false)));throw new Exception("Offline preview: network and account actions are disabled.");}
   switch(action){
-   case "findTitles":{JSONArray matches=TitleSearch.search(p.getString("query"));for(int i=0;i<matches.length();i++){JSONObject g=matches.getJSONObject(i);foundTitles.put(g.getString("titleId"),g);if(foundTitles.size()>256)foundTitles.remove(foundTitles.keySet().iterator().next());}return new JSONObject().put("results",matches);}
+   case "findTitles":{TitleSearch.SearchResult search=TitleSearch.searchResults(p.getString("query"));JSONArray matches=search.items;for(int i=0;i<matches.length();i++){JSONObject g=matches.getJSONObject(i);foundTitles.put(g.getString("titleId"),g);if(foundTitles.size()>512)foundTitles.remove(foundTitles.keySet().iterator().next());}return new JSONObject().put("results",matches).put("partial",search.partial);}
    case "refresh":refresh();return publicState(true);
    case "scan":launch(ScanActivity.class,20);return new JSONObject();
    case "login":launch(LoginActivity.class,21);return new JSONObject();

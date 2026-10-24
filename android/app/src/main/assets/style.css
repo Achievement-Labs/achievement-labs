@@ -8,3 +8,6 @@ dialog{background:#202222;color:#fff;border:1px solid #555;border-radius:18px;ma
 .session-clock{font-size:1.35rem;font-weight:700;color:var(--accent,#27cd55);font-variant-numeric:tabular-nums;margin:.5rem 0}
 
 .session-clock.paused{color:#a6aea8}
+.platform-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:12px}.platform-filters label{justify-content:flex-start;gap:8px;border:1px solid #444;border-radius:10px;padding:6px 8px;font-size:13px;min-height:44px}.platform-filters input{flex-shrink:0;margin:0}
+#lookupResults .grow>small{display:block;margin-top:4px}
+

@@ -345,16 +345,15 @@ public static class GameSessionWorkspace
                 statusParent.Children.Remove(statusTile);
                 if(statusParent.Children.Count==0 && statusParent.Parent is Panel container)container.Children.Remove(statusParent);
             }
-            var toolsLayout=new Grid {ColumnDefinitions=new ColumnDefinitions("*,360"),RowDefinitions=new RowDefinitions("Auto,Auto"),ColumnSpacing=18,RowSpacing=10};
-            toolsLayout.Children.Add(new TextBlock {Text="Settings, saved queues & tools",FontSize=13,FontWeight=FontWeight.SemiBold,Foreground=Brush("#D3DFE2")});
-            Grid.SetRow(extra,1);toolsLayout.Children.Add(extra);
-            if(statusTile!=null){statusTile.Margin=new Thickness(0);statusTile.VerticalAlignment=VerticalAlignment.Top;Grid.SetColumn(statusTile,1);Grid.SetRow(statusTile,0);Grid.SetRowSpan(statusTile,2);Grid.SetColumnSpan(statusTile,1);toolsLayout.Children.Add(statusTile);}
+            var toolsLayout=new Grid {ColumnDefinitions=new ColumnDefinitions("*,360"),RowDefinitions=new RowDefinitions("Auto"),ColumnSpacing=18,RowSpacing=6};
+            extra.Margin=new Thickness(0);extra.VerticalAlignment=VerticalAlignment.Top;Grid.SetRow(extra,0);toolsLayout.Children.Add(extra);
+            if(statusTile!=null){statusTile.Margin=new Thickness(0);statusTile.VerticalAlignment=VerticalAlignment.Top;Grid.SetColumn(statusTile,1);Grid.SetRow(statusTile,0);Grid.SetRowSpan(statusTile,1);Grid.SetColumnSpan(statusTile,1);toolsLayout.Children.Add(statusTile);}
             config.Children.Add(new Border {Name="QueueToolsSection",Child=toolsLayout,Padding=new Thickness(12),CornerRadius=new CornerRadius(12),BorderThickness=new Thickness(1),BorderBrush=AppearanceController.For(owner).Line,Background=AppearanceController.For(owner).Panel});
             toolsLayout.SizeChanged+=(_,_)=>{
                 bool narrow=toolsLayout.Bounds.Width<1000;
                 toolsLayout.ColumnDefinitions=new ColumnDefinitions(narrow?"*":"*,360");
-                toolsLayout.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto,Auto":"Auto,Auto");
-                if(statusTile!=null){Grid.SetColumn(statusTile,narrow?0:1);Grid.SetRow(statusTile,narrow?2:0);Grid.SetRowSpan(statusTile,narrow?1:2);}
+                toolsLayout.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto":"Auto");
+                if(statusTile!=null){Grid.SetColumn(statusTile,narrow?0:1);Grid.SetRow(statusTile,narrow?1:0);Grid.SetRowSpan(statusTile,1);}
             };
             var summary=new TextBlock {FontSize=12,TextWrapping=TextWrapping.Wrap,Foreground=Brush("#C5D7DC")};summary.Bind(TextBlock.TextProperty,new Binding("XboxQueue.StatusText"));config.Children.Add(summary);
             var rowFields=config.Children.OfType<Grid>().FirstOrDefault(g=>g.GetLogicalDescendants().OfType<TextBox>().Any());
@@ -365,10 +364,20 @@ public static class GameSessionWorkspace
         if(list!=null){
             list.Margin=new Thickness(0);list.MinHeight=140;list.MaxHeight=280;list.Background=AppearanceController.For(owner).Panel;
             list.ItemTemplate=new FuncDataTemplate<object>((row,scope)=>{
-                var line=new Grid {ColumnDefinitions=new ColumnDefinitions("*,170,86"),ColumnSpacing=8,Margin=new Thickness(6,7)};
+                if(row is null)return null;
+                var line=new Grid {Name="AutoUnlockAchievementRow",ColumnDefinitions=new ColumnDefinitions("0.85*,1.4*,170,86"),ColumnSpacing=10,Margin=new Thickness(6,7)};
                 var name=new TextBlock {TextWrapping=TextWrapping.Wrap,FontSize=12,VerticalAlignment=VerticalAlignment.Center};name.Bind(TextBlock.TextProperty,new Binding("AchievementName"));line.Children.Add(name);
-                var delay=new NumericUpDown {Minimum=0,Maximum=10080,Increment=.5m,FontSize=13,FormatString="0.#",Padding=new Thickness(8,3)};ToolTip.SetTip(delay,"Delay in minutes");delay.Bind(NumericUpDown.ValueProperty,new Binding("DelayMinutes") {Mode=BindingMode.TwoWay});delay.Bind(InputElement.IsEnabledProperty,new Binding("CanEditDelay"));Grid.SetColumn(delay,1);line.Children.Add(delay);
-                var status=new TextBlock {FontSize=10,Foreground=Brush("#A7CDBB"),TextWrapping=TextWrapping.Wrap,VerticalAlignment=VerticalAlignment.Center};status.Bind(TextBlock.TextProperty,new Binding("Status"));Grid.SetColumn(status,2);line.Children.Add(status);return line;
+                var description=new TextBlock {Name="AutoUnlockRowDescription",TextWrapping=TextWrapping.Wrap,FontSize=11,Foreground=Brush("#ADBFC4"),VerticalAlignment=VerticalAlignment.Center};description.Bind(TextBlock.TextProperty,new Binding("AchievementDescription"));Grid.SetColumn(description,1);line.Children.Add(description);
+                var delay=new NumericUpDown {Minimum=0,Maximum=10080,Increment=.5m,FontSize=13,FormatString="0.#",Padding=new Thickness(8,3)};ToolTip.SetTip(delay,"Delay in minutes");delay.Bind(NumericUpDown.ValueProperty,new Binding("DelayMinutes") {Mode=BindingMode.TwoWay});delay.Bind(InputElement.IsEnabledProperty,new Binding("CanEditDelay"));Grid.SetColumn(delay,2);line.Children.Add(delay);
+                var status=new TextBlock {FontSize=10,Foreground=Brush("#A7CDBB"),TextWrapping=TextWrapping.Wrap,VerticalAlignment=VerticalAlignment.Center};status.Bind(TextBlock.TextProperty,new Binding("Status"));Grid.SetColumn(status,3);line.Children.Add(status);
+                line.SizeChanged+=(_,_)=>{
+                    var narrow=line.Bounds.Width<700;
+                    if(line.Tag is bool previous && previous==narrow)return;
+                    line.Tag=narrow;line.ColumnDefinitions=new ColumnDefinitions(narrow?"*,170,86":"0.85*,1.4*,170,86");
+                    line.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto":"Auto");
+                    Grid.SetRow(description,narrow?1:0);Grid.SetColumn(description,narrow?0:1);Grid.SetColumnSpan(description,narrow?3:1);description.Margin=narrow?new Thickness(0,5,0,0):new Thickness(0);
+                    Grid.SetColumn(delay,narrow?1:2);Grid.SetColumn(status,narrow?2:3);
+                };return line;
             });
             if(preview)list.Bind(ItemsControl.ItemsSourceProperty,new Binding {Source=new[]{new SampleRow("Welcome to the community",0,"Ready"),new SampleRow("A home of our own",9999.5m,"Waiting"),new SampleRow("Strength in numbers",10080,"Waiting")}});
         }
@@ -386,5 +395,5 @@ public static class GameSessionWorkspace
         foreach(var b in tabs.GetLogicalDescendants().OfType<Border>().Where(b=>b.Name=="QueueSpooferTile").ToArray())b.IsVisible=false;
         foreach(var button in tabs.GetLogicalDescendants().OfType<Button>().Where(b=>Equals(b.Content,"Stop spoofing")))button.IsVisible=false;
     }
-    sealed class SampleRow(string name,decimal delay,string status) {public string AchievementName=>name;public decimal DelayMinutes {get;set;}=delay;public string Status=>status;public bool CanEditDelay=>false;}
+    sealed class SampleRow(string name,decimal delay,string status) {public string AchievementName=>name;public string AchievementDescription=>"Complete the challenge to earn this achievement.";public decimal DelayMinutes {get;set;}=delay;public string Status=>status;public bool CanEditDelay=>false;}
 }

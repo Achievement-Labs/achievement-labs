@@ -160,6 +160,7 @@ namespace AchievementLabs.Desktop.Workflows
 
             public int Index { get; set; }
             public string AchievementName { get; set; } = "";
+            public string AchievementDescription { get; set; } = "";
             public string AchievementId { get; set; } = "";
             public int Gamerscore { get; set; }
             private bool canEditDelay;
@@ -274,6 +275,7 @@ namespace AchievementLabs.Desktop.Workflows
                 NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
 
             await AchievementLabs.MultiSelect.QueueTools.LoadedOnly(this);
+            await RefreshQueueDescriptionsAsync();
         }
 
         [RelayCommand]
@@ -448,6 +450,7 @@ namespace AchievementLabs.Desktop.Workflows
                     {
                         AchievementId = achievement.id,
                         AchievementName = achievement.name,
+                        AchievementDescription = QueueDescription(achievement),
                         Gamerscore = gamerscore,
                         DelaySeconds = delaySeconds,
                         Completed = false
@@ -803,6 +806,26 @@ namespace AchievementLabs.Desktop.Workflows
             catch { StatusText = "Could not save the queue. Your edits are still available here."; }
         }
 
+        private static string QueueDescription(OneCoreAchievementResponse row) =>
+            !string.IsNullOrWhiteSpace(row.lockedDescription) ? row.lockedDescription : row.description ?? "";
+
+        private async Task RefreshQueueDescriptionsAsync()
+        {
+            var state=_state; var owner=account.XUIDOnly;
+            if(state==null || ReadQueueAchievementsAsync==null || !state.Queue.Any(e=>string.IsNullOrWhiteSpace(e.AchievementDescription))) return;
+            try
+            {
+                var response=await ReadQueueAchievementsAsync(state.TitleId,CancellationToken.None);
+                if(response==null || _state!=state || account.XUIDOnly!=owner || IsRunning) return;
+                var descriptions=response.achievements.GroupBy(a=>a.id).Where(g=>g.Count()==1).ToDictionary(g=>g.Key,g=>g.Single());
+                foreach(var entry in state.Queue)
+                    if(string.IsNullOrWhiteSpace(entry.AchievementDescription) && descriptions.TryGetValue(entry.AchievementId,out var row) && string.Equals(entry.AchievementName,row.name,StringComparison.OrdinalIgnoreCase))
+                        entry.AchievementDescription=QueueDescription(row);
+                PopulateQueueDisplay();
+            }
+            catch { /* Optional display metadata must never prevent loading an existing queue. */ }
+        }
+
         private void PopulateQueueDisplay()
         {
             if (_state == null) return;
@@ -815,6 +838,7 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     Index = i + 1,
                     AchievementName = entry.AchievementName,
+                    AchievementDescription = entry.AchievementDescription,
                     AchievementId = entry.AchievementId,
                     Gamerscore = entry.Gamerscore,
                     CanEditDelay = !IsRunning,
@@ -869,6 +893,7 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     Index = item.Index,
                     AchievementName = item.AchievementName,
+                    AchievementDescription = item.AchievementDescription,
                     AchievementId = item.AchievementId,
                     Gamerscore = item.Gamerscore,
                     CanEditDelay = item.CanEditDelay,

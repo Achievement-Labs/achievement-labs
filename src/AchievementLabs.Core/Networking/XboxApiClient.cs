@@ -777,7 +777,9 @@ public class XboxApiClient : IDisposable
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.ContractVersion, HeaderValues.ContractVersion3);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Host, Hosts.Achievements);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Connection, HeaderValues.KeepAlive);
-        var response = await (await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.QueryAchievements360Url, xuid, titleId))).Content.ReadAsStringAsync();
+        using var httpResponse = await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.QueryAchievements360Url, xuid, titleId));
+        httpResponse.EnsureSuccessStatusCode();
+        var response = await httpResponse.Content.ReadAsStringAsync();
         var achievements = JsonConvert.DeserializeObject<Xbox360AchievementResponse>(response);
         return achievements;
     }

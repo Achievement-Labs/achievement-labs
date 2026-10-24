@@ -17,7 +17,30 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  if(args.Contains("--startup-mode"))
+  {
+   var configure=typeof(AchievementLabs.Desktop.MainWindow).Assembly.GetType("AchievementLabs.Desktop.Program")!.GetMethod("ConfigureStartup",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static)!;
+   foreach(var launch in new[]{Array.Empty<string>(),new[]{"--xbox360-local-test"},new[]{"--local-360-smoke-test"}})
+   {
+    AppContext.SetSwitch("AchievementLabs.OfflineChecks",false);
+    AppContext.SetSwitch("AchievementLabs.StartOnXbox360",false);
+    configure.Invoke(null,new object[]{launch});
+    Assert((AppContext.TryGetSwitch("AchievementLabs.OfflineChecks",out var isolated)&&isolated)==(launch.Length>0),"Only explicit preview flags disable Xbox attachment");
+    Assert((AppContext.TryGetSwitch("AchievementLabs.StartOnXbox360",out var start360)&&start360)==(launch.Length>0),"Normal EXE startup does not force the 360 page");
+   }
+   Console.WriteLine("PASS: ordinary startup enables normal Xbox attachment; only explicit preview/test arguments isolate the 360 page.");return;
+  }
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Length==2 && args[0]=="--description-layout"){AchievementDescriptionLayoutChecks.Run(args[1]);return;}
+  if(args.Contains("--queue-descriptions")){SavedGameQueueTests.Run();return;}
+  if(args.Length is 2 or 3 && args[0]=="--xbox360-layout"){Xbox360LayoutChecks.Run(args[1],args.Length==3?args[2]:null);return;}
+  if(args.Length==3 && args[0]=="--prepare360-signing"){AchievementLabs.Services.Xbox360.Xbox360SigningSession.LoadHorizonFile(args[1]);AchievementLabs.Services.Xbox360.Xbox360SigningSession.WriteLocalBuildIdentity(args[2]);AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear();Console.WriteLine("Prepared private local-build signing input. No key values printed.");return;}
+  if(args.Length==4 && args[0]=="--xbox360-signing-check"){Xbox360SigningChecks.Run(args[1],args[2],args[3]);return;}
+  if(args.Length==3 && args[0]=="--xbox360-profile-check"){Xbox360ProfilePreviewChecks.Run(args[1],args[2]);return;}
+  if(args.Contains("--exophase-360")){Exophase360Tests.Run();return;}
+  if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
+  if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
+  if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}
@@ -44,6 +67,20 @@ static class Test
    AppBuilder.Configure(()=> (Application)Activator.CreateInstance(appType)!).UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();
    var window=(Window)Activator.CreateInstance(assembly.GetTypes().Single(t=>t.Name=="MainWindow"))!;
    var saveAll = Desc<Button>(window).Single(b=>b.Name=="SaveAllSettings");
+   Assert(Desc<Button>(window).Any(b=>b.Name=="UnlockXbox360Selected" && !b.IsEnabled),"360 unlock is one explicit action and starts gated");
+   Assert(!Desc<Button>(window).Any(b=>b.Name is "StageXbox360Review" or "SaveXbox360WorkingCopy"),"Separate stage/save actions removed from normal 360 workflow");
+   Assert(Desc<Button>(window).Any(b=>b.Name=="SetupXbox360Signing"),"Custom signing setup remains accessible");
+   Assert(!Desc<CheckBox>(window).Any(c=>Equals(c.Content,"This is my profile") || Equals(c.Content,"The loaded profile is mine and I have a backup")),"Manual ownership acknowledgement removed");
+   Assert(!Desc<TextBlock>(window).Any(t=>t.Text=="RECENTLY PLAYED"),"360 recent-game cards removed");
+   Assert(Desc<TextBox>(window).Any(b=>b.Name=="Xbox360ExophaseName") && Desc<Button>(window).Any(b=>b.Name=="LookupXbox360ExophaseButton"),"Exophase name lookup controls are attached");
+   Assert(Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementFilter") && Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementSort"),"360 filter and sort controls are bound in the real window");
+   Assert(!Desc<TextBlock>(window).Any(t=>t.Text=="Settings, saved queues & tools"),"Redundant queue heading removed");
+   var platformFilters = Desc<ItemsControl>(window).Single(c=>c.Name=="TitleSearchPlatformFilters");
+   Assert(platformFilters.Items.Count==9,"Nine title-search platforms available");
+   Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsNone"));
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>!p.Selected),"None clears all platform toggles");
+   Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsAll"));
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>p.Selected),"All restores platform toggles");
    Assert(saveAll.Parent is Grid settingsPanel && Grid.GetRow(saveAll)==0 && settingsPanel.Children.OfType<TabControl>().Any(t=>Grid.GetRow(t)==1),"Save all settings remains above the category tabs");
    Assert(Desc<CheckBox>(window).Any(c=>Equals(c.Content,"Remember window size and position")),"Window size setting present");
    Assert(Desc<CheckBox>(window).Any(c=>Equals(c.Content,"Always open maximized")),"Maximize setting present");

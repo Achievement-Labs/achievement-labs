@@ -1,6 +1,28 @@
 package org.achievementlabs.mobile;
 import org.junit.Test;import static org.junit.Assert.*;import org.json.*;
 public class TitleSearchTests {
+ @Test public void numeralAliasesAreBoundedAndPreserveOfficialNames()throws Exception{
+  assertTrue(TitleSearch.variants("Black Ops 3").contains("Black Ops III"));
+  assertTrue(TitleSearch.variants("Black Ops iii").contains("Black Ops 3"));
+  assertTrue(TitleSearch.variants("Final Fantasy 13-2").contains("Final Fantasy XIII-2"));
+  assertEquals(java.util.List.of("I Am Alive"),TitleSearch.variants("I Am Alive"));
+  assertEquals(1,TitleSearch.variants("Civilization MIXED 007").size());
+  assertTrue(TitleSearch.variants("Game 1 2 3 4 5 6 7 8").size()<=8);
+  java.util.List<String> requests=new java.util.ArrayList<>();
+  TitleSearch.SearchResult result=TitleSearch.searchResults("Black Ops 3",url->{requests.add(url);return url.contains("Ops%20III")?"{\"items\":[{\"title_id\":\"7\",\"name\":\"Black Ops III\",\"systems\":[\"XBOXONE\"]},{\"title_id\":\"8\",\"name\":\"Black Ops III\",\"systems\":[\"PC\"]}]}":"{\"items\":[]}";});
+  assertEquals(2,requests.size());assertEquals(2,result.items.length());assertFalse(result.partial);
+  assertEquals("Black Ops III",result.items.getJSONObject(0).getString("name"));
+  assertNotEquals(result.items.getJSONObject(0).getString("titleId"),result.items.getJSONObject(1).getString("titleId"));
+ }
+ @Test public void aliasFailuresKeepMatchesAndDirectIDsNeverRequestNames()throws Exception{
+  String row="{\"items\":[{\"title_id\":\"7\",\"name\":\"Game III\",\"systems\":[\"XBOXONE\"]}]}";
+  TitleSearch.SearchResult merged=TitleSearch.searchResults("Game 3",url->row);assertEquals(1,merged.items.length());
+  TitleSearch.SearchResult partial=TitleSearch.searchResults("Game 3",url->{if(url.contains("%20III"))throw new java.io.IOException("Unavailable");return row;});
+  assertTrue(partial.partial);assertEquals(1,partial.items.length());
+  try{TitleSearch.searchResults("Game 3",url->{throw new java.io.IOException("Unavailable");});fail("All failures must surface");}catch(java.io.IOException expected){}
+  TitleSearch.SearchResult direct=TitleSearch.searchResults("7",url->{fail("No public request for a Title ID");return "";});
+  assertEquals("7",direct.items.getJSONObject(0).getString("titleId"));assertEquals(0,direct.items.getJSONObject(0).getJSONArray("devices").length());
+ }
  @Test public void discoveredProgressUsesXboxRowsWithoutMutatingTheProfile()throws Exception{
   JSONObject found=TitleSearch.direct("7");JSONArray rows=new JSONArray().put(new JSONObject().put("isUnlocked",true)).put(new JSONObject().put("isUnlocked",false));
   JSONObject updated=TitleSearch.progress(found,rows);assertFalse(found.has("achievement"));
