@@ -11,14 +11,17 @@ settings:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
-    MARKETING_VERSION: "0.12.6"
-    CURRENT_PROJECT_VERSION: "24"
+    MARKETING_VERSION: "0.12.7"
+    CURRENT_PROJECT_VERSION: "25"
 targets:
   AchievementLabsMobile:
     type: application
     platform: iOS
     sources:
       - path: App
+      - path: Shared360
+        type: folder
+        buildPhase: resources
       - path: Catalogue
         type: folder
         buildPhase: resources

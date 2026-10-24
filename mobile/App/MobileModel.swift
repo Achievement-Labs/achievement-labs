@@ -144,7 +144,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             do { try catalogue?.loadCache(directory.appendingPathComponent("synced-events.json")); eventSyncStatus = "Cached synced event data loaded." }
             catch { eventSyncStatus = "Synced cache could not be validated. Bundled data retained." }
         }
-        selectedTab = account == nil ? 4 : ([0,1,2,3,4].contains(launchPage) ? launchPage : 4)
+        selectedTab = account == nil ? 4 : ([0,1,2,3,4,5].contains(launchPage) ? (launchPage == 2 ? 1 : launchPage) : 4)
         #if DEBUG
         if let argument = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix("--ui-preview=") }) { configurePreview(String(argument.dropFirst("--ui-preview=".count))) }
         #endif
@@ -182,6 +182,12 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         return try await task.value
     }
     /// Only read operations may be repeated after a 401; unlocks and failed heartbeats are never replayed here.
+    func openGameSession(_ game:Game) {
+        titleDetails[game.id] = game
+        if !running && !presenceRunning { queueTitle = game.id; presenceTitle = game.id }
+        else if queueTitle != game.id || presenceTitle != game.id { status = "Stop active sessions before changing games." }
+        selectedTab = 1
+    }
     private func readWithAccount<T>(_ operation: (Account) async throws -> T) async throws -> T {
         let current = try await authorizedAccount()
         do { return try await operation(current) }
@@ -889,7 +895,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         queue = [QueueItem(game:second,achievement:row,delay:120)]
         referenceInfo = "Reference profile · 1 queued · 2 skipped"; status = "Timing queue loaded. Review delays, then start when ready."
         spoofStatus = "No heartbeat sent."; playedHours[second.id] = 12.5
-        selectedTab = page == "queue" ? 1 : page == "spoof" ? 2 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
+        selectedTab = page == "queue" ? 1 : page == "spoof" ? 1 : page == "xbox360" ? 5 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
     }
     #endif
     private struct CompletionCache: Codable { var mythic: Set<String>; var checked: Set<String>; var totals: [String:Int] }

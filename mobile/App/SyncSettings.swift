@@ -26,7 +26,7 @@ struct SyncSettings: View {
             if category == .app {
             Section("Launch") {
                 Picker("Open app to",selection:$m.launchPage) {
-                    Text("Home / sign-in").tag(4); Text("Library").tag(0); Text("Auto Unlock").tag(1); Text("Title Spoofing").tag(2); Text("Settings").tag(3)
+                    Text("Home / sign-in").tag(4); Text("Library").tag(0); Text("Game Session").tag(1); Text("Xbox 360").tag(5); Text("Settings").tag(3)
                 }
             }
             Section("App updates") {

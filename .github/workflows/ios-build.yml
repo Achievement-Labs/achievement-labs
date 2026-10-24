@@ -36,7 +36,10 @@ jobs:
       - name: Verify iOS 26 SDK
         run: xcodebuild -version
       - name: Prepare mobile catalogue without changing desktop data
-        run: python3 mobile/tools/prepare_catalogue.py
+        run: |
+          python3 mobile/tools/prepare_catalogue.py
+          python3 mobile/tools/prepare_360.py
+          node mobile/Shared360/core-checks.cjs
       - name: Run synthetic core and generated catalogue checks
         env:
           LABS_CATALOGUE: ${{ github.workspace }}/mobile/Catalogue
@@ -74,8 +77,8 @@ jobs:
           mkdir -p mobile/artifacts/Payload
           cp -R mobile/build/Build/Products/Release-iphoneos/AchievementLabsMobile.app mobile/artifacts/Payload/
           cd mobile/artifacts
-          /usr/bin/zip -qry AchievementLabs-iOS-0.12.6-UNSIGNED.ipa Payload
-          shasum -a 256 AchievementLabs-iOS-0.12.6-UNSIGNED.ipa > SHA256.txt
+          /usr/bin/zip -qry AchievementLabs-iOS-0.12.7-UNSIGNED.ipa Payload
+          shasum -a 256 AchievementLabs-iOS-0.12.7-UNSIGNED.ipa > SHA256.txt
           cp ../Catalogue/catalogue-report.json .
           cp ../README.md .
           cp ../WIDGETS.md .

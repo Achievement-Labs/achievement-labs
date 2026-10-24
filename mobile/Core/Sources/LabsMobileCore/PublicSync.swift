@@ -25,12 +25,12 @@ public struct MobileRelease: Equatable {
         guard let releases = try JSONSerialization.jsonObject(with:data) as? [[String:Any]] else { throw LabsError.message("Invalid release list.") }
         var result: MobileRelease?
         for release in releases where release["draft"] as? Bool == false {
-            guard let page = URL(string:JSON.string(release["html_url"])), page.scheme == "https", page.host == "github.com", page.path.hasPrefix("/Achievement-Labs/achievement-labs/releases/tag/"), page.user == nil else { continue }
+            guard let page = URL(string:JSON.string(release["html_url"])), page.scheme == "https", page.host == "github.com", page.path.hasPrefix("/thevampirebat/achievement-labs/releases/tag/"), page.user == nil else { continue }
             for asset in release["assets"] as? [[String:Any]] ?? [] {
                 let name = JSON.string(asset["name"]); let prefix = "AchievementLabs-iOS-"; let suffix = "-UNSIGNED.ipa"
                 guard name.hasPrefix(prefix), name.hasSuffix(suffix) else { continue }
                 let version = String(name.dropFirst(prefix.count).dropLast(suffix.count))
-                guard parts(version) != nil, let url = URL(string:JSON.string(asset["browser_download_url"])), url.scheme == "https", url.host == "github.com", url.user == nil, url.path.hasPrefix("/Achievement-Labs/achievement-labs/releases/download/"), url.lastPathComponent == name else { continue }
+                guard parts(version) != nil, let url = URL(string:JSON.string(asset["browser_download_url"])), url.scheme == "https", url.host == "github.com", url.user == nil, url.path.hasPrefix("/thevampirebat/achievement-labs/releases/download/"), url.lastPathComponent == name else { continue }
                 let candidate = MobileRelease(version:version,page:page,asset:url)
                 if result == nil || newer(version,than:result!.version) { result = candidate }
             }
@@ -69,7 +69,7 @@ public struct PublicSync {
         return TitleSearchResponse(games:TitleSearch.merge(batches),partial:failure != nil)
     }
     public func release() async throws -> MobileRelease? {
-        try MobileRelease.latest(await get("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",limit:4*1024*1024))
+        try MobileRelease.latest(await get("https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100",limit:4*1024*1024))
     }
 }
 

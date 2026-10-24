@@ -37,6 +37,17 @@ log=run('adb','logcat','-d','-s','AndroidRuntime:E')
 assert 'FATAL EXCEPTION' not in log,log
 print('Six offline Android screens launched without credentials or Xbox requests.')
 
+subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
+subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--ez','xbox360Test','true'],check=True)
+for attempt in range(45):
+ time.sleep(1)
+ marker=subprocess.run(['adb','shell','run-as','org.achievementlabs.mobile','cat','files/xbox360-self-test.json'],capture_output=True,text=True)
+ if marker.returncode==0: break
+assert marker.returncode==0, '360 native bridge did not finish'
+assert json.loads(marker.stdout).get('passed'),marker.stdout
+with open(root/'Android-xbox360.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],stdout=out,check=True)
+print('Xbox 360: actual WebView imported a synthetic profile, unlocked, signed, saved and verified native export/backup bytes. No account or network.')
+
 
 # Inflate the shipped RemoteViews and exercise both native timer bases and next-item transitions.
 subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)

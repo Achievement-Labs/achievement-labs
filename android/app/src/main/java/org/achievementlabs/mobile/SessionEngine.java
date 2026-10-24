@@ -131,6 +131,7 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
    case "refresh":refresh();return publicState(true);
    case "scan":launch(ScanActivity.class,20);return new JSONObject();
    case "login":launch(LoginActivity.class,21);return new JSONObject();
+   case "open360":launch(Xbox360Activity.class,23);return new JSONObject();
    case "manual":replaceAccount(Net.connect(p.getString("authorization")));notice="Account connected.";refresh();return publicState(true);
    case "disconnect":if(queueGate.busy()||spoofGate.busy())throw new Exception("Stop sessions first.");save();account=null;games=new JSONArray();queue=new JSONArray();pending=null;save();return publicState(true);
    case "saveToken":if(queueGate.busy())throw new Exception("Pause queue first.");auth();account.put("eventToken",Core.token(p.getString("token"),true));save();return publicState(true);

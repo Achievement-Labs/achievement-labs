@@ -15,6 +15,7 @@
   <provider android:name=".QueueQRFileProvider" android:authorities="org.achievementlabs.mobile.queueqr" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/queue_qr_paths"/></provider>
   <activity android:name=".QueueQRActivity" android:exported="false"/>
   <activity android:name=".LoginActivity" android:exported="false"/>
+  <activity android:name=".Xbox360Activity" android:exported="false"/>
   <receiver android:name=".SessionWidget" android:exported="false" android:label="Labs sessions"><intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/></intent-filter><meta-data android:name="android.appwidget.provider" android:resource="@xml/session_widget_info"/></receiver>
  </application>
 </manifest>

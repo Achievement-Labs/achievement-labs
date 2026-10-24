@@ -2,7 +2,7 @@ import XCTest
 @testable import LabsMobileCore
 
 final class UpdateRepositoryTests: XCTestCase {
-    func testAppAndEventChecksUseOfficialRepositoryWithoutAccountHeaders() async throws {
+    func testForkAppAndUpstreamEventChecksHaveNoAccountHeaders() async throws {
         let config = URLSessionConfiguration.ephemeral; config.protocolClasses = [UpdateRepositoryProtocol.self]
         let updates = PublicSync(session:URLSession(configuration:config))
         let release = try await updates.release(); XCTAssertNil(release)
@@ -16,7 +16,7 @@ private final class UpdateRepositoryProtocol: URLProtocol {
         XCTAssertEqual(request.httpMethod,"GET"); XCTAssertNil(request.httpBody)
         XCTAssertNil(request.value(forHTTPHeaderField:"Authorization")); XCTAssertNil(request.value(forHTTPHeaderField:"tickets"))
         let data: Data
-        if request.url?.absoluteString == "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100" { data = Data("[]".utf8) }
+        if request.url?.absoluteString == "https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100" { data = Data("[]".utf8) }
         else {
             XCTAssertEqual(request.url?.absoluteString,"https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/mobile-event-feed/catalogue.json")
             data = Data(#"{"schemaVersion":1,"upstreamRelease":"v1.0.8","archiveSHA256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","generatedAt":"2026-10-23T00:00:00Z","titles":{}}"#.utf8)

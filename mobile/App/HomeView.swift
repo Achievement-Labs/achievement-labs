@@ -22,8 +22,8 @@ struct HomeView: View {
                     Section("Jump back in") {
                         HStack(spacing:12) {
                             shortcut("Library",icon:"books.vertical",tab:0)
-                            shortcut("Auto Unlock",icon:"list.bullet.rectangle",tab:1)
-                            shortcut("Spoofing",icon:"gamecontroller",tab:2)
+                            shortcut("Game Session",icon:"gamecontroller",tab:1)
+                            shortcut("Xbox 360",icon:"externaldrive",tab:5)
                         }.buttonStyle(.borderless)
                     }
                     if !m.games.isEmpty {

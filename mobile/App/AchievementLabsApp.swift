@@ -10,8 +10,8 @@ import UniformTypeIdentifiers
             TabView(selection: $model.selectedTab) {
                 HomeView().tabItem { Label("Home",systemImage:"house") }.tag(4)
                 LibraryView().tabItem { Label("Library", systemImage: "books.vertical") }.tag(0)
-                QueueView().tabItem { Label("Auto Unlock", systemImage: "list.bullet.rectangle") }.tag(1)
-                PresenceView().tabItem { Label("Title Spoofing", systemImage: "gamecontroller") }.tag(2)
+                QueueView().tabItem { Label("Game Session", systemImage: "gamecontroller") }.tag(1)
+                Xbox360View().tabItem { Label("Xbox 360", systemImage: "externaldrive") }.tag(5)
                 SettingsView().tabItem { Label("Settings", systemImage: "gear") }.tag(3)
             }
             .environmentObject(model).tint(.green).preferredColorScheme(.dark)
@@ -41,7 +41,7 @@ import UniformTypeIdentifiers
             .onOpenURL { url in
                 guard url.scheme == "achievementlabs" else { return }
                 if url.host == "queue" { model.selectedTab = 1; if url.path == "/pause" { model.pauseQueue() } }
-                else if url.host == "spoof" { model.selectedTab = 2; if url.path == "/stop" { Task { await model.stopPresence() } } }
+                else if url.host == "spoof" { model.selectedTab = 1; if url.path == "/stop" { Task { await model.stopPresence() } } }
                 else { model.selectedTab = 4 }
             }
             .onReceive(NotificationCenter.default.publisher(for:UIApplication.willTerminateNotification)) { _ in model.terminating() }
@@ -77,8 +77,7 @@ struct LibraryView: View {
                             .listRowInsets(EdgeInsets(top:7,leading:14,bottom:7,trailing:14))
                             .listRowBackground(m.highlightCompleted && game.complete ? Color.green.opacity(0.16) : Color(.secondarySystemGroupedBackground))
                             .swipeActions(edge:.trailing) {
-                                Button("Spoof") { m.presenceTitle = game.id; m.titleDetails[game.id] = game; m.selectedTab = 2 }.tint(.green)
-                                Button("Auto Unlock") { m.queueTitle = game.id; m.titleDetails[game.id] = game; m.selectedTab = 1 }.tint(.blue)
+                                Button("Game Session") { m.openGameSession(game) }.tint(.green)
                             }
                     }
                 }
@@ -128,9 +127,8 @@ struct AchievementView: View {
                 GameHeader(game:m.gameForTitle(game.id) ?? game)
                 if let status = m.catalogue?.index[game.id] { Text("Event data: \(status.classification) · \(status.count) mobile mappings").font(.caption).foregroundStyle(.secondary) }
                 HStack {
-                    Button("Auto Unlock") { m.queueTitle = game.id; m.titleDetails[game.id] = game; if !selected.isEmpty { m.enqueue(m.rows.filter { selected.contains($0.id) }, game:game) }; m.selectedTab = 1 }
+                    Button("Open Game Session") { if !selected.isEmpty { m.enqueue(m.rows.filter { selected.contains($0.id) }, game:game) }; m.openGameSession(game) }
                     Spacer()
-                    Button("Title Spoofing") { m.presenceTitle = game.id; m.titleDetails[game.id] = game; m.selectedTab = 2 }
                 }.buttonStyle(.bordered).font(.caption)
             }
             Section {
@@ -184,6 +182,7 @@ struct QueueView: View {
     var body: some View {
         NavigationStack {
             List {
+                PresenceSections()
                 Section("Timing source") {
                     TextField("Reference gamertag",text:$m.referenceGamertag).textInputAutocapitalization(.never).autocorrectionDisabled().submitLabel(.go).onSubmit { build() }.disabled(m.running || m.busy)
                     TextField("Title ID",text:$m.queueTitle).keyboardType(.numbersAndPunctuation).submitLabel(.go).onSubmit { build() }.disabled(m.running || m.busy)
@@ -212,7 +211,6 @@ struct QueueView: View {
                         }.font(.subheadline).buttonStyle(.borderless)
                     }.activeSessionHighlight(m.running)
                 }
-                if m.presenceRunning || m.presenceStarted != nil { Section("Title Spoofing") { SpoofSummary() } }
                 Section {
                     DisclosureGroup("Queue options",isExpanded:$options) {
                         Toggle("Stop on failure",isOn:$m.stopOnFailure)
@@ -251,7 +249,7 @@ struct QueueView: View {
                     ForEach(m.queue) { item in QueueRow(itemID:item.id) }
                     if m.queue.isEmpty { Text("Build a timing queue above, or select achievements from Library.").font(.caption).foregroundStyle(.secondary) }
                 }
-            }.scrollDismissesKeyboard(.interactively).listSectionSpacing(.compact).navigationTitle("Auto Unlock").navigationBarTitleDisplayMode(.inline)
+            }.scrollDismissesKeyboard(.interactively).listSectionSpacing(.compact).navigationTitle("Game Session").navigationBarTitleDisplayMode(.inline)
             .confirmationDialog("Delete saved queue?",isPresented:Binding(get:{ deletingSaved != nil },set:{ if !$0 { deletingSaved = nil } }),titleVisibility:.visible) {
                 if let saved = deletingSaved {
                     Button("Delete " + saved.name,role:.destructive) { if m.account?.xuid == deletingOwner { m.deleteSavedGameQueue(saved.id) }; deletingSaved = nil }
@@ -317,11 +315,10 @@ struct QueueRow: View {
         }
     }
 }
-struct PresenceView: View {
+struct PresenceSections: View {
     @EnvironmentObject var m: MobileModel
     var body: some View {
-        NavigationStack {
-            Form {
+        Group {
                 Section {
                     VStack(alignment:.leading,spacing:12) {
                     TextField("Title ID",text:$m.presenceTitle).keyboardType(.numbersAndPunctuation).submitLabel(.done).onSubmit { Task { await m.lookupTitle(m.presenceTitle) } }.disabled(m.presenceRunning)
@@ -350,9 +347,8 @@ struct PresenceView: View {
                     Button("Refresh Xbox playtime") { Task { await m.readPlaytime(m.presenceTitle) } }.disabled(m.account == nil || !JSON.numeric(m.presenceTitle))
                     Text("Background spoofing can use a finite session when enabled in Settings → App. For system-task mode, wait for a grant before leaving; for extended mode, wait for “Extended audio active”. iOS or audio interruptions can stop it. Xbox-recorded playtime can update later.").font(.caption2).foregroundStyle(.secondary)
                 }.font(.subheadline)
-            }.listSectionSpacing(.compact).navigationTitle("Title Spoofing").navigationBarTitleDisplayMode(.inline)
-            .task(id:m.presenceTitle) { do { try await Task.sleep(nanoseconds:400_000_000); try Task.checkCancellation(); await m.lookupTitle(m.presenceTitle); await m.readPlaytime(m.presenceTitle) } catch {} }
         }
+            .task(id:m.presenceTitle) { do { try await Task.sleep(nanoseconds:400_000_000); try Task.checkCancellation(); await m.lookupTitle(m.presenceTitle); await m.readPlaytime(m.presenceTitle) } catch {} }
     }
 }
 

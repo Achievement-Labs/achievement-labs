@@ -99,6 +99,31 @@ public struct XboxService {
         let name = settings.first { JSON.string($0["id"]) == "Gamertag" }.map { JSON.string($0["value"]) } ?? tag
         return Account(authorization:account.authorization,xuid:xuid,gamertag:name)
     }
+    /// Read-only reference dates for an exact 360 title. No profile file is uploaded.
+    public func reference360(_ title:String,gamertag:String,account:Account) async throws -> [[String:Any]] {
+        guard JSON.numeric(title),UInt32(title) != nil else { throw LabsError.message("Invalid Xbox 360 title.") }
+        let user = try await profile(gamertag:gamertag,account:account)
+        var output:[[String:Any]] = [], continuation = "", seen = Set<String>()
+        repeat {
+            var url = URLComponents(string:"https://achievements.xboxlive.com/users/xuid(\(user.xuid))/titleachievements")!
+            url.queryItems = [URLQueryItem(name:"titleId",value:title),URLQueryItem(name:"maxItems",value:"1000")]
+            if !continuation.isEmpty { url.queryItems!.append(URLQueryItem(name:"continuationToken",value:continuation)) }
+            let data = try await request(url.url!.absoluteString,authorization:account.authorization,version:"3")
+            let json = try JSON.object(data)
+            guard let rows = json["achievements"] as? [[String:Any]] else { throw LabsError.message("Incomplete reference response.") }
+            for row in rows where JSON.string(row["titleId"]) == title && row["unlocked"] as? Bool == true {
+                guard let id = UInt32(JSON.string(row["id"])),let score = UInt32(JSON.string(row["gamerscore"])) else { continue }
+                let online = row["unlockedOnline"] as? Bool ?? false
+                let date = ServiceDates.parse(JSON.string(row["timeUnlocked"]))
+                if online && date == nil { continue }
+                output.append(["id":id,"titleId":title,"score":score,"unlocked":true,"online":online,"time":online ? (date!.timeIntervalSince1970*1000).rounded() as Any : NSNull()])
+            }
+            continuation = (json["pagingInfo"] as? [String:Any])?["continuationToken"] as? String ?? ""
+            if !continuation.isEmpty { guard continuation != "null",seen.insert(continuation).inserted,seen.count < 100 else { throw LabsError.message("Invalid reference pagination.") } }
+            guard output.count <= 5000 else { throw LabsError.message("Too many reference achievements.") }
+        } while !continuation.isEmpty
+        return output
+    }
     public func game(_ title: String, account: Account) async throws -> Game {
         guard JSON.numeric(title) else { throw LabsError.message("Enter a numeric Title ID.") }
         let data = try await request("https://titlehub.xboxlive.com/users/xuid(\(account.xuid))/titles/batch/decoration/TitleHistory,Achievement,detail,scid", authorization:account.authorization, method:"POST", body:["Pfns":NSNull(),"TitleIds":[title]])
