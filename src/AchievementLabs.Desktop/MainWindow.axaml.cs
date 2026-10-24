@@ -27,6 +27,8 @@ public partial class MainWindow : Window
         var notifications = new WindowNotificationManager(this) { Position = NotificationPosition.TopRight, MaxItems = 3 };
         model.AutoUnlockFailure = message => { notifications.Show(new Notification("Unlock failed", message, NotificationType.Error, TimeSpan.FromSeconds(10))); model.NotifyWindows("Unlock failed", message); };
         model.AutoUnlockCompleted = message => notifications.Show(new Notification("Auto unlock complete", message, NotificationType.Success, TimeSpan.FromSeconds(10)));
+        model.MirrorAlert = (title, message) => notifications.Show(new Notification(title, message, NotificationType.Error, TimeSpan.FromSeconds(15)));
+        model.MirrorPreflightReview = ReviewMirrorPreflightAsync;
         model.SpooferFailure = message => notifications.Show(new Notification("Spoofer stopped", message, NotificationType.Error, TimeSpan.FromSeconds(10)));
         model.WindowsNotification = (title, message) =>
         {
@@ -125,7 +127,10 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppAsync(); return;
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppOnStartupAsync();
+                // After the attach: its 6-second session read must not compete with this work. The Home Steam card
+                // was only filled in after clicking Home; read the local Steam profile at startup too.
+                _ = model.RefreshSteamProfileOnStartupAsync(); return;
             }
             try
             {
@@ -329,6 +334,30 @@ public partial class MainWindow : Window
         if (file?.TryGetLocalPath() is { } path) await model.ExportProfileGamesAsync(path);
     }
     private void ShowSteamQueue(object? s, RoutedEventArgs e) => model.Navigate("SteamQueue");
+    private void ShowMirror(object? s, RoutedEventArgs e) => model.OpenMirror();
+    private async Task<bool> ReviewMirrorPreflightAsync(IReadOnlyList<Workflows.MirrorPreflightIssue> issues)
+    {
+        var blocking = issues.Any(i => i.Blocking);
+        var dialog = new Window { Title = "Achievement Mirror check", Width = 560, SizeToContent = SizeToContent.Height, CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var openMirror = new Button { Content = "Open Achievement Mirror" };
+        var start = new Button { Content = "Start without mirroring these", IsVisible = !blocking };
+        var cancel = new Button { Content = "Cancel" };
+        var openRequested = false;
+        openMirror.Click += (_, _) => { openRequested = true; dialog.Close(false); };
+        start.Click += (_, _) => dialog.Close(true); cancel.Click += (_, _) => dialog.Close(false);
+        var list = new StackPanel { Spacing = 8 };
+        foreach (var issue in issues)
+            list.Children.Add(new TextBlock { Text = (issue.Blocking ? "• " : "◦ ") + issue.TitleName + ": " + issue.Message, TextWrapping = TextWrapping.Wrap });
+        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = {
+            new TextBlock { Text = blocking ? "Fix these before Auto Unlock starts" : "Some games won't be mirrored", FontSize = 20, TextWrapping = TextWrapping.Wrap },
+            new TextBlock { Text = blocking ? "Achievement Mirror is copying your Xbox unlocks to Steam, but it can't mirror everything in this queue. Nothing has been unlocked." : "These games are in the queue but aren't being mirrored to Steam.", TextWrapping = TextWrapping.Wrap },
+            list,
+            new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openMirror, start, cancel } }
+        } } };
+        var proceed = await dialog.ShowDialog<bool>(this);
+        if (openRequested) model.OpenMirror();
+        return proceed;
+    }
     private void OpenLibraryStats(object? s, RoutedEventArgs e) { if (s is Button { Tag: Game game }) model.OpenLibraryStats(game); }
     private void ShowQueues(object? s, RoutedEventArgs e) => model.OpenQueues();
     private async void RunXboxQueue(object? s, RoutedEventArgs e) => await model.RunXboxQueueAsync();
@@ -364,7 +393,7 @@ public partial class MainWindow : Window
     }
     private async void ShowSteam(object? s, RoutedEventArgs e) => await model.RefreshSteamAsync();
     private async void LoadSteam(object? s, RoutedEventArgs e) => await model.LoadSteamAchievementsAsync();
-    private void ShowSteamAchievements(object? s, RoutedEventArgs e) => model.Navigate("SteamAchievements");
+    private async void ShowSteamAchievements(object? s, RoutedEventArgs e) => await model.OpenSteamAchievementsAsync();
     private async void OpenSteamAchievements(object? s, RoutedEventArgs e)
     {
         if (s is Button { Tag: AchievementLabs.Models.SteamGameItem game }) { model.SelectedSteamGame = game; await model.LoadSteamAchievementsAsync(); }

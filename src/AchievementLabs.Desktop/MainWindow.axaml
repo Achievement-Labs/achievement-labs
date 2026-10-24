@@ -1,5 +1,5 @@
-<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AchievementLabs.Desktop" xmlns:workflows="using:AchievementLabs.Desktop.Workflows" xmlns:models="clr-namespace:AchievementLabs.Models;assembly=AchievementLabs.Core" xmlns:gfwl="clr-namespace:AchievementLabs.Services.Gfwl;assembly=AchievementLabs.Core" xmlns:core="clr-namespace:AchievementLabs.Core;assembly=AchievementLabs.Core"
-        x:Class="AchievementLabs.Desktop.MainWindow" x:CompileBindings="True" x:DataType="local:DesktopModel" Title="Achievement Labs 1.0.6" Width="1440" Height="920" MinWidth="1120" MinHeight="720" Background="#000000" FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter" WindowStartupLocation="CenterScreen">
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:AchievementLabs.Desktop" xmlns:workflows="using:AchievementLabs.Desktop.Workflows" xmlns:models="clr-namespace:AchievementLabs.Models;assembly=AchievementLabs.Core" xmlns:gfwl="clr-namespace:AchievementLabs.Services.Gfwl;assembly=AchievementLabs.Core" xmlns:core="clr-namespace:AchievementLabs.Core;assembly=AchievementLabs.Core" xmlns:mirror="clr-namespace:AchievementLabs.Mirror;assembly=AchievementLabs.MultiSelect"
+        x:Class="AchievementLabs.Desktop.MainWindow" x:CompileBindings="True" x:DataType="local:DesktopModel" Title="{x:Static local:AppInfo.DisplayName}" Width="1440" Height="920" MinWidth="1120" MinHeight="720" Background="#000000" FontFamily="avares://Avalonia.Fonts.Inter/Assets#Inter" WindowStartupLocation="CenterScreen">
  <Design.DataContext><local:DesktopModel/></Design.DataContext>
  <Grid x:Name="PreviewRoot" Background="#000000" ColumnDefinitions="240,*" RowDefinitions="*,38">
   <Border Grid.RowSpan="2" Background="#050606" BorderBrush="#24272A" BorderThickness="0,0,1,0">
@@ -12,6 +12,7 @@
     <ScrollViewer Grid.Row="1" Margin="0,24,0,16"><StackPanel Spacing="5">
      <TextBlock Text="WORKSPACE" Classes="eyebrow" Margin="12,0,0,12"/>
      <Button Classes="nav" Classes.active="{Binding IsHome}" Click="ShowHome" Content="⌂     Home"/>
+     <Button x:Name="MirrorNav" Classes="nav" Classes.active="{Binding IsMirror}" Click="ShowMirror" Content="⇄     Achievement Mirror"/>
       <Expander IsExpanded="True"><Expander.Header><StackPanel Orientation="Horizontal" Spacing="9"><Image Source="/Assets/xbox-logo.jpg" Width="18" Height="18" Stretch="UniformToFill"/><TextBlock Text="Xbox"/></StackPanel></Expander.Header><StackPanel Margin="10,4,0,6" Spacing="3"><Button x:Name="LibraryNav" Classes="nav" Classes.active="{Binding IsLibrary}" Click="ShowLibrary" Content="Library"/><Button Classes="nav" Classes.active="{Binding IsXbox360Profiles}" Click="ShowXbox360Profiles" Content="Xbox 360 profiles"/><Button Classes="nav" Classes.active="{Binding IsGfwl}" Click="ShowGfwl" Content="GFWL"/><Button x:Name="AchievementsNav" Classes="nav" Classes.active="{Binding IsAchievements}" Click="ShowAchievements" Content="Achievements"/><Button Classes="nav" Classes.active="{Binding IsSpoofer}" Content="Title spoofer" Click="ShowSpoofer"/><Button Classes="nav" Classes.active="{Binding IsStats}" Content="Stats editor" Click="ShowStats"/><Button Name="XboxAutoUnlockNav" Classes="nav" Classes.active="{Binding IsQueues}" Content="Auto Unlocker" Click="ShowQueues"/><Button Classes="nav" Classes.active="{Binding IsDiagnostics}" Click="ShowDiagnostics" Content="Event catalog"/><Button Classes="nav" Classes.active="{Binding IsTools}" Content="Tools" Click="ShowTools"/></StackPanel></Expander>
       <Expander><Expander.Header><StackPanel Orientation="Horizontal" Spacing="9"><Image Source="/Assets/steam-logo.webp" Width="18" Height="18"/><TextBlock Text="Steam"/></StackPanel></Expander.Header><StackPanel Margin="10,4,0,6" Spacing="3"><Button Classes="nav" Classes.active="{Binding IsSteamLibrary}" Content="Library" Click="ShowSteam"/><Button Classes="nav" Classes.active="{Binding IsSteamAchievements}" Content="Achievements" Click="ShowSteamAchievements"/><Button Name="SteamAutoUnlockNav" Classes="nav" Classes.active="{Binding IsSteamQueue}" Content="Auto Unlocker" Click="ShowSteamQueue"/></StackPanel></Expander>
       <Expander><Expander.Header><StackPanel Orientation="Horizontal" Spacing="9"><Border Background="#D5D8DC" CornerRadius="3" Width="18" Height="18"><Image Source="/Assets/epic-logo.png" Margin="2"/></Border><TextBlock Text="Epic Games"/></StackPanel></Expander.Header><StackPanel Margin="10,4,0,6"><Button Classes="nav" Classes.active="{Binding IsEpic}" Content="Library and achievements" Click="ShowEpic"/></StackPanel></Expander>
@@ -23,7 +24,8 @@
 
     </StackPanel>
     </ScrollViewer><StackPanel Grid.Row="2" Spacing="14">
-      <Border Classes="panel" Padding="12"><StackPanel Spacing="6"><TextBlock Text="A space to experiment." FontSize="12"/><TextBlock Text="Achievement Labs 1.0.6" Classes="muted" FontSize="11"/></StackPanel></Border>
+      <Border Background="#21352E" CornerRadius="10" Padding="12,8" IsVisible="{Binding Mirror.HasGlobalSummary}"><TextBlock Text="{Binding Mirror.GlobalSummary}" Foreground="#91CFB1" FontSize="11" TextWrapping="Wrap"/></Border>
+      <Border Classes="panel" Padding="12"><StackPanel Spacing="6"><TextBlock Text="A space to experiment." FontSize="12"/><TextBlock Text="{x:Static local:AppInfo.DisplayName}" Classes="muted" FontSize="11"/></StackPanel></Border>
      <Grid ColumnDefinitions="34,*"><Grid Width="34" Height="34"><Border Background="#303642" CornerRadius="17"><TextBlock Text="U" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="11"/></Border><Border CornerRadius="17" ClipToBounds="True"><local:RemoteImage Url="{Binding ProfileImageUrl}" Stretch="UniformToFill"/></Border></Grid><StackPanel Grid.Column="1" Margin="10,0,0,0"><TextBlock Text="{Binding ProfileName}" FontSize="12"/><TextBlock Text="{Binding ConnectionLabel}" Classes="muted" FontSize="10"/></StackPanel></Grid>
     </StackPanel>
    </Grid>
@@ -177,6 +179,115 @@
 
    </TabControl>
      <Grid Grid.Row="1" IsVisible="{Binding IsSteamQueue}" RowDefinitions="Auto,*,Auto" Margin="0,12"><StackPanel Spacing="12"><Grid ColumnDefinitions="*,*"><TextBox Text="{Binding SteamQueue.AppId, Mode=TwoWay}" PlaceholderText="Steam app ID"/><TextBox Grid.Column="1" Text="{Binding SteamQueue.TargetProfile, Mode=TwoWay}" PlaceholderText="Reference Steam profile" Margin="10,0,0,0"/></Grid><StackPanel Orientation="Horizontal" Spacing="8"><Button Content="Load locked achievements" Command="{Binding SteamQueue.LoadQueueCommand}"/><Button Content="Load profile queue" Command="{Binding SteamQueue.LoadProfileQueueCommand}"/><Button Content="Clear" Command="{Binding SteamQueue.ClearQueueCommand}"/></StackPanel><WrapPanel><TextBlock Text="Min delay (seconds)" VerticalAlignment="Center" Margin="0,0,8,0"/><NumericUpDown Value="{Binding SteamQueue.MinimumDelaySeconds, Mode=TwoWay}" Width="110"/><TextBlock Text="Max delay" VerticalAlignment="Center" Margin="12,0,8,0"/><NumericUpDown Value="{Binding SteamQueue.MaximumDelaySeconds, Mode=TwoWay}" Width="110"/><TextBlock Text="Profile time scale" VerticalAlignment="Center" Margin="12,0,8,0"/><NumericUpDown Value="{Binding SteamQueue.ProfileTimeScale, Mode=TwoWay}" Width="110"/></WrapPanel><Border Classes="panel" Padding="16"><StackPanel Spacing="8"><TextBlock Text="STEAM QUEUE STATUS" Classes="eyebrow"/><TextBlock Text="{Binding SteamQueue.ProgressText}" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="{Binding SteamQueue.StatusText}" TextWrapping="Wrap"/><TextBlock Text="{Binding SteamQueue.TargetProfileStatus}" Classes="muted" TextWrapping="Wrap"/></StackPanel></Border></StackPanel><ListBox Grid.Row="1" ItemsSource="{Binding SteamQueue.QueueItems}" Margin="0,15"><ListBox.ItemTemplate><DataTemplate x:DataType="models:SteamAutoUnlockQueueItem"><Grid ColumnDefinitions="*,100,180" Margin="10"><TextBlock Text="{Binding Name}"/><TextBlock Grid.Column="1" Text="{Binding DelaySeconds}"/><TextBlock Grid.Column="2" Text="{Binding Status}"/></Grid></DataTemplate></ListBox.ItemTemplate></ListBox><StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10"><Button Content="Start queue" Click="RunSteamQueue" IsEnabled="{Binding CanInteract}"/><Button Content="Stop" Command="{Binding SteamQueue.StopCommand}"/></StackPanel></Grid>
+     <ScrollViewer Grid.Row="1" IsVisible="{Binding IsMirror}" x:Name="MirrorPage">
+      <StackPanel Spacing="14" Margin="0,4,12,24" DataContext="{Binding Mirror}" x:DataType="workflows:AchievementMirrorViewModel">
+       <TextBlock Text="{x:Static workflows:AchievementMirrorViewModel.BuildLabel}" Classes="muted" FontSize="11"/>
+       <TextBlock Text="Pair a Steam game with an Xbox title. New unlocks on one platform appear on the other as they happen. Monitoring keeps running while you use other pages." Classes="muted" TextWrapping="Wrap"/>
+       <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+        <ComboBox ItemsSource="{Binding Pairs}" SelectedItem="{Binding SelectedPair}" HorizontalAlignment="Stretch" IsEnabled="{Binding !IsScanning}">
+         <ComboBox.ItemTemplate><DataTemplate x:DataType="mirror:MirrorPair"><TextBlock Text="{Binding DisplayName}"/></DataTemplate></ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Grid.Column="1" Content="New pair" Command="{Binding NewPairCommand}"/>
+        <Button Grid.Column="2" Content="Delete pair" Command="{Binding DeletePairCommand}" IsEnabled="{Binding CanEditPair}"/>
+       </Grid>
+       <Border Classes="panel" Padding="16">
+        <StackPanel Spacing="10">
+         <TextBlock Text="PAIRING" Classes="eyebrow"/>
+         <StackPanel Orientation="Horizontal" Spacing="16">
+          <TextBlock Text="Direction" Classes="muted" VerticalAlignment="Center"/>
+          <RadioButton GroupName="MirrorDirection" Content="Steam → Xbox" IsChecked="{Binding IsSteamToXbox}" IsEnabled="{Binding CanEditPair}"/>
+          <RadioButton GroupName="MirrorDirection" Content="Xbox → Steam" IsChecked="{Binding IsXboxToSteam}" IsEnabled="{Binding CanEditPair}"/>
+         </StackPanel>
+         <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+          <TextBox Text="{Binding SteamAppIdText}" PlaceholderText="Steam App ID, e.g. 3669870" IsEnabled="{Binding CanEditPair}"/>
+          <TextBox Grid.Column="1" Text="{Binding XboxTitleIdText}" PlaceholderText="Xbox Title ID, e.g. 1653280174" IsEnabled="{Binding CanEditPair}"/>
+         </Grid>
+         <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+          <TextBox Text="{Binding StoreLinkText}" PlaceholderText="Or paste an Xbox Store link to look up the Title ID" IsEnabled="{Binding CanEditPair}"/>
+          <Button Grid.Column="1" Content="Look up Title ID" Command="{Binding LookupStoreLinkCommand}" IsEnabled="{Binding CanEditPair}"/>
+         </Grid>
+         <TextBox Text="{Binding SteamIdText}" PlaceholderText="Your SteamID64 (filled in automatically when Steam is signed in on this PC)" IsEnabled="{Binding CanEditPair}"/>
+         <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+          <TextBox Text="{Binding ApiKeyInput}" PasswordChar="•" PlaceholderText="Steam Web API key from steamcommunity.com/dev/apikey"/>
+          <Button Grid.Column="1" Content="Save key" Command="{Binding SaveApiKeyCommand}"/>
+          <Button Grid.Column="2" Content="Remove key" Command="{Binding ClearApiKeyCommand}" IsVisible="{Binding HasApiKey}"/>
+         </Grid>
+         <TextBlock Text="{Binding ApiKeyStatus}" Classes="muted" TextWrapping="Wrap"/>
+         <Button Content="Scan and match" Classes="primary" Command="{Binding ScanCommand}" IsEnabled="{Binding CanEditPair}"/>
+        </StackPanel>
+       </Border>
+       <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+        <TextBlock Text="{Binding Status}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Border Grid.Column="1" Background="{Binding StateBackground}" CornerRadius="12" Padding="10,5" VerticalAlignment="Center"><TextBlock Text="{Binding StateLabel}" Foreground="{Binding StateForeground}" FontSize="11"/></Border>
+       </Grid>
+       <Border Background="#40331A" CornerRadius="8" Padding="12"><TextBlock Text="{Binding WarningText}" Foreground="#F0C674" TextWrapping="Wrap"/></Border>
+       <Border Background="#4A2323" CornerRadius="8" Padding="12" IsVisible="{Binding IsStopped}">
+        <StackPanel Spacing="8">
+         <TextBlock Text="Mirroring stopped" FontWeight="SemiBold" Foreground="#F2A7A7"/>
+         <TextBlock Text="{Binding StopReason}" TextWrapping="Wrap" Foreground="#F2A7A7"/>
+         <TextBlock Text="{Binding PendingText}" TextWrapping="Wrap" Foreground="#F2A7A7"/>
+         <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Content="Resume and send pending in order" Command="{Binding ResumeSendPendingCommand}"/>
+          <Button Content="Resume and discard pending" Command="{Binding ResumeDiscardPendingCommand}"/>
+         </StackPanel>
+        </StackPanel>
+       </Border>
+       <Border Classes="panel">
+        <StackPanel>
+         <TextBlock Text="{Binding MatchSummary, StringFormat='Match · {0}'}" FontWeight="SemiBold" Margin="14,12"/>
+         <Grid ColumnDefinitions="*,24,*,210" ColumnSpacing="6" Margin="14,0,14,6">
+          <TextBlock Text="{Binding SourceHeader}" Classes="muted"/>
+          <TextBlock Grid.Column="2" Text="{Binding TargetHeader}" Classes="muted"/>
+          <TextBlock Grid.Column="3" Text="Status" Classes="muted"/>
+         </Grid>
+         <ItemsControl ItemsSource="{Binding Rows}" x:Name="MirrorRows">
+          <ItemsControl.ItemTemplate>
+           <DataTemplate x:DataType="workflows:MirrorRowViewModel">
+            <Border BorderBrush="{DynamicResource Line}" BorderThickness="0,1,0,0" Padding="14,8">
+             <Grid ColumnDefinitions="*,24,*,210" ColumnSpacing="6">
+              <TextBlock Text="{Binding SourceName}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+              <TextBlock Grid.Column="1" Text="→" Classes="muted" VerticalAlignment="Center"/>
+              <ComboBox Grid.Column="2" ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedOption}" PlaceholderText="Choose an achievement" HorizontalAlignment="Stretch" IsEnabled="{Binding #MirrorRows.((workflows:AchievementMirrorViewModel)DataContext).CanEditPair}"/>
+              <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+               <Border Background="{Binding StatusBackground}" BorderBrush="{Binding StatusBorder}" BorderThickness="1" CornerRadius="10" Padding="8,3" ToolTip.Tip="{Binding StatusTip}"><TextBlock Text="{Binding StatusLabel}" Foreground="{Binding StatusForeground}" FontSize="11" FontWeight="SemiBold"/></Border>
+               <Button Content="Confirm" Padding="10,4" FontSize="11" Command="{Binding ConfirmCommand}" IsVisible="{Binding NeedsConfirm}"/>
+              </StackPanel>
+             </Grid>
+            </Border>
+           </DataTemplate>
+          </ItemsControl.ItemTemplate>
+         </ItemsControl>
+        </StackPanel>
+       </Border>
+       <StackPanel Orientation="Horizontal" Spacing="6">
+        <CheckBox IsChecked="{Binding MirrorAppUnlocks}">
+         <StackPanel><TextBlock Text="{Binding AppUnlocksLabel}"/><TextBlock Text="{Binding AppUnlocksDetail}" Classes="muted" FontSize="11"/></StackPanel>
+        </CheckBox>
+        <Button Classes="help" Content="?" IsVisible="{Binding IsSteamToXbox}" ToolTip.Tip="{x:Static workflows:AchievementMirrorViewModel.SteamHelpText}" AutomationProperties.Name="About this setting">
+         <Button.Flyout><Flyout><TextBlock Text="{x:Static workflows:AchievementMirrorViewModel.SteamHelpText}" MaxWidth="380" TextWrapping="Wrap"/></Flyout></Button.Flyout>
+        </Button>
+        <Button Classes="help" Content="?" IsVisible="{Binding IsXboxToSteam}" ToolTip.Tip="{x:Static workflows:AchievementMirrorViewModel.XboxHelpText}" AutomationProperties.Name="About this setting">
+         <Button.Flyout><Flyout><TextBlock Text="{x:Static workflows:AchievementMirrorViewModel.XboxHelpText}" MaxWidth="380" TextWrapping="Wrap"/></Flyout></Button.Flyout>
+        </Button>
+       </StackPanel>
+       <CheckBox IsChecked="{Binding ShowInGame}">
+        <StackPanel><TextBlock Text="Show me in the game on Steam and Xbox while mirroring"/><TextBlock Text="Idles the game on Steam and shows it on Xbox until you stop. Turn off when you play on a Steam Deck or another PC, where idling here would sign that session out of the game." Classes="muted" FontSize="11" TextWrapping="Wrap"/></StackPanel>
+       </CheckBox>
+       <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button Content="{Binding StartStopLabel}" Classes="primary" Command="{Binding StartStopCommand}"/>
+        <Button Content="Rescan" Command="{Binding ScanCommand}" IsEnabled="{Binding CanEditPair}"/>
+        <Button Content="Check now" Command="{Binding CheckNowCommand}" IsVisible="{Binding IsRunning}" ToolTip.Tip="Read the source platform immediately and write what it reports to the activity log"/>
+       </StackPanel>
+       <Border Classes="panel" Padding="14">
+        <StackPanel Spacing="4">
+         <TextBlock Text="ACTIVITY" Classes="eyebrow"/>
+         <ItemsControl ItemsSource="{Binding LogEntries}">
+          <ItemsControl.ItemTemplate><DataTemplate x:DataType="mirror:MirrorLogEntry"><TextBlock Text="{Binding Line}" FontFamily="Consolas,Menlo,monospace" FontSize="11" TextWrapping="Wrap" Classes="muted"/></DataTemplate></ItemsControl.ItemTemplate>
+         </ItemsControl>
+        </StackPanel>
+       </Border>
+      </StackPanel>
+     </ScrollViewer>
      <Grid Grid.Row="1" IsVisible="{Binding IsXbox360Profiles}" RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="14">
       <TextBlock Text="Extract a profile from USB with a verified backup, then load the local working copy. The Xbox library stays combined; Open uses this profile for Xbox 360 games." TextWrapping="Wrap" Classes="muted"/>
       <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8"><Button Content="1. Extract USB profile and backup" Click="ExtractUsbProfile" IsEnabled="{Binding CanInteract}"/><Button Content="Open profiles folder" Click="OpenProfilesFolder"/><Button Content="Refresh local profiles" Click="RefreshLocalXbox360Profiles"/></StackPanel>
@@ -203,7 +314,7 @@
 
     <ScrollViewer Grid.Row="1" IsVisible="{Binding IsAbout}"><StackPanel Spacing="18" MaxWidth="760" HorizontalAlignment="Left"><Image Source="/Assets/achievement-labs-logo.png" Width="86" Height="86" HorizontalAlignment="Left"/><TextBlock Text="Achievement Labs" FontSize="28" FontWeight="SemiBold"/><TextBlock Text="Achievement Labs is a unified desktop workspace for viewing and managing achievements across Xbox, Steam, and legacy PC ecosystems. It combines account-aware libraries, achievement tools, title research, and community-tested compatibility in a native Avalonia interface." TextWrapping="Wrap" LineHeight="22"/><TextBlock Text="Achievement Labs builds on the original Ultimate Xbox Achievement Unlocker (XAU) project. Credit and thanks go to ItsLogic and the original contributors whose work made this project possible." TextWrapping="Wrap" Classes="muted" LineHeight="21"/><WrapPanel><Button Content="Achievement Labs on GitHub" Tag="GitHub" Click="OpenUtilityLink"/><Button Content="Original XAU project" Tag="Original XAU" Click="OpenUtilityLink" Margin="8,0,0,0"/><Button Content="Join Discord" Tag="Discord" Click="OpenUtilityLink" Margin="8,0,0,0"/></WrapPanel></StackPanel></ScrollViewer>
    <Border Grid.Row="1" IsVisible="{Binding IsSteamLibrary}" Classes="panel" Padding="18">
-    <Grid RowDefinitions="Auto,*" RowSpacing="12"><Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding SteamSearch, Mode=TwoWay}" PlaceholderText="Search Steam games or app ID…"/><Button Grid.Column="1" Content="Refresh library" Click="ShowSteam" IsEnabled="{Binding CanInteract}" Margin="10,0,0,0"/></Grid><ListBox Grid.Row="1" ItemsSource="{Binding SteamGames}" SelectedItem="{Binding SelectedSteamGame, Mode=TwoWay}"><ListBox.ItemTemplate><DataTemplate x:DataType="models:SteamGameItem"><Grid ColumnDefinitions="64,*,120,150" Margin="10,8"><Grid Width="54" Height="54"><Border Background="#171A1C" CornerRadius="8"/><local:RemoteImage Url="{Binding ImageUrl}" Stretch="UniformToFill"/></Grid><StackPanel Grid.Column="1" Spacing="6" Margin="10,0"><SelectableTextBlock Text="{Binding DisplayName}" FontSize="15"/><TextBlock Text="{Binding Status}" Classes="muted" FontSize="10"/></StackPanel><TextBlock Grid.Column="2" Text="{Binding AppId}" VerticalAlignment="Center"/><Button Grid.Column="3" Content="Open achievements" Tag="{Binding}" Click="OpenSteamAchievements" Classes="primary"/></Grid></DataTemplate></ListBox.ItemTemplate></ListBox></Grid>
+    <Grid RowDefinitions="Auto,*" RowSpacing="12"><Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding SteamSearch, Mode=TwoWay}" PlaceholderText="Search Steam games or app ID…"/><Button Grid.Column="1" Content="Refresh library" Click="ShowSteam" IsEnabled="{Binding CanInteract}" Margin="10,0,0,0"/></Grid><ListBox Grid.Row="1" ItemsSource="{Binding SteamGames}" SelectedItem="{Binding SelectedSteamGame, Mode=TwoWay}"><ListBox.ItemTemplate><DataTemplate x:DataType="models:SteamGameItem"><Grid ColumnDefinitions="64,*,120,150" Margin="10,8"><Grid Width="54" Height="54"><Border Background="#171A1C" CornerRadius="8"/><local:RemoteImage Url="{Binding ImageUrl}" Stretch="UniformToFill"/></Grid><StackPanel Grid.Column="1" Spacing="6" Margin="10,0" VerticalAlignment="Center"><SelectableTextBlock Text="{Binding DisplayName}" FontSize="15"/></StackPanel><TextBlock Grid.Column="2" Text="{Binding AppId}" VerticalAlignment="Center"/><Button Grid.Column="3" Content="Open achievements" Tag="{Binding}" Click="OpenSteamAchievements" Classes="primary"/></Grid></DataTemplate></ListBox.ItemTemplate></ListBox></Grid>
    </Border>
    <Grid Grid.Row="1" IsVisible="{Binding IsSteamAchievements}" RowDefinitions="Auto,Auto,*,Auto">
     <StackPanel Spacing="12"><Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding SteamAppId, Mode=TwoWay}" PlaceholderText="Open Steam achievements by app ID…" Tag="load-steam" KeyDown="SubmitTextField"/><Button Grid.Column="1" Content="Load achievements" Click="LoadSteam" IsEnabled="{Binding CanInteract}" Margin="10,0,0,0"/></Grid><TextBlock Text="{Binding SteamStatus}" TextWrapping="Wrap"/><TextBox Text="{Binding SteamAchievementSearch, Mode=TwoWay}" PlaceholderText="Search achievements by name or ID…"/></StackPanel>

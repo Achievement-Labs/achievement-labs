@@ -25,6 +25,15 @@ namespace AchievementLabs.Desktop.Workflows
         private long lastPresenceHeartbeat;
         public string StatePath { get; set; } = AutoUnlockState.GetSavePath();
         public AutoUnlockState? PreparedState => _state;
+        /// <summary>
+        /// Achievement Mirror hook, awaited after each successful unlock (title ID, achievement ID, name).
+        /// Returning false means the unlock couldn't be mirrored, and the queue stops before the next one.
+        /// </summary>
+        public Func<string, string, string, CancellationToken, Task<bool>>? MirrorUnlockAsync { get; set; }
+        /// <summary>Called before each unlock (title ID, achievement ID, name) and, if it fails, to withdraw it.</summary>
+        public Action<string, string, string>? MirrorExpect { get; set; }
+        public Action<string, string>? MirrorCancel { get; set; }
+        private string mirrorFailure = "";
         public bool HadFailure { get; private set; }
         public bool PresenceCleanupSucceeded { get; private set; } = true;
         public bool QueueReady { get; private set; }
@@ -59,6 +68,8 @@ namespace AchievementLabs.Desktop.Workflows
             SpeedMultiplier = _state.SpeedMultiplier;
             PopulateQueueDisplay(); UpdateProgressText();
             await StartAutoUnlockProcess(token);
+            if (mirrorFailure.Length > 0)
+                throw new AchievementLabs.Core.BuildQueueHandoffException(mirrorFailure + " The build queue is paused.");
             if (!PresenceCleanupSucceeded)
                 throw new AchievementLabs.Core.BuildQueueHandoffException("The previous title's presence could not be stopped. The build queue is paused; check the Xbox connection before resuming.");
             return token.IsCancellationRequested ? AchievementLabs.Core.BuildQueueItemStatus.Paused
@@ -551,6 +562,7 @@ namespace AchievementLabs.Desktop.Workflows
             if (_state == null || IsRunning) return;
             if (_state.OwnerXuid != account.XUIDOnly) { StatusText = "Rebuild this queue for the connected account."; return; }
             HadFailure = false;
+            mirrorFailure = "";
             PresenceCleanupSucceeded = true;
 
             _state.RefreshTokenOnFailure = RefreshTokenOnFailure;
@@ -693,6 +705,7 @@ namespace AchievementLabs.Desktop.Workflows
 
                 bool unlockSuccess = false;
                 string unlockError = "";
+                MirrorExpect?.Invoke(_state.TitleId, entry.AchievementId, entry.AchievementName);
 
                 try
                 {
@@ -742,9 +755,24 @@ namespace AchievementLabs.Desktop.Workflows
                             $"{entry.AchievementName} ({entry.Gamerscore}G) has been unlocked.",
                             NoticeAppearance.Success, new NoticeIcon(NoticeSymbol.Checkmark24), _snackbarDuration);
                     });
+
+                    if (MirrorUnlockAsync != null && !await MirrorUnlockAsync(_state.TitleId, entry.AchievementId, entry.AchievementName, token))
+                    {
+                        // Never race ahead on Xbox when the matching Steam unlock didn't happen.
+                        mirrorFailure = $"Achievement Mirror couldn't copy {entry.AchievementName} to Steam, so Auto Unlock stopped.";
+                        HadFailure = true;
+                        Avalonia.Threading.Dispatcher.UIThread.Invoke(() =>
+                        {
+                            StatusText = mirrorFailure + " Resolve it in Achievement Mirror, then click Start to continue.";
+                            FailureNotification?.Invoke(mirrorFailure);
+                        });
+                        _state.IsRunning = false; SaveState();
+                        return;
+                    }
                 }
                 else
                 {
+                    MirrorCancel?.Invoke(_state.TitleId, entry.AchievementId);
                     bool stop = false;
                     Avalonia.Threading.Dispatcher.UIThread.Invoke(() => stop = HandleUnlockFailure(entry, unlockError));
                     HadFailure = true;
