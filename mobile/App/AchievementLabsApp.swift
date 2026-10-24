@@ -5,9 +5,15 @@ import UniformTypeIdentifiers
 @main struct AchievementLabsApp: App {
     @StateObject private var model = MobileModel()
     @StateObject private var appearance = MobileAppearance()
-    @Environment(\.scenePhase) private var phase
     var body: some Scene {
-        WindowGroup {
+        WindowGroup { MobileRootView().environmentObject(model).environmentObject(appearance) }
+    }
+}
+struct MobileRootView: View {
+    @EnvironmentObject var model: MobileModel
+    @EnvironmentObject var appearance: MobileAppearance
+    @Environment(\.scenePhase) private var phase
+    private var tabs: some View {
             TabView(selection: $model.selectedTab) {
                 HomeView().tabItem { Label("Home",systemImage:"house") }.tag(4)
                 LibraryView().tabItem { Label("Library", systemImage: "books.vertical") }.tag(0)
@@ -15,10 +21,15 @@ import UniformTypeIdentifiers
                 Xbox360View().tabItem { Label("Xbox 360", systemImage: "externaldrive") }.tag(5)
                 SettingsView().tabItem { Label("Settings", systemImage: "gear") }.tag(3)
             }
-            .environmentObject(model).environmentObject(appearance).tint(appearance.accentColor).preferredColorScheme(.dark)
+            .tint(appearance.accentColor).preferredColorScheme(.dark)
+            .onAppear { if let title = model.selectedGame?.id ?? model.queue.first?.game.id, JSON.numeric(title) { appearance.title=title } }
             .onChange(of:model.presenceTitle) { _, value in if JSON.numeric(value) { appearance.title=value } }
             .onChange(of:model.queueTitle) { _, value in if JSON.numeric(value) { appearance.title=value } }
             .onChange(of:model.selectedGame?.id) { _, value in if let value { appearance.title=value } }
+
+    }
+    var body: some View {
+        tabs
             .confirmationDialog("Add another game",isPresented:Binding(get:{ !model.pendingQueueItems.isEmpty },set:{ if !$0 { model.pendingQueueItems = [] } }),titleVisibility:.visible) {
                 Button("Add to end of current queue") { model.resolveQueueAddition(separate:false) }
                 Button("Save as a separate game queue") { model.resolveQueueAddition(separate:true) }
@@ -50,9 +61,9 @@ import UniformTypeIdentifiers
             }
             .onReceive(NotificationCenter.default.publisher(for:UIApplication.willTerminateNotification)) { _ in model.terminating() }
             .onChange(of: phase) { _, value in if value == .active { model.active() } else if value == .background { model.background() } }
-        }
     }
 }
+
 
 struct LibraryView: View {
     @EnvironmentObject var m: MobileModel
@@ -74,17 +85,17 @@ struct LibraryView: View {
                 Section {
                     ProfileTile()
                     Picker("Sort", selection: $sort) { ForEach(["Last played", "A–Z", "Z–A"], id: \.self) { Text($0) } }.font(.subheadline)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section {
                     ForEach(visible) { game in
                         NavigationLink(value:game) { LibraryGameRow(game:game) }
                             .listRowInsets(EdgeInsets(top:7,leading:14,bottom:7,trailing:14))
-                            .listRowBackground(m.highlightCompleted && game.complete ? Color.green.opacity(0.16) : Color(.secondarySystemGroupedBackground))
+                            .listRowBackground(LabsGlassSurface(highlight:m.highlightCompleted && game.complete))
                             .swipeActions(edge:.trailing) {
                                 Button("Game Session") { m.openGameSession(game) }.tint(.green)
                             }
                     }
-                }
+                }.listRowBackground(LabsGlassSurface())
             }
             .labsPage().listSectionSpacing(.compact).navigationTitle("Library").navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Game.self) { AchievementView(game: $0) }
@@ -134,7 +145,7 @@ struct AchievementView: View {
                     Button("Open Game Session") { if !selected.isEmpty { m.enqueue(m.rows.filter { selected.contains($0.id) }, game:game) }; m.openGameSession(game) }
                     Spacer()
                 }.buttonStyle(.bordered).font(.caption)
-            }
+            }.listRowBackground(LabsGlassSurface())
             Section {
                 Picker("Show", selection: $filter) { ForEach(["All","Locked","Unlocked"],id: \.self) { Text($0) } }.pickerStyle(.segmented)
                 Picker("Sort", selection: $sort) { Text("Name").tag("Name"); Text("ID").tag("ID") }
@@ -144,7 +155,7 @@ struct AchievementView: View {
                 }.font(.caption)
                 Button("Unlock \(selected.count) selected together") { Task { await m.unlockTogether(m.rows.filter { selected.contains($0.id) },game:game) } }.disabled(selected.isEmpty || m.running || m.busy)
                 Button("Add \(selected.count) to queue") { m.enqueue(m.rows.filter { selected.contains($0.id) }, game: game) }.disabled(selected.isEmpty || m.running)
-            }
+            }.listRowBackground(LabsGlassSurface())
             ForEach(groupNames, id: \.self) { group in
                 Section {
                     DisclosureGroup(isExpanded: Binding(get: { expanded[group] ?? true }, set: { expanded[group] = $0 })) {
@@ -162,7 +173,7 @@ struct AchievementView: View {
                             }.padding(.vertical,6)
                         }
                     } label: { Text(group).foregroundStyle(.green).font(.headline) }
-                }
+                }.listRowBackground(LabsGlassSurface())
             }
         }
         .labsPage().navigationTitle("Achievements").navigationBarTitleDisplayMode(.inline)
@@ -195,7 +206,7 @@ struct SessionSettingsView: View {
                     Button("Build timing queue",systemImage:"clock.arrow.circlepath") { build() }.disabled(m.running || m.busy || m.account == nil || m.referenceGamertag.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty || !JSON.numeric(m.queueTitle))
                     if !m.referenceInfo.isEmpty { Text(m.referenceInfo).font(.caption).foregroundStyle(.secondary) }
                     Text("Uses intervals between the reference profile’s visible unlocks. Review the queue before starting; it does not copy past dates.").font(.caption2).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section {
                     DisclosureGroup("Queue options",isExpanded:$options) {
                         Toggle("Stop on failure",isOn:$m.stopOnFailure)
@@ -206,7 +217,7 @@ struct SessionSettingsView: View {
                         Button("Save queue delays") { m.saveQueue() }.disabled(m.running)
                         Text(m.continueQueueInBackground ? "Background continuation is experimental. iOS can pause it; long delays may expire. Refresh Xbox to verify progress." : "Queues pause when you leave the app. Refresh achievements to verify accepted requests.").font(.caption2).foregroundStyle(.secondary)
                     }
-                }.font(.subheadline)
+                }.listRowBackground(LabsGlassSurface()).font(.subheadline)
                 Section {
                     DisclosureGroup("Saved game queues (\(m.queueBook.sorted.count))",isExpanded:$savedExpanded) {
                     HStack {
@@ -229,7 +240,7 @@ struct SessionSettingsView: View {
                     }
                     Text("To sync: Export queue sync file → copy the JSON file to your other device → Import queue sync file there while signed into the same account. This is a manual transfer; loading requires Start.").font(.caption2).foregroundStyle(.secondary)
                     }
-                }
+                }.listRowBackground(LabsGlassSurface())
             }.scrollDismissesKeyboard(.interactively).listSectionSpacing(.compact).navigationTitle("Session Settings").navigationBarTitleDisplayMode(.inline).labsPage()
             .toolbar { ToolbarItem(placement:.confirmationAction) { Button("Done") { dismiss() } } }
             .confirmationDialog("Delete saved queue?",isPresented:Binding(get:{ deletingSaved != nil },set:{ if !$0 { deletingSaved = nil } }),titleVisibility:.visible) {
@@ -317,19 +328,19 @@ struct PresenceSections: View {
                     if m.extendedAudio.active { Text(m.extendedAudio.status).font(.caption).foregroundStyle(.green) }
                     if m.continueSpoofInBackground || m.continueQueueInBackground { Text(m.extendedAudio.active ? m.extendedAudio.status : m.continuedQueue.status).font(.caption2).foregroundStyle(.secondary) }
                     }.activeSessionHighlight(m.presenceRunning)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 if !m.spoofDiagnostics.isEmpty {
                     Section("Spoofing diagnostics") {
                         Text(m.spoofDiagnostics).font(.caption.monospaced()).textSelection(.enabled)
                         Button("Copy diagnostics",systemImage:"doc.on.doc") { UIPasteboard.general.string = m.spoofDiagnostics }
                         Text("Includes status, profile choice and server codes. Authorization and event tokens are excluded.").font(.caption2).foregroundStyle(.secondary)
-                    }
+                    }.listRowBackground(LabsGlassSurface())
                 }
                 Section {
                     Toggle("Notify if spoofing stops",isOn:$m.notifyPresenceFailure)
                     Button("Refresh Xbox playtime") { Task { await m.readPlaytime(m.presenceTitle) } }.disabled(m.account == nil || !JSON.numeric(m.presenceTitle))
                     Text("Background spoofing can use a finite session when enabled in Settings → App. For system-task mode, wait for a grant before leaving; for extended mode, wait for “Extended audio active”. iOS or audio interruptions can stop it. Xbox-recorded playtime can update later.").font(.caption2).foregroundStyle(.secondary)
-                }.font(.subheadline)
+                }.listRowBackground(LabsGlassSurface()).font(.subheadline)
         }
             .task(id:m.presenceTitle) { do { try await Task.sleep(nanoseconds:400_000_000); try Task.checkCancellation(); await m.lookupTitle(m.presenceTitle); await m.readPlaytime(m.presenceTitle) } catch {} }
     }
@@ -406,24 +417,24 @@ struct SettingsView: View {
                     Text("Use the full Xbox authorization starting XBL3.0 x=…;… . The account is checked with Xbox before saving. Manual authorization is an advanced alternative to browser sign-in. The event token below is separate from account authorization.").font(.caption).foregroundStyle(.secondary)
                     }
                     if m.account != nil { Button("Disconnect",role: .destructive) { Task { await m.disconnect() } }.disabled(m.busy) }
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section("Event token") {
                     if reveal { TextField("Paste event token",text: $eventToken).textInputAutocapitalization(.never).autocorrectionDisabled() } else { SecureField("Paste event token",text: $eventToken).textContentType(.oneTimeCode).textInputAutocapitalization(.never).autocorrectionDisabled() }
                     Toggle("Show token", isOn: $reveal)
                     Button("Save event token") { m.saveEventToken(eventToken); eventToken = m.account?.eventToken ?? "" }.disabled(m.account == nil || eventToken.isEmpty || m.running || m.busy)
                     Button("Remove event token",role: .destructive) { m.removeEventToken(); eventToken = "" }.disabled(m.account == nil || m.running || m.busy)
                     Text("Stored in the iOS Keychain for this device. Changing accounts clears the previous account's event token from the active session. Retrieval from other apps is not available.").font(.caption).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
     }
     @ViewBuilder private var librarySettings: some View {
-                Section("Appearance") { Toggle("Show Mythic for base completion", isOn: $m.showMythic); Toggle("Highlight 100% completed games", isOn: $m.highlightCompleted) }
+                Section("Appearance") { Toggle("Show Mythic for base completion", isOn: $m.showMythic); Toggle("Highlight 100% completed games", isOn: $m.highlightCompleted) }.listRowBackground(LabsGlassSurface())
                 Section("Completion indicators") {
                     Text("Mythic is the same local base-completion marker as desktop. The profile count includes verified base completions and titles with every achievement unlocked; it can increase after scanning.").font(.caption).foregroundStyle(.secondary)
                     Text("Checked \(m.checkedCompletion.count) of \(m.games.count) titles").font(.caption)
                     Button("Scan unchecked titles, one at a time") { Task { await m.scanCompletion() } }.disabled(m.account == nil || m.busy || m.running || m.games.isEmpty)
                     if m.scanningCompletion { Button("Stop after current title",role:.destructive) { m.scanningCompletion = false } }
                     Text(m.status).font(.caption2).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
     }
     @ViewBuilder private var appSettings: some View {
                 Section("Background sessions · experimental") {
@@ -440,7 +451,7 @@ struct SettingsView: View {
                     Text(m.extendedAudio.active ? m.extendedAudio.status : m.continuedQueue.status).font(.caption)
                     Text("System-task mode requires iOS 26 and a grant before leaving. Extended audio works only during your finite spoofing session. iOS can still stop either mode. Accepted actions need Xbox verification. Either session can start first; extended mode is shared once spoofing begins.").font(.caption2).foregroundStyle(.secondary)
                     Text("When background mode is enabled, remembered sign-in and queue files remain accessible after the first device unlock. They stay protected on this device.").font(.caption2).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section("Secure connections") {
                     Text("Xbox event collector: Windows · Microsoft root validated")
                     Button("Test secure connections") { Task { await m.checkSecureConnections() } }.disabled(m.running || m.presenceRunning || m.checkingConnections)
@@ -449,13 +460,13 @@ struct SettingsView: View {
                         Text(m.transportDiagnostics).font(.caption.monospaced()).textSelection(.enabled)
                         Button("Copy connection diagnostics") { UIPasteboard.general.string = m.transportDiagnostics }
                     }
-                }
-                Section("Notifications") { Button("Allow notifications") { Task { await m.requestNotifications() } } }
+                }.listRowBackground(LabsGlassSurface())
+                Section("Notifications") { Button("Allow notifications") { Task { await m.requestNotifications() } } }.listRowBackground(LabsGlassSurface())
                 Section("Mobile beta") {
                     Text("Standalone iPhone and iPad app · " + (Bundle.main.object(forInfoDictionaryKey:"CFBundleShortVersionString") as? String ?? "Unknown")).font(.headline)
                     Text("Bundled event data: fork v1.0.8-fork.1. Event actions use only deterministic recipes that passed mobile checks. Unsupported edition routing remains disabled. Live Xbox behaviour needs device testing. New event games sync from the public upstream feed; Windows-specific tools are not included.").font(.caption).foregroundStyle(.secondary)
                     Text("App identifier: " + (Bundle.main.bundleIdentifier ?? "Unknown")).font(.caption2).textSelection(.enabled)
                     Link("Project on GitHub",destination: URL(string:"https://github.com/Achievement-Labs/achievement-labs")!)
-                }
+                }.listRowBackground(LabsGlassSurface())
     }
 }

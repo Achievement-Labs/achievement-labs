@@ -17,7 +17,7 @@ struct HomeView: View {
             List {
                 Section {
                     HomeProfileHero()
-                }.listRowBackground(Color.green.opacity(0.09))
+                }.listRowBackground(LabsGlassSurface(highlight:true))
                 if m.account != nil {
                     Section("Jump back in") {
                         HStack(spacing:12) {
@@ -25,13 +25,13 @@ struct HomeView: View {
                             shortcut("Game Session",icon:"gamecontroller",tab:1)
                             shortcut("Xbox 360",icon:"externaldrive",tab:5)
                         }.buttonStyle(.borderless)
-                    }
+                    }.listRowBackground(LabsGlassSurface())
                     if !m.games.isEmpty {
                         Section("Recently played") {
                             ForEach(Array(m.games.sorted { $0.lastPlayed > $1.lastPlayed }.prefix(3))) { game in
                                 NavigationLink { AchievementView(game:game) } label: { LibraryGameRow(game:game) }
                             }
-                        }
+                        }.listRowBackground(LabsGlassSurface())
                     }
                 }
                 Section("Connect") {
@@ -41,14 +41,14 @@ struct HomeView: View {
                     } } label: { Label("Sign in with Microsoft",systemImage:"person.crop.circle.badge.checkmark") }.disabled(m.busy || m.running || m.presenceRunning)
                     Button { sync = true } label: { Label("Sync from PC",systemImage:"qrcode.viewfinder") }.disabled(m.busy || m.running || m.presenceRunning)
                     Text("Scan the codes from the mobile icon in the PC app, or use normal Microsoft sign-in.").font(.caption).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 if safariPending {
                     Section("Finish Safari sign-in") {
                         SecureField("Paste the final Microsoft redirect URL",text:$redirect).textContentType(.oneTimeCode).textInputAutocapitalization(.never).autocorrectionDisabled()
                         Button("Complete sign-in") { let value = redirect; redirect = ""; Task { await m.finishBrowserLogin(value); if m.account != nil { safariPending = false } } }.disabled(redirect.isEmpty || m.busy)
-                    }
+                    }.listRowBackground(LabsGlassSurface())
                 }
-                Section { Button("Settings and launch page",systemImage:"gear") { m.selectedTab = 3 } }
+                Section { Button("Settings and launch page",systemImage:"gear") { m.selectedTab = 3 } }.listRowBackground(LabsGlassSurface())
             }.listSectionSpacing(.compact).labsPage().navigationTitle("Home").navigationBarTitleDisplayMode(.inline)
             .refreshable { await m.refreshGames() }
             .toolbar { Button { Task { await m.refreshGames() } } label: { Image(systemName:"arrow.clockwise") }.disabled(m.account == nil || m.busy).accessibilityLabel("Refresh profile and library") }

@@ -45,13 +45,15 @@ extension Color {
     @Published var images:[String:UIImage] = [:]
     private var attempted = Set<String>()
     private var loading = Set<String>()
-    private var failedImages = Set<String>()
+    @Published private(set) var failedImages = Set<String>()
     func resolve(_ title:String) async {
         guard !title.isEmpty, !attempted.contains(title) else { return }; attempted.insert(title)
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains(where: { $0.hasPrefix("--ui-preview=") }) { candidates[title] = []; return }
         #endif
-        candidates[title] = (try? await StoreArtwork.lookup(title)) ?? []
+        let resolved = try? await StoreArtwork.lookup(title)
+        if Task.isCancelled { attempted.remove(title); return }
+        candidates[title] = resolved ?? []
         if candidates.count > 12 { candidates = candidates.filter { $0.key == title } }
     }
     func load(_ url:URL?) async {
@@ -74,7 +76,7 @@ struct LabsBackdrop: View {
     var body:some View {
         GeometryReader { geometry in
             let show = !a.oled && (a.background == "custom" || (a.background == "game" && (a.persistent || m.selectedTab == 1)))
-            let selected = StoreArtwork.best(art.candidates[a.title] ?? [],width:geometry.size.width,height:geometry.size.height) ?? StoreArtwork.secureURL(m.gameForTitle(a.title)?.image ?? "")
+            let selected = StoreArtwork.best((art.candidates[a.title] ?? []).filter { !art.failedImages.contains($0.url.absoluteString) },width:geometry.size.width,height:geometry.size.height) ?? StoreArtwork.secureURL(m.gameForTitle(a.title)?.image ?? "")
             let image = a.background == "custom" ? custom : selected.flatMap { art.images[$0.absoluteString] }
             ZStack {
                 (a.oled ? Color.black : Color(red:0.035,green:0.075,blue:0.085))
@@ -105,13 +107,14 @@ struct AdjustableBlur:UIViewRepresentable {
     static func dismantleUIView(_ view:UIVisualEffectView,coordinator:Coordinator) { coordinator.animator?.stopAnimation(true) }
 }
 struct LabsGlassSurface:View {
+    var highlight=false
     @EnvironmentObject var a:MobileAppearance
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     var body:some View {
         ZStack {
             if a.glass && !a.oled && !reduceTransparency { AdjustableBlur(intensity:a.blur) }
             (a.oled ? Color.black : Color(red:0.07,green:0.13,blue:0.15)).opacity(a.glass && !a.oled && !reduceTransparency ? 1-a.transparency : 1)
-            if !a.oled { a.tintColor.opacity(0.14) }
+            if !a.oled { a.tintColor.opacity(0.14) }; if highlight { Color.green.opacity(0.1) }
         }.clipShape(RoundedRectangle(cornerRadius:17)).overlay { RoundedRectangle(cornerRadius:17).strokeBorder(.white.opacity(0.12),lineWidth:0.5) }
     }
 }

@@ -29,7 +29,7 @@ struct FindGamesView: View {
                     Button("Search all games",systemImage:"magnifyingglass") { request += 1 }.disabled(query.trimmingCharacters(in:.whitespacesAndNewlines).isEmpty || searching || opening)
                     if searching || opening { ProgressView() }
                     Text(message).font(.caption).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section {
                     HStack {
                         Text("Platforms").font(.headline)
@@ -44,7 +44,7 @@ struct FindGamesView: View {
                         }
                     }
                     Text("Filters apply to name searches. A Title ID lookup shows the exact title, even before its platform is known.").font(.caption).foregroundStyle(.secondary)
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section("Results · \(visible.count) / \(results.count)") {
                     if !results.isEmpty && visible.isEmpty { Text(platforms.isEmpty ? "Select at least one platform." : "No matches on the selected platforms. Try All.").foregroundStyle(.secondary) }
                     ForEach(visible) { game in
@@ -62,11 +62,11 @@ struct FindGamesView: View {
                             }
                         }.disabled(opening || m.busy || m.account == nil)
                     }
-                }
+                }.listRowBackground(LabsGlassSurface())
                 Section {
                     Text("Choose the correct edition to open its achievements. Xbox sign-in is required to view account progress. Search results do not confirm achievement or event support and do not add games to your profile.").font(.caption).foregroundStyle(.secondary)
-                }
-            }.navigationTitle("Find any game").navigationBarTitleDisplayMode(.inline)
+                }.listRowBackground(LabsGlassSurface())
+            }.labsPage().navigationTitle("Find any game").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement:.cancellationAction) { Button("Done") { dismiss() } } }
             .navigationDestination(item:$selected) { AchievementView(game:$0) }
             .task(id:request) {
