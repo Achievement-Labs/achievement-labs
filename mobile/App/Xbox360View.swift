@@ -69,7 +69,12 @@ private struct Xbox360WebView: UIViewRepresentable {
             guard let directory, pending == nil,!working.isEmpty else { throw fail("No completed profile is available.") }
             let file = directory.appendingPathComponent(backup ? "original.con" : "working.con")
             guard try Data(contentsOf:file) == (backup ? original : working) else { throw fail("Private profile changed. Reload before export.") }
-            return file
+            let bytes = backup ? original : working
+            guard bytes.count >= 0x379 else { throw fail("Profile header is missing.") }
+            let name = bytes[0x371..<0x379].map { String(format:"%02X",$0) }.joined() + (backup ? ".original.bak" : "")
+            let output = directory.appendingPathComponent(name)
+            try privateWrite(bytes,to:output)
+            return output
         }
         func handle(_ action:String,_ p:[String:Any],id:String) async throws -> Any? {
             switch action {
