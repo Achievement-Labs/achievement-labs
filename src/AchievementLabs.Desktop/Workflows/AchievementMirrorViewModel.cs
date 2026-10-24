@@ -371,6 +371,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         try
         {
             ResetSources(pair);
+            if (idlePausedApp == pair.SteamAppId) idlePausedApp = 0;
             IReadOnlyList<MirrorAchievement> baseline;
             string baselineSource;
             if (pair.Direction == MirrorDirection.SteamToXbox)
@@ -864,7 +865,18 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         {
             long wanted = 0; string why = "";
             var running = host.SteamRunningAppId;
-            foreach (var runner in runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && r.Pair.ShowInGame))
+            // Idling was ended outside the Mirror (Steam's Stop button, or the real game taking over): pause while
+            // you play, and resume only after the game has been closed for a minute.
+            if (idlePausedApp != 0)
+            {
+                if (running == idlePausedApp) idlePausedSince = DateTimeOffset.Now;
+                else if (DateTimeOffset.Now - idlePausedSince > TimeSpan.FromMinutes(1))
+                {
+                    Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == idlePausedApp)?.Pair, "The game has been closed for a minute · idling resumes.");
+                    idlePausedApp = 0;
+                }
+            }
+            foreach (var runner in runners.Values.Where(r => r.Status == MirrorStatus.Monitoring && r.Pair.ShowInGame && r.Pair.SteamAppId != idlePausedApp))
             {
                 // The real game (or SAM) already shows you playing on Steam; a second session isn't needed.
                 if (running == runner.Pair.SteamAppId && idleStartedByMirror != runner.Pair.SteamAppId) { LogOnce(runner.Pair, "realgame", "Steam already shows you playing this game · not idling it."); continue; }
@@ -879,6 +891,15 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
                 // short connection as the same game, such as a Steam-tab save, closes it on Steam's side).
                 var alive = host.SteamIdleAppId == wanted;
                 if (alive && running == wanted) idleSeenBySteam = true;
+                if (!alive && !restartIdleAfterSave)
+                {
+                    // The helper was ended by Steam or you, not by the Mirror: don't fight it.
+                    idlePausedApp = wanted; idlePausedSince = DateTimeOffset.Now;
+                    idleStartedByMirror = 0; idleSeenBySteam = false;
+                    Log(runners.Values.FirstOrDefault(r => r.Pair.SteamAppId == wanted)?.Pair,
+                        "Steam ended the idle session (Stop pressed or the game is starting) · idling paused while you play. Xbox still shows you in the game.");
+                    return;
+                }
                 var lost = !alive || idleSeenBySteam && running != wanted || restartIdleAfterSave;
                 if (!lost || DateTimeOffset.Now < idleRetryAfter) return;
                 var afterSave = restartIdleAfterSave; restartIdleAfterSave = false;
@@ -915,6 +936,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     }
 
     private bool idleSeenBySteam, restartIdleAfterSave;
+    private long idlePausedApp;
+    private DateTimeOffset idlePausedSince;
     private DateTimeOffset idleRetryAfter;
 
     private readonly ConcurrentDictionary<(Guid, string), string> loggedOnce = new();

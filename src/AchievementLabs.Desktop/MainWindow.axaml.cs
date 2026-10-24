@@ -85,8 +85,6 @@ public partial class MainWindow : Window
         {
             // Headless regression tests must never attach to a real account.
             if (offlineChecks) return;
-            // The Home Steam card was only filled in after clicking Home; read the local Steam profile at startup too.
-            if (!startupWindowCheck) _ = model.RefreshSteamProfileOnStartupAsync();
             if (startupWindowCheck)
             {
                 var initial = WindowState;
@@ -129,7 +127,10 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppAsync(); return;
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppOnStartupAsync();
+                // After the attach: its 6-second session read must not compete with this work. The Home Steam card
+                // was only filled in after clicking Home; read the local Steam profile at startup too.
+                _ = model.RefreshSteamProfileOnStartupAsync(); return;
             }
             try
             {
