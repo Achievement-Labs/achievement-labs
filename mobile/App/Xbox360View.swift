@@ -6,11 +6,13 @@ import LabsMobileCore
 
 struct Xbox360View: View {
     @EnvironmentObject var model: MobileModel
-    var body: some View { NavigationStack { Xbox360WebView(model:model).navigationTitle("Xbox 360").navigationBarTitleDisplayMode(.inline) } }
+    @EnvironmentObject var appearance: MobileAppearance
+    var body: some View { NavigationStack { Xbox360WebView(model:model,appearance:appearance).navigationTitle("Xbox 360").navigationBarTitleDisplayMode(.inline) } }
 }
 
 private struct Xbox360WebView: UIViewRepresentable {
     let model: MobileModel
+    let appearance:MobileAppearance
     func makeCoordinator() -> Coordinator { Coordinator(model:model) }
     func makeUIView(context:Context) -> WKWebView {
         let config = WKWebViewConfiguration()
@@ -25,7 +27,7 @@ private struct Xbox360WebView: UIViewRepresentable {
         }
         return web
     }
-    func updateUIView(_ uiView:WKWebView,context:Context) {}
+    func updateUIView(_ uiView:WKWebView,context:Context) { if context.coordinator.appearanceReady { context.coordinator.applyAppearance(uiView) } }
     static func dismantleUIView(_ uiView:WKWebView,coordinator:Coordinator) { uiView.configuration.userContentController.removeScriptMessageHandler(forName:"labs360"); uiView.navigationDelegate = nil }
 
     @MainActor final class Coordinator: NSObject,WKScriptMessageHandler,WKNavigationDelegate,UIDocumentPickerDelegate {
@@ -35,6 +37,7 @@ private struct Xbox360WebView: UIViewRepresentable {
         var original = Data(), working = Data(), pending: Data?
         var expected = 0, digest = "", directory: URL?
         var pickerID: String?, pickerAction = ""
+        var appearanceReady=false, lastAppearance=""
         init(model:MobileModel) { self.model = model }
         func hash(_ data:Data) -> String { Insecure.SHA1.hash(data:data).map { String(format:"%02x",$0) }.joined() }
         func reply(_ id:String,_ result:Any = [:],error:String? = nil) {
@@ -56,9 +59,17 @@ private struct Xbox360WebView: UIViewRepresentable {
             decisionHandler(allowed ? .allow : .cancel)
         }
         func webView(_ webView:WKWebView,didFinish navigation:WKNavigation!) {
+            appearanceReady=true;applyAppearance(webView)
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("--ui-preview=xbox360") { webView.evaluateJavaScript("window.mobile360SelfTest()",completionHandler:nil) }
             #endif
+        }
+        func applyAppearance(_ webView:WKWebView) {
+            let appearance=MobileAppearance()
+            var config:[String:Any] = ["glassEnabled":appearance.glass,"oledMode":appearance.oled,"glassTint":"#"+appearance.tint,"accentColour":"#"+appearance.accent,"glassTransparency":appearance.transparency*100,"glassBlur":appearance.blur*40,"backgroundSource":appearance.background,"persistentGameArt":appearance.persistent,"artworkFit":appearance.fit ? "contain" : "cover","backgroundDim":appearance.dim*100,"backgroundBlur":appearance.artBlur]
+            config["backgroundURL"]=model.gameForTitle(appearance.title)?.image ?? ""
+            if appearance.background == "custom", let data=try? Data(contentsOf:MobileAppearance.customURL) { config["customImage"]="data:image/jpeg;base64,"+data.base64EncodedString() }
+            if let data=try? JSONSerialization.data(withJSONObject:config),let json=String(data:data,encoding:.utf8) { if json != lastAppearance { lastAppearance=json;webView.evaluateJavaScript("window.setLabsAppearance(\(json))",completionHandler:nil) } }
         }
         func fail(_ text:String) -> LabsError { .message(text) }
         func privateWrite(_ data:Data,to url:URL) throws {
@@ -126,7 +137,12 @@ private struct Xbox360WebView: UIViewRepresentable {
             case "art":
                 let title = p["titleId"] as? String ?? ""
                 let game = model.games.first { $0.id == title } ?? model.titleDetails[title]
-                return ["url":game?.image ?? ""]
+                var result:[String:Any] = ["url":game?.image ?? ""]
+                #if DEBUG
+                if ProcessInfo.processInfo.arguments.contains("--ui-preview=xbox360") { return result }
+                #endif
+                if let images=try? await StoreArtwork.lookup(title) { result["images"]=images.map { ["url":$0.url.absoluteString,"width":$0.width,"height":$0.height,"purpose":$0.purpose] as [String:Any] } }
+                return result
             case "reference":
                 guard let account = model.account else { throw fail("Connect an Xbox account in Settings first.") }
                 return ["rows":try await model.api.reference360(p["titleId"] as? String ?? "",gamertag:p["gamertag"] as? String ?? "",account:account)]

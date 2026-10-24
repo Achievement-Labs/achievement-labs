@@ -54,7 +54,7 @@ extension Color {
         let resolved = try? await StoreArtwork.lookup(title)
         if Task.isCancelled { attempted.remove(title); return }
         candidates[title] = resolved ?? []
-        if candidates.count > 12 { candidates = candidates.filter { $0.key == title } }
+        if candidates.count > 12 { candidates = candidates.filter { $0.key == title }; attempted = Set(candidates.keys) }
     }
     func load(_ url:URL?) async {
         guard let url, images[url.absoluteString] == nil, !loading.contains(url.absoluteString), !failedImages.contains(url.absoluteString) else { return }
