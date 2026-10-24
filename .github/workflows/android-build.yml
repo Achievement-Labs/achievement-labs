@@ -80,6 +80,13 @@ jobs:
           "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging android/artifacts/AchievementLabs-Android-0.6.5.apk > android/artifacts/APK-INFO.txt
           sha256sum android/artifacts/AchievementLabs-Android-0.6.5.apk > android/artifacts/SHA256.txt
       - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AchievementLabs-Android-Screens
+          path: android/artifacts/Android-*.png
+          retention-days: 7
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
         if: github.event_name == 'workflow_dispatch'
         with:
           name: AchievementLabs-Android-Beta

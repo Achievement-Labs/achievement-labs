@@ -43,6 +43,9 @@ for attempt in range(45):
  time.sleep(1)
  marker=subprocess.run(['adb','shell','run-as','org.achievementlabs.mobile','cat','files/xbox360-self-test.json'],capture_output=True,text=True)
  if marker.returncode==0: break
+if marker.returncode!=0:
+ print(run('adb','logcat','-d','-s','Labs360Test:I','chromium:E','AndroidRuntime:E'),flush=True)
+ with open(root/'Android-xbox360-failure.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],stdout=out,check=True)
 assert marker.returncode==0, '360 native bridge did not finish'
 assert json.loads(marker.stdout).get('passed'),marker.stdout
 with open(root/'Android-xbox360.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],stdout=out,check=True)
