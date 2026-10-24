@@ -11,6 +11,24 @@ for page in ['home','library','find','queue','spoof','session-settings','setting
  marker=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
  assert marker['page']==('settings' if page=='settings-appearance' else page) and len(marker['text'])>100, 'Web UI did not render: '+page
  with open(root/f'Android-{page}.png','wb') as f:subprocess.run(['adb','exec-out','screencap','-p'],check=True,stdout=f)
+# Resizing/rotation must keep the live WebView and current session page.
+subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
+subprocess.run(['adb','shell','settings','put','system','accelerometer_rotation','0'],check=True)
+subprocess.run(['adb','shell','settings','put','system','user_rotation','0'],check=True)
+subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--es','page','queue'],check=True)
+time.sleep(4)
+portrait=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
+subprocess.run(['adb','shell','settings','put','system','user_rotation','1'],check=True)
+for _ in range(12):
+ time.sleep(1)
+ landscape=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
+ if landscape['viewport']['width']>landscape['viewport']['height']: break
+assert landscape['page']=='queue' and landscape['viewToken']==portrait['viewToken'], 'Rotation recreated or changed the session page'
+assert landscape['viewport']['width']>landscape['viewport']['height'], 'App did not resize to landscape'
+with open(root/'Android-queue-landscape.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],check=True,stdout=out)
+subprocess.run(['adb','shell','settings','put','system','user_rotation','0'],check=True)
+time.sleep(2)
+print('Rotation kept the same live WebView/session and delivered updated window dimensions.')
 # Android's real foreground service must survive Home and Activity replacement.
 subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
 subprocess.run(['adb','shell','pm','grant','org.achievementlabs.mobile','android.permission.POST_NOTIFICATIONS'],check=True)
