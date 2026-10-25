@@ -23,3 +23,9 @@ The Android Microsoft client configuration is the existing browser sign-in confi
 ## Test coverage
 
 Synthetic transports cover successful issuance, HTTP refusal, wrong account, wrong event identity, missing/expired dates, imported sessions without renewal credentials, refresh rotation, preservation of the old token, and the absence of achievement/presence/collector calls. CI validates native compilation and existing app flows without personal accounts. A real Microsoft-issued mobile token remains a separate user device test.
+
+## Unified QR scanning
+
+In Android 0.6.8 (16) and iOS 0.12.10 (28), the main Scan QR button recognises sign-in/event-token transfers (ALPC1) and saved game queues (ALQ1). Queue codes show a review/import confirmation with the number of games; they never connect an account or start unlocking. Sign in to the same Xbox account first. Existing owner, achievement-edition and active-queue checks still apply. The collector pins both the transfer checksum and QR format so interleaved codes cannot be combined. The dedicated queue scanner remains queue-only.
+
+A user reported successful mobile token issuance on a phone after the original test build. Collector acceptance and behavior on other devices/accounts remain separate checks.

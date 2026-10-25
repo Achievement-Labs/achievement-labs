@@ -4,7 +4,7 @@
 
 Native SwiftUI app for iPhone and iPad, iOS/iPadOS 17 or later. No PC companion or running desktop app is required. This is a separate early mobile beta, not a replacement for the Windows release.
 
-## Current test build — iOS 0.12.9 (27)
+## Current test build — iOS 0.12.10 (28)
 
 This is the unofficial vampirebat fork of the [upstream Achievement Labs project](https://github.com/Achievement-Labs/achievement-labs). App update checks/downloads use [vampirebat releases](https://github.com/thevampirebat/achievement-labs/releases). Event JSON stays upstream. Older installed binaries need one manual corrected install to move their hardcoded app-update feed.
 

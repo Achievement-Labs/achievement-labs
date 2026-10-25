@@ -371,7 +371,7 @@ struct SettingsView: View {
                     if category == .appearance { AppearanceSettings() }
                 }
             }.navigationTitle("Settings").navigationBarTitleDisplayMode(.inline).labsPage()
-            .toolbar { Button { pcSync = true } label: { Label("Scan PC QR",systemImage:"qrcode.viewfinder") }.disabled(m.busy || m.running || m.presenceRunning) }
+            .toolbar { Button { pcSync = true } label: { Label("Scan QR",systemImage:"qrcode.viewfinder") }.disabled(m.busy || m.running || m.presenceRunning) }
             .sheet(isPresented:$pcSync) { PCSyncView(startScanning:true) }
             .sheet(item:$embeddedLogin) { page in
                 EmbeddedSignIn(url:page.url, onComplete: { redirect in
@@ -390,7 +390,7 @@ struct SettingsView: View {
                     Text(m.account?.gamertag ?? "Not connected")
                     if let profile = m.account?.loginProfile { Text("Current session: " + profile).font(.caption).foregroundStyle(.secondary) }
                     Picker("Sign-in profile",selection:$m.loginProfile) { ForEach(LoginProfile.allCases) { Text($0.rawValue).tag($0.rawValue) } }.disabled(m.busy || m.running || m.presenceRunning)
-                    Button("Scan PC sign-in QR",systemImage:"qrcode.viewfinder") { pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
+                    Button("Scan QR codes",systemImage:"qrcode.viewfinder") { pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
                     Text("For title spoofing, use the PC’s full Sign-in + event token QR if browser sign-in returns a heartbeat 403. Event-token-only sync leaves account authorization unchanged.").font(.caption).foregroundStyle(.secondary)
                     Text("Profile changes apply when you sign in again.").font(.caption2).foregroundStyle(.secondary)
                     Toggle("Remember sign-in",isOn:$m.rememberSignIn).disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning).onChange(of:m.rememberSignIn) { _,_ in Task { await m.updateRememberSignIn() } }

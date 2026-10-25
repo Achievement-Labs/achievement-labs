@@ -1,4 +1,4 @@
-# Achievement Labs Android — unofficial fork beta 0.6.7
+# Achievement Labs Android — unofficial fork beta 0.6.8
 
 > Experimental mobile event-token test: see [test instructions](../docs/mobile-event-token-test.md). Public fork .15 remains unchanged. Successful token issuance and acceptance by the event collector are separate checks.
 

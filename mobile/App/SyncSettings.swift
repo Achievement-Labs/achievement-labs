@@ -44,14 +44,14 @@ struct SyncSettings: View {
             }
             if category == .sync {
             Section("PC sync") {
-                Button("Scan PC QR codes",systemImage:"qrcode.viewfinder") { scanImmediately = true; pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
+                Button("Scan QR codes",systemImage:"qrcode.viewfinder") { scanImmediately = true; pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
                 Button("PC sync / import file",systemImage:"desktopcomputer") { scanImmediately = false; pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
                 Text("Click the mobile icon on PC. Select full sign-in, sign-in only, or event-token-only QR. Transfers expire after 10 minutes; encrypted file import remains available.").font(.caption2).foregroundStyle(.secondary)
             }.listRowBackground(LabsGlassSurface())
             Section("Event data sync") {
                 Toggle("Sync new event games automatically",isOn:$m.autoSyncEvents)
                 Button("Sync event data now") { Task { await m.syncEvents() } }.disabled(m.eventsSyncing || m.running)
-                Button("Import event pack JSON…",systemImage:"square.and.arrow.down") { importingEvents = true }.disabled(m.eventsSyncing || m.running)
+                Button("Import event pack JSONâ€¦",systemImage:"square.and.arrow.down") { importingEvents = true }.disabled(m.eventsSyncing || m.running)
                 Text(m.eventSyncStatus).font(.caption).foregroundStyle(.secondary)
                 Text("The public feed checks the official repository hourly. Import a saved event pack to add new titles offline. New titles are marked Testing; existing mappings and edition fixes are retained.").font(.caption2).foregroundStyle(.secondary)
             }.listRowBackground(LabsGlassSurface())
@@ -76,22 +76,32 @@ struct PCSyncView: View {
     @State private var scanning = false
     @State private var file: Data?
     @State private var key = ""
+    @State private var pendingQueue: Data?
+    @State private var queueSummary = ""
     var body: some View {
         NavigationStack {
             Form {
                 Section("QR sync") {
-                    Button("Scan PC QR codes",systemImage:"qrcode.viewfinder") { scanning = true }
-                    Text("On PC, click the mobile icon beside Attach Xbox PC app. Choose sign-in or Event token QR only, then keep the camera pointed at the looping codes.").font(.caption).foregroundStyle(.secondary)
+                    Button("Scan QR codes",systemImage:"qrcode.viewfinder") { scanning = true }.disabled(m.busy)
+                    Text("Scan sign-in, event-token or saved queue codes from your own device. The scanner recognises the type automatically. Keep the looping codes in view.").font(.caption).foregroundStyle(.secondary)
                 }.listRowBackground(LabsGlassSurface())
                 Section("Encrypted file fallback") {
                     Button(file == nil ? "Choose .labslink file" : "Choose another file") { importing = true }
                     SecureField("Pairing key from PC",text:$key).textContentType(.oneTimeCode).textInputAutocapitalization(.never).autocorrectionDisabled()
                     Button("Verify PC account") {
-                        guard let data = file else { return }; let value = key; file = nil; key = ""
+                        guard let data = file else { return }; let value = key; file = nil; key = ""; pendingQueue = nil
                         Task { await m.preparePCTransfer(data,key:value) }
                     }.disabled(file == nil || key.isEmpty || m.busy)
                     Text(m.pcSyncStatus).font(.caption).foregroundStyle(.secondary)
                 }.listRowBackground(LabsGlassSurface())
+                if let data = pendingQueue {
+                    Section("Saved game queues detected") {
+                        Text(queueSummary).font(.headline)
+                        Text("Matching saved queues will be replaced after Xbox verifies achievements. Nothing starts automatically.").font(.caption)
+                        Button("Import saved queues") { pendingQueue = nil; m.error = nil; Task { await m.importQueueTransfer(data); m.pcSyncStatus = m.error ?? m.status } }.disabled(m.busy || m.running || m.presenceRunning)
+                        Button("Cancel import",role:.cancel) { pendingQueue = nil }
+                    }.listRowBackground(LabsGlassSurface())
+                }
                 if let imported = m.pendingPCAccount {
                     Section("Verified account") {
                         Text(imported.gamertag).font(.headline)
@@ -101,10 +111,18 @@ struct PCSyncView: View {
                     }.listRowBackground(LabsGlassSurface())
                 }
             }.disabled(m.running || m.presenceRunning)
-            .navigationTitle("PC sync").navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("QR & PC sync").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement:.cancellationAction) { Button("Done") { m.pendingPCAccount = nil; key = ""; file = nil; dismiss() }.disabled(m.busy) } }
             .sheet(isPresented:$scanning) { PCQRScanner { data,key in
-                scanning = false; Task { await m.preparePCTransfer(data,key:key) }
+                scanning = false; pendingQueue = nil; m.pendingPCAccount = nil
+                if key.isEmpty {
+                    do {
+                        guard !m.busy, !m.running, !m.presenceRunning else { throw LabsError.message("Pause sessions before importing saved queues.") }
+                        guard let owner = m.account?.xuid else { throw LabsError.message("Sign in to the same Xbox account before importing saved queues.") }
+                        let transfer = try JSONDecoder().decode(QueueTransfer.self,from:data); try transfer.validate(owner:owner)
+                        pendingQueue = data; queueSummary = "\(transfer.games.count) games Â· \(transfer.games.reduce(0) { $0+$1.items.count }) achievements"; m.pcSyncStatus = "Saved game queue QR detected. Review before importing."
+                    } catch { m.pcSyncStatus = error.localizedDescription }
+                } else { Task { await m.preparePCTransfer(data,key:key) } }
             } }
             .fileImporter(isPresented:$importing,allowedContentTypes:[.item],allowsMultipleSelection:false) { result in
                 do {
@@ -119,7 +137,7 @@ struct PCSyncView: View {
                 startedScan = true
                 do { try await Task.sleep(nanoseconds:350_000_000); try Task.checkCancellation(); scanning = true } catch {}
             }
-        }.onDisappear { key = ""; file = nil; m.pendingPCAccount = nil }
+        }.onDisappear { key = ""; file = nil; pendingQueue = nil; m.pendingPCAccount = nil }
     }
 }
 
