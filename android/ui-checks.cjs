@@ -112,3 +112,8 @@ for(const target of ['home','library','find','game','queue','spoof','session-set
  if(target==='queue'||target==='session-settings')assert.match(nodes.headerActions.innerHTML,/Session Settings|Done/);
 }
 console.log('Global QR scan is present alongside existing actions on every Android main and detail page.');
+
+assert.match(run(`eventTokenExpiry({hasEventToken:true},0)`),/Expiry unknown/);
+assert.match(run(`eventTokenExpiry({hasEventToken:true,eventTokenExpiresAt:'2030-01-01T01:00:00Z'},Date.parse('2030-01-01T00:00:00Z'))`),/1h 0m/);
+assert.match(run(`eventTokenExpiry({hasEventToken:true,eventTokenExpiresAt:'2030-01-01T00:00:00Z'},Date.parse('2030-01-01T01:00:00Z'))`),/expiry passed/);
+console.log('Event-token display distinguishes unknown, issuer expiry and expired metadata.');

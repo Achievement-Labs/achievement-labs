@@ -1,4 +1,5 @@
 import XCTest
+import CryptoKit
 @testable import LabsMobileCore
 
 final class MobilePresenceAuthorizationTests: XCTestCase {
@@ -32,7 +33,7 @@ final class MobilePresenceAuthorizationTests: XCTestCase {
                     XCTAssertEqual(value.refreshToken,"next");XCTAssertEqual(value.authorization,before.authorization);XCTAssertEqual(value.eventToken,before.eventToken);rotated=true
                 }
                 XCTAssertEqual(scenario,"success");XCTAssertEqual(result.presenceAuthorization,"XBL3.0 x=123;presence")
-                XCTAssertEqual(result.authorization,before.authorization);XCTAssertEqual(result.eventToken,before.eventToken);XCTAssertFalse(result.needsPresenceAuthorization())
+                XCTAssertEqual(result.authorization,before.authorization);XCTAssertEqual(result.eventToken,before.eventToken);XCTAssertFalse(result.needsPresenceAuthorization());XCTAssertEqual(result.presenceSigningKey?.count,32)
             } catch { XCTAssertNotEqual(scenario,"success");XCTAssertFalse(error.localizedDescription.contains("synthetic-access")) }
             XCTAssertNil(before.presenceAuthorization);XCTAssertFalse(endpoints.contains { $0.contains("events") || $0.contains("presence-heartbeat") || $0.contains("achievements") })
         }
@@ -40,14 +41,14 @@ final class MobilePresenceAuthorizationTests: XCTestCase {
     func testOldAccountsDecodeAndRequireNewPresenceAuthorization() throws {
         let old=Data(#"{"authorization":"XBL3.0 x=1;old","xuid":"42","gamertag":"Synthetic","eventToken":""}"#.utf8)
         var account=try JSONDecoder().decode(Account.self,from:old);XCTAssertTrue(account.needsPresenceAuthorization())
-        account.presenceAuthorization="XBL3.0 x=1;presence";account.presenceAuthorizationExpiresAt=Date().addingTimeInterval(299);XCTAssertTrue(account.needsPresenceAuthorization())
+        account.presenceAuthorization="XBL3.0 x=1;presence";account.presenceSigningKey=P256.Signing.PrivateKey().rawRepresentation;account.presenceAuthorizationExpiresAt=Date().addingTimeInterval(299);XCTAssertTrue(account.needsPresenceAuthorization())
         account.presenceAuthorizationExpiresAt=Date().addingTimeInterval(3600);XCTAssertFalse(account.needsPresenceAuthorization())
     }
     func testHeartbeatAndStopUsePresenceCredentialWithoutEventToken() async throws {
         let config=URLSessionConfiguration.ephemeral;config.protocolClasses=[LoginProtocol.self]
         let session=URLSession(configuration:config);defer { session.invalidateAndCancel();LoginProtocol.handler=nil;LoginProtocol.responseCode=200 }
         var account=Account(authorization:"XBL3.0 x=123;library",xuid:"42",gamertag:"Synthetic")
-        account.presenceAuthorization="XBL3.0 x=123;presence"
+        account.presenceAuthorization="XBL3.0 x=123;presence";account.presenceSigningKey=P256.Signing.PrivateKey().rawRepresentation
         var methods=[String]()
         LoginProtocol.handler={ request in
             XCTAssertEqual(request.url?.host,"presence-heartbeat.xboxlive.com")

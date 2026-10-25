@@ -420,6 +420,8 @@ struct SettingsView: View {
                 }.listRowBackground(LabsGlassSurface())
                 Section("Event token") {
                     if reveal { TextField("Paste event token",text: $eventToken).textInputAutocapitalization(.never).autocorrectionDisabled() } else { SecureField("Paste event token",text: $eventToken).textContentType(.oneTimeCode).textInputAutocapitalization(.never).autocorrectionDisabled() }
+                    TimelineView(.periodic(from:Date(),by:60)) { context in Text(EventTokenLifetime.status(m.account,at:context.date)).font(.caption).foregroundStyle(.secondary) }
+                    Text("Issued expiry is supplied by Xbox. A token can be rejected earlier; an unknown expiry does not mean it is valid.").font(.caption2).foregroundStyle(.secondary)
                     Toggle("Show token", isOn: $reveal)
                     Button("Save event token") { m.saveEventToken(eventToken); eventToken = m.account?.eventToken ?? "" }.disabled(m.account == nil || eventToken.isEmpty || m.running || m.busy)
                     Button("Remove event token",role: .destructive) { m.removeEventToken(); eventToken = "" }.disabled(m.account == nil || m.running || m.busy)

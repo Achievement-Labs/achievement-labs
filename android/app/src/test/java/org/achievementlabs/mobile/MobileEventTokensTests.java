@@ -9,12 +9,12 @@ public class MobileEventTokensTests {
  JSONObject account()throws Exception{return new JSONObject().put("xuid","42").put("authorization","XBL3.0 x=123;old-authorization").put("eventToken","x:XBL3.0 x=123;old-event").put("loginProfile","Microsoft browser").put("refreshToken","old-refresh");}
  static JSONObject grant(String value,String hash,String id,String expiry)throws Exception{return new JSONObject().put("Token",value).put("NotAfter",expiry).put("DisplayClaims",new JSONObject().put("xui",new JSONArray().put(new JSONObject().put("uhs",hash).put("xid",id))));}
  static class Fake implements MobileEventTokens.Transport {
-  List<String> calls=new ArrayList<>();boolean rotated,nullEventToken;String reject="",hash="123",xuid="42",expiry="2099-01-01T00:00:00Z",profile="42";
+  KeyPair deviceKey;List<String> calls=new ArrayList<>();boolean rotated,nullEventToken;String reject="",hash="123",xuid="42",expiry="2099-01-01T00:00:00Z",profile="42";
   public JSONObject refresh(String token)throws Exception{assertEquals("old-refresh",token);calls.add("refresh");return new JSONObject().put("access_token","private-access").put("refresh_token","next-refresh");}
   public JSONObject post(String url,JSONObject body,KeyPair proof)throws Exception{
    assertTrue("Rotation precedes further requests",rotated);calls.add(url+"|"+body.optString("RelyingParty"));
    if(url.contains(reject)&&!reject.isEmpty())throw new Net.HttpFailure(403,"private-access private-refresh response-must-not-leak");
-   if(url.equals("https://device.auth.xboxlive.com/device/authenticate")){assertNotNull(proof);assertEquals("Android",body.getJSONObject("Properties").getString("DeviceType"));return new JSONObject().put("Token","device");}
+   if(url.equals("https://device.auth.xboxlive.com/device/authenticate")){deviceKey=proof;assertNotNull(proof);assertEquals("Android",body.getJSONObject("Properties").getString("DeviceType"));return new JSONObject().put("Token","device");}
    assertNull(proof);
    if(url.equals("https://user.auth.xboxlive.com/user/authenticate")){assertEquals("t=private-access",body.getJSONObject("Properties").getString("RpsTicket"));return new JSONObject().put("Token","user");}
    assertEquals("https://xsts.auth.xboxlive.com/xsts/authorize",url);assertEquals("device",body.getJSONObject("Properties").getString("DeviceToken"));
@@ -36,7 +36,7 @@ public class MobileEventTokensTests {
   JSONObject before=account();Fake f=new Fake();JSONObject result=MobileEventTokens.presence(before,next->{f.rotated=true;},"14",f);
   assertEquals(before.getString("authorization"),result.getString("authorization"));assertEquals(before.getString("eventToken"),result.getString("eventToken"));
   assertEquals("XBL3.0 x=123;identity",result.getString("presenceAuthorization"));assertEquals("2099-01-01T00:00:00Z",result.getString("presenceAuthorizationExpiresAt"));
-  assertEquals("next-refresh",result.getString("refreshToken"));assertFalse(before.has("presenceAuthorization"));assertEquals(5,f.calls.size());
+  assertEquals("next-refresh",result.getString("refreshToken"));assertEquals(Core.b64(f.deviceKey.getPrivate().getEncoded()),result.getString("presenceSigningKey"));assertFalse(before.has("presenceAuthorization"));assertEquals(5,f.calls.size());
   assertFalse(f.calls.toString().contains("events.xboxlive"));assertFalse(f.calls.toString().contains("presence-heartbeat"));
  }
  @Test public void mismatchedPresenceIdentityIsNotSaved()throws Exception{JSONObject before=account();Fake f=new Fake();f.profile="43";try{MobileEventTokens.presence(before,next->{f.rotated=true;},"14",f);fail();}catch(MobileEventTokens.Failure expected){}assertFalse(before.has("presenceAuthorization"));}

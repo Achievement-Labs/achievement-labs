@@ -6,12 +6,13 @@ import FoundationNetworking
 public struct XboxService {
     private let session: URLSession
     public init(session: URLSession = XboxSessions.shared) { self.session = session }
-    private func request(_ url: String, authorization: String, version: String = "2", method: String = "GET", body: Any? = nil) async throws -> Data {
+    private func request(_ url: String, authorization: String, version: String = "2", method: String = "GET", body: Any? = nil, presenceKey: Data? = nil) async throws -> Data {
         guard let endpoint = URL(string: url), endpoint.scheme == "https", endpoint.host?.hasSuffix(".xboxlive.com") == true else { throw LabsError.message("Invalid Xbox endpoint.") }
         var r = URLRequest(url: endpoint); r.timeoutInterval = 45; r.httpMethod = method
         r.setValue(authorization, forHTTPHeaderField: "Authorization"); r.setValue(version, forHTTPHeaderField: "x-xbl-contract-version")
         r.setValue("application/json", forHTTPHeaderField: "Accept"); r.setValue("en-US", forHTTPHeaderField: "Accept-Language")
         if let body { r.httpBody = try JSON.data(body); r.setValue("application/json", forHTTPHeaderField: "Content-Type") }
+        if let presenceKey { r.setValue(try PresenceSignature.header(method:method,url:endpoint,authorization:authorization,body:r.httpBody ?? Data(),key:presenceKey),forHTTPHeaderField:"Signature") }
         let (data, response) = try await transfer(r)
         try Self.check(response, data:data, endpoint: endpoint.host ?? "Xbox"); guard data.count <= 128 * 1024 * 1024 else { throw LabsError.message("The response is too large.") }; return data
     }
@@ -148,8 +149,9 @@ public struct XboxService {
     }
     public func presence(_ title: String?, account: Account) async throws {
         if let title { guard JSON.numeric(title) else { throw LabsError.message("Enter a numeric Title ID.") } }
+        if account.presenceAuthorization != nil && account.presenceSigningKey == nil { throw LabsError.message("Renew mobile presence authorization before spoofing.") }
         let body: Any? = title.map { ["titles":[["id":$0,"expiration":600,"state":"active","sandbox":"RETAIL"]]] }
-        _ = try await request("https://presence-heartbeat.xboxlive.com/users/xuid(\(account.xuid))/devices/current/", authorization: account.presenceAuthorization ?? account.authorization, version: "3", method: title == nil ? "DELETE" : "POST", body: body)
+        _ = try await request("https://presence-heartbeat.xboxlive.com/users/xuid(\(account.xuid))/devices/current/", authorization: account.presenceAuthorization ?? account.authorization, version: "3", method: title == nil ? "DELETE" : "POST", body: body, presenceKey:account.presenceSigningKey)
     }
     public func sendEvent(_ payload: String, account: Account, route: CollectorRoute = .windows) async throws {
         let token = try Tokens.normalize(account.eventToken, event: true)
@@ -160,6 +162,7 @@ public struct XboxService {
         let redacted = account.authorization.replacingOccurrences(of: #"(?i)x=[^;]+;"#, with: "x=-;", options: .regularExpression)
         let headers = ["Content-Type":"application/x-json-stream; charset=utf-8", "Accept":"application/json", "User-Agent":"MSDW", "reliability-mode":"standard", "Client-Id":"NO_AUTH", "client-version":"EUTC-Windows-C++-no-10.0.22621.3296.amd64fre.ni_release.220506-1250-no", "apikey":"0890af88a9ed4cc886a14f5e174a2827-9de66c5e-f867-43a8-a7b8-e0ddd481cca4-7548,95c1f21d6cb047a09e7b423c1cb2222e-9965f07b-54fa-498e-9727-9e8d24dec39e-7027", "authxtoken":redacted, "tickets":"\"1\"=\"\(token)\""]
         headers.forEach { r.setValue($1, forHTTPHeaderField: $0) }
+
         let (data, response) = try await transfer(r); try Self.check(response, data:data, event: true,endpoint:route.url.host!); try Self.validateCollector(data)
     }
     public static func validateCollector(_ data: Data) throws {

@@ -11,3 +11,13 @@ Scan QR is in every main/detail page header on Android and the shared iOS page t
 Phone test: sign in with Microsoft on the phone (iOS: use the Xbox iOS profile to test mobile-device credentials), open a game in Game Session, tap Start spoofing, and check for a heartbeat acceptance message. Stop explicitly, then test again after reopening the app. If Xbox refuses the token, share the status/HTTP code only, never tokens or redirect URLs.
 
 App update feeds remain thevampirebat/achievement-labs. Event catalogue remains Achievement-Labs/achievement-labs. Mac work is parked and excluded from this branch.
+
+## Follow-up: device proof and issuer expiry
+
+The 0.12.11 phone test still returned heartbeat 403 while the same-account profile read succeeded. That establishes a presence-specific refusal; it does not establish expired sign-in or identify the exact missing permission.
+
+Test candidates Android 0.6.10 (18), iOS 0.12.12 (30) retain the per-device P-256 proof key alongside its presence token in existing encrypted account storage and attach a signature to POST and DELETE presence requests. The signature covers policy version, Windows timestamp, method, path, authorization and exact body bytes. Imported PC authorization keeps its original path. Existing mobile credentials without their proof key are renewed before use. Keys are generated locally and never printed, sent to public feeds, QR exports or UI diagnostics. This corrects an unsigned-request omission; live Xbox acceptance remains unverified and Xbox may still enforce additional title/client permissions.
+
+Event-token issuer NotAfter is saved and displayed with time remaining. Metadata is bound to the exact token fingerprint and cannot follow a replacement/manual/QR token. Unknown expiry stays unknown, including previously acquired tokens whose metadata was discarded. Refresh/replacement never invents a new lifetime. The issuer expiry is a scheduled bound, not a guarantee against earlier rejection or revocation. Get a fresh mobile event token once to populate it.
+
+References: Microsoft proof-key request signing https://learn.microsoft.com/en-us/gaming/gdk/docs/services/fundamentals/s2s-auth-calls/s2s-calls/live-title-service-calls-xbox-live and XSTS token structure https://learn.microsoft.com/en-us/gaming/gdk/docs/services/fundamentals/s2s-auth-calls/service-authentication/security-tokens/live-security-tokens .

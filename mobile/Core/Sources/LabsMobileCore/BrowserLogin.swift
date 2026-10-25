@@ -69,7 +69,8 @@ public final class BrowserLogin {
         var account = try await authorize(oauth)
         guard account.xuid == previous.xuid else { throw LabsError.message("Renewed sign-in belongs to a different Xbox account. The active account and queue were retained; sign in explicitly to switch accounts.") }
         account.refreshToken = rotated.refreshToken; account.eventToken = previous.eventToken
-        account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
+        account.eventTokenExpiresAt = previous.eventTokenExpiresAt; account.eventTokenExpiryHash = previous.eventTokenExpiryHash
+        account.presenceSigningKey = previous.presenceSigningKey; account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
         return account
     }
     /// Explicit authentication-only experiment. Does not send presence or achievement events.
@@ -124,7 +125,7 @@ public final class BrowserLogin {
         guard verified.xuid == previous.xuid, id["xid"] == nil || JSON.string(id["xid"]) == previous.xuid else { throw LabsError.message("Xbox account mismatch. Existing account and event token retained.") }
         if !includeEvents {
             guard let expiry = ServiceDates.parse(JSON.string(identity["NotAfter"])), expiry > Date().addingTimeInterval(60) else { throw LabsError.message("Presence authorization expiry is missing or invalid. Sign in again on this device.") }
-            result.presenceAuthorization = authorization; result.presenceAuthorizationExpiresAt = expiry
+            result.presenceAuthorization = authorization; result.presenceAuthorizationExpiresAt = expiry; result.presenceSigningKey = key.rawRepresentation
             return result
         }
         let events = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://events.xboxlive.com","TokenType":"JWT","Properties":properties],stage:"Xbox event-token authorization")
@@ -133,6 +134,7 @@ public final class BrowserLogin {
         guard let expiry = ServiceDates.parse(JSON.string(events["NotAfter"])), expiry > Date().addingTimeInterval(60) else { throw LabsError.message("Event-token expiry missing, invalid or too soon. Existing event token retained.") }
         result.authorization = authorization; result.authorizationExpiresAt = ServiceDates.parse(JSON.string(identity["NotAfter"]))
         result.eventToken = try Tokens.normalize("x:XBL3.0 x=\(hash);\(try token(events))",event:true)
+        result.eventTokenExpiresAt = expiry; result.eventTokenExpiryHash = EventTokenLifetime.fingerprint(result.eventToken)
         return result
     }
     private func authorize(_ oauth: [String:Any]) async throws -> Account {

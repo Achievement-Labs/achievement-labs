@@ -56,12 +56,12 @@ final class MobileEventTokens {
   if(!eventsRequested){
    Instant expiry;try{expiry=Instant.parse(identity.getString("NotAfter"));}catch(Exception e){throw new Failure("Presence authorization expiry is missing or invalid. Sign in again on this device.");}
    if(!expiry.isAfter(Instant.now().plusSeconds(60)))throw new Failure("Presence authorization is already expiring. Sign in again on this device.");
-   return new JSONObject(previous.toString()).put("refreshToken",next).put("presenceAuthorization",verified.getString("authorization")).put("presenceAuthorizationExpiresAt",expiry.toString());
+   return new JSONObject(previous.toString()).put("refreshToken",next).put("presenceAuthorization",verified.getString("authorization")).put("presenceAuthorizationExpiresAt",expiry.toString()).put("presenceSigningKey",Core.b64(key.getPrivate().getEncoded()));
   }
   JSONObject events=post(t,"https://xsts.auth.xboxlive.com/xsts/authorize",new JSONObject().put("RelyingParty","http://events.xboxlive.com").put("TokenType","JWT").put("Properties",properties),null,"Xbox event-token authorization");
   JSONObject eventId=claim(events);if(!hash.equals(eventId.optString("uhs"))||(!eventId.optString("xid").isEmpty()&&!previous.getString("xuid").equals(eventId.optString("xid"))))throw new Failure("Event account mismatch. Existing event token retained.");
   Instant expiry;try{expiry=Instant.parse(events.getString("NotAfter"));}catch(Exception e){throw new Failure("Event-token expiry missing or invalid. Existing token retained.");}
   if(!expiry.isAfter(Instant.now().plusSeconds(60)))throw new Failure("Event token already expiring. Existing token retained.");
-  JSONObject result=new JSONObject(previous.toString());result.put("refreshToken",next).put("authorization",verified.getString("authorization")).put("authorizationExpiresAt",identity.optString("NotAfter")).put("eventToken",Core.token("x:XBL3.0 x="+hash+";"+token(events),true)).put("eventTokenExpiresAt",expiry.toString());return result;
+  JSONObject result=new JSONObject(previous.toString());result.put("refreshToken",next).put("authorization",verified.getString("authorization")).put("authorizationExpiresAt",identity.optString("NotAfter")).put("eventToken",Core.token("x:XBL3.0 x="+hash+";"+token(events),true)).put("eventTokenExpiresAt",expiry.toString());result.put("eventTokenExpiryHash",EventTokenLifetime.fingerprint(result.getString("eventToken")));return result;
  }
 }
