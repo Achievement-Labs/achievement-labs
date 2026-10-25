@@ -149,7 +149,7 @@ public struct XboxService {
     public func presence(_ title: String?, account: Account) async throws {
         if let title { guard JSON.numeric(title) else { throw LabsError.message("Enter a numeric Title ID.") } }
         let body: Any? = title.map { ["titles":[["id":$0,"expiration":600,"state":"active","sandbox":"RETAIL"]]] }
-        _ = try await request("https://presence-heartbeat.xboxlive.com/users/xuid(\(account.xuid))/devices/current/", authorization: account.authorization, version: "3", method: title == nil ? "DELETE" : "POST", body: body)
+        _ = try await request("https://presence-heartbeat.xboxlive.com/users/xuid(\(account.xuid))/devices/current/", authorization: account.presenceAuthorization ?? account.authorization, version: "3", method: title == nil ? "DELETE" : "POST", body: body)
     }
     public func sendEvent(_ payload: String, account: Account, route: CollectorRoute = .windows) async throws {
         let token = try Tokens.normalize(account.eventToken, event: true)

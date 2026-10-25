@@ -110,14 +110,21 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
   for(int g=0;g<transfers.length();g++){JSONObject transfer=transfers.getJSONObject(g);String title=transfer.getString("titleId");for(int i=0;i<queue.length();i++)if(queue.getJSONObject(i).getJSONObject("game").getString("titleId").equals(title))throw new Exception("This transfer includes a game in your active queue. Load a different saved game before importing; current progress was retained.");JSONObject game=lookup(title);JSONArray fresh=rows(game,owner),source=transfer.getJSONArray("items"),items=new JSONArray();for(int i=0;i<source.length();i++){JSONObject old=source.getJSONObject(i),row=selectRow(fresh,old.getString("achievementId"));if(!row.getString("name").equalsIgnoreCase(old.getString("name")))throw new Exception("Achievement name or edition differs; import cancelled.");JSONObject item=new JSONObject().put("game",game).put("achievementId",row.getString("id")).put("name",row.getString("name")).put("description",row.optString("description",row.optString("lockedDescription"))).put("delay",old.getDouble("delaySeconds")).put("status",QueueTransfer.importedStatus(old.getString("status"),unlocked(row)));if(!old.isNull("remainingDelaySeconds"))item.put("remainingDelay",old.getDouble("remainingDelaySeconds"));items.put(item);}QueueLibrary.capture(staged,new JSONArray(),items);}
   Core.sameOwner(owner,auth().getString("xuid"));for(Iterator<String> it=staged.keys();it.hasNext();){String id=it.next();savedQueues.put(id,staged.get(id));}save();notice="Imported "+transfers.length()+" saved queues. Load and review before starting.";
  }
+ JSONObject presenceAuth()throws Exception{synchronized(stateLock){
+  JSONObject current=auth();if(!"Microsoft browser".equals(current.optString("loginProfile")))return current;
+  boolean valid=false;try{valid=!current.optString("presenceAuthorization").isEmpty()&&Instant.parse(current.getString("presenceAuthorizationExpiresAt")).isAfter(Instant.now().plusSeconds(300));}catch(Exception ignored){}
+  if(valid)return current;
+  String owner=current.getString("xuid");JSONObject next=MobileEventTokens.presence(current,refresh->{Core.sameOwner(owner,account.getString("xuid"));account.put("refreshToken",refresh);save();},Build.VERSION.RELEASE,MobileEventTokens.LIVE);
+  Core.sameOwner(owner,account.getString("xuid"));account.put("presenceAuthorization",next.getString("presenceAuthorization")).put("presenceAuthorizationExpiresAt",next.getString("presenceAuthorizationExpiresAt"));save();return new JSONObject(account.toString());
+ }}
  void startSpoof(String title)throws Exception{
   if(spoofGate.busy()||!foreground)throw new Exception("Wait for the previous spoof to finish, then start while the app is open.");
   Core.numeric(title);JSONObject initial=auth();String owner=initial.getString("xuid");SessionService.ensure(this);long generation=spoofGate.start();
   spoofRunning=true;spoofTitle=title;spoofStatus="Sending heartbeat…";keepAwake();
-  spoofJob=sessions.submit(()->{if(!spoofGate.begin(generation))return;try{
-   while(spoofGate.running(generation)&&sessionAllowed()){JSONObject active=auth();Core.sameOwner(owner,active.getString("xuid"));if(Thread.currentThread().isInterrupted())throw new InterruptedException();heartbeat(active,title);if(spoofStarted==0)spoofStarted=System.currentTimeMillis();spoofStatus="Heartbeat accepted";push();Thread.sleep(240000);}
+  spoofJob=sessions.submit(()->{if(!spoofGate.begin(generation))return;JSONObject cleanup=initial;boolean sent=false;try{
+   while(spoofGate.running(generation)&&sessionAllowed()){JSONObject active=presenceAuth();Core.sameOwner(owner,active.getString("xuid"));if(Thread.currentThread().isInterrupted())throw new InterruptedException();heartbeat(active,title);cleanup=active;sent=true;if(spoofStarted==0)spoofStarted=System.currentTimeMillis();spoofStatus="Heartbeat accepted";push();Thread.sleep(240000);}
   }catch(InterruptedException ignored){}catch(Exception e){spoofStatus=safe(e);if(prefs.optBoolean("stopOnSpoofFailure",true))pause();if(prefs.optBoolean("notifySpoofFailure",true))notifyUser("Title spoofing stopped",spoofStatus);
-  }finally{Thread.interrupted();try{if(!preview)Net.presence(initial,null);}catch(Exception ignored){}spoofRunning=false;spoofStarted=0;spoofGate.finish(generation);keepAwake();push();}});
+  }finally{Thread.interrupted();try{if(!preview&&sent)Net.presence(cleanup,null);}catch(Exception ignored){}spoofRunning=false;spoofStarted=0;spoofGate.finish(generation);keepAwake();push();}});
  }
  void heartbeat(JSONObject active,String title)throws Exception{for(int attempt=0;;attempt++){try{Net.presence(active,title);return;}catch(Exception e){if(attempt>=2||!QueuePolicy.transientFailure(e))throw e;Thread.sleep(2000L*(attempt+1));}}}
  void stopSpoof(){spoofGate.pause();spoofRunning=false;spoofStarted=0;if(spoofJob!=null)spoofJob.cancel(true);spoofStatus="Stopped";keepAwake();push();}

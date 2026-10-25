@@ -577,6 +577,27 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             queue.removeAll { completed.contains($0.id) }; saveQueue(); status = "Removed achievements confirmed unlocked by Xbox."
         } catch { self.error = error.localizedDescription }
     }
+    private func presenceAccount() async throws -> Account {
+        let current = try await authorizedAccount()
+        guard let profile = current.loginProfile.flatMap(LoginProfile.init(rawValue:)), current.needsPresenceAuthorization() else { return current }
+        guard current.refreshToken?.isEmpty == false else { throw LabsError.message("Sign in with Microsoft on this device with Remember sign-in enabled, then start spoofing again.") }
+        let version = generation
+        spoofStatus = "Preparing mobile presence authorization…"
+        let task = Task { @MainActor [self] () async throws -> Account in
+            defer { renewalTask = nil }
+            let next = try await BrowserLogin(profile:profile).acquirePresenceAuthorization(current) { rotated in
+                guard version == self.generation, self.account?.xuid == current.xuid else { throw CancellationError() }
+                var saved = self.account ?? current; saved.refreshToken = rotated.refreshToken
+                try self.saveAccount(saved)
+            }
+            guard version == generation, account?.xuid == current.xuid else { throw CancellationError() }
+            var saved = account ?? current; saved.presenceAuthorization = next.presenceAuthorization; saved.presenceAuthorizationExpiresAt = next.presenceAuthorizationExpiresAt
+            try saveAccount(saved)
+            return saved
+        }
+        renewalTask = task
+        let result = try await task.value; try Task.checkCancellation(); return result
+    }
     func startPresence(_ title: String) {
         guard let account, presenceTask == nil, !presenceStopping, foreground, JSON.numeric(title) else { return }
         spoofStopReason = ""; spoofCleanupStatus = ""; lastHeartbeat = nil; presenceTitle = title; presenceRunning = true; spoofDiagnostics = ""; spoofStatus = "Sending heartbeat…"
@@ -584,7 +605,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             guard let self else { return }
             defer { self.presenceStarted = nil; self.presenceRunning = false; self.presenceTask = nil; self.updateSessionCard(); self.presenceDeadline = nil; if !self.presenceStopping { self.extendedAudio.stop() }; self.finishSessionIfIdle(); if !self.foreground && self.running && !self.queueBackgroundAllowed { self.pauseQueue() }; UIApplication.shared.isIdleTimerDisabled = self.running }
             do {
-                let active = try await self.authorizedAccount(); try Task.checkCancellation(); try await self.api.presence(title, account: active); self.presenceStarted = Date(); self.presenceCleanupNeeded = true
+                let active = try await self.presenceAccount(); try Task.checkCancellation(); try await self.api.presence(title, account: active); self.presenceStarted = Date(); self.presenceCleanupNeeded = true
                 if self.continueSpoofInBackground {
                     let minutes = max(5,min(120,self.spoofBackgroundMinutes)); self.presenceDeadline = Date().addingTimeInterval(minutes*60)
                     if self.useExtendedAudio {
@@ -599,7 +620,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                     }
                 }
                 self.lastHeartbeat = Date(); self.startSessionStatusUpdates(); self.updateSessionCard(); self.spoofStatus = "Heartbeat accepted. Xbox-recorded playtime can update later."; UIApplication.shared.isIdleTimerDisabled = true
-                while !Task.isCancelled { try await Task.sleep(nanoseconds: 240_000_000_000); try Task.checkCancellation(); guard self.foreground || self.presenceBackgroundAllowed else { throw CancellationError() }; let active = try await self.authorizedAccount(); try Task.checkCancellation(); try await self.renewHeartbeat(title,account:active); self.lastHeartbeat = Date(); self.spoofStatus = "Heartbeat accepted at " + Date().formatted(date:.omitted,time:.standard); if self.continueSpoofInBackground { self.continuedQueue.advance() }; self.updateSessionCard() }
+                while !Task.isCancelled { try await Task.sleep(nanoseconds: 240_000_000_000); try Task.checkCancellation(); guard self.foreground || self.presenceBackgroundAllowed else { throw CancellationError() }; let active = try await self.presenceAccount(); try Task.checkCancellation(); try await self.renewHeartbeat(title,account:active); self.lastHeartbeat = Date(); self.spoofStatus = "Heartbeat accepted at " + Date().formatted(date:.omitted,time:.standard); if self.continueSpoofInBackground { self.continuedQueue.advance() }; self.updateSessionCard() }
             } catch is CancellationError { }
             catch {
                 if Task.isCancelled { return }
@@ -617,7 +638,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 }
                 var guidance = ""
                 if let failure = error as? XboxHTTPFailure, failure.status == 403, self.account?.loginProfile != "PC transfer" {
-                    guidance = "\nUse Settings → Scan PC QR and import the full Sign-in + event token QR. Event-token-only sync does not change heartbeat authorization."
+                    guidance = "\nXbox refused this mobile presence authorization. Sign in again on this device and retry. An event token does not grant heartbeat access."
                 }
                 self.error = "Title spoofing stopped: \(error.localizedDescription)" + guidance
                 if self.stopOnPresenceFailure { self.pauseQueue() }

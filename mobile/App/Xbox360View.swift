@@ -7,7 +7,7 @@ import LabsMobileCore
 struct Xbox360View: View {
     @EnvironmentObject var model: MobileModel
     @EnvironmentObject var appearance: MobileAppearance
-    var body: some View { NavigationStack { Xbox360WebView(model:model,appearance:appearance).navigationTitle("Xbox 360").navigationBarTitleDisplayMode(.inline) } }
+    var body: some View { NavigationStack { Xbox360WebView(model:model,appearance:appearance).labsPage().navigationTitle("Xbox 360").navigationBarTitleDisplayMode(.inline) } }
 }
 
 private struct Xbox360WebView: UIViewRepresentable {

@@ -132,7 +132,13 @@ struct LabsGlassSurface:View {
     }
 }
 struct LabsPageStyle:ViewModifier {
-    func body(content:Content)->some View { content.scrollContentBackground(.hidden).background { LabsBackdrop() }.toolbarBackground(.hidden,for:.navigationBar) }
+    @EnvironmentObject var model:MobileModel
+    @State private var scanning=false
+    func body(content:Content)->some View {
+        content.scrollContentBackground(.hidden).background { LabsBackdrop() }.toolbarBackground(.hidden,for:.navigationBar)
+            .toolbar { ToolbarItem(placement:.topBarTrailing) { Button("Scan QR codes",systemImage:"qrcode.viewfinder") { scanning=true }.labelStyle(.iconOnly).disabled(model.busy || model.running || model.presenceRunning) } }
+            .sheet(isPresented:$scanning) { PCSyncView(startScanning:true) }
+    }
 }
 extension View {
     func labsPage()->some View { modifier(LabsPageStyle()) }

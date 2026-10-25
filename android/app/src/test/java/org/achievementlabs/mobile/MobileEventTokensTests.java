@@ -31,4 +31,13 @@ public class MobileEventTokensTests {
  @Test public void nullTokenDoesNotReplaceAValidSavedToken()throws Exception{JSONObject a=account();Fake f=new Fake();f.nullEventToken=true;try{acquire(a,f);fail();}catch(MobileEventTokens.Failure expected){}assertEquals("x:XBL3.0 x=123;old-event",a.getString("eventToken"));}
  @Test public void rotationStorageFailureStopsBeforeXboxRequests()throws Exception{Fake f=new Fake();try{MobileEventTokens.acquire(account(),next->{throw new Exception("Protected storage unavailable");},"14",f);fail();}catch(Exception expected){}assertEquals(1,f.calls.size());}
  @Test public void importedSessionCannotUseProbe()throws Exception{JSONObject a=account();a.remove("refreshToken");Fake f=new Fake();try{acquire(a,f);fail();}catch(MobileEventTokens.Failure expected){}assertTrue(f.calls.isEmpty());}
+
+ @Test public void mobilePresenceKeepsLibraryAndEventCredentialsAndNeverRequestsEvents()throws Exception{
+  JSONObject before=account();Fake f=new Fake();JSONObject result=MobileEventTokens.presence(before,next->{f.rotated=true;},"14",f);
+  assertEquals(before.getString("authorization"),result.getString("authorization"));assertEquals(before.getString("eventToken"),result.getString("eventToken"));
+  assertEquals("XBL3.0 x=123;identity",result.getString("presenceAuthorization"));assertEquals("2099-01-01T00:00:00Z",result.getString("presenceAuthorizationExpiresAt"));
+  assertEquals("next-refresh",result.getString("refreshToken"));assertFalse(before.has("presenceAuthorization"));assertEquals(5,f.calls.size());
+  assertFalse(f.calls.toString().contains("events.xboxlive"));assertFalse(f.calls.toString().contains("presence-heartbeat"));
+ }
+ @Test public void mismatchedPresenceIdentityIsNotSaved()throws Exception{JSONObject before=account();Fake f=new Fake();f.profile="43";try{MobileEventTokens.presence(before,next->{f.rotated=true;},"14",f);fail();}catch(MobileEventTokens.Failure expected){}assertFalse(before.has("presenceAuthorization"));}
 }

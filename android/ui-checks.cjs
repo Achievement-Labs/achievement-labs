@@ -105,3 +105,10 @@ assert.equal(run(`appearanceValues().source`),'game');
 assert.equal(run(`appearanceValues().tint`),'#34594c');
 assert.equal(run(`appearanceValues().accent`),'#abcdef');
 console.log('Compact session controls, separate settings, poster/hero selection across rotation and Split View, missing-art fallbacks and appearance bounds passed.');
+
+for(const id of ['headerActions','nav','title'])nodes[id]={innerHTML:'',textContent:''};
+for(const target of ['home','library','find','game','queue','spoof','session-settings','settings']){
+ run(`page=${JSON.stringify(target)};nav()`);assert.match(nodes.headerActions.innerHTML,/data-action="scan"/);
+ if(target==='queue'||target==='session-settings')assert.match(nodes.headerActions.innerHTML,/Session Settings|Done/);
+}
+console.log('Global QR scan is present alongside existing actions on every Android main and detail page.');
