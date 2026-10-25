@@ -64,6 +64,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
     private var lastUpdateCheck = Date.distantPast
     @Published var refreshingSignIn = false
     @Published var sessionStatus = ""
+    @Published var eventTokenProbeStatus = ""
     @Published var spoofDiagnostics = ""
     @AppStorage("launchPage") var launchPage = 4
     @AppStorage("rememberSignIn") var rememberSignIn = true
@@ -153,6 +154,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         var next = input
         if rememberSignIn { try SecureStore.save(JSONEncoder().encode(next),allowBackground:continueQueueInBackground || continueSpoofInBackground) }
         else { next.refreshToken = nil; try SecureStore.remove() }
+        if account?.xuid != next.xuid { eventTokenProbeStatus = "" }
         account = next
     }
     private func authorizedAccount(force: Bool = false) async throws -> Account {
@@ -252,6 +254,30 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             try saveAccount(next); sessionStatus = rememberSignIn && next.refreshToken != nil ? "Sign-in remembered with automatic renewal." : "Session saved; browser sign-in may be needed when it expires."; generation = UUID(); games = []; rows = []; selectedGame = nil; baseCompleted = []; rowResults = [:]; queue = []; titleDetails = [:]; playedHours = [:]; referenceInfo = ""; loadQueue(); loadCompletion()
             status = "Connected as \(next.gamertag). Refresh the library."
         } catch { self.error = error.localizedDescription }
+    }
+    func testMobileEventToken() async {
+        guard !busy, !refreshingSignIn, !running, !presenceRunning, let current = account else { return }
+        guard rememberSignIn, current.loginProfile == LoginProfile.ios.rawValue, current.refreshToken?.isEmpty == false else {
+            eventTokenProbeStatus = "Sign in with Xbox iOS and Remember sign-in enabled on this device first. PC QR/manual sessions cannot run this test."; return
+        }
+        busy = true; refreshingSignIn = true; defer { busy = false }
+        eventTokenProbeStatus = "Requesting mobile event-token authorization… No achievement events are sent."
+        let version = generation
+        let task = Task { @MainActor [self] () async throws -> Account in
+            defer { renewalTask = nil; refreshingSignIn = false }
+            let next = try await BrowserLogin(profile:.ios).acquireEventToken(current) { rotated in
+                guard version == self.generation, self.account?.xuid == current.xuid, self.rememberSignIn else { throw CancellationError() }
+                var saved = rotated; saved.eventToken = self.account?.eventToken ?? rotated.eventToken
+                try self.saveAccount(saved)
+            }
+            guard version == generation, account?.xuid == current.xuid, rememberSignIn else { throw CancellationError() }
+            try saveAccount(next); return next
+        }
+        renewalTask = task
+        do { _ = try await task.value; eventTokenProbeStatus = "Microsoft issued a matching event token; saved securely. No achievement events were sent. Collector acceptance is not tested." }
+        catch is CancellationError { eventTokenProbeStatus = "Test cancelled. No event token was replaced." }
+        catch let problem as LabsError { eventTokenProbeStatus = (problem.errorDescription ?? "Authorization failed.") + " Existing event token retained." }
+        catch { eventTokenProbeStatus = "Mobile event-token test could not complete. Existing event token retained. No achievement events were sent." }
     }
     func saveEventToken(_ input: String) {
         guard var current = account, !running, !busy else { return }

@@ -423,6 +423,8 @@ struct SettingsView: View {
                     Toggle("Show token", isOn: $reveal)
                     Button("Save event token") { m.saveEventToken(eventToken); eventToken = m.account?.eventToken ?? "" }.disabled(m.account == nil || eventToken.isEmpty || m.running || m.busy)
                     Button("Remove event token",role: .destructive) { m.removeEventToken(); eventToken = "" }.disabled(m.account == nil || m.running || m.busy)
+                    Button("Test & save mobile event token") { Task { await m.testMobileEventToken() } }.disabled(m.account == nil || m.busy || m.refreshingSignIn || m.running || m.presenceRunning)
+                    Text(m.eventTokenProbeStatus.isEmpty ? "Experimental: uses this device’s Xbox iOS browser sign-in. Requests token issuance only; no achievement events. An existing token is retained on failure." : m.eventTokenProbeStatus).font(.caption).foregroundStyle(.secondary)
                     Text("Stored in the iOS Keychain for this device. Changing accounts clears the previous account's event token from the active session. Retrieval from other apps is not available.").font(.caption).foregroundStyle(.secondary)
                 }.listRowBackground(LabsGlassSurface())
     }
