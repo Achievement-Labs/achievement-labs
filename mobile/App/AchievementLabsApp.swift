@@ -401,6 +401,13 @@ struct SettingsView: View {
                             else { embeddedLogin = SignInPage(url:url) }
                         }
                     }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning)
+                    Button("Try Xbox session sign-in (experimental)",systemImage:"person.badge.key") {
+                        Task { if let url=await m.beginSisuBrowserLogin() {
+                            if m.signInBrowser == "Safari" { advanced=true;signInURL="";openURL(url) }
+                            else { embeddedLogin=SignInPage(url:url) }
+                        } }
+                    }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning)
+                    Text("Creates an Xbox iOS session before Microsoft sign-in and retains its device proof. Phone-only spoofing access is still being tested.").font(.caption2).foregroundStyle(.secondary)
                     if !m.sessionStatus.isEmpty { Text(m.sessionStatus).font(.caption).foregroundStyle(.secondary) }
                     if m.account?.refreshToken != nil && m.rememberSignIn { Button("Renew remembered sign-in") { Task { await m.renewSignIn() } }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning) }
                     Text("Remembering stores renewal credentials in this device’s Keychain, not your password. Sign in once after this update to enable renewal. For incorrect password suggestions in the webpage, try Safari or choose your Microsoft account from Passwords.").font(.caption2).foregroundStyle(.secondary)

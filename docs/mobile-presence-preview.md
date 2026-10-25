@@ -35,3 +35,13 @@ Install over the previous test app. Keep your native phone Microsoft login with 
 Automated transport tests use synthetic grants and verify app/device matching, title inclusion, proof continuity, refresh rotation, same-account validation, expiry, missing-title/refusal behavior and preservation of library/event credentials. They do not prove live heartbeat permission. Phone acceptance remains unverified until tested.
 
 Protocol reference: https://github.com/PrismarineJS/prismarine-auth/blob/master/src/TokenManagers/XboxTokenManager.js (SiSU title-token retention and signed XSTS title/device exchange). No example credential logging is included in our implementation.
+
+## SiSU pre-authentication candidate (iOS first)
+
+Both app/title candidates were refused on the user's phone for Xbox iOS and Xbox desktop. Read-only investigation found the same public desktop client ID in the installed Xbox PC app, plus Gaming Runtime Services and Windows broker token/signature API references. This supports an issuing/provider difference; static strings do not expose the working token's exact grants. The public default NSAL policy matches the current relying party/signing policy, without ruling out title-specific overrides.
+
+An account-free device + SiSU authenticate probe returned HTTP 200 for both stages and a Microsoft login URL with matching client, redirect, state and PKCE. No account login, heartbeat or credential persistence was performed in that probe. It establishes pre-auth availability, not heartbeat acceptance.
+
+Unpublished iOS 0.12.14 (32) adds Settings > Xbox account > Try Xbox session sign-in (experimental). It uses the Xbox iOS profile, creates the proof/device before the browser, obtains and validates the SiSU Microsoft URL, then keeps the original proof/device for authorization, heartbeat and renewal. Unlike the prior candidate, its presence token is SiSU's initial AuthorizationToken rather than another post-login XSTS exchange. The existing browser and event-token flows remain available. Device proof renewal fails closed and asks for this explicit sign-in again once its device grant expires. This first candidate targets the iOS device where the failures were reported; Android's flow is not changed by this experiment.
+
+Numeric/hex x-err headers are displayed separately from the generic response code. Other header values and raw response bodies are excluded. Library, event and queue state are retained on a failed attempt. Sign in to the same account with Remember sign-in enabled, then start spoofing separately. Diagnostics should identify Xbox pre-auth session + original device proof. Live acceptance remains unverified.

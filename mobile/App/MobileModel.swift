@@ -154,7 +154,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         var next = input
         if let previous=account,previous.xuid == next.xuid {
             if previous.eventToken == next.eventToken && next.eventTokenExpiryHash == nil { next.eventTokenExpiresAt=previous.eventTokenExpiresAt;next.eventTokenExpiryHash=previous.eventTokenExpiryHash }
-            if previous.authorization == next.authorization && next.presenceAuthorization == nil { next.presenceAuthorization=previous.presenceAuthorization;next.presenceAuthorizationExpiresAt=previous.presenceAuthorizationExpiresAt;next.presenceSigningKey=previous.presenceSigningKey;next.presenceAuthorizationFlow=previous.presenceAuthorizationFlow }
+            if previous.authorization == next.authorization && next.presenceAuthorization == nil { next.presenceAuthorization=previous.presenceAuthorization;next.presenceAuthorizationExpiresAt=previous.presenceAuthorizationExpiresAt;next.presenceSigningKey=previous.presenceSigningKey;next.presenceAuthorizationFlow=previous.presenceAuthorizationFlow;next.presenceDeviceToken=previous.presenceDeviceToken;next.presenceDeviceExpiresAt=previous.presenceDeviceExpiresAt }
         }
         if EventTokenLifetime.expiry(next) == nil { next.eventTokenExpiresAt=nil;next.eventTokenExpiryHash=nil }
         if rememberSignIn { try SecureStore.save(JSONEncoder().encode(next),allowBackground:continueQueueInBackground || continueSpoofInBackground) }
@@ -248,6 +248,18 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         guard !busy, !refreshingSignIn, !running, !presenceRunning else { return nil }
         let login = BrowserLogin(profile:LoginProfile(rawValue:loginProfile) ?? .desktop); browserLogin = login; browserPending = true
         return login.startURL
+    }
+    func beginSisuBrowserLogin() async -> URL? {
+        guard !busy,!refreshingSignIn,!running,!presenceRunning else { return nil }
+        busy=true;defer { busy=false }
+        let version=generation,login=BrowserLogin(profile:.ios)
+        do {
+            let url=try await login.prepareSisuStartURL()
+            guard version==generation,foreground,!Task.isCancelled else { return nil }
+            loginProfile=LoginProfile.ios.rawValue;browserLogin=login;browserPending=true
+            sessionStatus="Experimental Xbox session sign-in prepared. Complete Microsoft sign-in to test spoofing."
+            return url
+        } catch { self.error=error.localizedDescription;return nil }
     }
     func cancelBrowserLogin() { guard !busy else { return }; browserLogin = nil; browserPending = false }
     func finishBrowserLogin(_ redirect: String) async {
@@ -596,7 +608,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 try self.saveAccount(saved)
             }
             guard version == generation, account?.xuid == current.xuid else { throw CancellationError() }
-            var saved = account ?? current; saved.presenceAuthorization = next.presenceAuthorization; saved.presenceAuthorizationExpiresAt = next.presenceAuthorizationExpiresAt; saved.presenceSigningKey = next.presenceSigningKey; saved.presenceAuthorizationFlow = next.presenceAuthorizationFlow
+            var saved = account ?? current; saved.presenceAuthorization = next.presenceAuthorization; saved.presenceAuthorizationExpiresAt = next.presenceAuthorizationExpiresAt; saved.presenceSigningKey = next.presenceSigningKey; saved.presenceAuthorizationFlow = next.presenceAuthorizationFlow; saved.presenceDeviceToken = next.presenceDeviceToken; saved.presenceDeviceExpiresAt = next.presenceDeviceExpiresAt
             try saveAccount(saved)
             return saved
         }
@@ -631,7 +643,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 if Task.isCancelled { return }
                 self.rememberTransport(error); self.backgroundHadFailure = true; self.spoofStopReason = "Heartbeat failed: " + error.localizedDescription; self.spoofStatus = self.spoofStopReason
                 if let failure = error as? XboxHTTPFailure {
-                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\nPresence request: " + (self.account?.presenceSigningKey == nil ? "Imported / existing authorization" : "App/title + device proof (experimental)") + "\n" + failure.diagnostic
+                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\nPresence request: " + (self.account?.presenceSigningKey == nil ? "Imported / existing authorization" : (self.account?.presenceAuthorizationFlow == "sisu-preauth-v1" ? "Xbox pre-auth session + original device proof" : "App/title + device proof (experimental)")) + "\n" + failure.diagnostic
                     if failure.status == 403 {
                         do {
                             let current = self.account ?? account

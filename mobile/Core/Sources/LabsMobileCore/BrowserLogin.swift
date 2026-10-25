@@ -12,6 +12,9 @@ public enum LoginProfile: String, CaseIterable, Identifiable {
 public final class BrowserLogin {
     private let verifier: String
     private let state: String
+    private var preauthKey: P256.Signing.PrivateKey?
+    private var preauthDevice: [String:Any]?
+    private var preparing = false
     private var consumed = false
     private let created = Date()
     private let session: URLSession
@@ -30,6 +33,54 @@ public final class BrowserLogin {
         var c = URLComponents(string: "https://login.live.com/oauth20_authorize.srf")!
         c.queryItems = ["client_id":client, "scope":Self.scope, "tenant":"consumers", "response_type":"code", "response_mode":"query", "prompt":"select_account", "state":state, "code_challenge":Self.b64(Data(SHA256.hash(data: Data(verifier.utf8)))), "code_challenge_method":"S256", "redirect_uri":Self.redirect].map { URLQueryItem(name:$0.key, value:$0.value) }
         return c.url!
+    }
+    /// Explicit experimental route. Creates the device proof before Microsoft sign-in.
+    /// A failed/cancelled attempt never changes the saved account.
+    public func prepareSisuStartURL() async throws -> URL {
+        guard profile == .ios, !preparing, preauthKey == nil, !consumed, Date().timeIntervalSince(created) < 600 else { throw LabsError.message("Start a new Xbox session sign-in using the Xbox iOS profile.") }
+        preparing = true; defer { preparing = false }
+        let key = P256.Signing.PrivateKey()
+        let device = try await signedPost("https://device.auth.xboxlive.com/device/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","SerialNumber":"{\(UUID().uuidString)}","DeviceType":profile.deviceType,"Version":"0.0.0","ProofKey":Self.proof(key)]],key:key,stage:"Xbox session: device authorization")
+        guard let token = device["Token"] as? String, !token.isEmpty, token.utf8.count <= 131072, let expiry = ServiceDates.parse(JSON.string(device["NotAfter"])), expiry > Date().addingTimeInterval(600) else { throw LabsError.message("Xbox session device authorization is incomplete or expiring.") }
+        let challenge = Self.b64(Data(SHA256.hash(data:Data(verifier.utf8))))
+        let response = try await signedPost("https://sisu.xboxlive.com/authenticate",["AppId":client,"TitleId":328178078,"RedirectUri":Self.redirect,"DeviceToken":token,"Sandbox":"RETAIL","TokenType":"code","Offers":[Self.scope],"Query":["display":"ios_phone","prompt":"select_account","code_challenge":challenge,"code_challenge_method":"S256","state":state]],key:key,stage:"Xbox session: pre-authentication")
+        let url = try Self.validateSisuStartURL(JSON.string(response["MsaOauthRedirect"]),client:client,state:state,challenge:challenge)
+        try Task.checkCancellation()
+        preauthKey = key; preauthDevice = device
+        return url
+    }
+    public static func validateSisuStartURL(_ raw:String,client:String,state:String,challenge:String) throws -> URL {
+        guard raw.utf8.count <= 16384, let c=URLComponents(string:raw), let url=c.url, c.scheme=="https", c.host?.lowercased()=="login.live.com", c.path=="/oauth20_authorize.srf", c.port==nil || c.port==443, c.user==nil, c.password==nil, c.fragment==nil else { throw LabsError.message("Xbox returned an unexpected Microsoft sign-in address.") }
+        let items=c.queryItems ?? []
+        func single(_ name:String)->String? { let values=items.filter { $0.name.lowercased()==name };return values.count==1 ? values[0].value:nil }
+        guard single("client_id")?.lowercased()==client.lowercased(),single("redirect_uri")==Self.redirect,single("state")==state,single("code_challenge")==challenge,single("code_challenge_method")=="S256",single("response_type")=="code",single("scope")==Self.scope else { throw LabsError.message("Xbox sign-in client, redirect or proof challenge did not match this attempt.") }
+        return url
+    }
+    private static func proof(_ key:P256.Signing.PrivateKey)->[String:String] {
+        let pub=key.publicKey.x963Representation
+        return ["use":"sig","alg":"ES256","kty":"EC","crv":"P-256","x":b64(pub.subdata(in:1..<33)),"y":b64(pub.subdata(in:33..<65))]
+    }
+    private func signedPost(_ url:String,_ object:[String:Any],key:P256.Signing.PrivateKey,stage:String) async throws -> [String:Any] {
+        let body=try JSON.data(object)
+        var version=UInt32(1).bigEndian,stamp=UInt64((Int64(Date().timeIntervalSince1970)+11644473600)*10000000).bigEndian
+        let v=withUnsafeBytes(of:&version) { Data($0) },t=withUnsafeBytes(of:&stamp) { Data($0) }
+        var message=v;message.append(0);message.append(t);message.append(0);message.append(Data(("POST\0"+URL(string:url)!.path+"\0\0").utf8));message.append(body);message.append(0)
+        var header=v;header.append(t);header.append(try key.signature(for:message).rawRepresentation)
+        return try await post(url,body:body,signature:header.base64EncodedString(),stage:stage)
+    }
+    private func renewSisuSession(_ previous:Account,persistRotation:(Account) async throws -> Void) async throws -> Account {
+        guard previous.loginProfile==profile.rawValue, profile == .ios, let refresh=previous.refreshToken,!refresh.isEmpty,let rawKey=previous.presenceSigningKey,let device=previous.presenceDeviceToken,!device.isEmpty,let deviceExpiry=previous.presenceDeviceExpiresAt,deviceExpiry>Date().addingTimeInterval(300) else { throw LabsError.message("Start Xbox session sign-in again to renew this device proof. Your account and event token were retained.") }
+        let key=try P256.Signing.PrivateKey(rawRepresentation:rawKey)
+        var form=URLComponents();form.queryItems=["client_id":client,"scope":Self.scope,"refresh_token":refresh,"grant_type":"refresh_token"].map { URLQueryItem(name:$0.key,value:$0.value) }
+        let oauth=try await post("https://login.live.com/oauth20_token.srf",body:Data(form.percentEncodedQuery!.replacingOccurrences(of:"+",with:"%2B").utf8),form:true,stage:"Xbox session: Microsoft renewal")
+        var result=previous
+        if let next=oauth["refresh_token"] as? String,!next.isEmpty { result.refreshToken=next }
+        try await persistRotation(result)
+        let next=try await authorize(oauth,keyOverride:key,deviceOverride:["Token":device,"NotAfter":ISO8601DateFormatter().string(from:deviceExpiry)])
+        guard next.xuid==previous.xuid else { throw LabsError.message("Renewed Xbox session belongs to another account. Your previous account and event token were retained.") }
+        result.authorization=next.authorization;result.authorizationExpiresAt=next.authorizationExpiresAt
+        result.presenceAuthorization=next.presenceAuthorization;result.presenceAuthorizationExpiresAt=next.presenceAuthorizationExpiresAt
+        return result
     }
     public static func validateRedirect(_ input: String, state: String) throws -> String {
         guard let c = URLComponents(string: input.trimmingCharacters(in: .whitespacesAndNewlines)), c.scheme == "https", c.host?.lowercased() == "login.live.com", c.path == "/oauth20_desktop.srf", c.port == nil || c.port == 443, c.user == nil, c.password == nil, c.fragment == nil else { throw LabsError.message("Paste the final Microsoft sign-in URL from the browser address bar.") }
@@ -59,6 +110,7 @@ public final class BrowserLogin {
     }
     /// Persist rotation before Xbox exchange, which may fail independently after Microsoft accepts refresh.
     public func refresh(_ previous: Account, persistRotation: (Account) async throws -> Void) async throws -> Account {
+        if previous.presenceAuthorizationFlow == "sisu-preauth-v1" { return try await renewSisuSession(previous,persistRotation:persistRotation) }
         guard previous.loginProfile == profile.rawValue, let refresh = previous.refreshToken, !refresh.isEmpty else { throw LabsError.message("Sign in once with Remember sign-in enabled to allow renewal.") }
         var form = URLComponents(); form.queryItems = ["client_id":client,"scope":Self.scope,"refresh_token":refresh,"grant_type":"refresh_token"].map { URLQueryItem(name:$0.key,value:$0.value) }
         let encoded = form.percentEncodedQuery!.replacingOccurrences(of:"+",with:"%2B")
@@ -70,7 +122,7 @@ public final class BrowserLogin {
         guard account.xuid == previous.xuid else { throw LabsError.message("Renewed sign-in belongs to a different Xbox account. The active account and queue were retained; sign in explicitly to switch accounts.") }
         account.refreshToken = rotated.refreshToken; account.eventToken = previous.eventToken
         account.eventTokenExpiresAt = previous.eventTokenExpiresAt; account.eventTokenExpiryHash = previous.eventTokenExpiryHash
-        account.presenceAuthorizationFlow = previous.presenceAuthorizationFlow; account.presenceSigningKey = previous.presenceSigningKey; account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
+        account.presenceDeviceToken = previous.presenceDeviceToken; account.presenceDeviceExpiresAt = previous.presenceDeviceExpiresAt; account.presenceAuthorizationFlow = previous.presenceAuthorizationFlow; account.presenceSigningKey = previous.presenceSigningKey; account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
         return account
     }
     /// Explicit authentication-only experiment. Does not send presence or achievement events.
@@ -79,7 +131,8 @@ public final class BrowserLogin {
     }
     /// Experimental app/title + device authorization on this device. Does not send a heartbeat.
     public func acquirePresenceAuthorization(_ previous: Account, persistRotation: (Account) async throws -> Void) async throws -> Account {
-        try await acquireMobileAuthorization(previous, includeEvents:false, persistRotation:persistRotation)
+        if previous.presenceAuthorizationFlow == "sisu-preauth-v1" { return try await renewSisuSession(previous,persistRotation:persistRotation) }
+        return try await acquireMobileAuthorization(previous, includeEvents:false, persistRotation:persistRotation)
     }
     private func acquireMobileAuthorization(_ previous: Account, includeEvents: Bool, persistRotation: (Account) async throws -> Void) async throws -> Account {
         guard (!includeEvents || profile == .ios), previous.loginProfile == profile.rawValue, let refresh = previous.refreshToken, !refresh.isEmpty else {
@@ -146,9 +199,9 @@ public final class BrowserLogin {
         result.eventTokenExpiresAt = expiry; result.eventTokenExpiryHash = EventTokenLifetime.fingerprint(result.eventToken)
         return result
     }
-    private func authorize(_ oauth: [String:Any]) async throws -> Account {
+    private func authorize(_ oauth: [String:Any],keyOverride:P256.Signing.PrivateKey? = nil,deviceOverride:[String:Any]? = nil) async throws -> Account {
         guard let access = oauth["access_token"] as? String, !access.isEmpty else { throw LabsError.message("Microsoft did not return an access token.") }
-        let key = P256.Signing.PrivateKey(); let pub = key.publicKey.x963Representation
+        let key = keyOverride ?? preauthKey ?? P256.Signing.PrivateKey(); let pub = key.publicKey.x963Representation
         let proof = ["use":"sig","alg":"ES256","kty":"EC","crv":"P-256","x":Self.b64(pub.subdata(in:1..<33)),"y":Self.b64(pub.subdata(in:33..<65))]
         func signed(_ url: String, _ object: [String:Any], stage: String) async throws -> [String:Any] {
             let body = try JSON.data(object)
@@ -161,7 +214,8 @@ public final class BrowserLogin {
             var header = v; header.append(t); header.append(signature)
             return try await post(url,body:body,signature:header.base64EncodedString(),stage:stage)
         }
-        let device = try await signed("https://device.auth.xboxlive.com/device/authenticate", ["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","DeviceType":profile.deviceType,"Version":"0.0.0","ProofKey":proof,"SerialNumber":"{\(UUID().uuidString)}"]], stage:"Xbox device authorization")
+        let device: [String:Any]
+        if let cached = deviceOverride ?? preauthDevice { device = cached } else { device = try await signed("https://device.auth.xboxlive.com/device/authenticate", ["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","DeviceType":profile.deviceType,"Version":"0.0.0","ProofKey":proof,"SerialNumber":"{\(UUID().uuidString)}"]], stage:"Xbox device authorization") }
         guard let deviceToken = device["Token"] as? String else { throw LabsError.message("Xbox did not return device authorization.") }
         let xbox = try await signed("https://sisu.xboxlive.com/authorize", ["AccessToken":"t="+access,"AppId":client,"DeviceToken":deviceToken,"Sandbox":"RETAIL","UseModernGamertag":true,"SiteName":"user.auth.xboxlive.com","RelyingParty":"http://xboxlive.com","ProofKey":proof], stage:"Xbox account authorization")
         guard let authorization = xbox["AuthorizationToken"] as? [String:Any], let token = authorization["Token"] as? String, let claims = authorization["DisplayClaims"] as? [String:Any] else { throw LabsError.message("Xbox returned incomplete authorization.") }
@@ -170,6 +224,11 @@ public final class BrowserLogin {
         var account = try await XboxService(session:session).connect("XBL3.0 x=\(hash);\(token)")
         account.loginProfile = profile.rawValue
         account.authorizationExpiresAt = ServiceDates.parse(JSON.string(authorization["NotAfter"] ?? authorization["ExpireOn"]))
+        if keyOverride != nil || preauthKey != nil {
+            guard let title=xbox["TitleToken"] as? [String:Any],let titleToken=title["Token"] as? String,!titleToken.isEmpty,let user=xbox["UserToken"] as? [String:Any],let userToken=user["Token"] as? String,!userToken.isEmpty,let expiry=account.authorizationExpiresAt,expiry>Date().addingTimeInterval(300),let deviceExpiry=ServiceDates.parse(JSON.string(device["NotAfter"])),deviceExpiry>Date().addingTimeInterval(300),xui?["xid"]==nil || JSON.string(xui?["xid"])==account.xuid else { throw LabsError.message("Xbox session returned incomplete title, device, expiry or account authorization. Saved account retained.") }
+            account.presenceAuthorizationFlow="sisu-preauth-v1";account.presenceAuthorization=account.authorization;account.presenceAuthorizationExpiresAt=expiry;account.presenceSigningKey=key.rawRepresentation
+            account.presenceDeviceToken=deviceToken;account.presenceDeviceExpiresAt=deviceExpiry
+        }
         return account
     }
 }

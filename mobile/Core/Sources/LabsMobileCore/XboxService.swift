@@ -181,10 +181,11 @@ public struct XboxHTTPFailure: LocalizedError {
     public let endpoint: String
     public let message: String
     public let serverCode: String?
+    public let xboxErrorCode: String?
     public let correlation: String?
     public var errorDescription: String? { message }
     public var diagnostic: String {
-        "HTTP \(status) · \(endpoint)" + (serverCode.map { "\nServer code: " + $0 } ?? "\nNo structured server error code supplied.") + (correlation.map { "\nCorrelation: " + $0 } ?? "")
+        "HTTP \(status) · \(endpoint)" + (serverCode.map { "\nServer code: " + $0 } ?? "\nNo structured server error code supplied.") + (xboxErrorCode.map { "\nXbox error header: " + $0 } ?? "") + (correlation.map { "\nCorrelation: " + $0 } ?? "")
     }
     init(status: Int, endpoint: String, message: String, response: HTTPURLResponse, data: Data) {
         self.status = status; self.endpoint = endpoint; self.message = message
@@ -194,6 +195,7 @@ public struct XboxHTTPFailure: LocalizedError {
         let json = data.count <= 65536 ? (try? JSON.object(data)) : nil
         let error = json?["error"] as? [String:Any]
         serverCode = safeCode(response.value(forHTTPHeaderField:"x-xbl-error-code")) ?? safeCode(JSON.string(json?["XErr"] ?? json?["code"] ?? json?["errorCode"] ?? error?["code"]))
+        if let value=response.value(forHTTPHeaderField:"x-err"),value.utf8.count<=20,value.range(of:#"^(?:[0-9]{1,20}|0[xX][0-9A-Fa-f]{1,8})$"#,options:.regularExpression) != nil { xboxErrorCode=value } else { xboxErrorCode=nil }
         let header = response.value(forHTTPHeaderField:"x-ms-request-id") ?? response.value(forHTTPHeaderField:"ms-cv")
         if let header, header.count <= 128, header.range(of:#"^[A-Za-z0-9+/.=_-]+$"#,options:.regularExpression) != nil { correlation = header } else { correlation = nil }
     }
