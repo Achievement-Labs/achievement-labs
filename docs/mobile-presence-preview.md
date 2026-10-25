@@ -1,3 +1,11 @@
+# Current test build: stable sign-in restored
+
+iOS 0.12.15 (33) and Android 0.6.12 (20) remove the unsuccessful phone-only presence experiments. Spoofing again uses the account authorization imported through the PC app’s full sign-in QR (or the existing manual route). Event-token-only sync does not replace account authorization. Normal Microsoft sign-in, phone event-token acquisition, global QR scanning, saved queues and the issuer-provided event-token time estimate remain available.
+
+Obsolete experimental presence credentials are discarded while account, refresh and event credentials are retained. The iOS sign-in WebKit view now requires a user gesture for media playback, prefers inline playback, and disables Picture in Picture and AirPlay. Offline native smoke checks verify those settings and OAuth callback handling. The reported four-second black player during live Microsoft two-factor authentication still requires a check on a physical phone; this change does not claim to reproduce that private sign-in prompt.
+
+## Historical investigation (superseded)
+
 # Mobile sign-in spoofing and global scanner preview
 
 Unpublished test builds: Android 0.6.9 (17), iOS 0.12.11 (29).

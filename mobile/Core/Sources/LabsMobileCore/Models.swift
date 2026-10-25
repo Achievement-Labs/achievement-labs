@@ -16,13 +16,6 @@ public struct Account: Codable, Equatable {
     public var authorizationExpiresAt: Date?
     public var eventTokenExpiresAt: Date?
     public var eventTokenExpiryHash: String?
-    public var presenceDeviceToken: String?
-    public var presenceDeviceExpiresAt: Date?
-    public var presenceAuthorizationFlow: String?
-    public var presenceSigningKey: Data?
-    public var presenceAuthorization: String?
-    public var presenceAuthorizationExpiresAt: Date?
-    public func needsPresenceAuthorization(at date: Date = Date()) -> Bool { !["title-device-v1","sisu-preauth-v1"].contains(presenceAuthorizationFlow ?? "") || presenceSigningKey?.count != 32 || presenceAuthorization?.isEmpty != false || presenceAuthorizationExpiresAt.map { $0 <= date.addingTimeInterval(300) } != false }
     public func needsRefresh(at date: Date = Date()) -> Bool { authorizationExpiresAt.map { $0 <= date.addingTimeInterval(300) } ?? false }
     public init(authorization: String, xuid: String, gamertag: String, eventToken: String = "") {
         self.authorization = authorization; self.xuid = xuid; self.gamertag = gamertag; self.eventToken = eventToken

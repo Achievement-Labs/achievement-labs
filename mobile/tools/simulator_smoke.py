@@ -99,6 +99,9 @@ time.sleep(5)
 container=Path(run('xcrun','simctl','get_app_container',device,'org.achievementlabs.mobile','data').strip())
 marker=container/'Documents'/'Callback-self-test.txt'
 assert marker.read_text() == 'passed', 'Embedded WebKit did not capture and validate the synthetic redirect'
+media=json.loads((container/'Documents'/'SignInMedia-self-test.json').read_text())
+assert media == dict(inline=True,requiresTap=True,pictureInPicture=False,airPlay=False), media
+print('Sign-in WebKit media requires a tap; inline playback preferred; PiP and AirPlay disabled.')
 subprocess.run(['xcrun','simctl','terminate',device,'org.achievementlabs.mobile'],check=True)
 print('Embedded WebKit automatic callback capture and full redirect validation passed without credentials or OAuth requests.')
 

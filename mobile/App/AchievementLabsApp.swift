@@ -391,7 +391,7 @@ struct SettingsView: View {
                     if let profile = m.account?.loginProfile { Text("Current session: " + profile).font(.caption).foregroundStyle(.secondary) }
                     Picker("Sign-in profile",selection:$m.loginProfile) { ForEach(LoginProfile.allCases) { Text($0.rawValue).tag($0.rawValue) } }.disabled(m.busy || m.running || m.presenceRunning)
                     Button("Scan QR codes",systemImage:"qrcode.viewfinder") { pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
-                    Text("For title spoofing, use the PC’s full Sign-in + event token QR if browser sign-in returns a heartbeat 403. Event-token-only sync leaves account authorization unchanged.").font(.caption).foregroundStyle(.secondary)
+                    Text("For title spoofing, use the PC’s full Sign-in + event token QR. Event-token-only sync leaves account authorization unchanged.").font(.caption).foregroundStyle(.secondary)
                     Text("Profile changes apply when you sign in again.").font(.caption2).foregroundStyle(.secondary)
                     Toggle("Remember sign-in",isOn:$m.rememberSignIn).disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning).onChange(of:m.rememberSignIn) { _,_ in Task { await m.updateRememberSignIn() } }
                     Picker("Sign-in browser",selection:$m.signInBrowser) { Text("In app").tag("In app"); Text("Safari").tag("Safari") }.disabled(m.busy || m.refreshingSignIn)
@@ -401,13 +401,6 @@ struct SettingsView: View {
                             else { embeddedLogin = SignInPage(url:url) }
                         }
                     }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning)
-                    Button("Try Xbox session sign-in (experimental)",systemImage:"person.badge.key") {
-                        Task { if let url=await m.beginSisuBrowserLogin() {
-                            if m.signInBrowser == "Safari" { advanced=true;signInURL="";openURL(url) }
-                            else { embeddedLogin=SignInPage(url:url) }
-                        } }
-                    }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning)
-                    Text("Creates an Xbox iOS session before Microsoft sign-in and retains its device proof. Phone-only spoofing access is still being tested.").font(.caption2).foregroundStyle(.secondary)
                     if !m.sessionStatus.isEmpty { Text(m.sessionStatus).font(.caption).foregroundStyle(.secondary) }
                     if m.account?.refreshToken != nil && m.rememberSignIn { Button("Renew remembered sign-in") { Task { await m.renewSignIn() } }.disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning) }
                     Text("Remembering stores renewal credentials in this device’s Keychain, not your password. Sign in once after this update to enable renewal. For incorrect password suggestions in the webpage, try Safari or choose your Microsoft account from Passwords.").font(.caption2).foregroundStyle(.secondary)

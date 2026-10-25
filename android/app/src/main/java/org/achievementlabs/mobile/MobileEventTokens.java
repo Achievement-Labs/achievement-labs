@@ -31,9 +31,7 @@ final class MobileEventTokens {
   JSONArray rows=(JSONArray)value;if(rows.length()!=1)throw new Failure("Ambiguous Xbox identity. Existing event token retained.");return rows.getJSONObject(0);
  }
  static String token(JSONObject response)throws Exception{Object raw=response.opt("Token");String value=raw instanceof String?(String)raw:"";if(value.isEmpty()||value.length()>131072)throw new Failure("Missing or oversized Xbox authorization.");return value;}
- static JSONObject acquire(JSONObject previous,OAuth.Rotation rotation,String version,Transport t)throws Exception{return acquire(previous,rotation,version,t,true);}
- static JSONObject presence(JSONObject previous,OAuth.Rotation rotation,String version,Transport t)throws Exception{return acquire(previous,rotation,version,t,false);}
- static JSONObject acquire(JSONObject previous,OAuth.Rotation rotation,String version,Transport t,boolean eventsRequested)throws Exception{
+ static JSONObject acquire(JSONObject previous,OAuth.Rotation rotation,String version,Transport t)throws Exception{
   String refresh=previous.optString("refreshToken");if(refresh.isEmpty()||!"Microsoft browser".equals(previous.optString("loginProfile")))throw new Failure("Sign in with Microsoft on this device first. PC QR/manual sessions cannot run this test.");
   JSONObject oauth;
   try{oauth=t.refresh(refresh);}catch(Net.HttpFailure e){throw new Failure("Microsoft renewal refused (HTTP "+e.status+"). Sign in again. Existing event token retained.");}
@@ -43,30 +41,16 @@ final class MobileEventTokens {
   Object rawAccess=oauth.opt("access_token");String access=rawAccess instanceof String?(String)rawAccess:"";if(access.isEmpty())throw new Failure("Microsoft returned no access token.");
   KeyPairGenerator gen=KeyPairGenerator.getInstance("EC");gen.initialize(new ECGenParameterSpec("secp256r1"));KeyPair key=gen.generateKeyPair();ECPublicKey pub=(ECPublicKey)key.getPublic();
   JSONObject proof=new JSONObject().put("use","sig").put("alg","ES256").put("kty","EC").put("crv","P-256").put("x",OAuth.url64(OAuth.fixed(pub.getW().getAffineX()))).put("y",OAuth.url64(OAuth.fixed(pub.getW().getAffineY())));
-  JSONObject device=post(t,"https://device.auth.xboxlive.com/device/authenticate",new JSONObject().put("RelyingParty","http://auth.xboxlive.com").put("TokenType","JWT").put("Properties",new JSONObject().put("AuthMethod","ProofOfPossession").put("Id","{"+UUID.randomUUID()+"}").put("DeviceType",eventsRequested?"Android":"Win32").put("Version",eventsRequested?version:"0.0.0").put("ProofKey",proof).put("SerialNumber","{"+UUID.randomUUID()+"}")),key,"Xbox mobile device authorization");
-  JSONObject properties;
-  if(eventsRequested){
-   JSONObject user=post(t,"https://user.auth.xboxlive.com/user/authenticate",new JSONObject().put("RelyingParty","http://auth.xboxlive.com").put("TokenType","JWT").put("Properties",new JSONObject().put("AuthMethod","RPS").put("SiteName","user.auth.xboxlive.com").put("RpsTicket","t="+access)),null,"Xbox user authorization");
-   properties=new JSONObject().put("SandboxId","RETAIL").put("UserTokens",new JSONArray().put(token(user))).put("DeviceToken",token(device));
-  }else{
-   // Match the existing browser OAuth app/device profile and retain its title identity.
-   JSONObject sisu=post(t,"https://sisu.xboxlive.com/authorize",new JSONObject().put("AccessToken","t="+access).put("AppId",OAuth.CLIENT).put("DeviceToken",token(device)).put("Sandbox","RETAIL").put("UseModernGamertag",true).put("SiteName","user.auth.xboxlive.com").put("RelyingParty","http://xboxlive.com").put("ProofKey",proof),key,"Presence: Xbox app/title authorization");
-   JSONObject user=sisu.optJSONObject("UserToken"),title=sisu.optJSONObject("TitleToken");
-   if(user==null||title==null)throw new Failure("Xbox did not return app/title authorization. No heartbeat was sent. Existing account and event token retained.");
-   properties=new JSONObject().put("SandboxId","RETAIL").put("UserTokens",new JSONArray().put(token(user))).put("DeviceToken",token(device)).put("TitleToken",token(title)).put("ProofKey",proof);
-  }
-  JSONObject identity=post(t,"https://xsts.auth.xboxlive.com/xsts/authorize",new JSONObject().put("RelyingParty","http://xboxlive.com").put("TokenType","JWT").put("Properties",properties),eventsRequested?null:key,eventsRequested?"Xbox identity authorization":"Presence: Xbox title/device authorization");
+  JSONObject device=post(t,"https://device.auth.xboxlive.com/device/authenticate",new JSONObject().put("RelyingParty","http://auth.xboxlive.com").put("TokenType","JWT").put("Properties",new JSONObject().put("AuthMethod","ProofOfPossession").put("Id","{"+UUID.randomUUID()+"}").put("DeviceType","Android").put("Version",version).put("ProofKey",proof).put("SerialNumber","{"+UUID.randomUUID()+"}")),key,"Xbox mobile device authorization");
+  JSONObject user=post(t,"https://user.auth.xboxlive.com/user/authenticate",new JSONObject().put("RelyingParty","http://auth.xboxlive.com").put("TokenType","JWT").put("Properties",new JSONObject().put("AuthMethod","RPS").put("SiteName","user.auth.xboxlive.com").put("RpsTicket","t="+access)),null,"Xbox user authorization");
+  JSONObject properties=new JSONObject().put("SandboxId","RETAIL").put("UserTokens",new JSONArray().put(token(user))).put("DeviceToken",token(device));
+  JSONObject identity=post(t,"https://xsts.auth.xboxlive.com/xsts/authorize",new JSONObject().put("RelyingParty","http://xboxlive.com").put("TokenType","JWT").put("Properties",properties),null,"Xbox identity authorization");
   JSONObject id=claim(identity);String hash=id.optString("uhs");if(hash.isEmpty())throw new Failure("Xbox returned no user identity.");
   JSONObject verified;
   try{verified=t.connect(Core.token("XBL3.0 x="+hash+";"+token(identity),false));}
   catch(Net.HttpFailure e){throw new Failure("Xbox profile verification refused (HTTP "+e.status+"). Existing event token retained.");}
   catch(Exception e){throw new Failure("Xbox profile verification could not complete. Existing event token retained.");}
   if(!previous.getString("xuid").equals(verified.getString("xuid"))||(!id.optString("xid").isEmpty()&&!previous.getString("xuid").equals(id.optString("xid"))))throw new Failure("Xbox account mismatch. Existing account and event token retained.");
-  if(!eventsRequested){
-   Instant expiry;try{expiry=Instant.parse(identity.getString("NotAfter"));}catch(Exception e){throw new Failure("Presence authorization expiry is missing or invalid. Sign in again on this device.");}
-   if(!expiry.isAfter(Instant.now().plusSeconds(60)))throw new Failure("Presence authorization is already expiring. Sign in again on this device.");
-   return new JSONObject(previous.toString()).put("refreshToken",next).put("presenceAuthorizationFlow","title-device-v1").put("presenceAuthorization",verified.getString("authorization")).put("presenceAuthorizationExpiresAt",expiry.toString()).put("presenceSigningKey",Core.b64(key.getPrivate().getEncoded()));
-  }
   JSONObject events=post(t,"https://xsts.auth.xboxlive.com/xsts/authorize",new JSONObject().put("RelyingParty","http://events.xboxlive.com").put("TokenType","JWT").put("Properties",properties),null,"Xbox event-token authorization");
   JSONObject eventId=claim(events);if(!hash.equals(eventId.optString("uhs"))||(!eventId.optString("xid").isEmpty()&&!previous.getString("xuid").equals(eventId.optString("xid"))))throw new Failure("Event account mismatch. Existing event token retained.");
   Instant expiry;try{expiry=Instant.parse(events.getString("NotAfter"));}catch(Exception e){throw new Failure("Event-token expiry missing or invalid. Existing token retained.");}
