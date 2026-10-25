@@ -21,3 +21,17 @@ Test candidates Android 0.6.10 (18), iOS 0.12.12 (30) retain the per-device P-25
 Event-token issuer NotAfter is saved and displayed with time remaining. Metadata is bound to the exact token fingerprint and cannot follow a replacement/manual/QR token. Unknown expiry stays unknown, including previously acquired tokens whose metadata was discarded. Refresh/replacement never invents a new lifetime. The issuer expiry is a scheduled bound, not a guarantee against earlier rejection or revocation. Get a fresh mobile event token once to populate it.
 
 References: Microsoft proof-key request signing https://learn.microsoft.com/en-us/gaming/gdk/docs/services/fundamentals/s2s-auth-calls/s2s-calls/live-title-service-calls-xbox-live and XSTS token structure https://learn.microsoft.com/en-us/gaming/gdk/docs/services/fundamentals/s2s-auth-calls/service-authentication/security-tokens/live-security-tokens .
+
+## Phone-only app/title experiment
+
+Unpublished candidates: Android 0.6.11 (19), iOS 0.12.13 (31).
+
+Both earlier iOS attempts received heartbeat 403, including the request carrying a device signature. The PC path instead reads the native Xbox PC app authorization before sending each heartbeat; its exact grants are not known. A successful library read does not establish permission to send presence.
+
+This candidate refreshes the phone browser login, obtains the selected app's SiSU user/title authorization and exchanges UserTokens + DeviceToken + TitleToken + ProofKey in a signed XSTS request. The same generated proof key signs device, SiSU, XSTS and heartbeat requests. iOS respects the selected Xbox iOS/iOS or Xbox desktop/Win32 profile; Android uses its existing desktop OAuth/Win32 pair. It never silently changes OAuth client or borrows a PC credential. The earlier user/device-only presence cache is invalidated by a flow marker. Missing title authorization or a refusal ends that attempt without fallback/retries. Event-token requests retain their previous exchange.
+
+Install over the previous test app. Keep your native phone Microsoft login with Remember sign-in enabled; no PC QR transfer is needed. Open Game Session and tap Start spoofing. On iOS, Diagnostics will identify App/title + device proof (experimental). If it is refused, share only the displayed stage, HTTP code and sanitized diagnostics. Do not send authentication tokens, private keys or sign-in redirect URLs. An Xbox desktop profile can also be signed in through the phone browser; that name describes the OAuth profile and does not require a PC. Changing profile is a separate test, not an automatic fallback.
+
+Automated transport tests use synthetic grants and verify app/device matching, title inclusion, proof continuity, refresh rotation, same-account validation, expiry, missing-title/refusal behavior and preservation of library/event credentials. They do not prove live heartbeat permission. Phone acceptance remains unverified until tested.
+
+Protocol reference: https://github.com/PrismarineJS/prismarine-auth/blob/master/src/TokenManagers/XboxTokenManager.js (SiSU title-token retention and signed XSTS title/device exchange). No example credential logging is included in our implementation.

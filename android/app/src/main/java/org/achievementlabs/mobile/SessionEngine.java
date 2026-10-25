@@ -112,10 +112,10 @@ try{preview=BuildConfig.DEBUG&&previewMode;previewPage=startPage;vault=new Vault
  }
  JSONObject presenceAuth()throws Exception{synchronized(stateLock){
   JSONObject current=auth();if(!"Microsoft browser".equals(current.optString("loginProfile")))return current;
-  boolean valid=false;try{valid=!current.optString("presenceSigningKey").isEmpty()&&!current.optString("presenceAuthorization").isEmpty()&&Instant.parse(current.getString("presenceAuthorizationExpiresAt")).isAfter(Instant.now().plusSeconds(300));}catch(Exception ignored){}
+  boolean valid=false;try{valid="title-device-v1".equals(current.optString("presenceAuthorizationFlow"))&&!current.optString("presenceSigningKey").isEmpty()&&!current.optString("presenceAuthorization").isEmpty()&&Instant.parse(current.getString("presenceAuthorizationExpiresAt")).isAfter(Instant.now().plusSeconds(300));}catch(Exception ignored){}
   if(valid)return current;
   String owner=current.getString("xuid");JSONObject next=MobileEventTokens.presence(current,refresh->{Core.sameOwner(owner,account.getString("xuid"));account.put("refreshToken",refresh);save();},Build.VERSION.RELEASE,MobileEventTokens.LIVE);
-  Core.sameOwner(owner,account.getString("xuid"));account.put("presenceSigningKey",next.getString("presenceSigningKey")).put("presenceAuthorization",next.getString("presenceAuthorization")).put("presenceAuthorizationExpiresAt",next.getString("presenceAuthorizationExpiresAt"));save();return new JSONObject(account.toString());
+  Core.sameOwner(owner,account.getString("xuid"));account.put("presenceAuthorizationFlow",next.getString("presenceAuthorizationFlow")).put("presenceSigningKey",next.getString("presenceSigningKey")).put("presenceAuthorization",next.getString("presenceAuthorization")).put("presenceAuthorizationExpiresAt",next.getString("presenceAuthorizationExpiresAt"));save();return new JSONObject(account.toString());
  }}
  void startSpoof(String title)throws Exception{
   if(spoofGate.busy()||!foreground)throw new Exception("Wait for the previous spoof to finish, then start while the app is open.");

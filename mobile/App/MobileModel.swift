@@ -154,7 +154,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         var next = input
         if let previous=account,previous.xuid == next.xuid {
             if previous.eventToken == next.eventToken && next.eventTokenExpiryHash == nil { next.eventTokenExpiresAt=previous.eventTokenExpiresAt;next.eventTokenExpiryHash=previous.eventTokenExpiryHash }
-            if previous.authorization == next.authorization && next.presenceAuthorization == nil { next.presenceAuthorization=previous.presenceAuthorization;next.presenceAuthorizationExpiresAt=previous.presenceAuthorizationExpiresAt;next.presenceSigningKey=previous.presenceSigningKey }
+            if previous.authorization == next.authorization && next.presenceAuthorization == nil { next.presenceAuthorization=previous.presenceAuthorization;next.presenceAuthorizationExpiresAt=previous.presenceAuthorizationExpiresAt;next.presenceSigningKey=previous.presenceSigningKey;next.presenceAuthorizationFlow=previous.presenceAuthorizationFlow }
         }
         if EventTokenLifetime.expiry(next) == nil { next.eventTokenExpiresAt=nil;next.eventTokenExpiryHash=nil }
         if rememberSignIn { try SecureStore.save(JSONEncoder().encode(next),allowBackground:continueQueueInBackground || continueSpoofInBackground) }
@@ -596,7 +596,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 try self.saveAccount(saved)
             }
             guard version == generation, account?.xuid == current.xuid else { throw CancellationError() }
-            var saved = account ?? current; saved.presenceAuthorization = next.presenceAuthorization; saved.presenceAuthorizationExpiresAt = next.presenceAuthorizationExpiresAt; saved.presenceSigningKey = next.presenceSigningKey
+            var saved = account ?? current; saved.presenceAuthorization = next.presenceAuthorization; saved.presenceAuthorizationExpiresAt = next.presenceAuthorizationExpiresAt; saved.presenceSigningKey = next.presenceSigningKey; saved.presenceAuthorizationFlow = next.presenceAuthorizationFlow
             try saveAccount(saved)
             return saved
         }
@@ -631,7 +631,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 if Task.isCancelled { return }
                 self.rememberTransport(error); self.backgroundHadFailure = true; self.spoofStopReason = "Heartbeat failed: " + error.localizedDescription; self.spoofStatus = self.spoofStopReason
                 if let failure = error as? XboxHTTPFailure {
-                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\nPresence request: " + (self.account?.presenceSigningKey == nil ? "Imported / existing authorization" : "Device proof signature attached") + "\n" + failure.diagnostic
+                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\nPresence request: " + (self.account?.presenceSigningKey == nil ? "Imported / existing authorization" : "App/title + device proof (experimental)") + "\n" + failure.diagnostic
                     if failure.status == 403 {
                         do {
                             let current = self.account ?? account

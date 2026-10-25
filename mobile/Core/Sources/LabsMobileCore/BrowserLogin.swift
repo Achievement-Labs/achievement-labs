@@ -70,14 +70,14 @@ public final class BrowserLogin {
         guard account.xuid == previous.xuid else { throw LabsError.message("Renewed sign-in belongs to a different Xbox account. The active account and queue were retained; sign in explicitly to switch accounts.") }
         account.refreshToken = rotated.refreshToken; account.eventToken = previous.eventToken
         account.eventTokenExpiresAt = previous.eventTokenExpiresAt; account.eventTokenExpiryHash = previous.eventTokenExpiryHash
-        account.presenceSigningKey = previous.presenceSigningKey; account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
+        account.presenceAuthorizationFlow = previous.presenceAuthorizationFlow; account.presenceSigningKey = previous.presenceSigningKey; account.presenceAuthorization = previous.presenceAuthorization; account.presenceAuthorizationExpiresAt = previous.presenceAuthorizationExpiresAt
         return account
     }
     /// Explicit authentication-only experiment. Does not send presence or achievement events.
     public func acquireEventToken(_ previous: Account, persistRotation: (Account) async throws -> Void) async throws -> Account {
         try await acquireMobileAuthorization(previous, includeEvents:true, persistRotation:persistRotation)
     }
-    /// Obtains a separate user/device authorization on this device. Does not send a heartbeat.
+    /// Experimental app/title + device authorization on this device. Does not send a heartbeat.
     public func acquirePresenceAuthorization(_ previous: Account, persistRotation: (Account) async throws -> Void) async throws -> Account {
         try await acquireMobileAuthorization(previous, includeEvents:false, persistRotation:persistRotation)
     }
@@ -86,7 +86,7 @@ public final class BrowserLogin {
             throw LabsError.message(includeEvents ? "Sign in with the Xbox iOS browser profile and Remember sign-in enabled first. PC QR/manual sessions cannot run this test." : "Sign in with Microsoft on this device with Remember sign-in enabled before starting spoofing.")
         }
         var form = URLComponents(); form.queryItems = ["client_id":client,"scope":Self.scope,"refresh_token":refresh,"grant_type":"refresh_token"].map { URLQueryItem(name:$0.key,value:$0.value) }
-        let oauth = try await post("https://login.live.com/oauth20_token.srf",body:Data(form.percentEncodedQuery!.replacingOccurrences(of:"+",with:"%2B").utf8),form:true,stage:"Event token: Microsoft renewal")
+        let oauth = try await post("https://login.live.com/oauth20_token.srf",body:Data(form.percentEncodedQuery!.replacingOccurrences(of:"+",with:"%2B").utf8),form:true,stage:includeEvents ? "Event token: Microsoft renewal" : "Presence: Microsoft renewal")
         var result = previous
         if let next = oauth["refresh_token"] as? String, !next.isEmpty { result.refreshToken = next }
         try await persistRotation(result)
@@ -114,10 +114,19 @@ public final class BrowserLogin {
             if let row = claims["xui"] as? [String:Any] { return row }
             throw LabsError.message("Ambiguous Xbox identity. Existing event token retained.")
         }
-        let device = try await request("https://device.auth.xboxlive.com/device/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","DeviceType":"iOS","Version":"0.0.0","ProofKey":proof,"SerialNumber":"{\(UUID().uuidString)}"]],signed:true,stage:"Event token: Xbox iOS device authorization")
-        let user = try await request("https://user.auth.xboxlive.com/user/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"RPS","SiteName":"user.auth.xboxlive.com","RpsTicket":"t="+access]],stage:"Event token: Xbox user authorization")
-        let properties: [String:Any] = ["SandboxId":"RETAIL","UserTokens":[try token(user)],"DeviceToken":try token(device)]
-        let identity = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://xboxlive.com","TokenType":"JWT","Properties":properties],stage:"Event token: Xbox identity authorization")
+        let device = try await request("https://device.auth.xboxlive.com/device/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","DeviceType":includeEvents ? "iOS" : profile.deviceType,"Version":"0.0.0","ProofKey":proof,"SerialNumber":"{\(UUID().uuidString)}"]],signed:true,stage:includeEvents ? "Event token: Xbox iOS device authorization" : "Presence: Xbox device authorization")
+        let properties: [String:Any]
+        if includeEvents {
+            let user = try await request("https://user.auth.xboxlive.com/user/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"RPS","SiteName":"user.auth.xboxlive.com","RpsTicket":"t="+access]],stage:"Event token: Xbox user authorization")
+            properties = ["SandboxId":"RETAIL","UserTokens":[try token(user)],"DeviceToken":try token(device)]
+        } else {
+            // Keep the selected OAuth app, matching device type and proof key together.
+            // A user/device-only XSTS loses the app/title identity and was refused by heartbeat.
+            let sisu = try await request("https://sisu.xboxlive.com/authorize",["AccessToken":"t="+access,"AppId":client,"DeviceToken":try token(device),"Sandbox":"RETAIL","UseModernGamertag":true,"SiteName":"user.auth.xboxlive.com","RelyingParty":"http://xboxlive.com","ProofKey":proof],signed:true,stage:"Presence: Xbox app/title authorization")
+            guard let user = sisu["UserToken"] as? [String:Any], let title = sisu["TitleToken"] as? [String:Any] else { throw LabsError.message("Xbox did not return app/title authorization for this sign-in profile. No heartbeat was sent. Existing account and event token retained.") }
+            properties = ["SandboxId":"RETAIL","UserTokens":[try token(user)],"DeviceToken":try token(device),"TitleToken":try token(title),"ProofKey":proof]
+        }
+        let identity = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://xboxlive.com","TokenType":"JWT","Properties":properties],signed:!includeEvents,stage:includeEvents ? "Event token: Xbox identity authorization" : "Presence: Xbox title/device authorization")
         let id = try claim(identity)
         guard let hash = id["uhs"] as? String, !hash.isEmpty else { throw LabsError.message("Xbox returned no user identity.") }
         let authorization = try Tokens.normalize("XBL3.0 x=\(hash);\(try token(identity))",event:false)
@@ -125,7 +134,7 @@ public final class BrowserLogin {
         guard verified.xuid == previous.xuid, id["xid"] == nil || JSON.string(id["xid"]) == previous.xuid else { throw LabsError.message("Xbox account mismatch. Existing account and event token retained.") }
         if !includeEvents {
             guard let expiry = ServiceDates.parse(JSON.string(identity["NotAfter"])), expiry > Date().addingTimeInterval(60) else { throw LabsError.message("Presence authorization expiry is missing or invalid. Sign in again on this device.") }
-            result.presenceAuthorization = authorization; result.presenceAuthorizationExpiresAt = expiry; result.presenceSigningKey = key.rawRepresentation
+            result.presenceAuthorizationFlow = "title-device-v1"; result.presenceAuthorization = authorization; result.presenceAuthorizationExpiresAt = expiry; result.presenceSigningKey = key.rawRepresentation
             return result
         }
         let events = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://events.xboxlive.com","TokenType":"JWT","Properties":properties],stage:"Xbox event-token authorization")
