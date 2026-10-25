@@ -18,7 +18,7 @@ public final class Xbox360Activity extends Activity {
  final class Bridge {
   @JavascriptInterface public void call(String id,String action,String json){if(id.length()>32||json.length()>50000)return;files.execute(()->{try{JSONObject p=new JSONObject(json);Object result;
    switch(action){
-    case "scan":runOnUiThread(()->startActivityForResult(new Intent(this,ScanActivity.class),24));result=empty();break;
+    case "scan":runOnUiThread(()->startActivityForResult(new Intent(Xbox360Activity.this,ScanActivity.class),24));result=empty();break;
     case "testProfile":if(!BuildConfig.DEBUG||!getIntent().getBooleanExtra("selfTest",false))throw new Exception("Test mode is unavailable.");store.load(Profile360Store.bounded(getAssets().open("xbox360/synthetic.dat"),Profile360Store.LIMIT));result=new JSONObject().put("length",store.working.length);break;
     case "testDone":if(!BuildConfig.DEBUG||!getIntent().getBooleanExtra("selfTest",false))throw new Exception("Test mode is unavailable.");if(p.optBoolean("passed")){if(java.util.Arrays.equals(store.export(true),store.export(false)))throw new Exception("Test output unchanged.");}Profile360Store.atomic(new File(getFilesDir(),"xbox360-self-test.json"),p.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));result=empty();break;
     case "pickProfile":case "pickReference":{runOnUiThread(()->{if(picker!=null){reply(id,null,"A document picker is already open.");return;}picker=id;startActivityForResult(new Intent(Intent.ACTION_OPEN_DOCUMENT).setType("*/*").addCategory(Intent.CATEGORY_OPENABLE),action.equals("pickProfile")?10:11);});return;}
