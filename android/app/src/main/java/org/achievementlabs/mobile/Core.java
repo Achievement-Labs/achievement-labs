@@ -58,7 +58,7 @@ public final class Core {
    if(digest!=null&&(!digest.equals(a[1])||total!=n||!a[0].equals(format)))throw new Exception("Different transfer. Reset the scanner.");digest=a[1];total=n;format=a[0];
    if(pieces.containsKey(i)&&!pieces.get(i).equals(a[4]))throw new Exception("Conflicting code. Reset scanner.");pieces.put(i,a[4]);if(pieces.size()!=total)return null;
    StringBuilder joined=new StringBuilder();for(int x=0;x<total;x++)joined.append(pieces.get(x));byte[] data=un64(joined.toString());
-   if(data.length>180*1024||!hash(data).equals(digest))throw new Exception("QR checksum failed.");JSONObject p=new JSONObject(text(data));if("ALQ1".equals(format)){if(data.length>128*1024)throw new Exception("Queue QR too large.");return new JSONObject().put("queue",p);}if(p.getString("key").length()!=43||un64(p.getString("file")).length>128*1024)throw new Exception("Invalid QR transfer.");return p;
+   if(data.length>180*1024||!hash(data).equals(digest))throw new Exception("QR checksum failed.");JSONObject p=new JSONObject(text(data));if("ALQ1".equals(format)){if(data.length>128*1024)throw new Exception("Queue QR too large.");return new JSONObject().put("queue",p);}if(p.getString("key").length()!=43||un64(p.getString("file")).length>128*1024)throw new Exception("Invalid QR transfer.");return new JSONObject().put("key",p.getString("key")).put("file",p.getString("file"));
   }
  }
  static List<String> payloads(String template,JSONArray requests,String title,String xuid,long now)throws Exception{

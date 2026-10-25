@@ -15,7 +15,7 @@ public class QueueQRTests {
   for(String frame:QueueQR.frames(transfer,"42"))queue=automatic.add(frame);
   assertNotNull(queue);QueueTransfer.validate(queue.getJSONObject("queue"),"42");
   try{QueueTransfer.validate(queue.getJSONObject("queue"),"43");fail();}catch(Exception expected){}
-  byte[] bytes=Core.utf(new JSONObject().put("key","A".repeat(43)).put("file",Core.b64(Core.utf("synthetic"))).toString());
+  byte[] bytes=Core.utf(new JSONObject().put("key","A".repeat(43)).put("file",Core.b64(Core.utf("synthetic"))).put("queue",new JSONObject()).toString());
   String hash=Core.hash(bytes),text=Core.b64(bytes);int half=text.length()/2;
   String first="ALPC1|"+hash+"|0|2|"+text.substring(0,half),last="ALPC1|"+hash+"|1|2|"+text.substring(half);
   Core.Collector signIn=new Core.Collector(false,true);assertNull(signIn.add(first));
