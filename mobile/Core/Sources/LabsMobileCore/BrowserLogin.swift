@@ -95,7 +95,11 @@ public final class BrowserLogin {
         r.setValue("1", forHTTPHeaderField:"x-xbl-contract-version")
         if let signature { r.setValue(signature, forHTTPHeaderField:"Signature") }
         let (data,response) = try await session.data(for:r)
-        guard let h = response as? HTTPURLResponse, (200...299).contains(h.statusCode) else { throw LabsError.message("\(stage) failed (HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0)). Start a new browser sign-in. Your saved account was retained.") }
+        guard let h=response as? HTTPURLResponse else { throw LabsError.message("\(stage) returned no HTTP response. Saved account retained.") }
+        guard (200...299).contains(h.statusCode) else {
+            let failure=XboxHTTPFailure(status:h.statusCode,endpoint:r.url?.host ?? "Xbox",message:"",response:h,data:data)
+            throw LabsError.message("\(stage) failed. Start a new browser sign-in. Your saved account was retained.\n"+failure.diagnostic)
+        }
         guard data.count <= 1024 * 1024 else { throw LabsError.message("Authorization response is too large.") }; return try JSON.object(data)
     }
     public func complete(_ redirect: String) async throws -> Account {

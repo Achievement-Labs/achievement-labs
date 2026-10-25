@@ -93,4 +93,36 @@ final class SisuPreauthenticationTests: XCTestCase {
             else { XCTAssertNil(error.xboxErrorCode);XCTAssertFalse(error.diagnostic.contains("secret")) }
         }
     }
+    func testRefusalMissingTitleAndIdentityMismatchStopWithoutHeartbeat() async throws {
+        for scenario in ["preauth-refused","missing-title","identity-mismatch"] {
+            let config=URLSessionConfiguration.ephemeral;config.protocolClasses=[LoginProtocol.self]
+            let session=URLSession(configuration:config);defer { session.invalidateAndCancel();LoginProtocol.handler=nil;LoginProtocol.responseCode=200 }
+            var calls=[String]()
+            LoginProtocol.handler={ request in
+                let host=request.url!.host!;calls.append(host);LoginProtocol.responseCode=200
+                if host=="device.auth.xboxlive.com" { return try JSON.data(["Token":"device","NotAfter":"2099-01-01T00:00:00Z"]) }
+                if host=="login.live.com" { return try JSON.data(["access_token":"private-access","refresh_token":"private-refresh"]) }
+                if host=="profile.xboxlive.com" { return try JSON.data(["profileUsers":[["id":scenario=="identity-mismatch" ? "43":"42","settings":[]]]]) }
+                let payload=try JSON.object(self.body(request))
+                if request.url!.path=="/authenticate" {
+                    if scenario=="preauth-refused" { LoginProtocol.responseCode=403;return try JSON.data(["code":"Forbidden","message":"private-access must not appear"]) }
+                    var c=URLComponents(string:"https://login.live.com/oauth20_authorize.srf")!
+                    var q=payload["Query"] as! [String:String];q["client_id"]=LoginProfile.ios.clientID;q["redirect_uri"]="https://login.live.com/oauth20_desktop.srf";q["response_type"]="code";q["scope"]="service::user.auth.xboxlive.com::MBI_SSL"
+                    c.queryItems=q.map { URLQueryItem(name:$0.key,value:$0.value) };return try JSON.data(["MsaOauthRedirect":c.url!.absoluteString])
+                }
+                var auth:[String:Any]=["UserToken":["Token":"user"],"AuthorizationToken":["Token":"session","NotAfter":"2099-01-01T00:00:00Z","DisplayClaims":["xui":[["uhs":"123","xid":"42"]]]]]
+                if scenario != "missing-title" { auth["TitleToken"]=["Token":"title"] };return try JSON.data(auth)
+            }
+            let login=BrowserLogin(session:session,profile:.ios)
+            do {
+                let start=try await login.prepareSisuStartURL(),q=URLComponents(url:start,resolvingAgainstBaseURL:false)!.queryItems!
+                let state=q.first { $0.name=="state" }!.value!
+                _=try await login.complete("https://login.live.com/oauth20_desktop.srf?state="+state+"&code=synthetic")
+                XCTFail("Invalid session must not be returned")
+            } catch { XCTAssertFalse(error.localizedDescription.contains("private-access")) }
+            XCTAssertFalse(calls.contains { $0.contains("presence-heartbeat") || $0.contains("events") })
+            if scenario=="preauth-refused" { XCTAssertEqual(calls.count,2) }
+        }
+    }
+
 }
