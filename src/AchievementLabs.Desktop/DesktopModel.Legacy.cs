@@ -46,12 +46,12 @@ public sealed partial class DesktopModel
     public bool IsXbox360Profiles => page == "Xbox360Profiles";
     public string[] LocalXbox360Profiles { get => localXbox360Profiles; private set { localXbox360Profiles = value; Changed(); } }
     public string? SelectedLocalXbox360Profile { get => selectedLocalXbox360Profile; set { selectedLocalXbox360Profile = value; Changed(); } }
-    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
+    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; CaptureXbox360PreviewSource(); Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
     public string GpdDirectory => GameAdder.GpdDirectory;
     public string GpdTitleId { get => gpdTitleId; set { gpdTitleId = value ?? ""; Changed(); } }
     public string GpdAddStatus { get => gpdAddStatus; private set { gpdAddStatus = value; Changed(); } }
     public string Xbox360EditorTitleName { get => xbox360EditorTitleName; private set { xbox360EditorTitleName = value; Changed(); } }
-    public string Xbox360EditorTitleId { get => xbox360EditorTitleId; private set { xbox360EditorTitleId = value; Changed(); } }
+    public string Xbox360EditorTitleId { get => xbox360EditorTitleId; private set { xbox360EditorTitleId = value; Xbox360QuickUnlockMode = "Offline (no date)"; Xbox360UnlockStatus = "Select achievements to unlock."; Changed(); } }
     public string HorizonStatus => packages.IsHorizonInstalled ? "Horizon reference found: " + packages.HorizonInstallPath : "Horizon reference not installed; package inspection remains available.";
     public void RefreshHorizonStatus() { Changed(nameof(HorizonStatus)); }
     public void OpenHorizonFolder()
@@ -68,20 +68,20 @@ public sealed partial class DesktopModel
     public string SelectedSaveGame { get => selectedSaveGame; set { selectedSaveGame = value; Changed(); } }
     public string LegacyXuid { get => legacyXuid; set { legacyXuid = value; Changed(); } }
     public string SaveAchievementId { get => saveAchievementId; set { saveAchievementId = value; Changed(); } }
-    public string PackagePath { get => packagePath; set { packagePath = value; Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
-    public Xbox360ProfileGame[] Xbox360Games { get => xbox360Games; private set { xbox360Games = value; Changed(); Changed(nameof(VisibleGames)); Changed(nameof(GameCount)); } }
+    public string PackagePath { get => packagePath; set { packagePath = value; ResetXbox360Preview(); Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
+    public Xbox360ProfileGame[] Xbox360Games { get => xbox360Games; private set { xbox360Games = value; RefreshXbox360Library(); Changed(); Changed(nameof(VisibleGames)); Changed(nameof(GameCount)); } }
     public Xbox360ProfileGame? SelectedXbox360Game { get => selectedXbox360Game; set { selectedXbox360Game = value; Changed(); } }
-    public Xbox360ProfileAchievement[] Xbox360Achievements { get => xbox360Achievements; private set { xbox360Achievements = value; Changed(); } }
+    public Xbox360ProfileAchievement[] Xbox360Achievements { get => xbox360Achievements; private set { xbox360Achievements = value; Xbox360Choices = value.Select(a => new Xbox360AchievementChoice(a, Xbox360SelectionChanged)).ToArray(); SelectedXbox360Choice = null; ResetXbox360Preview(); Changed(); } }
     public Xbox360ProfileAchievement? SelectedXbox360Achievement { get => selectedXbox360Achievement; set { selectedXbox360Achievement = value; Changed(); Xbox360UnlockMode = value?.Status ?? "Locked"; Xbox360UnlockTimeText = (value?.UnlockedAt ?? DateTimeOffset.Now).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff", CultureInfo.InvariantCulture); } }
     public string[] Xbox360UnlockModes { get; } = ["Locked", "Unlocked Offline", "Unlocked Online"];
     public string Xbox360UnlockMode { get => xbox360UnlockMode; set { xbox360UnlockMode = value; Changed(); Changed(nameof(CanEditXbox360UnlockTime)); } }
     public bool CanEditXbox360UnlockTime => Xbox360UnlockMode == "Unlocked Online";
     public string Xbox360UnlockTimeText { get => xbox360UnlockTimeText; set { xbox360UnlockTimeText = value; Changed(); } }
     public int PendingXbox360EditCount => pendingXbox360Edits.Count;
-    public bool CanModifyXbox360Profile => AchievementLabs.Services.Xbox360.Xbox360ConSigner.SigningAvailable;
-    public string Xbox360SigningStatus => "Profile browsing and backups are available. Achievement edits and GPD addition are disabled because the upstream public source omits its signing dependency.";
-    public bool CanSaveXbox360Edits => CanModifyXbox360Profile && pendingXbox360Edits.Count > 0;
-    public bool CanInjectXbox360Profile => !string.IsNullOrWhiteSpace(loadedXbox360Profile) && pendingXbox360Edits.Count == 0;
+    public bool CanModifyXbox360Profile => Xbox360ConSigner.SigningAvailable && HasValidatedXbox360WorkingCopy;
+    public string Xbox360SigningStatus => !Xbox360ConSigner.SigningAvailable ? "Signing setup needed" : "Signing ready · saves resign automatically";
+    public bool CanSaveXbox360Edits => !busy && CanModifyXbox360Profile && pendingXbox360Edits.Count > 0;
+    public bool CanInjectXbox360Profile => !busy && HasValidatedXbox360WorkingCopy && pendingXbox360Edits.Count == 0;
     public string ProfilesDirectory => profiles.ProfilesDirectory;
     public string UsbProfileStatus => $"{profiles.FindUsbProfiles().Count} Xbox 360 profile(s) found on connected drives. Extracted profiles: {ProfilesDirectory}";
     public string LegacyOutput { get => legacyOutput; private set { legacyOutput = value; Changed(); } }
@@ -160,6 +160,8 @@ public sealed partial class DesktopModel
     }
     public async Task LoadSelectedXbox360ProfileAsync()
     {
+        if (busy) return;
+        if (pendingXbox360Edits.Count > 0) { LegacyOutput = "Save or discard pending edits before switching profiles."; return; }
         if (SelectedLocalXbox360Profile is not { } path) { LegacyOutput = "Select a local Xbox 360 profile first."; return; }
         if (!path.EndsWith(".con", StringComparison.OrdinalIgnoreCase))
         {
@@ -178,6 +180,8 @@ public sealed partial class DesktopModel
     }
     public async Task ExtractUsbProfileAsync()
     {
+      if (busy) return;
+      if (pendingXbox360Edits.Count > 0) { LegacyOutput = "Save or discard pending edits before extracting another profile."; return; }
       var previousPath = PackagePath;
       await LegacyOperationAsync(async () =>
       {
@@ -230,6 +234,7 @@ public sealed partial class DesktopModel
     }
     public async Task LoadXbox360ProfileAsync() => await LegacyOperationAsync(async () =>
     {
+        xbox360LoadedProfileVerified = false; RefreshXbox360Signing();
         var path = PackagePath;
         var games = await Task.Run(() => ProfileReader.ReadGames(path), lifetime.Token);
         Xbox360Games = games.ToArray();
@@ -247,6 +252,8 @@ public sealed partial class DesktopModel
     });
     public async Task OpenXbox360TitleAsync(Game game)
     {
+        if (busy) return;
+        if (pendingXbox360Edits.Count > 0) { Notice = "Save or discard pending edits before switching games."; return; }
         if (await IsGfwlTitleAsync(game)) { OpenGfwlTitle(game); return; }
         if (!uint.TryParse(game.Id, out var numericTitleId))
         {
@@ -254,6 +261,7 @@ public sealed partial class DesktopModel
             return;
         }
         Xbox360EditorTitleName = game.Name;
+        Xbox360ArtworkUrl = game.ImageUrl;
         Xbox360EditorTitleId = numericTitleId.ToString("X8");
         PackagePath = loadedXbox360Profile;
         Xbox360Achievements = [];
@@ -303,6 +311,7 @@ public sealed partial class DesktopModel
     });
     public void SetXbox360Achievement()
     {
+        if (busy) return;
         if (!CanModifyXbox360Profile) { Notice = Xbox360SigningStatus; return; }
         var selected = SelectedXbox360Achievement;
         if (selected == null) return;
@@ -324,6 +333,8 @@ public sealed partial class DesktopModel
             "Unlocked Online" => 0x30000u,
             _ => throw new InvalidDataException("Choose a valid unlock state.")
         };
+        if (timestamp < new DateTimeOffset(2005,11,22,0,0,0,TimeSpan.Zero) || timestamp > DateTimeOffset.UtcNow)
+        { Notice = "Online unlock dates must be between Xbox 360 launch and now."; return; }
         var updated = selected with
         {
             Flags = (selected.Flags & ~0x30000u) | stateBits | 0x100000u,
@@ -348,12 +359,15 @@ public sealed partial class DesktopModel
         Busy(true);
         try
         {
+            ValidateXbox360PreviewProfile(allowPending: true);
             var backup = await Task.Run(() => ProfileEditor.Save(path, titleId, edits), lifetime.Token);
+            CaptureXbox360PreviewSource();
             var achievements = await Task.Run(() => ProfileReader.ReadAchievements(path, titleId), lifetime.Token);
             Xbox360Achievements = achievements.ToArray();
             SelectedXbox360Achievement = Xbox360Achievements.FirstOrDefault(item => item.Id == selectedId)
                 ?? Xbox360Achievements.FirstOrDefault();
             pendingXbox360Edits.Clear();
+            Xbox360Games = ProfileReader.ReadGames(path).ToArray();
             Changed(nameof(PendingXbox360EditCount));
             Changed(nameof(CanSaveXbox360Edits));
             Changed(nameof(CanInjectXbox360Profile));
@@ -367,7 +381,7 @@ public sealed partial class DesktopModel
     }
     public async Task InjectXbox360ProfileAsync()
     {
-        if (busy || pendingXbox360Edits.Count > 0) return;
+        if (busy || !CanInjectXbox360Profile) return;
         var path = loadedXbox360Profile;
         var fileName = Path.GetFileName(path);
         var parentName = Path.GetFileName(Path.GetDirectoryName(path));
@@ -375,6 +389,10 @@ public sealed partial class DesktopModel
         Busy(true);
         try
         {
+            using (var input = File.OpenRead(path))
+                if (Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(input)) != xbox360LoadedFingerprint)
+                    throw new IOException("The working profile changed since loading. Reload and review it before USB injection.");
+            Xbox360StfsIntegrity.VerifyFile(path);
             var targets = await Task.Run(() => profiles.FindUsbProfiles().Where(candidate =>
                 Path.GetFileName(candidate).Equals(id, StringComparison.OrdinalIgnoreCase)).ToArray(), lifetime.Token);
             if (targets.Length != 1)

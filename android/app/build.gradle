@@ -2,7 +2,7 @@ plugins { id 'com.android.application' }
 android {
  namespace 'org.achievementlabs.mobile'
  compileSdk 35
- defaultConfig { applicationId 'org.achievementlabs.mobile'; minSdk 26; targetSdk 35; versionCode 11; versionName '0.6.3'; testInstrumentationRunner 'android.test.InstrumentationTestRunner' }
+ defaultConfig { applicationId 'org.achievementlabs.mobile'; minSdk 26; targetSdk 35; versionCode 20; versionName '0.6.12'; testInstrumentationRunner 'android.test.InstrumentationTestRunner' }
  compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
  buildFeatures { buildConfig true }
  testOptions { unitTests.all { testLogging { events "passed", "failed", "skipped"; exceptionFormat "full" } } }

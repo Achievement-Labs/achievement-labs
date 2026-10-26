@@ -1,29 +1,17 @@
-# Achievement Labs Android 0.2.1 beta
+# Achievement Labs Android — unofficial fork beta 0.6.8
 
-Standalone Android 8+ APK. The interface is packaged inside the APK; Xbox traffic, QR decoding, encryption, authentication and queue execution run on the device. No PC server or hosted website is needed.
+> Experimental mobile event-token test: see [test instructions](../docs/mobile-event-token-test.md). Public fork .15 remains unchanged. Successful token issuance and acceptance by the event collector are separate checks.
 
-Home includes gamerpic, gamerscore, game and achievement counts, known Mythic completions and recent games. Library supports search and remembered sorting. Achievement pages include shared DLC groups, selection, retry and queues. Auto Unlock supports reference-gamertag intervals, editable saved delays, ETA, remove completed, failure controls and notifications. Title Spoofing runs alongside the queue while the app remains active. Settings has Account, Sync, Library and App categories.
+Standalone Android app. App updates and downloads use [thevampirebat/achievement-labs](https://github.com/thevampirebat/achievement-labs/releases); event JSON comes from the [upstream Achievement Labs project](https://github.com/Achievement-Labs/achievement-labs). Feature contributions are submitted upstream.
 
-The existing Windows mobile QR dialog works with Android. Scan full sign-in codes or event-token-only codes using the in-app camera. A verified account confirmation is required. Event-only imports require the same signed-in XUID and preserve mobile renewal. Microsoft browser sign-in is also available; PC-transferred authorization may have different heartbeat permissions. Tokens stay in app-private Android Keystore-encrypted storage. Passwords are handled by Microsoft's sign-in page, not stored by this app.
+Game Session combines Title Spoofing and Auto Unlock with explicit Start/Stop controls, reference-gamertag queue timing, saved queues, editable delays, timers and notifications. Library/achievement shortcuts open the selected game in Game Session. Search includes platform filters and Roman/Arabic numeral matching.
 
-Shared catalogue generation preserves desktop edition fixes and blocked routes. Public event sync adds validated new titles without replacing existing IDs. No live Xbox unlocks are performed by the build. Accepted requests are never shown as confirmed unlocks. Legacy Xbox 360/GFWL unlocks are read-only. The first Android build supports QR transfer; encrypted file import and the Windows-only tools are not included.
+Xbox 360 imports an exported retail CON profile, displays its game library and achievement descriptions, filters/sorts rows, and edits selected locked achievements with offline, current, custom or reference dates. Unlock selected automatically backs up, rehashes and re-signs the private working copy. Export signed profile produces a separate file; console/USB copying remains a user step. Imports are limited to 32 MB and supported STFS layouts. GFWL and server-based 360 achievement requests remain read-only. No exported profile is uploaded. See [mobile Xbox 360 details](../docs/mobile-xbox360.md).
 
-Queues and spoofing pause on backgrounding. This version does not run a background foreground-service worker. App update checks look for Android APK assets on published fork releases; Windows/iOS-only releases are ignored.
+Microsoft sign-in and PC QR sync stay native. Sign-in tokens use Android Keystore-encrypted app-private storage. Queue JSON/QR transfer contains progress and delays, not sign-in credentials. Background queue/spoof sessions use an ongoing notification when enabled; Android may stop or delay them. Sessions never resume automatically after an app restart. Accepted requests still require an Xbox progress refresh.
 
-## Build
+## Build and checks
 
-JDK 17, Gradle 8.11.1, Android SDK 35 and Android Gradle plugin 8.9.2. Generate the mobile catalogue with `python3 mobile/tools/prepare_catalogue.py`, copy `mobile/Catalogue` to `android/app/src/main/assets/catalogue` and the existing desktop PNG icon to `android/app/src/main/res/drawable/app_icon.png`, then `gradle -p android testDebugUnitTest assembleDebug lintDebug`. GitHub Actions also verifies launch on an API 35 emulator with synthetic data and all account/network actions blocked in preview mode.
+Use JDK 17, Gradle 8.11.1 and Android SDK 35. Run `python3 mobile/tools/prepare_catalogue.py` and `python3 mobile/tools/prepare_360.py`, copy `mobile/Catalogue` to `android/app/src/main/assets/catalogue` and the desktop icon to `android/app/src/main/res/drawable/app_icon.png`, then run `gradle -p android testDebugUnitTest assembleDebug lintDebug`. The 360 preparation statically reads the pinned, checksum-verified public fork Windows build; it never executes it and never reads a personal profile. Generated signing inputs stay ignored by Git.
 
-This is a debug-signed test APK, not a Google Play release. The CI debug signing key is temporary; a stable user-owned signing key is needed before promising seamless upgrades or publishing. Back up account-independent settings if replacing builds signed with a different key; Android requires uninstalling the previous app in that case.
-
-0.1.1 fixes Android null continuation tokens on the last achievement page, normalizes artwork URL shapes and allows the Xbox store image host. Library sorting is cached, search is debounced without rebuilding its input, and costly navigation blur is removed.
-
-## Android 0.2.0
-Achievements can be sorted within their existing DLC groups (original, A–Z, Z–A, highest/lowest gamerscore), and filtered All / Locked / Unlocked. Preferences are saved.
-
-Active queues and title spoofing now use an application-owned runtime and a data-sync foreground service. Allow notifications before starting. The notification has Pause queue and Stop all actions; background operation can be disabled in Settings → App. No automatic restart after force-stop, reboot or process death. All sessions pause after six hours; Android 15 can enforce an earlier shared data-sync allowance. Battery restrictions and network loss may delay requests.
-
-Settings → App can download and verify a published Android release APK, then open Android's installer. Package ID, newer version code, GitHub asset SHA-256 digest, and identical signing certificates are required. Install permission and final installation remain under Android/user control. There must first be a public Android release asset with a GitHub SHA-256 digest.
-
-### Permanent release signing
-Configure these GitHub Actions repository secrets once: `LABS_ANDROID_KEYSTORE_BASE64`, `LABS_ANDROID_KEY_ALIAS`, `LABS_ANDROID_STORE_PASSWORD`, `LABS_ANDROID_KEY_PASSWORD`. The workflow signs the delivered APK with that key and removes its temporary keystore. Keep a secure backup of the permanent keystore; never commit it. The build now fails when any signing secret is missing; it never falls back to a temporary test key. A different key requires a one-time reinstall; the updater refuses to erase existing data.
+CI runs Java/JavaScript checks and emulator screens, including synthetic profile import/unlock/signed-save through the actual WebView and native file bridge. Public APK packaging requires the existing permanent Android signing key. Console acceptance and Xbox synchronization of exported profiles still need device validation.

@@ -60,6 +60,7 @@ public sealed partial class DesktopModel
         var title = response.Titles.FirstOrDefault() ?? throw new InvalidDataException();
         SpoofTitleName = title.Name;
         SpoofTitleImageUrl = ResolveTitleImage(title.DisplayImage, title.Images);
+        await PrepareGameQueueAsync(title.TitleId);
         SpoofTitleDetails = $"Title ID: {title.TitleId}\nPFN: {title.Pfn ?? "Unknown"}\nType: {title.Type ?? "Unknown"}\nDevices: {string.Join(", ", title.Devices)}\nGamerscore: {title.Achievement?.CurrentGamerscore ?? 0}/{title.Achievement?.TotalGamerscore ?? 0}";
     }, allowQueue: true);
     public void UseSelectedTitleForStats() { StatsTitleId = SelectedGame?.Id ?? ""; ServiceConfigId = definitions.Values.FirstOrDefault()?.serviceConfigId ?? ""; OpenStats(); StatsEditor.TitleId = StatsTitleId; }

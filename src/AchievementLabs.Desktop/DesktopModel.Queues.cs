@@ -32,6 +32,14 @@ public sealed partial class DesktopModel
         SyncWorkflowAccount();
         queueAccount.LastOAuthResponse = session?.OAuthResponse; queueAccount.XAUTH = session?.Authorization ?? ""; queueAccount.XUIDOnly = session?.Xuid ?? ""; queueAccount.EventsToken = session?.EventsToken ?? ""; queueAccount.EventsDirectory = EventsDirectory;
         XboxQueue.OnNavigatedTo(); XboxBuildQueue.Refresh(); Navigate("Queues");
+        if (SelectedGame?.Id == PresenceTitleId) _ = PrepareGameQueueAsync(PresenceTitleId);
+    }
+    private async Task PrepareGameQueueAsync(string titleId)
+    {
+        if (QueueActive || xboxQueue?.IsRunning == true || xboxBuildQueue?.IsRunning == true) return;
+        SyncWorkflowAccount();
+        XboxQueue.OnNavigatedTo();
+        await XboxQueue.LoadSavedQueueForTitleAsync(titleId);
     }
     private async Task<AchievementsResponse?> ReadQueueAchievementsAsync(string titleId, CancellationToken ct)
     {

@@ -11,7 +11,21 @@ public static class Xbox360ConSigner
     private const int CertificateLength = 0x1A8;
     private static readonly byte[] Sha1DigestInfo = Convert.FromHexString("3021300906052B0E03021A05000414");
 
-    public static bool SigningAvailable => false;
+    public static bool SigningAvailable => Xbox360ConSigningMaterial.Available;
+
+    internal static void ValidateSigningMaterial(byte[] certificate, byte[] p, byte[] q)
+    {
+        if (certificate.Length != CertificateLength || p.Length != 64 || q.Length != 64 || certificate[0] != 1 || certificate[1] != 0xA8)
+            throw new InvalidDataException("The signing material has an unsupported layout.");
+        var exponent = new BigInteger(certificate.AsSpan(0x24, 4), true, true);
+        var primeP = new BigInteger(p, true, true); var primeQ = new BigInteger(q, true, true);
+        var modulus = GetModulus(certificate);
+        if (exponent != 65537 || primeP <= 2 || primeQ <= 2 || primeP * primeQ != modulus)
+            throw new InvalidDataException("The local signing key does not match its console certificate.");
+        var privateExponent = ModInverse(exponent, (primeP - 1) * (primeQ - 1));
+        if (BigInteger.ModPow(BigInteger.ModPow(2, privateExponent, modulus), exponent, modulus) != 2)
+            throw new InvalidDataException("The local signing key failed its consistency test.");
+    }
 
     public static void SignFile(string path)
     {
@@ -20,15 +34,16 @@ public static class Xbox360ConSigner
         {
             var header = ReadHeader(stream);
             VerifyContentId(stream, header);
-            var certificate = Xbox360ConSigningMaterial.Certificate;
-            if (certificate.Length != CertificateLength || Xbox360ConSigningMaterial.PrimeP.Length != 64 ||
-                Xbox360ConSigningMaterial.PrimeQ.Length != 64)
-                throw new InvalidDataException("The CON signing material is incomplete.");
+            var material = Xbox360ConSigningMaterial.Snapshot();
+            try
+            {
+            var certificate = material.Certificate;
+            ValidateSigningMaterial(certificate, material.P, material.Q);
 
             var modulus = GetModulus(certificate);
             var exponent = new BigInteger(certificate.AsSpan(0x24, 4), isUnsigned: true, isBigEndian: true);
-            var primeP = new BigInteger(Xbox360ConSigningMaterial.PrimeP, isUnsigned: true, isBigEndian: true);
-            var primeQ = new BigInteger(Xbox360ConSigningMaterial.PrimeQ, isUnsigned: true, isBigEndian: true);
+            var primeP = new BigInteger(material.P, isUnsigned: true, isBigEndian: true);
+            var primeQ = new BigInteger(material.Q, isUnsigned: true, isBigEndian: true);
             if (exponent != 65537 || primeP * primeQ != modulus)
                 throw new InvalidDataException("The CON signing material does not match its certificate.");
 
@@ -42,6 +57,8 @@ public static class Xbox360ConSigner
             stream.Write(certificate);
             stream.Write(signature);
             stream.Flush(true);
+            }
+            finally { CryptographicOperations.ZeroMemory(material.P); CryptographicOperations.ZeroMemory(material.Q); }
         }
         if (!VerifyFile(path)) throw new IOException("The signed CON header failed verification.");
     }

@@ -7,13 +7,13 @@ struct PCQRScanner: View {
     let completion: (Data,String) -> Void
     @Environment(\.dismiss) private var dismiss
     @State private var collector = QRTransferCollector()
-    @State private var status = "Point the camera at the PC codes."
+    @State private var status = "Point the camera at the transfer codes."
     @State private var cameraError: String?
     @State private var finished = false
     var body: some View {
         NavigationStack {
             VStack(spacing:16) {
-                Text("Keep the PC codes in view while they cycle.").font(.headline)
+                Text("Keep the QR codes in view while they cycle.").font(.headline)
                 CameraReader(onCode: { frame in
                     guard !finished else { return }
                     do {
@@ -23,9 +23,9 @@ struct PCQRScanner: View {
                 },onError: { cameraError = $0 }).clipShape(RoundedRectangle(cornerRadius:16))
                 Text(cameraError ?? status).font(.subheadline).multilineTextAlignment(.center)
                 if cameraError != nil, let url = URL(string:UIApplication.openSettingsURLString) { Link("Open camera permission settings",destination:url) }
-                Button("Reset scanner") { collector = QRTransferCollector(queueOnly:queueOnly); status = collector.progress }
-                Text(queueOnly ? "Queue codes contain saved progress and delays, without sign-in tokens." : "These codes contain private sign-in information. Only scan your own PC transfer.").font(.caption).foregroundStyle(.secondary)
-            }.padding().onAppear { collector = QRTransferCollector(queueOnly:queueOnly) }.navigationTitle(queueOnly ? "Scan queue codes" : "Scan PC codes").navigationBarTitleDisplayMode(.inline)
+                Button("Reset scanner") { collector = QRTransferCollector(queueOnly:queueOnly,autoDetect:true); status = collector.progress }
+                Text(queueOnly ? "Queue codes contain saved progress and delays, without sign-in tokens." : "Recognises sign-in, event-token and saved queue codes. Only scan your own transfers; sign-in codes contain private credentials.").font(.caption).foregroundStyle(.secondary)
+            }.padding().onAppear { collector = QRTransferCollector(queueOnly:queueOnly,autoDetect:true) }.navigationTitle(queueOnly ? "Scan queue codes" : "Scan QR codes").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement:.cancellationAction) { Button("Cancel") { dismiss() } } }
         }
     }

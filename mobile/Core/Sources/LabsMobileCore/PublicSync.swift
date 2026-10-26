@@ -25,12 +25,12 @@ public struct MobileRelease: Equatable {
         guard let releases = try JSONSerialization.jsonObject(with:data) as? [[String:Any]] else { throw LabsError.message("Invalid release list.") }
         var result: MobileRelease?
         for release in releases where release["draft"] as? Bool == false {
-            guard let page = URL(string:JSON.string(release["html_url"])), page.scheme == "https", page.host == "github.com", page.path.hasPrefix("/Achievement-Labs/achievement-labs/releases/tag/"), page.user == nil else { continue }
+            guard let page = URL(string:JSON.string(release["html_url"])), page.scheme == "https", page.host == "github.com", page.path.hasPrefix("/thevampirebat/achievement-labs/releases/tag/"), page.user == nil else { continue }
             for asset in release["assets"] as? [[String:Any]] ?? [] {
                 let name = JSON.string(asset["name"]); let prefix = "AchievementLabs-iOS-"; let suffix = "-UNSIGNED.ipa"
                 guard name.hasPrefix(prefix), name.hasSuffix(suffix) else { continue }
                 let version = String(name.dropFirst(prefix.count).dropLast(suffix.count))
-                guard parts(version) != nil, let url = URL(string:JSON.string(asset["browser_download_url"])), url.scheme == "https", url.host == "github.com", url.user == nil, url.path.hasPrefix("/Achievement-Labs/achievement-labs/releases/download/"), url.lastPathComponent == name else { continue }
+                guard parts(version) != nil, let url = URL(string:JSON.string(asset["browser_download_url"])), url.scheme == "https", url.host == "github.com", url.user == nil, url.path.hasPrefix("/thevampirebat/achievement-labs/releases/download/"), url.lastPathComponent == name else { continue }
                 let candidate = MobileRelease(version:version,page:page,asset:url)
                 if result == nil || newer(version,than:result!.version) { result = candidate }
             }
@@ -44,8 +44,8 @@ public struct PublicSync {
         if let session { self.session = session }
         else { let config = URLSessionConfiguration.ephemeral; config.httpShouldSetCookies = false; self.session = URLSession(configuration:config) }
     }
-    private func get(_ url: String, limit: Int) async throws -> Data {
-        var request = URLRequest(url:URL(string:url)!); request.timeoutInterval = 90; request.cachePolicy = .reloadIgnoringLocalCacheData
+    private func get(_ url: String, limit: Int, timeout: TimeInterval = 90) async throws -> Data {
+        var request = URLRequest(url:URL(string:url)!); request.timeoutInterval = timeout; request.cachePolicy = .reloadIgnoringLocalCacheData
         request.setValue("AchievementLabs-Mobile/0.3",forHTTPHeaderField:"User-Agent")
         let (data,response) = try await session.data(for:request)
         guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode), data.count <= limit else { throw LabsError.message("Public update check failed (HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0)). Existing data was retained.") }
@@ -56,11 +56,20 @@ public struct PublicSync {
         return try JSONDecoder().decode(EventFeed.self,from:data)
     }
     public func searchTitles(_ input: String) async throws -> [Game] {
-        if let direct = try TitleSearch.direct(input) { return [direct] }
-        return try TitleSearch.parse(await get(TitleSearch.url(input).absoluteString,limit:2*1024*1024))
+        try await searchTitleResults(input).games
+    }
+    public func searchTitleResults(_ input: String) async throws -> TitleSearchResponse {
+        if let direct = try TitleSearch.direct(input) { return TitleSearchResponse(games:[direct],partial:false) }
+        var batches: [[Game]] = []; var failure: Error?; var consecutiveFailures = 0
+        for variant in try TitleSearch.variants(input) {
+            do { batches.append(try TitleSearch.parse(await get(TitleSearch.url(variant).absoluteString,limit:2*1024*1024,timeout:20))); consecutiveFailures = 0 }
+            catch { if Task.isCancelled { throw CancellationError() }; failure = error; consecutiveFailures += 1; if consecutiveFailures >= 2 { break } }
+        }
+        guard !batches.isEmpty else { throw failure ?? LabsError.message("Game search is unavailable.") }
+        return TitleSearchResponse(games:TitleSearch.merge(batches),partial:failure != nil)
     }
     public func release() async throws -> MobileRelease? {
-        try MobileRelease.latest(await get("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",limit:4*1024*1024))
+        try MobileRelease.latest(await get("https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100",limit:4*1024*1024))
     }
 }
 

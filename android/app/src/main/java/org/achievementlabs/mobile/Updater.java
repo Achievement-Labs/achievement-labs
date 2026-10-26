@@ -2,8 +2,8 @@ package org.achievementlabs.mobile;
 import android.app.*;import android.content.*;import android.content.pm.*;import android.net.Uri;import android.os.*;import android.provider.Settings;import androidx.core.content.FileProvider;
 import org.json.*;import java.io.*;import java.util.*;import java.util.concurrent.*;
 final class Updater {
- static final String REPOSITORY="https://github.com/Achievement-Labs/achievement-labs";
- static final String RELEASES_API="https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100";
+ static final String REPOSITORY="https://github.com/thevampirebat/achievement-labs";
+ static final String RELEASES_API="https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100";
  static volatile JSONObject candidate;static volatile boolean downloading,ready;static volatile String status="";
  static final ExecutorService worker=Executors.newSingleThreadExecutor();
  static JSONObject snapshot()throws Exception{return new JSONObject().put("downloading",downloading).put("ready",ready).put("status",status);}

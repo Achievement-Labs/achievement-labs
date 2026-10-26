@@ -25,6 +25,24 @@ public sealed partial class DesktopModel
     private TitleSearchResult[] allTitleSearchResults = [];
     private readonly ConcurrentDictionary<string, bool?> dboxAchievementCache = new(StringComparer.OrdinalIgnoreCase);
     private bool onlyVerifiedAchievementTitles = true;
+    private TitlePlatformFilter[]? titleSearchPlatforms;
+    private string titleSearchWarning = "";
+    public TitlePlatformFilter[] TitleSearchPlatforms => titleSearchPlatforms ??= AchievementLabs.Core.TitleSearchPlatforms.Choices
+        .Select(x => new TitlePlatformFilter(x.Key, x.Label, ApplyTitleSearchFilters)).ToArray();
+    public void SelectAllTitleSearchPlatforms(bool selected)
+    {
+        foreach (var platform in TitleSearchPlatforms) platform.Selected = selected;
+        ApplyTitleSearchFilters();
+    }
+    private void ApplyTitleSearchFilters()
+    {
+        var selected = TitleSearchPlatforms.Where(x => x.Selected).Select(x => x.Key).ToHashSet();
+        TitleSearchResults = allTitleSearchResults.Where(item => (!OnlyVerifiedAchievementTitles || item.HasVerifiedAchievements) &&
+            AchievementLabs.Core.TitleSearchPlatforms.Classify(item.Platform.Split([',', '/'], StringSplitOptions.TrimEntries)).Overlaps(selected)).ToArray();
+        if (allTitleSearchResults.Length > 0)
+            LookupOutput = $"Showing {TitleSearchResults.Length} of {allTitleSearchResults.Length} titles; {allTitleSearchResults.Count(item => !item.HasVerifiedAchievements)} remain unverified." +
+                (selected.Count == 0 ? " Select at least one platform." : "") + titleSearchWarning;
+    }
     private bool excludeZeroScore, exclude360;
     private string converterStatus = "Not scanned.";
     public bool IsTools => page == "Tools";
@@ -40,9 +58,7 @@ public sealed partial class DesktopModel
         {
             onlyVerifiedAchievementTitles = value;
             Changed();
-            TitleSearchResults = value ? allTitleSearchResults.Where(item => item.HasVerifiedAchievements).ToArray() : allTitleSearchResults;
-            if (allTitleSearchResults.Length > 0)
-                LookupOutput = $"Showing {TitleSearchResults.Length} of {allTitleSearchResults.Length} titles; {allTitleSearchResults.Count(item => !item.HasVerifiedAchievements)} remain unverified.";
+            ApplyTitleSearchFilters();
         }
     }
     public bool ExcludeZeroScore { get => excludeZeroScore; set { excludeZeroScore = value; Changed(); } }
@@ -60,11 +76,18 @@ public sealed partial class DesktopModel
         if (busy || string.IsNullOrWhiteSpace(TitleSearch)) return; Busy(true);
         try
         {
-            using var http = new HttpClient();
+            using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(20) };
             var found = new Dictionary<string, TitleSearchResult>(StringComparer.OrdinalIgnoreCase);
-            foreach (var query in SearchSpellings(TitleSearch))
+            var aliases = AchievementLabs.Core.TitleSearchText.Variants(NormalizeLookalikes(TitleSearch.Trim()));
+            var succeeded = 0; var failed = 0; var consecutiveFailures = 0;
+            foreach (var query in aliases.Concat(SearchSpellings(TitleSearch)).Distinct(StringComparer.OrdinalIgnoreCase).Take(14))
             {
+                // Lookalike spellings are a fallback; numeral aliases are always searched.
+                if (found.Count > 0 && !aliases.Contains(query, StringComparer.OrdinalIgnoreCase)) break;
+                try
+                {
                 var json = JObject.Parse(await http.GetStringAsync("https://dbox.tools/api/title_ids/?name=" + Uri.EscapeDataString(query) + "&limit=100&offset=0", lifetime.Token));
+                succeeded++; consecutiveFailures = 0;
                 foreach (var item in json["items"] as JArray ?? [])
                 {
                     var hexadecimalId = item["title_id"]?.ToString() ?? item["titleId"]?.ToString() ?? "";
@@ -75,10 +98,13 @@ public sealed partial class DesktopModel
                         IsKnownGfwlTitle(decimalId) || systems.Contains("PC") && systems.Contains("XBOX360")
                         ? "GFWL" : string.Join(", ", systems.Select(FormatXboxPlatform).Distinct());
                     var image = Games.FirstOrDefault(game => game.Id == decimalId)?.ImageUrl;
-                    found.TryAdd(decimalId, new TitleSearchResult(decimalId, name, string.IsNullOrWhiteSpace(platform) ? "Platform unavailable" : platform, image));
+                    if (found.Count < 300) found.TryAdd(decimalId, new TitleSearchResult(decimalId, name, string.IsNullOrWhiteSpace(platform) ? "Platform unavailable" : platform, image));
                 }
-                if (found.Values.Any(item => string.Equals(item.Name, NormalizeLookalikes(TitleSearch), StringComparison.OrdinalIgnoreCase))) break;
+                }
+                catch (Exception error) when (error is HttpRequestException or Newtonsoft.Json.JsonException or FormatException || error is OperationCanceledException && !lifetime.IsCancellationRequested) { failed++; if (++consecutiveFailures >= 2) break; }
             }
+            if (succeeded == 0) throw new HttpRequestException("The public title catalogue is unavailable. Try again.");
+            titleSearchWarning = failed > 0 ? " Some search spellings were unavailable; results may be incomplete." : "";
             var candidates = found.Values
                 .OrderBy(result => result.Name, StringComparer.OrdinalIgnoreCase)
                 .ThenBy(result => result.Platform, StringComparer.OrdinalIgnoreCase)
@@ -115,10 +141,8 @@ public sealed partial class DesktopModel
                 finally { limit.Release(); }
             });
             allTitleSearchResults = await Task.WhenAll(checks);
-            TitleSearchResults = OnlyVerifiedAchievementTitles
-                ? allTitleSearchResults.Where(item => item.HasVerifiedAchievements).ToArray()
-                : allTitleSearchResults;
-            LookupOutput = $"Showing {TitleSearchResults.Length} of {allTitleSearchResults.Length} titles; {allTitleSearchResults.Count(item => !item.HasVerifiedAchievements)} remain unverified.";
+            ApplyTitleSearchFilters();
+            if (allTitleSearchResults.Length == 0) LookupOutput = failed > 0 ? "Search was incomplete. Retry or try another name." : "No matching titles found. Try another name.";
         }
         catch (Exception error) { LookupOutput = $"Title search failed: {error.Message}"; }
         finally { Busy(false); }

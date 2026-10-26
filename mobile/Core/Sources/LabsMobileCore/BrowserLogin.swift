@@ -68,8 +68,60 @@ public final class BrowserLogin {
         try await persistRotation(rotated)
         var account = try await authorize(oauth)
         guard account.xuid == previous.xuid else { throw LabsError.message("Renewed sign-in belongs to a different Xbox account. The active account and queue were retained; sign in explicitly to switch accounts.") }
-        account.refreshToken = rotated.refreshToken; account.eventToken = previous.eventToken
+        account.refreshToken = rotated.refreshToken; account.eventToken = previous.eventToken; account.eventTokenExpiresAt = previous.eventTokenExpiresAt; account.eventTokenExpiryHash = previous.eventTokenExpiryHash
         return account
+    }
+    /// Explicit authentication-only experiment. Does not send presence or achievement events.
+    public func acquireEventToken(_ previous: Account, persistRotation: (Account) async throws -> Void) async throws -> Account {
+        guard profile == .ios, previous.loginProfile == profile.rawValue, let refresh = previous.refreshToken, !refresh.isEmpty else {
+            throw LabsError.message("Sign in with the Xbox iOS browser profile and Remember sign-in enabled first. PC QR/manual sessions cannot run this test.")
+        }
+        var form = URLComponents(); form.queryItems = ["client_id":client,"scope":Self.scope,"refresh_token":refresh,"grant_type":"refresh_token"].map { URLQueryItem(name:$0.key,value:$0.value) }
+        let oauth = try await post("https://login.live.com/oauth20_token.srf",body:Data(form.percentEncodedQuery!.replacingOccurrences(of:"+",with:"%2B").utf8),form:true,stage:"Event token: Microsoft renewal")
+        var result = previous
+        if let next = oauth["refresh_token"] as? String, !next.isEmpty { result.refreshToken = next }
+        try await persistRotation(result)
+        guard let access = oauth["access_token"] as? String, !access.isEmpty else { throw LabsError.message("Microsoft returned no access token. Existing event token retained.") }
+        let key = P256.Signing.PrivateKey(); let pub = key.publicKey.x963Representation
+        let proof = ["use":"sig","alg":"ES256","kty":"EC","crv":"P-256","x":Self.b64(pub.subdata(in:1..<33)),"y":Self.b64(pub.subdata(in:33..<65))]
+        func request(_ url: String, _ object: [String:Any], signed: Bool = false, stage: String) async throws -> [String:Any] {
+            let body = try JSON.data(object); var header: String?
+            if signed {
+                var version = UInt32(1).bigEndian
+                var timestamp = UInt64((Int64(Date().timeIntervalSince1970) + 11644473600) * 10000000).bigEndian
+                let v = withUnsafeBytes(of:&version) { Data($0) }; let t = withUnsafeBytes(of:&timestamp) { Data($0) }
+                var message = v; message.append(0); message.append(t); message.append(0)
+                message.append(Data(("POST\0" + URL(string:url)!.path + "\0\0").utf8)); message.append(body); message.append(0)
+                var bytes = v; bytes.append(t); bytes.append(try key.signature(for:message).rawRepresentation); header = bytes.base64EncodedString()
+            }
+            return try await post(url,body:body,signature:header,stage:stage)
+        }
+        func token(_ response: [String:Any]) throws -> String {
+            guard let value = response["Token"] as? String, !value.isEmpty, value.utf8.count <= 131072 else { throw LabsError.message("Missing or oversized Xbox authorization. Existing event token retained.") }; return value
+        }
+        func claim(_ response: [String:Any]) throws -> [String:Any] {
+            guard let claims = response["DisplayClaims"] as? [String:Any] else { throw LabsError.message("Xbox returned no identity claims.") }
+            if let rows = claims["xui"] as? [[String:Any]], rows.count == 1 { return rows[0] }
+            if let row = claims["xui"] as? [String:Any] { return row }
+            throw LabsError.message("Ambiguous Xbox identity. Existing event token retained.")
+        }
+        let device = try await request("https://device.auth.xboxlive.com/device/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"ProofOfPossession","Id":"{\(UUID().uuidString)}","DeviceType":"iOS","Version":"0.0.0","ProofKey":proof,"SerialNumber":"{\(UUID().uuidString)}"]],signed:true,stage:"Event token: Xbox iOS device authorization")
+        let user = try await request("https://user.auth.xboxlive.com/user/authenticate",["RelyingParty":"http://auth.xboxlive.com","TokenType":"JWT","Properties":["AuthMethod":"RPS","SiteName":"user.auth.xboxlive.com","RpsTicket":"t="+access]],stage:"Event token: Xbox user authorization")
+        let properties: [String:Any] = ["SandboxId":"RETAIL","UserTokens":[try token(user)],"DeviceToken":try token(device)]
+        let identity = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://xboxlive.com","TokenType":"JWT","Properties":properties],stage:"Event token: Xbox identity authorization")
+        let id = try claim(identity)
+        guard let hash = id["uhs"] as? String, !hash.isEmpty else { throw LabsError.message("Xbox returned no user identity.") }
+        let authorization = try Tokens.normalize("XBL3.0 x=\(hash);\(try token(identity))",event:false)
+        let verified = try await XboxService(session:session).connect(authorization)
+        guard verified.xuid == previous.xuid, id["xid"] == nil || JSON.string(id["xid"]) == previous.xuid else { throw LabsError.message("Xbox account mismatch. Existing account and event token retained.") }
+        let events = try await request("https://xsts.auth.xboxlive.com/xsts/authorize",["RelyingParty":"http://events.xboxlive.com","TokenType":"JWT","Properties":properties],stage:"Xbox event-token authorization")
+        let eventId = try claim(events)
+        guard eventId["uhs"] as? String == hash, eventId["xid"] == nil || JSON.string(eventId["xid"]) == previous.xuid else { throw LabsError.message("Event account mismatch. Existing event token retained.") }
+        guard let expiry = ServiceDates.parse(JSON.string(events["NotAfter"])), expiry > Date().addingTimeInterval(60) else { throw LabsError.message("Event-token expiry missing, invalid or too soon. Existing event token retained.") }
+        result.authorization = authorization; result.authorizationExpiresAt = ServiceDates.parse(JSON.string(identity["NotAfter"]))
+        result.eventToken = try Tokens.normalize("x:XBL3.0 x=\(hash);\(try token(events))",event:true)
+        result.eventTokenExpiresAt = expiry; result.eventTokenExpiryHash = EventTokenLifetime.fingerprint(result.eventToken)
+        return result
     }
     private func authorize(_ oauth: [String:Any]) async throws -> Account {
         guard let access = oauth["access_token"] as? String, !access.isEmpty else { throw LabsError.message("Microsoft did not return an access token.") }

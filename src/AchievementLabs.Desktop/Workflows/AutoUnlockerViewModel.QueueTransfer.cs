@@ -35,7 +35,7 @@ public partial class AutoUnlockerViewModel
                 var unlocked=string.Equals(row.progressState,"Achieved",StringComparison.OrdinalIgnoreCase);
                 // Unconfirmed transferred submissions are not silently replayed.
                 if (!unlocked && item.Status!="Waiting") throw new InvalidDataException("Refresh or reset previously submitted items before importing into PC: "+item.Name);
-                state.Queue.Add(new AutoUnlockQueueEntry { AchievementId=row.id,AchievementName=row.name,DelaySeconds=item.DelaySeconds,Completed=unlocked });
+                state.Queue.Add(new AutoUnlockQueueEntry { AchievementId=row.id,AchievementName=row.name,AchievementDescription=QueueDescription(row),DelaySeconds=item.DelaySeconds,Completed=unlocked });
             }
             state.CurrentIndex=state.Queue.FindIndex(x=>!x.Completed);if(state.CurrentIndex<0)state.CurrentIndex=state.Queue.Count;
             if(state.CurrentIndex<state.Queue.Count)state.RemainingDelaySeconds=saved.Items[state.CurrentIndex].RemainingDelaySeconds ?? state.Queue[state.CurrentIndex].DelaySeconds;

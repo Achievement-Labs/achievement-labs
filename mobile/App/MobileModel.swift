@@ -64,6 +64,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
     private var lastUpdateCheck = Date.distantPast
     @Published var refreshingSignIn = false
     @Published var sessionStatus = ""
+    @Published var eventTokenProbeStatus = ""
     @Published var spoofDiagnostics = ""
     @AppStorage("launchPage") var launchPage = 4
     @AppStorage("rememberSignIn") var rememberSignIn = true
@@ -144,15 +145,20 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             do { try catalogue?.loadCache(directory.appendingPathComponent("synced-events.json")); eventSyncStatus = "Cached synced event data loaded." }
             catch { eventSyncStatus = "Synced cache could not be validated. Bundled data retained." }
         }
-        selectedTab = account == nil ? 4 : ([0,1,2,3,4].contains(launchPage) ? launchPage : 4)
+        selectedTab = account == nil ? 4 : ([0,1,2,3,4,5].contains(launchPage) ? (launchPage == 2 ? 1 : launchPage) : 4)
         #if DEBUG
         if let argument = ProcessInfo.processInfo.arguments.first(where: { $0.hasPrefix("--ui-preview=") }) { configurePreview(String(argument.dropFirst("--ui-preview=".count))) }
         #endif
     }
     private func saveAccount(_ input: Account) throws {
         var next = input
+        if let previous=account,previous.xuid == next.xuid {
+            if previous.eventToken == next.eventToken && next.eventTokenExpiryHash == nil { next.eventTokenExpiresAt=previous.eventTokenExpiresAt;next.eventTokenExpiryHash=previous.eventTokenExpiryHash }
+        }
+        if EventTokenLifetime.expiry(next) == nil { next.eventTokenExpiresAt=nil;next.eventTokenExpiryHash=nil }
         if rememberSignIn { try SecureStore.save(JSONEncoder().encode(next),allowBackground:continueQueueInBackground || continueSpoofInBackground) }
         else { next.refreshToken = nil; try SecureStore.remove() }
+        if account?.xuid != next.xuid { eventTokenProbeStatus = "" }
         account = next
     }
     private func authorizedAccount(force: Bool = false) async throws -> Account {
@@ -182,6 +188,17 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         return try await task.value
     }
     /// Only read operations may be repeated after a 401; unlocks and failed heartbeats are never replayed here.
+    func openGameSession(_ game:Game) {
+        titleDetails[game.id] = game
+        if !running && !presenceRunning && !busy {
+            if queueBook.shouldRestore(game.id, current:queue, active:running || presenceRunning) {
+                loadGameQueue(game.id, append:false)
+            }
+            queueTitle = game.id; presenceTitle = game.id
+        }
+        else if queueTitle != game.id || presenceTitle != game.id { status = "Stop active sessions before changing games." }
+        selectedTab = 1
+    }
     private func readWithAccount<T>(_ operation: (Account) async throws -> T) async throws -> T {
         let current = try await authorizedAccount()
         do { return try await operation(current) }
@@ -241,6 +258,30 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
             try saveAccount(next); sessionStatus = rememberSignIn && next.refreshToken != nil ? "Sign-in remembered with automatic renewal." : "Session saved; browser sign-in may be needed when it expires."; generation = UUID(); games = []; rows = []; selectedGame = nil; baseCompleted = []; rowResults = [:]; queue = []; titleDetails = [:]; playedHours = [:]; referenceInfo = ""; loadQueue(); loadCompletion()
             status = "Connected as \(next.gamertag). Refresh the library."
         } catch { self.error = error.localizedDescription }
+    }
+    func testMobileEventToken() async {
+        guard !busy, !refreshingSignIn, !running, !presenceRunning, let current = account else { return }
+        guard rememberSignIn, current.loginProfile == LoginProfile.ios.rawValue, current.refreshToken?.isEmpty == false else {
+            eventTokenProbeStatus = "Sign in with Xbox iOS and Remember sign-in enabled on this device first. PC QR/manual sessions cannot run this test."; return
+        }
+        busy = true; refreshingSignIn = true; defer { busy = false }
+        eventTokenProbeStatus = "Requesting mobile event-token authorization… No achievement events are sent."
+        let version = generation
+        let task = Task { @MainActor [self] () async throws -> Account in
+            defer { renewalTask = nil; refreshingSignIn = false }
+            let next = try await BrowserLogin(profile:.ios).acquireEventToken(current) { rotated in
+                guard version == self.generation, self.account?.xuid == current.xuid, self.rememberSignIn else { throw CancellationError() }
+                var saved = rotated; saved.eventToken = self.account?.eventToken ?? rotated.eventToken
+                try self.saveAccount(saved)
+            }
+            guard version == generation, account?.xuid == current.xuid, rememberSignIn else { throw CancellationError() }
+            try saveAccount(next); return next
+        }
+        renewalTask = task
+        do { _ = try await task.value; eventTokenProbeStatus = "Microsoft issued a matching event token; saved securely. No achievement events were sent. Collector acceptance is not tested." }
+        catch is CancellationError { eventTokenProbeStatus = "Test cancelled. No event token was replaced." }
+        catch let problem as LabsError { eventTokenProbeStatus = (problem.errorDescription ?? "Authorization failed.") + " Existing event token retained." }
+        catch { eventTokenProbeStatus = "Mobile event-token test could not complete. Existing event token retained. No achievement events were sent." }
     }
     func saveEventToken(_ input: String) {
         guard var current = account, !running, !busy else { return }
@@ -568,7 +609,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 if Task.isCancelled { return }
                 self.rememberTransport(error); self.backgroundHadFailure = true; self.spoofStopReason = "Heartbeat failed: " + error.localizedDescription; self.spoofStatus = self.spoofStopReason
                 if let failure = error as? XboxHTTPFailure {
-                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\n" + failure.diagnostic
+                    self.spoofDiagnostics = "Title spoofing · " + Date().formatted(date:.numeric,time:.standard) + "\nTitle ID: " + title + "\nSign-in profile: " + (self.account?.loginProfile ?? "Manual / previous beta") + "\nPresence request: " + "Account authorization" + "\n" + failure.diagnostic
                     if failure.status == 403 {
                         do {
                             let current = self.account ?? account
@@ -580,7 +621,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
                 }
                 var guidance = ""
                 if let failure = error as? XboxHTTPFailure, failure.status == 403, self.account?.loginProfile != "PC transfer" {
-                    guidance = "\nUse Settings → Scan PC QR and import the full Sign-in + event token QR. Event-token-only sync does not change heartbeat authorization."
+                    guidance = "\nFor title spoofing, scan the PC app’s full sign-in QR. An event-token-only QR does not supply spoofing authorization."
                 }
                 self.error = "Title spoofing stopped: \(error.localizedDescription)" + guidance
                 if self.stopOnPresenceFailure { self.pauseQueue() }
@@ -889,7 +930,7 @@ final class NotificationPresentation: NSObject, UNUserNotificationCenterDelegate
         queue = [QueueItem(game:second,achievement:row,delay:120)]
         referenceInfo = "Reference profile · 1 queued · 2 skipped"; status = "Timing queue loaded. Review delays, then start when ready."
         spoofStatus = "No heartbeat sent."; playedHours[second.id] = 12.5
-        selectedTab = page == "queue" ? 1 : page == "spoof" ? 2 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
+        selectedTab = (page == "queue" || page == "session-settings") ? 1 : page == "spoof" ? 1 : page == "xbox360" ? 5 : page.hasPrefix("settings") ? 3 : page == "home" ? 4 : 0
     }
     #endif
     private struct CompletionCache: Codable { var mythic: Set<String>; var checked: Set<String>; var totals: [String:Int] }
