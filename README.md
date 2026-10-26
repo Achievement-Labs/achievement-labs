@@ -44,7 +44,14 @@ and the Steam idle helper. Its output stays under `releases/` and is not committ
 - **Supported**: mappings have been tested and are expected to work.
 - **Testing**: the title has a usable template and mappings, but achievement IDs may
   not match and individual unlock requests may fail. Verify results one at a time.
+- **Partially Supported**: some mappings have been tested and are expected to work;
+  the rest are still being tested. Verify results one at a time.
 - **Coming Soon**: no usable testing template is currently available.
+
+In `Data.json` a title block is Supported when `FullySupported` is `true`, Partially
+Supported when `FullySupported` is `false` and the optional `PartiallySupported` is `true`,
+Testing otherwise, and Coming Soon when `Enabled` is `false`. Builds that predate
+`PartiallySupported` ignore it and show those titles as Testing.
 
 `SupportedTitleIDs` must remain the final top-level property in every `Data.json`.
 Each event title must use its own `Events/<titleId>.json` template.

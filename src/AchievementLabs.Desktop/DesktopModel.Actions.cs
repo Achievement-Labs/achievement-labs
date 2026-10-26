@@ -7,22 +7,24 @@ public sealed partial class DesktopModel
 {
     private Dictionary<string, OneCoreAchievementResponse> definitions = [];
     private HashSet<string> mappedIds = [];
-    private bool liveAchievements, eventBased, eventTitleSupported, titleTesting, unlockAllEnabled;
-    private static readonly (HashSet<string> Testing, HashSet<string> ComingSoon) localCatalog = LoadLocalCatalog();
-    private static (HashSet<string>, HashSet<string>) LoadLocalCatalog()
+    private bool liveAchievements, eventBased, eventTitleSupported, titleTesting, titlePartial, unlockAllEnabled;
+    private static readonly (HashSet<string> Testing, HashSet<string> ComingSoon, HashSet<string> Partial) localCatalog = LoadLocalCatalog();
+    private static (HashSet<string>, HashSet<string>, HashSet<string>) LoadLocalCatalog()
     {
         using var stream = typeof(DesktopModel).Assembly.GetManifestResourceStream("AchievementLabs.PublicCatalog.json");
-        if (stream == null) return ([], []);
+        if (stream == null) return ([], [], []);
         using var catalog = System.Text.Json.JsonDocument.Parse(stream);
         var rows = catalog.RootElement.EnumerateArray().ToArray();
         return (
             rows.Where(x => x.GetProperty("status").GetString() == "testing").Select(x => x.GetProperty("titleId").GetString()!).ToHashSet(),
-            rows.Where(x => x.GetProperty("status").GetString() == "coming-soon").Select(x => x.GetProperty("titleId").GetString()!).ToHashSet()
+            rows.Where(x => x.GetProperty("status").GetString() == "coming-soon").Select(x => x.GetProperty("titleId").GetString()!).ToHashSet(),
+            rows.Where(x => x.GetProperty("status").GetString() == "partial").Select(x => x.GetProperty("titleId").GetString()!).ToHashSet()
         );
     }
     private bool titleComingSoon;
     public bool TitleComingSoon => titleComingSoon;
-    public bool TitleTesting => titleTesting;
+    public bool TitleTesting => titleTesting && !titlePartial;
+    public bool TitlePartial => titlePartial;
     public bool TitleNotSupported => eventBased && !eventTitleSupported && !titleComingSoon;
     private string actionSummary = "Load achievements from your account to enable actions.";
     public ObservableCollection<ActionReport> ActionReports { get; } = [];
@@ -30,8 +32,8 @@ public sealed partial class DesktopModel
     public string ActionSummary { get => actionSummary; private set { actionSummary = value; Changed(); } }
     public bool CanUnlockSelected => AchievementLabs.MultiSelect.BatchPicker.CanUnlockSelected(this);
     public bool CanUnlockAll => CanQuery && liveAchievements && !eventBased && UnlockAllEnabled && SelectedGame != null && !UsesLegacyEndpoint(SelectedGame) && achievements.Any(a => !a.Unlocked);
-    private void NotifyActions() { Changed(nameof(TitleComingSoon)); Changed(nameof(TitleTesting)); Changed(nameof(TitleNotSupported)); Changed(nameof(CanUnlockSelected)); Changed(nameof(CanUnlockAll)); }
-    private void ResetActions() { titleComingSoon = false; titleTesting = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
+    private void NotifyActions() { Changed(nameof(TitleComingSoon)); Changed(nameof(TitleTesting)); Changed(nameof(TitlePartial)); Changed(nameof(TitleNotSupported)); Changed(nameof(CanUnlockSelected)); Changed(nameof(CanUnlockAll)); }
+    private void ResetActions() { titleComingSoon = false; titleTesting = false; titlePartial = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
     private async Task LoadActionMetadataAsync(AchievementsResponse response, string titleId, int version)
     {
         var nextDefinitions = response.achievements.ToDictionary(a => a.id);
@@ -41,12 +43,14 @@ public sealed partial class DesktopModel
         var nextSupported = false;
         var nextTesting = nextEventBased && localCatalog.Testing.Contains(titleId);
         var nextComingSoon = nextEventBased && localCatalog.ComingSoon.Contains(titleId);
+        var nextPartial = nextEventBased && localCatalog.Partial.Contains(titleId);
         if (nextEventBased)
         {
             try
             {
                 var catalog = await eventCatalog.GetCatalogAsync(lifetime.Token);
-                nextTesting = catalog.TestingTitleIds?.Contains(titleId) == true;
+                nextPartial = catalog.PartialTitleIds?.Contains(titleId) == true;
+                nextTesting = catalog.TestingTitleIds?.Contains(titleId) == true || nextPartial;
                 nextSupported = catalog.TitleIds.Contains(titleId) || nextTesting;
                 nextComingSoon = catalog.ComingSoonTitleIds?.Contains(titleId) == true;
                 if (nextSupported)
@@ -59,7 +63,7 @@ public sealed partial class DesktopModel
             catch { error = nextComingSoon ? "Coming Soon — this title is still being tested." : "Event template service unavailable. Try again shortly."; }
         }
         if (version != selectionVersion || lifetime.IsCancellationRequested) return;
-        titleComingSoon = nextComingSoon; titleTesting = nextTesting; definitions = nextDefinitions; eventBased = nextEventBased; eventTitleSupported = nextSupported; mappedIds = nextMappedIds; liveAchievements = true;
+        titleComingSoon = nextComingSoon; titleTesting = nextTesting; titlePartial = nextPartial; definitions = nextDefinitions; eventBased = nextEventBased; eventTitleSupported = nextSupported; mappedIds = nextMappedIds; liveAchievements = true;
         ActionSummary = error ?? (eventBased ? $"Event-based title · {mappedIds.Count} mapped achievement IDs" : "Title-based achievements · ready for individual actions");
         NotifyActions();
     }    public async Task UnlockSelectedAsync()

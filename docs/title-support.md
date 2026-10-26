@@ -2,7 +2,7 @@
 
 413 titles: **263 Supported**, **147 Testing**, **3 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
-Supported classifications reflect the author’s corrections. Testing includes partial or still-under-test mappings; mapped counts do not indicate the game’s total achievements.
+Supported classifications reflect the author’s corrections. Partially Supported titles (`FullySupported: false` with the optional `PartiallySupported: true` in Data.json) have some author-tested mappings and others still under test; older app builds show them as Testing. Testing includes still-under-test mappings; mapped counts do not indicate the game’s total achievements.
 
 ## Supported
 

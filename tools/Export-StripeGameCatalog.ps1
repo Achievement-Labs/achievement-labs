@@ -47,6 +47,9 @@ $rows = foreach ($titleId in $data.Keys | Where-Object { $_ -match '^\d+$' }) {
         TitleId = $titleId
         SupportStatus = if ($available -and [bool]$block.FullySupported) {
             'Fully supported'
+        } elseif ($available -and [bool]$block.PartiallySupported) {
+            # Optional flag; older readers see FullySupported false and treat the title as Testing.
+            'Partially supported'
         } elseif ($available) {
             'Testing'
         } else {
