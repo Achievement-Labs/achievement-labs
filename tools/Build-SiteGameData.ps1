@@ -11,7 +11,7 @@ $taskPublic = @($taskRows | ForEach-Object {
         titleId = $_.TitleId
         name = $_.Title
         platform = $_.Platform
-        status = if ($_.SupportStatus -eq 'Fully supported') { 'supported' } elseif ($_.SupportStatus -eq 'Testing') { 'testing' } else { 'coming-soon' }
+        status = if ($_.SupportStatus -eq 'Fully supported') { 'supported' } elseif ($_.SupportStatus -eq 'Partially supported') { 'partial' } elseif ($_.SupportStatus -eq 'Testing') { 'testing' } else { 'coming-soon' }
     }
 })
 [IO.File]::WriteAllText($Destination, ($taskPublic | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))

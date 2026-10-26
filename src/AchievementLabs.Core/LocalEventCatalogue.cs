@@ -52,6 +52,7 @@ internal sealed class LocalEventCatalogue
         using var reader = new StreamReader(stream); var rows = JArray.Parse(reader.ReadToEnd());
         string[] Ids(string status) => rows.Where(r => (string?)r["status"] == status).Select(r => r["titleId"]!.ToString()).ToArray();
         var supportedIds = Ids("supported"); var coming = Ids("coming-soon");
-        return new(supportedIds, Ids("testing").Concat(TitleIds.Except(supportedIds).Except(coming)).Distinct().ToArray(), coming);
+        // Partial titles stay in the testing list (unknown statuses fall through to it anyway) and are also reported separately.
+        return new(supportedIds, Ids("testing").Concat(TitleIds.Except(supportedIds).Except(coming)).Distinct().ToArray(), coming, Ids("partial"));
     }
 }

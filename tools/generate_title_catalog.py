@@ -3,8 +3,8 @@
 Writes docs/title-support.md, Events/README.md and site/assets/games.json using the
 same eligibility rules as tools/Export-StripeGameCatalog.ps1: a title is available when
 it is not disabled, is listed in SupportedTitleIDs and has a standalone template.
-Available + FullySupported is Supported, available otherwise is Testing, anything
-else is Coming Soon. Read-only for Data.json.
+Available + FullySupported is Supported, available + PartiallySupported is Partially
+Supported, available otherwise is Testing, anything else is Coming Soon. Read-only for Data.json.
 
 Usage: python tools/generate_title_catalog.py [release-label]
 """
@@ -21,7 +21,7 @@ MANUAL = {
 }
 DEVICE_LABELS = {'PC': 'Windows PC', 'Windows': 'Windows PC', 'Desktop': 'Windows PC',
                  'XboxOne': 'Xbox One', 'XboxSeries': 'Xbox Series X|S', 'Xbox360': 'Xbox 360'}
-ORDER = ['Supported', 'Testing', 'Coming Soon']
+ORDER = ['Supported', 'Partially Supported', 'Testing', 'Coming Soon']
 
 
 def platform(devices):
@@ -52,7 +52,10 @@ def rows():
         devices = block.get('Devices') or record.get('Devices') or manual[1]
         available = (block.get('Enabled') is not False and tid in listed
                      and (ROOT / 'src/AchievementLabs.App/Events' / f'{tid}.json').exists())
-        status = 'Supported' if available and block.get('FullySupported') else 'Testing' if available else 'Coming Soon'
+        if not available: status = 'Coming Soon'
+        elif block.get('FullySupported'): status = 'Supported'
+        elif block.get('PartiallySupported'): status = 'Partially Supported'
+        else: status = 'Testing'
         mapped = sum(1 for v in (block.get('Achievements') or {}).values() if v)
         out.append(dict(id=tid, name=name, platform=platform(devices), status=status, mapped=mapped,
                         template=(ROOT / 'Events' / f'{tid}.json').exists()))
@@ -73,7 +76,7 @@ def main():
     rs = rows()
     lines = ['# Complete event title catalog', '',
              summary(rs) + '. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.', '',
-             'Supported classifications reflect the author’s corrections. Testing includes partial or still-under-test mappings; mapped counts do not indicate the game’s total achievements.']
+             'Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.']
     for s in ORDER:
         lines += ['', f'## {s}', '', '| Title | Platform | Title ID | Mapped achievements |', '|---|---|---|---:|']
         lines += [f"| {cell(r['name'])} | {cell(r['platform'])} | {r['id']} | {r['mapped']} |" for r in rs if r['status'] == s]
@@ -87,7 +90,7 @@ def main():
               + (f"[{r['id']}.json]({r['id']}.json)" if r['template'] else 'Unavailable') + ' |' for r in rs]
     write('Events/README.md', '\n'.join(lines) + '\n')
 
-    status = {'Supported': 'supported', 'Testing': 'testing', 'Coming Soon': 'coming-soon'}
+    status = {'Supported': 'supported', 'Partially Supported': 'partial', 'Testing': 'testing', 'Coming Soon': 'coming-soon'}
     games = [dict(titleId=r['id'], name=r['name'], platform=r['platform'], status=status[r['status']]) for r in rs]
     write('site/assets/games.json', json.dumps(games, indent=2, ensure_ascii=False))
     print(summary(rs))

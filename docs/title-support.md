@@ -1,8 +1,8 @@
 # Complete event title catalog
 
-512 titles: **289 Supported**, **217 Testing**, **6 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
+512 titles: **289 Supported**, **0 Partially Supported**, **217 Testing**, **6 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
-Supported classifications reflect the author’s corrections. Testing includes partial or still-under-test mappings; mapped counts do not indicate the game’s total achievements.
+Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.
 
 ## Supported
 
@@ -297,6 +297,11 @@ Supported classifications reflect the author’s corrections. Testing includes p
 | Wolfenstein: The Old Blood (PC) | Windows PC | 1909396590 | 50 |
 | サイコブレイク (The Evil Within JP) | Xbox One, Xbox Series X\|S | 2112431452 | 71 |
 | ブリッジコンストラクター：ウォーキング・デッド | Xbox One, Xbox Series X\|S | 1787967632 | 13 |
+
+## Partially Supported
+
+| Title | Platform | Title ID | Mapped achievements |
+|---|---|---|---:|
 
 ## Testing
 
