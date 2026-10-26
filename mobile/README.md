@@ -21,7 +21,7 @@ The unsigned IPA requires user signing/sideloading. Keep the Live Activity exten
 - Manual unlock/retry, multi-selection into an account-specific persisted queue, per-item delays, pause/resume, remove items and remove achievements confirmed unlocked by Xbox.
 - Foreground title-presence heartbeats and elapsed timer alongside the queue, failure/completion notification options and stop-on-presence-failure.
 - Microsoft browser sign-in with PKCE and automatic in-app callback capture, optional manual authorization, separate event-token entry, iOS Keychain storage. No passwords, tokens or real accounts in tests, logs or artifacts.
-- Bundled current fork catalogue, prepared from committed source. Only deterministic Replace operations with checked targets, placeholders and title/service identity are enabled. Unsupported edition routes (including Minecraft's hosted route and the three guarded edition aliases) remain disabled until their full guards are ported. Disabled author titles stay disabled. See catalogue-report.json in the build artifact for exact coverage.
+- Bundled current fork catalogue, prepared from committed source. Only deterministic Replace operations with checked targets, placeholders and title/service identity are enabled. Unsupported edition routes (including Minecraft's hosted route and the remaining guarded edition aliases) remain disabled until their full guards are ported. Disabled author titles stay disabled. See catalogue-report.json in the build artifact for exact coverage.
 
 ## First connection
 
@@ -135,3 +135,5 @@ Extended background audio is an explicit opt-in under Settings → App, off by d
 A new WidgetKit/ActivityKit extension displays extended-mode spoof elapsed time using native timer text, plus queue handled counts. It never labels accepted event requests as verified unlocks. One custom activity is used; it is not shown while the system background task is active. It ends when the session stops and shows stale status if app updates cease. The app updates state at 15-second intervals; timer rendering does not require one-second app wakeups. Physical-device audio/runtime behavior and Signulous signing of the extension still require testing.
 
 
+
+Modern Warfare Remastered (Xbox One) uses a reviewed 50-achievement mapping. The mobile catalogue checks legacy PC-keyed and corrected Xbox-keyed sets against fixed event signatures. Unknown IDs or changed semantics disable the whole title. Downloaded/imported feeds cannot replace bundled edition mappings.

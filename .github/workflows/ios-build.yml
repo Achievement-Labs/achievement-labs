@@ -37,6 +37,7 @@ jobs:
         run: xcodebuild -version
       - name: Prepare mobile catalogue without changing desktop data
         run: |
+          python3 -m unittest discover -s mobile/tools -p test_edition_catalogue.py -v
           python3 mobile/tools/prepare_catalogue.py
           python3 mobile/tools/prepare_360.py
           node mobile/Shared360/core-checks.cjs
@@ -50,12 +51,6 @@ jobs:
           mkdir -p mobile/layout-previews
           cat mobile/App/ActiveSessionStyle.swift mobile/Widget/SessionActivityCard.swift mobile/tools/render_session_card.swift > /tmp/session-card-preview.swift
           swift /tmp/session-card-preview.swift
-      - uses: actions/upload-artifact@v4
-        with:
-          name: AchievementLabs-iOS-Live-Activity-Layouts
-          path: mobile/layout-previews/
-          retention-days: 7
-          if-no-files-found: error
       - name: Install project generator
         run: brew list xcodegen >/dev/null 2>&1 || brew install xcodegen
       - name: Prepare existing application icon
@@ -78,8 +73,8 @@ jobs:
           mkdir -p mobile/artifacts/Payload
           cp -R mobile/build/Build/Products/Release-iphoneos/AchievementLabsMobile.app mobile/artifacts/Payload/
           cd mobile/artifacts
-          /usr/bin/zip -qry AchievementLabs-iOS-0.12.15-UNSIGNED.ipa Payload
-          shasum -a 256 AchievementLabs-iOS-0.12.15-UNSIGNED.ipa > SHA256.txt
+          /usr/bin/zip -qry AchievementLabs-iOS-0.12.16-UNSIGNED.ipa Payload
+          shasum -a 256 AchievementLabs-iOS-0.12.16-UNSIGNED.ipa > SHA256.txt
           cp ../Catalogue/catalogue-report.json .
           cp ../README.md .
           cp ../WIDGETS.md .
@@ -89,16 +84,15 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: AchievementLabs-iOS-Standalone-Unsigned
-          path: mobile/artifacts/
+          path: |
+            mobile/artifacts/AchievementLabs-iOS-0.12.16-UNSIGNED.ipa
+            mobile/artifacts/SHA256.txt
+            mobile/artifacts/catalogue-report.json
+            mobile/artifacts/README.md
+            mobile/artifacts/WIDGETS.md
+            mobile/artifacts/QUEUE-QR.md
           retention-days: 30
           if-no-files-found: error
       - name: Verify iOS 26 simulator screens and safe background request
         timeout-minutes: 12
         run: python3 -u mobile/tools/simulator_smoke.py
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: AchievementLabs-iOS-Simulator-Checks
-          path: mobile/artifacts/iPhone-*.png
-          retention-days: 7
-          if-no-files-found: ignore
