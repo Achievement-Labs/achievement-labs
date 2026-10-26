@@ -1,6 +1,7 @@
 {
   "349397095": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -295,6 +296,7 @@
   },
   "974917521": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -3479,6 +3481,7 @@
   },
   "2076385443": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -5898,6 +5901,7 @@
   },
   "1763742865": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -13230,6 +13234,7 @@
   },
   "1669996905": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -16839,6 +16844,7 @@
   },
   "1935604508": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -18272,6 +18278,7 @@
   },
   "2063484815": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -18600,6 +18607,7 @@
   },
   "2130778777": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -25808,6 +25816,7 @@
   },
   "58472989": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "2": {
         "EventReplacement": {
@@ -34269,6 +34278,7 @@
   },
   "85494077": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "2": {
         "EventReplacement": {
@@ -42490,6 +42500,7 @@
   },
   "267248679": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -53626,7 +53637,9 @@
           }
         }
       }
-    }
+    },
+    "FullySupported": false,
+    "PartiallySupported": true
   },
   "1798197019": {
     "TitleName": "1001 Spikes",
@@ -53638,6 +53651,7 @@
     "ServiceConfigId": "50030100-56b1-410c-b9d1-88816b2e4f1b",
     "PackageFamilyName": "NicalisInc.1001Spikes_e4xpj5gwgmkdm",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Rebuilt 2026-10-06: replaced dead AchievementUnlock (accepted acc:1 but never moved rule current, per app debug) with semantically-correct specific events. #1-4/#7 Complete-area -> CompletedMode (shared; likely needs a scenario/mode field not recoverable from dump - PHXscn01-15 are the title stats), #5 CollectedGoldenSkull, #6/#10 CharacterUnlocked, #8 AcquiredItem, #9 CoinsUpdated. Bare payloads; field names not in dump (no manifest).",
     "Notes": [
@@ -53894,6 +53908,7 @@
     ],
     "ServiceConfigId": "636a0100-392d-4116-9c4f-e0c513e2c350",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "10": {
@@ -59959,7 +59974,7 @@
     }
   },
   "434412541": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "4": {
         "EventReplacement": {
@@ -68317,6 +68332,7 @@
   },
   "552499398": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "TitleName": "Gears of War 4",
     "ServiceConfigId": "780f0100-3c66-41ff-b8cc-964f20ee78c6",
@@ -267372,6 +267388,7 @@
   },
   "896928775": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -277719,7 +277736,7 @@
     }
   },
   "1019460860": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -279902,7 +279919,7 @@
     }
   },
   "1030018025": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "5": {
         "Request1": {
@@ -284387,7 +284404,7 @@
     }
   },
   "1047964830": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -286720,7 +286737,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "a4a30100-3f61-49bc-a4f6-2c9f3f327694",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Canonical Aero block = Xbox SKU 1060271764 / SCID a4a30100-3f61-49bc-a4f6-2c9f3f327694 (multi-device catalog entry, matches working ACA blocks). Supersedes PC-only SKU 1758359164 (zero SCID, now disabled). KNOWN ISSUE: ScoreA/B/C, HIScoreModeA/B/C, CaravanModeA/B/C events are fabricated (not in real HAMSTER capture which has only RecordScore/Markhighscore/Highscoreplayer/RankingHighScoreEvent00) - affects all 4 ACA blocks; score-threshold achievements need the real events.",
     "AchievementNames": {
@@ -350564,6 +350581,7 @@
   },
   "1285166951": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Note": "Stat-registry mapping (ESO 1.45 eso64.exe registry offsets 0x30e5f00-0x30e7928, 341 stat names). Event name = registry stat name; payload uses the proven QUESTMQ1 shape with EMPTY properties. This replaces the synthetic AchievementEarned shape in Data-eso.json, which never triggers unlocks (unlocks are service-side via XblAchievementsUpdateAchievementAsync; these envelopes replay the title-observed stat events). 169 achievements mapped of 181 live (ids 57-295, SCID dd7a0100-915c-4cc6-935b-f67e4c9a1767). Unmapped (12): 202, 205 = Murkmire (Update 20, no U-family in registry); 217,218,219,222,225,228,252,256,266,267 = delisted prologue. Mapping confidence and per-id evidence in data/eso-achievement-stat-mapping.json (eventbreaker repo).",
     "Achievements": {
       "57": {
@@ -361554,7 +361572,7 @@
     }
   },
   "1667928394": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "6": {
         "Request1": {
@@ -396351,6 +396369,7 @@
   },
   "1739947436": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -399689,6 +399708,7 @@
     "PackageFamilyName": "Microsoft.DeltaPC_8wekyb3d8bbwe",
     "ApplicationId": "App",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Unlock path traced: UnlockAchievementXBoxOne sends WarGameStatAction {ActionId:20, ResultType:4, Result:<EWargameAchievements ordinal = service id>}. All fields are strings in properties (native writer). Base-struct field values are placeholders. Untested.",
     "Notes": [
@@ -401097,6 +401117,7 @@
   },
   "1835298427": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -406743,6 +406764,7 @@
   },
   "1944307183": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -409784,6 +409806,7 @@
   },
   "1999574456": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "361": {
         "EventReplacement": {
@@ -428117,6 +428140,7 @@
   },
   "2142027917": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -429395,6 +429419,7 @@
     "PackageFamilyName": "Microsoft.Dayton_8wekyb3d8bbwe",
     "ApplicationId": "Shipping",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Round 2 (2026-10-13 test logs): only the specific gameplay events credit; direct-award events removed. Counter rules repeat the event to the requirements.json target (app sends every RequestN once). Fixed 34/35/36/64 (dedicated kill events), 84/100 (wave variants), 124/210 (one request per requirement), 128/129/135, 181-190 (survivor ID probe 0-19), 209.",
     "Notes": [
@@ -651363,6 +651388,7 @@
   },
   "199875921": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -657329,7 +657355,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "80f60100-215b-4f08-8c68-2b353e5e3f4b",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "4": {
@@ -665671,6 +665697,7 @@
     "PackageFamilyName": "Microsoft.dd1b24e1-a56f-4bc3-a7ae-9bf5c376501f_8wekyb3d8bbwe",
     "ApplicationId": "App",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Round 2: Result = console achievement id (logs 2026-10-13: console 23/25/55 reached current 2 from two sends of those Result values).",
     "Notes": [
@@ -678002,7 +678029,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "00000000-0000-0000-0000-00007371e936",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: 122 Windows achievement event recipes ported; Remastered IDs and event envelope unverified",
     "SourceTitleId": "748474487",
@@ -682412,6 +682439,7 @@
     ],
     "ServiceConfigId": "05c20100-6e60-45d5-878a-4903149e11ae",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13 rebuild from Minecraft.Client.exe 1.61.1924.0 (sha256 cf100020...6d88). All 87 service IDs accounted for. Client send predicates FUN_1402329b0/FUN_140241100 prove which internal achievements the game emits as AchievementGet/progress; 37 IDs are never sent as achievements and are rebuilt from their traced feeder telemetry (McItemAcquired, McItemUsed, BlockPlaced, MobKilled, MobInteract, EnteredNewBiome, IncTimePlayed). Event names, value domains and field order are traced; JSON keys for feeder custom fields are candidates (see RecipeStatus). Not runtime-verified for the rebuilt entries.",
     "AchievementNames": {
@@ -695276,7 +695304,7 @@
       "XboxOne"
     ],
     "ServiceConfigId": "ac950100-364c-4bbc-ab7b-596b3067220a",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: supplied MCC recipes matched by unique achievement name and description to CN IDs",
     "Notes": [
@@ -749874,6 +749902,7 @@
   ],
   "2047319603": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -753799,7 +753828,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "601b0100-5c88-4b77-a022-50602088eb72",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -757045,7 +757074,7 @@
     }
   },
   "875417719": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "TitleName": "Call of Duty®: Advanced Warfare",
     "TitleId": "875417719",
@@ -769543,7 +769572,7 @@
       "PC"
     ],
     "ServiceConfigId": "00000000-0000-0000-0000-000068ce6e7c",
-    "Enabled": false,
+    "Enabled": true,
     "ResearchStatus": "DISABLED 2026-10-06: wrong SKU (PC-only, zero SCID). Superseded by Xbox SKU 1060271764. Testing: existing ACA multi-request mappings copied; target ",
     "AchievementNames": {
       "1": "Record score",
@@ -777711,7 +777740,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "d7e70100-66b7-42f8-badc-f3b23e961d5b",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -779035,7 +779064,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "b7b6df83-54f9-46ee-b1ec-95bbae5171db",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -784122,7 +784151,7 @@
     ],
     "ServiceConfigId": "eae20100-5c4e-4d37-87bc-e2f637bfd7f9",
     "PackageFamilyName": "ElectronicArtsMobile.FIFA19_q5ha1ztykcgvj",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "EXPERIMENTAL: FIFA 15 AchievementEarned event and AchievementId payload ported for testing; unlock behavior is unconfirmed for this release.",
     "Notes": [
@@ -789266,6 +789295,7 @@
   },
   "1482870140": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "111": {
         "EventReplacement": {
@@ -790749,7 +790779,7 @@
     }
   },
   "217258585": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -791860,6 +791890,7 @@
   },
   "530599647": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "2": {
         "EventReplacement": {
@@ -795429,7 +795460,7 @@
     }
   },
   "148078765": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "41": {
         "EventReplacement": {
@@ -797830,7 +797861,7 @@
     }
   },
   "506903100": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "41": {
         "EventReplacement": {
@@ -798328,7 +798359,7 @@
     ]
   },
   "717669198": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "41": {
         "EventReplacement": {
@@ -801936,7 +801967,7 @@
     ]
   },
   "1994181526": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "41": {
         "EventReplacement": {
@@ -809168,7 +809199,7 @@
     "ServiceConfigId": "685b0100-c29b-4e86-813b-6201389b44db",
     "PackageFamilyName": "505GAMESS.P.A.35784A6D3DB4D_tefn33qh9azfc",
     "ApplicationId": "AppABZU",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Round 2: same payload as console (which credited); SCID switched to the manifest XmsKey 685b0100-... because the PC zero-padded SCID never credited. PC titleId kept.",
     "Notes": [
@@ -809445,7 +809476,7 @@
     "ServiceConfigId": "685b0100-c29b-4e86-813b-6201389b44db",
     "PackageFamilyName": "505GAMESS.P.A.a74b523b-7acb-435f-acba-aa38493d1f8c_tefn33qh9azfc",
     "ApplicationId": "App",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Same recipe as PC (shipped Achievements.json + Events-S505.0-389B44DB.man, whose XmsKey IS this console SCID): AchievementUpdate {AchievementIndex, PercentComplete:100.0}. Console service id = index + 3. Untested.",
     "Notes": [
@@ -809713,6 +809744,7 @@
   },
   "1810924247": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -812141,6 +812173,7 @@
     ],
     "ServiceConfigId": "1370999b-fca2-4c53-8ec5-73493bcb67e5",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Delta container submission-encrypted: no native event table recovered.180 logs/73 IDs audited:17 latest Achieved,1 InProgress,55 NotStarted. Preserved17 achieved recipes; corrected boolean candidates16/78 and added2 map candidates79. No new unlocks verified.",
     "Notes": [
@@ -823075,6 +823108,7 @@
     ],
     "ServiceConfigId": "788f0100-a4bc-46c3-b19b-d1001a96545b",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: FH2 retail dump identity and game-db values audited; many FH3-derived event schemas remain unverified",
     "Notes": [
@@ -844808,6 +844842,7 @@
     ],
     "ServiceConfigId": "a72e0e3d-ce31-4ae0-89b8-741c625ab197",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "FM5 stat payloads updated 2026-10-06 from the dump's ForzaProfile.sch stat schema: Driver Level (#7-16) -> GameProgress1 with Level=<target> (GameProgress1 has exactly 1 custom field; 'Level' is the profile driver-level stat); Career Golds (#28-37) -> RaceEnd with NumGoldsTotal=<target> (career-gold counter recovered from the exe). Affinity (#2-6) and Championships (#57-61) remain on their dedicated Unlock events. MP Medals (#17-26) left as-is: no medal counter field is named anywhere in the dump (ForzaProfile.sch/UnlockRules/descriptors). Field names are dump-sourced hypotheses; if Level/NumGoldsTotal are measurements rather than properties, swap the container. | prior: Rebuilt 2026-10-05 from the Xbox One dump (forza_durango_release_final.exe, EtwPlus/ETX common schema, EtxFillCommonFiel",
     "Notes": [
@@ -847330,6 +847365,7 @@
     ],
     "ServiceConfigId": "417d0100-b230-41cf-975d-3eaa64f9397e",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "FM7-invented payload fields removed 2026-10-06; FM6-native events only. Verified against forza_durango_release_final.exe: NumVolumesCompleted/NumShowcasesCompleted/NumCarDivisionsCompleted/NumNascar*/NumPorsche*/BadgeLevel/VisitCount/TotalSpins do NOT exist in FM6 (all fabricated). User-confirmed working unlocks (EquipBadge, Payouts community credits, UGCShares, TombolaSpin, RaceEnd first-race) all fire on the event NAME with payload ignored by the service. CareerResultsUpdate #35-102 now fire proven RaceEnd{Place:1} first, then empty CareerResultsUpdate. Single-completion career races are the likely winners; cumulative 'Complete all X' still need a server-side count no single event can supply. EquipBadge/LinkToHub/TombolaSpin stripped to empty.",
     "Notes": [
@@ -851037,7 +851073,7 @@
       "PC"
     ],
     "ServiceConfigId": "3bfb0100-1cf8-4de5-b638-f0ff26498a63",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: PC event capture mapped by achievement name; console event names ported from PC and unverified",
     "Notes": [
@@ -852665,7 +852701,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "ea280100-5d13-4c1f-b2ae-942402afe9c4",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: PC event capture mapped by achievement name; console event names ported from PC and unverified",
     "Notes": [
@@ -854616,6 +854652,7 @@
   },
   "682562723": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "EventReplacement": {
@@ -856746,6 +856783,7 @@
     ],
     "ServiceConfigId": "f4f80100-7f03-4df9-8fbd-f0191738ca2a",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -857423,6 +857461,7 @@
     ],
     "ServiceConfigId": "712c0100-2a0c-4dd1-93be-16574345b14a",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Built 2026-10-05 from Unity Mono-AOT metadata (Il2Cpp-free) modeled on TWD (125965001). Event/stat-based via DataPlatform Send* -> XceDynamicProvider.WriteEvent. 23/34 mapped; 11 flagged (specific JobId/ItemId/InmateId or DLC-panel events).",
     "Notes": [
@@ -865519,7 +865558,7 @@
     }
   },
   "88086791": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "TitleName": "A KING'S TALE: FINAL FANTASY XV",
     "TitleId": "88086791",
@@ -865825,6 +865864,7 @@
     ],
     "ServiceConfigId": "3e9f0100-d8b1-4797-9034-c63d2d44d57b",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Built 2026-10-05 from Unity Mono-AOT metadata (Send* signatures) modeled on TWD/E1. 56/58 mapped; quest/trigger events 1:1; escapes use SendPrisonCompleted with best-effort PrisonIDs.",
     "Notes": [
@@ -875486,6 +875526,7 @@
     ],
     "ServiceConfigId": "03b10100-b308-4be9-b402-0d2c3dd7389b",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Built 2026-10-05 from Criterion exe (EtxEventWrite ETW in-game events, descriptor table, schema IGB-2.0/2.1). All 56 achievements map 1:1 to a dedicated E_ACHIEVEMENT_* event; empty IGB properties (custom fields untraced). | 2026-10-07 FIX (locked counters): debug requirements+EventUnlocks (capture 20261007_061055) showed the milestone-named events (E_ACHIEVEMENT_GET_500_TAKEDOWNS, _COLLECT_25_SMASHES, etc.) are accepted (acc:1) but NOT wired to the SUM stat (current stays ''). All 64 registered events are bare (no value field), so SUM is occurrence-based. Repointed the locked count achievements to the GRANULAR feeder event fired N times (=target): smashes->E_ACHIEVEMENT_COLLECT_SMASHES, jumps->E_ACHIEVEMENT_COLLECT_JUMP, billboards->E_COLLECTED_BILLBOARD, challenges->E_ACHIEVEMENT_COMPLETE_1_CHALLENGE, rivals->E_ACHIEVEMENT_MAKE_FIRST_ONLINE_RIVAL, online races->E_ACHIEVEMENT_COMPLETE_ONLINE_RACE. #22 burning routes & #23 takedowns have NO registered granular feeder (milestone event x N as best-effort, likely won't credit). #35 meta & #37 8-player win appear server-gated (named event doesn't feed even at target=1). See MappingStatus per id for confidence.",
     "Notes": [
@@ -893175,7 +893216,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "3a390100-73bd-4a7d-88ab-8d05352f69da",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Experimental: manifest and compiled registrations plus supplied achievement CSV; no runtime capture",
     "Notes": [
@@ -893987,7 +894028,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "45a60100-cd32-4650-95a7-2ba075f55f41",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-10 identifier revision: 50 achievement recipes preserved; seven mission feeders rebuilt from recovered database IDs using native decimal-string format. Custom JSON keys and event enum bindings inferred; no unlock verification. Unsupported descriptive mission/skill feeders removed.",
     "Notes": [
@@ -901356,6 +901397,7 @@
     ],
     "ServiceConfigId": "1b180100-2e72-4297-a9e6-b79d5a9771a4",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Testing: confirmed 2-10, 13, 16-20, 22, 24, 27. Probing 1 and 11. Unresolved 12, 14, 15, 21, 26.",
     "Notes": [
@@ -903234,6 +903276,7 @@
     ],
     "ServiceConfigId": "af6a0100-2e30-443d-87f8-d6e068f7a6f8",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Partial user-confirmed unlocks; revised native-derived test candidates. JSON names outside successful recipes remain unverified.",
     "Notes": [
@@ -904890,6 +904933,7 @@
     ],
     "ServiceConfigId": "b32e0100-8014-44fb-a4c5-eb943751a2ca",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Partial user-confirmed unlocks; revised native-derived test candidates. JSON names outside successful recipes remain unverified.",
     "Notes": [
@@ -907878,1021 +907922,6 @@
       }
     }
   },
-  "1879115757": {
-    "TitleName": "Trackmania®",
-    "TitleId": "1879115757",
-    "Devices": [
-      "XboxOne",
-      "XboxSeries"
-    ],
-    "ServiceConfigId": "00000000-0000-0000-0000-0000700107ed",
-    "FullySupported": false,
-    "Enabled": true,
-    "ResearchStatus": "Experimental event-name/stat probes; no Xbox ETX schema or achievement rule table recovered",
-    "Notes": [
-      "Track_* names and stat keys occur in GbxGame.exe, but their placement in an Xbox Live InGame payload is inferred solely for testing.",
-      "The executable also contains a direct Xbox achievement completion/update path. These event probes may be rejected or unrelated to Xbox unlocks.",
-      "Eleven stat-only achievements use Track_Context_PlayStop as an explicitly provisional fallback event.",
-      "Numeric values are candidate thresholds from the CSV descriptions, or 1 for first/completed milestones; game stat units and Xbox service rules are unverified.",
-      "The event envelope and metadata are adapted from the existing testing templates; no genuine Trackmania event capture has been observed."
-    ],
-    "AchievementNames": {
-      "4": "What a piece of art!",
-      "5": "Welcome to Trackmania!",
-      "6": "First of the collection",
-      "7": "Feels good to win?",
-      "8": "Your seat is so hot",
-      "9": "Don't look at my screen",
-      "10": "Not bad for a first try",
-      "11": "I want to be the Royal Champion",
-      "12": "Blackbelt Champion",
-      "13": "To the moon!",
-      "14": "Crazy Frog",
-      "15": "Gravity doesn't matter",
-      "16": "Faster than a train",
-      "17": "Gotta go fast",
-      "18": "I am speed",
-      "19": "Flymania",
-      "20": "Only a hundred?",
-      "21": "One Thousand and One Nights",
-      "22": "That's a lot of checkpoints",
-      "23": "Pedal to the bronze medal",
-      "24": "Pedal to the silver medal",
-      "25": "Pedal to the gold medal",
-      "26": "Beginning of a great story",
-      "27": "Bronze expert",
-      "28": "Silver expert",
-      "29": "Gold expert",
-      "30": "You are the Trackmaster",
-      "31": "Bronze medals completed (dailies)",
-      "32": "Silver medals completed (dailies)",
-      "33": "Gold medals completed (dailies)",
-      "34": "Daily Trackmaster",
-      "35": "What a week huh?",
-      "36": "Appetizer",
-      "37": "Completionist"
-    },
-    "AchievementDescriptions": {
-      "4": "Build your first track",
-      "5": "Complete your first race",
-      "6": "Win your first trophy",
-      "7": "Win your first multiplayer race with at least 2 players",
-      "8": "Complete a match in hotseat mode",
-      "9": "Complete a match in splitscreen mode",
-      "10": "Complete your first cup of the day",
-      "11": "Complete your first royal match",
-      "12": "Complete the black section of a royal map for the first time",
-      "13": "Drive 384 000m",
-      "14": "Jump for 200 meters or more 100 times",
-      "15": "Jump for 500 meters or more 100 times",
-      "16": "Exceed 575 km/h for the first time",
-      "17": "Exceed 500 km/h or more 100 times",
-      "18": "Exceed 998 km/h or more for the first time",
-      "19": "Reach a height of 1km",
-      "20": "Cross 100 finish lines",
-      "21": "Cross 1001 finish lines",
-      "22": "Cross 10000 checkpoints",
-      "23": "Obtain your first bronze medal on any official campaign track",
-      "24": "Obtain your first silver medal on any official campaign track",
-      "25": "Obtain your first gold medal on any official campaign track",
-      "26": "Obtain your first author medal on any official campaign track",
-      "27": "Obtain a bronze medal on 200 official campaign tracks",
-      "28": "Obtain a silver medal on 200 official campaign tracks",
-      "29": "Obtain a gold medal on 200 official campaign tracks",
-      "30": "Obtain an author medal on 200 official campaign tracks",
-      "31": "Obtain a bronze medal on 90 tracks of the day",
-      "32": "Obtain a silver medal on 90 tracks of the day",
-      "33": "Obtain a gold medal on 90 tracks of the day",
-      "34": "Obtain an author medal on 90 tracks of the day",
-      "35": "Obtain a gold medal on every track of the day (of the same week)",
-      "36": "Obtain a gold medal on 10 official campaign tracks (of the same campaign)",
-      "37": "Obtain a gold medal on 25 official campaign tracks (of the same campaign)"
-    },
-    "AchievementGamerscore": {
-      "4": 10,
-      "5": 10,
-      "6": 10,
-      "7": 10,
-      "8": 10,
-      "9": 10,
-      "10": 30,
-      "11": 15,
-      "12": 20,
-      "13": 30,
-      "14": 30,
-      "15": 60,
-      "16": 10,
-      "17": 60,
-      "18": 30,
-      "19": 15,
-      "20": 15,
-      "21": 30,
-      "22": 30,
-      "23": 15,
-      "24": 30,
-      "25": 40,
-      "26": 60,
-      "27": 30,
-      "28": 60,
-      "29": 90,
-      "30": 180,
-      "31": 30,
-      "32": 60,
-      "33": 90,
-      "34": 180,
-      "35": 90,
-      "36": 90,
-      "37": 180
-    },
-    "MappingEvidence": {
-      "4": {
-        "event": "Track_Create_NewMapCreated",
-        "eventOffset": 30080600,
-        "eventSelection": "related compiled Track event",
-        "stat": "MapCreatedCount",
-        "statOffset": 31231616,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "5": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayFinishLineCrossedCount",
-        "statOffset": 31231896,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "6": {
-        "event": "Track_Player_TrophyEarned",
-        "eventOffset": 30081432,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrophyEarnedCount",
-        "statOffset": 31233432,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "7": {
-        "event": "Track_Live_MultiplayerPlayed",
-        "eventOffset": 30080656,
-        "eventSelection": "related compiled Track event",
-        "stat": "LiveMultiplayerWinCount",
-        "statOffset": 31231176,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "8": {
-        "event": "Track_Local_HotseatPlayed_V2",
-        "eventOffset": 30080896,
-        "eventSelection": "related compiled Track event",
-        "stat": "LocalHotseatPlayedCount",
-        "statOffset": 31231544,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "9": {
-        "event": "Track_Local_SplitScreenPlayed_V2",
-        "eventOffset": 30080968,
-        "eventSelection": "related compiled Track event",
-        "stat": "LocalSplitScreenPlayedCount",
-        "statOffset": 31231584,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "10": {
-        "event": "Track_Live_COTDPlayed",
-        "eventOffset": 30080632,
-        "eventSelection": "related compiled Track event",
-        "stat": "LiveCOTDPlayedCount",
-        "statOffset": 31231096,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "11": {
-        "event": "Track_Live_RoyalPlayed_V2",
-        "eventOffset": 30080744,
-        "eventSelection": "related compiled Track event",
-        "stat": "LiveRoyalPlayedCount",
-        "statOffset": 31231264,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "12": {
-        "event": "Track_Live_RoyalSectionFinished_V2",
-        "eventOffset": 30080816,
-        "eventSelection": "related compiled Track event",
-        "stat": "LiveRoyalSectionFinishedCount.color.Black",
-        "statOffset": 31231496,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "13": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayDistanceDrivenTotalLength",
-        "statOffset": 31231864,
-        "probeValue": 384000,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "14": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeJumpMore200mCount",
-        "statOffset": 31231696,
-        "probeValue": 100,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "15": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeJumpMore500mCount",
-        "statOffset": 31231728,
-        "probeValue": 100,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "16": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeSpeedMaxSpeed",
-        "statOffset": 31231760,
-        "probeValue": 575,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "17": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeSpeedMore500kmphCount",
-        "statOffset": 31231792,
-        "probeValue": 100,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "18": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeSpeedMaxSpeed",
-        "statOffset": 31231760,
-        "probeValue": 998,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "19": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayAwesomeHeightMaxHeight",
-        "statOffset": 31231632,
-        "probeValue": 1000,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "20": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayFinishLineCrossedCount",
-        "statOffset": 31231896,
-        "probeValue": 100,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "21": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayFinishLineCrossedCount",
-        "statOffset": 31231896,
-        "probeValue": 1001,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "22": {
-        "event": "Track_Context_PlayStop",
-        "eventOffset": null,
-        "eventSelection": "provisional generic play-stop fallback",
-        "stat": "PlayCheckpointCrossedCount",
-        "statOffset": 31231832,
-        "probeValue": 10000,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "23": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountBronze",
-        "statOffset": 31232160,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "24": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountSilver",
-        "statOffset": 31232200,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "25": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountGold",
-        "statOffset": 31232240,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "26": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountAuthor",
-        "statOffset": 31232280,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "27": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountBronze",
-        "statOffset": 31232160,
-        "probeValue": 200,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "28": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountSilver",
-        "statOffset": 31232200,
-        "probeValue": 200,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "29": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountGold",
-        "statOffset": 31232240,
-        "probeValue": 200,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "30": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignMedalCountAuthor",
-        "statOffset": 31232280,
-        "probeValue": 200,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "31": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrackOfTheDayMedalCountBronze",
-        "statOffset": 31232400,
-        "probeValue": 90,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "32": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrackOfTheDayMedalCountSilver",
-        "statOffset": 31232440,
-        "probeValue": 90,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "33": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrackOfTheDayMedalCountGold",
-        "statOffset": 31232480,
-        "probeValue": 90,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "34": {
-        "event": "Track_Player_MedalEarned",
-        "eventOffset": 30081128,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrackOfTheDayMedalCountAuthor",
-        "statOffset": 31232520,
-        "probeValue": 90,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "35": {
-        "event": "Track_Player_TrackOfTheDayWeekAllTrackCompleted_V2",
-        "eventOffset": 30081376,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerTrackOfTheDayWeekAllTrackCompletedCountGold",
-        "statOffset": 31233320,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "36": {
-        "event": "Track_Player_OfficialCampaign10TrackCompleted",
-        "eventOffset": 30081160,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaign10TrackCompletedCountGold",
-        "statOffset": 31232768,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      },
-      "37": {
-        "event": "Track_Player_OfficialCampaignAllTrackCompleted_V2",
-        "eventOffset": 30081264,
-        "eventSelection": "related compiled Track event",
-        "stat": "PlayerOfficialCampaignAllTrackCompletedCountGold",
-        "statOffset": 31233040,
-        "probeValue": 1,
-        "status": "Candidate only: Xbox event schema, stat placement, and unlock rule unverified."
-      }
-    },
-    "Achievements": {
-      "4": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Create_NewMapCreated"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"MapCreatedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Create_NewMapCreated\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"MapCreatedCount\":1}}}"
-        }
-      },
-      "5": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayFinishLineCrossedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayFinishLineCrossedCount\":1}}}"
-        }
-      },
-      "6": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_TrophyEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrophyEarnedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_TrophyEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrophyEarnedCount\":1}}}"
-        }
-      },
-      "7": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Live_MultiplayerPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LiveMultiplayerWinCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Live_MultiplayerPlayed\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LiveMultiplayerWinCount\":1}}}"
-        }
-      },
-      "8": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Local_HotseatPlayed_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LocalHotseatPlayedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Local_HotseatPlayed_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LocalHotseatPlayedCount\":1}}}"
-        }
-      },
-      "9": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Local_SplitScreenPlayed_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LocalSplitScreenPlayedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Local_SplitScreenPlayed_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LocalSplitScreenPlayedCount\":1}}}"
-        }
-      },
-      "10": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Live_COTDPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LiveCOTDPlayedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Live_COTDPlayed\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LiveCOTDPlayedCount\":1}}}"
-        }
-      },
-      "11": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Live_RoyalPlayed_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LiveRoyalPlayedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Live_RoyalPlayed_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LiveRoyalPlayedCount\":1}}}"
-        }
-      },
-      "12": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Live_RoyalSectionFinished_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LiveRoyalSectionFinishedCount.color.Black\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Live_RoyalSectionFinished_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LiveRoyalSectionFinishedCount.color.Black\":1}}}"
-        }
-      },
-      "13": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayDistanceDrivenTotalLength\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayDistanceDrivenTotalLength\":384000}}}"
-        }
-      },
-      "14": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeJumpMore200mCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeJumpMore200mCount\":100}}}"
-        }
-      },
-      "15": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeJumpMore500mCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeJumpMore500mCount\":100}}}"
-        }
-      },
-      "16": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeSpeedMaxSpeed\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeSpeedMaxSpeed\":575}}}"
-        }
-      },
-      "17": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeSpeedMore500kmphCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeSpeedMore500kmphCount\":100}}}"
-        }
-      },
-      "18": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeSpeedMaxSpeed\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeSpeedMaxSpeed\":998}}}"
-        }
-      },
-      "19": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayAwesomeHeightMaxHeight\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayAwesomeHeightMaxHeight\":1000}}}"
-        }
-      },
-      "20": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayFinishLineCrossedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayFinishLineCrossedCount\":100}}}"
-        }
-      },
-      "21": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayFinishLineCrossedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayFinishLineCrossedCount\":1001}}}"
-        }
-      },
-      "22": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Context_PlayStop"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayCheckpointCrossedCount\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Context_PlayStop\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayCheckpointCrossedCount\":10000}}}"
-        }
-      },
-      "23": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountBronze\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountBronze\":1}}}"
-        }
-      },
-      "24": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountSilver\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountSilver\":1}}}"
-        }
-      },
-      "25": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountGold\":1}}}"
-        }
-      },
-      "26": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountAuthor\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountAuthor\":1}}}"
-        }
-      },
-      "27": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountBronze\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountBronze\":200}}}"
-        }
-      },
-      "28": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountSilver\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountSilver\":200}}}"
-        }
-      },
-      "29": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountGold\":200}}}"
-        }
-      },
-      "30": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignMedalCountAuthor\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignMedalCountAuthor\":200}}}"
-        }
-      },
-      "31": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrackOfTheDayMedalCountBronze\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrackOfTheDayMedalCountBronze\":90}}}"
-        }
-      },
-      "32": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrackOfTheDayMedalCountSilver\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrackOfTheDayMedalCountSilver\":90}}}"
-        }
-      },
-      "33": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrackOfTheDayMedalCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrackOfTheDayMedalCountGold\":90}}}"
-        }
-      },
-      "34": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_MedalEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrackOfTheDayMedalCountAuthor\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_MedalEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrackOfTheDayMedalCountAuthor\":90}}}"
-        }
-      },
-      "35": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_TrackOfTheDayWeekAllTrackCompleted_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerTrackOfTheDayWeekAllTrackCompletedCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_TrackOfTheDayWeekAllTrackCompleted_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerTrackOfTheDayWeekAllTrackCompletedCountGold\":1}}}"
-        }
-      },
-      "36": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_OfficialCampaign10TrackCompleted"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaign10TrackCompletedCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_OfficialCampaign10TrackCompleted\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaign10TrackCompletedCountGold\":1}}}"
-        }
-      },
-      "37": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Track_Player_OfficialCampaignAllTrackCompleted_V2"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerOfficialCampaignAllTrackCompletedCountGold\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Track_Player_OfficialCampaignAllTrackCompleted_V2\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000700107ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1879115757,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerOfficialCampaignAllTrackCompletedCountGold\":1}}}"
-        }
-      }
-    }
-  },
   "1959656817": {
     "TitleName": "Dungeon of the ENDLESS™",
     "TitleId": "1959656817",
@@ -910853,7 +909882,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "c4540100-7a68-4973-8e94-338927d78ec2",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Chapter achievements FIXED 2026-10-06: ChapterCompleted descriptor (kestrel.master.exe) = 00 00 0d 05 = 1 int32 PartC field; recipes were sending EMPTY payload so no chapter matched. Added {Chapter:1..15}. Field NAME is best-guess (not in exe; no manifest) - a chapter-unlock capture would confirm it (alternatives: ChapterNumber/ChapterIndex/Value). Rebuilt 2026-10-06 with REAL achievement ids/names/descripti",
     "Notes": [
@@ -926743,6 +925772,7 @@
     ],
     "ServiceConfigId": "a6bd0100-47d9-4e33-a474-d2c7060b2394",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -931299,6 +930329,7 @@
     ],
     "ServiceConfigId": "7d3b0100-dc71-41ad-afc0-24593d62da2c",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -934747,6 +933778,7 @@
     ],
     "ServiceConfigId": "1d6e0100-d372-476e-bb13-fc6868a7c428",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -937714,6 +936746,7 @@
     ],
     "ServiceConfigId": "3f5f0100-925e-45ba-8365-55b8692cb08f",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -941275,6 +940308,7 @@
     ],
     "ServiceConfigId": "74410100-4a0e-4452-892e-9a4a173861fd",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -946087,6 +945121,7 @@
     ],
     "ServiceConfigId": "99b80100-56eb-49c1-8a80-9e241c075e5d",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -948869,6 +947904,7 @@
     ],
     "ServiceConfigId": "2d800100-caa5-4387-914c-2a3321b36cfe",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -953004,6 +952040,7 @@
     ],
     "ServiceConfigId": "ae610100-a82d-473a-adfb-40ef26305d8d",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -956158,6 +955195,7 @@
     ],
     "ServiceConfigId": "6c0a0100-ab65-4bdd-a759-81be307bae80",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: test blocks built from user-edited LEGO-mapping-review.xlsx; untested. Vetted City and existing Marvel 2 primary requests preserved.",
     "Notes": [
@@ -965990,6 +965028,7 @@
     ],
     "ServiceConfigId": "6f4a0100-f460-426b-ba02-2a7430d1e0f7",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -966282,8 +965321,8 @@
     "ResearchStatus": "Runtime-confirmed 2026-10-14 for 2,4-12 (properties and measurements both credited; Sum rules for 7,10,11,12, latest/max for 2,6,8,9). #1 and #3 never sent (app debug-folder failure on names ending in '...'); FullySupported stays false until they are confirmed. Research: F:/UWPDumps/PixelPiracy_819060983, F:/UWPDumps/RuntimeValidation_20261014."
   },
   "55549300": {
-    "FullySupported": false,
-    "Enabled": false,
+    "FullySupported": true,
+    "Enabled": true,
     "ResearchStatus": "29/29 service IDs accounted for; 29 native dedicated fieldless recipes; 0 runtime-confirmed new recipes. Envelope inferred; Mostly Invincible counter reset/scripted-death semantics partly unresolved; external EtwPlus transport absent. See ledger/workflow.",
     "Achievements": {
       "1": {
@@ -966850,6 +965889,7 @@
     "ApplicationName": "TransGameDurangoFinalRelease",
     "ExecutableName": "Translated-TransGame-FinalRelease.exe",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "LOG FOLLOW-UP: 50 CSV entries; five dedicated recipes confirmed and preserved. Three Escalation recipes moved to EscWaveComplete; 42 generic recipes use configured PropertyOffset instead of achievement enums. JSON keys and remaining cloud rules are unverified; bounded three-request candidates.",
     "Notes": [
@@ -972781,7 +971821,7 @@
     "ServiceConfigId": "ef0b0100-cd59-4d38-b378-14571b0a83df",
     "ApplicationName": "GHLive",
     "ExecutableName": "GHLive_Master.exe",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "LOG FOLLOW-UP:50 CSV entries; ID1 observed Achieved and preserved. Other49 now test the three alternate key pairs already used in ID1. Six values corrected from captured requirements, including all5 former UInt32 ceilings. Revised recipes require retesting.",
     "Notes": [
@@ -977970,6 +977010,7 @@
     ],
     "ServiceConfigId": "9cf40100-c61f-4a81-a353-d8b12dbb840f",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Full 61-entry testing table. 14 observed-success recipes preserved; 47 entries are explicitly unverified native-schema-based candidates. Six prior missing recipes revised. No new unlocks claimed.",
     "AchievementNames": {
@@ -985063,6 +984104,7 @@
     ],
     "ServiceConfigId": "a8380100-870c-4448-bc75-f7ad6d6c5e46",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "26/34 runtime-confirmed. 8 unresolved (34-38, 41-43): events and native values traced in adv11.exe; JSON field names are server-side. Their entries are labeled multi-key candidates.",
     "Notes": [
@@ -986431,7 +985473,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "90c40100-9123-47d6-bc6b-35d3214e91ac",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1012120,6 +1011162,7 @@
   },
   "1147540192": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1015407,7 +1014450,7 @@
     "ServiceConfigId": "0b3f8fdf-f160-4115-9840-4e4215afafbf"
   },
   "326835485": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "TitleName": "Rise of Nations: Extended Edition",
     "TitleId": "326835485",
@@ -1016229,7 +1015272,7 @@
     }
   },
   "33936946": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "TitleName": "Zoo Tycoon: Ultimate Animal Collection",
     "TitleId": 33936946,
@@ -1055736,6 +1054779,7 @@
   },
   "711381438": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "TitleName": "Zoo Tycoon",
     "TitleId": 711381438,
@@ -1095213,7 +1094257,7 @@
     ],
     "ServiceConfigId": "",
     "PackageFamilyName": "",
-    "Enabled": false,
+    "Enabled": true,
     "ResearchStatus": "Testing: one FIFA 15 and one Madden NFL 21 structure probe",
     "TestPatterns": {
       "1": {
@@ -1095344,6 +1094388,7 @@
   },
   "1616270757": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "TitleName": "NBA LIVE 14",
     "TitleId": "1616270757",
     "Devices": [
@@ -1095352,7 +1094397,7 @@
     ],
     "ServiceConfigId": "",
     "PackageFamilyName": "",
-    "Enabled": false,
+    "Enabled": true,
     "ResearchStatus": "Testing: one FIFA 15 and one Madden NFL 21 structure probe",
     "TestPatterns": {
       "1": {
@@ -1095414,6 +1094459,7 @@
   },
   "2067761315": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "TitleName": "EA SPORTS™ NBA LIVE 16",
     "TitleId": "2067761315",
     "Devices": [
@@ -1095482,7 +1094528,7 @@
     }
   },
   "419391420": {
-    "FullySupported": false,
+    "FullySupported": true,
     "TitleName": "EA SPORTS™ NBA LIVE 15",
     "TitleId": "419391420",
     "Devices": [
@@ -1095621,6 +1094667,7 @@
   },
   "875079140": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "TitleName": "Tapping Skill Test",
     "TitleId": "875079140",
@@ -1095905,7 +1094952,7 @@
     "ServiceConfigId": "c4540100-dbbb-43b8-9242-54b5254f3589",
     "PackageFamilyName": "MonomiPark.SlimeRancher_9ahw7gx0g86p2",
     "ApplicationId": "Game",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Traced from GameAssembly (IL2CPP): event 'Achievement', properties {UserId, PlayerSessionId (empty GUID), AchievementId: enum name with '_'->'-' upper-cased}. Service-id join by description. Untested.",
     "Notes": [
@@ -1097118,7 +1096165,7 @@
     }
   },
   "968775939": {
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "TitleName": "EVERSPACE™",
     "TitleId": "968775939",
@@ -1097880,7 +1096927,7 @@
     "ServiceConfigId": "81070100-4b70-4743-8158-22c20c712583",
     "PackageFamilyName": "ANUMAN.SUBJECT13_sss09yjpacz64",
     "ApplicationId": "App",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "SPECULATIVE TEST BLOCK: event UnlockAchievement (from the game's AchievementManager.UnlockAchievement method name). The Windows build never sends Xbox events; all fields are candidates. Judge only by requirements.json current.",
     "Notes": [
@@ -1098568,6 +1097615,7 @@
     ],
     "ServiceConfigId": "d3d00100-7976-472f-a3f7-bc1760d19e14",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Static candidates only. 137 entries mapped to client events by name/description; 11 unresolved. No field names, value-slot assignment or service rules are recoverable from DakotaLink.exe; key 'Value' is a placeholder candidate. Probe first.",
     "Notes": [
@@ -1101655,7 +1100703,7 @@
     "PackageFamilyName": "Microsoft.AgeCastles_8wekyb3d8bbwe",
     "ApplicationId": "App",
     "ExecutableName": "CastlesClient_s.exe",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "2026-10-13: built from dump E:\\9WZDNCRFJB5L\\DUMP (Microsoft.AgeCastles 1.26.33.0 x86, CastlesClient_s.exe SHA-256 365DC607B1679766...). Native Sgi engine with statically linked XSAPI; AchievementsManagerXsapi2::UnlockAchievement only logs (no client write), so grants are event-driven. Traced: ObjectiveSystem::SetProgress (FUN_005b3a10) -> UIEvent_AchievementProgressChange -> FUN_0049cdb0 -> LiveManagerXsapi2::WriteEvent (vtable+0x54, FUN_00755d40) -> XSAPI write_in_game_event (FUN_00902360) with properties {AchievementID, AchievementProgress}. All 20 CSV ids link 1:1 to objectives.bmeta achievementID; value = linked successThreshold. Event, fields, id convention and client value semantics are static-evidence-backed; the service rule (aggregation/threshold) and server credit are unverified - no capture yet. Test: fire #15 (value 1) and check requirements.json current.",
     "Notes": [
@@ -1102103,7 +1101151,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "7d0597d8-2113-423a-9e4f-ed725b9d43ba",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Built 2026-10-14 from independent trace of engine.dll 1.0.11.1 (R1X1_CU11_1_CL138416, sha256 6e46cfea...). All 88 CSV ids map to a persistence var -> Xbox stat in resource/persistence_to_xbox_stats_links.txt (LZHAM-alpha VPK) emitted by PushPersistenceStat/PushPersistenceStatFloat (schema 0.7.IGB-2.2; Part C = StatName:string, value:int32|float) or PushPlayerLevel. StatName key strong; value key unresolved -> Request1 probe keys, Request2 minimal. Test on a LOCKED id, e.g. #27 (AchEjectingPilotTitanSniperKill=1, current null) and watch requirements current.",
     "Notes": [
@@ -1110476,7 +1109524,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "69400100-1179-4074-b4a2-c1cb08d29c82",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "HYPOTHESIS 2026-10-14, no dump: structure copied from MGSV:GZ (650249872, confirmed). Server rules: all 42 = Sum/Integer/target 1, same as GZ (counters are tracked client-side). Event names = PascalCase achievement names (GZ: 13/15 matched; exceptions Dawnfall/Stealth). Payload = GZ round-1 properties payload. Any id that credits confirms the shared structure.",
     "Notes": [
@@ -1112575,7 +1111623,7 @@
     "PackageFamilyName": "Team17DigitalLimited.Overcooked_j5x4vj4y67jhc",
     "ApplicationId": "App",
     "ExecutableName": "Overcooked.exe",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Unity 5.3.4p5 Mono-AOT. Event names + Part C field names/types recovered from embedded EtxManifest (provider TM17_145207D1). All 11 CSV achievements traced to OvercookedAchievementManager monitors; client OnAward is a no-op on XB1 so grants are server rules on these events. #2/#3 send StarCollected with the client's absolute snapshot (30 star levels, 90 stars max); client GameProgress is not emitted (manifest mismatch). Not runtime-tested: confirm requirements.json current moves. Research: F:/UWPDumps/Overcooked_340920273.",
     "AchievementNames": {
@@ -1112789,7 +1111837,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "ed7a0100-ddbb-4d1c-93d3-f8cf458e04d7",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1113143,7 +1112191,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "a0df0100-c2cf-4962-b0e2-46ea6f15104f",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "ResearchStatus": "Static, not runtime-tested. 60/60 CSV ids mapped to 60 native EAchievementList values; each value dispatches (PoplarDataPlatform::UnlockAchievement FUN_140fcb580) to its own ETX event (provider TKGB_6F15104F, 0.7.IGB-2.0) whose only custom field is the player's XUID string. Test: fire one recipe and confirm requirements.json current moves.",
     "Notes": [
@@ -1114493,6 +1113541,7 @@
     ],
     "ServiceConfigId": "9e9c0100-e67b-41f2-86b7-158632966611",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "ResearchStatus": "Built 2026-10-14 from PopCap native exe 'Peggle2 - Capilano.exe' 1.0.7.0 (ETX provider EARW_32966611, 26 descriptors, 10 emitted). Achievements are event-based: CapilanoAchievementDriver write slots are stubs. Recipes replicate CapilanoPeggleDataEventSink payloads after PeggleDataEventChallengeFilter/MultiplayerFilter: LevelBeaten (IGSE-2.4, 39 fields), ShotComplete (IGB-2.2, 34), CompleteObjective (IGOE-3.1, 10). Event names, field order, types and values are dump-proven; custom JSON key names (LevelId, PegsRemaining, BallsRemaining, BeatAceScore, TotalPoints, PointsEarned, StyleShotPoints, FreeBallsEarned, *PegsHit, StyleShot*) are derived from the exe debug-log labels and style-shot identifiers, NOT from a manifest: run probe P1 (experimental) first. Objective tiers 14-19/34/37 are incremental (30 new CompleteObjective events each, cumulative SUM): fire them in ascending order. App id U:...!App is EA-store sibling-inferred. Untested.",
     "Achievements": {
@@ -1121523,7 +1120572,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "00000000-0000-0000-0000-000069ff73ad",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1122847,7 +1121896,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "4afb0100-1a77-40b0-a405-d9f23c646a12",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "7": {
@@ -1123126,8 +1122175,8 @@
     "ResearchStatus": "STATIC UNTESTED: 16/16 CSV IDs accounted for; 16 manifest events recovered. Event names, Int32 fields and writer calls dump-proven. Service-id joins are semantic; JSON bags/envelope are app conventions. Rule operations/targets, complete pose-disqualification semantics for21, session identity, and runtime credit unresolved. Read achievement-mapping.json before testing."
   },
   "1766089184": {
-    "FullySupported": false,
-    "Enabled": false,
+    "FullySupported": true,
+    "Enabled": true,
     "ResearchStatus": "Research only. 49 client-backed feeder candidates; six aggregate mappings withheld in UnresolvedAchievements and experimental file. No runtime credit verified. Enable only after review and explicit installation authorization.",
     "Achievements": {
       "1": {
@@ -1173781,7 +1172830,7 @@
     ],
     "TitleName": "Dead Rising 2 Off the Record",
     "Enabled": true,
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1177125,7 +1176174,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "d2010100-d8c1-465f-b4f6-75431f90bb2a",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1177329,6 +1176378,7 @@
     ],
     "ServiceConfigId": "058e45a1-7402-4700-96d0-6389c9a8db77",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1179389,6 +1178439,7 @@
     "TitleName": "Dead Rising 2",
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1182412,6 +1181463,7 @@
   },
   "1840996916": {
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "TitleName": "Kinect Sports Rivals",
     "Achievements": {
@@ -1183567,6 +1182619,7 @@
     "ServiceConfigId": "309e0100-2c2f-4e09-90ae-397d7a72f63c",
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1184319,6 +1183372,7 @@
     ],
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1185343,7 +1184397,7 @@
       "XboxOne"
     ],
     "Enabled": true,
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "4": {
         "Request1": {
@@ -1185698,6 +1184752,7 @@
     ],
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1191483,6 +1190538,7 @@
     ],
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1196887,6 +1195943,7 @@
     ],
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "3": {
         "Request1": {
@@ -1202812,6 +1201869,7 @@
     ],
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1208330,6 +1207388,7 @@
     "TitleName": "The Amazing Spider-Man 2™",
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1250951,6 +1250010,7 @@
     ],
     "ServiceConfigId": "7fbb0100-3348-45b2-8572-273e7985cc5d",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1251493,7 +1250553,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "f9d30100-7748-4d1a-b508-524805a3c308",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1254602,6 +1253662,7 @@
     ],
     "ServiceConfigId": "25629596-d386-444c-a82e-734960c1dea3",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "4": {
@@ -1256932,7 +1255993,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "387a0100-dd3f-4dd2-9471-88134448127b",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1259289,7 +1258350,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "00220100-c7c2-4e25-9d3f-fac70a71c25f",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1259854,6 +1258915,7 @@
     ],
     "ServiceConfigId": "78d50100-4794-4634-9bcb-9d8a295f3c44",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "7": {
@@ -1272165,6 +1271227,7 @@
     ],
     "ServiceConfigId": "30700100-eb92-496d-a8c0-a0dd385636dd",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "17": {
@@ -1272747,7 +1271810,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "d7000100-e4b5-46cf-a6f6-395335a97d64",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1273480,7 +1272543,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "790a0100-8d47-499b-b5ef-f0bb3059349e",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "2": {
@@ -1274076,7 +1273139,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "70b10100-1bd8-4c0a-87bd-dd7c218a07a2",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1275097,6 +1274160,7 @@
     ],
     "ServiceConfigId": "c71e0100-1f2b-4454-9058-8b9d542d88d8",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1276117,6 +1275181,7 @@
     ],
     "ServiceConfigId": "c7cd0100-0473-4adf-8979-c3f805e973c0",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "12": {
@@ -1277136,6 +1276201,7 @@
     ],
     "ServiceConfigId": "42a60100-9caa-4ee4-b80b-595a757a62cc",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1289080,6 +1288146,7 @@
     ],
     "ServiceConfigId": "63c20100-5668-4d72-930c-ac714f338d29",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1289359,6 +1288426,7 @@
     ],
     "ServiceConfigId": "350f0100-90e7-4688-9178-c7b401ea2585",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "11": {
@@ -1290855,7 +1289923,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "99330100-8230-4304-8448-b7b80ffcf70b",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1310715,6 +1309783,7 @@
     ],
     "ServiceConfigId": "e8e80100-1c04-410c-a9e5-41bc3a3a6568",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "51": {
@@ -1320458,6 +1319527,7 @@
     ],
     "ServiceConfigId": "72dd0100-22ce-40d8-bcdd-d50f0831a404",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1321318,7 +1320388,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "6bad0100-af20-4ec9-a25a-357e2ce23f72",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1325207,7 +1324277,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "79480100-5c93-4a31-9a3c-7b8a583568f2",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1327311,6 +1326381,7 @@
     ],
     "ServiceConfigId": "2d660100-78ab-444e-bef1-71327259173a",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1327625,7 +1326696,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "faa90100-64d2-4520-bccf-790405508e4e",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1328559,6 +1327630,7 @@
     ],
     "ServiceConfigId": "6e020100-2dbd-4085-ab4b-72054bc12deb",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "3": {
@@ -1331525,6 +1330597,7 @@
     ],
     "ServiceConfigId": "6fd40100-764a-49ba-bef5-76902cb2d07f",
     "FullySupported": false,
+    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "3": {
@@ -1333548,7 +1332621,7 @@
     ],
     "ServiceConfigId": "89290100-e7f4-4f38-9d7b-322a2589f553",
     "Enabled": true,
-    "FullySupported": false,
+    "FullySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1334936,7 +1334009,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "46de0100-51a9-4b32-9958-800e6346e6a1",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "1": {
@@ -1340797,6 +1339870,7 @@
     "ServiceConfigId": "86080100-49a6-4cd1-a4ef-03f06e1d20c9",
     "Enabled": true,
     "FullySupported": false,
+    "PartiallySupported": true,
     "Achievements": {
       "1": {
         "Request1": {
@@ -1371026,7 +1370100,7 @@
       "XboxSeries"
     ],
     "ServiceConfigId": "91420100-a344-4648-ba6e-bc600b7fd9a7",
-    "FullySupported": false,
+    "FullySupported": true,
     "Enabled": true,
     "Achievements": {
       "2": {
@@ -1386094,7 +1385168,6 @@
     429018095,
     342226876,
     1535750831,
-    1879115757,
     1959656817,
     1847979820,
     1808064759,
