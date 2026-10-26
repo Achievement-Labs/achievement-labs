@@ -731,7 +731,10 @@ public class XboxApiClient : IDisposable
         }, ct);
     }
 
-    public async Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId)
+    public Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId) => GetAchievementsForTitleAsync(xuid, titleId, true);
+
+    /// <param name="writeDebugLog">False for frequent background reads (Achievement Mirror) so Documents isn't filled with copies.</param>
+    public async Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId, bool writeDebugLog)
     {
         if (string.IsNullOrWhiteSpace(xuid) || string.IsNullOrWhiteSpace(titleId))
         {
@@ -745,7 +748,7 @@ public class XboxApiClient : IDisposable
 
         var response = await (await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.QueryAchievementsUrl, xuid, titleId))).Content.ReadAsStringAsync();
         LastAchievementsRawResponse = response;
-        WriteAchievementsDebugLog(titleId, response);
+        if (writeDebugLog) WriteAchievementsDebugLog(titleId, response);
         var achievements = JsonConvert.DeserializeObject<AchievementsResponse>(response);
         return achievements;
     }
