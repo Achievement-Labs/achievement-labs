@@ -1,6 +1,6 @@
 # Event title catalogue
 
-512 titles: **289 Supported**, **217 Testing**, **6 Coming Soon**. This is the author-maintained catalogue included in v1.0.9 and synchronized to the hosted catalogue.
+512 titles: **289 Supported**, **0 Partially Supported**, **217 Testing**, **6 Coming Soon**. This is the author-maintained catalogue included in v1.0.9 and synchronized to the hosted catalogue.
 
 Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.
 
