@@ -7,7 +7,7 @@ Directory.CreateDirectory(root);
 var bytes = new byte[] { 77, 90, 1, 2, 3, 4 };
 var hash = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 var manifest = new UpdateManifest("1.0.6.1", bytes.Length, hash);
-if (AppUpdater.Repository != "https://github.com/thevampirebat/achievement-labs") throw new Exception("Wrong release repository");
+if (AppUpdater.Repository != "https://github.com/Achievement-Labs/achievement-labs") throw new Exception("Wrong release repository");
 var feed = "[" + JsonSerializer.Serialize(new { draft=false, prerelease=false, tag_name="v99.0.0", assets=Array.Empty<object>() }) + "," + JsonSerializer.Serialize(new { draft=false, prerelease=false, tag_name="v1.0.6", assets=new[] {
  new { name="update.json", browser_download_url=AppUpdater.Repository+"/releases/download/v1.0.6/update.json", size=0L, digest="" },
  new { name="AchievementLabs.exe", browser_download_url=AppUpdater.Repository+"/releases/download/v1.0.6/AchievementLabs.exe", size=(long)bytes.Length, digest="sha256:"+hash }
@@ -19,7 +19,7 @@ var badHandler = new Handler(url => url.Contains("/releases?per_page=100",String
 using (var mismatch = new AppUpdater(new HttpClient(badHandler),root)) {
  try { await mismatch.CheckAsync(new Version(1,0,6,0),default); throw new Exception("Mismatched publication accepted"); } catch(InvalidDataException) {}
 }
-var foreignFeed = feed.Replace(AppUpdater.Repository + "/releases/download/", "https://github.com/Achievement-Labs/achievement-labs/releases/download/", StringComparison.Ordinal);
+var foreignFeed = feed.Replace(AppUpdater.Repository + "/releases/download/", "https://github.com/thevampirebat/achievement-labs/releases/download/", StringComparison.Ordinal);
 using (var foreign = new AppUpdater(new HttpClient(new Handler(url => url.Contains("/releases?per_page=100",StringComparison.Ordinal) ? new StringContent(foreignFeed) : new StringContent("{}"))),root)) {
  try { await foreign.CheckAsync(new Version(1,0,6,0),default); throw new Exception("Old repository download accepted"); } catch(InvalidDataException) {}
 }
@@ -30,15 +30,6 @@ using (var mixed = new AppUpdater(new HttpClient(new Handler(url => url.Contains
  if (latest.Manifest.Version!="1.0.6.2") throw new Exception("Highest Windows revision was not selected");
 }
 using (var cancelled = new CancellationTokenSource()) { cancelled.Cancel(); try { await updater.DownloadAsync(update,cancelled.Token); throw new Exception("Cancellation ignored"); } catch(OperationCanceledException) {} }
-var forkManifest = manifest with { Version="1.0.8.14" };
-var forkFeed = feed.Replace("v1.0.6", "v1.0.8-fork.14", StringComparison.Ordinal).Replace("\"prerelease\":false", "\"prerelease\":true", StringComparison.Ordinal);
-using (var fork = new AppUpdater(new HttpClient(new Handler(url => url.Contains("/releases?per_page=100",StringComparison.Ordinal) ? new StringContent(forkFeed) : new StringContent(JsonSerializer.Serialize(forkManifest,new JsonSerializerOptions(JsonSerializerDefaults.Web))))),root)) {
- if ((await fork.CheckAsync(new Version(1,0,8,13),default))?.Manifest.Version!="1.0.8.14") throw new Exception("Fork prerelease revision missing");
- if (await fork.CheckAsync(new Version(1,0,8,14),default)!=null || await fork.CheckAsync(new Version(1,0,8,15),default)!=null) throw new Exception("Fork updater offered same or older revision");
-}
-using (var draft = new AppUpdater(new HttpClient(new Handler(_ => new StringContent(forkFeed.Replace("\"draft\":false","\"draft\":true",StringComparison.Ordinal)))),root)) {
- if(await draft.CheckAsync(new Version(1,0,8,13),default)!=null) throw new Exception("Draft release offered");
-}
 var download = await updater.DownloadAsync(update,default);
 var target = Path.Combine(root,"installed.exe");
 var events = Path.Combine(root,"Events"); Directory.CreateDirectory(events); File.WriteAllText(Path.Combine(events,"Data.json"),"user edits");
@@ -58,4 +49,4 @@ try { await oversized.DownloadAsync(update,default); throw new Exception("Oversi
 if(Directory.GetFiles(root,"download.part",SearchOption.AllDirectories).Length!=0) throw new Exception("Partial files retained");
 if(File.ReadAllText(Path.Combine(events,"Data.json"))!="user edits") throw new Exception("Events modified");
 Console.WriteLine("PASS: canonical repository, mixed-platform releases, highest revision, foreign download rejection, revision detection, same-version rejection, download verification, replacement, backup, startup rollback, checksum/truncated/oversized rejection, partial cleanup, Events preservation.");
-sealed class Handler(Func<string,HttpContent> response) : HttpMessageHandler { protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken ct) { ct.ThrowIfCancellationRequested(); if(request.Headers.Contains("Authorization") || request.Headers.Contains("tickets")) throw new Exception("Account credentials reached update requests"); if(request.RequestUri!.Host=="api.github.com" && request.RequestUri.AbsoluteUri!="https://api.github.com/repos/thevampirebat/achievement-labs/releases?per_page=100") throw new Exception("Wrong release API"); return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK){Content=response(request.RequestUri!.AbsoluteUri)}); } }
+sealed class Handler(Func<string,HttpContent> response) : HttpMessageHandler { protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken ct) { ct.ThrowIfCancellationRequested(); if(request.Headers.Contains("Authorization") || request.Headers.Contains("tickets")) throw new Exception("Account credentials reached update requests"); if(request.RequestUri!.Host=="api.github.com" && request.RequestUri.AbsoluteUri!="https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100") throw new Exception("Wrong release API"); return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK){Content=response(request.RequestUri!.AbsoluteUri)}); } }

@@ -18,7 +18,7 @@ Scan QR is in every main/detail page header on Android and the shared iOS page t
 
 Phone test: sign in with Microsoft on the phone (iOS: use the Xbox iOS profile to test mobile-device credentials), open a game in Game Session, tap Start spoofing, and check for a heartbeat acceptance message. Stop explicitly, then test again after reopening the app. If Xbox refuses the token, share the status/HTTP code only, never tokens or redirect URLs.
 
-App update feeds remain thevampirebat/achievement-labs. Event catalogue remains Achievement-Labs/achievement-labs. Mac work is parked and excluded from this branch.
+App update feeds remain Achievement-Labs/achievement-labs. Event catalogue remains Achievement-Labs/achievement-labs. Mac work is parked and excluded from this branch.
 
 ## Follow-up: device proof and issuer expiry
 

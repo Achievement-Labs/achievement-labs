@@ -37,11 +37,11 @@ final class PublicSyncTests: XCTestCase {
     func testMobileReleaseFilteringAndNumericVersion() throws {
         XCTAssertTrue(MobileRelease.newer("0.10.0",than:"0.9.9")); XCTAssertFalse(MobileRelease.newer("0.3.0",than:"0.3.0"))
         let releases: [[String:Any]] = [
-          ["draft":false,"html_url":"https://github.com/thevampirebat/achievement-labs/releases/tag/v9.0.0","assets":[["name":"AchievementLabs.exe"]]],
-          ["draft":false,"html_url":"https://github.com/thevampirebat/achievement-labs/releases/tag/ios-v0.4.0","assets":[["name":"AchievementLabs-iOS-0.4.0-UNSIGNED.ipa","browser_download_url":"https://github.com/thevampirebat/achievement-labs/releases/download/ios-v0.4.0/AchievementLabs-iOS-0.4.0-UNSIGNED.ipa"]]]
+          ["draft":false,"html_url":"https://github.com/Achievement-Labs/achievement-labs/releases/tag/v9.0.0","assets":[["name":"AchievementLabs.exe"]]],
+          ["draft":false,"html_url":"https://github.com/Achievement-Labs/achievement-labs/releases/tag/ios-v0.4.0","assets":[["name":"AchievementLabs-iOS-0.4.0-UNSIGNED.ipa","browser_download_url":"https://github.com/Achievement-Labs/achievement-labs/releases/download/ios-v0.4.0/AchievementLabs-iOS-0.4.0-UNSIGNED.ipa"]]]
         ]
         XCTAssertEqual(try MobileRelease.latest(JSON.data(releases))?.version,"0.4.0")
-        var oldRepository = releases[1]; oldRepository["html_url"] = "https://github.com/Achievement-Labs/achievement-labs/releases/tag/ios-v0.4.0"
+        var oldRepository = releases[1]; oldRepository["html_url"] = "https://github.com/thevampirebat/achievement-labs/releases/tag/ios-v0.4.0"
         XCTAssertNil(try MobileRelease.latest(JSON.data([oldRepository])))
         var invalid = releases[1]; invalid["html_url"] = "https://example.com/releases/tag/x"
         XCTAssertNil(try MobileRelease.latest(JSON.data([invalid])))
