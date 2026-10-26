@@ -2,11 +2,11 @@ using System.Security.Cryptography;
 
 namespace AchievementLabs.Services.Xbox360;
 
-public sealed class Xbox360ProfileService
+public sealed class Xbox360ProfileService(string? profilesDirectory = null)
 {
-    public string ProfilesDirectory => Path.Combine(
+    public string ProfilesDirectory { get; } = Path.GetFullPath(profilesDirectory ?? Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-        "AchievementLabs", "Xbox360", "Profiles");
+        "AchievementLabs", "Xbox360", "Profiles"));
 
     public IReadOnlyList<string> FindUsbProfiles()
     {

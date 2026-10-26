@@ -1,17 +1,18 @@
 # Achievement Labs — standalone iOS beta
 
+> Experimental mobile event-token test: see [test instructions](../docs/mobile-event-token-test.md). Public fork .15 remains unchanged. Successful token issuance and acceptance by the event collector are separate checks.
+
 Native SwiftUI app for iPhone and iPad, iOS/iPadOS 17 or later. No PC companion or running desktop app is required. This is a separate early mobile beta, not a replacement for the Windows release.
 
-## Current release preparation — iOS 0.12.2
+## Current test build — iOS 0.12.10 (28)
 
-- Matching companion builds: PC 1.0.8.9 and Android 0.6.0.
-- Live Activity timers use a fixed trailing column labelled Elapsed / Next unlock. Narrow iPhone layouts and long names cannot push the two clocks out of alignment. Active session panels have a static green outline/glow; paused or stale sessions remain neutral. The iOS Settings version now comes from the installed bundle.
-- PC QR sync offers Sign-in + event token, Sign-in only, and Event token only. Sign-in-only import preserves an existing event token for the same Xbox account. Microsoft renewal credentials remain on PC.
-- Saved game queues support manual JSON and QR transfer across PC, iOS and Android. Queue codes carry progress/delays without sign-in credentials. Imports validate the account and achievement metadata and never start automatically. See [QUEUE-QR.md](QUEUE-QR.md).
-- iOS retains its lock-screen Live Activity and Dynamic Island timers. The Home Screen widget, shared-storage code and App Groups entitlement have been removed for compatibility with the current signing setup. Keep the Live Activity extension when signing. Android retains its Home Screen widget.
-- Physical-device background execution remains subject to iOS. Timers describe this app session and accepted requests still require Xbox progress verification.
+App update checks/downloads and event JSON use [Achievement-Labs/achievement-labs](https://github.com/Achievement-Labs/achievement-labs/releases).
 
-Versioned notes below record how earlier betas evolved; this current summary takes precedence over descriptions of older behavior.
+Game Session combines spoofing and Auto Unlock with separate explicit Start actions. Library shortcuts select both controls for the chosen game while preventing active-session retargeting. Old spoof routes and launch preferences resolve to Game Session. Xbox 360 is a separate tab with native exported-profile import, library browsing, artwork when cached, filtering/sorting, green unlocked rows, descriptions, selected achievement/timestamp editing, automatic verified backups, rehash/resign and signed document export. The original export is read-only; console/USB copying remains separate. No exported profile or account token is sent to the editor's WebView network. See [mobile Xbox 360 details](../docs/mobile-xbox360.md).
+
+Before generating the Xcode project, run both `python3 mobile/tools/prepare_catalogue.py` and `python3 mobile/tools/prepare_360.py`. The latter prepares shared offline assets and the user-authorized CON identity from the checksum-pinned public Windows fork build without executing it. Generated binary inputs remain ignored by Git. CI tests synthetic profiles through the real WKWebView/native import/save/export bridge. Console acceptance and server synchronization require device validation.
+
+The unsigned IPA requires user signing/sideloading. Keep the Live Activity extension when signing. Live Activity/Dynamic Island timers and existing QR/session behavior remain available; there is no iOS Home Screen widget. Background execution remains subject to iOS. The current summary takes precedence over older version notes below.
 
 ## What is implemented
 
@@ -80,7 +81,7 @@ Spoofing 403 is now reported without repeatedly recommending the already-tested 
 
 Settings includes automatic event-data sync, Sync now, mobile release checking, update notifications and an automatic library refresh toggle. Public checks use an unauthenticated, cookie-free client and never send Xbox credentials. The hourly GitHub `Mobile public event feed` workflow verifies the original repo’s latest published Events.zip digest and archive structure, preserves JSON operation order, rejects unsupported replacement types and publishes only new titles absent from the bundled source. Native import revalidates every recipe and title/service identity before atomically caching it. Bundled corrections and disabled edition routes cannot be overwritten. New titles are Testing; accepted event requests still need progress verification. The public feed currently matches upstream v1.0.8, so zero new titles is a valid sync result.
 
-App update checks inspect published IPA release assets in the fork and ignore Windows-only releases. If no iOS release is published, the app says so; build artifacts alone do not appear as releases. Checks and notifications run while the app is active, not as an always-on background service. Installation remains a Signulous signing/install operation.
+App update checks inspect published IPA release assets on Achievement-Labs/achievement-labs and ignore Windows-only releases. If no iOS release is published, the app says so; build artifacts alone do not appear as releases. Checks and notifications run while the app is active, not as an always-on background service. Installation remains a Signulous signing/install operation.
 
 The matching Windows build adds Settings → iPhone / iPad sync → Export encrypted mobile sign-in. This writes a `.labslink` file encrypted with AES-256-GCM and a separate random 256-bit pairing key. Import is accepted for 10 minutes. Transfer the file to the phone, import it in mobile Settings → PC sync, and enter the key. Xbox verifies the authorization and XUID before a preview offers Connect this PC account or Import event token only. Event-only import requires the same account and preserves native OAuth renewal. Connecting the PC account imports current authorization/event credentials; OAuth renewal credentials stay on PC, so sync again when the imported authorization expires. No credential listener, LAN port or token-upload service is created. Keep both file and key private.
 

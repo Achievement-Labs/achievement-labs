@@ -132,6 +132,25 @@ public partial class BuildQueueViewModel : ObservableObject
         finally { runner.ReleaseClient(); ActiveGame = null; }
     }
 
+    /// <summary>Remaining achievements of every game still to run, read from their saved checkpoints (for the Achievement Mirror check).</summary>
+    public IReadOnlyList<(string TitleId, string TitleName, IReadOnlyList<string> AchievementIds)> RemainingQueues()
+    {
+        if (coordinator == null) return [];
+        var result = new List<(string, string, IReadOnlyList<string>)>();
+        foreach (var item in Items.Where(i => i.Xuid == account.XUIDOnly && i.Status is not (BuildQueueItemStatus.Completed or BuildQueueItemStatus.Cancelled)))
+        {
+            try
+            {
+                var path = coordinator.CheckpointPath(item.Id);
+                var state = File.Exists(path) ? Newtonsoft.Json.JsonConvert.DeserializeObject<AchievementLabs.Models.AutoUnlockState>(File.ReadAllText(path)) : null;
+                var ids = state?.Queue.Where(e => !e.Completed).Select(e => e.AchievementId).ToArray() ?? [];
+                result.Add((item.TitleId, item.TitleName, ids));
+            }
+            catch { result.Add((item.TitleId, item.TitleName, [])); }
+        }
+        return result;
+    }
+
     public void Stop() { coordinator?.Stop(); ActiveGame?.Stop(); Status = "Stopping build queue; progress will be kept."; }
 }
 

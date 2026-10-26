@@ -89,22 +89,25 @@ public sealed partial class DesktopModel
                 var account=session;if(account==null)return;
                 async Task<(string Name,string Message,bool Rejected)> Send(string id) {
                     var definition=source[id];using var api=new XboxApiClient(account.Authorization);
+                    MirrorExpectXbox(game.Id,id,definition.name);
                     try {
                         if(session?.Xuid!=account.Xuid)throw new OperationCanceledException();
                         if(useEvents) {
                             var payloads=await eventCatalog.GetPayloadsAsync(game.Id,id,account.Xuid,lifetime.Token);
                             foreach(var payload in payloads.Payloads) {
                                 lifetime.Token.ThrowIfCancellationRequested();var result=await api.UnlockEventBasedAchievementWithDiagnostics(account.EventsToken,payload);
-                                if(result.StatusCode is 401 or 403)return(definition.name,"Authorization rejected; refresh the event token.",true);
+                                if(result.StatusCode is 401 or 403) { MirrorCancelXbox(game.Id,id); return(definition.name,"Authorization rejected; refresh the event token.",true); }
                                 if(result.StatusCode<200 || result.StatusCode>=300)throw new HttpRequestException($"HTTP {result.StatusCode} {result.ReasonPhrase}");
                             }
                         } else {
                             if(string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId==Guid.Empty.ToString())throw new InvalidDataException("Missing service configuration.");
                             await api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId,game.Id,account.Xuid,id,FakeSignature);
                         }
+                        if(!await MirrorXboxAppUnlockAsync(game.Id,id,definition.name,lifetime.Token))
+                            return(definition.name,"Request accepted · Achievement Mirror couldn't copy it to Steam; see Achievement Mirror",false);
                         return(definition.name,"Request accepted; refresh Xbox progress to verify.",false);
-                    } catch(OperationCanceledException) { throw; }
-                    catch(Exception error) { return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }
+                    } catch(OperationCanceledException) { MirrorCancelXbox(game.Id,id); throw; }
+                    catch(Exception error) { MirrorCancelXbox(game.Id,id); return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }
                 }
                 foreach(var batch in ids.Distinct().Chunk(3)) {
                     var results=await Task.WhenAll(batch.Select(Send));

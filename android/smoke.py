@@ -3,14 +3,32 @@ import subprocess,time,pathlib,json
 root=pathlib.Path('android/artifacts');root.mkdir(exist_ok=True)
 def run(*args):return subprocess.check_output(args,text=True)
 subprocess.run(['adb','install','-r','android/app/build/outputs/apk/debug/app-debug.apk'],check=True)
-for page in ['home','library','find','queue','spoof','settings']:
+for page in ['home','library','find','queue','spoof','session-settings','settings','settings-appearance']:
  subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
  subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--es','page',page],check=True)
  time.sleep(6)
  assert run('adb','shell','pidof','org.achievementlabs.mobile').strip(),'App exited: '+page
  marker=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
- assert marker['page']==page and len(marker['text'])>100, 'Web UI did not render: '+page
+ assert marker['page']==('settings' if page=='settings-appearance' else page) and len(marker['text'])>100, 'Web UI did not render: '+page
  with open(root/f'Android-{page}.png','wb') as f:subprocess.run(['adb','exec-out','screencap','-p'],check=True,stdout=f)
+# Resizing/rotation must keep the live WebView and current session page.
+subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
+subprocess.run(['adb','shell','settings','put','system','accelerometer_rotation','0'],check=True)
+subprocess.run(['adb','shell','settings','put','system','user_rotation','0'],check=True)
+subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--es','page','queue'],check=True)
+time.sleep(4)
+portrait=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
+subprocess.run(['adb','shell','settings','put','system','user_rotation','1'],check=True)
+for _ in range(12):
+ time.sleep(1)
+ landscape=json.loads(run('adb','shell','run-as','org.achievementlabs.mobile','cat','files/preview-rendered.json'))
+ if landscape['viewport']['width']>landscape['viewport']['height']: break
+assert landscape['page']=='queue' and landscape['viewToken']==portrait['viewToken'], 'Rotation recreated or changed the session page'
+assert landscape['viewport']['width']>landscape['viewport']['height'], 'App did not resize to landscape'
+with open(root/'Android-queue-landscape.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],check=True,stdout=out)
+subprocess.run(['adb','shell','settings','put','system','user_rotation','0'],check=True)
+time.sleep(2)
+print('Rotation kept the same live WebView/session and delivered updated window dimensions.')
 # Android's real foreground service must survive Home and Activity replacement.
 subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
 subprocess.run(['adb','shell','pm','grant','org.achievementlabs.mobile','android.permission.POST_NOTIFICATIONS'],check=True)
@@ -36,6 +54,20 @@ print('Offline foreground session survived backgrounding and Activity replacemen
 log=run('adb','logcat','-d','-s','AndroidRuntime:E')
 assert 'FATAL EXCEPTION' not in log,log
 print('Six offline Android screens launched without credentials or Xbox requests.')
+
+subprocess.run(['adb','shell','am','force-stop','org.achievementlabs.mobile'],check=True)
+subprocess.run(['adb','shell','am','start','-W','-n','org.achievementlabs.mobile/.MainActivity','--ez','preview','true','--ez','xbox360Test','true'],check=True)
+for attempt in range(45):
+ time.sleep(1)
+ marker=subprocess.run(['adb','shell','run-as','org.achievementlabs.mobile','cat','files/xbox360-self-test.json'],capture_output=True,text=True)
+ if marker.returncode==0: break
+if marker.returncode!=0:
+ print(run('adb','logcat','-d','-s','Labs360Test:I','chromium:E','AndroidRuntime:E'),flush=True)
+ with open(root/'Android-xbox360-failure.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],stdout=out,check=True)
+assert marker.returncode==0, '360 native bridge did not finish'
+assert json.loads(marker.stdout).get('passed'),marker.stdout
+with open(root/'Android-xbox360.png','wb') as out:subprocess.run(['adb','exec-out','screencap','-p'],stdout=out,check=True)
+print('Xbox 360: actual WebView imported a synthetic profile, unlocked, signed, saved and verified native export/backup bytes. No account or network.')
 
 
 # Inflate the shipped RemoteViews and exercise both native timer bases and next-item transitions.

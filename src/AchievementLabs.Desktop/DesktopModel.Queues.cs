@@ -11,11 +11,12 @@ public sealed partial class DesktopModel
     public BuildQueueViewModel XboxBuildQueue => xboxBuildQueue ??= ObserveBuildQueuePreferences(ObserveWorkflow(new BuildQueueViewModel(queueAccount, new NativeNotices(message => Notice = message), eventCatalog) { ConfigureRunner = runner => {
         runner.ReadQueueAchievementsAsync = ReadQueueAchievementsAsync;
         runner.PresenceGate = requests;
+        runner.MirrorUnlockAsync = MirrorXboxAppUnlockAsync; runner.MirrorExpect = MirrorExpectXbox; runner.MirrorCancel = MirrorCancelXbox;
         runner.FailureNotification = message => AutoUnlockFailure?.Invoke(message);
         runner.CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } };
     } }));
-    public AutoUnlockerViewModel XboxQueue => xboxQueue ??= ObserveAutoUnlockPreferences(new AutoUnlockerViewModel(new NativeNotices(message => Notice = message), queueAccount) { EventCatalog = eventCatalog, CanDeleteSavedQueue = () => !QueueActive && xboxBuildQueue?.IsAdding != true, AppendSavedGameAsync = state => XboxBuildQueue.AddSavedGameAsync(state), ReadQueueAchievementsAsync = ReadQueueAchievementsAsync, ExternalPresenceActive = () => PresenceRunning, PresenceGate = requests, FailureNotification = message => AutoUnlockFailure?.Invoke(message), CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } } });
-    public SteamAutoUnlockerViewModel SteamQueue => steamQueue ??= ObserveWorkflow(new SteamAutoUnlockerViewModel(steam, new NativeNotices(message => Notice = message)));
+    public AutoUnlockerViewModel XboxQueue => xboxQueue ??= ObserveAutoUnlockPreferences(new AutoUnlockerViewModel(new NativeNotices(message => Notice = message), queueAccount) { EventCatalog = eventCatalog, CanDeleteSavedQueue = () => !QueueActive && xboxBuildQueue?.IsAdding != true, AppendSavedGameAsync = state => XboxBuildQueue.AddSavedGameAsync(state), ReadQueueAchievementsAsync = ReadQueueAchievementsAsync, ExternalPresenceActive = () => PresenceRunning, PresenceGate = requests, MirrorUnlockAsync = MirrorXboxAppUnlockAsync, MirrorExpect = MirrorExpectXbox, MirrorCancel = MirrorCancelXbox, FailureNotification = message => AutoUnlockFailure?.Invoke(message), CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } } });
+    public SteamAutoUnlockerViewModel SteamQueue => steamQueue ??= ObserveWorkflow(new SteamAutoUnlockerViewModel(steam, new NativeNotices(message => Notice = message)) { MirrorUnlockAsync = MirrorSteamAppUnlockAsync, MirrorExpect = MirrorExpectSteam, MirrorCancel = MirrorCancelSteam });
     public string QueueOwnerXuid => queueAccount.XUIDOnly;
     public bool IsQueues => page == "Queues";
     public bool IsSteamQueue => page == "SteamQueue";
@@ -32,6 +33,14 @@ public sealed partial class DesktopModel
         SyncWorkflowAccount();
         queueAccount.LastOAuthResponse = session?.OAuthResponse; queueAccount.XAUTH = session?.Authorization ?? ""; queueAccount.XUIDOnly = session?.Xuid ?? ""; queueAccount.EventsToken = session?.EventsToken ?? ""; queueAccount.EventsDirectory = EventsDirectory;
         XboxQueue.OnNavigatedTo(); XboxBuildQueue.Refresh(); Navigate("Queues");
+        if (SelectedGame?.Id == PresenceTitleId) _ = PrepareGameQueueAsync(PresenceTitleId);
+    }
+    private async Task PrepareGameQueueAsync(string titleId)
+    {
+        if (QueueActive || xboxQueue?.IsRunning == true || xboxBuildQueue?.IsRunning == true) return;
+        SyncWorkflowAccount();
+        XboxQueue.OnNavigatedTo();
+        await XboxQueue.LoadSavedQueueForTitleAsync(titleId);
     }
     private async Task<AchievementsResponse?> ReadQueueAchievementsAsync(string titleId, CancellationToken ct)
     {
@@ -75,6 +84,8 @@ public sealed partial class DesktopModel
         if (session == null && !XboxQueue.IsRunning) return;
         if (XboxQueue.IsRunning) { await XboxQueue.StartStopAutoUnlock(); return; }
         if (busy) { Notice = "Wait for the current operation before starting a queue."; return; }
+        if (XboxQueue.PreparedState is { } prepared && !await MirrorPreflightAsync([(prepared.TitleId, prepared.GameName,
+            prepared.Queue.Where(e => !e.Completed).Select(e => e.AchievementId).ToArray())])) return;
         QueueActive = true;
         try { await XboxQueue.StartStopAutoUnlock(); } finally { QueueActive = false; }
     }
@@ -89,6 +100,7 @@ public sealed partial class DesktopModel
         if (XboxBuildQueue.IsRunning) { XboxBuildQueue.Stop(); return; }
         if (session == null || QueueActive || busy || PresenceRunning || XboxBuildQueue.IsAdding || xboxQueue?.IsRunning == true) return;
         SyncWorkflowAccount();
+        if (!await MirrorPreflightAsync(XboxBuildQueue.RemainingQueues())) return;
         QueueActive = true;
         try { await XboxBuildQueue.RunAsync(lifetime.Token, TimeSpan.FromSeconds(BuildQueueBufferSeconds)); }
         finally { QueueActive = false; }

@@ -5,6 +5,11 @@ import java.util.*;
 /** Account partitioning is supplied by SessionEngine's protected storage. */
 final class QueueLibrary {
  static String key(JSONObject item)throws Exception{return Core.numeric(item.getJSONObject("game").getString("titleId"))+"/"+Core.numeric(item.getString("achievementId"));}
+ static boolean shouldRestore(JSONObject saved,JSONArray current,String title,boolean active)throws Exception{
+  Core.numeric(title);if(active||!saved.has(title))return false;
+  for(int i=0;i<current.length();i++)if(title.equals(current.getJSONObject(i).getJSONObject("game").getString("titleId")))return false;
+  return true;
+ }
  static JSONArray copy(JSONArray items)throws Exception{return new JSONArray(items.toString());}
  static JSONArray append(JSONArray current,JSONArray incoming)throws Exception{
   JSONArray result=copy(current);Set<String> ids=new HashSet<>();for(int i=0;i<result.length();i++)ids.add(key(result.getJSONObject(i)));

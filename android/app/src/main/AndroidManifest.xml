@@ -8,13 +8,14 @@
  <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
  <uses-feature android:name="android.hardware.camera" android:required="false"/>
  <application android:name=".LabsApplication" android:theme="@style/AppTheme" android:label="Achievement Labs" android:icon="@drawable/app_icon" android:allowBackup="false" android:usesCleartextTraffic="false" android:supportsRtl="true">
-  <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+  <activity android:name=".MainActivity" android:configChanges="orientation|screenSize|smallestScreenSize|keyboardHidden" android:exported="true" android:windowSoftInputMode="adjustResize"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
   <service android:name=".SessionService" android:exported="false" android:foregroundServiceType="dataSync"/>
   <provider android:name="androidx.core.content.FileProvider" android:authorities="org.achievementlabs.mobile.updates" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/update_paths"/></provider>
   <activity android:name=".ScanActivity" android:exported="false" android:screenOrientation="portrait"/>
   <provider android:name=".QueueQRFileProvider" android:authorities="org.achievementlabs.mobile.queueqr" android:exported="false" android:grantUriPermissions="true"><meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/queue_qr_paths"/></provider>
   <activity android:name=".QueueQRActivity" android:exported="false"/>
   <activity android:name=".LoginActivity" android:exported="false"/>
+  <activity android:name=".Xbox360Activity" android:configChanges="orientation|screenSize|smallestScreenSize|keyboardHidden" android:exported="false"/>
   <receiver android:name=".SessionWidget" android:exported="false" android:label="Labs sessions"><intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/></intent-filter><meta-data android:name="android.appwidget.provider" android:resource="@xml/session_widget_info"/></receiver>
  </application>
 </manifest>

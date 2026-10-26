@@ -41,6 +41,8 @@ final class ServiceRefinementTests: XCTestCase {
             XCTAssertEqual(request.url?.host,"presence-heartbeat.xboxlive.com")
             XCTAssertEqual(request.url?.absoluteString,"https://presence-heartbeat.xboxlive.com/users/xuid(42)/devices/current/")
             XCTAssertEqual(request.value(forHTTPHeaderField:"x-xbl-contract-version"),"3")
+            XCTAssertEqual(request.value(forHTTPHeaderField:"Authorization"),"synthetic")
+            XCTAssertNil(request.value(forHTTPHeaderField:"Signature"))
             var body = request.httpBody ?? Data()
             if let stream = request.httpBodyStream {
                 stream.open(); defer { stream.close() }; var buffer = [UInt8](repeating:0,count:4096)

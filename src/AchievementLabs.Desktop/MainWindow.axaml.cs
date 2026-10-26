@@ -23,10 +23,14 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        InitializeComponent(); DataContext = model; model.EventTokenRequired = ShowEventTokenRequiredAsync;
+        InitializeComponent(); DataContext = model;
+        AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
+        AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
         var notifications = new WindowNotificationManager(this) { Position = NotificationPosition.TopRight, MaxItems = 3 };
         model.AutoUnlockFailure = message => { notifications.Show(new Notification("Unlock failed", message, NotificationType.Error, TimeSpan.FromSeconds(10))); model.NotifyWindows("Unlock failed", message); };
         model.AutoUnlockCompleted = message => notifications.Show(new Notification("Auto unlock complete", message, NotificationType.Success, TimeSpan.FromSeconds(10)));
+        model.MirrorAlert = (title, message) => notifications.Show(new Notification(title, message, NotificationType.Error, TimeSpan.FromSeconds(15)));
+        model.MirrorPreflightReview = ReviewMirrorPreflightAsync;
         model.SpooferFailure = message => notifications.Show(new Notification("Spoofer stopped", message, NotificationType.Error, TimeSpan.FromSeconds(10)));
         model.WindowsNotification = (title, message) =>
         {
@@ -39,6 +43,8 @@ public partial class MainWindow : Window
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
         xboxPresenceTimer.Tick += (_, _) => model.RefreshXboxPcAppPresence();
         var offlineChecks = AppContext.TryGetSwitch("AchievementLabs.OfflineChecks", out var offline) && offline;
+        var local360Preview = Environment.GetCommandLineArgs().Contains("--xbox360-local-test") || AppContext.TryGetSwitch("AchievementLabs.StartOnXbox360",out var start360) && start360;
+        if (!offlineChecks || local360Preview) model.RestoreXbox360SigningData();
         var startupWindowCheck = Environment.GetCommandLineArgs().Contains("--window-startup-test");
         if (!offlineChecks && !Environment.GetCommandLineArgs().Contains("--smoke-test") && !Environment.GetCommandLineArgs().Contains("--release-smoke-test"))
         {
@@ -82,7 +88,32 @@ public partial class MainWindow : Window
         Opened += async (_, _) =>
         {
             // Headless regression tests must never attach to a real account.
-            if (offlineChecks) return;
+            if (offlineChecks)
+            {
+                if (local360Preview)
+                {
+                    Title = "Achievement Labs — Local Xbox 360 preview";
+                    model.OpenXbox360Profiles();
+                    var localArgs = Environment.GetCommandLineArgs();
+                    if (localArgs.Contains("--local-360-smoke-test"))
+                    {
+                        var report = localArgs.SkipWhile(a=>a!="--output").Skip(1).First(); Directory.CreateDirectory(report);
+                        try
+                        {
+                            foreach (var relative in new[] { "steam-idle/AchievementLabs.SteamIdle.exe", "gfwl/AchievementLabs.GfwlInjector.exe", "StatsCatalog/TitleBasedStats.txt" })
+                                if (!File.Exists(Path.Combine(AppContext.BaseDirectory,relative))) throw new IOException("Missing extracted dependency: "+relative);
+                            if (model.Xbox360NeedsSigningSetup) throw new IOException("Standalone signing identity did not load.");
+                            if (!model.IsXbox360Profiles) throw new IOException("Local 360 landing page did not open.");
+                            if (Directory.Exists(Path.Combine(AppContext.BaseDirectory,"Events"))) throw new IOException("Unexpected loose Events directory.");
+                            await Task.Delay(150);
+                            File.WriteAllText(Path.Combine(report,"single-exe-smoke.txt"),"PASS: self-contained single EXE starts the Xbox 360 page, extracts helpers/catalogues and loads native signing automatically. No account attachment, network calls or profile writes.");
+                        }
+                        catch (Exception error) { File.WriteAllText(Path.Combine(report,"single-exe-smoke-error.txt"),error.ToString()); Environment.ExitCode=1; }
+                        Close(); return;
+                    }
+                }
+                return;
+            }
             if (startupWindowCheck)
             {
                 var initial = WindowState;
@@ -125,7 +156,10 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppAsync(); return;
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppOnStartupAsync();
+                // After the attach: its 6-second session read must not compete with this work. The Home Steam card
+                // was only filled in after clicking Home; read the local Steam profile at startup too.
+                _ = model.RefreshSteamProfileOnStartupAsync(); return;
             }
             try
             {
@@ -220,9 +254,25 @@ public partial class MainWindow : Window
         if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) await model.ImportEventPackAsync(path);
     }
     private void GoBack(object? s, RoutedEventArgs e) => model.GoBack();
+    private void GoForward(object? s, RoutedEventArgs e) => model.GoForward();
+    private void NavigationKeyDown(object? s, KeyEventArgs e)
+    {
+        if (e.Key == Key.BrowserBack || e.Key == Key.Left && e.KeyModifiers == KeyModifiers.Alt) { if (model.CanGoBack) { model.GoBack(); e.Handled = true; } }
+        else if (e.Key == Key.BrowserForward || e.Key == Key.Right && e.KeyModifiers == KeyModifiers.Alt) { if (model.CanGoForward) { model.GoForward(); e.Handled = true; } }
+    }
+    private void NavigationPointerPressed(object? s, PointerPressedEventArgs e)
+    {
+        var kind = e.GetCurrentPoint(this).Properties.PointerUpdateKind;
+        if (kind == PointerUpdateKind.XButton1Pressed && model.CanGoBack) { model.GoBack(); e.Handled = true; }
+        else if (kind == PointerUpdateKind.XButton2Pressed && model.CanGoForward) { model.GoForward(); e.Handled = true; }
+    }
+
     private void ShowAbout(object? s, RoutedEventArgs e) => model.Navigate("About");
     private void ShowLibrary(object? s, RoutedEventArgs e) => model.Navigate("Library");
     private void ShowXbox360Profiles(object? s, RoutedEventArgs e) => model.OpenXbox360Profiles();
+    private async void OpenXbox360LibraryGame(object? s, RoutedEventArgs e) { if (s is Button { Tag: Xbox360LibraryEntry entry }) await model.OpenXbox360LibraryGameAsync(entry); }
+    private void MoreXbox360Games(object? s, RoutedEventArgs e) => model.MoreXbox360Games();
+
     private void ShowGfwl(object? s, RoutedEventArgs e) => model.OpenGfwlWorkspace();
     private void OpenGpdFolder(object? s, RoutedEventArgs e) => model.OpenGpdFolder();
     private async void AddXbox360Gpd(object? s, RoutedEventArgs e) => await model.AddXbox360GameAsync(model.GpdTitleId);
@@ -320,6 +370,8 @@ public partial class MainWindow : Window
     private void ShowSteamProfile(object? s, RoutedEventArgs e) => model.ShowSteamProfile();
     private void ShowTools(object? s, RoutedEventArgs e) => model.Navigate("Tools");
     private async void SearchTitles(object? s, RoutedEventArgs e) => await model.SearchTitlesAsync();
+    private void SelectAllTitlePlatforms(object? s, RoutedEventArgs e) => model.SelectAllTitleSearchPlatforms(true);
+    private void ClearTitlePlatforms(object? s, RoutedEventArgs e) => model.SelectAllTitleSearchPlatforms(false);
     private async void SearchGamertag(object? s, RoutedEventArgs e) => await model.SearchGamertagAsync();
     private void OpenUtilityLink(object? s, RoutedEventArgs e) { if (s is Button { Tag: string destination }) model.OpenUtilityLink(destination); }
     private void RefreshConverter(object? s, RoutedEventArgs e) => model.RefreshConverterStatus();
@@ -329,6 +381,30 @@ public partial class MainWindow : Window
         if (file?.TryGetLocalPath() is { } path) await model.ExportProfileGamesAsync(path);
     }
     private void ShowSteamQueue(object? s, RoutedEventArgs e) => model.Navigate("SteamQueue");
+    private void ShowMirror(object? s, RoutedEventArgs e) => model.OpenMirror();
+    private async Task<bool> ReviewMirrorPreflightAsync(IReadOnlyList<Workflows.MirrorPreflightIssue> issues)
+    {
+        var blocking = issues.Any(i => i.Blocking);
+        var dialog = new Window { Title = "Achievement Mirror check", Width = 560, SizeToContent = SizeToContent.Height, CanResize = false, WindowStartupLocation = WindowStartupLocation.CenterOwner };
+        var openMirror = new Button { Content = "Open Achievement Mirror" };
+        var start = new Button { Content = "Start without mirroring these", IsVisible = !blocking };
+        var cancel = new Button { Content = "Cancel" };
+        var openRequested = false;
+        openMirror.Click += (_, _) => { openRequested = true; dialog.Close(false); };
+        start.Click += (_, _) => dialog.Close(true); cancel.Click += (_, _) => dialog.Close(false);
+        var list = new StackPanel { Spacing = 8 };
+        foreach (var issue in issues)
+            list.Children.Add(new TextBlock { Text = (issue.Blocking ? "• " : "◦ ") + issue.TitleName + ": " + issue.Message, TextWrapping = TextWrapping.Wrap });
+        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = {
+            new TextBlock { Text = blocking ? "Fix these before Auto Unlock starts" : "Some games won't be mirrored", FontSize = 20, TextWrapping = TextWrapping.Wrap },
+            new TextBlock { Text = blocking ? "Achievement Mirror is copying your Xbox unlocks to Steam, but it can't mirror everything in this queue. Nothing has been unlocked." : "These games are in the queue but aren't being mirrored to Steam.", TextWrapping = TextWrapping.Wrap },
+            list,
+            new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openMirror, start, cancel } }
+        } } };
+        var proceed = await dialog.ShowDialog<bool>(this);
+        if (openRequested) model.OpenMirror();
+        return proceed;
+    }
     private void OpenLibraryStats(object? s, RoutedEventArgs e) { if (s is Button { Tag: Game game }) model.OpenLibraryStats(game); }
     private void ShowQueues(object? s, RoutedEventArgs e) => model.OpenQueues();
     private async void RunXboxQueue(object? s, RoutedEventArgs e) => await model.RunXboxQueueAsync();
@@ -346,6 +422,58 @@ public partial class MainWindow : Window
     private async void LoadSelectedXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadSelectedXbox360ProfileAsync();
     private async void LoadXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadXbox360ProfileAsync();
     private async void LoadXbox360Achievements(object? s, RoutedEventArgs e) => await model.LoadXbox360AchievementsAsync();
+    private void SelectXbox360Locked(object? s, RoutedEventArgs e) => model.SelectXbox360PreviewAchievements(true);
+    private void ClearXbox360Selection(object? s, RoutedEventArgs e) => model.SelectXbox360PreviewAchievements(false);
+    private async void PreviewXbox360Dates(object? s, RoutedEventArgs e) => await model.PreviewXbox360TimestampsAsync();
+    private async void LookupXbox360Exophase(object? s, RoutedEventArgs e) => await model.LoadXbox360ExophaseDatesAsync();
+    private async void ImportXbox360Dates(object? s, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Preview Exophase unlock dates", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Exophase JSON or saved HTML") { Patterns = ["*.json", "*.html", "*.htm"] }] });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) { await model.PreviewXbox360TimestampsAsync(path); if (model.Xbox360PreviewRows.Any(r => r.Result == "Ready for review")) model.Xbox360QuickUnlockMode = "Imported dates"; }
+    }
+    private void AchievementHeaderSizeChanged(object? sender, SizeChangedEventArgs e)
+    {
+        if (sender is not Grid row) return;
+        var narrow=row.Bounds.Width<650;
+        row.ColumnDefinitions=new ColumnDefinitions(narrow?"44,*,80,84,44":"44,0.85*,1.4*,80,84,44");
+        row.Children[1].IsVisible=!narrow;
+        for(var i=2;i<5;i++) Grid.SetColumn(row.Children[i],narrow?i:i+1);
+    }
+    private void AchievementRowSizeChanged(object? sender, SizeChangedEventArgs e)
+    {
+        if (sender is not Grid row || row.Children.Count!=6) return;
+        var narrow=row.Bounds.Width<650;
+        if(row.Tag is bool previous && previous==narrow) return;
+        row.Tag=narrow;
+        row.ColumnDefinitions=new ColumnDefinitions(narrow?"44,*,80,84,44":"44,0.85*,1.4*,80,84,44");
+        row.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto":"Auto");
+        Grid.SetRow(row.Children[2],narrow?1:0);Grid.SetColumn(row.Children[2],narrow?1:2);Grid.SetColumnSpan(row.Children[2],narrow?4:1);
+        row.Children[2].Margin=narrow?new Thickness(0,5,0,0):new Thickness(0);
+        Grid.SetRowSpan(row.Children[0],narrow?2:1);
+        for(var i=3;i<6;i++)Grid.SetColumn(row.Children[i],narrow?i-1:i);
+    }
+    private void Xbox360AchievementRowSizeChanged(object? sender, SizeChangedEventArgs e)
+    {
+        if (sender is not Grid row || row.Children.Count != 5) return;
+        var narrow = row.Bounds.Width < 600;
+        if (row.Tag is bool previous && previous==narrow) return;
+        row.Tag=narrow;
+        row.ColumnDefinitions = new ColumnDefinitions(narrow ? "Auto,*,96,36" : "Auto,0.85*,1.6*,100,36");
+        row.RowDefinitions = new RowDefinitions(narrow ? "Auto,Auto" : "Auto");
+        Grid.SetRow(row.Children[2],narrow?1:0); Grid.SetColumn(row.Children[2],narrow?1:2); Grid.SetColumnSpan(row.Children[2],narrow?3:1);
+        Grid.SetRowSpan(row.Children[0],narrow?2:1);
+        Grid.SetColumn(row.Children[3],narrow?2:3); Grid.SetColumn(row.Children[4],narrow?3:4);
+        row.Children[2].Margin = narrow ? new Thickness(0,5,0,2) : new Thickness(6,0);
+    }
+    private async void LoadXbox360Signing(object? s, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Load local Xbox 360 signing data", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Horizon executable or decrypted keyvault") { Patterns = ["*.exe", "*.bin", "*.kv"] }] });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) model.LoadXbox360SigningData(path);
+    }
+    private async void QuickUnlockXbox360(object? s, RoutedEventArgs e) => await model.UnlockSelectedXbox360Async();
+    private void ClearXbox360Signing(object? s, RoutedEventArgs e) => model.ClearXbox360SigningData();
+    private void StageXbox360Dates(object? s, RoutedEventArgs e) => model.StageXbox360TimestampPreview();
+    private async void DiscardXbox360Edits(object? s, RoutedEventArgs e) => await model.DiscardXbox360EditsAsync();
     private void SetXbox360Achievement(object? s, RoutedEventArgs e) => model.SetXbox360Achievement();
     private async void SaveXbox360Edits(object? s, RoutedEventArgs e) => await model.SaveXbox360EditsAsync();
     private async void InjectXbox360Profile(object? s, RoutedEventArgs e) => await model.InjectXbox360ProfileAsync();
@@ -364,7 +492,7 @@ public partial class MainWindow : Window
     }
     private async void ShowSteam(object? s, RoutedEventArgs e) => await model.RefreshSteamAsync();
     private async void LoadSteam(object? s, RoutedEventArgs e) => await model.LoadSteamAchievementsAsync();
-    private void ShowSteamAchievements(object? s, RoutedEventArgs e) => model.Navigate("SteamAchievements");
+    private async void ShowSteamAchievements(object? s, RoutedEventArgs e) => await model.OpenSteamAchievementsAsync();
     private async void OpenSteamAchievements(object? s, RoutedEventArgs e)
     {
         if (s is Button { Tag: AchievementLabs.Models.SteamGameItem game }) { model.SelectedSteamGame = game; await model.LoadSteamAchievementsAsync(); }

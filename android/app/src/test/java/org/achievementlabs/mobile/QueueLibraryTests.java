@@ -3,6 +3,16 @@ import org.junit.Test;import static org.junit.Assert.*;import org.json.*;
 
 public class QueueLibraryTests {
  private JSONObject item(String title,String id)throws Exception{return new JSONObject().put("game",new JSONObject().put("titleId",title).put("name","Game "+title)).put("achievementId",id).put("name","Achievement "+id).put("delay",120).put("status","Waiting");}
+ @Test public void autoRestoreOnlyForAnIdleDifferentGame()throws Exception{
+  JSONObject saved=new JSONObject();JSONArray a=new JSONArray().put(item("7","1")),b=new JSONArray().put(item("8","1"));
+  QueueLibrary.capture(saved,new JSONArray(),a);QueueLibrary.capture(saved,new JSONArray(),b);
+  assertTrue(QueueLibrary.shouldRestore(saved,a,"8",false));
+  assertFalse(QueueLibrary.shouldRestore(saved,a,"7",false));
+  assertFalse(QueueLibrary.shouldRestore(saved,a,"8",true));
+  assertFalse(QueueLibrary.shouldRestore(saved,a,"9",false));
+  JSONArray restored=QueueLibrary.restore(saved.getJSONObject("8"));assertEquals(120,restored.getJSONObject(0).getInt("delay"));
+  assertEquals("7/1",QueueLibrary.key(a.getJSONObject(0)));assertTrue(saved.has("7"));
+ }
  @Test public void separateQueuesSurviveReloadWithoutReplacingActive()throws Exception{
   JSONObject saved=new JSONObject();JSONArray a=new JSONArray().put(item("7","1")),b=new JSONArray().put(item("8","1"));
   QueueLibrary.capture(saved,new JSONArray(),a);QueueLibrary.capture(saved,new JSONArray(),b);

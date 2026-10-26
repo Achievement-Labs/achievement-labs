@@ -1,0 +1,19 @@
+package org.achievementlabs.mobile;
+import java.io.*;import java.nio.file.*;import java.security.*;import java.util.*;
+
+// A private session: document-picker sources are read-only; commits preserve a verified backup.
+final class Profile360Store {
+ static final int LIMIT=32*1024*1024, CHUNK=32768;
+ final File root; File directory; byte[] original,working;ByteArrayOutputStream pending;int expected;String digest;
+ Profile360Store(File root){this.root=root;}
+ static String profileName(byte[] b)throws IOException{if(b.length<0x379)throw new IOException("Profile header is missing.");StringBuilder name=new StringBuilder();for(int i=0x371;i<0x379;i++)name.append(String.format(Locale.ROOT,"%02X",b[i]&255));return name.toString();}
+ static String hash(byte[] b)throws Exception{byte[] digest=MessageDigest.getInstance("SHA-1").digest(b);StringBuilder s=new StringBuilder();for(byte x:digest)s.append(String.format(Locale.ROOT,"%02x",x&255));return s.toString();}
+ static byte[] bounded(InputStream in,int limit)throws IOException{if(in==null)throw new IOException("Could not open document.");try(in;ByteArrayOutputStream out=new ByteArrayOutputStream()){byte[] b=new byte[16384];int n;while((n=in.read(b))!=-1){if(out.size()+n>limit)throw new IOException("Document exceeds the size limit.");out.write(b,0,n);}return out.toByteArray();}}
+ static void atomic(File f,byte[] bytes)throws Exception{File temp=new File(f.getParentFile(),f.getName()+".partial");try{try(FileOutputStream out=new FileOutputStream(temp)){out.write(bytes);out.getFD().sync();}if(!Arrays.equals(Files.readAllBytes(temp.toPath()),bytes))throw new IOException("Private file readback failed.");Files.move(temp.toPath(),f.toPath(),StandardCopyOption.ATOMIC_MOVE,StandardCopyOption.REPLACE_EXISTING);}finally{Files.deleteIfExists(temp.toPath());}}
+ synchronized void load(byte[] bytes)throws Exception{if(pending!=null)throw new IOException("Finish the current save first.");if(bytes.length==0||bytes.length>LIMIT)throw new IOException("Profile must be smaller than 32 MB.");File next=new File(root,UUID.randomUUID().toString());if(!next.mkdirs())throw new IOException("Could not create private backup directory.");atomic(new File(next,"original.con"),bytes);atomic(new File(next,"working.con"),bytes);original=bytes.clone();working=bytes.clone();directory=next;}
+ synchronized void begin(int size,String sha,String before)throws Exception{if(working==null||pending!=null||size!=working.length||size>LIMIT||!sha.matches("[0-9a-f]{40}")||!hash(working).equals(before)||!Arrays.equals(Files.readAllBytes(new File(directory,"working.con").toPath()),working))throw new IOException("Working profile changed or save is invalid. Reload before editing.");pending=new ByteArrayOutputStream(size);expected=size;digest=sha;}
+ synchronized void append(int offset,byte[] bytes)throws Exception{if(pending==null||offset!=pending.size()||bytes.length==0||bytes.length>CHUNK||offset+bytes.length>expected)throw new IOException("Invalid or out-of-order save chunk.");pending.write(bytes);}
+ synchronized void commit()throws Exception{if(pending==null)throw new IOException("No pending save.");byte[] next=pending.toByteArray();if(next.length!=expected||!hash(next).equals(digest))throw new IOException("Signed profile transfer failed verification.");File previous=new File(directory,"before-save-"+UUID.randomUUID()+".con");atomic(previous,working);atomic(new File(directory,"working.con"),next);working=next;pending=null;}
+ synchronized void abort(){pending=null;}
+ synchronized byte[] export(boolean backup)throws Exception{if(working==null||pending!=null)throw new IOException("No completed profile is available.");byte[] data=backup?original:working;File f=new File(directory,backup?"original.con":"working.con");if(!Arrays.equals(Files.readAllBytes(f.toPath()),data))throw new IOException("Private profile changed. Reload before export.");return data.clone();}
+}
