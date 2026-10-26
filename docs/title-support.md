@@ -1,6 +1,6 @@
 # Complete event title catalog
 
-511 titles: **351 Supported**, **88 Partially Supported**, **71 Testing**, **1 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
+511 titles: **351 Supported**, **89 Partially Supported**, **71 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
 Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.
 
@@ -424,6 +424,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | R.B.I. Baseball 15 | Xbox One, Xbox Series X\|S | 1412270296 | 19 |
 | R.B.I. Baseball 18 | Xbox One, Xbox Series X\|S | 99185600 | 19 |
 | Rabbids Invasion : The Interactive TV Show | Xbox One | 1970954956 | 41 |
+| Rare Replay | Xbox One, Xbox Series X\|S | 515050978 | 200 |
 | Rayman Legends | Xbox One, Xbox Series X\|S | 666757656 | 8 |
 | Rock Band 4 | Durango | 767263759 | 61 |
 | Ryse: Son of Rome | Xbox One, Xbox Series X\|S | 1708767297 | 37 |
@@ -533,4 +534,3 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 
 | Title | Platform | Title ID | Mapped achievements |
 |---|---|---|---:|
-| Rare Replay | Xbox One, Xbox Series X\|S | 515050978 | 0 |

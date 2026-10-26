@@ -1,6 +1,6 @@
 # Event title catalogue
 
-511 titles: **351 Supported**, **88 Partially Supported**, **71 Testing**, **1 Coming Soon**. This is the author-maintained catalogue included in v1.0.10 and synchronized to the hosted catalogue.
+511 titles: **351 Supported**, **89 Partially Supported**, **71 Testing**, **0 Coming Soon**. This is the author-maintained catalogue included in v1.0.10 and synchronized to the hosted catalogue.
 
 Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.
 
@@ -407,7 +407,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | R.B.I. Baseball 17 | Xbox One, Xbox Series X\|S | `811152542` | 11 | Supported | [811152542.json](811152542.json) |
 | R.B.I. Baseball 18 | Xbox One, Xbox Series X\|S | `99185600` | 19 | Partially Supported | [99185600.json](99185600.json) |
 | Rabbids Invasion : The Interactive TV Show | Xbox One | `1970954956` | 41 | Partially Supported | [1970954956.json](1970954956.json) |
-| Rare Replay | Xbox One, Xbox Series X\|S | `515050978` | 0 | Coming Soon | [515050978.json](515050978.json) |
+| Rare Replay | Xbox One, Xbox Series X\|S | `515050978` | 200 | Partially Supported | [515050978.json](515050978.json) |
 | Rayman Legends | Xbox One, Xbox Series X\|S | `666757656` | 8 | Partially Supported | [666757656.json](666757656.json) |
 | ReCore: Definitive Edition | Windows PC, Xbox One, Xbox Series X\|S | `852431422` | 74 | Supported | [852431422.json](852431422.json) |
 | Red Faction Guerrilla Re-Mars-tered | Xbox One, Xbox Series X\|S | `753024882` | 57 | Supported | [753024882.json](753024882.json) |
