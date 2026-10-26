@@ -14,6 +14,8 @@ public struct Account: Codable, Equatable {
     public var loginProfile: String?
     public var refreshToken: String?
     public var authorizationExpiresAt: Date?
+    public var eventTokenExpiresAt: Date?
+    public var eventTokenExpiryHash: String?
     public func needsRefresh(at date: Date = Date()) -> Bool { authorizationExpiresAt.map { $0 <= date.addingTimeInterval(300) } ?? false }
     public init(authorization: String, xuid: String, gamertag: String, eventToken: String = "") {
         self.authorization = authorization; self.xuid = xuid; self.gamertag = gamertag; self.eventToken = eventToken

@@ -44,8 +44,8 @@ public struct PublicSync {
         if let session { self.session = session }
         else { let config = URLSessionConfiguration.ephemeral; config.httpShouldSetCookies = false; self.session = URLSession(configuration:config) }
     }
-    private func get(_ url: String, limit: Int) async throws -> Data {
-        var request = URLRequest(url:URL(string:url)!); request.timeoutInterval = 90; request.cachePolicy = .reloadIgnoringLocalCacheData
+    private func get(_ url: String, limit: Int, timeout: TimeInterval = 90) async throws -> Data {
+        var request = URLRequest(url:URL(string:url)!); request.timeoutInterval = timeout; request.cachePolicy = .reloadIgnoringLocalCacheData
         request.setValue("AchievementLabs-Mobile/0.3",forHTTPHeaderField:"User-Agent")
         let (data,response) = try await session.data(for:request)
         guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode), data.count <= limit else { throw LabsError.message("Public update check failed (HTTP \((response as? HTTPURLResponse)?.statusCode ?? 0)). Existing data was retained.") }
@@ -56,8 +56,17 @@ public struct PublicSync {
         return try JSONDecoder().decode(EventFeed.self,from:data)
     }
     public func searchTitles(_ input: String) async throws -> [Game] {
-        if let direct = try TitleSearch.direct(input) { return [direct] }
-        return try TitleSearch.parse(await get(TitleSearch.url(input).absoluteString,limit:2*1024*1024))
+        try await searchTitleResults(input).games
+    }
+    public func searchTitleResults(_ input: String) async throws -> TitleSearchResponse {
+        if let direct = try TitleSearch.direct(input) { return TitleSearchResponse(games:[direct],partial:false) }
+        var batches: [[Game]] = []; var failure: Error?; var consecutiveFailures = 0
+        for variant in try TitleSearch.variants(input) {
+            do { batches.append(try TitleSearch.parse(await get(TitleSearch.url(variant).absoluteString,limit:2*1024*1024,timeout:20))); consecutiveFailures = 0 }
+            catch { if Task.isCancelled { throw CancellationError() }; failure = error; consecutiveFailures += 1; if consecutiveFailures >= 2 { break } }
+        }
+        guard !batches.isEmpty else { throw failure ?? LabsError.message("Game search is unavailable.") }
+        return TitleSearchResponse(games:TitleSearch.merge(batches),partial:failure != nil)
     }
     public func release() async throws -> MobileRelease? {
         try MobileRelease.latest(await get("https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100",limit:4*1024*1024))

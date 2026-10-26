@@ -34,10 +34,17 @@ struct SignInWebView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration(); config.websiteDataStore = remember ? .default() : .nonPersistent()
+        config.allowsInlineMediaPlayback = true
+        config.mediaTypesRequiringUserActionForPlayback = .all
+        config.allowsPictureInPictureMediaPlayback = false
+        config.allowsAirPlayForMediaPlayback = false
         let view = WKWebView(frame:.zero,configuration:config)
         view.navigationDelegate = context.coordinator; view.uiDelegate = context.coordinator
         #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("--web-callback-self-test") {
+            let policy: [String:Bool] = ["inline":view.configuration.allowsInlineMediaPlayback,"requiresTap":view.configuration.mediaTypesRequiringUserActionForPlayback == .all,"pictureInPicture":view.configuration.allowsPictureInPictureMediaPlayback,"airPlay":view.configuration.allowsAirPlayForMediaPlayback]
+            let marker = FileManager.default.urls(for:.documentDirectory,in:.userDomainMask)[0].appendingPathComponent("SignInMedia-self-test.json")
+            do { try JSONSerialization.data(withJSONObject:policy).write(to:marker,options:.atomic) } catch { fatalError("Media policy self-test could not save its result") }
             view.loadHTMLString("<html><head><meta http-equiv='refresh' content='0;url=https://login.live.com/oauth20_desktop.srf?state=synthetic-state&amp;code=synthetic-code'></head><body>Synthetic callback check</body></html>",baseURL:nil)
             return view
         }

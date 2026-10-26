@@ -29,6 +29,15 @@ public sealed partial class DesktopModel
         }
     }
 
+    /// <summary>Startup attach, retried once after a short wait in case the Xbox app was still loading.</summary>
+    public async Task AttachXboxPcAppOnStartupAsync()
+    {
+        await AttachXboxPcAppAsync();
+        if (session != null || lifetime.IsCancellationRequested) return;
+        try { await Task.Delay(TimeSpan.FromSeconds(10), lifetime.Token); } catch (OperationCanceledException) { return; }
+        if (session == null && CanConnect) await AttachXboxPcAppAsync();
+    }
+
     public async Task AttachXboxPcAppAsync()
     {
         if (!CanConnect) return;

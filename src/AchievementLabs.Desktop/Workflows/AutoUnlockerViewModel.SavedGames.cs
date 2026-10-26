@@ -38,6 +38,45 @@ public partial class AutoUnlockerViewModel
     }
     public string SavedGameQueuesRoot { get; set; } = Path.Combine(Path.GetDirectoryName(AutoUnlockState.GetSavePath())!,"saved-game-queues");
     private string SavedGamesDirectory => Path.Combine(SavedGameQueuesRoot,account.XUIDOnly);
+    private bool loadingGameQueue;
+    public async Task<bool> LoadSavedQueueForTitleAsync(string titleId)
+    {
+        if (IsRunning || loadingGameQueue || !CanDeleteSavedQueue() || !uint.TryParse(titleId, out var id) || id == 0) return false;
+        if (_state != null && OwnSavedState(_state) && _state.TitleId == titleId) return true;
+        loadingGameQueue = true;
+        try
+        {
+            if (_state != null && OwnSavedState(_state)) SaveState();
+            RefreshSavedGameQueues();
+            var saved = SavedGameQueues.FirstOrDefault(q => q.TitleId == titleId);
+            if (saved != null)
+            {
+                SelectedSavedGameQueue = saved;
+                // Validate owner/title before replacing the active checkpoint.
+                _ = ReadSelectedSavedGame();
+                await LoadSelectedGameQueueAsync();
+                return _state != null && OwnSavedState(_state) && _state.TitleId == titleId;
+            }
+            ClearLoadedQueueForTitle(titleId);
+            StatusText = "No saved queue for this game. Load a reference to build one.";
+            return false;
+        }
+        catch
+        {
+            ClearLoadedQueueForTitle(titleId);
+            StatusText = "Saved queue could not be loaded. Existing saved files were retained.";
+            return false;
+        }
+        finally { loadingGameQueue = false; }
+    }
+    private void ClearLoadedQueueForTitle(string titleId)
+    {
+        _state = null; QueueItems.Clear(); TitleId = titleId; SelectedSavedGameQueue = null;
+        HasExistingState = false; ExistingStateInfo = ""; GameName = "Game: None";
+        ReferenceInfo = "Reference User: None"; ProgressText = "Progress: 0/0";
+        NextUnlockText = "Next Unlock: N/A"; TimeRemainingText = "Time Until Next: N/A";
+        UpdateCompletionEstimate();
+    }
 
     private bool OwnSavedState(AutoUnlockState state) => Regex.IsMatch(account.XUIDOnly,@"^\d{1,20}$") && state.OwnerXuid == account.XUIDOnly && uint.TryParse(state.TitleId,out var title) && title != 0;
     private void SaveGameQueueSnapshot(AutoUnlockState state)

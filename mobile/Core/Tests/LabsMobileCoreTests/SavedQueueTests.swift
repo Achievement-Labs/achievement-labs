@@ -5,6 +5,16 @@ final class SavedQueueTests: XCTestCase {
     private func item(_ title: String, _ achievement: String) throws -> QueueItem {
         QueueItem(game:try Game(["titleId":title,"name":"Game " + title]),achievement:try Achievement(["id":achievement,"name":"Achievement " + achievement]),delay:120)
     }
+    func testAutoRestoreKeepsCurrentGameAndActiveSessions() throws {
+        var book = SavedQueueBook(); let a = try item("7","1"), b = try item("8","1")
+        book.capture([a]); book.saveSeparate([b])
+        XCTAssertTrue(book.shouldRestore("8", current:[a], active:false))
+        XCTAssertFalse(book.shouldRestore("7", current:[a], active:false))
+        XCTAssertFalse(book.shouldRestore("8", current:[a], active:true))
+        XCTAssertFalse(book.shouldRestore("9", current:[a], active:false))
+        XCTAssertEqual(book.games["8"]?.items.first?.delay,120)
+        XCTAssertEqual(book.current.first?.id,"7/1")
+    }
     func testSeparateSaveDoesNotChangeCurrentQueueAndSurvivesRestart() throws {
         var book = SavedQueueBook(); let first = try item("7","1"), second = try item("8","2")
         book.capture([first]); book.saveSeparate([second])

@@ -60,6 +60,7 @@ public sealed partial class DesktopModel
         var title = response.Titles.FirstOrDefault() ?? throw new InvalidDataException();
         SpoofTitleName = title.Name;
         SpoofTitleImageUrl = ResolveTitleImage(title.DisplayImage, title.Images);
+        await PrepareGameQueueAsync(title.TitleId);
         SpoofTitleDetails = $"Title ID: {title.TitleId}\nPFN: {title.Pfn ?? "Unknown"}\nType: {title.Type ?? "Unknown"}\nDevices: {string.Join(", ", title.Devices)}\nGamerscore: {title.Achievement?.CurrentGamerscore ?? 0}/{title.Achievement?.TotalGamerscore ?? 0}";
     }, allowQueue: true);
     public void UseSelectedTitleForStats() { StatsTitleId = SelectedGame?.Id ?? ""; ServiceConfigId = definitions.Values.FirstOrDefault()?.serviceConfigId ?? ""; OpenStats(); StatsEditor.TitleId = StatsTitleId; }
@@ -83,6 +84,7 @@ public sealed partial class DesktopModel
     {
         if (!CanStartPresence || client == null || session == null || !uint.TryParse(PresenceTitleId, out var id) || id == 0) return;
         var xuid = session.Xuid; var titleId = id.ToString();
+        runningPresenceTitleId = titleId; presenceHeartbeatAt = null;
         string? lastPresenceAuthorization = null;
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
         ActiveSpoofTitle = $"{Games.FirstOrDefault(g => g.Id == titleId)?.Name ?? (SpoofTitleDetails.StartsWith("Title ID: " + titleId + "\n") ? SpoofTitleName : "Xbox title")} · {titleId}";
@@ -112,6 +114,7 @@ public sealed partial class DesktopModel
                     StatsOutput = $"Presence heartbeat for {titleId}: HTTP {result.StatusCode}";
                     if (result.StatusCode < 200 || result.StatusCode >= 300) { failure = $"Heartbeat HTTP {result.StatusCode}"; PresenceHeartbeat = failure; break; }
                     PresenceHeartbeat = $"Last heartbeat: {DateTimeOffset.Now:HH:mm:ss} · HTTP {result.StatusCode}";
+                    presenceHeartbeatAt = DateTimeOffset.Now;
                     lastHeartbeat = stopwatch.Elapsed;
                 }
                 finally { requests.Release(); }
@@ -138,7 +141,7 @@ public sealed partial class DesktopModel
                 }
             }
             catch { StatsOutput = "Presence stop request failed; the service may retain presence until it expires."; }
-            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
+            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; runningPresenceTitleId = ""; presenceHeartbeatAt = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
         }
     }
     public void StopPresence() => presenceCancellation?.Cancel();
