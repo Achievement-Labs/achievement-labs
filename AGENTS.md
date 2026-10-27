@@ -17,6 +17,6 @@
 
 ## Repository routing
 
-App updates (Windows, Android, iOS) and event JSON both come from `Achievement-Labs/achievement-labs`. Never point an official build's update feed at a fork.
+Windows app updates and event JSON come from `Achievement-Labs/achievement-labs`. Android/iOS source and future app updates live in `Achievement-Labs/achievement-labs-mobile`; existing released mobile clients retain their original update endpoint until a bridge release. Keep the public mobile event feed here for both generations of clients. Never point an official build's update feed at a fork.
 
 The user authorized bundling the reusable Horizon-sourced CON identity after the complete 556-byte build record was verified to match Horizon, provided no personal profile or sign-in data is included. Keep raw build inputs, personal profiles, custom keyvaults and account secrets excluded from Git/releases, and never print signing values.
