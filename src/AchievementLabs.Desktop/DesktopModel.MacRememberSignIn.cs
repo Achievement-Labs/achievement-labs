@@ -43,7 +43,7 @@ public sealed partial class DesktopModel
                 : "Remember sign-in disabled and this app's saved Microsoft sign-in removed. The current session stays connected.";
         }
         catch (OperationCanceledException) { }
-        catch { Notice = "Could not change the saved sign-in. Check macOS Keychain access and try again."; }
+        catch { Notice = OperatingSystem.IsLinux() ? "Could not change the saved sign-in. Unlock your desktop keyring and try again." : "Could not change the saved sign-in. Check macOS Keychain access and try again."; }
         finally { if (locked) authorizationRefresh.Release(); Busy(false); }
     }
 }

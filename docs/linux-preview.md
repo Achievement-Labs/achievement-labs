@@ -18,6 +18,8 @@ Sign in to the same account on Linux and Windows. Attach the Windows app to the 
 
 Linux sends heartbeats directly using the transferred Windows authorization. The PC is needed again when fresh authorization is required. Remembered trust does not renew authorization. Imported presence authorization remains in memory and is separate from Linux sign-in and event tokens. Known expiry and refusal stop spoofing. Mac-only/ Linux-only presence permission is not established by an ordinary sign-in or event token. Actual Linux Xbox sign-in, token issuance and live presence require user device acceptance testing; CI uses fake credentials and loopback only.
 
+Existing Windows versions with encrypted mobile sign-in export can supply the same authorization using the `.labslink` file fallback and its separate key, without replacing the installed Windows app. The LAN pairing window is a feature of the companion desktop preview from the Mac PR. Transfer files expire after ten minutes; import never starts spoofing automatically.
+
 ## Build and updates
 
 Run `bash tools/linux/build-preview.sh` on Linux with .NET 9 SDK, Python 3 and Node.js installed. The desktop Xbox 360 preparation uses the existing checksum-pinned public build without executing it. Generated shared identity files remain ignored and are embedded only through the approved signing-resource path.
