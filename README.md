@@ -1,17 +1,68 @@
-# Achievement Labs
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="Achievement Labs Desktop — Your games. Your progress. One workspace." width="100%">
+</p>
 
-Achievement, stat, presence, and save tooling for Windows PC and Xbox titles. The
-desktop client uses Avalonia and includes Xbox, Xbox 360, Games for Windows Live,
-Steam, Epic, and Ubisoft workflows.
+<h1 align="center">Achievement Labs Desktop</h1>
 
-**[Download the latest release](https://github.com/ethanwp28/achievement-labs/releases/latest)**
+<p align="center">Free, open-source Xbox achievement unlocker and Steam Achievement Manager tools, with stats, presence, and save editing.</p>
 
-Windows only. Editing achievement and stat data can carry account risk on a live
-service. Use test accounts and keep the backups created by the application.
+<p align="center">
+  <a href="https://github.com/Achievement-Labs/achievement-labs/releases/latest"><img src="https://img.shields.io/github/v/release/Achievement-Labs/achievement-labs?style=flat-square&amp;color=83e6ad&amp;label=release" alt="Latest desktop release"></a>
+  <a href="https://github.com/Achievement-Labs/achievement-labs/releases"><img src="https://img.shields.io/github/downloads/Achievement-Labs/achievement-labs/total?style=flat-square&amp;color=83e6ad&amp;label=downloads" alt="Desktop release downloads"></a>
+  <a href="https://discord.gg/EY6AJpNfVu"><img src="https://img.shields.io/badge/Discord-Join_the_community-5865F2?style=flat-square&amp;logo=discord&amp;logoColor=white" alt="Join the Achievement Labs Discord"></a>
+</p>
 
-## Mobile apps
+<p align="center">
+  <a href="https://github.com/Achievement-Labs/achievement-labs/releases/latest"><img src="https://img.shields.io/badge/Download-Windows-83e6ad?style=for-the-badge&amp;labelColor=14232b" alt="Download Achievement Labs for Windows"></a>
+</p>
 
-Android and iOS development now lives in [Achievement Labs Mobile](https://github.com/Achievement-Labs/achievement-labs-mobile). Desktop sign-in/QR transfer and the public event feed remain here. See [migration notes](docs/mobile-repository-split.md) for release continuity and pending PRs.
+Bring your game library, achievement progress, Game Session queues, and profile tools into one desktop workspace. Windows includes workflows for Xbox, Xbox 360, Games for Windows Live, Steam, Epic, and Ubisoft. Separate Mac and Linux previews are also in development.
+
+![Game Session with title details, presence controls, and an editable achievement queue](docs/assets/desktop-session.png)
+
+*Current-source offline preview with sample data. Released builds may differ.*
+
+## Explore the workspace
+
+| Feature | What you can do |
+| --- | --- |
+| **Library and achievements** | Search your Xbox games, inspect achievement progress, and open a game's tools from its library row. |
+| **Game Session** | Keep title-presence controls and Auto Unlock queues together, with editable timing, saved queues, and explicit start/stop controls. |
+| **Achievement Mirror** | Review achievement matches between games before choosing the actions to apply. |
+| **Stats and event catalog** | Work with title-specific stats and browse event support states, including titles still in testing. |
+| **Xbox 360 and legacy tools** | Work with exported profiles and the available legacy workflows. Keep the backups created by the app. |
+| **PC game services** | Access Windows workflows for Steam, Epic, Ubisoft, and Games for Windows Live. Availability varies by service. |
+| **Appearance** | Adjust glass panels, backgrounds, and OLED mode to suit your setup. |
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/assets/desktop-library.png" alt="Xbox library with completion summaries, searchable games, and shortcuts" width="100%"></td>
+    <td width="50%"><img src="docs/assets/desktop-home.png" alt="Desktop dashboard with completion totals and game service shortcuts" width="100%"></td>
+  </tr>
+  <tr><td><b>Your library at a glance.</b> Progress, completion, and game tools.</td><td><b>A home for your game services.</b> Xbox and PC workflows in one place.</td></tr>
+</table>
+
+## Get started
+
+| Platform | Availability | Start here |
+| --- | --- | --- |
+| **Windows** | Published desktop release | [Download the latest release](https://github.com/Achievement-Labs/achievement-labs/releases/latest) |
+| **macOS** | Apple Silicon preview; macOS 14+ | [Mac preview and setup](docs/macos-preview.md) |
+| **Linux** | Ubuntu 24.04 x64 preview | [Linux preview and setup](docs/linux-preview.md) |
+
+For Windows, download `AchievementLabs.exe` from the official release page. Read the release notes for that build and keep any additional assets together as instructed. Platform previews have different requirements and feature coverage.
+
+Editing achievement and stat data can carry account risk on a live service. Use test accounts and keep backups. Event support varies by title; review the support states below before using a mapping.
+
+## Join the community
+
+- **Talk and share feedback:** [Achievement Labs Discord](https://discord.gg/EY6AJpNfVu).
+- **Report a bug or request a feature:** [open an issue](https://github.com/Achievement-Labs/achievement-labs/issues). Include your app version, platform, and steps to reproduce; remove account credentials and private exports.
+- **Contribute:** read [CONTRIBUTING.md](CONTRIBUTING.md), then open a focused pull request.
+- **Follow development:** star the repository or use **Watch → Custom → Releases** for release notifications.
+
+<details>
+<summary><strong>Developer guide, repository layout, and event support states</strong></summary>
 
 ## Build from source
 
@@ -29,7 +80,7 @@ dotnet build .\src\AchievementLabs.Desktop\AchievementLabs.Desktop.csproj -c Rel
 Create the self-contained single-file release candidate with:
 
 ```powershell
-pwsh -File .\tools\Build-Release.ps1 -Version 1.0.8
+pwsh -File .\tools\Build-Release.ps1 -Version 1.0.9
 ```
 
 The release script builds the Avalonia desktop application, the x86 GFWL helper,
@@ -70,10 +121,9 @@ Authentication files, event tokens, service credentials, databases, research,
 packet captures, build output, save backups, and machine-specific agent settings
 are excluded through `.gitignore`.
 
-## Support and credits
 
-Questions and test results: [Achievement Labs Discord](https://discord.gg/EY6AJpNfVu)
+</details>
 
-Achievement Labs builds on ideas and prior work from the original Xbox Achievement
-Unlocker project and includes Steam Achievement Manager code under its retained
-upstream license.
+## Credits
+
+Achievement Labs builds on ideas and prior work from the original Xbox Achievement Unlocker project and includes Steam Achievement Manager code under its retained upstream license. See the source and bundled notices for attribution.

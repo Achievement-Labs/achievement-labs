@@ -1,6 +1,6 @@
 # Contributing to Achievement Labs
 
-Create a feature branch in your fork based on the current upstream branch. Push your changes to your fork, then open a pull request against `ethanwp28/achievement-labs:main`. In GitHub's compare screen choose **compare across forks**, set the base repository to `ethanwp28/achievement-labs`, and select your fork and feature branch as the head. You do not need write access to this upstream repository.
+Create a feature branch in your fork based on the current upstream branch. Push your changes to your fork, then open a pull request against `Achievement-Labs/achievement-labs:main`. In GitHub's compare screen choose **compare across forks**, set the base repository to `Achievement-Labs/achievement-labs`, and select your fork and feature branch as the head. You do not need write access to this upstream repository.
 
 Keep app features and event-catalogue corrections in separate PRs. Prefer one feature or one title-specific mapping correction per PR, with a clear explanation of the behavior, source evidence and tests. State whether a recipe has only passed structural checks or has confirmed live achievement credit. Do not mix speculative edition remaps into a UI PR.
 
