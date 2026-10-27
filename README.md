@@ -4,7 +4,7 @@
 
 <h1 align="center">Achievement Labs Desktop</h1>
 
-<p align="center">Achievement, stat, presence, and save tools for Xbox and PC games.</p>
+<p align="center">Free, open-source Xbox achievement unlocker and Steam Achievement Manager tools, with stats, presence, and save editing.</p>
 
 <p align="center">
   <a href="https://github.com/Achievement-Labs/achievement-labs/releases/latest"><img src="https://img.shields.io/github/v/release/Achievement-Labs/achievement-labs?style=flat-square&amp;color=83e6ad&amp;label=release" alt="Latest desktop release"></a>
