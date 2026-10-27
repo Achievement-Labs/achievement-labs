@@ -9,7 +9,7 @@ using AchievementLabs.Services.Auth;
 namespace AchievementLabs.Core;
 
 // Uses the same registered desktop redirect as the original app, with PKCE and state.
-// A pasted redirect is used because the existing OAuth client does not register a localhost callback.
+// Mac captures the registered redirect in its native sign-in window; Windows retains the manual fallback.
 public sealed class BrowserXboxLogin : IDisposable
 {
     private readonly HttpClient http = new();
@@ -29,11 +29,11 @@ public sealed class BrowserXboxLogin : IDisposable
         var code = ValidateRedirect(redirect, state);
         consumed = true;
         var response = await oauth.GetAccessToken(new CodeFlowAccessTokenParameter { Code = code, CodeVerifier = verifier, RedirectUrl = CodeFlowLiveApiClient.OAuthDesktop }, cancellationToken);
-        return await SavedXboxSession.GenerateAsync(response, cancellationToken, profile);
+        return await SavedXboxSession.GenerateAsync(response, cancellationToken, profile, requestEvents: !DesktopPlatform.IsUnixDesktop);
     }
     public static string ValidateRedirect(string redirect, string expectedState)
     {
-        if (!Uri.TryCreate(redirect, UriKind.Absolute, out var uri) || uri.Scheme != "https" || !uri.Host.Equals("login.live.com", StringComparison.OrdinalIgnoreCase) || uri.AbsolutePath != "/oauth20_desktop.srf" || !uri.IsDefaultPort || uri.UserInfo.Length != 0) throw new InvalidDataException("Unexpected sign-in redirect.");
+        if (!Uri.TryCreate(redirect, UriKind.Absolute, out var uri) || uri.Scheme != "https" || !uri.Host.Equals("login.live.com", StringComparison.OrdinalIgnoreCase) || uri.AbsolutePath != "/oauth20_desktop.srf" || !uri.IsDefaultPort || uri.UserInfo.Length != 0 || uri.Fragment.Length != 0) throw new InvalidDataException("Unexpected sign-in redirect.");
         var query = HttpUtility.ParseQueryString(uri.Query);
         if (query["state"] != expectedState || query.GetValues("state")?.Length != 1 || query.GetValues("code")?.Length != 1 || string.IsNullOrWhiteSpace(query["code"]) || query["error"] != null) throw new InvalidDataException("Invalid or unsuccessful sign-in response.");
         return query["code"]!;

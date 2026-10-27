@@ -1,0 +1,98 @@
+name: macOS desktop preview
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths: [src/AchievementLabs.Desktop/**, src/AchievementLabs.Core/**, src/AchievementLabs.App/Services/Xbox360/**, tools/macos/**, docs/macos-preview.md, .github/workflows/macos-build.yml]
+permissions:
+  contents: read
+concurrency:
+  group: macos-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  apple-silicon:
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: macos-15-intel
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Check LAN pairing with synthetic credentials over loopback
+        run: dotnet run --project tools/lan-pairing-checks/LanPairingChecks.csproj -c Release -p:NuGetAudit=false
+      - name: Build and ad-hoc sign the Apple Silicon app
+        run: bash tools/macos/build-preview.sh
+      - name: Verify ARM64 package runtime files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import struct,zipfile
+          archive=Path('artifacts/macos-preview/AchievementLabs-macOS-0.1.0.9-arm64.zip')
+          with zipfile.ZipFile(archive) as z:
+              entry=z.getinfo('Achievement Labs.app/Contents/MacOS/libhostfxr.dylib')
+              data=z.read(entry)
+              assert ((entry.external_attr >> 16) & 0o170000) != 0o120000, 'Runtime must be a file, not a symlink'
+              assert data[:4] == bytes.fromhex('cffaedfe') and struct.unpack_from('<I',data,4)[0] == 0x100000c, 'Expected real ARM64 Mach-O runtime'
+              assert len(data)>100000, 'Runtime contains link text instead of binary data'
+          print('PASS: ARM64 libhostfxr is a real Mach-O file in the downloaded ZIP.')
+          PY
+      - name: Build native Intel sibling for launch checks
+        if: runner.arch == 'X64'
+        env:
+          LABS_MAC_RUNTIME: osx-x64
+          LABS_MAC_OUTPUT: ${{ github.workspace }}/artifacts/macos-x64-check
+        run: bash tools/macos/build-preview.sh
+      - name: Check extracted ZIP and normal Finder-style launch
+        env:
+          LABS_MAC_RUNTIME: ${{ runner.arch == 'X64' && 'osx-x64' || 'osx-arm64' }}
+          LABS_MAC_OUTPUT: ${{ github.workspace }}/artifacts/${{ runner.arch == 'X64' && 'macos-x64-check' || 'macos-preview' }}
+        run: python3 tools/macos/check-package-launch.py
+      - name: Check native WebKit callback capture without credentials or network
+        run: |
+          python3 - <<'PY'
+          import pathlib,platform,subprocess,json
+          root=pathlib.Path.cwd()
+          helper=root/('artifacts/macos-x64-check' if platform.machine()=='x86_64' else 'artifacts/macos-preview')/'Achievement Labs.app/Contents/Helpers/MicrosoftSignIn'
+          result=subprocess.run([str(helper),'--self-test'],stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,text=True,timeout=45,check=True)
+          assert json.loads(result.stdout)=={'status':'selfTestPassed'}
+          print('PASS: native WKWebView intercepts synthetic callback before network; invalid origin, duplicate/missing fields, wrong state and fragments rejected.')
+          PY
+      - name: Check native window, Keychain and synthetic profile signing
+        run: |
+          python3 - <<'PY'
+          import subprocess,pathlib,platform,json,os
+          root=pathlib.Path.cwd();out=root/'artifacts/macos-preview/checks';out.mkdir(exist_ok=True)
+          intel=platform.machine()=='x86_64'
+          executable=root/('artifacts/macos-x64-check' if intel else 'artifacts/macos-preview')/'Achievement Labs.app/Contents/MacOS/AchievementLabs'
+          args=[str(executable),'--mac-smoke-test','--fixture',str(root/'tools/xbox360/shared/synthetic.dat'),'--output',str(out)]
+          if intel:args.append('--mac-x64-package-check')
+          result=subprocess.run(args,timeout=120)
+          if result.returncode or not (out/'mac-smoke.txt').exists():
+              error=out/'mac-smoke-error.txt'
+              print(error.read_text() if error.exists() else 'Native Mac smoke test did not finish.')
+              raise SystemExit(1)
+          print((out/'mac-smoke.txt').read_text())
+          (root/'artifacts/macos-preview/BUILD-INFO.json').write_text(json.dumps(dict(sourceCommit=os.environ['GITHUB_SHA'],packageArchitecture='arm64',nativeLaunchCheckArchitecture=platform.machine(),arm64NativeExecutionVerified=not intel,signature='ad-hoc',notarized=False),indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AchievementLabs-macOS-Apple-Silicon-Preview
+          path: |
+            artifacts/macos-preview/AchievementLabs-macOS-0.1.0.9-arm64.zip
+            artifacts/macos-preview/SHA256.txt
+            artifacts/macos-preview/README.md
+            artifacts/macos-preview/BUILD-INFO.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AchievementLabs-macOS-Checks
+          path: |
+            artifacts/macos-preview/checks/finder-launch.json
+            artifacts/macos-preview/checks/mac-smoke.txt
+          if-no-files-found: ignore
+          retention-days: 7

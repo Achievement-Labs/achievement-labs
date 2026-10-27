@@ -23,6 +23,7 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        MacStartup.Stage("Loading main window");
         InitializeComponent(); DataContext = model;
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
         AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
@@ -35,10 +36,13 @@ public partial class MainWindow : Window
         model.WindowsNotification = (title, message) =>
         {
             if (AppContext.TryGetSwitch("AchievementLabs.OfflineChecks", out var checks) && checks) return;
-            if (!WindowsNotifications.TryShow(title, message)) model.Notice = "Windows notification could not be sent. Check Windows notification settings for Achievement Labs.";
+            if (OperatingSystem.IsMacOS()) { _ = SendMacNotificationAsync(title, message, false); }
+            else if (OperatingSystem.IsLinux()) { _ = LinuxNotifications.ShowAsync(title, message); }
+            else if (!WindowsNotifications.TryShow(title, message)) model.Notice = "Windows notification could not be sent. Check Windows notification settings for Achievement Labs.";
         };
         AchievementLabs.MultiSelect.BatchPicker.Attach(this);
         Presentation.GameSessionWorkspace.Attach(this);
+        ApplyMacPlatformControls();
         AchievementLabs.MultiSelect.SearchClearButtons.Attach(this);
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
         xboxPresenceTimer.Tick += (_, _) => model.RefreshXboxPcAppPresence();
@@ -87,6 +91,9 @@ public partial class MainWindow : Window
         };
         Opened += async (_, _) =>
         {
+            MacStartup.Stage("Window opened");
+            if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
+            if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
             // Headless regression tests must never attach to a real account.
             if (offlineChecks)
             {
@@ -156,10 +163,10 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false); await model.AttachXboxPcAppOnStartupAsync();
-                // After the attach: its 6-second session read must not compete with this work. The Home Steam card
-                // was only filled in after clicking Home; read the local Steam profile at startup too.
-                _ = model.RefreshSteamProfileOnStartupAsync(); return;
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
+                if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) await model.AttachXboxPcAppAsync();
+                else { await model.AttachXboxPcAppOnStartupAsync(); _ = model.RefreshSteamProfileOnStartupAsync(); }
+                MacStartup.Stage("Ready"); return;
             }
             try
             {
@@ -538,7 +545,7 @@ public partial class MainWindow : Window
     private void OpenApiAddress(object? s, RoutedEventArgs e) => model.OpenApiAddress();
     private void RestartElevated(object? s, RoutedEventArgs e) => model.RestartElevated();
     private async void AttachManual(object? s, RoutedEventArgs e) => await model.AttachManualAsync();
-    private void StartBrowserLogin(object? s, RoutedEventArgs e) => model.StartBrowserLogin();
+    private async void StartBrowserLogin(object? s, RoutedEventArgs e) => await model.StartBrowserLoginAsync();
     private async void CompleteBrowserLogin(object? s, RoutedEventArgs e) => await model.CompleteBrowserLoginAsync();
     private async void UnlockSelected(object? s, RoutedEventArgs e) => await model.UnlockSelectedAsync();
     private async void UnlockAll(object? s, RoutedEventArgs e) => await model.UnlockAllAsync();
@@ -577,7 +584,17 @@ public partial class MainWindow : Window
     }
     private void ShowSettings(object? s, RoutedEventArgs e) => model.Navigate("Settings");
     private void ShowDiagnostics(object? s, RoutedEventArgs e) => model.Navigate("Diagnostics");
-    private void TestWindowsNotification(object? s, RoutedEventArgs e) => model.TestWindowsNotification();
+    private async void TestWindowsNotification(object? s, RoutedEventArgs e)
+    {
+        if (OperatingSystem.IsMacOS()) await SendMacNotificationAsync("Achievement Labs", "Mac notifications test.", true);
+        else if (OperatingSystem.IsLinux()) model.Notice = await LinuxNotifications.ShowAsync("Achievement Labs", "Linux notification test.") ? "Linux notification submitted." : "Notification service unavailable.";
+        else model.TestWindowsNotification();
+    }
+    private async Task SendMacNotificationAsync(string title, string message, bool explicitTest)
+    {
+        var result = await MacNotifications.ShowAsync(title, message, explicitTest);
+        model.Notice = MacNotifications.ResultMessage(result);
+    }
     private async void ShowMobileSync(object? sender, RoutedEventArgs args)
     {
         if (!model.CanQuery) return;
@@ -676,7 +693,7 @@ public partial class MainWindow : Window
         var cancel = new Button { Content = "Cancel" };
         openSettings.Click += (_, _) => dialog.Close(true);
         cancel.Click += (_, _) => dialog.Close(false);
-        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = { new TextBlock { Text = "An event token is needed", FontSize = 22 }, new TextBlock { Text = "Paste a current event token in Settings before unlocking an event-based achievement. The saved token is encrypted for your Windows account.", TextWrapping = TextWrapping.Wrap }, new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openSettings, cancel } } } } };
+        dialog.Content = new Border { Padding = new Thickness(24), Child = new StackPanel { Spacing = 16, Children = { new TextBlock { Text = "An event token is needed", FontSize = 22 }, new TextBlock { Text = OperatingSystem.IsMacOS() ? "Get an event token on this Mac in Settings before unlocking an event-based achievement. Saved tokens use this Mac’s Keychain-backed protection." : "Paste a current event token in Settings before unlocking an event-based achievement. The saved token is encrypted for your Windows account.", TextWrapping = TextWrapping.Wrap }, new StackPanel { Orientation = Avalonia.Layout.Orientation.Horizontal, Spacing = 10, Children = { openSettings, cancel } } } } };
         if (await dialog.ShowDialog<bool>(this)) model.Navigate("Settings");
     }
     private async void TestEventReplacements(object? s, RoutedEventArgs e) => await model.TestEventReplacementsAsync();

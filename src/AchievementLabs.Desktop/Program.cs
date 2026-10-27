@@ -11,9 +11,19 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        if (args.Length == 2 && args[0] == "--apply-update") { Environment.ExitCode = AppUpdater.Apply(args[1]); return; }
-        ConfigureStartup(args);
-        BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        if (args.Length == 2 && args[0] == "--apply-update") { if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("This updater requires Windows."); Environment.ExitCode = AppUpdater.Apply(args[1]); return; }
+        MacStartup.Begin();
+        try
+        {
+            if (args.Contains("--mac-smoke-test") || args.Contains("--linux-smoke-test")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+            ConfigureStartup(args);
+            MacStartup.Stage("Creating desktop lifetime");
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        }
+        catch (Exception error) when (OperatingSystem.IsMacOS())
+        {
+            MacStartup.Failed(error);Environment.ExitCode=1;
+        }
     }
 
     internal static void ConfigureStartup(string[] args)

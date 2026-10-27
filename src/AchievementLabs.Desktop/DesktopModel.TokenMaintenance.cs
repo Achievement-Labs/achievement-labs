@@ -75,7 +75,7 @@ public sealed partial class DesktopModel
             if (now < nextAuthorizationRetry) throw new InvalidOperationException("Authorization renewal is waiting to retry.");
             if (connectionMethod == "manual authorization")
             {
-                AuthorizationStatus = "Manual XAUTH cannot renew automatically. Disconnect and attach Xbox PC app to renew it.";
+                AuthorizationStatus = "Manual authorization cannot renew automatically. Disconnect and sign in again to renew it.";
                 if (original.AuthorizationExpiresAt <= now) throw new InvalidOperationException(AuthorizationStatus);
                 return;
             }
@@ -151,12 +151,12 @@ public sealed partial class DesktopModel
     }
 
     private bool IsEventTokenUsable()
-        => session != null && !eventTokenRejected && EventTokenValidator.TryValidate(savedEventsToken, out _, out _);
+        => session != null && !eventTokenRejected && (!eventTokenIssuerExpiry.HasValue || eventTokenIssuerExpiry > DateTimeOffset.UtcNow.AddMinutes(1)) && EventTokenValidator.TryValidate(savedEventsToken, out _, out _);
 
     private Task EnsureEventTokenAsync(CancellationToken token)
     {
         token.ThrowIfCancellationRequested();
-        if (!IsEventTokenUsable()) throw new InvalidOperationException("A current event token for this account is required. Paste and save a token in Settings.");
+        if (!IsEventTokenUsable()) throw new InvalidOperationException(AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "A current event token is required. Use Get event token on this desktop in Settings." : "A current event token for this account is required. Paste and save a token in Settings.");
         return Task.CompletedTask;
     }
 
@@ -165,6 +165,12 @@ public sealed partial class DesktopModel
     {
         if (lifetime.IsCancellationRequested || eventTokenRejected) return;
         var ready = EventTokenValidator.TryValidate(savedEventsToken, out var expiry, out var message);
+        if (eventTokenIssuerExpiry is { } issued)
+        {
+            expiry = expiry.HasValue && expiry < issued ? expiry : issued;
+            if (expiry <= DateTimeOffset.UtcNow.AddMinutes(1)) { ready = false; message = "The saved event token is expired or about to expire."; }
+            else message = $"Event token ready · estimated time remaining: {Math.Max(1, (int)(expiry.Value - DateTimeOffset.UtcNow).TotalMinutes)} minutes · issuer expiry {expiry.Value.LocalDateTime:g}";
+        }
         EventTokenStatus = message;
         if (!ready && expiry.HasValue && !eventTokenExpiryNotified)
         {
@@ -177,5 +183,6 @@ public sealed partial class DesktopModel
     {
         eventTokenRejected = false;
         eventTokenExpiryNotified = false;
+        eventTokenIssuerExpiry = null;
     }
 }

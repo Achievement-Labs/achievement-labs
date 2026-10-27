@@ -10,6 +10,9 @@ public sealed record DesktopPreferences
     public bool RegionOverride { get; init; }
     public bool UnlockAllEnabled { get; init; }
     public string OAuthProfile { get; init; } = "Xbox App PC";
+    public bool? RememberMacSignIn { get; init; }
+    [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    public bool? RememberLinuxSignIn { get; init; }
     public bool FakeSignature { get; init; }
     public bool PrivacyMode { get; init; }
     public bool AutoSpoof { get; init; }
