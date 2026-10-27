@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main]
-    paths: [src/AchievementLabs.Desktop/**, src/AchievementLabs.Core/**, src/AchievementLabs.App/Services/Xbox360/**, tools/macos/**, docs/macos-preview.md, .github/workflows/macos-build.yml]
+    paths: [src/AchievementLabs.Desktop/**, src/AchievementLabs.Core/**, src/AchievementLabs.App/Services/Xbox360/**, tools/macos/**, tools/xbox360/**, Directory.Build.props, docs/macos-preview.md, .github/workflows/macos-build.yml]
 permissions:
   contents: read
 concurrency:
