@@ -42,7 +42,7 @@ def prepare():
     (OUTPUT / 'Events').mkdir(parents=True)
     guarded = {g['TitleId'] for g in json.loads((ROOT / 'src/AchievementLabs.Enhancements/EditionMappings.json').read_text())}
     # Preserve the released mobile edition guards even when desktop guard metadata differs.
-    guarded.update({'345903534', '796798669', '125965001', '2154930'})
+    guarded.update({'345903534', '796798669', '125965001', '2154930', '1766089184', '515050978'})
     guarded.difference_update(EDITIONS)
     supported = {str(x) for x in data['SupportedTitleIDs']}
     index, failures = {}, collections.Counter()
