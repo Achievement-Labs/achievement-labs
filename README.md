@@ -9,6 +9,10 @@ Steam, Epic, and Ubisoft workflows.
 Windows only. Editing achievement and stat data can carry account risk on a live
 service. Use test accounts and keep the backups created by the application.
 
+## Mobile apps
+
+Android and iOS development now lives in [Achievement Labs Mobile](https://github.com/Achievement-Labs/achievement-labs-mobile). Desktop sign-in/QR transfer and the public event feed remain here. See [migration notes](docs/mobile-repository-split.md) for release continuity and pending PRs.
+
 ## Build from source
 
 Install the .NET 9 SDK, then run:
