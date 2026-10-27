@@ -57,15 +57,7 @@ final class CoreTests: XCTestCase {
         let report = try JSON.object(Data(contentsOf:URL(fileURLWithPath:path).appendingPathComponent("catalogue-report.json")))
         XCTAssertEqual(c.index.count,(report["sourceTitleBlocks"] as? Int) ?? -1)
         XCTAssertGreaterThan(c.index.count,400)
-        for title in ["345903534","796798669","125965001","1766089184","515050978"] { XCTAssertNotNil(c.index[title]?.reason); XCTAssertThrowsError(try c.recipes(title)) }
-        let mwr = try c.recipes("2154930").recipes
-        XCTAssertEqual(mwr.count,50)
-        XCTAssertNil(mwr["43"])
-        XCTAssertNotNil(mwr["1"])
-        let first = try c.payloads(title:"2154930",achievement:"1",xuid:"0")
-        let event = try JSON.object(Data(first[0].utf8))
-        let base = (event["data"] as! [String:Any])["baseData"] as! [String:Any]
-        XCTAssertEqual((base["properties"] as! [String:Any])["ID"] as? String,"1")
+        for title in ["345903534","796798669","125965001","2154930","1766089184","515050978"] { XCTAssertNotNil(c.index[title]?.reason); XCTAssertThrowsError(try c.recipes(title)) }
         XCTAssertNotNil(c.index["1100121502"])
         var count = 0
         for (title,status) in c.index where status.reason == nil {

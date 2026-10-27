@@ -84,6 +84,7 @@ public sealed partial class DesktopModel
     {
         if (!CanStartPresence || client == null || session == null || !uint.TryParse(PresenceTitleId, out var id) || id == 0) return;
         var xuid = session.Xuid; var titleId = id.ToString();
+        runningPresenceTitleId = titleId; presenceHeartbeatAt = null;
         string? lastPresenceAuthorization = null;
         var heartbeatAccepted = false; var heartbeatRefused = false;
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
@@ -132,6 +133,7 @@ public sealed partial class DesktopModel
                     }
                     heartbeatAccepted = true;
                     PresenceHeartbeat = $"Last heartbeat: {DateTimeOffset.Now:HH:mm:ss} · HTTP {result.StatusCode}" + (pairedPcPresence != null ? " · PC-paired authorization" : "");
+                    presenceHeartbeatAt = DateTimeOffset.Now;
                     lastHeartbeat = stopwatch.Elapsed;
                 }
                 finally { requests.Release(); }
@@ -159,7 +161,7 @@ public sealed partial class DesktopModel
                 }
             }
             catch { StatsOutput = "Presence stop request failed; the service may retain presence until it expires."; }
-            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); if (heartbeatRefused && OperatingSystem.IsMacOS()) ClearPcPresence(); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
+            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; runningPresenceTitleId = ""; presenceHeartbeatAt = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); if (heartbeatRefused && OperatingSystem.IsMacOS()) ClearPcPresence(); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
         }
     }
     public void StopPresence() => presenceCancellation?.Cancel();

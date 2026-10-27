@@ -96,7 +96,7 @@ def prepare():
                 shutil.copyfile(path,OUTPUT/'Events'/f'{tid}.json')
                 (OUTPUT/'Events'/f'{tid}.mapping.json').write_text(json.dumps({'recipes':recipes},separators=(',',':')))
             else: reason=reason or 'No deterministic recipes passed the mobile payload checks.'
-        index[tid]={'count':len(recipes),'classification':'Supported' if block.get('FullySupported') is True else 'Testing','reason':reason}
+        index[tid]={'count':len(recipes),'classification':'Supported' if block.get('FullySupported') is True else 'Partially supported' if block.get('PartiallySupported') is True else 'Testing','reason':reason}
     (OUTPUT/'MobileIndex.json').write_text(json.dumps(index,separators=(',',':')))
     for name in ['achievement-packs.json','achievement-hubs.json','achievement-totals.json']: shutil.copyfile(ROOT/'catalog'/name,OUTPUT/name)
     summary={'sourceTitleBlocks':len(index),'mobileTitles':sum(v['count']>0 for v in index.values()),'recipes':sum(v['count'] for v in index.values()),'omittedRecipes':dict(failures),'guardedEditions':sorted(guarded)}

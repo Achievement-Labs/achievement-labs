@@ -36,7 +36,7 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
         using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync(ct));
         if (document.RootElement.ValueKind != JsonValueKind.Array || document.RootElement.GetArrayLength() > 100) throw new InvalidDataException("Invalid release list.");
         var candidates = document.RootElement.EnumerateArray()
-            .Where(r => !r.GetProperty("draft").GetBoolean())
+            .Where(r => !r.GetProperty("draft").GetBoolean() && !r.GetProperty("prerelease").GetBoolean())
             .Select(r => new { Release = r, Tag = r.GetProperty("tag_name").GetString()! })
             .Select(r => new { r.Release, r.Tag, Ceiling = TagCeiling(r.Tag) })
             .Where(r => r.Ceiling != null).OrderByDescending(r => r.Ceiling);

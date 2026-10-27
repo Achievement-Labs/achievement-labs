@@ -41,7 +41,7 @@ final class PublicSyncTests: XCTestCase {
           ["draft":false,"html_url":"https://github.com/Achievement-Labs/achievement-labs/releases/tag/ios-v0.4.0","assets":[["name":"AchievementLabs-iOS-0.4.0-UNSIGNED.ipa","browser_download_url":"https://github.com/Achievement-Labs/achievement-labs/releases/download/ios-v0.4.0/AchievementLabs-iOS-0.4.0-UNSIGNED.ipa"]]]
         ]
         XCTAssertEqual(try MobileRelease.latest(JSON.data(releases))?.version,"0.4.0")
-        var oldRepository = releases[1]; oldRepository["html_url"] = "https://github.com/Achievement-Labs/achievement-labs/releases/tag/ios-v0.4.0"
+        var oldRepository = releases[1]; oldRepository["html_url"] = "https://github.com/thevampirebat/achievement-labs/releases/tag/ios-v0.4.0"
         XCTAssertNil(try MobileRelease.latest(JSON.data([oldRepository])))
         var invalid = releases[1]; invalid["html_url"] = "https://example.com/releases/tag/x"
         XCTAssertNil(try MobileRelease.latest(JSON.data([invalid])))
