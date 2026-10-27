@@ -30,6 +30,8 @@ namespace AchievementLabs.Models
         /// Whether this achievement has already been unlocked by the auto unlocker
         /// </summary>
         public bool Completed { get; set; }
+        public bool EventSubmissionPendingVerification { get; set; }
+        public string LastVerificationProgress { get; set; } = "";
         public int EventRequestIndex { get; set; }
     }
 
