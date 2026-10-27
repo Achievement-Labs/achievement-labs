@@ -14,6 +14,7 @@ public sealed partial class DesktopModel
 
     public void RefreshXboxPcAppPresence()
     {
+        if (!OperatingSystem.IsWindows()) return;
         using var process = Process.GetProcessesByName("XboxPcApp").FirstOrDefault();
         XboxPcAppDetected = process != null;
         if (XboxPcAttached && process == null)
@@ -40,6 +41,7 @@ public sealed partial class DesktopModel
 
     public async Task AttachXboxPcAppAsync()
     {
+        if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) { PrepareMacSignIn(); if (CanConnect && RememberBrowserSession && File.Exists(NativeSessionStore.DefaultPath)) { SessionPath=NativeSessionStore.DefaultPath; await ConnectSavedOAuthFallbackAsync(); } return; }
         if (!CanConnect) return;
         Busy(true);
         XboxApiClient? candidate = null;
@@ -84,6 +86,7 @@ public sealed partial class DesktopModel
 
     public async Task LaunchXboxPcAppAndAttachAsync()
     {
+        if (!OperatingSystem.IsWindows()) { PrepareMacSignIn(); await StartBrowserLoginAsync(); return; }
         if (!CanConnect) return;
         try
         {
@@ -104,20 +107,20 @@ public sealed partial class DesktopModel
         XboxApiClient? candidate = null;
         try
         {
-            Notice = "Connecting the saved Microsoft OAuth fallback…";
+            Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Reconnecting your saved Microsoft sign-in…" : "Connecting the saved Microsoft OAuth fallback…";
             var connected = UseSavedEventToken(await SavedXboxSession.ConnectAsync(SessionPath, lifetime.Token, SelectedOAuthProfile));
             candidate = new XboxApiClient(connected.Authorization, RegionOverride);
             await ActivateXboxSessionAsync(connected, candidate, "Microsoft OAuth fallback");
             candidate = null;
             XboxPcAttached = false;
             OAuthFallbackAvailable = false;
-            XboxPcAttachmentLabel = "Connected with Microsoft OAuth fallback";
-            XboxPcAttachmentDetail = "Xbox PC app attachment was unavailable. This protected saved sign-in is being used for the current connection.";
-            Notice = $"OAuth fallback connected. Loaded {Games.Length} titles.";
+            XboxPcAttachmentLabel = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Connected with saved Microsoft sign-in" : "Connected with Microsoft OAuth fallback";
+            XboxPcAttachmentDetail = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Using the protected Microsoft sign-in saved on this desktop." : "Xbox PC app attachment was unavailable. This protected saved sign-in is being used for the current connection.";
+            Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? $"Saved Microsoft sign-in restored. Loaded {Games.Length} titles." : $"OAuth fallback connected. Loaded {Games.Length} titles.";
         }
-        catch (OperationCanceledException) { Notice = "OAuth fallback connection cancelled."; }
-        catch (FileNotFoundException) { Notice = "No saved OAuth fallback exists yet. Use Open Microsoft sign-in below."; }
-        catch { Notice = "The saved OAuth fallback could not be refreshed. Start a new Microsoft sign-in below."; }
+        catch (OperationCanceledException) { Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Saved sign-in connection cancelled." : "OAuth fallback connection cancelled."; }
+        catch (FileNotFoundException) { Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "No saved sign-in exists yet. Enable Remember sign-in and sign in with Microsoft." : "No saved OAuth fallback exists yet. Use Open Microsoft sign-in below."; }
+        catch { Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "The saved sign-in could not be refreshed. Sign in with Microsoft again." : "The saved OAuth fallback could not be refreshed. Start a new Microsoft sign-in below."; }
         finally { candidate?.Dispose(); Busy(false); }
     }
 
@@ -140,6 +143,7 @@ public sealed partial class DesktopModel
         {
             savedEventsToken = await EventTokenStore.ReadAsync(lifetime.Token);
             ResetEventTokenFreshness();
+            try { eventTokenIssuerExpiry = await EventTokenIssuerExpiry.ReadAsync(savedEventsToken, lifetime.Token); } catch { eventTokenIssuerExpiry = null; }
             EventTokenInput = savedEventsToken;
             EventTokenValidator.TryValidate(savedEventsToken, out _, out var message);
             EventTokenStatus = message;
@@ -148,10 +152,12 @@ public sealed partial class DesktopModel
         catch { savedEventsToken = ""; EventTokenStatus = "The saved event token could not be read."; }
     }
     private bool acquiringAccountEventToken;
-    public bool CanAcquireAccountEventToken => session != null && !acquiringAccountEventToken;
+    private DateTimeOffset? eventTokenIssuerExpiry;
+    public bool CanAcquireAccountEventToken => session != null && !acquiringAccountEventToken && !busy && !QueueActive && !PresenceRunning;
     public async Task AcquireAccountEventTokenAsync(Avalonia.Controls.Window owner)
     {
         if (!CanAcquireAccountEventToken || session == null) return;
+        if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) { await AcquireMacEventTokenAsync(); return; }
         var xuid=session.Xuid;var generation=sessionGeneration;
         acquiringAccountEventToken=true;Changed(nameof(CanAcquireAccountEventToken));
         EventTokenStatus="Requesting an event token for the connected Xbox account…";
@@ -176,6 +182,7 @@ public sealed partial class DesktopModel
             await EventTokenStore.SaveAsync(value, lifetime.Token);
             savedEventsToken = value;
             ResetEventTokenFreshness();
+            try { eventTokenIssuerExpiry = await EventTokenIssuerExpiry.ReadAsync(value, lifetime.Token); } catch { eventTokenIssuerExpiry = null; }
             queueAccount.EventsToken = value;
             if (session != null) session = session with { EventsToken = value };
             queueAccount.EventsToken = value;
@@ -184,7 +191,7 @@ public sealed partial class DesktopModel
             EventTokenValidator.TryValidate(value, out _, out message);
             EventTokenStatus = "Saved securely · " + message
                 + (hashMismatch ? " · Note: its user hash differs from the attached Xbox session; Xbox will reject it if it is for another account." : "");
-            Notice = "Event token saved securely for this Windows user.";
+            Notice = $"Event token saved securely for this {PlatformUserLabel}.";
         }
         catch { EventTokenStatus = "The event token could not be saved."; }
         finally { eventTokenWrites.Release(); }
@@ -247,14 +254,27 @@ public sealed partial class DesktopModel
     }
     private BrowserXboxLogin? browserLogin;
     private string browserProfileName = "";
-    public bool RememberBrowserSession { get; set; }
+    private bool rememberBrowserSession;
+    public bool RememberBrowserSession { get => rememberBrowserSession; set { rememberBrowserSession = value; Changed(); } }
     private string loginRedirect = "";
     public string LoginRedirect { get => loginRedirect; set { loginRedirect = value ?? ""; Changed(); } }
-    public void StartBrowserLogin()
+    public async Task StartBrowserLoginAsync()
     {
         if (!CanConnect || !OAuthFallbackAvailable) return;
         browserLogin?.Dispose(); browserLogin = new(SelectedOAuthProfile);
-        browserProfileName = SelectedOAuthProfile.Name;
+        browserProfileName = SelectedOAuthProfile.Name; LoginRedirect = "";
+        if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop)
+        {
+            Busy(true);
+            Notice = "Complete Microsoft sign-in in the sign-in window. This app will connect automatically.";
+            try { LoginRedirect = await (OperatingSystem.IsLinux() ? LinuxMicrosoftSignIn.CaptureAsync(browserLogin.StartUri, lifetime.Token) : MacMicrosoftSignIn.CaptureAsync(browserLogin.StartUri, lifetime.Token)); }
+            catch (OperationCanceledException) { Notice = "Sign-in cancelled."; }
+            catch { Notice = "Microsoft sign-in could not complete. Try signing in again."; }
+            finally { Busy(false); }
+            if (!string.IsNullOrWhiteSpace(LoginRedirect)) await CompleteBrowserLoginAsync();
+            else { browserLogin?.Dispose(); browserLogin = null; }
+            return;
+        }
         try { Process.Start(new ProcessStartInfo(browserLogin.StartUri.AbsoluteUri) { UseShellExecute = true }); Notice = "Complete Microsoft sign-in, then paste the final login.live.com redirect URL below."; }
         catch { browserLogin.Dispose(); browserLogin = null; Notice = "Could not open the system browser."; }
     }
@@ -283,14 +303,14 @@ public sealed partial class DesktopModel
                     SessionPath = NativeSessionStore.DefaultPath;
                     activeOAuthSessionPath = NativeSessionStore.DefaultPath;
                     await SavePreferencesAsync();
-                    Notice = "Signed in. Session saved for this Windows user; use Connect saved session next time.";
+                    Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Signed in. This Mac will reconnect using the protected saved sign-in next time." : "Signed in. Session saved securely for this user; use Connect saved session next time.";
                 }
                 catch (OperationCanceledException) { throw; }
                 catch { Notice = "Signed in for this app session, but the saved session could not be written."; }
             }
         }
         catch (OperationCanceledException) { Notice = "Sign-in cancelled."; }
-        catch { Notice = "Sign-in did not complete. Start a new browser sign-in and use its final redirect URL."; }
+        catch { Notice = AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? "Sign-in did not complete. Start a new Microsoft sign-in and try again." : "Sign-in did not complete. Start a new browser sign-in and use its final redirect URL."; }
         finally { login.Dispose(); candidate?.Dispose(); Busy(false); }
         if (session != null) { await RefreshLibraryAsync(); Navigate("Library"); }
     }

@@ -30,7 +30,7 @@ public sealed partial class DesktopModel
         {
             if (Path.GetExtension(path).Equals(".exe", StringComparison.OrdinalIgnoreCase)) Xbox360SigningSession.LoadHorizonFile(path);
             else Xbox360SigningSession.LoadKeyvault(path);
-            try { Xbox360SigningSession.Remember(Xbox360SigningStorePath); Notice = "Signing set up. Remembered securely for your Windows account."; }
+            try { Xbox360SigningSession.Remember(Xbox360SigningStorePath); Notice = $"Signing set up. Remembered securely for your {PlatformAccountLabel}."; }
             catch { Notice = "Signing is ready, but could not be remembered on this PC. Check folder access."; }
         }
         catch (Exception) { Notice = "Could not validate local signing data. Select a supported Horizon executable or decrypted console keyvault."; }

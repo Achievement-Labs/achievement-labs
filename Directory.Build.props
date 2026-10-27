@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <LabsPortableDesktop Condition="'$(LabsMacOS)' == 'true' Or '$(LabsLinux)' == 'true'">true</LabsPortableDesktop>
+  </PropertyGroup>
+  <Target Name="ValidateDesktopPlatform" BeforeTargets="PrepareForBuild" Condition="'$(LabsMacOS)' == 'true' And '$(LabsLinux)' == 'true'">
+    <Error Text="Choose exactly one desktop platform: LabsMacOS or LabsLinux." />
+  </Target>
+</Project>

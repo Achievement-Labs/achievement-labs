@@ -123,6 +123,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool CanGoBack => pageHistory.Count > 0;
     public bool CanGoForward => pageForwardHistory.Count > 0;
     public void Navigate(string destination) {
+        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable in this desktop preview."; return; }
         if (destination == "Legacy") return;
         if (destination == page) return;
         if (page == "Achievements" && destination != "Achievements" && autoPresenceTask != null) StopPresence();
@@ -155,7 +156,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         Changed(nameof(VisibleAchievements)); Changed(nameof(NoResults)); Changed(nameof(ResultLabel)); Changed(nameof(CanExport));
     }
     private void Busy(bool value) { busy = value; RefreshXbox360Signing(); Changed(nameof(CanAcquireAccountEventToken)); Changed(nameof(CanConnect)); Changed(nameof(CanInteract)); Changed(nameof(CanDisconnect)); Changed(nameof(CanQuery)); Changed(nameof(CanLookupSpoofTitle)); Changed(nameof(CanFillTotals)); Changed(nameof(CanStartPresence)); NotifyActions(); }
-    public Task ConnectAsync() => AttachXboxPcAppAsync();
+    public Task ConnectAsync() => AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? ConnectMacAsync() : AttachXboxPcAppAsync();
 
     private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method)
     {

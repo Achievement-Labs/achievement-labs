@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net9.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><DefineConstants>$(DefineConstants);LABS_LAN_PAIRING_CHECKS</DefineConstants></PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/AchievementLabs.Core/LanPairing.cs" Link="LanPairing.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/LanPairingStore.cs" Link="LanPairingStore.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/MobileTransfer.cs" Link="MobileTransfer.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/PcPresenceTransfer.cs" Link="PcPresenceTransfer.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/PresenceAuthorizationMetadata.cs" Link="PresenceAuthorizationMetadata.cs" />
+    <Compile Include="../../src/AchievementLabs.Desktop/PcPresenceChecks.cs" Link="PcPresenceChecks.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/LinuxSecretStore.cs" Link="LinuxSecretStore.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/DesktopPlatform.cs" Link="DesktopPlatform.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/SecureUserData.cs" Link="SecureUserData.cs" />
+    <Compile Include="../../src/AchievementLabs.Core/AchievementLabsPaths.cs" Link="AchievementLabsPaths.cs" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="7.0.0" />
+  </ItemGroup>
+</Project>

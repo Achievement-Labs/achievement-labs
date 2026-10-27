@@ -15,6 +15,10 @@ Android and iOS development now lives in [Achievement Labs Mobile](https://githu
 
 ## Build from source
 
+Mac and Linux previews use separate platform builds from this desktop repository.
+The Windows build below keeps its existing defaults. See [Linux preview](docs/linux-preview.md)
+and [Mac preview](docs/macos-preview.md) for their independent packages and platform requirements.
+
 Install the .NET 9 SDK, then run:
 
 ```powershell

@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
+#if WINDOWS
 using Microsoft.Toolkit.Uwp.Notifications;
+#endif
 
 namespace AchievementLabs.Desktop;
 
@@ -11,6 +13,9 @@ internal static class WindowsNotifications
     private static bool registered;
     public static bool TryShow(string title, string message)
     {
+#if !WINDOWS
+        return false;
+#else
         if (!OperatingSystem.IsWindows()) return false;
         try
         {
@@ -32,5 +37,6 @@ internal static class WindowsNotifications
             return true;
         }
         catch { return false; }
+#endif
     }
 }

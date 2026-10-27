@@ -1,0 +1,56 @@
+name: Linux desktop preview
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths: [src/**, tools/linux/**, tools/xbox360/**, tools/lan-pairing-checks/**, Directory.Build.props, .github/workflows/linux-build.yml]
+permissions:
+  contents: read
+concurrency:
+  group: linux-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install native desktop dependencies
+        run: sudo apt-get update && sudo apt-get install -y libx11-6 libice6 libsm6 libfontconfig1 libsecret-1-0 gnome-keyring dbus-x11 xvfb python3-gi gir1.2-webkit2-4.1 libnotify-bin
+      - name: Build standalone Linux package
+        run: bash tools/linux/build-preview.sh
+      - name: Check sign-in callback capture, pairing and packaged UI without accounts
+        run: |
+          export HOME="$RUNNER_TEMP/labs-linux-home"
+          export XDG_DATA_HOME="$HOME/.local/share"
+          export XDG_CONFIG_HOME="$HOME/.config"
+          export XDG_CACHE_HOME="$HOME/.cache"
+          export XDG_RUNTIME_DIR="$RUNNER_TEMP/labs-linux-runtime"
+          mkdir -p "$HOME" "$XDG_RUNTIME_DIR"
+          chmod 700 "$HOME" "$XDG_RUNTIME_DIR"
+          xvfb-run -a dbus-run-session -- bash -eu -o pipefail <<'CHECKS'
+          printf 'synthetic-ci-only\n' | gnome-keyring-daemon --unlock --components=secrets
+          /usr/bin/python3 tools/linux/microsoft-signin.py --self-test | tee artifacts/linux-preview/signin-check.json
+          python3 -c 'import json; assert json.load(open("artifacts/linux-preview/signin-check.json")) == {"status":"selfTestPassed"}'
+          dotnet run --project tools/lan-pairing-checks/LanPairingChecks.csproj -c Release -p:NuGetAudit=false
+          artifacts/linux-preview/AchievementLabs-linux-x64/AchievementLabs --linux-smoke-test --output artifacts/linux-preview/checks
+          CHECKS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: AchievementLabs-Linux-Preview
+          path: |
+            artifacts/linux-preview/AchievementLabs-linux-0.1.0.1-x64.tar.gz
+            artifacts/linux-preview/SHA256.txt
+            artifacts/linux-preview/checks/
+            artifacts/linux-preview/signin-check.json
+          if-no-files-found: error
+          retention-days: 14
