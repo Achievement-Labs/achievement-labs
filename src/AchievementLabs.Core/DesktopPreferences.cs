@@ -3,8 +3,8 @@ namespace AchievementLabs.Core;
 
 public sealed record DesktopPreferences
 {
-    public string EventsDirectory { get; init; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Events");
-    public string SessionPath { get; init; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "auth.json");
+    public string EventsDirectory { get; init; } = Path.Combine(DesktopPlatform.DocumentsDirectory, "AchievementLabs", "Events");
+    public string SessionPath { get; init; } = Path.Combine(DesktopPlatform.DocumentsDirectory, "AchievementLabs", "auth.json");
     public bool RememberWindowSize { get; init; }
     public bool AutoMaximize { get; init; }
     public bool RegionOverride { get; init; }

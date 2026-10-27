@@ -16,6 +16,7 @@ public partial class MainWindow
         Directory.CreateDirectory(output);
         try
         {
+            await Task.Delay(150); // Let the desktop lifetime finish opening before a test can close it.
             if (!OperatingSystem.IsLinux() || model.HasWindowsLocalTools || !model.IsPortablePlatform || model.IsWindowsPlatform)
                 throw new Exception("Linux platform capabilities are incorrect.");
             await model.AttachXboxPcAppAsync();

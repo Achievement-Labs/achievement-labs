@@ -36,7 +36,7 @@ jobs:
           export XDG_RUNTIME_DIR="$RUNNER_TEMP/labs-linux-runtime"
           mkdir -p "$HOME" "$XDG_RUNTIME_DIR"
           chmod 700 "$HOME" "$XDG_RUNTIME_DIR"
-          dbus-run-session -- xvfb-run -a bash -eu -o pipefail <<'CHECKS'
+          xvfb-run -a dbus-run-session -- bash -eu -o pipefail <<'CHECKS'
           printf 'synthetic-ci-only\n' | gnome-keyring-daemon --unlock --components=secrets
           /usr/bin/python3 tools/linux/microsoft-signin.py --self-test | tee artifacts/linux-preview/signin-check.json
           python3 -c 'import json; assert json.load(open("artifacts/linux-preview/signin-check.json")) == {"status":"selfTestPassed"}'
