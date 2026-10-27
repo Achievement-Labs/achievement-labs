@@ -14,7 +14,6 @@
 
 <p align="center">
   <a href="https://github.com/Achievement-Labs/achievement-labs/releases/latest"><img src="https://img.shields.io/badge/Download-Windows-83e6ad?style=for-the-badge&amp;labelColor=14232b" alt="Download Achievement Labs for Windows"></a>
-  <a href="https://github.com/Achievement-Labs/achievement-labs-mobile"><img src="https://img.shields.io/badge/Explore-Mobile-83e6ad?style=for-the-badge&amp;labelColor=14232b" alt="Explore Achievement Labs Mobile"></a>
 </p>
 
 Bring your game library, achievement progress, Game Session queues, and profile tools into one desktop workspace. Windows includes workflows for Xbox, Xbox 360, Games for Windows Live, Steam, Epic, and Ubisoft. Separate Mac and Linux previews are also in development.
@@ -50,7 +49,6 @@ Bring your game library, achievement progress, Game Session queues, and profile 
 | **Windows** | Published desktop release | [Download the latest release](https://github.com/Achievement-Labs/achievement-labs/releases/latest) |
 | **macOS** | Apple Silicon preview; macOS 14+ | [Mac preview and setup](docs/macos-preview.md) |
 | **Linux** | Ubuntu 24.04 x64 preview | [Linux preview and setup](docs/linux-preview.md) |
-| **Android / iOS** | Separate mobile project | [Achievement Labs Mobile](https://github.com/Achievement-Labs/achievement-labs-mobile) |
 
 For Windows, download `AchievementLabs.exe` from the official release page. Read the release notes for that build and keep any additional assets together as instructed. Platform previews have different requirements and feature coverage.
 
@@ -62,8 +60,6 @@ Editing achievement and stat data can carry account risk on a live service. Use 
 - **Report a bug or request a feature:** [open an issue](https://github.com/Achievement-Labs/achievement-labs/issues). Include your app version, platform, and steps to reproduce; remove account credentials and private exports.
 - **Contribute:** read [CONTRIBUTING.md](CONTRIBUTING.md), then open a focused pull request.
 - **Follow development:** star the repository or use **Watch → Custom → Releases** for release notifications.
-
-Android and iOS development lives in the [mobile repository](https://github.com/Achievement-Labs/achievement-labs-mobile). Desktop sign-in/QR transfer and the public event feed remain here; see the [migration notes](docs/mobile-repository-split.md).
 
 <details>
 <summary><strong>Developer guide, repository layout, and event support states</strong></summary>
