@@ -77,6 +77,8 @@ def main():
             return False
         uri = decision.get_navigation_action().get_request().get_uri()
         parsed = urlsplit(uri)
+        if self_test and uri == 'about:blank':
+            return False
         if parsed.hostname == 'login.live.com' and parsed.path == '/oauth20_desktop.srf':
             decision.ignore()  # Capture before the landing page can consume/clear the code.
             try:
