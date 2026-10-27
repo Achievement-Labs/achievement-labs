@@ -7,7 +7,7 @@ public sealed partial class DesktopModel
     private SteamGameItem[] steamGames = [];
     private SteamAchievementItem[] steamAchievements = [];
     private SteamGameItem? selectedSteamGame;
-    private string steamSearch = "", steamAppId = ReadLastSteamApp() is var lastApp and > 0 ? lastApp.ToString(System.Globalization.CultureInfo.InvariantCulture) : "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
+    private string steamSearch = "", steamAppId = "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
     private string? steamAvatarUrl;
     public bool IsSteam => page is "SteamLibrary" or "SteamAchievements" or "SteamQueue";
     public bool IsSteamLibrary => page == "SteamLibrary";
@@ -28,11 +28,6 @@ public sealed partial class DesktopModel
     {
         try { ApplySteamProfile(steam.GetProfileSummary()); }
         catch { SteamProfileName = "Steam unavailable"; SteamLevel = "Unknown"; SteamAvatarUrl = null; }
-    }
-    public async Task RefreshSteamProfileOnStartupAsync()
-    {
-        try { ApplySteamProfile(await Task.Run(steam.GetProfileSummary, lifetime.Token)); }
-        catch { /* Keep the placeholder; clicking Home retries. */ }
     }
     public async Task RefreshHomeProfilesAsync()
     {
@@ -56,59 +51,18 @@ public sealed partial class DesktopModel
         finally { Busy(false); }
     }
     private long loadedSteamAppId;
-    private static readonly string lastSteamAppPath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("steam-last-app.txt");
-    private bool lastSteamAppRestored;
-
-    /// <summary>App ID of the last game whose Steam achievements loaded, kept across restarts.</summary>
-    private static long ReadLastSteamApp()
-    {
-        try { return File.Exists(lastSteamAppPath) && long.TryParse(File.ReadAllText(lastSteamAppPath).Trim(), out var id) && id > 0 ? id : 0; }
-        catch { return 0; }
-    }
-
-    private static void SaveLastSteamApp(long id)
-    {
-        try { Directory.CreateDirectory(Path.GetDirectoryName(lastSteamAppPath)!); File.WriteAllText(lastSteamAppPath, id.ToString(System.Globalization.CultureInfo.InvariantCulture)); }
-        catch { /* Convenience only. */ }
-    }
-
-    public Task OpenSteamAchievementsAsync() { Navigate("SteamAchievements"); return Task.CompletedTask; }
-
-    /// <summary>
-    /// The first time the Steam achievements page is shown after a restart (by any route), reload the last game.
-    /// Waits for startup work to finish instead of skipping, since loading is refused while the app is busy.
-    /// </summary>
-    private async Task RestoreLastSteamGameAsync()
-    {
-        if (lastSteamAppRestored || SteamAchievements.Length > 0) return;
-        lastSteamAppRestored = true;
-        var last = ReadLastSteamApp();
-        if (last == 0) return;
-        var text = last.ToString(System.Globalization.CultureInfo.InvariantCulture);
-        if (SteamAppId.Length == 0) SteamAppId = text;
-        if (SteamAppId != text) return;
-        for (var i = 0; i < 120 && !CanInteract && !lifetime.IsCancellationRequested; i++) await Task.Delay(250);
-        if (page == "SteamAchievements" && SteamAchievements.Length == 0 && SteamAppId == text) await LoadSteamAchievementsAsync();
-    }
     public async Task LoadSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
         SteamAchievements = []; loadedSteamAppId = 0;
         var loaded = await Task.Run(() => steam.LoadAchievementsAsync(id, lifetime.Token), lifetime.Token);
         SteamAchievements = loaded.ToArray(); loadedSteamAppId = id; SteamStatus = $"Loaded {loaded.Count} achievements for app {id}."; Navigate("SteamAchievements");
-        if (loaded.Count > 0) { SaveLastSteamApp(id); lastSteamAppRestored = true; }
     });
     public async Task StoreSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
         if (id != loadedSteamAppId) { SteamStatus = "Load achievements for this app ID before saving changes."; return; }
         var snapshot = SteamAchievements.ToArray();
-        var unlocking = snapshot.Where(a => a.IsModified && a.DesiredUnlocked).Select(a => (a.Id, a.Name)).ToArray();
-        foreach (var (apiName, name) in unlocking) MirrorExpectSteam(id, apiName, name);
-        int count;
-        try { count = await Task.Run(() => steam.StoreAchievementsAsync(id, snapshot, lifetime.Token), lifetime.Token); }
-        catch { foreach (var (apiName, _) in unlocking) MirrorCancelSteam(id, apiName); throw; }
+        var count = await Task.Run(() => steam.StoreAchievementsAsync(id, snapshot, lifetime.Token), lifetime.Token);
         SteamStatus = $"Stored {count} changes. Reload to verify.";
-        foreach (var (apiName, name) in unlocking)
-            if (!await MirrorSteamAppUnlockAsync(id, apiName, name, lifetime.Token)) { SteamStatus = $"Stored {count} changes, but Achievement Mirror couldn't copy {name} to Xbox. See Achievement Mirror."; break; }
     });
     public void InvertSteam() { if (CanInteract) foreach (var item in SteamAchievements) item.DesiredUnlocked = !item.DesiredUnlocked; }
     public void RevertSteam() { if (CanInteract) foreach (var item in SteamAchievements) item.DesiredUnlocked = item.IsUnlocked; }
@@ -131,7 +85,7 @@ public sealed partial class DesktopModel
         Busy(true);
         try { await operation(id); }
         catch (OperationCanceledException) { SteamStatus = "Steam operation cancelled."; }
-        catch (Exception error) { SteamStatus = "Steam operation failed. Ensure Steam is running and the selected app is available. (" + error.Message + ")"; }
+        catch { SteamStatus = "Steam operation failed. Ensure Steam is running and the selected app is available."; }
         finally { Busy(false); }
     }
 }

@@ -2,7 +2,7 @@ import XCTest
 @testable import LabsMobileCore
 
 final class UpdateRepositoryTests: XCTestCase {
-    func testAppAndEventChecksUseOfficialRepositoryWithoutAccountHeaders() async throws {
+    func testForkAppAndUpstreamEventChecksHaveNoAccountHeaders() async throws {
         let config = URLSessionConfiguration.ephemeral; config.protocolClasses = [UpdateRepositoryProtocol.self]
         let updates = PublicSync(session:URLSession(configuration:config))
         let release = try await updates.release(); XCTAssertNil(release)

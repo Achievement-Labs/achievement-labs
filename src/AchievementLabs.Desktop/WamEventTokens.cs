@@ -3,7 +3,9 @@ using System.Text;
 using System.Text.Json;
 using Avalonia.Controls;
 using AchievementLabs.MultiSelect;
+#if WINDOWS
 using Windows.Security.Authentication.Web.Core;
+#endif
 using XboxAuthNet.XboxLive.Crypto;
 
 namespace AchievementLabs.Desktop;
@@ -15,6 +17,10 @@ public static class WamEventTokens
     const string ClientId = "000000004424da1f";
     public static async Task<AutomaticEventToken.Grant?> AcquireAsync(Window owner, string xuid, CancellationToken ct)
     {
+#if !WINDOWS
+        await Task.CompletedTask;
+        return null;
+#else
         if (!OperatingSystem.IsWindows()) return null;
         var provider = await WebAuthenticationCoreManager.FindAccountProviderAsync("https://login.live.com", "consumers");
         if (provider == null) return null;
@@ -33,6 +39,7 @@ public static class WamEventTokens
             using var http = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { Timeout = TimeSpan.FromSeconds(30) };
             return await ExchangeAsync(http, msa, xuid, ct);
         }, ct);
+#endif
     }
 
     public static async Task<AutomaticEventToken.Grant?> FindMatchingAccountAsync<T>(IEnumerable<T> accounts,

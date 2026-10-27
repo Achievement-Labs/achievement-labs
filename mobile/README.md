@@ -6,7 +6,7 @@ Native SwiftUI app for iPhone and iPad, iOS/iPadOS 17 or later. No PC companion 
 
 ## Current test build — iOS 0.12.10 (28)
 
-App update checks/downloads and event JSON use [Achievement-Labs/achievement-labs](https://github.com/Achievement-Labs/achievement-labs/releases).
+This is the unofficial vampirebat fork of the [upstream Achievement Labs project](https://github.com/Achievement-Labs/achievement-labs). App update checks/downloads use [vampirebat releases](https://github.com/thevampirebat/achievement-labs/releases). Event JSON stays upstream. Older installed binaries need one manual corrected install to move their hardcoded app-update feed.
 
 Game Session combines spoofing and Auto Unlock with separate explicit Start actions. Library shortcuts select both controls for the chosen game while preventing active-session retargeting. Old spoof routes and launch preferences resolve to Game Session. Xbox 360 is a separate tab with native exported-profile import, library browsing, artwork when cached, filtering/sorting, green unlocked rows, descriptions, selected achievement/timestamp editing, automatic verified backups, rehash/resign and signed document export. The original export is read-only; console/USB copying remains separate. No exported profile or account token is sent to the editor's WebView network. See [mobile Xbox 360 details](../docs/mobile-xbox360.md).
 
@@ -21,7 +21,7 @@ The unsigned IPA requires user signing/sideloading. Keep the Live Activity exten
 - Manual unlock/retry, multi-selection into an account-specific persisted queue, per-item delays, pause/resume, remove items and remove achievements confirmed unlocked by Xbox.
 - Foreground title-presence heartbeats and elapsed timer alongside the queue, failure/completion notification options and stop-on-presence-failure.
 - Microsoft browser sign-in with PKCE and automatic in-app callback capture, optional manual authorization, separate event-token entry, iOS Keychain storage. No passwords, tokens or real accounts in tests, logs or artifacts.
-- Bundled current fork catalogue, prepared from committed source. Only deterministic Replace operations with checked targets, placeholders and title/service identity are enabled. Unsupported edition routes (including Minecraft's hosted route and the three guarded edition aliases) remain disabled until their full guards are ported. Disabled author titles stay disabled. See catalogue-report.json in the build artifact for exact coverage.
+- Bundled current fork catalogue, prepared from committed source. Only deterministic Replace operations with checked targets, placeholders and title/service identity are enabled. Unsupported edition routes (including Minecraft's hosted route and the remaining guarded edition aliases) remain disabled until their full guards are ported. Disabled author titles stay disabled. See catalogue-report.json in the build artifact for exact coverage.
 
 ## First connection
 
@@ -81,7 +81,7 @@ Spoofing 403 is now reported without repeatedly recommending the already-tested 
 
 Settings includes automatic event-data sync, Sync now, mobile release checking, update notifications and an automatic library refresh toggle. Public checks use an unauthenticated, cookie-free client and never send Xbox credentials. The hourly GitHub `Mobile public event feed` workflow verifies the original repo’s latest published Events.zip digest and archive structure, preserves JSON operation order, rejects unsupported replacement types and publishes only new titles absent from the bundled source. Native import revalidates every recipe and title/service identity before atomically caching it. Bundled corrections and disabled edition routes cannot be overwritten. New titles are Testing; accepted event requests still need progress verification. The public feed currently matches upstream v1.0.8, so zero new titles is a valid sync result.
 
-App update checks inspect published IPA release assets on Achievement-Labs/achievement-labs and ignore Windows-only releases. If no iOS release is published, the app says so; build artifacts alone do not appear as releases. Checks and notifications run while the app is active, not as an always-on background service. Installation remains a Signulous signing/install operation.
+App update checks inspect published IPA release assets in the fork and ignore Windows-only releases. If no iOS release is published, the app says so; build artifacts alone do not appear as releases. Checks and notifications run while the app is active, not as an always-on background service. Installation remains a Signulous signing/install operation.
 
 The matching Windows build adds Settings → iPhone / iPad sync → Export encrypted mobile sign-in. This writes a `.labslink` file encrypted with AES-256-GCM and a separate random 256-bit pairing key. Import is accepted for 10 minutes. Transfer the file to the phone, import it in mobile Settings → PC sync, and enter the key. Xbox verifies the authorization and XUID before a preview offers Connect this PC account or Import event token only. Event-only import requires the same account and preserves native OAuth renewal. Connecting the PC account imports current authorization/event credentials; OAuth renewal credentials stay on PC, so sync again when the imported authorization expires. No credential listener, LAN port or token-upload service is created. Keep both file and key private.
 
@@ -135,3 +135,5 @@ Extended background audio is an explicit opt-in under Settings → App, off by d
 A new WidgetKit/ActivityKit extension displays extended-mode spoof elapsed time using native timer text, plus queue handled counts. It never labels accepted event requests as verified unlocks. One custom activity is used; it is not shown while the system background task is active. It ends when the session stops and shows stale status if app updates cease. The app updates state at 15-second intervals; timer rendering does not require one-second app wakeups. Physical-device audio/runtime behavior and Signulous signing of the extension still require testing.
 
 
+
+Modern Warfare Remastered (Xbox One) uses a reviewed 50-achievement mapping. The mobile catalogue checks legacy PC-keyed and corrected Xbox-keyed sets against fixed event signatures. Unknown IDs or changed semantics disable the whole title. Downloaded/imported feeds cannot replace bundled edition mappings.

@@ -48,7 +48,6 @@ static class Test
   if(args.Contains("--queue-tools")){DlcCatalogueTests.Run();CompletionPresentationTests.Run();GameDetailsTests.Run();QueueToolTests.Run();SavedGameQueueTests.Run();
   QueueTransferTests.Run();return;}
   if(args.Contains("--playtime")){PlaytimeTests.Run();return;}
-  if(args.Contains("--mirror")){MirrorTests.Run();return;}
   if(args.Contains("--export")){ExportTests.Run();return;}
   if(args.Contains("--mapping")){MappingTests.Run();return;}
   if(args.Contains("--editions")){LocalCatalogueIntegrationTests.CheckUnapprovedMappings();return;}

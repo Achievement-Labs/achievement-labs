@@ -84,8 +84,8 @@ public sealed partial class DesktopModel
     {
         if (!CanStartPresence || client == null || session == null || !uint.TryParse(PresenceTitleId, out var id) || id == 0) return;
         var xuid = session.Xuid; var titleId = id.ToString();
-        runningPresenceTitleId = titleId; presenceHeartbeatAt = null;
         string? lastPresenceAuthorization = null;
+        var heartbeatAccepted = false; var heartbeatRefused = false;
         var cancellation = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
         ActiveSpoofTitle = $"{Games.FirstOrDefault(g => g.Id == titleId)?.Name ?? (SpoofTitleDetails.StartsWith("Title ID: " + titleId + "\n") ? SpoofTitleName : "Xbox title")} · {titleId}";
         PresenceHeartbeat = "Waiting for first heartbeat";
@@ -100,26 +100,44 @@ public sealed partial class DesktopModel
             while (true)
             {
                 // Reacquire for every heartbeat so long sessions do not retain stale XAUTH.
-                var authorization = await AchievementLabs.Core.XboxPcAppAuthorizationReader.TryReadValidatedAsync(xuid, RegionOverride, cancellation.Token);
+                string? authorization;
+                if (OperatingSystem.IsMacOS())
+                {
+                    var paired = PairedPresenceAuthorization(xuid);
+                    if (paired == null) await EnsureAuthorizationFreshAsync(cancellation.Token);
+                    if (session?.Xuid != xuid) throw new InvalidOperationException("Account changed; spoofing stopped.");
+                    authorization = paired ?? session.Authorization;
+                }
+                else authorization = await AchievementLabs.Core.XboxPcAppAuthorizationReader.TryReadValidatedAsync(xuid, RegionOverride, cancellation.Token);
                 if (string.IsNullOrWhiteSpace(authorization)) throw new InvalidOperationException("Open and sign in to the Xbox PC app.");
                 using var api = new XboxApiClient(authorization, RegionOverride);
                 var profile = await api.GetBasicProfileAsync();
                 if (profile?.ProfileUsers.FirstOrDefault()?.Id != xuid)
-                    throw new InvalidOperationException("The Xbox PC app account differs from the connected account. Reconnect before spoofing.");
+                    throw new InvalidOperationException("The presence authorization belongs to another account. Reconnect before spoofing.");
                 lastPresenceAuthorization = authorization;
                 await requests.WaitAsync(cancellation.Token);
                 try
                 {
                     var result = await api.SendHeartbeatAsync(xuid, titleId);
                     StatsOutput = $"Presence heartbeat for {titleId}: HTTP {result.StatusCode}";
-                    if (result.StatusCode < 200 || result.StatusCode >= 300) { failure = $"Heartbeat HTTP {result.StatusCode}"; PresenceHeartbeat = failure; break; }
-                    PresenceHeartbeat = $"Last heartbeat: {DateTimeOffset.Now:HH:mm:ss} · HTTP {result.StatusCode}";
-                    presenceHeartbeatAt = DateTimeOffset.Now;
+                    if (result.StatusCode < 200 || result.StatusCode >= 300)
+                    {
+                        heartbeatRefused = result.StatusCode is 401 or 403;
+                        failure = OperatingSystem.IsMacOS() && pairedPcPresence != null && result.StatusCode == 403
+                            ? "Xbox refused the PC-paired authorization (HTTP 403). Pair with Windows again from Settings → Sync."
+                            : OperatingSystem.IsMacOS() && result.StatusCode == 403
+                            ? "Xbox refused heartbeat access for this Mac sign-in (HTTP 403). The profile check passed, but presence needs separate authorization. Xbox PC-app authorization remains the verified route; an event token does not grant heartbeat access."
+                            : $"Heartbeat HTTP {result.StatusCode}";
+                        PresenceHeartbeat = StatsOutput = failure; break;
+                    }
+                    heartbeatAccepted = true;
+                    PresenceHeartbeat = $"Last heartbeat: {DateTimeOffset.Now:HH:mm:ss} · HTTP {result.StatusCode}" + (pairedPcPresence != null ? " · PC-paired authorization" : "");
                     lastHeartbeat = stopwatch.Elapsed;
                 }
                 finally { requests.Release(); }
                 while (stopwatch.Elapsed - lastHeartbeat < TimeSpan.FromMinutes(5))
                 {
+                    if (OperatingSystem.IsMacOS() && pairedPcPresence != null) PairedPresenceAuthorization(xuid);
                     SpoofingStatus = "Spoofing active";
                     UpdatePresenceElapsed(stopwatch.Elapsed);
                     await Task.Delay(TimeSpan.FromSeconds(1), cancellation.Token);
@@ -127,13 +145,13 @@ public sealed partial class DesktopModel
             }
         }
         catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { }
-        catch { failure = "Presence heartbeat failed or timed out."; PresenceHeartbeat = StatsOutput = failure; }
+        catch { failure = pairedPcPresence != null ? "PC-paired heartbeat failed or authorization expired. Pair with Windows again from Settings → Sync, or import a fresh PC sync file." : "Presence heartbeat failed or timed out."; PresenceHeartbeat = StatsOutput = failure; }
         finally
         {
             await requests.WaitAsync();
             try
             {
-                if (!lifetime.IsCancellationRequested && lastPresenceAuthorization != null)
+                if (!lifetime.IsCancellationRequested && lastPresenceAuthorization != null && heartbeatAccepted && !heartbeatRefused)
                 {
                     using var stopApi = new XboxApiClient(lastPresenceAuthorization, RegionOverride);
                     var result = xboxQueue?.IsRunning == true ? await stopApi.SendHeartbeatAsync(xuid, xboxQueue.ActiveTitleId) : await stopApi.StopHeartbeatAsync(xuid);
@@ -141,7 +159,7 @@ public sealed partial class DesktopModel
                 }
             }
             catch { StatsOutput = "Presence stop request failed; the service may retain presence until it expires."; }
-            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; runningPresenceTitleId = ""; presenceHeartbeatAt = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
+            finally { var cancelled = cancellation.IsCancellationRequested; presenceCancellation = null; requests.Release(); cancellation.Dispose(); UpdatePresenceElapsed(stopwatch.Elapsed); CompletePresence(failure, cancelled); if (heartbeatRefused && OperatingSystem.IsMacOS()) ClearPcPresence(); Changed(nameof(PresenceRunning)); Changed(nameof(CanStartPresence)); Changed(nameof(CanDisconnect)); }
         }
     }
     public void StopPresence() => presenceCancellation?.Cancel();

@@ -3,12 +3,13 @@ import UniformTypeIdentifiers
 import LabsMobileCore
 
 enum SettingsCategory: String, CaseIterable, Identifiable {
-    case account = "Account", sync = "Sync", library = "Library", app = "App", appearance = "Appearance"
+    case account = "Account", sync = "Sync", library = "Library", app = "App", appearance = "Appearance", guides = "Guides"
     var id: String { rawValue }
     static var previewDefault: SettingsCategory {
         #if DEBUG
         let args = ProcessInfo.processInfo.arguments
         if args.contains("--ui-preview=settings-sync") { return .sync }
+        if args.contains("--ui-preview=settings-guides") { return .guides }
         if args.contains("--ui-preview=settings-library") { return .library }
         if args.contains("--ui-preview=settings-appearance") { return .appearance }
         if args.contains("--ui-preview=settings-app") { return .app }

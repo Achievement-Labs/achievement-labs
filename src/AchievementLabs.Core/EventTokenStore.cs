@@ -13,7 +13,7 @@ public static class EventTokenStore
     {
         var plain = Encoding.UTF8.GetBytes(token);
         byte[] protectedBytes;
-        try { protectedBytes = ProtectedData.Protect(plain, null, DataProtectionScope.CurrentUser); }
+        try { protectedBytes = SecureUserData.Protect(plain); }
         finally { CryptographicOperations.ZeroMemory(plain); }
         Directory.CreateDirectory(Path.GetDirectoryName(DefaultPath)!);
         await File.WriteAllBytesAsync(DefaultPath, protectedBytes, cancellationToken);
@@ -23,7 +23,7 @@ public static class EventTokenStore
     {
         if (!File.Exists(DefaultPath)) return "";
         var protectedBytes = await File.ReadAllBytesAsync(DefaultPath, cancellationToken);
-        var plain = ProtectedData.Unprotect(protectedBytes, null, DataProtectionScope.CurrentUser);
+        var plain = SecureUserData.Unprotect(protectedBytes);
         try { return Encoding.UTF8.GetString(plain); }
         finally { CryptographicOperations.ZeroMemory(plain); }
     }

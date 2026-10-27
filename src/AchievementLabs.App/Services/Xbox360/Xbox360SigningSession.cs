@@ -91,7 +91,11 @@ public static class Xbox360SigningSession
         {
             "ALC1"u8.CopyTo(plain);
             material.Certificate.CopyTo(plain, 4); material.P.CopyTo(plain, 428); material.Q.CopyTo(plain, 492);
+#if LABS_MACOS
+            encrypted = AchievementLabs.Core.SecureUserData.Protect(plain);
+#else
             encrypted = ProtectedData.Protect(plain, StoreEntropy, DataProtectionScope.CurrentUser);
+#endif
         }
         finally { CryptographicOperations.ZeroMemory(plain); CryptographicOperations.ZeroMemory(material.P); CryptographicOperations.ZeroMemory(material.Q); }
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
@@ -102,7 +106,11 @@ public static class Xbox360SigningSession
     public static void Restore(string path)
     {
         if (new FileInfo(path).Length > 4096) throw new InvalidDataException("Invalid saved signing identity.");
+#if LABS_MACOS
+        var plain = AchievementLabs.Core.SecureUserData.Unprotect(File.ReadAllBytes(path));
+#else
         var plain = ProtectedData.Unprotect(File.ReadAllBytes(path), StoreEntropy, DataProtectionScope.CurrentUser);
+#endif
         try
         {
             LoadIdentity(plain);

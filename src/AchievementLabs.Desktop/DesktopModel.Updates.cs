@@ -13,6 +13,7 @@ public sealed partial class DesktopModel
     public bool CanCheckUpdates => !checkingUpdate;
     public async Task CheckForUpdatesAsync(bool manual = false)
     {
+        if (OperatingSystem.IsMacOS()) { UpdateStatus = "Mac preview updates: download manually from Achievement-Labs/achievement-labs releases. Windows packages are excluded."; return; }
         if (checkingUpdate || UpdateReady || (!manual && !AutomaticallyCheckUpdates)) return;
         checkingUpdate = true; Changed(nameof(CanCheckUpdates));
         try
@@ -23,7 +24,7 @@ public sealed partial class DesktopModel
             UpdateStatus = "Downloading update " + availableUpdate.Manifest.Version + "…";
             updateDownload = await updater.DownloadAsync(availableUpdate, lifetime.Token);
             UpdateReady = true;
-            UpdateStatus = "Update " + availableUpdate.Manifest.Version + " is ready. Install and restart when your work is saved.";
+            UpdateStatus = OperatingSystem.IsMacOS() ? "Mac update verified. Reveal the ZIP, quit the app, and replace it manually in Applications." : "Update " + availableUpdate.Manifest.Version + " is ready. Install and restart when your work is saved.";
         }
         catch (OperationCanceledException) { }
         catch (Exception error) { UpdateStatus = "Update check/download failed: " + error.Message + " Retry in Settings. Your current app is unchanged."; }
@@ -37,7 +38,7 @@ public sealed partial class DesktopModel
             UpdateStatus = "Save pending profile edits and finish active operations before installing the update.";
             return false;
         }
-        try { AppUpdater.StartInstall(updateDownload, availableUpdate.Manifest); return true; }
+        try { AppUpdater.StartInstall(updateDownload, availableUpdate.Manifest); return !OperatingSystem.IsMacOS(); }
         catch (Exception error) { UpdateStatus = "Could not install update: " + error.Message + " Move the EXE to a writable folder or download the release manually."; return false; }
     }
 }

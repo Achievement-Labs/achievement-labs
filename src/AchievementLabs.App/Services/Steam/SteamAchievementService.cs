@@ -176,7 +176,6 @@ public sealed class SteamAchievementService : ISteamAchievementService
         EnrichGameNamesFromSteamStore(games, fetchMissing: false);
         EnrichMissingGameNamesFromSteamAppList(games);
         ScrubBadSteamNames(games);
-        EnrichGameNamesFromSchemas(games, steamPath);
 
         return games.Values
             .OrderBy(game => game.DisplayName, StringComparer.OrdinalIgnoreCase)
@@ -208,20 +207,6 @@ public sealed class SteamAchievementService : ISteamAchievementService
         {
             _metadataStatus = $"Steam app metadata cache failed: {ex.Message}";
             throw;
-        }
-    }
-
-    /// <summary>SteamID64 of the account signed in to Steam on this PC, read from loginusers.vdf without any network call.</summary>
-    public string GetLocalSteamId()
-    {
-        try
-        {
-            var steamId = ReadLocalLoginProfile(GetSteamInstallPath()).SteamId;
-            return string.IsNullOrWhiteSpace(steamId) || steamId == "Unknown" ? string.Empty : steamId;
-        }
-        catch
-        {
-            return string.Empty;
         }
     }
 
@@ -279,17 +264,8 @@ public sealed class SteamAchievementService : ISteamAchievementService
             var communityStates = new Dictionary<string, SteamCommunityAchievementState>(StringComparer.OrdinalIgnoreCase);
             try
             {
-                var steamPath = GetSteamInstallPath();
-                var steamId = ReadLocalLoginProfile(steamPath).SteamId;
-                // Steam's own stats file on this PC is current the moment an unlock is saved (as SAM sees it);
-                // the public profile page lags, so it is only used when there is no local file.
-                var local = AchievementLabs.Mirror.SteamWebApi.IsSteamId64(steamId)
-                    ? AchievementLabs.Mirror.SteamLocalStats.TryRead(steamPath, AchievementLabs.Mirror.SteamWebApi.AccountId(steamId), appId)
-                    : null;
-                if (local is { Count: > 0 })
-                    communityStates = local.ToDictionary(a => a.Id, a => new SteamCommunityAchievementState(a.Unlocked,
-                        a.UnlockedAt is { } at ? (uint)at.ToUnixTimeSeconds() : 0u), StringComparer.OrdinalIgnoreCase);
-                else if (!string.IsNullOrWhiteSpace(steamId) && steamId != "Unknown")
+                var steamId = ReadLocalLoginProfile(GetSteamInstallPath()).SteamId;
+                if (!string.IsNullOrWhiteSpace(steamId) && steamId != "Unknown")
                     communityStates = LoadCommunityAchievementStates(steamId, appId);
             }
             catch
@@ -473,19 +449,23 @@ public sealed class SteamAchievementService : ISteamAchievementService
         if (requested.Count == 0)
             return Task.FromResult(0);
 
-        // Changes run in the helper process: a fresh Steam connection tied to this game that waits for Steam to
-        // confirm the game's stats are loaded. Setting achievements in-process failed with "Steam refused to set
-        // achievement" because this process may already be tied to another game, and stats weren't confirmed.
         return Task.Run(() =>
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var arguments = new List<string> { appId.ToString(CultureInfo.InvariantCulture) };
+
+            using var client = CreateClient(appId);
+            PrepareStats(client);
+
             foreach (var achievement in requested)
             {
-                arguments.Add(achievement.DesiredUnlocked ? "--set" : "--clear");
-                arguments.Add(achievement.Id);
+                cancellationToken.ThrowIfCancellationRequested();
+                if (!client.SteamUserStats.SetAchievement(achievement.Id, achievement.DesiredUnlocked))
+                    throw new InvalidOperationException($"Steam refused to set achievement '{achievement.Id}'.");
             }
-            RunSteamHelper(arguments, TimeSpan.FromSeconds(45), "STORED ", cancellationToken);
+
+            if (!client.SteamUserStats.StoreStats())
+                throw new InvalidOperationException("Steam refused StoreStats for the active game.");
+
             return requested.Count;
         }, cancellationToken);
     }
@@ -613,40 +593,6 @@ public sealed class SteamAchievementService : ISteamAchievementService
             _spoofProcess.Dispose();
             _spoofProcess = null;
         }
-    }
-
-    /// <summary>Runs the Steam helper to completion and throws with its own message if it fails.</summary>
-    private static void RunSteamHelper(IEnumerable<string> arguments, TimeSpan timeout, string successPrefix, CancellationToken cancellationToken)
-    {
-        var helperPath = GetSteamIdleHelperPath();
-        if (!File.Exists(helperPath))
-            throw new FileNotFoundException("Steam helper was not found. Rebuild or publish Achievement Labs, then try again.", helperPath);
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = helperPath,
-            UseShellExecute = false,
-            CreateNoWindow = true,
-            WindowStyle = ProcessWindowStyle.Hidden,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true
-        };
-        foreach (var argument in arguments) startInfo.ArgumentList.Add(argument);
-        using var process = Process.Start(startInfo) ?? throw new InvalidOperationException("Steam helper failed to start.");
-        var output = process.StandardOutput.ReadToEndAsync(cancellationToken);
-        var error = process.StandardError.ReadToEndAsync(cancellationToken);
-        try
-        {
-            if (!process.WaitForExitAsync(cancellationToken).Wait(timeout, cancellationToken))
-                throw new TimeoutException("Steam didn't respond in time. Make sure Steam is running and online.");
-        }
-        catch
-        {
-            try { if (!process.HasExited) process.Kill(entireProcessTree: true); } catch { }
-            throw;
-        }
-        var stdout = output.Result;
-        if (process.ExitCode == 0 && stdout.Contains(successPrefix, StringComparison.Ordinal)) return;
-        throw new InvalidOperationException(FirstNonEmpty(error.Result.Trim(), $"Steam helper exited with code {process.ExitCode}."));
     }
 
     private static string GetSteamIdleHelperPath()
@@ -1113,52 +1059,6 @@ public sealed class SteamAchievementService : ISteamAchievementService
 
         return false;
     }
-
-    /// <summary>
-    /// Fills names still shown as "App 123" from the game's local achievement schema, which carries its name
-    /// ("gamename"). Works offline; results are cached by file time so the library stays fast.
-    /// </summary>
-    private static void EnrichGameNamesFromSchemas(Dictionary<long, SteamGameItem> games, string steamPath)
-    {
-        var cachePath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("steam-schema-names.json");
-        Dictionary<string, SchemaNameCacheEntry> cache;
-        try { cache = File.Exists(cachePath) ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, SchemaNameCacheEntry>>(File.ReadAllText(cachePath)) ?? [] : []; }
-        catch { cache = []; }
-        var changed = false;
-        foreach (var pair in games.ToList())
-        {
-            if (!string.Equals(pair.Value.Name, $"App {pair.Key.ToString(CultureInfo.InvariantCulture)}", StringComparison.Ordinal) && !string.IsNullOrWhiteSpace(pair.Value.Name))
-                continue;
-            var schemaPath = GetSchemaPath(steamPath, pair.Key);
-            if (!File.Exists(schemaPath)) continue;
-            var key = pair.Key.ToString(CultureInfo.InvariantCulture);
-            var stamp = File.GetLastWriteTimeUtc(schemaPath).Ticks;
-            string name;
-            if (cache.TryGetValue(key, out var hit) && hit.Ticks == stamp) name = hit.Name;
-            else
-            {
-                try
-                {
-                    var root = AchievementLabs.Mirror.SteamLocalStats.KeyValues.Parse(File.ReadAllBytes(schemaPath));
-                    var game = root.Child(key) ?? root.Children.FirstOrDefault();
-                    name = game?.Child("gamename")?.AsString()?.Trim() ?? "";
-                }
-                catch { name = ""; }
-                cache[key] = new SchemaNameCacheEntry(stamp, name);
-                changed = true;
-            }
-            if (name.Length > 0 && !IsLikelyBadSteamName(name)) games[pair.Key] = CopySteamGame(pair.Value, name);
-        }
-        if (!changed) return;
-        try
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(cachePath)!);
-            File.WriteAllText(cachePath, System.Text.Json.JsonSerializer.Serialize(cache));
-        }
-        catch { /* Cache only. */ }
-    }
-
-    private sealed record SchemaNameCacheEntry(long Ticks, string Name);
 
     private static void ScrubBadSteamNames(Dictionary<long, SteamGameItem> games)
     {

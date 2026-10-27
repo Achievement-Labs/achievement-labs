@@ -26,6 +26,9 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
     }
     internal async Task<AvailableUpdate?> CheckAsync(Version current, CancellationToken ct)
     {
+#if LABS_MACOS
+        if (OperatingSystem.IsMacOS()) return null;
+#endif
         using var request = new HttpRequestMessage(HttpMethod.Get, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100");
         request.Headers.UserAgent.ParseAdd("AchievementLabs/" + current);
         using var response = await http.SendAsync(request, ct);
@@ -33,7 +36,7 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
         using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync(ct));
         if (document.RootElement.ValueKind != JsonValueKind.Array || document.RootElement.GetArrayLength() > 100) throw new InvalidDataException("Invalid release list.");
         var candidates = document.RootElement.EnumerateArray()
-            .Where(r => !r.GetProperty("draft").GetBoolean() && !r.GetProperty("prerelease").GetBoolean())
+            .Where(r => !r.GetProperty("draft").GetBoolean())
             .Select(r => new { Release = r, Tag = r.GetProperty("tag_name").GetString()! })
             .Select(r => new { r.Release, r.Tag, Ceiling = TagCeiling(r.Tag) })
             .Where(r => r.Ceiling != null).OrderByDescending(r => r.Ceiling);
@@ -72,7 +75,7 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
         var folder = Path.Combine(root, Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(folder);
         var partial = Path.Combine(folder, "download.part");
-        var target = Path.Combine(folder, "AchievementLabs.exe");
+        var target = Path.Combine(folder, OperatingSystem.IsMacOS() ? "AchievementLabs-macOS-arm64.zip" : "AchievementLabs.exe");
         try
         {
             using var response = await http.GetAsync(update.DownloadUrl, HttpCompletionOption.ResponseHeadersRead, ct);
@@ -98,8 +101,8 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
     internal static void Verify(string file, UpdateManifest manifest)
     {
         using var stream = File.OpenRead(file);
-        if (stream.Length != manifest.Bytes || stream.ReadByte() != 'M' || stream.ReadByte() != 'Z')
-            throw new InvalidDataException("The update is not the expected Windows executable.");
+        if (stream.Length != manifest.Bytes || stream.ReadByte() != (OperatingSystem.IsMacOS() ? 'P' : 'M') || stream.ReadByte() != (OperatingSystem.IsMacOS() ? 'K' : 'Z'))
+            throw new InvalidDataException("The update is not the expected platform package.");
         stream.Position = 0;
         if (!Convert.ToHexString(SHA256.HashData(stream)).Equals(manifest.Sha256, StringComparison.OrdinalIgnoreCase))
             throw new CryptographicException("The update checksum does not match. Your current app has not changed.");
@@ -108,6 +111,9 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
     internal static void StartInstall(string download, UpdateManifest manifest)
     {
         Verify(download, manifest);
+#if LABS_MACOS
+        if (OperatingSystem.IsMacOS()) throw new PlatformNotSupportedException("Mac preview updates are installed manually from fork releases.");
+#endif
         var target = Environment.ProcessPath ?? throw new InvalidOperationException("Application path unavailable.");
         if (!target.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Use the published Windows EXE to install an update.");
         // Confirm the app's location is writable before asking it to exit.

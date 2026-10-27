@@ -3,8 +3,7 @@ using System.Text.Json;
 
 namespace AchievementLabs.Core;
 
-// PartialTitleIds is optional and also listed in TestingTitleIds, so older builds and catalogs keep working.
-public sealed record EventCatalogStatus(string[] TitleIds, string[]? TestingTitleIds, string[] ComingSoonTitleIds, string[]? PartialTitleIds = null);
+public sealed record EventCatalogStatus(string[] TitleIds, string[]? TestingTitleIds, string[] ComingSoonTitleIds);
 public sealed record EventTitleMapping(string[] AchievementIds);
 public sealed record EventPayloads(string[] Payloads);
 

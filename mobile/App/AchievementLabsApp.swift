@@ -369,6 +369,7 @@ struct SettingsView: View {
                     if category == .library { librarySettings }
                     if category == .app { appSettings }
                     if category == .appearance { AppearanceSettings() }
+                    if category == .guides { PairingGuides { pcSync = true } }
                 }
             }.navigationTitle("Settings").navigationBarTitleDisplayMode(.inline).labsPage()
             .toolbar { Button { pcSync = true } label: { Label("Scan QR",systemImage:"qrcode.viewfinder") }.disabled(m.busy || m.running || m.presenceRunning) }
@@ -391,7 +392,7 @@ struct SettingsView: View {
                     if let profile = m.account?.loginProfile { Text("Current session: " + profile).font(.caption).foregroundStyle(.secondary) }
                     Picker("Sign-in profile",selection:$m.loginProfile) { ForEach(LoginProfile.allCases) { Text($0.rawValue).tag($0.rawValue) } }.disabled(m.busy || m.running || m.presenceRunning)
                     Button("Scan QR codes",systemImage:"qrcode.viewfinder") { pcSync = true }.disabled(m.busy || m.running || m.presenceRunning)
-                    Text("For title spoofing, use the PC’s full Sign-in + event token QR. Event-token-only sync leaves account authorization unchanged.").font(.caption).foregroundStyle(.secondary)
+                    Text("For title spoofing, use a PC Sign-in only or Sign-in + event token QR. Event-token-only sync leaves account authorization unchanged.").font(.caption).foregroundStyle(.secondary)
                     Text("Profile changes apply when you sign in again.").font(.caption2).foregroundStyle(.secondary)
                     Toggle("Remember sign-in",isOn:$m.rememberSignIn).disabled(m.busy || m.refreshingSignIn || m.running || m.presenceRunning).onChange(of:m.rememberSignIn) { _,_ in Task { await m.updateRememberSignIn() } }
                     Picker("Sign-in browser",selection:$m.signInBrowser) { Text("In app").tag("In app"); Text("Safari").tag("Safari") }.disabled(m.busy || m.refreshingSignIn)

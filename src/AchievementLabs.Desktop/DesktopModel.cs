@@ -102,7 +102,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool HasLibrarySelection => SelectedLibraryGame != null;
     public Achievement? SelectedAchievement { get => selectedAchievement; set { selectedAchievement = value; Changed(); Changed(nameof(HasSelection)); NotifyActions(); } }
     public string Search { get => search; set { search = value ?? ""; Changed(); Refresh(); } }
-    public string PageTitle => page switch { "About" => "About Achievement Labs", "Home" => "Home", "Tools" => "Tools and information", "Queues" => "Xbox auto unlock queues", "SteamQueue" => "Steam Auto Unlocker", "Legacy" => "Legacy tools", "Gfwl" => "Games for Windows LIVE", "Xbox360Profiles" => "Xbox 360", "Xbox360ProfileEditor" => "Xbox 360", "SteamLibrary" => "Steam library", "SteamAchievements" => "Steam achievements", "Spoofer" => "Xbox title spoofer", "Epic" => "Epic Games", "Ubisoft" => "Ubisoft Connect", "Stats" => "Stats editor", "Settings" => "Settings", "Diagnostics" => "Event catalog", "Library" => "Xbox library", "Mirror" => "Achievement Mirror", _ => "Xbox achievements" };
+    public string PageTitle => page switch { "About" => "About Achievement Labs", "Home" => "Home", "Tools" => "Tools and information", "Queues" => "Xbox auto unlock queues", "SteamQueue" => "Steam Auto Unlocker", "Legacy" => "Legacy tools", "Gfwl" => "Games for Windows LIVE", "Xbox360Profiles" => "Xbox 360", "Xbox360ProfileEditor" => "Xbox 360", "SteamLibrary" => "Steam library", "SteamAchievements" => "Steam achievements", "Spoofer" => "Xbox title spoofer", "Epic" => "Epic Games", "Ubisoft" => "Ubisoft Connect", "Stats" => "Stats editor", "Settings" => "Settings", "Diagnostics" => "Event catalog", "Library" => "Xbox library", _ => "Xbox achievements" };
     public bool IsHome => page == "Home";
     public bool IsSpoofer => page == "Spoofer";
     public bool IsAchievements => page == "Achievements";
@@ -123,6 +123,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool CanGoBack => pageHistory.Count > 0;
     public bool CanGoForward => pageForwardHistory.Count > 0;
     public void Navigate(string destination) {
+        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable in this Mac preview."; return; }
         if (destination == "Legacy") return;
         if (destination == page) return;
         if (page == "Achievements" && destination != "Achievements" && autoPresenceTask != null) StopPresence();
@@ -140,7 +141,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         if (page == "Achievements" && autoPresenceTask != null) StopPresence();
         pageHistory.Push(page); SetPage(pageForwardHistory.Pop());
     }
-    private void SetPage(string destination) { page = destination; if (destination == "SteamAchievements") _ = RestoreLastSteamGameAsync(); Changed(nameof(CanGoBack)); Changed(nameof(CanGoForward)); Changed(nameof(IsAbout)); Changed(nameof(PageTitle)); Changed(nameof(IsMirror)); Changed(nameof(IsHome)); Changed(nameof(IsSpoofer)); Changed(nameof(IsAchievements)); Changed(nameof(IsLibrary)); Changed(nameof(IsSettings)); Changed(nameof(IsDiagnostics)); Changed(nameof(IsStats)); Changed(nameof(IsPlatform)); Changed(nameof(IsEpic)); Changed(nameof(IsUbisoft)); Changed(nameof(IsSteam)); Changed(nameof(IsSteamLibrary)); Changed(nameof(IsSteamAchievements)); Changed(nameof(IsLegacy)); Changed(nameof(IsGfwl)); Changed(nameof(IsXbox360Profiles)); Changed(nameof(IsXbox360ProfileEditor)); Changed(nameof(IsQueues)); Changed(nameof(IsSteamQueue)); Changed(nameof(IsTools)); }
+    private void SetPage(string destination) { page = destination; Changed(nameof(CanGoBack)); Changed(nameof(CanGoForward)); Changed(nameof(IsAbout)); Changed(nameof(PageTitle)); Changed(nameof(IsHome)); Changed(nameof(IsSpoofer)); Changed(nameof(IsAchievements)); Changed(nameof(IsLibrary)); Changed(nameof(IsSettings)); Changed(nameof(IsDiagnostics)); Changed(nameof(IsStats)); Changed(nameof(IsPlatform)); Changed(nameof(IsEpic)); Changed(nameof(IsUbisoft)); Changed(nameof(IsSteam)); Changed(nameof(IsSteamLibrary)); Changed(nameof(IsSteamAchievements)); Changed(nameof(IsLegacy)); Changed(nameof(IsGfwl)); Changed(nameof(IsXbox360Profiles)); Changed(nameof(IsXbox360ProfileEditor)); Changed(nameof(IsQueues)); Changed(nameof(IsSteamQueue)); Changed(nameof(IsTools)); }
     private void ApplyXboxProfile(ProfileUser? user)
     {
         ProfileName = user?.Settings.FirstOrDefault(s => s.Id == "Gamertag")?.Value ?? "Xbox account";
@@ -155,7 +156,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         Changed(nameof(VisibleAchievements)); Changed(nameof(NoResults)); Changed(nameof(ResultLabel)); Changed(nameof(CanExport));
     }
     private void Busy(bool value) { busy = value; RefreshXbox360Signing(); Changed(nameof(CanAcquireAccountEventToken)); Changed(nameof(CanConnect)); Changed(nameof(CanInteract)); Changed(nameof(CanDisconnect)); Changed(nameof(CanQuery)); Changed(nameof(CanLookupSpoofTitle)); Changed(nameof(CanFillTotals)); Changed(nameof(CanStartPresence)); NotifyActions(); }
-    public Task ConnectAsync() => AttachXboxPcAppAsync();
+    public Task ConnectAsync() => OperatingSystem.IsMacOS() ? ConnectMacAsync() : AttachXboxPcAppAsync();
 
     private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method)
     {
@@ -283,6 +284,6 @@ public sealed partial class DesktopModel : Observable, IDisposable
             .Select(value => value.Type == JTokenType.String ? value.Value<string>() : null)
             .FirstOrDefault(value => value != null && (value.StartsWith("http", StringComparison.OrdinalIgnoreCase) || value.StartsWith("//", StringComparison.Ordinal)));
     }
-    public void Dispose() { mirror?.Dispose(); AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
+    public void Dispose() { AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
     private async Task DisposeClientAsync() { await requests.WaitAsync(); client?.Dispose(); requests.Release(); }
 }

@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net9.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework Condition="'$(LabsMacOS)' != 'true'">net9.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework Condition="'$(LabsMacOS)' == 'true'">net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationManifest Condition="'$(LabsMacOS)' != 'true'">app.manifest</ApplicationManifest>
     <ApplicationIcon>../AchievementLabs.App/app.ico</ApplicationIcon>
     <AssemblyName>AchievementLabs</AssemblyName>
     <Version>1.0.9</Version>
@@ -14,7 +15,7 @@
 
   <ItemGroup><ProjectReference Include="../AchievementLabs.Enhancements/AchievementLabs.Enhancements.csproj" /></ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.2" Condition="'$(LabsMacOS)' != 'true'" />
     <PackageReference Include="ZXing.Net" Version="0.16.11" />
     <PackageReference Include="QRCoder" Version="1.8.0" />
     <PackageReference Include="Avalonia" Version="12.1.2" />
@@ -36,18 +37,18 @@
 <Content Include="../../uplayachievements/**/*.*" LinkBase="uplayachievements" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../Uplay spools/**/*.spool" LinkBase="Uplay spools" CopyToOutputDirectory="PreserveNewest"/>
 </ItemGroup>
-<Target Name="BuildNativeHelpers" Condition="'$(LabsSingleFile)' != 'true'" BeforeTargets="Build">
+<Target Name="BuildNativeHelpers" Condition="'$(LabsSingleFile)' != 'true' And '$(LabsMacOS)' != 'true'" BeforeTargets="Build">
 <RemoveDir Directories="$(MSBuildProjectDirectory)/obj/steam-idle;$(MSBuildProjectDirectory)/obj/gfwl-injector" />
 <MSBuild Projects="../AchievementLabs.SteamIdle/AchievementLabs.SteamIdle.csproj" Targets="Restore;Build" RemoveProperties="RuntimeIdentifier;SelfContained" Properties="Configuration=$(Configuration);OutputPath=$(MSBuildProjectDirectory)/obj/steam-idle/;NuGetAudit=false"/>
 <MSBuild Projects="../AchievementLabs.GfwlInjector/AchievementLabs.GfwlInjector.csproj" Targets="Restore;Build" RemoveProperties="RuntimeIdentifier;SelfContained" Properties="Configuration=$(Configuration);Platform=x86;OutputPath=$(MSBuildProjectDirectory)/obj/gfwl-injector/;NuGetAudit=false"/>
 </Target>
-<Target Name="CopyNativeHelpers" Condition="'$(LabsSingleFile)' != 'true'" AfterTargets="Build">
+<Target Name="CopyNativeHelpers" Condition="'$(LabsSingleFile)' != 'true' And '$(LabsMacOS)' != 'true'" AfterTargets="Build">
 <RemoveDir Directories="$(OutDir)steam-idle;$(OutDir)gfwl" />
 <ItemGroup><SteamHelper Include="$(MSBuildProjectDirectory)/obj/steam-idle/**/*.*"/><GfwlHelper Include="$(MSBuildProjectDirectory)/obj/gfwl-injector/**/*.*"/></ItemGroup>
 <Copy SourceFiles="@(SteamHelper)" DestinationFiles="@(SteamHelper->'$(OutDir)steam-idle/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true"/>
 <Copy SourceFiles="@(GfwlHelper)" DestinationFiles="@(GfwlHelper->'$(OutDir)gfwl/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true"/>
 </Target>
-<Target Name="PublishNativeHelpers" Condition="'$(LabsSingleFile)' != 'true'" AfterTargets="Publish">
+<Target Name="PublishNativeHelpers" Condition="'$(LabsSingleFile)' != 'true' And '$(LabsMacOS)' != 'true'" AfterTargets="Publish">
 <ItemGroup><PublishedSteamHelper Include="$(OutDir)steam-idle/**/*.*"/><PublishedGfwlHelper Include="$(OutDir)gfwl/**/*.*"/></ItemGroup>
 <Error Condition="'@(PublishedSteamHelper)' == '' Or '@(PublishedGfwlHelper)' == ''" Text="Native helper outputs are missing. Build before publishing."/>
 <Copy SourceFiles="@(PublishedSteamHelper)" DestinationFiles="@(PublishedSteamHelper->'$(PublishDir)steam-idle/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true"/>
@@ -66,5 +67,11 @@
   </ItemGroup>
   <Error Condition="'@(ForbiddenReleaseFile)' != ''" Text="Private/source files found in release: @(ForbiddenReleaseFile)" />
 </Target>
+<PropertyGroup Condition="'$(LabsMacOS)' == 'true'">
+  <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>0.1.0.9</AssemblyVersion><FileVersion>0.1.0.9</FileVersion><InformationalVersion>0.1.0-macos-preview.9</InformationalVersion>
+</PropertyGroup>
+<ItemGroup Condition="'$(LabsMacOS)' == 'true'">
+  <Content Remove="../../gfwlam/**/*.*;../../uplayachievements/**/*.*;../../Uplay spools/**/*.spool;../../tools/Submit-ColdAlleyAchievements.ps1" />
+</ItemGroup>
 </Project>
 

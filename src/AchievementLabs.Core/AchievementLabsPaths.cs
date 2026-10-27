@@ -7,7 +7,7 @@ public static class AchievementLabsPaths
 
     public static string LocalFile(string fileName)
     {
-        var local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var local = OperatingSystem.IsMacOS() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Application Support") : Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         var current = Path.Combine(local, CurrentFolder, fileName);
         var legacy = Path.Combine(local, LegacyFolder, fileName);
         if (!File.Exists(current) && File.Exists(legacy))

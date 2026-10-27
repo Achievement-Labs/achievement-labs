@@ -15,7 +15,7 @@ public static class NativeSessionStore
     {
         var plain = JsonSerializer.SerializeToUtf8Bytes(session);
         byte[] protectedBytes;
-        try { protectedBytes = ProtectedData.Protect(plain, null, DataProtectionScope.CurrentUser); }
+        try { protectedBytes = SecureUserData.Protect(plain); }
         finally { CryptographicOperations.ZeroMemory(plain); }
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(path))!);
         var temporary = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -31,7 +31,7 @@ public static class NativeSessionStore
     public static async Task<SavedSession> ReadAsync(string path, CancellationToken cancellationToken = default)
     {
         var encrypted = await File.ReadAllBytesAsync(path, cancellationToken);
-        var plain = ProtectedData.Unprotect(encrypted, null, DataProtectionScope.CurrentUser);
+        var plain = SecureUserData.Unprotect(encrypted);
         try
         {
             var session = JsonSerializer.Deserialize<SavedSession>(plain);
