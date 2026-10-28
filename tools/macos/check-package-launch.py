@@ -6,7 +6,9 @@ root=Path(__file__).resolve().parents[2]
 out=root/'artifacts/macos-preview/checks';out.mkdir(exist_ok=True)
 package_root=Path(os.environ.get('LABS_MAC_OUTPUT',str(root/'artifacts/macos-preview'))).resolve()
 arch=os.environ.get('LABS_MAC_RUNTIME','osx-arm64').removeprefix('osx-')
-archive=package_root/('AchievementLabs-macOS-0.1.0.9-'+arch+'.zip')
+archives=list(package_root.glob('AchievementLabs-macOS-*-'+arch+'.zip'))
+assert len(archives)==1, 'Expected one package for the checked architecture'
+archive=archives[0]
 window_query=out/'windows.swift'
 window_query.write_text('''import CoreGraphics
 import Foundation

@@ -47,7 +47,7 @@ public sealed partial class DesktopModel
         var active = session ?? throw new InvalidOperationException("Connect an Xbox account first.");
         var api = client ?? throw new InvalidOperationException("Xbox client is unavailable.");
         ct.ThrowIfCancellationRequested();
-        var response = await api.GetAchievementsForTitleAsync(active.Xuid, titleId);
+        var response = await api.GetAchievementsForTitleAsync(active.Xuid, titleId, ct);
         ct.ThrowIfCancellationRequested();
         if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");
         return response;

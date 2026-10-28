@@ -23,6 +23,8 @@ jobs:
           dotnet-version: '9.0.x'
       - name: Check LAN pairing with synthetic credentials over loopback
         run: dotnet run --project tools/lan-pairing-checks/LanPairingChecks.csproj -c Release -p:NuGetAudit=false
+      - name: Check read-only achievement verification
+        run: dotnet run --project tools/queue-verification-checks/QueueVerificationChecks.csproj -c Release -p:NuGetAudit=false
       - name: Build and ad-hoc sign the Apple Silicon app
         run: bash tools/macos/build-preview.sh
       - name: Verify ARM64 package runtime files

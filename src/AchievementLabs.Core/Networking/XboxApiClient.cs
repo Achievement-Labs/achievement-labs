@@ -731,10 +731,14 @@ public class XboxApiClient : IDisposable
         }, ct);
     }
 
-    public Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId) => GetAchievementsForTitleAsync(xuid, titleId, true);
+    public Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId) => GetAchievementsForTitleAsync(xuid, titleId, true, CancellationToken.None);
 
-    /// <param name="writeDebugLog">False for frequent background reads (Achievement Mirror) so Documents isn't filled with copies.</param>
-    public async Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId, bool writeDebugLog)
+    public Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId, bool writeDebugLog) => GetAchievementsForTitleAsync(xuid, titleId, writeDebugLog, CancellationToken.None);
+
+    // Repeated queue verification is cancellable and does not fill Documents with debug copies.
+    public Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId, CancellationToken cancellationToken) => GetAchievementsForTitleAsync(xuid, titleId, false, cancellationToken);
+
+    public async Task<AchievementsResponse?> GetAchievementsForTitleAsync(string xuid, string titleId, bool writeDebugLog, CancellationToken cancellationToken)
     {
         if (string.IsNullOrWhiteSpace(xuid) || string.IsNullOrWhiteSpace(titleId))
         {
@@ -746,7 +750,7 @@ public class XboxApiClient : IDisposable
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Host, Hosts.Achievements);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Connection, HeaderValues.KeepAlive);
 
-        var response = await (await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.QueryAchievementsUrl, xuid, titleId))).Content.ReadAsStringAsync();
+        var response = await (await _httpClient.GetAsync(string.Format(InterpolatedXboxAPIUrls.QueryAchievementsUrl, xuid, titleId), cancellationToken)).Content.ReadAsStringAsync();
         LastAchievementsRawResponse = response;
         if (writeDebugLog) WriteAchievementsDebugLog(titleId, response);
         var achievements = JsonConvert.DeserializeObject<AchievementsResponse>(response);
