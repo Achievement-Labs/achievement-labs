@@ -6,6 +6,22 @@ public sealed record AchievementVerificationResult(bool Confirmed, string Progre
 /// <summary>Read-only verification. Collector acceptance and numeric targets alone never confirm an unlock.</summary>
 public static class AchievementUnlockVerifier
 {
+    public static async Task<AchievementVerificationResult> WatchAsync(
+        Func<CancellationToken, Task<AchievementProgressSnapshot?>> read,
+        CancellationToken ct,
+        Func<TimeSpan, CancellationToken, Task>? delay = null,
+        Action<AchievementVerificationResult>? progress = null)
+    {
+        delay ??= (duration, token) => Task.Delay(duration, token);
+        while (true)
+        {
+            var result = await VerifyAsync(read, ct, delay);
+            if (result.Confirmed) return result;
+            progress?.Invoke(result);
+            ct.ThrowIfCancellationRequested();
+            await delay(TimeSpan.FromSeconds(30), ct);
+        }
+    }
     public static async Task<AchievementVerificationResult> VerifyAsync(
         Func<CancellationToken, Task<AchievementProgressSnapshot?>> read,
         CancellationToken ct,

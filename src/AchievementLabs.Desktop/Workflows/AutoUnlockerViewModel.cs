@@ -1085,11 +1085,13 @@ namespace AchievementLabs.Desktop.Workflows
             return true;
         }
 
+        public bool WaitForLateConfirmation { get; set; } = true;
+
         private async Task<AchievementLabs.Core.AchievementVerificationResult> VerifyEventAchievementAsync(AutoUnlockQueueEntry entry, CancellationToken token)
         {
             var state = _state ?? throw new InvalidOperationException("Queue is unavailable.");
             var owner = account.XUIDOnly;
-            var result = await AchievementLabs.Core.AchievementUnlockVerifier.VerifyAsync(async ct => {
+            async Task<AchievementLabs.Core.AchievementProgressSnapshot?> Read(CancellationToken ct) {
                 if (_state != state || account.XUIDOnly != owner || state.OwnerXuid != owner)
                     throw new InvalidOperationException("Queue account changed during verification.");
                 var response = ReadQueueAchievementsAsync != null
@@ -1108,8 +1110,16 @@ namespace AchievementLabs.Desktop.Workflows
                 entry.LastVerificationProgress = progress;
                 SaveState();
                 return new AchievementLabs.Core.AchievementProgressSnapshot(row.progressState, progress);
-            }, token, VerificationDelayAsync);
-            return result;
+            }
+            if (!WaitForLateConfirmation) return await AchievementLabs.Core.AchievementUnlockVerifier.VerifyAsync(Read, token, VerificationDelayAsync);
+            return await AchievementLabs.Core.AchievementUnlockVerifier.WatchAsync(Read, token, VerificationDelayAsync, result => {
+                entry.LastVerificationProgress = result.Progress;
+                SaveState();
+                Avalonia.Threading.Dispatcher.UIThread.Invoke(() => {
+                    StatusText = "Waiting for Xbox confirmation. Auto Unlock will continue when unlocked. " + result.Progress;
+                    UpdateQueueItemStatus(state.CurrentIndex, "Verifying · " + result.Progress);
+                });
+            });
         }
 
         private async Task WaitForCredentialsAsync(bool needsEvents, CancellationToken token)
