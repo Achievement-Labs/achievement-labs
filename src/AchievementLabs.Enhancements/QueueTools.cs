@@ -44,31 +44,34 @@ public static class QueueTools
   }
   Set(model,"PresenceTitleId",id);
  }
- public static int Remove(object model,object state,IEnumerable<object> selected)
+ public static int Remove(object model,object state,IEnumerable<object> selected,bool completedDuringRun=false)
  {
-  if(P(model,"IsRunning") is true || !ReferenceEquals(state,F(model,"_state")))return 0;
+  bool running=P(model,"IsRunning") is true;
+  if((running && !completedDuringRun) || !ReferenceEquals(state,F(model,"_state")))return 0;
   if(P(state,"Queue") is not IList list)return 0;
   var remove=selected.ToHashSet(ReferenceEqualityComparer.Instance);
   var original=list.Cast<object>().ToArray();int index=(int)(P(state,"CurrentIndex")??0);
   double delay=Convert.ToDouble(P(state,"RemainingDelaySeconds")??0d);
+  bool wasRunning=P(state,"IsRunning") is true;
+  if(running)remove.RemoveWhere(e=>P(e,"Completed") is not true || (index<original.Length && ReferenceEquals(e,original[index])));
   int next=original.Take(index).Count(x=>!remove.Contains(x));
   var kept=original.Where(x=>!remove.Contains(x)).ToArray();int count=original.Length-kept.Length;if(count==0)return 0;
   bool keepCurrent=index<original.Length && !remove.Contains(original[index]);
   list.Clear();foreach(var item in kept)list.Add(item);
   Set(state,"CurrentIndex",Math.Min(next,kept.Length));
   Set(state,"RemainingDelaySeconds",keepCurrent?delay:next<kept.Length?Convert.ToDouble(P(kept[next],"DelaySeconds")??0d):0d);
-  Set(state,"IsRunning",false);
+  if(!running)Set(state,"IsRunning",false);
   try{if(model.GetType().GetMethod("SaveState",Flags,Type.EmptyTypes)!=null)Call(model,"SaveState");else Call(state,"Save");}
-  catch{list.Clear();foreach(var item in original)list.Add(item);Set(state,"CurrentIndex",index);Set(state,"RemainingDelaySeconds",delay);throw;}
+  catch{list.Clear();foreach(var item in original)list.Add(item);Set(state,"CurrentIndex",index);Set(state,"RemainingDelaySeconds",delay);Set(state,"IsRunning",wasRunning);throw;}
   Call(model,"PopulateQueueDisplay");Call(model,"UpdateProgressText");
-  Set(model,"StatusText",$"Removed {count} achievement(s). Queue saved. Click Start when ready.");
+  Set(model,"StatusText",running?$"Removed {count} completed achievement(s). Queue continues.":$"Removed {count} achievement(s). Queue saved. Click Start when ready.");
   return count;
  }
  public static int RemoveCompleted(object model,object state)
  {
   if(P(state,"Queue") is not IList list)return 0;
-  // Reuse removal's active-run guard, index adjustment, delay preservation and rollback.
-  return Remove(model,state,list.Cast<object>().Where(e=>P(e,"Completed") is true).ToArray());
+  // Live cleanup protects the current entry and preserves the run, index and delay.
+  return Remove(model,state,list.Cast<object>().Where(e=>P(e,"Completed") is true).ToArray(),true);
  }
  public static void Attach(Window owner,object model)
  {
@@ -86,10 +89,14 @@ public static class QueueTools
   if(build?.Parent is not Panel panel)return;
   var remove=new Button{Name="RemoveQueueAchievements",Content="Remove achievements…",Margin=new Thickness(8,0,0,0)};
   var completed=new Button{Name="RemoveCompletedQueueAchievements",Content="Remove completed",Margin=new Thickness(8,0,0,0)};
-  ToolTip.SetTip(completed,"Remove completed entries from the saved queue. Pause the queue first.");
+  ToolTip.SetTip(completed,"Remove confirmed completed entries while preserving the active item and countdown.");
   panel.Children.Add(remove);panel.Children.Add(completed);bool editing=false;
   object? Queue()=>P(model,"XboxQueue");
-  void Refresh(){var q=Queue();completed.IsEnabled=!editing && P(q,"IsRunning") is not true && F(q,"_state") is object state && P(state,"Queue") is IList entries && entries.Cast<object>().Any(e=>P(e,"Completed") is true);remove.IsEnabled=!editing && P(q,"IsRunning") is not true && F(q,"_state") is object s && P(s,"Queue") is IList l && l.Count>0;}
+  void Refresh(){var q=Queue();completed.IsEnabled=!editing && F(q,"_state") is object state && P(state,"Queue") is IList entries && entries.Cast<object>().Any(e=>P(e,"Completed") is true);remove.IsEnabled=!editing && P(model,"CanQuery") is true && P(q,"IsRunning") is not true && F(q,"_state") is object s && P(s,"Queue") is IList l && l.Count>0;}
+  var queueChanges=Queue() as System.ComponentModel.INotifyPropertyChanged;
+  System.ComponentModel.PropertyChangedEventHandler onQueueChanged=(_,_)=>Refresh();
+  if(queueChanges!=null)queueChanges.PropertyChanged+=onQueueChanged;
+  owner.Closed+=(_,_)=>{if(queueChanges!=null)queueChanges.PropertyChanged-=onQueueChanged;};
   var tick=new DispatcherTimer{Interval=TimeSpan.FromSeconds(1)};tick.Tick+=(_,_)=>Refresh();tick.Start();Refresh();owner.Closed+=(_,_)=>tick.Stop();
   completed.Click+=(_,_)=>
   {

@@ -26,7 +26,7 @@ static class EventVerificationTests
   var root=Path.Combine(Path.GetTempPath(),"AchievementLabs-OfflineChecks",Environment.ProcessId.ToString(),"verification");Directory.CreateDirectory(root);
   var owner=new NativeAccountContext{XUIDOnly="0",XAUTH="synthetic-offline"};
   AutoUnlockerViewModel Model(AutoUnlockState state){
-   var vm=new AutoUnlockerViewModel(new NativeNotices(_=>{}),owner){StatePath=Path.Combine(root,Guid.NewGuid().ToString("N")+".json"),SavedGameQueuesRoot=Path.Combine(root,"games"),VerificationDelayAsync=(_,_)=>Task.CompletedTask,StopOnFailure=false,ContinueAfterFailure=true,NotifyOnFailure=false};
+   var vm=new AutoUnlockerViewModel(new NativeNotices(_=>{}),owner){StatePath=Path.Combine(root,Guid.NewGuid().ToString("N")+".json"),SavedGameQueuesRoot=Path.Combine(root,"games"),VerificationDelayAsync=(_,_)=>Task.CompletedTask,WaitForLateConfirmation=false,StopOnFailure=false,ContinueAfterFailure=true,NotifyOnFailure=false};
    typeof(AutoUnlockerViewModel).GetField("_state",BindingFlags.NonPublic|BindingFlags.Instance)!.SetValue(vm,state);
    typeof(AutoUnlockerViewModel).GetMethod("PopulateQueueDisplay",BindingFlags.NonPublic|BindingFlags.Instance)!.Invoke(vm,null);
    return vm;
@@ -44,6 +44,7 @@ static class EventVerificationTests
   var routeChanged=State();routeChanged.IsEventBased=false;var checkOnly=Model(routeChanged);calls=0;checkOnly.ReadQueueAchievementsAsync=(_,_)=>{calls++;return Task.FromResult<AchievementsResponse?>(Rows());};Loop(checkOnly);Check(calls==5&&!routeChanged.Queue[0].Completed&&routeChanged.CurrentIndex==0,"A pending accepted checkpoint stays read-only even if later metadata changes its event-routing flag");
   var success=State();var confirmed=Model(success);calls=0;confirmed.ReadQueueAchievementsAsync=(_,_)=>Task.FromResult<AchievementsResponse?>(Rows(++calls==2?"Achieved":"InProgress"));Loop(confirmed);Dispatcher.UIThread.RunJobs();
   Check(success.CurrentIndex==1&&success.Queue[0].Completed&&!success.Queue[0].EventSubmissionPendingVerification&&confirmed.QueueItems[0].Status=="Unlocked","Only Achieved advances the queue and paints green");
+  var late=State();var watcher=Model(late);watcher.WaitForLateConfirmation=true;calls=0;watcher.ReadQueueAchievementsAsync=(_,_)=>Task.FromResult<AchievementsResponse?>(Rows(++calls==7?"Achieved":"InProgress"));Loop(watcher);Check(calls==7&&late.Queue[0].Completed&&late.CurrentIndex==1,"Late confirmation continues the actual queue without manual resume or event resubmission");
   var old=State();old.CurrentIndex=1;old.Queue[0].Completed=true;old.Queue[0].EventSubmissionPendingVerification=false;var legacy=Model(old);legacy.ValidateQueueMetadata(Rows());
   Check(old.CurrentIndex==0&&!old.Queue[0].Completed&&old.Queue[0].EventSubmissionPendingVerification,"Old falsely completed saved entries are reopened without automatic replay");
   var unavailable=State();var readFailure=Model(unavailable);readFailure.ReadQueueAchievementsAsync=(_,_)=>throw new HttpRequestException("synthetic read failure");Loop(readFailure);Check(!unavailable.Queue[0].Completed&&unavailable.CurrentIndex==0&&unavailable.Queue[0].EventSubmissionPendingVerification,"Read failures never inherit submission success");
