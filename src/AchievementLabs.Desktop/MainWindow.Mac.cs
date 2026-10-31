@@ -26,6 +26,7 @@ public partial class MainWindow
         foreach(var toggle in this.GetLogicalDescendants().OfType<CheckBox>())
             if(toggle.Content is string content && (content.Contains("Xbox app",StringComparison.OrdinalIgnoreCase)||content.Contains("launch hidden",StringComparison.OrdinalIgnoreCase)))toggle.IsVisible=false;
     }
+    private async void MacRememberSignInClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => await model.ApplyMacRememberSignInAsync();
     private async Task RunMacSmokeAsync()
     {
         var args=Environment.GetCommandLineArgs();var output=Path.GetFullPath(args.SkipWhile(a=>a!="--output").Skip(1).First());Directory.CreateDirectory(output);
@@ -36,6 +37,9 @@ public partial class MainWindow
             if(!OperatingSystem.IsMacOS()||System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture!=expected)throw new Exception("Expected native Mac runtime architecture: "+expected);
             if(model.HasWindowsLocalTools)throw new Exception("Windows capabilities exposed on Mac.");
             await model.AttachXboxPcAppAsync();if(!model.OAuthFallbackAvailable||!model.ConnectActionLabel.Contains("Microsoft"))throw new Exception("Mac sign-in preparation failed.");
+            if (this.FindControl<Button>("ConnectAccountAction")?.Content?.ToString() != model.ConnectActionLabel
+                || this.FindControl<Button>("InstallUpdateAction")?.Content?.ToString() != model.UpdateActionLabel)
+                throw new Exception("Native account/update actions show Windows-specific labels.");
             if (BrowserXboxLogin.ValidateRedirect("https://login.live.com/oauth20_desktop.srf?code=synthetic&state=expected", "expected") != "synthetic") throw new Exception("Callback parsing failed.");
             foreach (var invalid in new[] {
                 "https://login.live.com/oauth20_desktop.srf?removed=true",

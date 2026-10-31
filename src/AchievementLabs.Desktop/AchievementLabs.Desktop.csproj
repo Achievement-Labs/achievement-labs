@@ -68,14 +68,14 @@
   <Error Condition="'@(ForbiddenReleaseFile)' != ''" Text="Private/source files found in release: @(ForbiddenReleaseFile)" />
 </Target>
 <PropertyGroup Condition="'$(LabsMacOS)' == 'true'">
-  <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>0.1.0.9</AssemblyVersion><FileVersion>0.1.0.9</FileVersion><InformationalVersion>0.1.0-macos-preview.9</InformationalVersion>
+  <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>0.1.1.1</AssemblyVersion><FileVersion>0.1.1.1</FileVersion><InformationalVersion>0.1.1-macos-preview.1</InformationalVersion>
 </PropertyGroup>
 <ItemGroup Condition="'$(LabsPortableDesktop)' == 'true'">
   <Content Remove="../../gfwlam/**/*.*;../../uplayachievements/**/*.*;../../Uplay spools/**/*.spool;../../tools/Submit-ColdAlleyAchievements.ps1" />
 </ItemGroup>
 <PropertyGroup Condition="'$(LabsLinux)' == 'true'">
   <DefineConstants>$(DefineConstants);LABS_LINUX</DefineConstants>
-  <AssemblyVersion>0.1.0.1</AssemblyVersion><FileVersion>0.1.0.1</FileVersion><InformationalVersion>0.1.0-linux-preview.1</InformationalVersion>
+  <AssemblyVersion>0.1.1.1</AssemblyVersion><FileVersion>0.1.1.1</FileVersion><InformationalVersion>0.1.1-linux-preview.1</InformationalVersion>
 </PropertyGroup>
 <ItemGroup Condition="'$(LabsLinux)' == 'true'">
   <Content Include="../../tools/linux/microsoft-signin.py" Link="Helpers/microsoft-signin.py" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />

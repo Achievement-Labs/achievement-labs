@@ -26,7 +26,9 @@ jobs:
       - name: Install native desktop dependencies
         run: sudo apt-get update && sudo apt-get install -y libx11-6 libice6 libsm6 libfontconfig1 libsecret-1-0 gnome-keyring dbus-x11 xvfb python3-gi gir1.2-webkit2-4.1 libnotify-bin
       - name: Build standalone Linux package
-        run: bash tools/linux/build-preview.sh
+        run: |
+          python3 -m unittest discover -s tools/xbox360 -p test_prepare.py
+          bash tools/linux/build-preview.sh
       - name: Check sign-in callback capture, pairing and packaged UI without accounts
         run: |
           export HOME="$RUNNER_TEMP/labs-linux-home"
@@ -48,7 +50,7 @@ jobs:
         with:
           name: AchievementLabs-Linux-Preview
           path: |
-            artifacts/linux-preview/AchievementLabs-linux-0.1.0.1-x64.tar.gz
+            artifacts/linux-preview/AchievementLabs-linux-0.1.1.1-x64.tar.gz
             artifacts/linux-preview/SHA256.txt
             artifacts/linux-preview/checks/
             artifacts/linux-preview/signin-check.json

@@ -92,7 +92,7 @@ public sealed class CompletionOverview
             var child=tile.Child!;tile.Child=null;
             var buttons=child.GetLogicalDescendants().OfType<Button>().ToArray();var actions=new WrapPanel {Orientation=Orientation.Horizontal};
             foreach(var button in buttons){if(button.Parent is Panel parent)parent.Children.Remove(button);button.FontSize=12;button.MinHeight=34;button.Padding=new Thickness(12,7);button.Margin=new Thickness(0,0,7,5);actions.Children.Add(button);
-                if(Equals(button.Content,"Retry attachment"))button.Content="Connect Xbox";if(Equals(button.Content,"Library")){button.Content="Open library";button.Classes.Add("primary");}}
+                if(Equals(button.Content,"Retry attachment"))button.Content=AchievementLabs.Core.DesktopPlatform.IsUnixDesktop?"Sign in with Microsoft":"Connect Xbox";if(Equals(button.Content,"Library")){button.Content="Open library";button.Classes.Add("primary");}}
             foreach(var stack in child.GetLogicalDescendants().OfType<StackPanel>())stack.Spacing=7;
             foreach(var text in child.GetLogicalDescendants().OfType<TextBlock>())if(text.FontSize>=16)text.FontSize=14;
             if(child is Grid serviceGrid)foreach(var image in serviceGrid.Children.OfType<Grid>())image.VerticalAlignment=VerticalAlignment.Top;
