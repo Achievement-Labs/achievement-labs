@@ -48,6 +48,11 @@ nested catalog. Mac/Linux preview packages are not Windows update assets.
 
 ## Validation
 
+Maintainers must supply the existing approved, Git-excluded `gfwlam/engine.dll`
+release input before running `tools/Build-Release.ps1`. The release builder fails
+early if it is absent. Local build output and package caches can be placed on a
+separate drive with `-BuildRoot` and `-PackagesDirectory`.
+
 Release preparation uses synthetic provider responses, fictional accounts, local
 catalog rendering and native UI previews. No live unlocks, telemetry submissions,
 game launches or production sign-ins are performed as part of release checks.

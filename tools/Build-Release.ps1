@@ -17,6 +17,9 @@ $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable version such as 1.0.6.' }
 $taskRoot = Split-Path -Parent $PSScriptRoot
 $taskBuildRoot = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { $taskRoot } else { [IO.Path]::GetFullPath($BuildRoot) }
+if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'gfwlam/engine.dll'))) {
+    throw 'Missing prepared GFWL engine: gfwlam/engine.dll. Restore the approved release input before packaging; it is intentionally excluded from Git.'
+}
 if ($RefreshCatalog) { & (Join-Path $PSScriptRoot 'Build-SiteGameData.ps1') }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'site/assets/games.json'))) {
     throw 'Public catalog metadata is missing. Prepare it before building or use -RefreshCatalog.'
