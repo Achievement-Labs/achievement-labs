@@ -26,7 +26,9 @@ jobs:
       - name: Check read-only achievement verification
         run: dotnet run --project tools/queue-verification-checks/QueueVerificationChecks.csproj -c Release -p:NuGetAudit=false
       - name: Build and ad-hoc sign the Apple Silicon app
-        run: bash tools/macos/build-preview.sh
+        run: |
+          python3 -m unittest discover -s tools/xbox360 -p test_prepare.py
+          bash tools/macos/build-preview.sh
       - name: Verify ARM64 package runtime files
         run: |
           python3 - <<'PY'
