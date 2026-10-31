@@ -26,6 +26,7 @@ public partial class MainWindow
         foreach(var toggle in this.GetLogicalDescendants().OfType<CheckBox>())
             if(toggle.Content is string content && (content.Contains("Xbox app",StringComparison.OrdinalIgnoreCase)||content.Contains("launch hidden",StringComparison.OrdinalIgnoreCase)))toggle.IsVisible=false;
     }
+    private async void MacRememberSignInClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => await model.ApplyMacRememberSignInAsync();
     private async Task RunMacSmokeAsync()
     {
         var args=Environment.GetCommandLineArgs();var output=Path.GetFullPath(args.SkipWhile(a=>a!="--output").Skip(1).First());Directory.CreateDirectory(output);

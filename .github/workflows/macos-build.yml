@@ -34,7 +34,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import struct,zipfile
-          archive=Path('artifacts/macos-preview/AchievementLabs-macOS-0.1.0.9-arm64.zip')
+          archive=Path('artifacts/macos-preview/AchievementLabs-macOS-0.1.1.1-arm64.zip')
           with zipfile.ZipFile(archive) as z:
               entry=z.getinfo('Achievement Labs.app/Contents/MacOS/libhostfxr.dylib')
               data=z.read(entry)
@@ -85,7 +85,7 @@ jobs:
         with:
           name: AchievementLabs-macOS-Apple-Silicon-Preview
           path: |
-            artifacts/macos-preview/AchievementLabs-macOS-0.1.0.9-arm64.zip
+            artifacts/macos-preview/AchievementLabs-macOS-0.1.1.1-arm64.zip
             artifacts/macos-preview/SHA256.txt
             artifacts/macos-preview/README.md
             artifacts/macos-preview/BUILD-INFO.json

@@ -43,7 +43,7 @@ xcrun swiftc -emit-library -parse-as-library -swift-version 5 -O -target "${SWIF
 python3 - "$APP" <<'PY'
 from pathlib import Path
 import plistlib,sys
-app=Path(sys.argv[1]);info={'CFBundleName':'Achievement Labs','CFBundleDisplayName':'Achievement Labs','CFBundleIdentifier':'org.achievementlabs.desktop.macos.preview','CFBundleExecutable':'AchievementLabs','CFBundlePackageType':'APPL','CFBundleShortVersionString':'0.1.0','CFBundleVersion':'9','LSMinimumSystemVersion':'14.0','NSHighResolutionCapable':True,'NSLocalNetworkUsageDescription':'Find your Windows Achievement Labs app and pair securely on your local network.','CFBundleIconFile':'AchievementLabs.icns','NSHumanReadableCopyright':'Achievement Labs; project: Achievement-Labs/achievement-labs'}
+app=Path(sys.argv[1]);info={'CFBundleName':'Achievement Labs','CFBundleDisplayName':'Achievement Labs','CFBundleIdentifier':'org.achievementlabs.desktop.macos.preview','CFBundleExecutable':'AchievementLabs','CFBundlePackageType':'APPL','CFBundleShortVersionString':'0.1.1','CFBundleVersion':'1','LSMinimumSystemVersion':'14.0','NSHighResolutionCapable':True,'NSLocalNetworkUsageDescription':'Find your Windows Achievement Labs app and pair securely on your local network.','CFBundleIconFile':'AchievementLabs.icns','NSHumanReadableCopyright':'Achievement Labs; project: Achievement-Labs/achievement-labs'}
 (app/'Contents/Info.plist').write_bytes(plistlib.dumps(info))
 PY
 ICONSET="$OUT/AchievementLabs.iconset"
@@ -70,6 +70,6 @@ assert not bad,bad
 print('Verified Mac bundle excludes Windows EXEs, source/debug files and personal-profile/credential stores.')
 PY
 cp docs/macos-preview.md "$OUT/README.md"
-ditto -c -k --sequesterRsrc --keepParent "$APP" "$OUT/AchievementLabs-macOS-0.1.0.9-${ARCH}.zip"
-(cd "$OUT" && shasum -a 256 AchievementLabs-macOS-0.1.0.9-${ARCH}.zip > SHA256.txt)
+ditto -c -k --sequesterRsrc --keepParent "$APP" "$OUT/AchievementLabs-macOS-0.1.1.1-${ARCH}.zip"
+(cd "$OUT" && shasum -a 256 AchievementLabs-macOS-0.1.1.1-${ARCH}.zip > SHA256.txt)
 echo "Built self-contained $RUNTIME Mac preview: $OUT"

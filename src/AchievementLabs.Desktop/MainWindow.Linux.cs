@@ -24,6 +24,7 @@ public partial class MainWindow
             if (this.FindControl<Button>("ConnectAccountAction")?.Content?.ToString() != model.ConnectActionLabel
                 || this.FindControl<Button>("InstallUpdateAction")?.Content?.ToString() != model.UpdateActionLabel)
                 throw new Exception("Native account/update actions show Windows-specific labels.");
+            if (this.FindControl<CheckBox>("MacRememberSignInToggle")?.IsVisible != true) throw new Exception("Desktop remember sign-in option is hidden.");
             var plain = "synthetic-linux-storage-test"u8.ToArray();
             var encrypted = SecureUserData.Protect(plain);
             if (encrypted.AsSpan().IndexOf(plain) >= 0 || !SecureUserData.Unprotect(encrypted).SequenceEqual(plain)) throw new Exception("Secret Service round trip failed.");
