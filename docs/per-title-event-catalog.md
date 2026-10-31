@@ -96,6 +96,7 @@ their event count. Those payload semantics remain unchanged.
 python -m unittest discover -s tools -p test_event_catalog.py
 python -m unittest discover -s tools/mobile -p test_publish_events.py
 dotnet run --project tools/EventCatalogChecks
+dotnet run --project tools/EventCatalogChecks -- --render Events
 dotnet run --project tools/EventCatalogChecks -- ORIGINAL_FLAT_FOLDER Events
 ```
 

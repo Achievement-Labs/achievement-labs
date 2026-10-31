@@ -27,4 +27,4 @@ jobs:
           python-version: '3.12'
       - run: python -m unittest discover -s tools -p test_event_catalog.py
       - run: python -m unittest discover -s tools/mobile -p test_publish_events.py
-      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --render Events

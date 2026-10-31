@@ -65,7 +65,25 @@ try
 }
 finally { Directory.Delete(temporary, true); }
 
-if (args.Length == 2)
+if (args.Length == 2 && args[0] == "--render")
+{
+    var catalog = new EventCatalog(args[1]); var index = await catalog.ReadIndexAsync();
+    int titles = 0, achievements = 0, payloads = 0; var failures = new List<string>();
+    foreach (var title in index.Properties().Where(p => p.Name.All(char.IsDigit)))
+    {
+        var block = await catalog.ReadTitleAsync(title.Name);
+        foreach (var achievement in ((JObject)block["Achievements"]!).Properties())
+        {
+            try { payloads += (await catalog.BuildPayloadsAsync(title.Name, achievement.Name, "0", DateTime.UnixEpoch)).Count; }
+            catch (Exception e) { failures.Add(title.Name + "/" + achievement.Name + ": " + e.Message); }
+            achievements++;
+        }
+        titles++;
+    }
+    Console.WriteLine($"Rendered {titles} titles, {achievements} mappings, {payloads} payloads; {failures.Count} failures. No live requests.");
+    Check(failures.Count == 0, string.Join(Environment.NewLine, failures));
+}
+else if (args.Length == 2)
 {
     var original = new EventCatalog(args[0]); var migrated = new EventCatalog(args[1]);
     var before = await original.ReadIndexAsync(); var after = await migrated.ReadIndexAsync();
