@@ -109,6 +109,27 @@ def runtime_title(block):
     return result
 
 
+def backup_catalog(source, backup):
+    """Snapshot original catalog inputs, without recursively copying historical backups/dumps."""
+    index = read_index(source)
+    indexed = (source / 'index.json').exists()
+    paths = [source / ('index.json' if indexed else 'Data.json')]
+    for tid in index:
+        if not ID.fullmatch(tid):
+            continue
+        if indexed:
+            paths.append(source / tid / 'Data.json')
+        paths.append(template_path(source, tid))
+    paths += [source / name for name in ['Stats.json', 'meta.json'] if (source / name).exists()]
+    if any(not path.is_file() for path in paths):
+        raise ValueError('Cannot back up an incomplete catalog')
+    backup.mkdir(parents=True)
+    for path in paths:
+        target = backup / path.relative_to(source)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, target)
+
+
 def write_split(source, output, backup):
     if output.exists() or backup.exists():
         raise ValueError('Output and backup must be new directories')
@@ -118,9 +139,8 @@ def write_split(source, output, backup):
     cleaned = {tid: runtime_title(block) for tid, block in data.items() if ID.fullmatch(tid)}
     if any(str(tid) not in cleaned for tid in data['SupportedTitleIDs']):
         raise ValueError('Supported ID without a title')
-    # Complete backup, including research and original recipes, precedes any generated files.
-    backup.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(source, backup)
+    # Original catalog files (including research in Data.json) precede generated files.
+    backup_catalog(source, backup)
     output.mkdir(parents=True)
     index = {}
     for tid, block in cleaned.items():
@@ -191,7 +211,7 @@ def reconcile(sources, output, backup):
     data['SupportedTitleIDs'] = list(supported.values())
     backup.mkdir(parents=True)
     for number, source in enumerate(sources, 1):
-        shutil.copytree(source, backup / ('source-' + str(number)))
+        backup_catalog(source, backup / ('source-' + str(number)))
     staged = backup / 'reconciled-input'
     staged.mkdir()
     dump(staged / 'Data.json', data)

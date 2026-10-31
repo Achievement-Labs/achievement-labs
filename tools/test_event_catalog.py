@@ -26,9 +26,11 @@ class CatalogChecks(unittest.TestCase):
         before = (self.source / 'Data.json').read_bytes()
         output = self.root / 'split'
         backup = self.root / 'backup'
+        (self.source / 'historical-backup.json').write_text('not a catalog input')
         write_split(self.source, output, backup)
         self.assertEqual(before, (self.source / 'Data.json').read_bytes())
         self.assertEqual(before, (backup / 'Data.json').read_bytes())
+        self.assertFalse((backup / 'historical-backup.json').exists())
         self.assertNotIn('Notes', read_index(output)['7'])
         self.assertNotIn('Achievements', read_index(output)['7'])
         title = read_catalog(output)['7']
