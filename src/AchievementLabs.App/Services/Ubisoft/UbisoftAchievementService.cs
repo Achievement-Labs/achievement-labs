@@ -110,30 +110,7 @@ public sealed class UbisoftAchievementService : IUbisoftAchievementService
         if (captured.Count > 0)
             return captured;
 
-        return new[]
-        {
-            new UbisoftAchievementItem
-            {
-                Id = "Connect metadata",
-                Name = "Resolve Ubisoft title context",
-                Description = "Uses local Ubisoft Connect registry/cache data now; online achievement catalog support needs a confirmed Ubisoft service route.",
-                State = "Local ready"
-            },
-            new UbisoftAchievementItem
-            {
-                Id = "Achievements",
-                Name = "Query achievement definitions",
-                Description = "Pending a public or captured Ubisoft service endpoint with the required title/game IDs and auth headers.",
-                State = "Research gated"
-            },
-            new UbisoftAchievementItem
-            {
-                Id = "Progress",
-                Name = "Query or update player progress",
-                Description = "Do not assume write support. This will remain disabled until the exact authenticated request shape is known.",
-                State = "Disabled"
-            }
-        };
+        return Array.Empty<UbisoftAchievementItem>();
     }
 
     public IReadOnlyList<UbisoftStatItem> LoadStatPlaceholders(UbisoftGameItem? game)
@@ -226,6 +203,12 @@ public sealed class UbisoftAchievementService : IUbisoftAchievementService
                 Status = LooksLikeModernConnectTitle(game) ? "Possible Ubisoft Connect cloud/cross-progression candidate" : "Local evidence only"
             })
             .ToList();
+    }
+
+    private static string ConfiguredCaptureRoot()
+    {
+        try { return File.Exists(ConfigPath) && JsonConvert.DeserializeObject<UbisoftServiceConfig>(File.ReadAllText(ConfigPath))?.CaptureFolder is { Length: > 0 } folder ? folder : CaptureRoot; }
+        catch { return CaptureRoot; }
     }
 
     public string GetCaptureRoot() => CaptureRoot;
@@ -403,6 +386,8 @@ public sealed class UbisoftAchievementService : IUbisoftAchievementService
                     Name = title,
                     Description = ReadJsonString(node, "description"),
                     State = IsTruthy(completed) ? FirstNonEmpty(completionDate, "Completed") : "Locked",
+                    Unlocked = bool.TryParse(completed, out var isCompleted) ? isCompleted : completed == "1" ? true : completed == "0" ? false : null,
+                    ImageUrl = ReadJsonString(node, "imageUrl", "iconUrl", "thumbnailUrl"),
                     Progress = IsTruthy(completed) ? 100 : 0
                 };
             }
@@ -674,13 +659,14 @@ public sealed class UbisoftAchievementService : IUbisoftAchievementService
 
     private static IEnumerable<JToken> ReadCapturedJsonPayloads()
     {
-        if (!Directory.Exists(CaptureRoot))
+        var captureFolder = ConfiguredCaptureRoot();
+        if (!Directory.Exists(captureFolder))
             yield break;
 
         IEnumerable<string> files;
         try
         {
-            files = Directory.EnumerateFiles(CaptureRoot, "*.*", SearchOption.AllDirectories)
+            files = Directory.EnumerateFiles(captureFolder, "*.*", SearchOption.AllDirectories)
                 .Where(path => path.EndsWith(".json", StringComparison.OrdinalIgnoreCase) ||
                                path.EndsWith(".jsonl", StringComparison.OrdinalIgnoreCase) ||
                                path.EndsWith(".har", StringComparison.OrdinalIgnoreCase) ||

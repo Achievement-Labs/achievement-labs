@@ -38,7 +38,7 @@ public sealed record SteamSpoofSessionInfo(bool IsActive, long AppId, string App
 public sealed record SteamResolvedProfile(string SteamId, string DisplayName);
 public sealed record SteamTargetAchievementUnlock(string Id, DateTime UnlockTime);
 
-public sealed class SteamAchievementService : ISteamAchievementService
+public sealed partial class SteamAchievementService : ISteamAchievementService
 {
     private static readonly Regex ManifestAppIdRegex = new("\"appid\"\\s+\"(?<value>\\d+)\"", RegexOptions.IgnoreCase | RegexOptions.Compiled);
     private static readonly Regex ManifestNameRegex = new("\"name\"\\s+\"(?<value>[^\"]+)\"", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -188,6 +188,28 @@ public sealed class SteamAchievementService : ISteamAchievementService
         return _metadataStatus;
     }
 
+    // Read cached state without creating a Steam game session or changing presence.
+    public (int Earned, int Total, bool Known) GetCachedLibraryProgress(long appId, string? expectedAccount = null)
+    {
+        var total = LoadDefinitions(appId, "english").Count;
+        var steamPath = GetSteamInstallPath();
+        var steamId = ReadLocalLoginProfile(steamPath).SteamId;
+        if (expectedAccount != null && steamId != expectedAccount) throw new InvalidOperationException("Steam account changed during refresh.");
+        var rows = AchievementLabs.Mirror.SteamWebApi.IsSteamId64(steamId)
+            ? AchievementLabs.Mirror.SteamLocalStats.TryRead(steamPath, AchievementLabs.Mirror.SteamWebApi.AccountId(steamId), appId)
+            : null;
+        return rows is { Count: > 0 } ? (rows.Count(a => a.Unlocked), Math.Max(total, rows.Count), true) : (0, total, false);
+    }
+
+    public async Task LoadGlobalPercentagesAsync(long appId, IEnumerable<SteamAchievementItem> rows, CancellationToken cancellationToken)
+    {
+        using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
+        var json = JObject.Parse(await http.GetStringAsync($"https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v2/?gameid={appId}", cancellationToken));
+        var values = (json["achievementpercentages"]?["achievements"] as JArray ?? new JArray())
+            .Where(a => a["name"] != null).ToDictionary(a => (string)a["name"]!, a => (double?)a["percent"], StringComparer.OrdinalIgnoreCase);
+        foreach (var row in rows) row.GlobalPercent = values.GetValueOrDefault(row.Id);
+    }
+
     public async Task RefreshSteamAppNameCacheAsync(CancellationToken cancellationToken)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(AppNameCachePath)!);
@@ -320,6 +342,8 @@ public sealed class SteamAchievementService : ISteamAchievementService
                     Id = definition.Id,
                     Name = string.IsNullOrWhiteSpace(definition.Name) ? definition.Id : definition.Name,
                     Description = definition.Description,
+                    IconUrl = AchievementIconUrl(appId, definition.IconNormal),
+                    LockedIconUrl = AchievementIconUrl(appId, definition.IconLocked),
                     IsUnlocked = isAchieved,
                     DesiredUnlocked = isAchieved,
                     UnlockTime = isAchieved && unlockTime > 0
@@ -332,6 +356,13 @@ public sealed class SteamAchievementService : ISteamAchievementService
             client?.Dispose();
             return achievements;
         }, cancellationToken);
+    }
+
+    private static string AchievementIconUrl(long appId, string icon)
+    {
+        if (string.IsNullOrWhiteSpace(icon)) return "";
+        return Uri.TryCreate(icon, UriKind.Absolute, out var uri) && uri.Scheme == "https" ? icon
+            : $"https://cdn.cloudflare.steamstatic.com/steamcommunity/public/images/apps/{appId}/{icon}";
     }
 
     public async Task<(int Unlocked, int Total)> GetAchievementProgressAsync(long appId, CancellationToken cancellationToken)

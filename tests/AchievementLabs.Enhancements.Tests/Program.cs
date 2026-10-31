@@ -44,6 +44,7 @@ static class Test
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
   if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
+  if(args.Contains("--platform-libraries")){AppBuilder.Configure<Application>().UseSkia().UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false }).SetupWithoutStarting();PlatformLibraryTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
   if(args.Contains("--ui-tweaks")){UITweakTests.Run();return;}
   if(args.Contains("--queue-tools")){DlcCatalogueTests.Run();CompletionPresentationTests.Run();GameDetailsTests.Run();QueueToolTests.Run();SavedGameQueueTests.Run();

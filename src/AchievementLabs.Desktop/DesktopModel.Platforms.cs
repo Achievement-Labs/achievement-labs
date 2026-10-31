@@ -14,9 +14,9 @@ public sealed partial class DesktopModel
     private string platformSearch = "", platformSection = "Achievements";
     private EpicEosConfig epicConfig = new();
     private UbisoftServiceConfig ubisoftConfig = new();
-    public bool IsPlatform => page is "Epic" or "Ubisoft";
-    public bool IsEpic => page == "Epic";
-    public bool IsUbisoft => page == "Ubisoft";
+    public bool IsPlatform => page is "Epic" or "EpicAchievements" or "Ubisoft" or "UbisoftAchievements" or "EA" or "EAAchievements" or "GOG" or "GOGAchievements";
+    public bool IsEpic => page is "Epic" or "EpicAchievements";
+    public bool IsUbisoft => page is "Ubisoft" or "UbisoftAchievements";
     public EpicEosConfig EpicConfig { get => epicConfig; private set { epicConfig = value; Changed(); } }
     public UbisoftServiceConfig UbisoftConfig { get => ubisoftConfig; private set { ubisoftConfig = value; Changed(); } }
     public IEnumerable<PlatformTitle> PlatformTitles => platformTitles.Where(t => t.Name.Contains(PlatformSearch, StringComparison.OrdinalIgnoreCase) || t.Id == PlatformSearch);
@@ -30,7 +30,7 @@ public sealed partial class DesktopModel
     public string PlatformSearch { get => platformSearch; set { platformSearch = value ?? ""; Changed(); Changed(nameof(PlatformTitles)); } }
     public string[] PlatformSections { get; } = ["Achievements", "Stats", "Challenges", "Cross-progression"];
     public string PlatformSection { get => platformSection; set { platformSection = value; Changed(); LoadPlatformDetails(); } }
-    public async Task OpenPlatformAsync(string platform)
+    private async Task OpenPlatformToolsAsync(string platform)
     {
         if (busy) return;
         Navigate(platform); Busy(true); platformTitles = []; PlatformDetails = []; Changed(nameof(PlatformTitles));

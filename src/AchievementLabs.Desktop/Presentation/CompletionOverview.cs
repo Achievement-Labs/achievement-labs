@@ -86,7 +86,7 @@ public sealed class CompletionOverview
         var tiles=services.Children.OfType<Border>().ToArray();old.Children.Remove(profile);
         var content=new StackPanel {Name="HomeDashboard",Spacing=16,HorizontalAlignment=HorizontalAlignment.Stretch};
         profile.Padding=new Thickness(20);profile.Margin=new Thickness(0);content.Children.Add(profile);content.Children.Add(BuildStats("HomeCompletionOverview",false));
-        var servicesGrid=new Grid {Name="HomeServiceTiles",ColumnDefinitions=new ColumnDefinitions("*,*"),RowDefinitions=new RowDefinitions("Auto,Auto"),ColumnSpacing=16,RowSpacing=16};
+        var servicesGrid=new Grid {Name="HomeServiceTiles",ColumnDefinitions=new ColumnDefinitions("*,*"),RowDefinitions=new RowDefinitions(string.Join(",",Enumerable.Repeat("Auto",(tiles.Length+1)/2))),ColumnSpacing=16,RowSpacing=16};
         for(int i=0;i<tiles.Length;i++){
             var tile=tiles[i];services.Children.Remove(tile);tile.Margin=new Thickness(0);tile.Padding=new Thickness(18);tile.MinHeight=145;
             var child=tile.Child!;tile.Child=null;
@@ -100,19 +100,23 @@ public sealed class CompletionOverview
             Grid.SetColumn(tile,i%2);Grid.SetRow(tile,i/2);servicesGrid.Children.Add(tile);
         }
         content.Children.Add(servicesGrid);home.Content=content;
-        servicesGrid.SizeChanged+=(_,_)=>{bool narrow=servicesGrid.Bounds.Width<700;if(servicesGrid.ColumnDefinitions.Count==(narrow?1:2))return;servicesGrid.ColumnDefinitions=new ColumnDefinitions(narrow?"*":"*,*");servicesGrid.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto,Auto,Auto":"Auto,Auto");for(int i=0;i<tiles.Length;i++){Grid.SetColumn(tiles[i],narrow?0:i%2);Grid.SetRow(tiles[i],narrow?i:i/2);}};
+        servicesGrid.SizeChanged+=(_,_)=>{bool narrow=servicesGrid.Bounds.Width<700;if(servicesGrid.ColumnDefinitions.Count==(narrow?1:2))return;servicesGrid.ColumnDefinitions=new ColumnDefinitions(narrow?"*":"*,*");servicesGrid.RowDefinitions=new RowDefinitions(string.Join(",",Enumerable.Repeat("Auto",narrow?tiles.Length:(tiles.Length+1)/2)));for(int i=0;i<tiles.Length;i++){Grid.SetColumn(tiles[i],narrow?0:i%2);Grid.SetRow(tiles[i],narrow?i:i/2);}};
     }
     public static async Task CheckPreview(Window owner,object model,Grid root,string output){
         model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Home"});
-        foreach(var size in new[]{(1440,920,"home-dashboard.png"),(1120,720,"home-compact.png"),(1680,1100,"home-large.png")}){
+        foreach(var size in new[]{(1440,920,"home-dashboard.png"),(1120,720,"home-compact.png"),(900,650,"home-narrow.png"),(1680,1100,"home-large.png")}){
             owner.Width=size.Item1;owner.Height=size.Item2;await Task.Delay(500);
             var stats=root.GetLogicalDescendants().OfType<Grid>().First(g=>g.Name=="HomeCompletionOverview");
             var values=stats.GetLogicalDescendants().OfType<TextBlock>().Select(t=>t.Text).ToArray();
             if(!values.Contains("2") || !values.Contains("1") || !values.Contains("74%"))throw new Exception("Home completion summary does not match the loaded demo library.");
             var buttons=root.GetLogicalDescendants().OfType<Grid>().First(g=>g.Name=="HomeServiceTiles").GetLogicalDescendants().OfType<Button>().Distinct().ToArray();
+            var tileGrid=root.GetLogicalDescendants().OfType<Grid>().First(g=>g.Name=="HomeServiceTiles");
+            var tiles=tileGrid.Children.OfType<Border>().ToArray();
+            for(int i=0;i<tiles.Length;i++)for(int j=0;j<i;j++)
+                if(tiles[i].Bounds.Intersects(tiles[j].Bounds))throw new Exception("Home service tiles overlap.");
             if(buttons.Length<6 || buttons.Any(b=>b.TranslatePoint(new Point(b.Bounds.Width,0),root)!.Value.X>root.Bounds.Width))throw new Exception("Home service buttons are missing or overflow the window.");
             using var bitmap=new RenderTargetBitmap(new PixelSize((int)root.Bounds.Width,(int)root.Bounds.Height),new Vector(96,96));bitmap.Render(root);bitmap.Save(Path.Combine(output,size.Item3),new PngBitmapEncoderOptions());
         }
-        File.WriteAllText(Path.Combine(output,"home-checks.txt"),"PASS: Home summary shows two earned Mythics, one fully completed game, and 74% achievement completion for the demo fixtures. Service buttons fit at three sizes. Game Session shares the existing achievement image source.\n");
+        File.WriteAllText(Path.Combine(output,"home-checks.txt"),"PASS: Home summary shows two earned Mythics, one fully completed game, and 74% achievement completion for the demo fixtures. Service tiles do not overlap and buttons fit at four sizes. Game Session shares the existing achievement image source.\n");
     }
 }

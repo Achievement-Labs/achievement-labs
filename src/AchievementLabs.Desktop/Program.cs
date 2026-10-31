@@ -12,6 +12,21 @@ class Program
     public static void Main(string[] args)
     {
         if (args.Length == 2 && args[0] == "--apply-update") { if (!OperatingSystem.IsWindows()) throw new PlatformNotSupportedException("This updater requires Windows."); Environment.ExitCode = AppUpdater.Apply(args[1]); return; }
+        if (args.Length == 3 && args[0] == "--achievement-read-check" && args[1] is "EA" or "Epic" or "GOG" or "Ubisoft")
+        {
+            Environment.ExitCode = Platforms.LauncherSession.CheckAchievementsAsync(args[1], args[2]).GetAwaiter().GetResult();
+            return;
+        }
+        if (args.Length == 3 && args[0] == "--launcher-session-check" && args[1] is "EA" or "Epic" or "Ubisoft" or "GOG")
+        {
+            Environment.ExitCode = Platforms.LauncherSession.CheckAsync(args[1], args[2]).GetAwaiter().GetResult();
+            return;
+        }
+        if (args.Length == 2 && args[0] == "--gog-session-check")
+        {
+            Environment.ExitCode = Platforms.LauncherSession.CheckGalaxyAsync(args[1]).GetAwaiter().GetResult();
+            return;
+        }
         MacStartup.Begin();
         try
         {
@@ -34,7 +49,7 @@ class Program
             AppContext.SetSwitch("AchievementLabs.StartOnXbox360", true);
             AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
         }
-        if (args.Contains("--visual-preview")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+        if (args.Contains("--visual-preview") || args.Contains("--steam-ui-check") || args.Contains("--platform-ui-check")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

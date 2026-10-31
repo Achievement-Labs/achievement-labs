@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     {
         MacStartup.Stage("Loading main window");
         InitializeComponent(); DataContext = model;
+        ConfigurePlatformSidebar();
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
         AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
         var notifications = new WindowNotificationManager(this) { Position = NotificationPosition.TopRight, MaxItems = 3 };
@@ -97,6 +98,8 @@ public partial class MainWindow : Window
             // Headless regression tests must never attach to a real account.
             if (offlineChecks)
             {
+                if (Environment.GetCommandLineArgs().Contains("--platform-ui-check")) { await CheckPlatformUiAsync(); return; }
+                if (Environment.GetCommandLineArgs().Contains("--steam-ui-check")) { await CheckSteamUiAsync(); return; }
                 if (local360Preview)
                 {
                     Title = "Achievement Labs — Local Xbox 360 preview";
@@ -515,7 +518,11 @@ public partial class MainWindow : Window
     private void StopSteamPresence(object? s, RoutedEventArgs e) => model.StopSteamPresence();
     private async void ShowEpic(object? s, RoutedEventArgs e) => await model.OpenPlatformAsync("Epic");
     private async void ShowUbisoft(object? s, RoutedEventArgs e) => await model.OpenPlatformAsync("Ubisoft");
-    private async void RefreshPlatform(object? s, RoutedEventArgs e) => await model.OpenPlatformAsync(model.IsEpic ? "Epic" : "Ubisoft");
+    private async void RefreshPlatform(object? s, RoutedEventArgs e)
+    {
+        if (model.PlatformToolsVisible) await model.ShowPlatformToolsAsync();
+        else await model.RefreshPlatformLibraryAsync();
+    }
     private void OpenPlatformFolder(object? s, RoutedEventArgs e) => model.OpenPlatformFolder(false);
     private void OpenPlatformCaptures(object? s, RoutedEventArgs e) => model.OpenPlatformFolder(true);
     private void CopyPlatformDetail(object? s, RoutedEventArgs e) { if (model.SelectedPlatformDetail is { } row) Workflows.NativeClipboard.SetText($"{row.Id}\n{row.Name}\n{row.Detail}\n{row.State}"); }
