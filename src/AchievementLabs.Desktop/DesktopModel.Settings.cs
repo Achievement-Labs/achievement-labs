@@ -74,7 +74,7 @@ public sealed partial class DesktopModel
             CatalogSummary = $"{result.Titles} title blocks · {result.Supported} supported IDs · {result.Findings.Count} findings · SupportedTitleIDs last: {(result.SupportedLast ? "yes" : "no")}";
         }
         catch (OperationCanceledException) { CatalogSummary = "Inspection cancelled."; }
-        catch { CatalogSummary = "Could not inspect Events/Data.json. Check the selected folder and JSON syntax."; }
+        catch { CatalogSummary = "Could not inspect the Events catalog. Check the selected folder and JSON syntax."; }
         finally { Busy(false); }
     }
     public async Task TestEventReplacementsAsync()
@@ -84,11 +84,11 @@ public sealed partial class DesktopModel
         {
             var result = await Task.Run(async () =>
             {
-                var catalog = new EventCatalog(EventsDirectory); var data = await catalog.ReadAsync(lifetime.Token);
+                var catalog = new EventCatalog(EventsDirectory); var data = await catalog.ReadIndexAsync(lifetime.Token);
                 var errors = new List<CatalogFinding>(); int passed = 0;
                 foreach (var id in data["SupportedTitleIDs"] ?? new Newtonsoft.Json.Linq.JArray())
                 {
-                    if (data[id.ToString()]?["Achievements"] is not Newtonsoft.Json.Linq.JObject mappings) continue;
+                    if ((await catalog.ReadTitleAsync(id.ToString(), lifetime.Token))["Achievements"] is not Newtonsoft.Json.Linq.JObject mappings) continue;
                     foreach (var mapping in mappings.Properties())
                     {
                         lifetime.Token.ThrowIfCancellationRequested();

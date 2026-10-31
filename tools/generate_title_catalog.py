@@ -11,6 +11,7 @@ Usage: python tools/generate_title_catalog.py [release-label]
 import json
 import sys
 from pathlib import Path
+from event_catalog import read_catalog, template_path
 
 ROOT = Path(__file__).resolve().parent.parent
 RELEASE = sys.argv[1] if len(sys.argv) > 1 else 'the next release'
@@ -38,7 +39,7 @@ def cell(text):
 
 
 def rows():
-    data = json.loads((ROOT / 'Events/Data.json').read_text(encoding='utf-8'))
+    data = read_catalog(ROOT / 'Events')
     assert list(data)[-1] == 'SupportedTitleIDs', 'SupportedTitleIDs must be the last key'
     xbox = {str(e['TitleId']): e for e in json.loads((ROOT / 'XboxTitleIDs.json').read_text(encoding='utf-8'))}
     listed = {str(x) for x in data['SupportedTitleIDs']}
@@ -51,14 +52,14 @@ def rows():
         name = block.get('TitleName') or record.get('Name') or block.get('Name') or manual[0] or f'Title {tid}'
         devices = block.get('Devices') or record.get('Devices') or manual[1]
         available = (block.get('Enabled') is not False and tid in listed
-                     and (ROOT / 'src/AchievementLabs.App/Events' / f'{tid}.json').exists())
+                     and template_path(ROOT / 'src/AchievementLabs.App/Events', tid).exists())
         if not available: status = 'Coming Soon'
         elif block.get('FullySupported'): status = 'Supported'
         elif block.get('PartiallySupported'): status = 'Partially Supported'
         else: status = 'Testing'
         mapped = sum(1 for v in (block.get('Achievements') or {}).values() if v)
         out.append(dict(id=tid, name=name, platform=platform(devices), status=status, mapped=mapped,
-                        template=(ROOT / 'Events' / f'{tid}.json').exists()))
+                        template=template_path(ROOT / 'Events', tid).exists()))
     out.sort(key=lambda r: (r['name'].casefold(), r['platform'], r['id']))
     return out
 
@@ -87,7 +88,7 @@ def main():
              'Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.', '',
              '| Title | Platform | Title ID | Mapped achievements | Status | Template |', '|---|---|---|---|---|---|']
     lines += [f"| {cell(r['name'])} | {cell(r['platform'])} | `{r['id']}` | {r['mapped']} | {r['status']} | "
-              + (f"[{r['id']}.json]({r['id']}.json)" if r['template'] else 'Unavailable') + ' |' for r in rs]
+              + ((f"[{r['id']}.json]({r['id']}/{r['id']}.json)" if (ROOT / 'Events/index.json').exists() else f"[{r['id']}.json]({r['id']}.json)") if r['template'] else 'Unavailable') + ' |' for r in rs]
     write('Events/README.md', '\n'.join(lines) + '\n')
 
     status = {'Supported': 'supported', 'Partially Supported': 'partial', 'Testing': 'testing', 'Coming Soon': 'coming-soon'}

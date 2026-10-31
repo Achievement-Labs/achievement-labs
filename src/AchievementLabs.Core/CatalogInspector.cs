@@ -6,7 +6,7 @@ public static class CatalogInspector
 {
     public static async Task<CatalogInspection> InspectAsync(string directory, CancellationToken cancellationToken = default)
     {
-        var root = JObject.Parse(await File.ReadAllTextAsync(Path.Combine(directory, "Data.json"), cancellationToken));
+        var root = EventCatalogStorage.Parse(await File.ReadAllTextAsync(EventCatalogStorage.IndexPath(directory), cancellationToken));
         var properties = root.Properties().ToArray();
         var titles = properties.Where(p => p.Name.All(char.IsDigit) && p.Name.Length > 0).ToArray();
         var last = properties.LastOrDefault()?.Name == "SupportedTitleIDs";
@@ -15,10 +15,17 @@ public static class CatalogInspector
         var findings = new List<CatalogFinding>();
         if (!last) findings.Add(new("—", "Ordering error", "SupportedTitleIDs must be the final property."));
         if (supported is not JArray) findings.Add(new("—", "Catalog error", "SupportedTitleIDs is missing or is not an array."));
+        EventCatalogStorage? storage = null;
+        if (last && supported is JArray) {
+            try { storage = new EventCatalogStorage(directory); }
+            catch (InvalidDataException e) { findings.Add(new("�", "Catalog error", e.Message)); }
+        }
         foreach (var title in titles)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var template = Path.Combine(directory, title.Name + ".json");
+            try { if (storage != null) await storage.ReadTitleAsync(title.Name, cancellationToken); }
+            catch (Exception e) when (e is IOException or InvalidDataException or Newtonsoft.Json.JsonException) { findings.Add(new(title.Name, "Invalid title file", e.Message)); continue; }
+            var template = Path.Combine(directory, File.Exists(Path.Combine(directory, "index.json")) ? title.Name : "", title.Name + ".json");
             if (!File.Exists(template)) { findings.Add(new(title.Name, "Missing template", "No standalone title template found.")); continue; }
             // Templates contain bare placeholders; strict JSON validation belongs after replacement.
             if (string.IsNullOrWhiteSpace(await File.ReadAllTextAsync(template, cancellationToken))) findings.Add(new(title.Name, "Empty template", "Standalone template is empty."));

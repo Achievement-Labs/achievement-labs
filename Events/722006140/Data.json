@@ -1,0 +1,54 @@
+{
+  "722006140": {
+    "FullySupported": false,
+    "TitleName": "EA SPORTS™ UFC® 3",
+    "TitleId": "722006140",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "d9510100-2b67-49f2-aa1a-d7b02b08f07c",
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T722006140.AchievementEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementEarned\",\"serviceConfigId\":\"d9510100-2b67-49f2-aa1a-d7b02b08f07c\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":722006140,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":1}}}"
+          }
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENT",
+          "Replacement": "Microsoft.XboxLive.T722006140.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"d9510100-2b67-49f2-aa1a-d7b02b08f07c\",\"titleId\":722006140,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "722006140"
+  ]
+}

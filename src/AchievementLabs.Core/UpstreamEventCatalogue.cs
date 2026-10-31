@@ -132,18 +132,19 @@ public sealed class UpstreamEventCatalogue
             if (releases.Count > 100) throw new InvalidDataException("Release list limit exceeded.");
             var release = releases.OfType<JObject>().FirstOrDefault(r => (bool?)r["draft"] == false && (bool?)r["prerelease"] == false
                 && Regex.IsMatch((string?)r["tag_name"] ?? "", @"^v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")
-                && r["assets"] is JArray list && list.OfType<JObject>().Any(a => (string?)a["name"] == "Events.zip"))
+                && r["assets"] is JArray list && list.OfType<JObject>().Any(a => (string?)a["name"] is "Events.zip" or "Events-Indexed.zip"))
                 ?? throw new InvalidDataException("No stable release containing Events.zip was found.");
             if ((bool?)release["draft"] != false || (bool?)release["prerelease"] != false) throw new InvalidDataException("No stable published release.");
             var tag = (string?)release["tag_name"] ?? "";
             if (!Regex.IsMatch(tag, "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")) throw new InvalidDataException("Unexpected release tag.");
-            var assets = (release["assets"] as JArray ?? throw new InvalidDataException("Release assets are missing."))
-                .OfType<JObject>().Where(a => (string?)a["name"] == "Events.zip").ToArray();
+            var availableAssets = (release["assets"] as JArray ?? throw new InvalidDataException("Release assets are missing.")).OfType<JObject>().ToArray();
+            var assetName = availableAssets.Any(a => (string?)a["name"] == "Events-Indexed.zip") ? "Events-Indexed.zip" : "Events.zip";
+            var assets = availableAssets.Where(a => (string?)a["name"] == assetName).ToArray();
             if (assets.Length != 1) throw new InvalidDataException("The release does not contain one Events.zip.");
             var asset = assets[0]; var digest = (string?)asset["digest"] ?? "";
             if (!Regex.IsMatch(digest, "^sha256:[a-fA-F0-9]{64}$")) throw new InvalidDataException("Events.zip SHA-256 digest is missing.");
             var revision = digest[7..].ToLowerInvariant();
-            var url = "https://github.com/Achievement-Labs/achievement-labs/releases/download/" + tag + "/Events.zip";
+            var url = "https://github.com/Achievement-Labs/achievement-labs/releases/download/" + tag + "/" + assetName;
             if ((string?)asset["browser_download_url"] != url) throw new InvalidDataException("Unexpected archive location.");
             var data = (JObject)previous.Data.DeepClone();
             var templates = new Dictionary<string, string>(previous.Templates, StringComparer.Ordinal);
@@ -155,17 +156,23 @@ public sealed class UpstreamEventCatalogue
                 if (Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() != revision) throw new InvalidDataException("Archive checksum mismatch.");
                 stage = "reading Events.zip";
                 using var archive = new ZipArchive(new MemoryStream(bytes), ZipArchiveMode.Read);
-                if (archive.Entries.Count > 2500 || archive.Entries.Sum(e => e.Length) > 256L * 1024 * 1024) throw new InvalidDataException("Archive expansion limit exceeded.");
+                if (archive.Entries.Count > 15001 || archive.Entries.Sum(e => e.Length) > 1024L * 1024 * 1024) throw new InvalidDataException("Archive expansion limit exceeded.");
                 var entries = new Dictionary<string, ZipArchiveEntry>(StringComparer.OrdinalIgnoreCase);
                 foreach (var entry in archive.Entries) {
                     var name = entry.FullName.Replace('\\', '/');
                     if (name.StartsWith('/') || name.Split('/').Any(part => part is ".." or ".") || !name.StartsWith("Events/", StringComparison.Ordinal)) throw new InvalidDataException("Unexpected archive path.");
                     if (name.EndsWith('/')) continue;
-                    if (name[7..].Contains('/') || !entries.TryAdd(name[7..], entry)) throw new InvalidDataException("Ambiguous archive entry.");
+                    var relative = name[7..];
+                    if ((relative.Contains('/') && !Regex.IsMatch(relative, @"^[0-9]{1,10}/(?:Data|[0-9]{1,10})\.json$")) || !entries.TryAdd(relative, entry)) throw new InvalidDataException("Ambiguous archive entry.");
                 }
-                if (!entries.TryGetValue("Data.json", out var sourceData)) throw new InvalidDataException("Events/Data.json is missing.");
-                var upstream = Parse(ReadZip(sourceData, 128 * 1024 * 1024));
-                if (upstream.Properties().Last().Name != "SupportedTitleIDs") throw new InvalidDataException("SupportedTitleIDs must be last in Data.json.");
+                var indexed = entries.ContainsKey("index.json");
+                if (!entries.ContainsKey(indexed ? "index.json" : "Data.json")) throw new InvalidDataException("Events catalog index is missing.");
+                var source = new EventCatalogStorage(indexed, (path, token) => {
+                    token.ThrowIfCancellationRequested();
+                    if (!entries.TryGetValue(path, out var file)) throw new InvalidDataException("Missing event file: " + path);
+                    return Task.FromResult(ReadZip(file, path == "index.json" ? 4 * 1024 * 1024 : path.EndsWith("Data.json", StringComparison.Ordinal) ? 128 * 1024 * 1024 : 1024 * 1024));
+                });
+                var upstream = source.Index;
                 var ids = upstream["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Supported-title list is missing.");
                 if (ids.Count > 5000) throw new InvalidDataException("Title limit exceeded.");
                 stage = "validating new titles";
@@ -173,9 +180,13 @@ public sealed class UpstreamEventCatalogue
                 {
                     ct.ThrowIfCancellationRequested();
                     if (reserved.Contains(id) || templates.ContainsKey(id)) continue;
-                    if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || upstream[id] is not JObject block || (bool?)block["Enabled"] == false || !entries.TryGetValue(id + ".json", out var entry)) { skipped++; continue; }
-                    var template = ReadZip(entry, 1024 * 1024);
-                    try { await ValidateAsync(id, block, template, ct).ConfigureAwait(false); }
+                    if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || upstream[id] is not JObject || (bool?)upstream[id]!["Enabled"] == false) { skipped++; continue; }
+                    JObject block; string template;
+                    try {
+                        block = await source.ReadTitleAsync(id, ct).ConfigureAwait(false);
+                        template = await source.ReadTemplateAsync(id, ct).ConfigureAwait(false);
+                        await ValidateAsync(id, block, template, ct).ConfigureAwait(false);
+                    }
                     catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException) { skipped++; continue; }
                     data.Remove("SupportedTitleIDs"); data[id] = block.DeepClone(); templates.Add(id, template); added++;
                 }

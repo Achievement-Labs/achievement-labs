@@ -31,7 +31,7 @@ public sealed class EventCatalogClient : IDisposable
         {
             if (!useLocal) return null;
             var path = directory?.Invoke();
-            var stamp = path == null ? default : File.GetLastWriteTimeUtc(Path.Combine(path, "Data.json"));
+            var stamp = path == null ? default : File.GetLastWriteTimeUtc(EventCatalogStorage.IndexPath(path));
             if (local == null || path != loadedPath || stamp != loadedTimestamp) { local = new(path); loadedPath = path; loadedTimestamp = stamp; additions = null; }
             return local;
         }

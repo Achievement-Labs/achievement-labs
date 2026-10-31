@@ -1,0 +1,54 @@
+{
+  "242301355": {
+    "FullySupported": false,
+    "TitleName": "EA SPORTS™ NHL® 16",
+    "TitleId": "242301355",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "be070100-7a69-41a6-ad7d-1f170e7139ab",
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T242301355.AchievementEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementEarned\",\"serviceConfigId\":\"be070100-7a69-41a6-ad7d-1f170e7139ab\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":242301355,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":1}}}"
+          }
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENT",
+          "Replacement": "Microsoft.XboxLive.T242301355.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"be070100-7a69-41a6-ad7d-1f170e7139ab\",\"titleId\":242301355,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "242301355"
+  ]
+}

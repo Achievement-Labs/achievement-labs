@@ -1,8 +1,10 @@
 """Publish public validated additions from the original repo's Events.zip. No account data."""
-import hashlib,io,json,os,re,urllib.request,urllib.error,zipfile
+import hashlib,io,json,os,re,sys,urllib.request,urllib.error,zipfile
 from datetime import datetime,timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT / "tools"))
+from event_catalog import read_index
 def read(url,limit,token=None,method='GET',body=None):
     headers={'User-Agent':'AchievementLabs-Mobile-Catalogue/1','Accept':'application/vnd.github+json'}
     if token: headers['Authorization']='Bearer '+token
@@ -24,8 +26,17 @@ def select_release(releases):
     for release in releases:
         if not isinstance(release,dict) or release.get('draft') or release.get('prerelease'): continue
         if not re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?',release.get('tag_name','')): continue
-        if sum(a.get('name')=='Events.zip' for a in release.get('assets',[]) if isinstance(a,dict))==1: return release
+        if any(a.get('name') in ('Events-Indexed.zip','Events.zip') for a in release.get('assets',[]) if isinstance(a,dict)):
+            event_asset(release)
+            return release
     raise ValueError('No stable release containing Events.zip')
+
+def event_asset(release):
+    assets=release.get('assets',[])
+    name='Events-Indexed.zip' if any(a.get('name')=='Events-Indexed.zip' for a in assets) else 'Events.zip'
+    matches=[a for a in assets if a.get('name')==name]
+    if len(matches)!=1: raise ValueError('Ambiguous event archive asset')
+    return matches[0]
 
 def normalize(tid,block,template):
     if len(template.encode())>1024*1024: raise ValueError('Template limit')
@@ -58,20 +69,21 @@ def normalize(tid,block,template):
 def build(release,archive,reserved):
     tag=release['tag_name']
     if release.get('draft') or release.get('prerelease') or not re.fullmatch(r'v[0-9]+\.[0-9]+\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?',tag): raise ValueError('Unexpected release')
-    asset=next(a for a in release['assets'] if a['name']=='Events.zip');digest=asset.get('digest','')
+    asset=event_asset(release);digest=asset.get('digest','')
     if not re.fullmatch(r'sha256:[a-fA-F0-9]{64}',digest) or hashlib.sha256(archive).hexdigest()!=digest[7:].lower(): raise ValueError('Archive checksum mismatch')
     titles={};skipped=0
     with zipfile.ZipFile(io.BytesIO(archive)) as z:
-        if len(z.infolist())>2500 or sum(i.file_size for i in z.infolist())>256*1024*1024: raise ValueError('Archive limit')
+        if len(z.infolist())>15001 or sum(i.file_size for i in z.infolist())>1024*1024*1024: raise ValueError('Archive limit')
         entries={}
         for info in z.infolist():
             name=info.filename.replace('\\','/')
             if name.startswith('/') or any(p in ('.','..') for p in name.split('/')) or not name.startswith('Events/'): raise ValueError('Unexpected path')
             if info.is_dir(): continue
             short=name[7:]
-            if '/' in short or short.lower() in entries: raise ValueError('Ambiguous archive')
+            if ('/' in short and not re.fullmatch(r'[0-9]{1,10}/(?:Data|[0-9]{1,10})\.json',short)) or short.lower() in entries: raise ValueError('Ambiguous archive')
             entries[short.lower()]=info
-        info=entries['data.json']
+        indexed='index.json' in entries
+        info=entries['index.json' if indexed else 'data.json']
         if info.file_size>128*1024*1024: raise ValueError('Catalogue limit')
         data=parse(z.read(info))
         if list(data)[-1]!='SupportedTitleIDs': raise ValueError('SupportedTitleIDs must remain last')
@@ -81,9 +93,17 @@ def build(release,archive,reserved):
             if tid in reserved: continue
             try:
                 if not re.fullmatch(r'[0-9]{1,10}',tid) or data[tid].get('Enabled') is False: raise ValueError('Disabled/invalid')
-                info=entries[tid+'.json']
+                block=data[tid]
+                if indexed:
+                    title_info=entries[tid+'/data.json']
+                    if title_info.file_size>128*1024*1024: raise ValueError('Title limit')
+                    title=parse(z.read(title_info))
+                    if list(title)!=[tid,'SupportedTitleIDs'] or list(map(str,title['SupportedTitleIDs']))!=[tid]: raise ValueError('Invalid title wrapper')
+                    block=title[tid]
+                    if {k:v for k,v in block.items() if k!='Achievements'}!=data[tid]: raise ValueError('Index/title mismatch')
+                info=entries[tid+'/'+tid+'.json' if indexed else tid+'.json']
                 if info.file_size>1024*1024: raise ValueError('Template limit')
-                titles[tid]=normalize(tid,data[tid],z.read(info).decode('utf-8-sig'))
+                titles[tid]=normalize(tid,block,z.read(info).decode('utf-8-sig'))
             except (KeyError,TypeError,ValueError,UnicodeError): skipped+=1
     return {'schemaVersion':1,'upstreamRelease':tag,'archiveSHA256':digest[7:].lower(),'generatedAt':datetime.now(timezone.utc).isoformat().replace('+00:00','Z'),'titles':titles},skipped
 
@@ -103,10 +123,10 @@ def publish(feed,pack=None):
 
 def main():
     release=select_release(parse(read('https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100',4*1024*1024)));tag=release['tag_name']
-    asset=next(a for a in release['assets'] if a['name']=='Events.zip')
-    expected='https://github.com/Achievement-Labs/achievement-labs/releases/download/'+tag+'/Events.zip'
+    asset=event_asset(release)
+    expected='https://github.com/Achievement-Labs/achievement-labs/releases/download/'+tag+'/'+asset['name']
     if asset['browser_download_url']!=expected: raise ValueError('Unexpected archive location')
-    archive=read(expected,32*1024*1024);data=parse((ROOT/'src/AchievementLabs.App/Events/Data.json').read_bytes())
+    archive=read(expected,32*1024*1024);data=read_index(ROOT/'src/AchievementLabs.App/Events')
     if list(data)[-1]!='SupportedTitleIDs': raise ValueError('Bundled SupportedTitleIDs must be last')
     feed,skipped=build(release,archive,set(data));encoded=json.dumps(feed,separators=(',',':')).encode()
     if len(encoded)>32*1024*1024: raise ValueError('Feed limit')

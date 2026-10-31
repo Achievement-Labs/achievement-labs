@@ -1,0 +1,321 @@
+{
+  "1918441274": {
+    "TitleName": "MONOPOLY PLUS",
+    "TitleId": "1918441274",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "2d660100-78ab-444e-bef1-71327259173a",
+    "FullySupported": false,
+    "PartiallySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PropertyAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PropertyAcquired\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "2": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HouseBuilt"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HouseBuilt\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "3": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HotelBuilt"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HotelBuilt\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "4": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NbGameStartFirst"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NbGameStartFirst\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "5": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PercentDeltaBuyable"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PercentDeltaBuyable\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PercentDeltaBuyable\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"PercentDeltaBuyable\":-10,\"Value\":-10,\"Count\":-10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "6": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RentTurn"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"RentTurn\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RentTurn\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"RentTurn\":1,\"Value\":1,\"Count\":1},\"measurements\":{}}}"
+          }
+        }
+      },
+      "7": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NbPropertiesCompletedDuringTrade"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"NbPropertiesCompletedDuringTrade\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NbPropertiesCompletedDuringTrade\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"NbPropertiesCompletedDuringTrade\":2,\"Value\":2,\"Count\":2},\"measurements\":{}}}"
+          }
+        }
+      },
+      "8": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectedMoneyFromCards"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"CollectedMoneyFromCards\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CollectedMoneyFromCards\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"CollectedMoneyFromCards\":200,\"Value\":200,\"Count\":200},\"measurements\":{}}}"
+          }
+        }
+      },
+      "9": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BankRunOutHouse"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BankRunOutHouse\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "10": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NbPropertyEachColor"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NbPropertyEachColor\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "11": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RentValueReceived"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"RentValueReceived\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RentValueReceived\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"RentValueReceived\":1000,\"Value\":1000,\"Count\":1000},\"measurements\":{}}}"
+          }
+        }
+      },
+      "12": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GroupCompletedWithOneHotel"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GroupCompletedWithOneHotel\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GroupCompletedWithOneHotel"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GroupCompletedWithOneHotel\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NbTimeWonWithHouseRule"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NbTimeWonWithHouseRule\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "14": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WonGamesWithLocalPlayers"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"WonGamesWithLocalPlayers\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WonGamesWithLocalPlayers\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"WonGamesWithLocalPlayers\":6,\"Value\":6,\"Count\":6},\"measurements\":{}}}"
+          }
+        }
+      },
+      "15": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Victory"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Victory\":4,\"Value\":4,\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Victory\",\"serviceConfigId\":\"2d660100-78ab-444e-bef1-71327259173a\",\"titleId\":1918441274,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"ver\":1,\"properties\":{\"Victory\":1,\"Value\":1,\"Count\":1},\"measurements\":{}}}"
+          }
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "1918441274"
+  ]
+}

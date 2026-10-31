@@ -1,0 +1,79 @@
+{
+  "682562723": {
+    "FullySupported": false,
+    "PartiallySupported": true,
+    "Achievements": {
+      "1": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PostStats"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Completed\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PostStats\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Completed\":1,\"MissionId\":1},\"serviceConfigId\":\"ed240100-924b-4ccc-8f0d-411e28af14a3\",\"titleId\":682562723,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "MatchUploadRequest"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Completed\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"MatchUploadRequest\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Completed\":1,\"MissionId\":1},\"serviceConfigId\":\"ed240100-924b-4ccc-8f0d-411e28af14a3\",\"titleId\":682562723,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "3": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PostStats"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Completed\":4,\"MissionId\":4,\"Score\":4,\"TotalKills\":4,\"EnabledSkulls\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PostStats\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Completed\":1,\"MissionId\":1,\"Score\":10000,\"TotalKills\":100,\"EnabledSkulls\":0},\"serviceConfigId\":\"ed240100-924b-4ccc-8f0d-411e28af14a3\",\"titleId\":682562723,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "4": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "MatchUploadRequest"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Completed\":4,\"MissionId\":4,\"Score\":4,\"TotalKills\":4,\"EnabledSkulls\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"MatchUploadRequest\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Completed\":1,\"MissionId\":1,\"Score\":10000,\"TotalKills\":100,\"EnabledSkulls\":0},\"serviceConfigId\":\"ed240100-924b-4ccc-8f0d-411e28af14a3\",\"titleId\":682562723,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "682562723"
+  ]
+}

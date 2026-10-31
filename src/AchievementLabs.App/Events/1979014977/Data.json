@@ -1,0 +1,1512 @@
+{
+  "1979014977": {
+    "TitleName": "The Crew",
+    "TitleId": "1979014977",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "45a60100-cd32-4650-95a7-2ba075f55f41",
+    "FullySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":8,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "2": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EventCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"IsCrewEvent\":4,\"Position\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EventCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"IsCrewEvent\":1,\"Position\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":28,\"AwardPoints\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "3": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BankEarnings"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Amount\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BankEarnings\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Amount\":10000},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":30,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "4": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":31,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "5": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BeatGhost"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BeatGhost\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":6,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "6": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":7,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "7": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":4,\"MissionId\":\"2305843009340065542\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":32,\"AwardPoints\":40},\"measurements\":{}}}"
+          }
+        }
+      },
+      "8": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":4,\"MissionId\":\"2305843009339904023\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":33,\"AwardPoints\":30},\"measurements\":{}}}"
+          }
+        }
+      },
+      "9": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":34,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "10": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":16,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "11": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EventCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"IsCrewEvent\":4,\"Position\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EventCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"IsCrewEvent\":1,\"Position\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":11,\"AwardPoints\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "12": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":26,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":23,\"AwardPoints\":30},\"measurements\":{}}}"
+          }
+        }
+      },
+      "14": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":13,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "16": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EventCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"IsCrewEvent\":4,\"Position\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EventCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"IsCrewEvent\":0,\"Position\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":14,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "17": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighestVehicleLevelOwnedChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"VehicleLevel\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighestVehicleLevelOwnedChanged\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"VehicleLevel\":510},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":12,\"AwardPoints\":38},\"measurements\":{}}}"
+          }
+        }
+      },
+      "18": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighestVehicleLevelOwnedChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"VehicleLevel\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighestVehicleLevelOwnedChanged\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"VehicleLevel\":1299},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":40,\"AwardPoints\":99},\"measurements\":{}}}"
+          }
+        }
+      },
+      "19": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":36,\"AwardPoints\":40},\"measurements\":{}}}"
+          }
+        }
+      },
+      "20": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UpdateDistanceDriven"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Distance\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UpdateDistanceDriven\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Distance\":8047},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":49,\"AwardPoints\":50},\"measurements\":{}}}"
+          }
+        }
+      },
+      "21": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BankEarnings"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Amount\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BankEarnings\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Amount\":500000},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":35,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "22": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":17,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "23": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":25,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "24": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":1,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "25": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TrophyId\":4,\"Points\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TrophyId\":27,\"Points\":5},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4,\"Points\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":27,\"Points\":5},\"measurements\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":27,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "26": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":10,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "27": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":40,\"ActivityType\":2},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":44,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "28": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":9,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "29": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":39,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "30": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":45,\"AwardPoints\":50},\"measurements\":{}}}"
+          }
+        }
+      },
+      "31": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardPoints"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Points\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardPoints\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Points\":10001},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":37,\"AwardPoints\":70},\"measurements\":{}}}"
+          }
+        }
+      },
+      "32": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":18,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "33": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":3,\"MissionId\":\"2305843009331673952\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":2,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "34": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":3,\"MissionId\":\"2305843009339802082\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":3,\"AwardPoints\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "35": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":3,\"MissionId\":\"2305843009339796478\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":4,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "36": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":3,\"MissionId\":\"2305843009339834609\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":5,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "37": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":24,\"AwardPoints\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "38": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":19,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "39": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"MissionType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MissionCompleted\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"MissionType\":3,\"MissionId\":\"2305843009339817382\"},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":41,\"AwardPoints\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "40": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AccessDataTower"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AccessDataTower\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":42,\"AwardPoints\":50},\"measurements\":{}}}"
+          }
+        }
+      },
+      "41": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "FindWreck"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FindWreck\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":15,\"AwardPoints\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "42": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "VisitLandmark"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"VisitLandmark\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":43,\"AwardPoints\":40},\"measurements\":{}}}"
+          }
+        }
+      },
+      "43": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":20,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "44": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":21,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "45": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":500,\"ActivityType\":2},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":46,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "46": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":50,\"AwardPoints\":64},\"measurements\":{}}}"
+          }
+        }
+      },
+      "47": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelUp"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Level\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelUp\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Level\":50},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":47,\"AwardPoints\":50},\"measurements\":{}}}"
+          }
+        }
+      },
+      "48": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":48,\"AwardPoints\":200},\"measurements\":{}}}"
+          }
+        }
+      },
+      "49": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4,\"ActivityType\":4}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnMedal\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{\"Count\":1,\"ActivityType\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":22,\"AwardPoints\":15},\"measurements\":{}}}"
+          }
+        }
+      },
+      "50": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":29,\"AwardPoints\":40},\"measurements\":{}}}"
+          }
+        }
+      },
+      "53": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MeetPlayer"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MeetPlayer\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardId\":4,\"AwardPoints\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardUnlocked\",\"serviceConfigId\":\"45a60100-cd32-4650-95a7-2ba075f55f41\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":1979014977,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardId\":38,\"AwardPoints\":10},\"measurements\":{}}}"
+          }
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "1979014977"
+  ]
+}

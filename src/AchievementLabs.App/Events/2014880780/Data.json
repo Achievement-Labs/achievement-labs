@@ -1,0 +1,54 @@
+{
+  "2014880780": {
+    "FullySupported": false,
+    "TitleName": "Madden NFL 17",
+    "TitleId": "2014880780",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "b70e0100-81fd-4489-af21-78087818a40c",
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T2014880780.AchievementEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementEarned\",\"serviceConfigId\":\"b70e0100-81fd-4489-af21-78087818a40c\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2014880780,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":1}}}"
+          }
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENT",
+          "Replacement": "Microsoft.XboxLive.T2014880780.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"b70e0100-81fd-4489-af21-78087818a40c\",\"titleId\":2014880780,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "2014880780"
+  ]
+}

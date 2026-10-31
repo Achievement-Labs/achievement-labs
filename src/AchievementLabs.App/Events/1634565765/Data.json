@@ -1,0 +1,54 @@
+{
+  "1634565765": {
+    "FullySupported": false,
+    "TitleName": "NHL™ 94 REWIND",
+    "TitleId": "1634565765",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "00000000-0000-0000-0000-0000616d7e85",
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1634565765.AchievementEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementEarned\",\"serviceConfigId\":\"00000000-0000-0000-0000-0000616d7e85\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":1634565765,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":1}}}"
+          }
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENT",
+          "Replacement": "Microsoft.XboxLive.T1634565765.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"00000000-0000-0000-0000-0000616d7e85\",\"titleId\":1634565765,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "1634565765"
+  ]
+}

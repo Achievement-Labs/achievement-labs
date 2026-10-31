@@ -1,0 +1,759 @@
+{
+  "2054354492": {
+    "TitleName": "Fruit Ninja Kinect 2",
+    "TitleId": "2054354492",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "309e0100-2c2f-4e09-90ae-397d7a72f63c",
+    "Enabled": true,
+    "FullySupported": false,
+    "PartiallySupported": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":0,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":0,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":251,\"BombsSlashed\":3,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "2": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectSlashed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"TypeId\":4,\"SubTypeId\":4,\"IsSupersized\":7}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectSlashed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"TypeId\":0,\"SubTypeId\":0,\"IsSupersized\":false},\"measurements\":{}}}"
+          }
+        }
+      },
+      "3": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ComboCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"NumberOfFruit\":4,\"VarietyOfFruit\":4,\"ActiveNegPowerup\":4,\"ConsecutiveInFreeze\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ComboCompleted\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumberOfFruit\":6,\"VarietyOfFruit\":6,\"ActiveNegPowerup\":0,\"ConsecutiveInFreeze\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "4": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectSlashed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"TypeId\":4,\"SubTypeId\":4,\"IsSupersized\":7}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectSlashed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"TypeId\":0,\"SubTypeId\":24,\"IsSupersized\":true},\"measurements\":{}}}"
+          }
+        }
+      },
+      "5": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":1,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":1,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "6": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CleanSlate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CleanSlate\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          }
+        }
+      },
+      "7": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BonusesViewed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"UniqueBonuses\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BonusesViewed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"UniqueBonuses\":30},\"measurements\":{}}}"
+          }
+        }
+      },
+      "8": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SwagEquipped"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"BladeId\":4,\"ShadowId\":4,\"BackgroundId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SwagEquipped\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BladeId\":10,\"ShadowId\":2,\"BackgroundId\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "9": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SpotlightExit"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"PlayerId\":4,\"TimeInSpotlight\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SpotlightExit\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":4,\"PlayerId\":0,\"TimeInSpotlight\":6.0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "10": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":4,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":4,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "11": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "12": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaggerFrenzy"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaggerFrenzy\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":3},\"measurements\":{}}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SeedStreak"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"StreakSize\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SeedStreak\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":6,\"StreakSize\":20},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SeedStreak"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"measurements\":{\"f\":{\"GameplayModeId\":4,\"StreakSize\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SeedStreak\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"GameplayModeId\":6,\"StreakSize\":20}}}"
+          }
+        }
+      },
+      "14": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":6,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":6,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":60,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "15": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":5,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":5,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "16": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":5,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":5,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":100,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "18": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NinjaRankChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NinjaRankChanged\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":4},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameProgress"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"CompletionPercent\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameProgress\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CompletionPercent\":100.0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "19": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NinjaRankChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NinjaRankChanged\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":10},\"measurements\":{}}}"
+          }
+        }
+      },
+      "20": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NinjaRankChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NinjaRankChanged\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "21": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NinjaRankChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NinjaRankChanged\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":30},\"measurements\":{}}}"
+          }
+        }
+      },
+      "22": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectSlashed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"TypeId\":4,\"SubTypeId\":4,\"IsSupersized\":7}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectSlashed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"TypeId\":0,\"SubTypeId\":0,\"IsSupersized\":false},\"measurements\":{}}}"
+          }
+        }
+      },
+      "23": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":7,\"DifficultyLevelId\":0,\"ConsecutiveGames\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"Score\":4,\"BombsSlashed\":4,\"FruitsDropped\":4,\"TargetsMissed\":4,\"SeedsSlashed\":4,\"PropellersMissed\":4,\"ShurikensDodged\":4,\"FruitsInSpotlights\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionEnd\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":7,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"Score\":651,\"BombsSlashed\":0,\"FruitsDropped\":0,\"TargetsMissed\":0,\"SeedsSlashed\":0,\"PropellersMissed\":0,\"ShurikensDodged\":0,\"FruitsInSpotlights\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "24": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PowerupActivated"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"PowerupId\":4,\"NumPowerups\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PowerupActivated\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"PowerupId\":1,\"NumPowerups\":3},\"measurements\":{}}}"
+          }
+        }
+      },
+      "25": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PosePerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PlayerId\":4,\"UniquePoses\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PosePerformed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayerId\":0,\"PoseId\":\"Pose_Rock\",\"UniquePoses\":20},\"measurements\":{}}}"
+          }
+        }
+      },
+      "26": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ConsecutiveGames\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameSessionStart\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":7,\"DifficultyLevelId\":0,\"ConsecutiveGames\":5},\"measurements\":{}}}"
+          }
+        }
+      },
+      "27": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ComboCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"NumberOfFruit\":4,\"VarietyOfFruit\":4,\"ActiveNegPowerup\":4,\"ConsecutiveInFreeze\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ComboCompleted\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumberOfFruit\":4,\"VarietyOfFruit\":1,\"ActiveNegPowerup\":5,\"ConsecutiveInFreeze\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "28": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "JumpIn"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"JumpIn\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "29": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PomegranateFinished"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"PlayerOneSlashes\":4,\"PlayerTwoSlashes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PomegranateFinished\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"PlayerOneSlashes\":50,\"PlayerTwoSlashes\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "30": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ComboCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"NumberOfFruit\":4,\"VarietyOfFruit\":4,\"ActiveNegPowerup\":4,\"ConsecutiveInFreeze\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ComboCompleted\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumberOfFruit\":3,\"VarietyOfFruit\":1,\"ActiveNegPowerup\":0,\"ConsecutiveInFreeze\":4},\"measurements\":{}}}"
+          }
+        }
+      },
+      "31": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectSlashed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"GameplayModeId\":4,\"TypeId\":4,\"SubTypeId\":4,\"IsSupersized\":7}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectSlashed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":2054354492,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"TypeId\":0,\"SubTypeId\":16,\"IsSupersized\":false},\"measurements\":{}}}"
+          }
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "2054354492"
+  ]
+}
