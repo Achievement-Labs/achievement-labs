@@ -7,7 +7,6 @@
     ],
     "ServiceConfigId": "9cf40100-c61f-4a81-a353-d8b12dbb840f",
     "FullySupported": false,
-    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "19": {
@@ -986,37 +985,41 @@
         }
       },
       "5": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "8": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "CampaignGigPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"City\":1,\"Gig\":1,\"Fans\":4,\"Cash\":4,\"Score\":4,\"Completed\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignGigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"City\":\"boston\",\"Gig\":\"fan_showcase\",\"Fans\":300000,\"Cash\":150001,\"Score\":10000001,\"Completed\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignGigPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"City\":1,\"Gig\":1,\"Fans\":4,\"Cash\":4,\"Score\":4,\"Completed\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignGigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"City\":\"boston\",\"Gig\":\"fan_showcase\",\"Fans\":300000,\"Cash\":150001,\"Score\":10000001,\"Completed\":true}}}"
+          }
         }
       },
       "18": {
@@ -1056,173 +1059,193 @@
         }
       },
       "21": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "CampaignGigPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"City\":1,\"Gig\":1,\"Fans\":4,\"Cash\":4,\"Score\":4,\"Completed\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignGigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"City\":\"boston\",\"Gig\":\"fan_showcase\",\"Fans\":300000,\"Cash\":150001,\"Score\":10000001,\"Completed\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignGigPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"City\":1,\"Gig\":1,\"Fans\":4,\"Cash\":4,\"Score\":4,\"Completed\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignGigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"City\":\"boston\",\"Gig\":\"fan_showcase\",\"Fans\":300000,\"Cash\":150001,\"Score\":10000001,\"Completed\":true}}}"
+          }
         }
       },
       "23": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "GigPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GigPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+          }
         }
       },
       "24": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "CampaignFanShowcaseUnlocked"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignFanShowcaseUnlocked\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignFanShowcaseUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignFanShowcaseUnlocked\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "26": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "CampaignCompleted"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCompleted\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCompleted\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "27": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "RockShopAssetAwarded"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RockShopAssetAwarded\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RockShopAssetAwarded"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RockShopAssetAwarded\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "29": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AchievementUnlocked"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":29}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":29}}}"
+          }
         }
       },
       "32": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongStagePresenceEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardCount\":4,\"StagePresence\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongStagePresenceEarned\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardCount\":5,\"StagePresence\":3}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongStagePresenceEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardCount\":4,\"StagePresence\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongStagePresenceEarned\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardCount\":5,\"StagePresence\":3}}}"
+          }
         }
       },
       "33": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongStagePresenceEarned"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardCount\":4,\"StagePresence\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongStagePresenceEarned\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardCount\":5,\"StagePresence\":3}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongStagePresenceEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AwardCount\":4,\"StagePresence\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongStagePresenceEarned\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AwardCount\":5,\"StagePresence\":3}}}"
+          }
         }
       },
       "35": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "MidSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MidSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+          }
         }
       },
       "36": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "GigPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GigPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+          }
         }
       },
       "37": {
@@ -1398,326 +1421,364 @@
         }
       },
       "39": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "TripleAwesomeOnHarmony"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TripleAwesomeOnHarmony\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TripleAwesomeOnHarmony"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TripleAwesomeOnHarmony\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "40": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":2,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":2,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "41": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":1,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":1,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "42": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ImprovSoloPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ImprovSoloPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+          }
         }
       },
       "43": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "FinalSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"FullOverdrive\":3,\"KickPercent\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FinalSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"FullOverdrive\":true,\"KickPercent\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "FinalSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"FullOverdrive\":3,\"KickPercent\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FinalSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"FullOverdrive\":true,\"KickPercent\":100}}}"
+          }
         }
       },
       "45": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":1,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":1,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "46": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":2,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":2,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "47": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "MidSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MidSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+          }
         }
       },
       "48": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "MidSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MidSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+          }
         }
       },
       "49": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "50": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "51": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "52": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "53": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ImprovSoloPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ImprovSoloPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+          }
         }
       },
       "55": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "FinalSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"FullOverdrive\":3,\"KickPercent\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FinalSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"FullOverdrive\":true,\"KickPercent\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "FinalSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"FullOverdrive\":3,\"KickPercent\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FinalSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"FullOverdrive\":true,\"KickPercent\":100}}}"
+          }
         }
       },
       "56": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "MidSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MidSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+          }
         }
       },
       "57": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ImprovSoloPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ImprovSoloPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TappingPercent\":6,\"SoloPercent\":6,\"SoloButtonPercent\":6,\"StreakPercent\":6,\"CompletionPercent\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ImprovSoloPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TappingPercent\":100.0,\"SoloPercent\":100.0,\"SoloButtonPercent\":100.0,\"StreakPercent\":100.0,\"CompletionPercent\":100.0}}}"
+          }
         }
       },
       "58": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "PlayerFailed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"VotedFor\":3,\"VotedAgainst\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerFailed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":0,\"Difficulty\":3,\"VotedFor\":true,\"VotedAgainst\":false}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerFailed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"VotedFor\":3,\"VotedAgainst\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerFailed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":0,\"Difficulty\":3,\"VotedFor\":true,\"VotedAgainst\":false}}}"
+          }
         }
       },
       "59": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "PlayerFailed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"VotedFor\":3,\"VotedAgainst\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerFailed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"VotedFor\":false,\"VotedAgainst\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerFailed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"VotedFor\":3,\"VotedAgainst\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerFailed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"VotedFor\":false,\"VotedAgainst\":true}}}"
+          }
         }
       },
       "61": {
@@ -1808,20 +1869,22 @@
         }
       },
       "62": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "GigPlayed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GigPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SetsPlayed\":4,\"ShowsPlayed\":4,\"EncoresPlayed\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GigPlayed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SetsPlayed\":5,\"ShowsPlayed\":50,\"EncoresPlayed\":1}}}"
+          }
         }
       },
       "63": {
@@ -1929,54 +1992,60 @@
         }
       },
       "65": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "MidSongStatsLogged"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MidSongStatsLogged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Instrument\":4,\"Difficulty\":4,\"Score\":4,\"NoteStreak\":4,\"OverdriveActivations\":4,\"FreestylePhrases\":4,\"NotesHit\":4,\"TotalNotes\":4,\"OverdriveDuration\":6,\"FullOverdrive\":3}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MidSongStatsLogged\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Instrument\":2,\"Difficulty\":3,\"Score\":1000001,\"NoteStreak\":500,\"OverdriveActivations\":4,\"FreestylePhrases\":3,\"NotesHit\":100,\"TotalNotes\":100,\"OverdriveDuration\":60.0,\"FullOverdrive\":true}}}"
+          }
         }
       },
       "66": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":5,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "67": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "SongPerformed"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SongPerformed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SongName\":1,\"Difficulty\":4,\"SongType\":4,\"Instrument\":4,\"Score\":4,\"Stars\":4,\"NotesHit\":4,\"TotalNotes\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SongPerformed\",\"serviceConfigId\":\"9cf40100-c61f-4a81-a353-d8b12dbb840f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":767263759,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SongName\":\"alloveru\",\"Difficulty\":3,\"SongType\":0,\"Instrument\":0,\"Score\":1000001,\"Stars\":6,\"NotesHit\":100,\"TotalNotes\":100}}}"
+          }
         }
       },
       "71": {
@@ -2085,7 +2154,8 @@
           }
         }
       }
-    }
+    },
+    "PartiallySupported": true
   },
   "SupportedTitleIDs": [
     "767263759"

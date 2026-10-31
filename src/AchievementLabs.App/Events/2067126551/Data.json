@@ -8,7 +8,6 @@
     ],
     "ServiceConfigId": "a72e0e3d-ce31-4ae0-89b8-741c625ab197",
     "FullySupported": false,
-    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "2": {
@@ -16,17 +15,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockManufacturerLevel1Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AffinityLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ManufacturerLevel1\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AffinityLevel\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel1Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ManufacturerLevel1\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -38,12 +37,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ManufacturerLevel1\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel1Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel1Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ManufacturerLevel1\":1},\"properties\":{}}}"
           }
         }
       },
@@ -52,17 +51,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockManufacturerLevel25Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AffinityLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ManufacturerLevel25\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AffinityLevel\":25}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ManufacturerLevel25\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -74,12 +73,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ManufacturerLevel25\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ManufacturerLevel25\":1},\"properties\":{}}}"
           }
         }
       },
@@ -88,17 +87,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockManufacturerLevel25x2Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AffinityLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ManufacturerLevel25x2\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AffinityLevel\":25}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x2Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ManufacturerLevel25x2\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -110,12 +109,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ManufacturerLevel25x2\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x2Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x2Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ManufacturerLevel25x2\":1},\"properties\":{}}}"
           }
         }
       },
@@ -124,17 +123,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockManufacturerLevel25x4Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AffinityLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ManufacturerLevel25x4\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AffinityLevel\":25}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x4Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ManufacturerLevel25x4\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -146,12 +145,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ManufacturerLevel25x4\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x4Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x4Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ManufacturerLevel25x4\":1},\"properties\":{}}}"
           }
         }
       },
@@ -160,17 +159,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockManufacturerLevel25x8Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AffinityLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ManufacturerLevel25x8\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AffinityLevel\":25}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x8Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ManufacturerLevel25x8\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -182,12 +181,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ManufacturerLevel25x8\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x8Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockManufacturerLevel25x8Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ManufacturerLevel25x8\":1},\"properties\":{}}}"
           }
         }
       },
@@ -201,12 +200,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":1,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -220,12 +219,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":3}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":3,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -239,12 +238,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":5}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":5,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -258,12 +257,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":10}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":10,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -277,12 +276,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":20}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":20,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -296,12 +295,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":30}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":30,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -315,12 +314,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":40}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":40,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -334,12 +333,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":50}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":50,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -353,12 +352,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":100}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":100,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -372,12 +371,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DriverLevel\":4,\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":150}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DriverLevel\":150,\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -391,29 +390,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -427,29 +409,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -463,29 +428,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -499,29 +447,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -535,29 +466,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -571,29 +485,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -607,29 +504,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -643,29 +523,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -679,29 +542,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -715,29 +561,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Multiplayer\":4,\"Place\":4,\"FinishPlace\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumPodiums\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Multiplayer\":1,\"Place\":1,\"FinishPlace\":1}}}"
-          }
-        },
-        "Request2": {
-          "EventReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
-          },
-          "MetaDataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1,\"Place\":1,\"NumPodiums\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -751,12 +580,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":5}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":5,\"NumGolds\":5,\"NumGoldsTotal\":5},\"measurements\":{}}}"
           }
         }
       },
@@ -770,12 +599,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":10}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":10,\"NumGolds\":10,\"NumGoldsTotal\":10},\"measurements\":{}}}"
           }
         }
       },
@@ -789,12 +618,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":20}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":20,\"NumGolds\":20,\"NumGoldsTotal\":20},\"measurements\":{}}}"
           }
         }
       },
@@ -808,12 +637,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":30}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":30,\"NumGolds\":30,\"NumGoldsTotal\":30},\"measurements\":{}}}"
           }
         }
       },
@@ -827,12 +656,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":50}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":50,\"NumGolds\":50,\"NumGoldsTotal\":50},\"measurements\":{}}}"
           }
         }
       },
@@ -846,12 +675,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":70}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":70,\"NumGolds\":70,\"NumGoldsTotal\":70},\"measurements\":{}}}"
           }
         }
       },
@@ -865,12 +694,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":100}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":100,\"NumGolds\":100,\"NumGoldsTotal\":100},\"measurements\":{}}}"
           }
         }
       },
@@ -884,12 +713,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":150}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":150,\"NumGolds\":150,\"NumGoldsTotal\":150},\"measurements\":{}}}"
           }
         }
       },
@@ -903,12 +732,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":300}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":300,\"NumGolds\":300,\"NumGoldsTotal\":300},\"measurements\":{}}}"
           }
         }
       },
@@ -922,12 +751,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumGoldsTotal\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4,\"Place\":4,\"NumVictories\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumGoldsTotal\":400}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":0,\"Place\":1,\"NumVictories\":400,\"NumGolds\":400,\"NumGoldsTotal\":400},\"measurements\":{}}}"
           }
         }
       },
@@ -941,12 +770,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"Place\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"Place\":1,\"IsMultiplayer\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -960,12 +789,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4,\"Count\":4,\"Likes\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCLike\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCLike\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":1,\"Count\":1,\"Likes\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UGCLikes"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4,\"Count\":4,\"Likes\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCLikes\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":1,\"Count\":1,\"Likes\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -974,17 +820,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCShare"
+            "Replacement": "UGCShares"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoShares\":4,\"TuneShares\":4,\"LiveryShares\":4,\"ReplayShares\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCShare\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCShares\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoShares\":0,\"TuneShares\":1,\"LiveryShares\":1,\"ReplayShares\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -993,17 +839,34 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "UnlockCabooseAchievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Caboose\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockCabooseAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Caboose\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockCabooseAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Caboose\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockCabooseAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Caboose\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1012,17 +875,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1031,17 +894,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1050,17 +913,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1069,17 +932,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1088,17 +951,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1107,17 +970,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":1000,\"TuningPayout\":0,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1126,17 +989,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":15000,\"TuningPayout\":0,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1145,17 +1008,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":30000,\"TuningPayout\":0,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1164,17 +1027,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCShares"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCShares\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":50,\"LiveryPayout\":0,\"TuningPayout\":0,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1183,17 +1046,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCShares"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCShares\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":100,\"LiveryPayout\":0,\"TuningPayout\":0,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1202,17 +1065,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "PerfectRaceFeat"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectDrafts\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectTurns\":4,\"PerfectDrifts\":4,\"PerfectPasses\":4,\"PerfectDrafts\":4,\"PerfectBlocks\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectDrafts\":20}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PerfectRaceFeat\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectTurns\":0,\"PerfectDrifts\":0,\"PerfectPasses\":0,\"PerfectDrafts\":20,\"PerfectBlocks\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1221,17 +1084,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "PerfectRaceFeat"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectPasses\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectTurns\":4,\"PerfectDrifts\":4,\"PerfectPasses\":4,\"PerfectDrafts\":4,\"PerfectBlocks\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectPasses\":125}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PerfectRaceFeat\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectTurns\":0,\"PerfectDrifts\":0,\"PerfectPasses\":125,\"PerfectDrafts\":0,\"PerfectBlocks\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1240,17 +1103,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "PerfectRaceFeat"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectTurns\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectTurns\":4,\"PerfectDrifts\":4,\"PerfectPasses\":4,\"PerfectDrafts\":4,\"PerfectBlocks\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectTurns\":300}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PerfectRaceFeat\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectTurns\":300,\"PerfectDrifts\":0,\"PerfectPasses\":0,\"PerfectDrafts\":0,\"PerfectBlocks\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1259,17 +1122,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "PerfectRaceFeat"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectDrifts\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PerfectTurns\":4,\"PerfectDrifts\":4,\"PerfectPasses\":4,\"PerfectDrafts\":4,\"PerfectBlocks\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectDrifts\":20}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PerfectRaceFeat\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PerfectTurns\":0,\"PerfectDrifts\":20,\"PerfectPasses\":0,\"PerfectDrafts\":0,\"PerfectBlocks\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1278,17 +1141,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockChampionshipSeries1Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Place\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChampionshipSeries5\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries1Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChampionshipSeries5\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -1300,12 +1163,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ChampionshipSeries5\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries1Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries1Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ChampionshipSeries5\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1314,17 +1177,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockChampionshipSeries2Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Place\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChampionshipSeries10\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries2Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChampionshipSeries10\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -1336,12 +1199,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ChampionshipSeries10\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries2Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries2Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ChampionshipSeries10\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1350,17 +1213,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockChampionshipSeries3Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Place\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChampionshipSeries15\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries3Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChampionshipSeries15\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -1372,12 +1235,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ChampionshipSeries15\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries3Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries3Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ChampionshipSeries15\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1386,17 +1249,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockChampionshipSeries5Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Place\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChampionshipSeries25\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries5Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChampionshipSeries25\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -1408,12 +1271,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ChampionshipSeries25\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries5Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries5Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ChampionshipSeries25\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1422,17 +1285,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "RaceEnd"
+            "Replacement": "UnlockChampionshipSeries8Achievement"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Place\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChampionshipSeries40\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":1}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries8Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChampionshipSeries40\":1},\"measurements\":{}}}"
           }
         },
         "Request2": {
@@ -1444,12 +1307,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ChampionshipSeries40\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries8Achievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockChampionshipSeries8Achievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"ChampionshipSeries40\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1458,17 +1321,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":0,\"TuningPayout\":1000,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1477,17 +1340,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":0,\"TuningPayout\":15000,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1501,12 +1364,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"RarifiedAir\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockRarifiedAirAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockRarifiedAirAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RarifiedAir\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockRarifiedAirAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"RarifiedAir\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockRarifiedAirAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"RarifiedAir\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1520,12 +1400,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":249,\"TrackId\":40},\"measurements\":{}}}"
           }
         }
       },
@@ -1539,12 +1419,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":1154,\"TrackId\":101},\"measurements\":{}}}"
           }
         }
       },
@@ -1558,12 +1438,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BeatFerrariWithShelbyCobra\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatFerrariWithShelbyCobraAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatFerrariWithShelbyCobraAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BeatFerrariWithShelbyCobra\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockBeatFerrariWithShelbyCobraAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BeatFerrariWithShelbyCobra\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatFerrariWithShelbyCobraAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BeatFerrariWithShelbyCobra\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1577,12 +1474,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"TripleCrown\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockTripleCrownAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockTripleCrownAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TripleCrown\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockTripleCrownAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"TripleCrown\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockTripleCrownAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"TripleCrown\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1596,12 +1510,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":100,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1615,12 +1529,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":510,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1634,12 +1548,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":231,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1653,12 +1567,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":2015,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1672,12 +1586,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NotJustForShow\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockNotJustForShowAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockNotJustForShowAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NotJustForShow\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockNotJustForShowAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"NotJustForShow\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockNotJustForShowAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"NotJustForShow\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1691,12 +1622,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":1667,\"TrackId\":18,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1710,12 +1641,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Hopper\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockHopperAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockHopperAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Hopper\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockHopperAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Hopper\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockHopperAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Hopper\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1729,12 +1677,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BeatStig\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatStigAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatStigAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BeatStig\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockBeatStigAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BeatStig\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockBeatStigAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BeatStig\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1748,12 +1713,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoFinisher\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockPhotoFinisherAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockPhotoFinisherAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoFinisher\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockPhotoFinisherAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PhotoFinisher\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockPhotoFinisherAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PhotoFinisher\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1767,12 +1749,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1786,12 +1768,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822},\"measurements\":{}}}"
           }
         }
       },
@@ -1805,12 +1787,29 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Caboose\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockCabooseAchievement\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockCabooseAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Caboose\":1},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockCabooseAchievement"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Caboose\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockCabooseAchievement\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Caboose\":1},\"properties\":{}}}"
           }
         }
       },
@@ -1819,17 +1818,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "UGCPayout"
+            "Replacement": "Payouts"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PhotoDownloads\":4,\"LiveryPayout\":4,\"TuningPayout\":4,\"DrivatarPayout\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UGCPayout\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Payouts\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PhotoDownloads\":0,\"LiveryPayout\":0,\"TuningPayout\":30000,\"DrivatarPayout\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1843,12 +1842,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4,\"DistanceDriven\":4,\"TotalDistanceDriven\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":2118,\"TrackId\":540,\"DistanceDriven\":482803,\"TotalDistanceDriven\":482803},\"measurements\":{}}}"
           }
         }
       },
@@ -1862,12 +1861,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"Place\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822,\"Place\":1,\"IsMultiplayer\":0},\"measurements\":{}}}"
           }
         }
       },
@@ -1881,12 +1880,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822,\"IsMultiplayer\":0,\"NumGolds\":20,\"NumGoldsTotal\":20},\"measurements\":{}}}"
           }
         }
       },
@@ -1895,17 +1894,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -1919,12 +1918,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822},\"measurements\":{}}}"
           }
         }
       },
@@ -1938,12 +1937,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"DistanceDriven\":4,\"TotalDistanceDriven\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822,\"DistanceDriven\":482803,\"TotalDistanceDriven\":482803},\"measurements\":{}}}"
           }
         }
       },
@@ -1957,12 +1956,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":1300,\"TrackId\":822,\"NumGolds\":5,\"NumGoldsTotal\":5},\"measurements\":{}}}"
           }
         }
       },
@@ -1976,12 +1975,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":1501,\"TrackId\":822},\"measurements\":{}}}"
           }
         }
       },
@@ -1995,12 +1994,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822},\"measurements\":{}}}"
           }
         }
       },
@@ -2014,12 +2013,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":822,\"IsMultiplayer\":0,\"NumGolds\":25,\"NumGoldsTotal\":25},\"measurements\":{}}}"
           }
         }
       },
@@ -2033,12 +2032,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"Place\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":33,\"Place\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -2052,12 +2051,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"TopSpeed\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32,\"TopSpeed\":89},\"measurements\":{}}}"
           }
         }
       },
@@ -2071,12 +2070,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"DistanceDriven\":4,\"TotalDistanceDriven\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32,\"DistanceDriven\":321869,\"TotalDistanceDriven\":321869},\"measurements\":{}}}"
           }
         }
       },
@@ -2090,12 +2089,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4,\"DistanceDriven\":4,\"TotalDistanceDriven\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":2015,\"TrackId\":32,\"DistanceDriven\":321869,\"TotalDistanceDriven\":321869},\"measurements\":{}}}"
           }
         }
       },
@@ -2109,12 +2108,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32,\"IsMultiplayer\":0,\"NumGolds\":20,\"NumGoldsTotal\":20},\"measurements\":{}}}"
           }
         }
       },
@@ -2123,17 +2122,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTNAME",
-            "Replacement": "MultiplayerRoundEnd1"
+            "Replacement": "RaceEnd"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd1\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32,\"IsMultiplayer\":1},\"measurements\":{}}}"
           }
         }
       },
@@ -2147,12 +2146,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4,\"IsMultiplayer\":4,\"NumGolds\":4,\"NumGoldsTotal\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32,\"IsMultiplayer\":0,\"NumGolds\":25,\"NumGoldsTotal\":25},\"measurements\":{}}}"
           }
         }
       },
@@ -2166,12 +2165,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32},\"measurements\":{}}}"
           }
         }
       },
@@ -2185,12 +2184,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"CarId\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"CarId\":1667,\"TrackId\":32},\"measurements\":{}}}"
           }
         }
       },
@@ -2204,16 +2203,17 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Finished\":4,\"TrackId\":4}}},\"ver\":2}},\"privTags\":1,\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"serviceConfigId\":\"a72e0e3d-ce31-4ae0-89b8-741c625ab197\",\"titleId\":2067126551,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Finished\":1,\"TrackId\":32},\"measurements\":{}}}"
           }
         }
       }
-    }
+    },
+    "PartiallySupported": true
   },
   "SupportedTitleIDs": [
     "2067126551"

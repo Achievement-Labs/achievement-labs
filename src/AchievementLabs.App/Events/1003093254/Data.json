@@ -355,6 +355,44 @@
           }
         }
       },
+      "12": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":\"Collaborative\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":1,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":\"Collaborative\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":1,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
       "14": {
         "Request1": {
           "EventNameReplacement": {
@@ -3284,6 +3322,25 @@
           }
         }
       },
+      "25": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SpecialAchievementsVerified"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"REWARD_25\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"SpecialAchievementsVerified\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"REWARD_25\":1},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
       "26": {
         "Request1": {
           "EventNameReplacement": {
@@ -3300,6 +3357,646 @@
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
             "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"PlaylistCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SweatCounterToggled\":0,\"Is40minPlaylist\":0,\"Is10minPlaylist\":0,\"Is20minPlaylist\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "27": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameActionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"CMUSubmitted\":4,\"SignatureMoveChanged\":4,\"ScoreChallengeSent\":4,\"AutodanceShared\":4,\"JDVoiceCommandUsed\":4,\"HighFive\":4,\"AutodanceSmile\":4,\"AutodanceEffectApplied\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"GameActionCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CMUSubmitted\":0,\"SignatureMoveChanged\":0,\"ScoreChallengeSent\":0,\"AutodanceShared\":0,\"JDVoiceCommandUsed\":0,\"HighFive\":0,\"AutodanceSmile\":0,\"AutodanceEffectApplied\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request2": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlaylistStarted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SweatCounterToggled\":4,\"Is40minPlaylist\":4,\"Is10minPlaylist\":4,\"Is20minPlaylist\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"PlaylistStarted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SweatCounterToggled\":0,\"Is40minPlaylist\":0,\"Is10minPlaylist\":0,\"Is20minPlaylist\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "28": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "29": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request2": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request3": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request4": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request5": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request6": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request7": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request8": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "30": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request2": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request3": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request4": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request5": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request6": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request7": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request8": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "31": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WDFMapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"DanceWithAStar\":4,\"Saturday6PM_12PM\":4,\"WDFRank\":4,\"WDFLocalWon\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"WDFMapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"DanceWithAStar\":0,\"Saturday6PM_12PM\":0,\"WDFRank\":0,\"WDFLocalWon\":1},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "32": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WDFMapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"DanceWithAStar\":4,\"Saturday6PM_12PM\":4,\"WDFRank\":4,\"WDFLocalWon\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"WDFMapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"DanceWithAStar\":0,\"Saturday6PM_12PM\":0,\"WDFRank\":0,\"WDFLocalWon\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "33": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WDFMapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"DanceWithAStar\":4,\"Saturday6PM_12PM\":4,\"WDFRank\":4,\"WDFLocalWon\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"WDFMapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"DanceWithAStar\":0,\"Saturday6PM_12PM\":0,\"WDFRank\":5,\"WDFLocalWon\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "34": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WDFMapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"DanceWithAStar\":4,\"Saturday6PM_12PM\":4,\"WDFRank\":4,\"WDFLocalWon\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"WDFMapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"DanceWithAStar\":0,\"Saturday6PM_12PM\":0,\"WDFRank\":9999,\"WDFLocalWon\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "35": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"JustDanceMachine\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "36": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"Classic\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":50,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "37": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"Classic\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":100,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "38": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":6,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"Classic\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "39": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":6,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"Classic\",\"ScoreChallengeBeaten\":0,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":50,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        }
+      },
+      "40": {
+        "Request1": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request2": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request3": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request4": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request5": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request6": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request7": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
+          }
+        },
+        "Request8": {
+          "EventNameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MapCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SongName\":1,\"MaxStars\":4,\"NumPlayers\":4,\"NumCoachs\":4,\"Gamemode\":1,\"ScoreChallengeBeaten\":4,\"CommonPlayerScoreAbove3Stars\":4,\"CommonPlayerScore5Stars\":4,\"NumDifferentMapsCompletedAtLeast3Stars\":9,\"NumDifferentMapsCompleted5Stars\":9,\"TotalStars\":4,\"NumClassicMapsCompletedAtLeast3Stars\":9,\"NumClassicMapsCompleted5Stars\":9,\"DynamicDuo\":4}}}}}}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"ver\":2,\"name\":\"MapCompleted\",\"titleId\":1003093254,\"userId\":\"REPLACEXUID\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"SongName\":\"HoldingOut\",\"MaxStars\":5,\"NumPlayers\":1,\"NumCoachs\":1,\"Gamemode\":\"DanceQuest\",\"ScoreChallengeBeaten\":1,\"CommonPlayerScoreAbove3Stars\":0,\"CommonPlayerScore5Stars\":0,\"NumDifferentMapsCompletedAtLeast3Stars\":0,\"NumDifferentMapsCompleted5Stars\":0,\"TotalStars\":0,\"NumClassicMapsCompletedAtLeast3Stars\":0,\"NumClassicMapsCompleted5Stars\":0,\"DynamicDuo\":0},\"measurements\":{},\"serviceConfigId\":\"a5c60100-9858-47d7-86de-8fa33bc9fd06\"}}"
           }
         }
       }

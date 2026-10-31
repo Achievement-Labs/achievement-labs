@@ -11,190 +11,212 @@
     "Enabled": true,
     "Achievements": {
       "2": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardYouDidIt"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardYouDidIt\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardYouDidIt"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardYouDidIt\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "3": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardSampler"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardSampler\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardSampler"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardSampler\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "4": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardWorldTraveler"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardWorldTraveler\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardWorldTraveler"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardWorldTraveler\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "5": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardPollster"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardPollster\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardPollster"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardPollster\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "6": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardDeepDiver"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardDeepDiver\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardDeepDiver"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardDeepDiver\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "7": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardOneNameManyFaces"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardOneNameManyFaces\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardOneNameManyFaces"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardOneNameManyFaces\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "8": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Award3DayRoll"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award3DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Award3DayRoll"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award3DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "9": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Award10DayRoll"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award10DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Award10DayRoll"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award10DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "10": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "Award20DayRoll"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award20DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Award20DayRoll"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Award20DayRoll\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "11": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardStrengthInNumbers"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardStrengthInNumbers\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardStrengthInNumbers"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardStrengthInNumbers\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       },
       "12": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "AwardFoursCompany"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardFoursCompany\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AwardFoursCompany"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardFoursCompany\",\"serviceConfigId\":\"bab50100-e49a-4ce8-b16f-918d1465f7bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":342226876,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
         }
       }
     }
