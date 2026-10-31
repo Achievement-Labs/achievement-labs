@@ -5,6 +5,8 @@ param(
     [switch]$RefreshCatalog,
     [string]$EventsSource = (Join-Path $PSScriptRoot '../src/AchievementLabs.App/Events'),
     [ValidateRange(0,65534)][int]$BuildRevision = 0,
+    [string]$BuildRoot = '',
+    [string]$PackagesDirectory = '',
     [string]$SigningThumbprint = $env:ACHIEVEMENT_LABS_SIGNING_THUMBPRINT,
     [string]$TimestampUrl = 'http://timestamp.digicert.com'
 )
@@ -14,25 +16,30 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable version such as 1.0.6.' }
 $taskRoot = Split-Path -Parent $PSScriptRoot
+$taskBuildRoot = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { $taskRoot } else { [IO.Path]::GetFullPath($BuildRoot) }
 if ($RefreshCatalog) { & (Join-Path $PSScriptRoot 'Build-SiteGameData.ps1') }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'site/assets/games.json'))) {
     throw 'Public catalog metadata is missing. Prepare it before building or use -RefreshCatalog.'
 }
 $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-$taskOutput = Join-Path $taskRoot "releases/$Version-$taskStamp"
-$taskWork = Join-Path $taskRoot "artifacts/release-work/$taskStamp"
+$taskOutput = Join-Path $taskBuildRoot "releases/$Version-$taskStamp"
+$taskWork = Join-Path $taskBuildRoot "artifacts/release-work/$taskStamp"
 $taskHelpers = Join-Path $taskWork 'helpers'
-$env:DOTNET_CLI_HOME = Join-Path $taskRoot '.dotnet'
-$env:NUGET_PACKAGES = Join-Path $taskRoot '.nuget-packages'
+$env:DOTNET_CLI_HOME = Join-Path $taskBuildRoot '.dotnet'
+$env:NUGET_PACKAGES = if ([string]::IsNullOrWhiteSpace($PackagesDirectory)) { Join-Path $taskBuildRoot '.nuget-packages' } else { [IO.Path]::GetFullPath($PackagesDirectory) }
+$taskBuildOptions = @()
+if (-not [string]::IsNullOrWhiteSpace($BuildRoot)) {
+    $taskBuildOptions = @('-p:UseArtifactsOutput=true', "-p:ArtifactsPath=$(Join-Path $taskWork 'build')")
+}
 New-Item -ItemType Directory -Path $taskOutput,$taskHelpers -Force | Out-Null
 foreach ($taskHelper in @(
     @{ Project='AchievementLabs.SteamIdle'; Rid='win-x64'; Folder='steam-idle'; Platform='AnyCPU' },
     @{ Project='AchievementLabs.GfwlInjector'; Rid='win-x86'; Folder='gfwl'; Platform='x86' }
 )) {
-    & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
+    & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false @taskBuildOptions -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$([System.IO.Path]::GetFullPath($EventsSource))" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false -o $taskOutput -v:q
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$([System.IO.Path]::GetFullPath($EventsSource))" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }

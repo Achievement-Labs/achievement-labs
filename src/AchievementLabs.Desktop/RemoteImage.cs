@@ -39,18 +39,27 @@ public sealed class RemoteImage : Avalonia.Controls.Image
                 return;
             }
             if (uri.Scheme != Uri.UriSchemeHttps && uri.Scheme != Uri.UriSchemeHttp) { ReplaceBitmap(null, version); return; }
-            using var response = await Client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
-            if (response.Content.Headers.ContentLength is > 8_388_608) return;
-            await using var source = await response.Content.ReadAsStreamAsync();
-            using var bytes = new MemoryStream();
-            await source.CopyToAsync(bytes);
-            if (bytes.Length > 8_388_608) return;
-            bytes.Position = 0;
-            var bitmap = new Bitmap(bytes);
+            var bitmap = await FetchBitmapAsync(Client, uri);
             await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() => ReplaceBitmap(bitmap, version));
         }
         catch { }
+    }
+
+    internal static async Task<Bitmap> FetchBitmapAsync(HttpClient http, Uri uri, CancellationToken ct = default)
+    {
+        using var response = await http.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, ct);
+        response.EnsureSuccessStatusCode();
+        if (response.Content.Headers.ContentLength is > 8_388_608) throw new InvalidDataException("Artwork is too large.");
+        await using var source = await response.Content.ReadAsStreamAsync(ct);
+        using var bytes = new MemoryStream();
+        var buffer = new byte[16384]; int count;
+        while ((count = await source.ReadAsync(buffer, ct)) > 0)
+        {
+            if (bytes.Length + count > 8_388_608) throw new InvalidDataException("Artwork is too large.");
+            bytes.Write(buffer, 0, count);
+        }
+        bytes.Position = 0;
+        return await Task.Run(() => new Bitmap(bytes), ct);
     }
 
     private static HttpClient CreateClient()
@@ -66,7 +75,9 @@ public sealed class RemoteImage : Avalonia.Controls.Image
         value = value.Trim();
         if (value.StartsWith("//", StringComparison.Ordinal)) return "https:" + value;
         return value.Replace("{width}", "512", StringComparison.OrdinalIgnoreCase)
-            .Replace("{height}", "512", StringComparison.OrdinalIgnoreCase);
+            .Replace("{height}", "512", StringComparison.OrdinalIgnoreCase)
+            .Replace("{formatter}", "", StringComparison.OrdinalIgnoreCase)
+            .Replace("{ext}", "jpg", StringComparison.OrdinalIgnoreCase);
     }
 
     private void ReplaceBitmap(Bitmap? bitmap, int version)

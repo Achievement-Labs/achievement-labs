@@ -120,30 +120,13 @@ public sealed class EpicAchievementService : IEpicAchievementService
         if (captured.Count > 0)
             return captured;
 
-        return new[]
-        {
-            new EpicAchievementItem
-            {
-                Id = "EOS definitions",
-                Name = "Query achievement definitions",
-                Description = "Requires ProductId, SandboxId, DeploymentId, and an EOS client policy that can read achievement definitions.",
-                State = "Planned"
-            },
-            new EpicAchievementItem
-            {
-                Id = "EOS player state",
-                Name = "Query player achievement states",
-                Description = "Requires a signed-in Epic/EOS user and the title's deployment context.",
-                State = "Planned"
-            },
-            new EpicAchievementItem
-            {
-                Id = "EOS unlock",
-                Name = "Unlock title-managed achievements",
-                Description = "Only available when the configured EOS client policy allows achievement writes for that product.",
-                State = "Credential gated"
-            }
-        };
+        return Array.Empty<EpicAchievementItem>();
+    }
+
+    private static string ConfiguredCaptureRoot()
+    {
+        try { return File.Exists(ConfigPath) && JsonConvert.DeserializeObject<EpicEosConfig>(File.ReadAllText(ConfigPath))?.CaptureFolder is { Length: > 0 } folder ? folder : CaptureRoot; }
+        catch { return CaptureRoot; }
     }
 
     public string GetCaptureRoot() => CaptureRoot;
@@ -151,7 +134,6 @@ public sealed class EpicAchievementService : IEpicAchievementService
     private static IReadOnlyList<EpicAchievementItem> LoadCapturedAchievements(EpicGameItem game)
     {
         var achievements = new Dictionary<string, EpicAchievementItem>(StringComparer.OrdinalIgnoreCase);
-        var playerStates = ReadCapturedPlayerAchievementStates().ToDictionary(state => state.Name, StringComparer.OrdinalIgnoreCase);
         var needles = new[]
         {
             game.AppName,
@@ -160,6 +142,9 @@ public sealed class EpicAchievementService : IEpicAchievementService
             game.NamespaceId,
             game.Title
         }.Where(value => !string.IsNullOrWhiteSpace(value)).Distinct(StringComparer.OrdinalIgnoreCase).ToList();
+
+        var playerStates = ReadCapturedPlayerAchievementStates().Where(state => MatchesEpicGame(state, needles))
+            .GroupBy(state => state.Name, StringComparer.OrdinalIgnoreCase).ToDictionary(group => group.Key, group => group.Last(), StringComparer.OrdinalIgnoreCase);
 
         foreach (var payload in ReadCapturedJsonPayloads())
         {
@@ -234,6 +219,7 @@ public sealed class EpicAchievementService : IEpicAchievementService
                     Name = state.Name,
                     Description = $"Player achievement state captured from Epic. XP: {state.Xp}",
                     State = state.Unlocked ? state.UnlockDate : $"Progress {state.Progress}",
+                    Unlocked = state.Unlocked,
                     Progress = state.Unlocked ? 100 : Math.Clamp(state.Progress * 100, 0, 100)
                 };
             }
@@ -248,6 +234,7 @@ public sealed class EpicAchievementService : IEpicAchievementService
             achievements[key] = new EpicAchievementItem
             {
                 Id = notification.Key,
+                IsDefinition = false,
                 Name = $"Captured earned achievement notification {notification.Ordinal}",
                 Description = "Epic overlay telemetry reported an earned achievement notification for this title. The notification does not include the individual achievement name, so this row is capture evidence rather than a definition row.",
                 State = notification.Timestamp,
@@ -448,13 +435,14 @@ public sealed class EpicAchievementService : IEpicAchievementService
 
     private static IEnumerable<JToken> ReadCapturedJsonPayloads()
     {
-        if (!Directory.Exists(CaptureRoot))
+        var captureFolder = ConfiguredCaptureRoot();
+        if (!Directory.Exists(captureFolder))
             yield break;
 
         IEnumerable<string> files;
         try
         {
-            files = Directory.EnumerateFiles(CaptureRoot, "*.*", SearchOption.AllDirectories)
+            files = Directory.EnumerateFiles(captureFolder, "*.*", SearchOption.AllDirectories)
                 .Where(path => path.EndsWith(".json", StringComparison.OrdinalIgnoreCase) ||
                                path.EndsWith(".jsonl", StringComparison.OrdinalIgnoreCase) ||
                                path.EndsWith(".har", StringComparison.OrdinalIgnoreCase) ||
@@ -583,6 +571,9 @@ public sealed class EpicAchievementService : IEpicAchievementService
                 ? description
                 : $"{description}  XP: {xp}  Rarity: {rarity}%",
             State = string.IsNullOrWhiteSpace(source) ? state : $"{state} / {source}",
+            Unlocked = bool.TryParse(ReadString(obj, "unlocked", "isUnlocked", "isCompleted", "completed"), out var unlocked) ? unlocked : DateTimeOffset.TryParse(ReadString(obj, "unlockTime", "unlockedAt", "completionDate", "completedAt"), out _) ? true : null,
+            ImageUrl = ReadString(obj, "unlockedIconUrl", "lockedIconUrl", "iconUrl", "icon"),
+            GlobalPercent = double.TryParse(rarity, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var percent) && percent is >= 0 and <= 100 ? percent : null,
             Progress = IsUnlockedState(state) ? 100 : 0
         };
     }
@@ -590,6 +581,7 @@ public sealed class EpicAchievementService : IEpicAchievementService
     private static void ApplyCapturedPlayerState(EpicAchievementItem item, CapturedEpicPlayerState state)
     {
         item.State = state.Unlocked ? state.UnlockDate : $"Progress {state.Progress}";
+        item.Unlocked = state.Unlocked;
         item.Progress = state.Unlocked ? 100 : Math.Clamp(state.Progress * 100, 0, 100);
         if (!string.IsNullOrWhiteSpace(state.UnlockDate) && !item.Description.Contains(state.UnlockDate, StringComparison.OrdinalIgnoreCase))
             item.Description = $"{item.Description}  Unlocked: {state.UnlockDate}";
@@ -612,7 +604,7 @@ public sealed class EpicAchievementService : IEpicAchievementService
 
     private static bool IsUnlockedState(string state) =>
         state.Equals("Unlocked", StringComparison.OrdinalIgnoreCase) ||
-        state.Contains("T", StringComparison.OrdinalIgnoreCase) && !state.StartsWith("Progress", StringComparison.OrdinalIgnoreCase);
+        DateTimeOffset.TryParse(state, out _);
 
     private static bool IsTruthy(string value) =>
         value.Equals("true", StringComparison.OrdinalIgnoreCase) ||

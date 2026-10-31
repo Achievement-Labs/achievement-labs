@@ -5,6 +5,7 @@ public sealed partial class DesktopModel
 {
     private readonly SteamAchievementService steam = new();
     private SteamGameItem[] steamGames = [];
+    private string steamLibraryOwner = "";
     private SteamAchievementItem[] steamAchievements = [];
     private SteamGameItem? selectedSteamGame;
     private string steamSearch = "", steamAppId = ReadLastSteamApp() is var lastApp and > 0 ? lastApp.ToString(System.Globalization.CultureInfo.InvariantCulture) : "", steamStatus = "Refresh installed games to begin.", steamProfileName = "Steam not detected", steamLevel = "Unknown";
@@ -16,11 +17,55 @@ public sealed partial class DesktopModel
     public string SteamLevel { get => steamLevel; private set { steamLevel = value; Changed(); Changed(nameof(HomeSteamSummary)); } }
     public string? SteamAvatarUrl { get => steamAvatarUrl; private set { steamAvatarUrl = value; Changed(); } }
     public string SteamSearch { get => steamSearch; set { steamSearch = value ?? ""; Changed(); Changed(nameof(SteamGames)); } }
-    public IEnumerable<SteamGameItem> SteamGames => steamGames.Where(g => g.DisplayName.Contains(SteamSearch, StringComparison.OrdinalIgnoreCase) || g.AppId.ToString() == SteamSearch);
+    public string[] SteamLibrarySortOptions { get; } = ["Name A–Z", "Name Z–A", "Most completed", "Least completed", "Achievements earned", "App ID"];
+    private string steamLibrarySort = "Name A–Z";
+    public string SteamLibrarySort { get => steamLibrarySort; set { steamLibrarySort = value; Changed(); Changed(nameof(SteamGames)); } }
+    public IEnumerable<SteamGameItem> SteamGames {
+        get {
+            var rows = steamGames.Where(g => g.DisplayName.Contains(SteamSearch, StringComparison.OrdinalIgnoreCase) || g.AppId.ToString() == SteamSearch);
+            return SteamLibrarySort switch {
+                "Name Z–A" => rows.OrderByDescending(g => g.DisplayName, StringComparer.OrdinalIgnoreCase),
+                "Most completed" => rows.OrderByDescending(g => g.ProgressKnown).ThenByDescending(g => g.Progress).ThenBy(g => g.DisplayName),
+                "Least completed" => rows.OrderByDescending(g => g.ProgressKnown).ThenBy(g => g.Progress).ThenBy(g => g.DisplayName),
+                "Achievements earned" => rows.OrderByDescending(g => g.ProgressKnown).ThenByDescending(g => g.EarnedAchievements).ThenBy(g => g.DisplayName),
+                "App ID" => rows.OrderBy(g => g.AppId),
+                _ => rows.OrderBy(g => g.DisplayName, StringComparer.OrdinalIgnoreCase)
+            };
+        }
+    }
+    public string SteamLibrarySummary => $"{steamGames.Length} titles · {steamGames.Where(g => g.ProgressKnown).Sum(g => g.EarnedAchievements)} / {steamGames.Where(g => g.ProgressKnown).Sum(g => g.TotalAchievements)} achievements · {steamGames.Count(g => g.IsComplete)} completed · {steamGames.Count(g => !g.ProgressKnown)} totals unavailable";
+    public SteamGameItem? SteamAchievementGame => steamGames.FirstOrDefault(g => g.AppId == loadedSteamAppId);
+    public string SteamGameName => SteamAchievementGame?.DisplayName ?? (loadedSteamAppId > 0 ? $"App {loadedSteamAppId}" : "Steam achievements");
+    public string SteamGameImage => SteamAchievementGame?.ImageUrl ?? (loadedSteamAppId > 0 ? $"https://cdn.cloudflare.steamstatic.com/steam/apps/{loadedSteamAppId}/header.jpg" : "");
+    public string SteamGameProgress => $"{SteamAchievements.Count(a => a.IsUnlocked)} / {SteamAchievements.Length} achievements";
+    public bool SteamGameComplete => SteamAchievements.Length > 0 && SteamAchievements.All(a => a.IsUnlocked);
+    private void RefreshSteamPresentation() {
+        foreach (var name in new[] { nameof(SteamGames), nameof(SteamLibrarySummary), nameof(SteamAchievementGame), nameof(SteamGameName), nameof(SteamGameImage), nameof(SteamGameProgress), nameof(SteamGameComplete) }) Changed(name);
+    }
     public SteamGameItem? SelectedSteamGame { get => selectedSteamGame; set { selectedSteamGame = value; Changed(); if (value != null) SteamAppId = value.AppId.ToString(); } }
     private string steamAchievementSearch = "";
     public string SteamAchievementSearch { get => steamAchievementSearch; set { steamAchievementSearch = value ?? ""; Changed(); Changed(nameof(VisibleSteamAchievements)); } }
-    public IEnumerable<SteamAchievementItem> VisibleSteamAchievements => steamAchievements.Where(a => (a.Name ?? "").Contains(SteamAchievementSearch, StringComparison.OrdinalIgnoreCase) || (a.Id ?? "").Contains(SteamAchievementSearch, StringComparison.OrdinalIgnoreCase));
+    public string[] SteamAchievementFilters { get; } = ["All achievements", "Locked", "Unlocked"];
+    public string[] SteamAchievementSortOptions { get; } = ["Default", "Name A–Z", "Name Z–A", "Rarest first", "Most common", "Unlock time", "Status"];
+    private string steamAchievementFilter = "All achievements", steamAchievementSort = "Default";
+    public string SteamAchievementFilter { get => steamAchievementFilter; set { steamAchievementFilter = value; Changed(); Changed(nameof(VisibleSteamAchievements)); } }
+    public string SteamAchievementSort { get => steamAchievementSort; set { steamAchievementSort = value; Changed(); Changed(nameof(VisibleSteamAchievements)); } }
+    public IEnumerable<SteamAchievementItem> VisibleSteamAchievements {
+        get {
+            var rows = steamAchievements.Where(a => (a.Name.Contains(SteamAchievementSearch, StringComparison.OrdinalIgnoreCase) || a.Id.Contains(SteamAchievementSearch, StringComparison.OrdinalIgnoreCase) || a.Description.Contains(SteamAchievementSearch, StringComparison.OrdinalIgnoreCase)) && (SteamAchievementFilter == "All achievements" || a.IsUnlocked == (SteamAchievementFilter == "Unlocked")));
+            return SteamAchievementSort switch {
+                "Name A–Z" => rows.OrderBy(a => a.Name, StringComparer.OrdinalIgnoreCase),
+                "Name Z–A" => rows.OrderByDescending(a => a.Name, StringComparer.OrdinalIgnoreCase),
+                "Rarest first" => rows.OrderBy(a => a.GlobalPercent ?? double.MaxValue),
+                "Most common" => rows.OrderByDescending(a => a.GlobalPercent ?? -1),
+                "Unlock time" => rows.OrderByDescending(a => a.UnlockTime),
+                "Status" => rows.OrderBy(a => a.IsUnlocked).ThenBy(a => a.Name),
+                _ => rows
+            };
+        }
+    }
+    private SteamAchievementItem? selectedSteamAchievement;
+    public SteamAchievementItem? SelectedSteamAchievement { get => selectedSteamAchievement; set { selectedSteamAchievement = value; Changed(); } }
     public SteamAchievementItem[] SteamAchievements { get => steamAchievements; private set { steamAchievements = value; Changed(); Changed(nameof(VisibleSteamAchievements)); } }
     public string SteamAppId { get => steamAppId; set { steamAppId = value ?? ""; Changed(); } }
     public string SteamStatus { get => steamStatus; private set { steamStatus = value; Changed(); Changed(nameof(HomeSteamSummary)); } }
@@ -51,8 +96,55 @@ public sealed partial class DesktopModel
     {
         if (!CanInteract) return;
         Navigate("SteamLibrary"); Busy(true);
-        try { steamGames = (await Task.Run(steam.GetInstalledGames, lifetime.Token)).ToArray(); Changed(nameof(SteamGames)); SteamStatus = $"{steamGames.Length} games · Steam {(steam.IsSteamRunning() ? "running" : "not running")}"; }
-        catch { SteamStatus = "Could not read the Steam library."; }
+        try {
+            var owner = steam.GetLocalSteamId();
+            if (owner != steamLibraryOwner) { steamGames = []; SelectedSteamGame = null; SteamAchievements = []; loadedSteamAppId = 0; RefreshSteamPresentation(); }
+            steamGames = (await steam.GetAccountLibraryAsync(AchievementLabs.Core.MirrorStore.ReadKey(), lifetime.Token)).ToArray();
+            if (steam.GetLocalSteamId() != owner) throw new InvalidOperationException("Steam account changed during refresh. Refresh again.");
+            steamLibraryOwner = owner;
+            RefreshSteamPresentation();
+            SteamStatus = "Reading achievement totals and resolving missing titles…";
+            var missing = steamGames.Where(g => string.IsNullOrWhiteSpace(g.Name) || g.Name == $"App {g.AppId}" || g.Name == g.AppId.ToString()).ToArray();
+            try {
+                var names = await steam.RefreshSteamStoreNamesAsync(missing.Select(g => g.AppId), lifetime.Token);
+                foreach (var game in missing) if (names.TryGetValue(game.AppId, out var name)) game.Name = name;
+            } catch (OperationCanceledException) { throw; } catch { /* Keep cached names offline. */ }
+            foreach (var game in steamGames) {
+                lifetime.Token.ThrowIfCancellationRequested();
+                try {
+                    var progress = await Task.Run(() => steam.GetCachedLibraryProgress(game.AppId, owner), lifetime.Token);
+                    game.ApplyProgress(progress.Earned, progress.Total, progress.Known);
+                } catch (OperationCanceledException) { throw; } catch { game.ApplyProgress(0, 0, false); }
+            }
+            RefreshSteamPresentation();
+            if (steam.GetLocalSteamId() != owner) { steamGames = []; RefreshSteamPresentation(); throw new InvalidOperationException("Steam account changed during refresh. Refresh again."); }
+            SteamStatus = SteamLibrarySummary;
+        }
+        catch (Exception error) { SteamStatus = error is OperationCanceledException ? "Steam library refresh cancelled." : error.Message; }
+        finally { Busy(false); }
+    }
+    public async Task FillSteamTotalsAsync()
+    {
+        if (!CanInteract) return;
+        Busy(true);
+        try
+        {
+            foreach (var game in steamGames.Where(g => !g.ProgressKnown))
+            {
+                lifetime.Token.ThrowIfCancellationRequested();
+                SteamStatus = $"Reading achievement totals: {game.DisplayName}";
+                try
+                {
+                    var progress = await steam.GetCommunityAchievementProgressAsync(game.AppId, lifetime.Token);
+                    game.ApplyProgress(progress.Unlocked, progress.Total);
+                }
+                catch (OperationCanceledException) { throw; }
+                catch { /* Private or unavailable profiles stay unknown. */ }
+            }
+            RefreshSteamPresentation();
+            SteamStatus = SteamLibrarySummary;
+        }
+        catch (OperationCanceledException) { SteamStatus = "Steam totals scan cancelled."; }
         finally { Busy(false); }
     }
     private long loadedSteamAppId;
@@ -92,13 +184,50 @@ public sealed partial class DesktopModel
     }
     public async Task LoadSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
-        SteamAchievements = []; loadedSteamAppId = 0;
-        var loaded = await Task.Run(() => steam.LoadAchievementsAsync(id, lifetime.Token), lifetime.Token);
-        SteamAchievements = loaded.ToArray(); loadedSteamAppId = id; SteamStatus = $"Loaded {loaded.Count} achievements for app {id}."; Navigate("SteamAchievements");
+        SelectedSteamAchievement = null; SteamAchievements = []; loadedSteamAppId = 0;
+        var loaded = await steam.LoadAccountAchievementsAsync(id, AchievementLabs.Core.MirrorStore.ReadKey(), lifetime.Token);
+        SteamAchievements = loaded.ToArray(); loadedSteamAppId = id;
+        try { await steam.LoadGlobalPercentagesAsync(id, SteamAchievements, lifetime.Token); }
+        catch (OperationCanceledException) { throw; } catch { /* Rarity remains explicitly unavailable offline. */ }
+        var game = steamGames.FirstOrDefault(g => g.AppId == id);
+        if (game == null)
+        {
+            game = new SteamGameItem { AppId = id, ImageUrl = $"https://cdn.cloudflare.steamstatic.com/steam/apps/{id}/header.jpg" };
+            steamGames = [.. steamGames, game];
+        }
+        if (string.IsNullOrWhiteSpace(game.Name) || game.Name == $"App {id}" || game.Name == id.ToString())
+        {
+            try
+            {
+                var names = await steam.RefreshSteamStoreNamesAsync([id], lifetime.Token);
+                if (names.TryGetValue(id, out var name)) game.Name = name;
+            }
+            catch (OperationCanceledException) { throw; }
+            catch { /* App ID remains usable offline. */ }
+        }
+        game?.ApplyProgress(loaded.Count(a => a.IsUnlocked), loaded.Count);
+        RefreshSteamPresentation();
+        Changed(nameof(VisibleSteamAchievements));
+        SteamStatus = $"Loaded {loaded.Count} achievements for app {id}."; Navigate("SteamAchievements");
         if (loaded.Count > 0) { SaveLastSteamApp(id); lastSteamAppRestored = true; }
     });
+    public async Task UnlockSteamSelectionAsync(IEnumerable<SteamAchievementItem> selected)
+    {
+        if (!CanInteract || !long.TryParse(SteamAppId, out var id) || id != loadedSteamAppId) return;
+        var rows = selected.Where(a => SteamAchievements.Contains(a) && !a.IsUnlocked).Distinct().ToArray();
+        if (rows.Length == 0) { SteamStatus = "Select locked achievements to unlock."; return; }
+        RevertSteam();
+        foreach (var row in rows) row.DesiredUnlocked = true;
+        await StoreSteamAchievementsAsync();
+        var result = SteamStatus;
+        if (!steamStoreSucceeded) return;
+        await LoadSteamAchievementsAsync();
+        SteamStatus = result;
+    }
+    private bool steamStoreSucceeded;
     public async Task StoreSteamAchievementsAsync() => await SteamOperationAsync(async id =>
     {
+        steamStoreSucceeded = false;
         if (id != loadedSteamAppId) { SteamStatus = "Load achievements for this app ID before saving changes."; return; }
         var snapshot = SteamAchievements.ToArray();
         var unlocking = snapshot.Where(a => a.IsModified && a.DesiredUnlocked).Select(a => (a.Id, a.Name)).ToArray();
@@ -107,6 +236,7 @@ public sealed partial class DesktopModel
         try { count = await Task.Run(() => steam.StoreAchievementsAsync(id, snapshot, lifetime.Token), lifetime.Token); }
         catch { foreach (var (apiName, _) in unlocking) MirrorCancelSteam(id, apiName); throw; }
         SteamStatus = $"Stored {count} changes. Reload to verify.";
+        steamStoreSucceeded = true;
         foreach (var (apiName, name) in unlocking)
             if (!await MirrorSteamAppUnlockAsync(id, apiName, name, lifetime.Token)) { SteamStatus = $"Stored {count} changes, but Achievement Mirror couldn't copy {name} to Xbox. See Achievement Mirror."; break; }
     });
@@ -116,7 +246,13 @@ public sealed partial class DesktopModel
     public async Task RefreshSteamMetadataAsync()
     {
         if (!CanInteract) return; Busy(true);
-        try { await steam.RefreshSteamAppNameCacheAsync(lifetime.Token); await steam.RefreshSteamStoreNamesAsync(steamGames.Select(g => g.AppId), lifetime.Token); SteamStatus = steam.GetSteamMetadataStatus(); }
+        try {
+            try { await steam.RefreshSteamAppNameCacheAsync(lifetime.Token); }
+            catch (OperationCanceledException) { throw; }
+            catch { /* Store lookups can still work if the bulk app list is unavailable. */ }
+            await steam.RefreshSteamStoreNamesAsync(steamGames.Select(g => g.AppId), lifetime.Token);
+            SteamStatus = steam.GetSteamMetadataStatus();
+        }
         catch { SteamStatus = "Could not refresh Steam metadata."; }
         finally { Busy(false); }
         await RefreshSteamAsync();

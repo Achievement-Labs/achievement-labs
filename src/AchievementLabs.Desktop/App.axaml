@@ -22,5 +22,9 @@
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter"><Setter Property="Background" Value="#152019"/></Style>
     <Style Selector="ListBox"><Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/></Style>
     <Style Selector="TabItem"><Setter Property="FontSize" Value="14"/></Style>
+    <Style Selector="Border.sidebar Button.nav"><Setter Property="Padding" Value="8,6"/><Setter Property="FontSize" Value="12"/><Setter Property="MinHeight" Value="0"/></Style>
+    <Style Selector="Border.sidebar Expander"><Setter Property="FontSize" Value="12"/><Setter Property="Padding" Value="0"/></Style>
+    <Style Selector="Border.sidebar Expander /template/ ToggleButton"><Setter Property="Padding" Value="7,5"/><Setter Property="MinHeight" Value="0"/></Style>
+    <Style Selector="WrapPanel.library-actions Button"><Setter Property="Padding" Value="9,6"/><Setter Property="FontSize" Value="11"/><Setter Property="Margin" Value="0,0,6,0"/></Style>
   </Application.Styles>
 </Application>

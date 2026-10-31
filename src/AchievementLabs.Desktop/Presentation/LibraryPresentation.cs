@@ -56,7 +56,7 @@ public static class LibraryPresentation
             void Layout(){
                 bool compact=grid.Bounds.Width<1160;
                 if(currentCompact==compact)return;currentCompact=compact;
-                grid.ColumnDefinitions=new ColumnDefinitions(compact?"54,*,210,40,100":"54,*,210,40,100,Auto");
+                grid.ColumnDefinitions=new ColumnDefinitions(compact?"44,*,150,28,82":"44,*,150,28,82,Auto");
                 grid.RowDefinitions=new RowDefinitions(compact?"Auto,Auto":"Auto");
                 Grid.SetColumn(actions,compact?1:5);Grid.SetRow(actions,compact?1:0);Grid.SetColumnSpan(actions,compact?4:1);
                 actions.HorizontalAlignment=HorizontalAlignment.Right;
@@ -79,7 +79,7 @@ public static class LibraryPresentation
             var counts=root.GetLogicalDescendants().OfType<TextBlock>().Where(t=>t.Name=="LibraryAchievementCount").Distinct().ToArray();
             var buttons=root.GetLogicalDescendants().OfType<Button>().Where(b=>b.Name=="LibraryOpenGameSession").Distinct().ToArray();
             if(counts.Length!=3 || buttons.Length!=3)throw new Exception("Library preview must contain three aligned rows and session buttons.");
-            foreach(var count in counts){if(count.TextWrapping!=TextWrapping.NoWrap || count.Bounds.Height>25 || count.Bounds.Width<185)throw new Exception("Achievement count wrapped or lost its reserved space.");}
+            foreach(var count in counts){if(count.TextWrapping!=TextWrapping.NoWrap || count.Bounds.Height>25 || count.Bounds.Width<125)throw new Exception("Achievement count wrapped or lost its reserved space.");}
             foreach(var button in buttons){var point=button.TranslatePoint(new Point(button.Bounds.Width,button.Bounds.Height),root)!.Value;if(point.X>root.Bounds.Width || button.Bounds.Width<115)throw new Exception("Library session action is clipped.");}
             if(!counts.Any(c=>c.Text?.Contains("1234")==true))throw new Exception("Large achievement count fixture missing.");
             var symbols=root.GetLogicalDescendants().OfType<Avalonia.Controls.Shapes.Path>().Where(p=>p.Name=="MythicCompletionIcon" && p.IsEffectivelyVisible).Distinct().ToArray();
