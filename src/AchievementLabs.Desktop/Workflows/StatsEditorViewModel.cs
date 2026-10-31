@@ -87,9 +87,14 @@ namespace AchievementLabs.Desktop.Workflows
             : HasEditableEventData ? "Event" : "Unknown";
         private string? ReadStatTemplate()
         {
-            var path = Path.Combine(account.EventsDirectory, TitleId + ".json");
+            var path = File.Exists(Path.Combine(account.EventsDirectory, "index.json"))
+                ? Path.Combine(account.EventsDirectory, TitleId, TitleId + ".json") : Path.Combine(account.EventsDirectory, TitleId + ".json");
             if (File.Exists(path)) return File.ReadAllText(path);
-            using var stream = typeof(AchievementLabs.Core.StatCatalogStore).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents." + TitleId + ".json");
+            var assembly = typeof(AchievementLabs.Core.StatCatalogStore).Assembly;
+            var indexed = assembly.GetManifestResourceNames().Contains("AchievementLabs.LocalEvents.index.json");
+            var expected = "AchievementLabs.LocalEvents." + (indexed ? TitleId + "." : "") + TitleId + ".json";
+            var resource = assembly.GetManifestResourceNames().FirstOrDefault(name => name.Replace('/', '.').Replace('\\', '.') == expected);
+            using var stream = resource == null ? null : assembly.GetManifestResourceStream(resource);
             if (stream == null) return null;
             using var reader = new StreamReader(stream); return reader.ReadToEnd();
         }

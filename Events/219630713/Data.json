@@ -1,0 +1,3209 @@
+{
+  "219630713": {
+    "TitleName": "Halo 5: Guardians",
+    "TitleId": "219630713",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "1370999b-fca2-4c53-8ec5-73493bcb67e5",
+    "FullySupported": false,
+    "PartiallySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "5": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":5}}}"
+        }
+      },
+      "6": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ChangedAppearanceArmor"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChangedAppearanceArmor\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "7": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ChangedAppearanceEmblem"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChangedAppearanceEmblem\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "8": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ChangedAppearanceServiceTag"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChangedAppearanceServiceTag\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "9": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CreateWarGamesCustomGameType"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CreateWarGamesCustomGameType\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "10": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SpectatedMatch"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SpectatedMatch\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB251C51-F206-11E4-8541-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C854E54F-F206-11E4-BDDC-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        }
+      },
+      "14": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "RequisitionCardConsumed"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CardLevel\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RequisitionCardConsumed\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CardDefinitionGuid\":\"00000000-0000-0000-0000-000000000000\",\"CardLevel\":5}}}"
+        }
+      },
+      "15": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "RequisitionPackOpened"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RequisitionPackOpened\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PackDefinitionGuid\":\"00000000-0000-0000-0000-000000000000\"}}}"
+        }
+      },
+      "16": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"CB251C51-F206-11E4-8541-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"F6DE5351-3797-41E9-8053-7FB111A3A1A0\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C854E54F-F206-11E4-BDDC-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        }
+      },
+      "17": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1571FDAC-E0B4-4EBC-A73A-6E13001B71D3\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CAACB800-F206-11E4-81AB-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1571FDAC-E0B4-4EBC-A73A-6E13001B71D3\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CAACB800-F206-11E4-81AB-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1571FDAC-E0B4-4EBC-A73A-6E13001B71D3\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CAACB800-F206-11E4-81AB-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1571FDAC-E0B4-4EBC-A73A-6E13001B71D3\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CAACB800-F206-11E4-81AB-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1571FDAC-E0B4-4EBC-A73A-6E13001B71D3\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CAACB800-F206-11E4-81AB-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        }
+      },
+      "18": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1E473914-46E4-408D-AF26-178FB115DE76\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C7EDBF0F-F206-11E4-AA52-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1E473914-46E4-408D-AF26-178FB115DE76\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C7EDBF0F-F206-11E4-AA52-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1E473914-46E4-408D-AF26-178FB115DE76\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C7EDBF0F-F206-11E4-AA52-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1E473914-46E4-408D-AF26-178FB115DE76\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C7EDBF0F-F206-11E4-AA52-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"1E473914-46E4-408D-AF26-178FB115DE76\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C7EDBF0F-F206-11E4-AA52-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        }
+      },
+      "19": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"A2949322-DC84-45AB-8454-CF94FB28C189\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CC040AA1-F206-11E4-A3E0-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"A2949322-DC84-45AB-8454-CF94FB28C189\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CC040AA1-F206-11E4-A3E0-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"A2949322-DC84-45AB-8454-CF94FB28C189\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CC040AA1-F206-11E4-A3E0-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"A2949322-DC84-45AB-8454-CF94FB28C189\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CC040AA1-F206-11E4-A3E0-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"A2949322-DC84-45AB-8454-CF94FB28C189\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CC040AA1-F206-11E4-A3E0-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        }
+      },
+      "20": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB914B9E-F206-11E4-B447-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB914B9E-F206-11E4-B447-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB914B9E-F206-11E4-B447-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB914B9E-F206-11E4-B447-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB914B9E-F206-11E4-B447-24BE05E24F7E\",\"Won\":0}}}"
+          }
+        }
+      },
+      "21": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":0}}}"
+        }
+      },
+      "22": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":2,\"SkullCount\":0}}}"
+        }
+      },
+      "23": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignCollectibleAcquired"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":0,\"IsSkull\":1}}}"
+        }
+      },
+      "24": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":6,\"SkullCount\":0}}}"
+        }
+      },
+      "25": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":7,\"SkullCount\":0}}}"
+        }
+      },
+      "26": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":13,\"SkullCount\":0}}}"
+        }
+      },
+      "27": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":14,\"SkullCount\":0}}}"
+        }
+      },
+      "28": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":2,\"SkullCount\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":3,\"SkullCount\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":4,\"SkullCount\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":5,\"SkullCount\":0}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":6,\"SkullCount\":0}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":7,\"SkullCount\":0}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":8,\"SkullCount\":0}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":9,\"SkullCount\":0}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":10,\"SkullCount\":0}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":11,\"SkullCount\":0}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":12,\"SkullCount\":0}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":13,\"SkullCount\":0}}}"
+          }
+        },
+        "Request14": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":14,\"SkullCount\":0}}}"
+          }
+        },
+        "Request15": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":15,\"SkullCount\":0}}}"
+          }
+        }
+      },
+      "30": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":2,\"SkullCount\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":3,\"SkullCount\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":4,\"SkullCount\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":5,\"SkullCount\":0}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":6,\"SkullCount\":0}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":7,\"SkullCount\":0}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":8,\"SkullCount\":0}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":9,\"SkullCount\":0}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":10,\"SkullCount\":0}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":11,\"SkullCount\":0}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":12,\"SkullCount\":0}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":13,\"SkullCount\":0}}}"
+          }
+        },
+        "Request14": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":14,\"SkullCount\":0}}}"
+          }
+        },
+        "Request15": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":15,\"SkullCount\":0}}}"
+          }
+        }
+      },
+      "31": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":2,\"SkullCount\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":3,\"SkullCount\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":4,\"SkullCount\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":5,\"SkullCount\":0}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":6,\"SkullCount\":0}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":7,\"SkullCount\":0}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":8,\"SkullCount\":0}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":9,\"SkullCount\":0}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":10,\"SkullCount\":0}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":11,\"SkullCount\":0}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":12,\"SkullCount\":0}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":13,\"SkullCount\":0}}}"
+          }
+        },
+        "Request14": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":14,\"SkullCount\":0}}}"
+          }
+        },
+        "Request15": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":15,\"SkullCount\":0}}}"
+          }
+        }
+      },
+      "32": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignCollectibleAcquired"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":1,\"IsSkull\":0}}}"
+        }
+      },
+      "33": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PlatformStatsImpulse"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlatformStatsImpulse\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Impulse\":\"LegendaryBossKill\"}}}"
+        }
+      },
+      "34": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignAllAudioLogsAcquired"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignAllAudioLogsAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "35": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":35}}}"
+        }
+      },
+      "36": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":0,\"IsSkull\":1}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":1,\"IsSkull\":1}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":2,\"IsSkull\":1}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":3,\"IsSkull\":1}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":4,\"IsSkull\":1}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":5,\"IsSkull\":1}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":6,\"IsSkull\":1}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":7,\"IsSkull\":1}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":8,\"IsSkull\":1}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":9,\"IsSkull\":1}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":10,\"IsSkull\":1}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":11,\"IsSkull\":1}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCollectibleAcquired"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CollectibleId\":4,\"IsSkull\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCollectibleAcquired\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CollectibleId\":12,\"IsSkull\":1}}}"
+          }
+        }
+      },
+      "37": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":37}}}"
+        }
+      },
+      "38": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":38}}}"
+        }
+      },
+      "39": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":39}}}"
+        }
+      },
+      "40": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":40}}}"
+        }
+      },
+      "41": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":41}}}"
+        }
+      },
+      "42": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":42}}}"
+        }
+      },
+      "43": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":43}}}"
+        }
+      },
+      "44": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":44}}}"
+        }
+      },
+      "45": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":45}}}"
+        }
+      },
+      "46": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":46}}}"
+        }
+      },
+      "47": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":47}}}"
+        }
+      },
+      "48": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":48}}}"
+        }
+      },
+      "49": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":49}}}"
+        }
+      },
+      "50": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":50}}}"
+        }
+      },
+      "51": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":51}}}"
+        }
+      },
+      "52": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":52}}}"
+        }
+      },
+      "53": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":53}}}"
+        }
+      },
+      "54": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":54}}}"
+        }
+      },
+      "55": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":55}}}"
+        }
+      },
+      "56": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":56}}}"
+        }
+      },
+      "57": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":57}}}"
+        }
+      },
+      "58": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignScriptedEvent"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignScriptedEvent\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":58}}}"
+        }
+      },
+      "59": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":2,\"SkullCount\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":3,\"SkullCount\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":4,\"SkullCount\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":5,\"SkullCount\":0}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":6,\"SkullCount\":0}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":7,\"SkullCount\":0}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":8,\"SkullCount\":0}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":9,\"SkullCount\":0}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":10,\"SkullCount\":0}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":11,\"SkullCount\":0}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":12,\"SkullCount\":0}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":13,\"SkullCount\":0}}}"
+          }
+        },
+        "Request14": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":14,\"SkullCount\":0}}}"
+          }
+        },
+        "Request15": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":3,\"IsCoop\":0,\"MissionId\":15,\"SkullCount\":0}}}"
+          }
+        }
+      },
+      "60": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":1,\"SkullCount\":0}}}"
+        }
+      },
+      "61": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":1,\"SkullCount\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":2,\"SkullCount\":0}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":3,\"SkullCount\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":4,\"SkullCount\":0}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":5,\"SkullCount\":0}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":6,\"SkullCount\":0}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":7,\"SkullCount\":0}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":8,\"SkullCount\":0}}}"
+          }
+        },
+        "Request9": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":9,\"SkullCount\":0}}}"
+          }
+        },
+        "Request10": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":10,\"SkullCount\":0}}}"
+          }
+        },
+        "Request11": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":11,\"SkullCount\":0}}}"
+          }
+        },
+        "Request12": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":12,\"SkullCount\":0}}}"
+          }
+        },
+        "Request13": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":13,\"SkullCount\":0}}}"
+          }
+        },
+        "Request14": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":14,\"SkullCount\":0}}}"
+          }
+        },
+        "Request15": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignMissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":1,\"MissionId\":15,\"SkullCount\":0}}}"
+          }
+        }
+      },
+      "62": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":12,\"SkullCount\":0}}}"
+        }
+      },
+      "63": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":2,\"IsCoop\":0,\"MissionId\":1,\"SkullCount\":3}}}"
+        }
+      },
+      "64": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PlayerCsr"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Csr\":4,\"Tier\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerCsr\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Csr\":1,\"GameCategoryGuid\":\"257A305E-4DD3-41F1-9824-DFE7E8BD59E1\",\"Tier\":1}}}"
+        }
+      },
+      "65": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":3,\"SkullCount\":0}}}"
+        }
+      },
+      "66": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":4,\"SkullCount\":0}}}"
+        }
+      },
+      "67": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":5,\"SkullCount\":0}}}"
+        }
+      },
+      "68": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":8,\"SkullCount\":0}}}"
+        }
+      },
+      "69": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":9,\"SkullCount\":0}}}"
+        }
+      },
+      "70": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":10,\"SkullCount\":0}}}"
+        }
+      },
+      "71": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":11,\"SkullCount\":0}}}"
+        }
+      },
+      "72": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "CampaignMissionCompleted"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DifficultyLevel\":4,\"IsCoop\":4,\"MissionId\":4,\"SkullCount\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignMissionCompleted\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DifficultyLevel\":1,\"IsCoop\":0,\"MissionId\":15,\"SkullCount\":0}}}"
+        }
+      },
+      "73": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameScore"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ScoreMe\":4,\"ScoreThem\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameScore\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ScoreMe\":10000,\"ScoreThem\":0}}}"
+        }
+      },
+      "74": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameScore"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ScoreMe\":4,\"ScoreThem\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameScore\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ScoreMe\":50000,\"ScoreThem\":0}}}"
+        }
+      },
+      "75": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameScore"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ScoreMe\":4,\"ScoreThem\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameScore\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ScoreMe\":200000,\"ScoreThem\":0}}}"
+        }
+      },
+      "76": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameScore"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ScoreMe\":4,\"ScoreThem\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameScore\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ScoreMe\":10000,\"ScoreThem\":0}}}"
+        }
+      },
+      "77": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameScore"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ScoreMe\":4,\"ScoreThem\":4}}}}},\"policies\":0},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameScore\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ScoreMe\":500000,\"ScoreThem\":0}}}"
+        }
+      },
+      "78": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":true}}}"
+          }
+        }
+      },
+      "79": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C8D69870-F206-11E4-B477-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"CB251C51-F206-11E4-8541-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C854E54F-F206-11E4-BDDC-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C93D708F-F206-11E4-A815-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C9A1B0A1-F206-11E4-AD20-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsMatchmaking\":4,\"Won\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":1,\"ScenarioGuid\":\"C96FF240-F206-11E4-B581-24BE05E24F7E\",\"Won\":1}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"4B5EB236-80A4-4961-AE61-163F2C65E779\",\"Won\":true}}}"
+          }
+        },
+        "Request8": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryGuid\":\"DFD51EE3-9060-46C3-B131-08D946C4C7B9\",\"IsMatchmaking\":true,\"ScenarioGuid\":\"5E130537-2275-40B5-9758-94B1986934ED\",\"Won\":true}}}"
+          }
+        }
+      },
+      "80": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PlatformStatsImpulse"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "\"metadata\":{\"policies\":1},"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlatformStatsImpulse\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":219630713,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Impulse\":\"MythicBossKill\"}}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "219630713"
+  ]
+}

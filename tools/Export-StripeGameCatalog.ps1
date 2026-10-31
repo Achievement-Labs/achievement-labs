@@ -5,7 +5,10 @@ param(
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $output = Join-Path $repo $OutputDirectory
-$data = Get-Content -LiteralPath (Join-Path $repo 'src/AchievementLabs.App/Events/Data.json') -Raw | ConvertFrom-Json -AsHashtable
+$events = Join-Path $repo 'src/AchievementLabs.App/Events'
+$indexed = Test-Path -LiteralPath (Join-Path $events 'index.json')
+$indexFile = if ($indexed) { 'index.json' } else { 'Data.json' }
+$data = Get-Content -LiteralPath (Join-Path $events $indexFile) -Raw | ConvertFrom-Json -AsHashtable
 $catalog = Get-Content -LiteralPath (Join-Path $repo 'XboxTitleIDs.json') -Raw | ConvertFrom-Json
 $byId = @{}
 foreach ($entry in $catalog) { $byId[[string]$entry.TitleId] = $entry }
@@ -40,7 +43,7 @@ $rows = foreach ($titleId in $data.Keys | Where-Object { $_ -match '^\d+$' }) {
     # Match hosted catalog eligibility; a block alone does not make it available.
     $available = $block.Enabled -ne $false -and
         $titleId -in @($data.SupportedTitleIDs | ForEach-Object { [string]$_ }) -and
-        (Test-Path -LiteralPath (Join-Path $repo "src/AchievementLabs.App/Events/$titleId.json"))
+        (Test-Path -LiteralPath (Join-Path $events $(if ($indexed) { "$titleId/$titleId.json" } else { "$titleId.json" })))
     [pscustomobject][ordered]@{
         Title = $title
         Platform = Get-PlatformLabel $devices

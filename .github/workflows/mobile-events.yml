@@ -9,6 +9,7 @@ on:
       - '.github/workflows/mobile-events.yml'
       - 'tools/mobile/publish_events.py'
       - 'tools/mobile/export_event_pack.py'
+      - 'tools/event_catalog.py'
       - 'src/AchievementLabs.App/Events/**'
 permissions:
   contents: write

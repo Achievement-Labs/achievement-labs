@@ -10,7 +10,7 @@ public static class UpstreamEventCatalogueTests
     sealed class Fixture : HttpMessageHandler
     {
         public byte[] Archive=[];
-        public bool Fail, BadDigest, WrongLocation;
+        public bool Fail, BadDigest, WrongLocation, IndexedAsset;
         public int Calls;
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken ct)
         {
@@ -19,18 +19,27 @@ public static class UpstreamEventCatalogueTests
             Assert(request.Method==HttpMethod.Get && !request.Headers.Contains("Authorization") && !request.Headers.Contains("tickets"),"Public read only; no tokens");
             var metadata=request.RequestUri!.AbsolutePath.EndsWith("/releases");
             var digest=BadDigest ? new string('0',64) : Convert.ToHexString(SHA256.HashData(Archive)).ToLowerInvariant();
-            HttpContent content=metadata ? new StringContent(new JArray(new JObject { ["tag_name"]="v99.0.0",["draft"]=false,["prerelease"]=false,["assets"]=new JArray() }, new JObject { ["tag_name"]="v1.0.8",["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]="Events.zip",["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/v1.0.8/Events.zip" }) }).ToString()) : new ByteArrayContent(Archive);
+            var assetName=IndexedAsset ? "Events-Indexed.zip" : "Events.zip";
+            HttpContent content=metadata ? new StringContent(new JArray(new JObject { ["tag_name"]="v99.0.0",["draft"]=false,["prerelease"]=false,["assets"]=new JArray() }, new JObject { ["tag_name"]="v1.0.8",["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]=assetName,["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/v1.0.8/"+assetName }) }).ToString()) : new ByteArrayContent(Archive);
             return Task.FromResult(new HttpResponseMessage(Fail?HttpStatusCode.Forbidden:HttpStatusCode.OK){Content=content});
         }
     }
     static JObject Block()=>JObject.Parse("""{"Achievements":{"1":{"Id":{"ReplacementType":"Replace","Target":"REPLACEACH","Replacement":"1"}}}}""");
     static string Template(string id)=>new JObject { ["name"]="Microsoft.XboxLive.T"+id+".AchievementUnlock",["data"]=new JObject{["baseData"]=new JObject{["titleId"]=id,["serviceConfigId"]="11111111-2222-3333-4444-555555555555",["name"]="AchievementUnlock",["userId"]="REPLACEXUID",["properties"]=new JObject{["AchievementID"]="REPLACEACH"}}}}.ToString();
-    static byte[] Zip(JObject data,bool unsafePath=false)
+    static byte[] Zip(JObject data,bool unsafePath=false,bool indexed=false)
     {
         using var bytes=new MemoryStream();
         using(var zip=new ZipArchive(bytes,ZipArchiveMode.Create,true)) {
             void Put(string name,string text) { using var writer=new StreamWriter(zip.CreateEntry(name,CompressionLevel.Fastest).Open());writer.Write(text); }
-            Put("Events/Data.json",data.ToString()); Put("Events/99.json",Template("99")); Put("Events/101.json",Template("101")); Put("Events/102.json",Template("999"));
+            if (indexed) {
+                var index = new JObject();
+                foreach (var title in data.Properties().Where(p => p.Name != "SupportedTitleIDs")) {
+                    var summary=(JObject)title.Value.DeepClone(); summary.Remove("Achievements"); index[title.Name]=summary;
+                    Put("Events/"+title.Name+"/Data.json",new JObject { [title.Name]=title.Value.DeepClone(),["SupportedTitleIDs"]=new JArray(title.Name) }.ToString());
+                }
+                index["SupportedTitleIDs"]=data["SupportedTitleIDs"]!.DeepClone();Put("Events/index.json",index.ToString());
+                Put("Events/99/99.json",Template("99"));Put("Events/101/101.json",Template("101"));Put("Events/102/102.json",Template("999"));
+            } else { Put("Events/Data.json",data.ToString()); Put("Events/99.json",Template("99")); Put("Events/101.json",Template("101")); Put("Events/102.json",Template("999")); }
             if(unsafePath)Put("Events/../escape.json","{}");
         }
         return bytes.ToArray();
@@ -48,6 +57,11 @@ public static class UpstreamEventCatalogueTests
             Assert(JObject.Parse(payload.Payloads[0])["data"]!["baseData"]!["properties"]!["AchievementID"]!.ToString()=="1","Cached ordinary replacement builds offline");
             var valid=File.ReadAllText(path); Assert(((JObject)JObject.Parse(valid)["data"]!).Properties().Last().Name=="SupportedTitleIDs","Data ordering maintained");
             Assert(new UpstreamEventCatalogue(path,new[]{"99"}).Contains("101"),"Digest-based cache reload works without network");
+            var folderFixture=new Fixture{Archive=Zip(data,indexed:true),IndexedAsset=true};using var folderHttp=new HttpClient(folderFixture);
+            var folders=new UpstreamEventCatalogue(Path.Combine(dir,"folder-cache.json"),new[]{"99"});
+            folders.RefreshAsync(folderHttp,true).GetAwaiter().GetResult();
+            Assert(folders.TitleIds.SequenceEqual(new[]{"101"}),"Indexed archive imports only valid non-reserved titles");
+            Assert(folders.PayloadsAsync("101","1","0",default).GetAwaiter().GetResult().Payloads.SequenceEqual(payload.Payloads),"Flat and folder archives produce identical payloads");
             var calls=fixture.Calls;catalogue.RefreshAsync(http).GetAwaiter().GetResult();Assert(calls==fixture.Calls,"Hourly throttle avoids duplicate downloads");
             fixture.BadDigest=true;catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();Assert(File.ReadAllText(path)==valid && catalogue.Status.Contains("checksum mismatch"),"Bad checksum cannot replace cache");
             fixture.BadDigest=false;fixture.Archive=Zip(data,true);catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();Assert(File.ReadAllText(path)==valid && catalogue.Status.Contains("archive path"),"Unsafe archive paths rejected without extraction or cache mutation");

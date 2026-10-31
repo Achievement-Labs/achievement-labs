@@ -10,7 +10,8 @@
 
 ## Event testing templates — explicit user requirement
 
-- Use a standalone Events/<titleId>.json template for every test title, following the existing ordinary replacement flow.
+- New repository catalogs use Events/index.json and Events/<titleId>/Data.json plus Events/<titleId>/<titleId>.json. Legacy flat catalogs remain readable. Keep each title in its own folder and retain the ordinary replacement flow.
+- Per-title Data.json contains exactly its numeric title block followed by SupportedTitleIDs. The index contains runtime title summaries without achievement mappings, with SupportedTitleIDs last. Never put research or diagnostic fields in either file.
 - Do not generate RawBody or TemplateReplacement operations or embed full templates in achievement recipes.
 - Keep test patterns simple. Exclude randomized multi-stat patterns involving map IDs, kills, mission scores, time played, multipliers and LDAP timestamps.
 - Preserve preexisting unrelated title recipes when enforcing these rules on new testing work.

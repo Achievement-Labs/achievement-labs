@@ -1,0 +1,460 @@
+{
+  "916339986": {
+    "TitleName": "Party Hard",
+    "TitleId": "916339986",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "173c0100-cf9c-453c-9460-a096369e3d12",
+    "FullySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "12": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchStartPartyHard"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchStartPartyHard\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchStartPartyHard\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchStartPartyHard\":100.0}}}"
+        }
+      },
+      "13": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchPlay100Times"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchPlay100Times\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchPlay100Times\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchPlay100Times\":100.0}}}"
+        }
+      },
+      "14": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill1KPeople"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill1KPeople\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill1KPeople\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill1KPeople\":100.0}}}"
+        }
+      },
+      "15": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchUseTraps50Times"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchUseTraps50Times\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchUseTraps50Times\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchUseTraps50Times\":100.0}}}"
+        }
+      },
+      "16": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchHide30Bodies"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchHide30Bodies\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchHide30Bodies\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchHide30Bodies\":100.0}}}"
+        }
+      },
+      "17": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchPassLevelWithoutTraps"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchPassLevelWithoutTraps\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchPassLevelWithoutTraps\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchPassLevelWithoutTraps\":100.0}}}"
+        }
+      },
+      "18": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill5PeopleInRow"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill5PeopleInRow\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill5PeopleInRow\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill5PeopleInRow\":100.0}}}"
+        }
+      },
+      "19": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill10PeopleInRow"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill10PeopleInRow\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill10PeopleInRow\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill10PeopleInRow\":100.0}}}"
+        }
+      },
+      "20": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill15PeopleInRow"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill15PeopleInRow\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill15PeopleInRow\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill15PeopleInRow\":100.0}}}"
+        }
+      },
+      "21": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchEscapeCop5Times"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchEscapeCop5Times\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchEscapeCop5Times\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchEscapeCop5Times\":100.0}}}"
+        }
+      },
+      "22": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchDie100Times"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchDie100Times\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchDie100Times\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchDie100Times\":100.0}}}"
+        }
+      },
+      "23": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKillCallingCop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKillCallingCop\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKillCallingCop\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKillCallingCop\":100.0}}}"
+        }
+      },
+      "24": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKillVegasThieves"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKillVegasThieves\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKillVegasThieves\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKillVegasThieves\":100.0}}}"
+        }
+      },
+      "25": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchCompleteGame"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchCompleteGame\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchCompleteGame\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchCompleteGame\":100.0}}}"
+        }
+      },
+      "26": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchLoseLevel1Alive"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchLoseLevel1Alive\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchLoseLevel1Alive\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchLoseLevel1Alive\":100.0}}}"
+        }
+      },
+      "27": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchCompleteAllAchievements"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchCompleteAllAchievements\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchCompleteAllAchievements\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchCompleteAllAchievements\":100.0}}}"
+        }
+      },
+      "28": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchGetAssKickingForDance"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchGetAssKickingForDance\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchGetAssKickingForDance\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchGetAssKickingForDance\":100.0}}}"
+        }
+      },
+      "29": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill30Stunned"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill30Stunned\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill30Stunned\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill30Stunned\":100.0}}}"
+        }
+      },
+      "30": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill50WithHorse"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill50WithHorse\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill50WithHorse\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill50WithHorse\":100.0}}}"
+        }
+      },
+      "31": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchCompleteLevelIn3Min"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchCompleteLevelIn3Min\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchCompleteLevelIn3Min\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchCompleteLevelIn3Min\":100.0}}}"
+        }
+      },
+      "32": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill10PeopleWithCar"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill10PeopleWithCar\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill10PeopleWithCar\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill10PeopleWithCar\":100.0}}}"
+        }
+      },
+      "33": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchPoison100People"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchPoison100People\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchPoison100People\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchPoison100People\":100.0}}}"
+        }
+      },
+      "34": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchCompleteLevelWithFBI"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchCompleteLevelWithFBI\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchCompleteLevelWithFBI\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchCompleteLevelWithFBI\":100.0}}}"
+        }
+      },
+      "35": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchKill20PeopleWithoutAlarm"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchKill20PeopleWithoutAlarm\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchKill20PeopleWithoutAlarm\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchKill20PeopleWithoutAlarm\":100.0}}}"
+        }
+      },
+      "36": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchCompleteLevelWithoutFoundBody"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchCompleteLevelWithoutFoundBody\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchCompleteLevelWithoutFoundBody\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchCompleteLevelWithoutFoundBody\":100.0}}}"
+        }
+      },
+      "37": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SetAchEscapeFromCop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"AchEscapeFromCop\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SetAchEscapeFromCop\",\"serviceConfigId\":\"173c0100-cf9c-453c-9460-a096369e3d12\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"916339986\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"AchEscapeFromCop\":100.0}}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "916339986"
+  ]
+}

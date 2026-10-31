@@ -1,0 +1,751 @@
+{
+  "1519874468": {
+    "TitleName": "Forza Horizon 2 Presents Fast & Furious",
+    "TitleId": "1519874468",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "1b180100-2e72-4297-a9e6-b79d5a9771a4",
+    "FullySupported": false,
+    "PartiallySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ArrivedAtFestival"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"ArrivedAtFestival\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineSessionStarted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"OnlineSessionStarted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AnnaUsed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AnnaUsed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineCleanStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"OnlineCleanStart\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineCleanStreak"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"OnlineCleanStreak\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2287,\"MissionId\":2},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "3": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2277,\"MissionId\":3},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "4": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2281,\"MissionId\":4},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "5": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":1667,\"MissionId\":7},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "6": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2276,\"MissionId\":6},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "7": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2284,\"MissionId\":5},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "8": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2279,\"MissionId\":8},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "9": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2286,\"MissionId\":9},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "10": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GarageCarReveal"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GarageCarReveal\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2288,\"MissionId\":10},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "11": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarnFindFound"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarModelId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"BarnFindFound\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarModelId\":2278},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarnFindFound"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"BarnFindFound\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarId\":2278},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CarAddedToGarage"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarId\":4,\"NumCars\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"CarAddedToGarage\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarId\":2278,\"NumCars\":2,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "12": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShowcaseRaceEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"ShowcaseRaceEnd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"EventId\":560},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShowcaseRaceEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"EventID\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"ShowcaseRaceEnd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"EventID\":560},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":50000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "14": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillAchieved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"Burnout\",\"CarId\":2280,\"Count\":10,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":7000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "15": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillAchieved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"Drift\",\"CarId\":2280,\"Count\":20,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillAchieved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"EDrift\",\"CarId\":2280,\"Count\":20,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":7000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "16": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SkillAchieved"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"Air\",\"CarId\":2280,\"Count\":5,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "17": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SkillAchieved"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"Destruction\",\"CarId\":2280,\"Count\":10,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "18": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SkillAchieved"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"CleanSpeed\",\"CarId\":2280,\"Count\":5,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "19": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SkillAchieved"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"NearMiss\",\"CarId\":2280,\"Count\":25,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "20": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "SkillAchieved"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"TradingPaint\",\"CarId\":2280,\"Count\":5,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "21": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillAchieved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":2,\"CarId\":4,\"Count\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillAchieved\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Type\":\"Draft\",\"CarId\":2280,\"Count\":5,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":7000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "22": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":7000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "24": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Payout\":4,\"NumSkills\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Payout\":50000,\"NumSkills\":10,\"Multiplier\":1.0,\"Track\":551},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "IEDroveToFirstEvent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"IEDroveToFirstEvent\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "26": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "NitrousUsed"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MissionEventId\":4,\"MissionEventType\":4,\"MissionId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"NitrousUsed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"EventProgress\":0.4,\"MissionEventId\":3,\"MissionEventType\":2,\"MissionId\":2,\"NitrousNowEmpty\":true,\"NitrousUsed\":1.0},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "27": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "PromoCarPhotographed"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarId\":4,\"Track\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PromoCarPhotographed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"CarId\":2280,\"Track\":954},\"serviceConfigId\":\"1b180100-2e72-4297-a9e6-b79d5a9771a4\",\"titleId\":1519874468,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "1519874468"
+  ]
+}

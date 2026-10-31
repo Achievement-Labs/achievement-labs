@@ -1,0 +1,212 @@
+{
+  "367004125": {
+    "TitleName": "BioShock Remastered",
+    "TitleId": "367004125",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "5e980100-0bf0-43ca-af95-dfe715e009dd",
+    "FullySupported": false,
+    "Enabled": true,
+    "Achievements": {
+      "5": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.Achievement_04"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Achievement_04\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+        }
+      },
+      "15": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementID\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementID\":15},\"measurements\":{}}}"
+        }
+      },
+      "16": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.UnlockAchievement"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementId\":4,\"Unlocked\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"UnlockAchievement\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"AchievementId\":16,\"Unlocked\":1},\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"titleId\":367004125,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "17": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.Achievement17Unlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Unlock\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Achievement17Unlocked\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Unlock\":1}}}"
+        }
+      },
+      "18": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.UnlockAchievement0018"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"PlayerSessionId\":\"{00000000-0000-0000-0000-000000000000}\",\"UserId\":\"1\"},\"name\":\"UnlockAchievement0018\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{},\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"titleId\":367004125,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "19": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Microsoft.XboxLive.T367004125.Achievement018"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"Achievement018\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"PlayerSessionId\":\"REPLACESESSIONGUID\",\"UserID\":\"REPLACEXUID\"},\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"titleId\":367004125,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        }
+      },
+      "20": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.AchievementEarned"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementID\":4}}}}},\"policies\":1}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementEarned\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementID\":\"20\"}}}"
+        }
+      },
+      "21": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.AchievementEventId21"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementFlagId21\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementEventId21\",\"playerSessionId\":\"A5326C92-3C1B-407E-AF7C-F1F246A757CE\",\"properties\":{\"AchievementFlagId21\":1},\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"titleId\":367004125,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "22": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.AwardProlificPhotographer"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"policies\":1}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AwardProlificPhotographer\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        }
+      },
+      "24": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.RestoredtheForestAchievement"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RestoredtheForestAchievement\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"UserId\":\"REPLACEXUID\"}}}"
+        }
+      },
+      "25": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Microsoft.XboxLive.T367004125.AchievementUnlocked"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ID\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"5e980100-0bf0-43ca-af95-dfe715e009dd\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"367004125\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ID\":\"REPLACEID\"}}}"
+        },
+        "Replacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEID",
+          "Replacement": 25
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "367004125"
+  ]
+}

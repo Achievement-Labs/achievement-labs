@@ -9,16 +9,23 @@ public sealed class EventCatalog
     private readonly Dictionary<string, string> templates = new();
     private readonly string directory;
     private readonly Func<string, CancellationToken, Task<string>>? templateReader;
+    private EventCatalogStorage? storage;
+    private EventCatalogStorage Storage => storage ??= new(directory);
     internal EventCatalog(JObject catalog, Func<string, CancellationToken, Task<string>> readTemplate)
     { directory = ""; snapshot = catalog; templateReader = readTemplate; }
     public EventCatalog(string directory) => this.directory = Path.GetFullPath(directory);
-    public async Task<JObject> ReadAsync(CancellationToken cancellationToken = default) => templateReader != null ? snapshot! : JObject.Parse(await File.ReadAllTextAsync(Path.Combine(directory, "Data.json"), cancellationToken));
+    internal EventCatalog(EventCatalogStorage storage) { this.storage = storage; directory = ""; }
+    public Task<JObject> ReadAsync(CancellationToken cancellationToken = default) => templateReader != null ? Task.FromResult(snapshot!) : Storage.ReadAllAsync(cancellationToken);
+    public Task<JObject> ReadIndexAsync(CancellationToken cancellationToken = default) { cancellationToken.ThrowIfCancellationRequested(); return Task.FromResult(templateReader != null ? snapshot! : Storage.Index); }
+    public async Task<JObject> ReadTitleAsync(string titleId, CancellationToken cancellationToken = default) => templateReader != null
+        ? snapshot![titleId] as JObject ?? throw new InvalidDataException("Unknown title ID.")
+        : await Storage.ReadTitleAsync(titleId, cancellationToken);
     public async Task<IReadOnlyList<string>> BuildPayloadsAsync(string titleId, string achievementId, string xuid, DateTime timestamp, CancellationToken cancellationToken = default)
     {
         if (!Regex.IsMatch(titleId, @"^\d+$") || !Regex.IsMatch(achievementId, @"^\d+$")) throw new ArgumentException("Title and achievement IDs must be numeric.");
-        var catalog = snapshot ??= await ReadAsync(cancellationToken);
-        var entry = catalog[titleId]?["Achievements"]?[achievementId] as JObject ?? throw new InvalidOperationException("No event mapping is available for this achievement.");
-        if (!templates.TryGetValue(titleId, out var template)) templates[titleId] = template = templateReader != null ? await templateReader(titleId, cancellationToken) : await File.ReadAllTextAsync(Path.Combine(directory, titleId + ".json"), cancellationToken);
+        var title = await ReadTitleAsync(titleId, cancellationToken);
+        var entry = title["Achievements"]?[achievementId] as JObject ?? throw new InvalidOperationException("No event mapping is available for this achievement.");
+        if (!templates.TryGetValue(titleId, out var template)) templates[titleId] = template = templateReader != null ? await templateReader(titleId, cancellationToken) : await Storage.ReadTemplateAsync(titleId, cancellationToken);
         var first = entry.Properties().FirstOrDefault()?.Value as JObject ?? throw new InvalidDataException("Empty event mapping.");
         var requests = first["ReplacementType"] != null ? new[] { entry } : entry.Properties().Select(p => (JObject)p.Value).ToArray();
         var bodies = new List<string>();

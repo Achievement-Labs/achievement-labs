@@ -1,0 +1,2183 @@
+{
+  "867642949": {
+    "TitleName": "LEGO Worlds",
+    "TitleId": "867642949",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "97e10100-dcad-42ce-84e0-258d33b72e45",
+    "FullySupported": false,
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerSessionStart\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":0,\"DifficultyLevelId\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StoryLevelCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"StoryLevel\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StoryLevelCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StoryLevel\":1}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Chapter\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Chapter\":1}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterId\":1}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterNumber\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterNumber\":1}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":1}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":1,\"AchievementName\":\"Pirate Playground Professional\"}}}"
+          }
+        }
+      },
+      "2": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerSessionStart\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":0,\"DifficultyLevelId\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StoryLevelCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"StoryLevel\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StoryLevelCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StoryLevel\":2}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Chapter\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Chapter\":2}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterId\":2}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterNumber\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterNumber\":2}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":2}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":2,\"AchievementName\":\"Prehistoric Protector\"}}}"
+          }
+        }
+      },
+      "3": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerSessionStart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GameplayModeId\":4,\"DifficultyLevelId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerSessionStart\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":0,\"DifficultyLevelId\":0}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StoryLevelCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"StoryLevel\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StoryLevelCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StoryLevel\":3}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Chapter\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Chapter\":3}}}"
+          }
+        },
+        "Request4": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterId\":3}}}"
+          }
+        },
+        "Request5": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ChapterNumber\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChapterNumber\":3}}}"
+          }
+        },
+        "Request6": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChapterCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChapterCompleted\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":3}}}"
+          }
+        },
+        "Request7": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":3,\"AchievementName\":\"Candy Custodian\"}}}"
+          }
+        }
+      },
+      "5": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect3GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect3GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect3GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect3GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":5,\"AchievementName\":\"Rank - Discoverer Builder!\"}}}"
+          }
+        }
+      },
+      "6": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect10GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect10GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect10GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect10GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":6,\"AchievementName\":\"Rank - Explorer Builder!\"}}}"
+          }
+        }
+      },
+      "7": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect15GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect15GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect15GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect15GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":7,\"AchievementName\":\"Rank - Observer Builder!\"}}}"
+          }
+        }
+      },
+      "8": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect20GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect20GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect20GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect20GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":8,\"AchievementName\":\"Rank - Finder Builder!\"}}}"
+          }
+        }
+      },
+      "9": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect25GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect25GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect25GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect25GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":9,\"AchievementName\":\"Rank - Traveler Builder!\"}}}"
+          }
+        }
+      },
+      "10": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect30GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect30GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect30GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect30GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":10,\"AchievementName\":\"Rank - Navigator Builder!\"}}}"
+          }
+        }
+      },
+      "11": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect40GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect40GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect40GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect40GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":11,\"AchievementName\":\"Rank - Collector Builder!\"}}}"
+          }
+        }
+      },
+      "12": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect50GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect50GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect50GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect50GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":12,\"AchievementName\":\"Rank - Adventurer Builder!\"}}}"
+          }
+        }
+      },
+      "13": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect65GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect65GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect65GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect65GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":13,\"AchievementName\":\"Rank - Advanced Builder!\"}}}"
+          }
+        }
+      },
+      "14": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect80GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect80GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect80GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect80GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":14,\"AchievementName\":\"Rank - Expert Builder!\"}}}"
+          }
+        }
+      },
+      "15": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect100GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect100GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collect100GoldBricks"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collect100GoldBricks\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":15,\"AchievementName\":\"Rank - MASTER BUILDER!!!\"}}}"
+          }
+        }
+      },
+      "23": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collected60ThousandStuds"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collected60ThousandStuds\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collected60ThousandStuds"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collected60ThousandStuds\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":23,\"AchievementName\":\"Ravenous Stud Collector\"}}}"
+          }
+        }
+      },
+      "60": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collected1BillionStuds"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collected1BillionStuds\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Collected1BillionStuds"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Collected1BillionStuds\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":60,\"AchievementName\":\"Billionaire!\"}}}"
+          }
+        }
+      },
+      "67": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CreateCustomSuperHero"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CreateCustomSuperHero\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AllSlotsContainedCustomCharacters"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AllSlotsContainedCustomCharacters\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":67,\"AchievementName\":\"It's Alive!\"}}}"
+          }
+        }
+      },
+      "70": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockAllCharacters"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockAllCharacters\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnlockAllCharacters"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnlockAllCharacters\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":70,\"AchievementName\":\"Colour me Spooked\"}}}"
+          }
+        }
+      },
+      "4": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":4,\"AchievementName\":\"Rank - Learner Builder!\"}}}"
+          }
+        }
+      },
+      "16": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":16,\"AchievementName\":\"Champion of Companions\"}}}"
+          }
+        }
+      },
+      "17": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":17,\"AchievementName\":\"Tremendous Vehicular Terraformer\"}}}"
+          }
+        }
+      },
+      "18": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":18,\"AchievementName\":\"Insane stunts!\"}}}"
+          }
+        }
+      },
+      "19": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":19,\"AchievementName\":\"Proficient Parkour Prowess\"}}}"
+          }
+        }
+      },
+      "20": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":20,\"AchievementName\":\"The Great and Grand Grappler\"}}}"
+          }
+        }
+      },
+      "21": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":21,\"AchievementName\":\"Creature Comforts\"}}}"
+          }
+        }
+      },
+      "22": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":22,\"AchievementName\":\"All Biomed Out\"}}}"
+          }
+        }
+      },
+      "24": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":24,\"AchievementName\":\"Champion of Combat Capers\"}}}"
+          }
+        }
+      },
+      "25": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":25,\"AchievementName\":\"The Ultimate Skydive!\"}}}"
+          }
+        }
+      },
+      "26": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":26,\"AchievementName\":\"Into the Abyss\"}}}"
+          }
+        }
+      },
+      "27": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":27,\"AchievementName\":\"Flying Paintbrush\"}}}"
+          }
+        }
+      },
+      "28": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":28,\"AchievementName\":\"Duet\"}}}"
+          }
+        }
+      },
+      "29": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":29,\"AchievementName\":\"Highland Coo!\"}}}"
+          }
+        }
+      },
+      "30": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":30,\"AchievementName\":\"Trumpet Trunk Trumpeter\"}}}"
+          }
+        }
+      },
+      "31": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":31,\"AchievementName\":\"Pied Piper of Squirreldom\"}}}"
+          }
+        }
+      },
+      "32": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":32,\"AchievementName\":\"Pink Steed\"}}}"
+          }
+        }
+      },
+      "33": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":33,\"AchievementName\":\"Fluffy Steed\"}}}"
+          }
+        }
+      },
+      "34": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":34,\"AchievementName\":\"A Well-Trained Dragon\"}}}"
+          }
+        }
+      },
+      "35": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":35,\"AchievementName\":\"Civilization!\"}}}"
+          }
+        }
+      },
+      "36": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":36,\"AchievementName\":\"It's Dangerous To Go Alone!\"}}}"
+          }
+        }
+      },
+      "37": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":37,\"AchievementName\":\"Photogenic\"}}}"
+          }
+        }
+      },
+      "38": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":38,\"AchievementName\":\"Legendary 1x1 Brick\"}}}"
+          }
+        }
+      },
+      "39": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":39,\"AchievementName\":\"Legendary 1x2 Brick\"}}}"
+          }
+        }
+      },
+      "40": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":40,\"AchievementName\":\"Legendary 2x2 Brick\"}}}"
+          }
+        }
+      },
+      "41": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":41,\"AchievementName\":\"Legendary 2x3 Brick\"}}}"
+          }
+        }
+      },
+      "42": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":42,\"AchievementName\":\"Legendary 2x4 Brick\"}}}"
+          }
+        }
+      },
+      "43": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":43,\"AchievementName\":\"Legendary 1x2 Slope Brick\"}}}"
+          }
+        }
+      },
+      "44": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":44,\"AchievementName\":\"Legendary 2x2 Slope Brick\"}}}"
+          }
+        }
+      },
+      "45": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":45,\"AchievementName\":\"Legendary 1x3 Slope Brick\"}}}"
+          }
+        }
+      },
+      "46": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":46,\"AchievementName\":\"Legendary 2x3 Slope Brick\"}}}"
+          }
+        }
+      },
+      "47": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":47,\"AchievementName\":\"Legendary 1x4 Slope Brick\"}}}"
+          }
+        }
+      },
+      "48": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":48,\"AchievementName\":\"Legendary 2x4 Slope Brick\"}}}"
+          }
+        }
+      },
+      "49": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":49,\"AchievementName\":\"Legendary 1x2x3 Slope Brick\"}}}"
+          }
+        }
+      },
+      "50": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":50,\"AchievementName\":\"Legendary 2x2x3 Slope Brick\"}}}"
+          }
+        }
+      },
+      "51": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":51,\"AchievementName\":\"Legendary 2x2 Corner Brick\"}}}"
+          }
+        }
+      },
+      "52": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":52,\"AchievementName\":\"Legendary 3x3 Corner Brick\"}}}"
+          }
+        }
+      },
+      "53": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":53,\"AchievementName\":\"Hopping Hot and High\"}}}"
+          }
+        }
+      },
+      "54": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":54,\"AchievementName\":\"Full Scale Musical\"}}}"
+          }
+        }
+      },
+      "55": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":55,\"AchievementName\":\"Dark, Dank and Dangerous\"}}}"
+          }
+        }
+      },
+      "56": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":56,\"AchievementName\":\"Land Shark!\"}}}"
+          }
+        }
+      },
+      "57": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":57,\"AchievementName\":\"Designer's Delight\"}}}"
+          }
+        }
+      },
+      "58": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":58,\"AchievementName\":\"Troublemaker Takedown\"}}}"
+          }
+        }
+      },
+      "59": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":59,\"AchievementName\":\"Bartering, Banter and Balloons!\"}}}"
+          }
+        }
+      },
+      "61": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":61,\"AchievementName\":\"BADGER!\"}}}"
+          }
+        }
+      },
+      "62": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":62,\"AchievementName\":\"...One Giant Leap for LEGO-kind!\"}}}"
+          }
+        }
+      },
+      "63": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":63,\"AchievementName\":\"No Space For Spiders\"}}}"
+          }
+        }
+      },
+      "64": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":64,\"AchievementName\":\"Space Jam\"}}}"
+          }
+        }
+      },
+      "65": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":65,\"AchievementName\":\"No Space Like Home\"}}}"
+          }
+        }
+      },
+      "66": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":66,\"AchievementName\":\"What Does This Button Do?\"}}}"
+          }
+        }
+      },
+      "68": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":68,\"AchievementName\":\"The Mayor of Monsterville\"}}}"
+          }
+        }
+      },
+      "69": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":69,\"AchievementName\":\"Monster Mash\"}}}"
+          }
+        }
+      },
+      "71": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUpdate"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AchievementIndex\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUpdate\",\"serviceConfigId\":\"97e10100-dcad-42ce-84e0-258d33b72e45\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":867642949,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementIndex\":71,\"AchievementName\":\"Sucker For Love\"}}}"
+          }
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "867642949"
+  ]
+}

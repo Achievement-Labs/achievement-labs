@@ -1,0 +1,30 @@
+name: Event catalog checks
+on:
+  pull_request:
+    paths:
+      - 'Events/**'
+      - 'src/AchievementLabs.App/Events/**'
+      - 'src/AchievementLabs.Core/**'
+      - 'tools/event_catalog.py'
+      - 'tools/test_event_catalog.py'
+      - 'tools/EventCatalogChecks/**'
+      - 'tools/mobile/**'
+      - 'tests/AchievementLabs.Enhancements.Tests/UpstreamEventCatalogueTests.cs'
+      - '.github/workflows/event-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tools -p test_event_catalog.py
+      - run: python -m unittest discover -s tools/mobile -p test_publish_events.py
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false

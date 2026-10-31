@@ -1,0 +1,477 @@
+{
+  "892299738": {
+    "TitleName": "Bard's Gold",
+    "TitleId": "892299738",
+    "Devices": [
+      "XboxOne",
+      "XboxSeries"
+    ],
+    "ServiceConfigId": "3a390100-73bd-4a7d-88ab-8d05352f69da",
+    "FullySupported": true,
+    "Enabled": true,
+    "Achievements": {
+      "1": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":0,\"SkillBookFound\":0,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":0,\"ChestUnlock\":0,\"Gem1000\":1000}}}"
+        }
+      },
+      "2": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":50000,\"SkillBookFound\":0,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":0,\"ChestUnlock\":0,\"Gem1000\":0}}}"
+        }
+      },
+      "3": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":1,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "4": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Shop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BoughtItem\":4,\"MoneySpend\":4,\"DealFound\":4,\"DarkContract\":4,\"BuyShield\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Shop\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BoughtItem\":0,\"MoneySpend\":0,\"DealFound\":1,\"DarkContract\":0,\"BuyShield\":0}}}"
+        }
+      },
+      "5": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":0,\"SkillBookFound\":1,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":0,\"ChestUnlock\":0,\"Gem1000\":0}}}"
+        }
+      },
+      "6": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Shop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BoughtItem\":4,\"MoneySpend\":4,\"DealFound\":4,\"DarkContract\":4,\"BuyShield\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Shop\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BoughtItem\":1,\"MoneySpend\":0,\"DealFound\":0,\"DarkContract\":0,\"BuyShield\":0}}}"
+        }
+      },
+      "7": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":1,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "8": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":1,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "9": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":1,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "10": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "LevelProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FirstWorld\":4,\"SecondWorld\":4,\"ThirdWorld\":4,\"FourthWorld\":4,\"FoundBonusLevel\":4,\"Invincible\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FirstWorld\":1,\"SecondWorld\":0,\"ThirdWorld\":0,\"FourthWorld\":0,\"FoundBonusLevel\":0,\"Invincible\":0}}}"
+        }
+      },
+      "11": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":10000,\"SkillBookFound\":0,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":0,\"ChestUnlock\":0,\"Gem1000\":0}}}"
+        }
+      },
+      "12": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":0,\"SkillBookFound\":0,\"CollectedAllSkillbook\":1,\"HiddenTreasure\":0,\"ChestUnlock\":0,\"Gem1000\":0}}}"
+        }
+      },
+      "13": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "LevelProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FirstWorld\":4,\"SecondWorld\":4,\"ThirdWorld\":4,\"FourthWorld\":4,\"FoundBonusLevel\":4,\"Invincible\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FirstWorld\":0,\"SecondWorld\":1,\"ThirdWorld\":0,\"FourthWorld\":0,\"FoundBonusLevel\":0,\"Invincible\":0}}}"
+        }
+      },
+      "14": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "LevelProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FirstWorld\":4,\"SecondWorld\":4,\"ThirdWorld\":4,\"FourthWorld\":4,\"FoundBonusLevel\":4,\"Invincible\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FirstWorld\":0,\"SecondWorld\":0,\"ThirdWorld\":1,\"FourthWorld\":0,\"FoundBonusLevel\":0,\"Invincible\":0}}}"
+        }
+      },
+      "15": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "GameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"CompletionPercent\":6}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"CompletionPercent\":100.0}}}"
+        }
+      },
+      "16": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Shop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BoughtItem\":4,\"MoneySpend\":4,\"DealFound\":4,\"DarkContract\":4,\"BuyShield\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Shop\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BoughtItem\":0,\"MoneySpend\":0,\"DealFound\":0,\"DarkContract\":1,\"BuyShield\":0}}}"
+        }
+      },
+      "17": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":200,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "18": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":250,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "19": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":5,\"FindKillShadow\":0}}}"
+        }
+      },
+      "20": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":0,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":1}}}"
+        }
+      },
+      "21": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "LevelProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FirstWorld\":4,\"SecondWorld\":4,\"ThirdWorld\":4,\"FourthWorld\":4,\"FoundBonusLevel\":4,\"Invincible\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FirstWorld\":0,\"SecondWorld\":0,\"ThirdWorld\":0,\"FourthWorld\":0,\"FoundBonusLevel\":1,\"Invincible\":0}}}"
+        }
+      },
+      "22": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":0,\"SkillBookFound\":0,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":1,\"ChestUnlock\":0,\"Gem1000\":0}}}"
+        }
+      },
+      "23": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "IngameProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FoundTower\":4,\"SecretFound\":4,\"KillBloodGhost\":4,\"RunoutOfTime\":4,\"LevelaSkill\":4,\"VaseBreak\":4,\"EnemyKills\":4,\"TotalDeath\":4,\"FindKillShadow\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"IngameProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FoundTower\":0,\"SecretFound\":100,\"KillBloodGhost\":0,\"RunoutOfTime\":0,\"LevelaSkill\":0,\"VaseBreak\":0,\"EnemyKills\":0,\"TotalDeath\":0,\"FindKillShadow\":0}}}"
+        }
+      },
+      "24": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "ItemCollected"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"GemCollected\":4,\"SkillBookFound\":4,\"CollectedAllSkillbook\":4,\"HiddenTreasure\":4,\"ChestUnlock\":4,\"Gem1000\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemCollected\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"GemCollected\":0,\"SkillBookFound\":0,\"CollectedAllSkillbook\":0,\"HiddenTreasure\":0,\"ChestUnlock\":20,\"Gem1000\":0}}}"
+        }
+      },
+      "25": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "LevelProgress"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"FirstWorld\":4,\"SecondWorld\":4,\"ThirdWorld\":4,\"FourthWorld\":4,\"FoundBonusLevel\":4,\"Invincible\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"FirstWorld\":0,\"SecondWorld\":0,\"ThirdWorld\":0,\"FourthWorld\":0,\"FoundBonusLevel\":0,\"Invincible\":1}}}"
+        }
+      },
+      "26": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Shop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BoughtItem\":4,\"MoneySpend\":4,\"DealFound\":4,\"DarkContract\":4,\"BuyShield\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Shop\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BoughtItem\":0,\"MoneySpend\":0,\"DealFound\":0,\"DarkContract\":0,\"BuyShield\":1}}}"
+        }
+      },
+      "27": {
+        "EventReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEEVENTNAME",
+          "Replacement": "Shop"
+        },
+        "MetaDataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEMETADATA",
+          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BoughtItem\":4,\"MoneySpend\":4,\"DealFound\":4,\"DarkContract\":4,\"BuyShield\":4}}}}},\"policies\":0}"
+        },
+        "DataReplacement": {
+          "ReplacementType": "Replace",
+          "Target": "REPLACEDATA",
+          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Shop\",\"serviceConfigId\":\"3a390100-73bd-4a7d-88ab-8d05352f69da\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":892299738,\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BoughtItem\":0,\"MoneySpend\":5000,\"DealFound\":0,\"DarkContract\":0,\"BuyShield\":0}}}"
+        }
+      }
+    }
+  },
+  "SupportedTitleIDs": [
+    "892299738"
+  ]
+}
