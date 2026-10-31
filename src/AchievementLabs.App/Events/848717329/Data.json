@@ -8,7 +8,6 @@
     ],
     "ServiceConfigId": "9e9c0100-e67b-41f2-86b7-158632966611",
     "FullySupported": false,
-    "PartiallySupported": true,
     "Enabled": true,
     "Achievements": {
       "2": {
@@ -5148,173 +5147,193 @@
         }
       },
       "20": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "LevelBeaten"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":12,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelBeaten"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":12,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "21": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ShotComplete"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":25000,\"StyleShotPoints\":0,\"FreeBallsEarned\":3,\"BluePegsHit\":5,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShotComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":25000,\"StyleShotPoints\":0,\"FreeBallsEarned\":3,\"BluePegsHit\":5,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "22": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ShotComplete"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":100000,\"StyleShotPoints\":75000,\"FreeBallsEarned\":0,\"BluePegsHit\":5,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":true,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShotComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":100000,\"StyleShotPoints\":75000,\"FreeBallsEarned\":0,\"BluePegsHit\":5,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":true,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "23": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "LevelBeaten"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":0,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":true,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelBeaten"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":0,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":true,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "24": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ShotComplete"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":10000,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShotComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":10000,\"OrangePegsHit\":0,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "25": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ShotComplete"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":0,\"OrangePegsHit\":5000,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShotComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":0,\"OrangePegsHit\":5000,\"GreenPegsHit\":0,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "26": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "ShotComplete"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":0,\"OrangePegsHit\":0,\"GreenPegsHit\":300,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ShotComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"PointsEarned\":4,\"StyleShotPoints\":4,\"FreeBallsEarned\":4,\"BluePegsHit\":4,\"OrangePegsHit\":4,\"GreenPegsHit\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ShotComplete\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PointsEarned\":0,\"StyleShotPoints\":0,\"FreeBallsEarned\":0,\"BluePegsHit\":0,\"OrangePegsHit\":0,\"GreenPegsHit\":300,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "27": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "LevelBeaten"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelBeaten"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":150000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "28": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "LevelBeaten"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":3,\"BeatAceScore\":true,\"TotalPoints\":300000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelBeaten"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":5,\"BallsRemaining\":3,\"BeatAceScore\":true,\"TotalPoints\":300000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "29": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENTNAME",
-          "Replacement": "LevelBeaten"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":0,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":300000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelBeaten"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"SectionId\":4,\"GameplayModeId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"PegsRemaining\":4,\"BallsRemaining\":4,\"TotalPoints\":4}}}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelBeaten\",\"serviceConfigId\":\"9e9c0100-e67b-41f2-86b7-158632966611\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":848717329,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SectionId\":0,\"MultiplayerCorrelationId\":\"\",\"GameplayModeId\":3,\"DifficultyLevelId\":3,\"ExitStatusId\":2,\"LevelId\":\"Bjorn01d.lvl\",\"PegsRemaining\":0,\"BallsRemaining\":3,\"BeatAceScore\":false,\"TotalPoints\":300000,\"StyleShotFreeBallSkillz\":false,\"StyleShotLongShot\":false,\"StyleShotSuperLongShot\":false,\"StyleShotKickTheBucket\":false,\"StyleShotLuckyBounce\":false,\"StyleShotMadSkillz\":false,\"StyleShotCrazyMadSkillz\":false,\"StyleShotExtremeSlide\":false,\"StyleShotOrangeAttack\":false,\"StyleShotCoolClear\":false,\"StyleShotBucketBonus\":false,\"StyleShotMegaShotBonus\":false,\"StyleShotOffTheWall\":false,\"StyleShotFeverPower\":false,\"StyleShotDoublePower\":false,\"StyleShotDoubleGuide\":false,\"StyleShotWreckingBall\":false,\"StyleShotSparePickup\":false,\"StyleShotFrostbite\":false,\"StyleShotCoolCatch\":false,\"StyleShotIceCracker\":false,\"StyleShotMajorDischarge\":false,\"StyleShotChargeCaught\":false,\"StyleShotGhostTouch\":false,\"StyleShotPossessed\":false},\"measurements\":{}}}"
+          }
         }
       },
       "31": {
@@ -7029,7 +7048,8 @@
           }
         }
       }
-    }
+    },
+    "PartiallySupported": true
   },
   "SupportedTitleIDs": [
     "848717329"

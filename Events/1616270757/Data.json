@@ -1,7 +1,6 @@
 {
   "1616270757": {
     "FullySupported": false,
-    "PartiallySupported": true,
     "TitleName": "NBA LIVE 14",
     "TitleId": "1616270757",
     "Devices": [
@@ -31,23 +30,26 @@
         }
       },
       "2": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENT",
-          "Replacement": "Microsoft.XboxLive.T1616270757.AchievementUnlocked"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":1616270757,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1616270757.AchievementUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":1616270757,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
         }
       }
-    }
+    },
+    "PartiallySupported": true
   },
   "SupportedTitleIDs": [
     "1616270757"

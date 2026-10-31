@@ -1,7 +1,6 @@
 {
   "2067761315": {
     "FullySupported": false,
-    "PartiallySupported": true,
     "TitleName": "EA SPORTS™ NBA LIVE 16",
     "TitleId": "2067761315",
     "Devices": [
@@ -31,23 +30,26 @@
         }
       },
       "2": {
-        "EventReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEEVENT",
-          "Replacement": "Microsoft.XboxLive.T2067761315.AchievementUnlocked"
-        },
-        "MetaDataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEMETADATA",
-          "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
-        },
-        "DataReplacement": {
-          "ReplacementType": "Replace",
-          "Target": "REPLACEDATA",
-          "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"bb8f0100-d041-479e-bea9-4be47b3f88a3\",\"titleId\":2067761315,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T2067761315.AchievementUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":33554432,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AchievementUnlocked\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"AchievementId\":2},\"serviceConfigId\":\"bb8f0100-d041-479e-bea9-4be47b3f88a3\",\"titleId\":2067761315,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
         }
       }
-    }
+    },
+    "PartiallySupported": true
   },
   "SupportedTitleIDs": [
     "2067761315"
