@@ -19,5 +19,5 @@ assert not bad,bad
 assert (root/'AchievementLabs').read_bytes()[:4]==b'\x7fELF'
 print('PASS: Linux ELF package excludes Windows helpers, personal profiles and loose credential/signing files.')
 PY
-tar -czf "$OUT/AchievementLabs-linux-0.1.0.1-x64.tar.gz" -C "$OUT" AchievementLabs-linux-x64
-(cd "$OUT" && sha256sum AchievementLabs-linux-0.1.0.1-x64.tar.gz > SHA256.txt)
+tar -czf "$OUT/AchievementLabs-linux-0.1.1.1-x64.tar.gz" -C "$OUT" AchievementLabs-linux-x64
+(cd "$OUT" && sha256sum AchievementLabs-linux-0.1.1.1-x64.tar.gz > SHA256.txt)

@@ -16,7 +16,7 @@ For the contributor-reported working presence route, connect the same account on
 
 On Mac, run `bash tools/macos/build-preview.sh` with .NET 9 SDK, Python 3 and Node installed. Desktop-only Xbox 360 resource preparation lives under `tools/xbox360`, independent of the mobile repository. The self-contained `.app` needs no separate .NET installation. It is ad-hoc signed for preview testing and is not Developer ID signed/notarized.
 
-Output: `artifacts/macos-preview/AchievementLabs-macOS-0.1.0.9-arm64.zip`. App updates are manual downloads from `Achievement-Labs/achievement-labs`; Windows update packages are excluded. Event data uses the same official desktop repository. No personal profile or account data is packaged.
+Output: `artifacts/macos-preview/AchievementLabs-macOS-0.1.1.1-arm64.zip`. App updates are manual downloads from `Achievement-Labs/achievement-labs`; Windows update packages are excluded. Event data uses the same official desktop repository. No personal profile or account data is packaged.
 
 CI checks synthetic pairing, WebKit callback capture, Keychain protection, normal LaunchServices startup, page rendering and signed synthetic profile export without live Xbox operations. On its configured Intel runner it cross-builds the ARM64 package and runs a native Intel sibling; BUILD-INFO.json records that distinction. Package byte validation does not establish native ARM64 execution. Live account sign-in, event acceptance and presence still require separate user-device acceptance testing.
 
