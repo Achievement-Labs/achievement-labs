@@ -1,6 +1,6 @@
 # Complete event title catalog
 
-557 titles: **351 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
+558 titles: **352 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
 Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.
 
@@ -273,6 +273,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Microsoft Ultimate Word Games | Windows PC | 534004979 | 38 |
 | Minecraft | Xbox One, Xbox Series X\|S | 1828326430 | 123 |
 | Minecraft for Gear VR | Gear VR | 1909043648 | 94 |
+| Minecraft for Nintendo Switch 2 | Nintendo Switch 2 | 1977135090 | 109 |
 | Minecraft for Windows 10 Mobile | Mobile, Windows PC | 1916611344 | 88 |
 | Minecraft: Story Mode - A Telltale Games Series | Windows PC | 849609009 | 50 |
 | Minecraft: Story Mode - Episode 1: The Order of the Stone | Xbox One | 2014650813 | 50 |
