@@ -143,7 +143,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 7
+            "Replacement": "7"
           }
         }
       },
@@ -205,7 +205,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 10
+            "Replacement": "10"
           }
         }
       },
@@ -271,22 +271,17 @@
           "EventReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEEVENTMCW",
-            "Replacement": "Microsoft.XboxLive.T1977135090.BlockBroken"
-          },
-          "DataReplacement": {
-            "ReplacementType": "Replace",
-            "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlockBroken\",\"serviceConfigId\":\"00000000-0000-0000-0000-000075d8aff2\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":1977135090,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AccountType\":1,\"AuxType\":0,\"Biome\":22,\"Block\":\"log\",\"Build\":\"1.20.81\",\"BuildNum\":\"24130101\",\"BuildPlat\":7,\"Cheevos\":1,\"ClientId\":\"11111111-1111-1111-1111-111111111111\",\"CurrentNumDevices\":1,\"DestructionMethod\":0,\"Difficulty\":\"NORMAL\",\"Dim\":0,\"DnAPlat\":\"Win,D,,UWP\",\"DnaIgnore\":1,\"MasterPlayfabId\":\"1111111111111111\",\"Mode\":0,\"Namespace\":\"minecraft\",\"NetworkType\":0,\"Plat\":\"Win 10.0.22631.3447\",\"PlayerGameMode\":0,\"TitleAccountPlayfabId\":\"1111111111111111\",\"ToolItemType\":262,\"Type\":17,\"UserId\":\"REPLACEXUID\",\"Variant\":0,\"WorldFeature\":0,\"WorldID\":\"2212502279500604416\",\"editionType\":\"win10\",\"isTrial\":0,\"isUnderground\":0,\"vrMode\":0},\"measurements\":{\"Count\":1}}}"
+            "Replacement": "Microsoft.XboxLive.T1977135090.ItemAcquired"
           },
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AccountType\":4,\"AuxType\":4,\"Biome\":4,\"BuildPlat\":4,\"Cheevos\":4,\"CurrentNumDevices\":4,\"DestructionMethod\":4,\"Dim\":4,\"DnaIgnore\":4,\"Mode\":4,\"NetworkType\":4,\"PlayerGameMode\":4,\"ToolItemType\":4,\"Type\":4,\"Variant\":4,\"WorldFeature\":4,\"isTrial\":4,\"isUnderground\":4,\"vrMode\":4}},\"measurements\":{\"f\":{\"Count\":4}}}}},\"policies\":0},"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AccountType\":4,\"AcquisitionMethodID\":4,\"AuxType\":4,\"Biome\":4,\"BuildPlat\":4,\"Cheevos\":4,\"CurrentNumDevices\":4,\"Dim\":4,\"DnaIgnore\":4,\"Mode\":4,\"NetworkType\":4,\"PlayerGameMode\":4,\"Type\":4,\"WorldFeature\":4,\"isTrial\":4,\"isUnderground\":4,\"vrMode\":4}},\"measurements\":{\"f\":{\"Count\":4}}}}},\"policies\":0},"
           },
-          "NewEventBaseReplacement": {
+          "DataReplacement": {
             "ReplacementType": "Replace",
-            "Target": "REPLACEEVENT2",
-            "Replacement": "{\"ver\":\"4.0\",\"name\":\"Microsoft.XboxLive.T1977135090.ItemAcquired\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AccountType\":4,\"AcquisitionMethodID\":4,\"AuxType\":4,\"Biome\":4,\"BuildPlat\":4,\"Cheevos\":4,\"CurrentNumDevices\":4,\"Dim\":4,\"DnaIgnore\":4,\"Mode\":4,\"NetworkType\":4,\"PlayerGameMode\":4,\"Type\":4,\"WorldFeature\":4,\"isTrial\":4,\"isUnderground\":4,\"vrMode\":4}},\"measurements\":{\"f\":{\"Count\":6}}}}},\"policies\":0},\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.MinecraftUWP_1.20.8101.0_x64__8wekyb3d8bbwe!App\",\"ver\":\"1.20.8101.0_x64_!2024/04/25:22:50:06!0!minecraft.windows.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:7A8A7134-E2F6-472B-A375-A39935EF3FAD\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"11\",\"devModel\":\"11\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemAcquired\",\"serviceConfigId\":\"00000000-0000-0000-0000-000075d8aff2\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":1977135090,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AccountType\":1,\"AcquisitionMethodID\":1,\"AuxType\":0,\"Biome\":22,\"Build\":\"1.20.81\",\"BuildNum\":\"24130101\",\"BuildPlat\":7,\"Cheevos\":1,\"ClientId\":\"11111111-1111-1111-1111-111111111111\",\"CurrentNumDevices\":1,\"Difficulty\":\"NORMAL\",\"Dim\":0,\"DnAPlat\":\"Win,D,,UWP\",\"DnaIgnore\":1,\"MasterPlayfabId\":\"1111111111111111\",\"Mode\":0,\"NetworkType\":0,\"Plat\":\"Win 10.0.22631.3447\",\"PlayerGameMode\":0,\"TitleAccountPlayfabId\":\"1111111111111111\",\"Type\":17,\"UserId\":\"REPLACEXUID\",\"WorldFeature\":0,\"WorldID\":\"2212502279500604416\",\"editionType\":\"win10\",\"isTrial\":0,\"isUnderground\":0,\"vrMode\":0},\"measurements\":{\"Count\":2}}}}"
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ItemAcquired\",\"serviceConfigId\":\"00000000-0000-0000-0000-000075d8aff2\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":1977135090,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AccountType\":1,\"AcquisitionMethodID\":1,\"AuxType\":0,\"Biome\":22,\"Build\":\"1.20.81\",\"BuildNum\":\"24130101\",\"BuildPlat\":7,\"Cheevos\":1,\"ClientId\":\"11111111-1111-1111-1111-111111111111\",\"CurrentNumDevices\":1,\"Difficulty\":\"NORMAL\",\"Dim\":0,\"DnAPlat\":\"Win,D,,UWP\",\"DnaIgnore\":1,\"MasterPlayfabId\":\"1111111111111111\",\"Mode\":0,\"NetworkType\":0,\"Plat\":\"Win 10.0.22631.3447\",\"PlayerGameMode\":0,\"TitleAccountPlayfabId\":\"1111111111111111\",\"Type\":17,\"UserId\":\"REPLACEXUID\",\"WorldFeature\":0,\"WorldID\":\"2212502279500604416\",\"editionType\":\"win10\",\"isTrial\":0,\"isUnderground\":0,\"vrMode\":0},\"measurements\":{\"Count\":2}}}"
           }
         }
       },
@@ -386,7 +381,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 20
+            "Replacement": "20"
           }
         }
       },
@@ -410,7 +405,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 21
+            "Replacement": "21"
           }
         }
       },
@@ -510,7 +505,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 29
+            "Replacement": "29"
           }
         }
       },
@@ -534,7 +529,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 30
+            "Replacement": "30"
           }
         }
       },
@@ -577,7 +572,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 37
+            "Replacement": "37"
           }
         }
       },
@@ -601,7 +596,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 53
+            "Replacement": "53"
           }
         }
       },
@@ -625,7 +620,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 38
+            "Replacement": "38"
           }
         }
       },
@@ -649,7 +644,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 39
+            "Replacement": "39"
           }
         }
       },
@@ -673,7 +668,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 40
+            "Replacement": "40"
           }
         }
       },
@@ -811,7 +806,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 61
+            "Replacement": "61"
           }
         }
       },
@@ -854,7 +849,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 62
+            "Replacement": "62"
           }
         }
       },
@@ -916,7 +911,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 63
+            "Replacement": "63"
           }
         }
       },
@@ -1035,7 +1030,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 66
+            "Replacement": "66"
           }
         }
       },
@@ -1059,7 +1054,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 64
+            "Replacement": "64"
           }
         }
       },
@@ -1083,7 +1078,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 65
+            "Replacement": "65"
           }
         }
       },
@@ -1221,7 +1216,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 67
+            "Replacement": "67"
           }
         }
       },
@@ -1245,7 +1240,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 79
+            "Replacement": "79"
           }
         }
       },
@@ -1269,7 +1264,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 76
+            "Replacement": "76"
           }
         }
       },
@@ -1293,7 +1288,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 74
+            "Replacement": "74"
           }
         }
       },
@@ -1317,7 +1312,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 78
+            "Replacement": "78"
           }
         }
       },
@@ -1341,7 +1336,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 75
+            "Replacement": "75"
           }
         }
       },
@@ -1365,7 +1360,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 77
+            "Replacement": "77"
           }
         }
       },
@@ -1389,7 +1384,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 73
+            "Replacement": "73"
           }
         }
       },
@@ -1413,7 +1408,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 72
+            "Replacement": "72"
           }
         }
       },
@@ -1437,7 +1432,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 81
+            "Replacement": "81"
           }
         }
       },
@@ -1461,7 +1456,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 80
+            "Replacement": "80"
           }
         }
       },
@@ -1485,7 +1480,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 82
+            "Replacement": "82"
           }
         }
       },
@@ -1509,7 +1504,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 83
+            "Replacement": "83"
           }
         }
       },
@@ -1552,7 +1547,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 85
+            "Replacement": "85"
           }
         }
       },
@@ -1576,7 +1571,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 84
+            "Replacement": "84"
           }
         }
       },
@@ -1600,7 +1595,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 86
+            "Replacement": "86"
           }
         }
       },
@@ -1643,7 +1638,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 88
+            "Replacement": "88"
           }
         }
       },
@@ -1667,7 +1662,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 89
+            "Replacement": "89"
           }
         }
       },
@@ -1710,7 +1705,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 87
+            "Replacement": "87"
           }
         }
       },
@@ -1772,7 +1767,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 90
+            "Replacement": "90"
           }
         }
       },
@@ -1796,7 +1791,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 91
+            "Replacement": "91"
           }
         }
       },
@@ -1820,7 +1815,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 92
+            "Replacement": "92"
           }
         }
       },
@@ -1844,7 +1839,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 93
+            "Replacement": "93"
           }
         }
       },
@@ -1887,7 +1882,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 94
+            "Replacement": "94"
           }
         }
       },
@@ -1930,7 +1925,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 95
+            "Replacement": "95"
           }
         }
       },
@@ -1954,7 +1949,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 96
+            "Replacement": "96"
           }
         }
       },
@@ -1978,7 +1973,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 98
+            "Replacement": "98"
           }
         }
       },
@@ -2002,7 +1997,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 100
+            "Replacement": "100"
           }
         }
       },
@@ -2026,7 +2021,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 101
+            "Replacement": "101"
           }
         }
       },
@@ -2050,7 +2045,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 102
+            "Replacement": "102"
           }
         }
       },
@@ -2074,7 +2069,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 103
+            "Replacement": "103"
           }
         }
       },
@@ -2098,7 +2093,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 104
+            "Replacement": "104"
           }
         }
       },
@@ -2122,7 +2117,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 105
+            "Replacement": "105"
           }
         }
       },
@@ -2146,7 +2141,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 106
+            "Replacement": "106"
           }
         }
       },
@@ -2170,7 +2165,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 107
+            "Replacement": "107"
           }
         }
       },
@@ -2194,7 +2189,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 108
+            "Replacement": "108"
           }
         }
       },
@@ -2218,7 +2213,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 109
+            "Replacement": "109"
           }
         }
       },
@@ -2242,7 +2237,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 110
+            "Replacement": "110"
           }
         }
       },
@@ -2266,7 +2261,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 111
+            "Replacement": "111"
           }
         }
       },
@@ -2290,7 +2285,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 112
+            "Replacement": "112"
           }
         }
       },
@@ -2314,7 +2309,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 113
+            "Replacement": "113"
           }
         }
       },
@@ -2338,7 +2333,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 114
+            "Replacement": "114"
           }
         }
       },
@@ -2362,7 +2357,7 @@
           "Replacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEACHMCW",
-            "Replacement": 115
+            "Replacement": "115"
           }
         }
       },
