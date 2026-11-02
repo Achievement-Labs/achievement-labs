@@ -1,6 +1,6 @@
 # Event title catalogue
 
-557 titles: **351 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This is the author-maintained catalogue included in the next release and synchronized to the hosted catalogue.
+558 titles: **352 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This is the author-maintained catalogue included in the next release and synchronized to the hosted catalogue.
 
 Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.
 
@@ -393,6 +393,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Minecraft for iOS | iOS | `1810924247` | 121 | Partially Supported | [1810924247.json](1810924247/1810924247.json) |
 | Minecraft for Kindle Fire | Kindle Fire | `1944307183` | 121 | Partially Supported | [1944307183.json](1944307183/1944307183.json) |
 | Minecraft for Nintendo Switch | Nintendo Switch | `2047319603` | 109 | Partially Supported | [2047319603.json](2047319603/2047319603.json) |
+| Minecraft for Nintendo Switch 2 | Nintendo Switch 2 | `1977135090` | 109 | Supported | [1977135090.json](1977135090/1977135090.json) |
 | Minecraft for Windows | Windows PC | `896928775` | 123 | Partially Supported | [896928775.json](896928775/896928775.json) |
 | Minecraft for Windows 10 Mobile | Mobile, Windows PC | `1916611344` | 88 | Supported | [1916611344.json](1916611344/1916611344.json) |
 | Minecraft: Story Mode - A Telltale Games Series | Windows PC | `849609009` | 50 | Supported | [849609009.json](849609009/849609009.json) |
