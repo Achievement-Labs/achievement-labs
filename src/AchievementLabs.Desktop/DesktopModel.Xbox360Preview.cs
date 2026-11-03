@@ -21,43 +21,15 @@ public sealed partial class DesktopModel
     }
     private void RefreshXbox360Signing()
     {
-        Changed(nameof(CanModifyXbox360Profile)); Changed(nameof(CanSaveXbox360Edits)); Changed(nameof(CanInjectXbox360Profile)); Changed(nameof(Xbox360SigningStatus)); Changed(nameof(CanStageXbox360Preview)); Changed(nameof(Xbox360NeedsSigningSetup)); Changed(nameof(Xbox360SigningReady)); Changed(nameof(CanQuickUnlockXbox360));
+        Changed(nameof(CanModifyXbox360Profile)); Changed(nameof(CanSaveXbox360Edits)); Changed(nameof(CanInjectXbox360Profile)); Changed(nameof(Xbox360SigningStatus)); Changed(nameof(CanStageXbox360Preview)); Changed(nameof(Xbox360SigningUnavailable)); Changed(nameof(Xbox360SigningReady)); Changed(nameof(CanQuickUnlockXbox360)); RefreshXbox360Files();
     }
-    public void LoadXbox360SigningData(string path)
-    {
-        if (busy) return;
-        try
-        {
-            if (Path.GetExtension(path).Equals(".exe", StringComparison.OrdinalIgnoreCase)) Xbox360SigningSession.LoadHorizonFile(path);
-            else Xbox360SigningSession.LoadKeyvault(path);
-            try { Xbox360SigningSession.Remember(Xbox360SigningStorePath); Notice = $"Signing set up. Remembered securely for your {PlatformAccountLabel}."; }
-            catch { Notice = "Signing is ready, but could not be remembered on this PC. Check folder access."; }
-        }
-        catch (Exception) { Notice = "Could not validate local signing data. Select a supported Horizon executable or decrypted console keyvault."; }
-        RefreshXbox360Signing();
-    }
-    public string Xbox360SigningStorePath { get; set; } = AchievementLabs.Core.AchievementLabsPaths.LocalFile("xbox360-signing.bin");
     public bool Xbox360SigningReady => Xbox360ConSigner.SigningAvailable;
-    public bool Xbox360NeedsSigningSetup => !Xbox360ConSigner.SigningAvailable;
+    public bool Xbox360SigningUnavailable => !Xbox360ConSigner.SigningAvailable;
+    // Like mobile, signing always uses the bundled identity; nothing is imported, remembered or configured.
     public void RestoreXbox360SigningData()
     {
-        try
-        {
-            if (File.Exists(Xbox360SigningStorePath)) Xbox360SigningSession.Restore(Xbox360SigningStorePath);
-        }
-        catch { Notice = "Saved custom signing setup could not be opened."; }
-        if (!Xbox360ConSigner.SigningAvailable)
-        {
-            try { Xbox360SigningSession.LoadBundledIdentity(); }
-            catch { Notice = "Built-in signing could not be loaded. Set up signing manually."; }
-        }
-        RefreshXbox360Signing();
-    }
-    public void ClearXbox360SigningData()
-    {
-        if (busy) return;
-        try { if (File.Exists(Xbox360SigningStorePath)) File.Delete(Xbox360SigningStorePath); Xbox360SigningSession.Clear(); Xbox360SigningSession.LoadBundledIdentity(); Notice = Xbox360SigningSession.HasBundledIdentity ? "Custom setup forgotten. Built-in signing is ready." : "Saved signing setup forgotten."; }
-        catch { Notice = "Could not remove saved signing setup. Check folder access."; }
+        try { if (!Xbox360SigningSession.LoadBundledIdentity()) Notice = "This build has no Xbox 360 signing identity."; }
+        catch { Notice = "Built-in signing could not be loaded."; }
         RefreshXbox360Signing();
     }
     private void CaptureXbox360PreviewSource()
@@ -85,9 +57,10 @@ public sealed partial class DesktopModel
     public string? Xbox360ArtworkUrl { get => xbox360ArtworkUrl; private set { xbox360ArtworkUrl = value; Changed(); } }
     private Xbox360AchievementChoice[] xbox360Choices = [];
     private Xbox360AchievementChoice? selectedXbox360Choice;
-    private string xbox360AchievementFilter = "All", xbox360AchievementSort = "Achievement ID";
+    private string xbox360AchievementFilter = "Locked only", xbox360AchievementSort = "Achievement ID";
+    private string? xbox360PreviewSourceMode;
     public string[] Xbox360AchievementFilters { get; } = ["All", "Locked only", "Unlocked only"];
-    public string[] Xbox360AchievementSorts { get; } = ["Achievement ID", "A–Z", "Z–A", "Unlock date (newest)", "Unlock date (oldest)"];
+    public string[] Xbox360AchievementSorts { get; } = ["Achievement ID", "A–Z", "Z–A", "Gamerscore", "Unlock date (newest)", "Unlock date (oldest)"];
     public string Xbox360AchievementFilter { get => xbox360AchievementFilter; set { xbox360AchievementFilter = value; Changed(); RefreshXbox360Choices(); } }
     public string Xbox360AchievementSort { get => xbox360AchievementSort; set { xbox360AchievementSort = value; Changed(); RefreshXbox360Choices(); } }
     public Xbox360AchievementChoice[] VisibleXbox360Choices
@@ -100,6 +73,7 @@ public sealed partial class DesktopModel
             return (Xbox360AchievementSort switch {
                 "A–Z" => items.OrderBy(c => c.Name, StringComparer.CurrentCultureIgnoreCase).ThenBy(c => c.Achievement.Id),
                 "Z–A" => items.OrderByDescending(c => c.Name, StringComparer.CurrentCultureIgnoreCase).ThenBy(c => c.Achievement.Id),
+                "Gamerscore" => items.OrderByDescending(c => c.Achievement.Gamerscore).ThenBy(c => c.Achievement.Id),
                 "Unlock date (newest)" => items.OrderByDescending(c => c.Achievement.UnlockedAt).ThenBy(c => c.Achievement.Id),
                 "Unlock date (oldest)" => items.OrderBy(c => c.Achievement.UnlockedAt ?? DateTimeOffset.MaxValue).ThenBy(c => c.Achievement.Id),
                 _ => items.OrderBy(c => c.Achievement.Id)
@@ -118,14 +92,14 @@ public sealed partial class DesktopModel
     public bool CanStageXbox360Preview => !busy && CanModifyXbox360Profile && Xbox360PreviewRows.Any(r => r.Result == "Ready for review");
     public string Xbox360PreviewStatus { get => xbox360PreviewStatus; private set { xbox360PreviewStatus = value; Changed(); } }
     public string Xbox360PreviewStart { get; set; } = DateTimeOffset.UtcNow.AddMinutes(-5).ToString("O", CultureInfo.InvariantCulture);
-    public decimal Xbox360PreviewStepMinutes { get; set; }
+    public decimal Xbox360PreviewStepMinutes { get; set; } = 1;
     private bool xbox360ReferenceEditionConfirmed;
     public bool Xbox360ReferenceEditionConfirmed { get => xbox360ReferenceEditionConfirmed; set { xbox360ReferenceEditionConfirmed = value; Changed(); } }
 
     private void ResetXbox360Preview()
     {
         Xbox360PreviewRows = [];
-        xbox360PreviewFingerprint = null;
+        xbox360PreviewFingerprint = null; xbox360PreviewSourceMode = null;
         Xbox360ReferenceEditionConfirmed = false;
         Xbox360PreviewStatus = "No imported dates loaded.";
     }
@@ -136,9 +110,9 @@ public sealed partial class DesktopModel
         Changed(nameof(Xbox360SelectionCount));
     }
 
-    private string ValidateXbox360PreviewProfile(bool allowPending = false)
+    private string ValidateXbox360PreviewProfile(bool allowPending = false, bool requireEditable = true)
     {
-        if (string.IsNullOrWhiteSpace(loadedXbox360Profile) || string.IsNullOrWhiteSpace(Xbox360EditorTitleId))
+        if (string.IsNullOrWhiteSpace(loadedXbox360Profile) || requireEditable && string.IsNullOrWhiteSpace(Xbox360EditorTitleId))
             throw new InvalidOperationException("Load an extracted Xbox 360 profile and open one of its games first.");
         var fullPath = Path.GetFullPath(loadedXbox360Profile);
         if (!fullPath.Equals(Path.GetFullPath(PackagePath), StringComparison.OrdinalIgnoreCase) ||
@@ -153,9 +127,9 @@ public sealed partial class DesktopModel
         }
         if (!Xbox360ConSigner.VerifyFile(fullPath)) throw new InvalidDataException("The profile signature or metadata hash is invalid.");
         if (!allowPending && pendingXbox360Edits.Count != 0) throw new InvalidOperationException("Save or reload the existing pending edits before previewing reference timestamps.");
-        if (!ProfileReader.ReadGames(fullPath).Any(g => g.TitleId.Equals(Xbox360EditorTitleId, StringComparison.OrdinalIgnoreCase)))
+        if (requireEditable && !ProfileReader.ReadGames(fullPath).Any(g => g.TitleId.Equals(Xbox360EditorTitleId, StringComparison.OrdinalIgnoreCase)))
             throw new InvalidDataException("This title is not in the loaded profile.");
-        if (Xbox360ProfileGameAddService.IsAwaitingConsoleSync(fullPath, Xbox360EditorTitleId))
+        if (requireEditable && Xbox360ProfileGameAddService.IsAwaitingConsoleSync(fullPath, Xbox360EditorTitleId))
             throw new InvalidOperationException("This title requires Xbox 360 console sync and re-extraction first.");
         using var input = File.OpenRead(fullPath);
         var fingerprint = Convert.ToHexString(SHA256.HashData(input));
@@ -200,6 +174,7 @@ public sealed partial class DesktopModel
             if (fingerprint != ValidateXbox360PreviewProfile()) throw new IOException("The working profile changed during preview. Reload it before continuing.");
             Xbox360PreviewRows = Xbox360TimestampPreview.Match(originals, reference, selected).ToArray();
             xbox360PreviewFingerprint = fingerprint;
+            if (referencePath != null) { xbox360PreviewSourceMode = Xbox360ExophaseMode; Xbox360QuickUnlockMode = Xbox360ExophaseMode; }
             var ready = Xbox360PreviewRows.Count(r => r.Result == "Ready for review");
             Xbox360PreviewStatus = $"{ready} proposed / {Xbox360PreviewRows.Length} selected; {reference.Count} reference entries. No changes saved.";
         }

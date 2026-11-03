@@ -21,9 +21,8 @@ static class Xbox360LayoutChecks
         model.SelectedXbox360Choice=model.Xbox360Choices[0];
         if (AchievementLabs.Services.Xbox360.Xbox360SigningSession.HasBundledIdentity)
         {
-            model.Xbox360SigningStorePath=Path.Combine(Path.GetFullPath(output),"no-user-signing-cache.bin");
             model.RestoreXbox360SigningData();
-            if (model.Xbox360NeedsSigningSetup) throw new Exception("Standalone screen still asks for setup");
+            if (model.Xbox360SigningUnavailable) throw new Exception("Standalone screen reports signing unavailable");
         }
         model.Navigate("Xbox360ProfileEditor");
         Directory.CreateDirectory(output);
@@ -41,7 +40,7 @@ static class Xbox360LayoutChecks
         }
         if (signing != null)
         {
-            AchievementLabs.Services.Xbox360.Xbox360SigningSession.LoadHorizonFile(signing);
+            AchievementLabs.Services.Xbox360.Xbox360SigningSession.LoadBundledIdentity();
 
             model.Xbox360Choices[0].Selected=true;
             Dispatcher.UIThread.RunJobs(); window.UpdateLayout();

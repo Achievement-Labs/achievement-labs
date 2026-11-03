@@ -19,7 +19,9 @@ public sealed partial class DesktopModel
     public string ContributionDirectory => Path.Combine(Path.GetDirectoryName(Path.GetFullPath(GpdDirectory))!, "GPD contributions");
     public string GpdCatalogSearch { get => gpdCatalogSearch; set { gpdCatalogSearch = value ?? ""; Changed(); DrawGpdCatalog(); } }
     public GpdCatalogRow[] GpdCatalogRows { get => gpdCatalogRows; private set { gpdCatalogRows = value; Changed(); } }
-    public bool CanContributeXbox360Gpd => GpdContributions && !string.IsNullOrEmpty(loadedXbox360Profile);
+    // Like mobile, only offered for the open game when the loaded catalog does not already carry it.
+    public bool CanContributeXbox360Gpd => GpdContributions && !string.IsNullOrEmpty(loadedXbox360Profile) && Xbox360GpdCatalogClient.IsTitleId(Xbox360EditorTitleId) &&
+        gpdCatalogTitles.Count != 0 && !gpdCatalogTitles.Any(t => t.TitleId.Equals(Xbox360EditorTitleId, StringComparison.OrdinalIgnoreCase));
 
     public async Task LoadGpdCatalogAsync()
     {
@@ -52,6 +54,7 @@ public sealed partial class DesktopModel
             .Select(t => new GpdCatalogRow(t.TitleId, t.Name.Length > 0 ? t.Name : "Title " + t.TitleId,
                 $"{t.TitleId} · {t.Achievements} achievements · {t.Gamerscore} G", inProfile.Contains(t.TitleId + ".gpd")))
             .ToArray();
+        RefreshXbox360Files();
     }
 
     public async Task AddCatalogGameAsync(GpdCatalogRow row)
@@ -73,9 +76,8 @@ public sealed partial class DesktopModel
 
     public void ContributeXbox360Gpd()
     {
-        if (!CanContributeXbox360Gpd) { GpdAddStatus = "Turn on GPD contributions in Settings and load a profile first."; return; }
-        var key = GpdTitleId.Trim().ToUpperInvariant();
-        if (!Xbox360GpdCatalogClient.IsTitleId(key)) { GpdAddStatus = "Enter the eight-digit hexadecimal title ID of a game in the loaded profile."; return; }
+        if (!CanContributeXbox360Gpd) { Xbox360UnlockStatus = GpdAddStatus = "Turn on GPD contributions in Settings, load the catalog and open a game it does not include."; return; }
+        var key = Xbox360EditorTitleId.ToUpperInvariant();
         try
         {
             var locked = Xbox360GpdTemplate.Reset(packages.ReadEntryBytes(loadedXbox360Profile, key + ".gpd"));
@@ -85,8 +87,8 @@ public sealed partial class DesktopModel
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(ContributionDirectory) { UseShellExecute = true });
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(
                 Xbox360GpdCatalogClient.IssueUri + Uri.EscapeDataString("GPD contribution: " + key)) { UseShellExecute = true });
-            GpdAddStatus = $"Exported a locked copy to {path}. Attach it to the GitHub issue that opened. Nothing was uploaded automatically.";
+            Xbox360UnlockStatus = GpdAddStatus = $"Exported a locked copy to {path}. Attach it to the GitHub issue that opened. Nothing was uploaded automatically.";
         }
-        catch (Exception error) { GpdAddStatus = $"Could not export {key}.gpd: {error.Message}"; }
+        catch (Exception error) { Xbox360UnlockStatus = GpdAddStatus = $"Could not export {key}.gpd: {error.Message}"; }
     }
 }
