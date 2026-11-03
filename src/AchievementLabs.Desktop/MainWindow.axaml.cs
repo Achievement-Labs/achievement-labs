@@ -43,6 +43,7 @@ public partial class MainWindow : Window
         };
         AchievementLabs.MultiSelect.BatchPicker.Attach(this);
         Presentation.GameSessionWorkspace.Attach(this);
+        StartOverlay();
         ApplyMacPlatformControls();
         AchievementLabs.MultiSelect.SearchClearButtons.Attach(this);
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
