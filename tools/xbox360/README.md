@@ -46,22 +46,23 @@ node tools/xbox360/shared/core-checks.cjs
 
 ## GPD catalog
 
-Desktop and mobile apps add games to a loaded profile from the public GPD catalog on the
-`gpd-catalog` branch (served through `raw.githubusercontent.com`). Apps check each download's size
-and SHA-256 against `index.json`, convert it to the locked catalog form (`Gpd.template` in
+Desktop and mobile apps add games to a loaded profile from the public GPD catalog: flat assets
+(`index.json`, `TITLEID.gpd`) of the `gpd-catalog` prerelease, downloaded from
+`https://github.com/Achievement-Labs/achievement-labs/releases/download/gpd-catalog/`. It is a
+prerelease so app updaters and the event catalogue skip it. Apps check each download's size and
+SHA-256 against `index.json`, convert it to the locked catalog form (`Gpd.template` in
 `shared/profile-core.js`, mirrored byte-for-byte by `Xbox360GpdTemplate.cs`), insert it as a new
 STFS file, and re-sign. The console adds the dashboard record on its next sign-in.
 
-Publish GPDs with `node tools/xbox360/gpd-catalog.cjs add CATALOG_DIR TITLEID.gpd ...` and check with
-`verify`. To create the branch the first time:
+Maintain it with the GitHub CLI signed in to an account that can edit releases:
 
 ```text
-git switch --orphan gpd-catalog
-git rm -rf --cached . && git clean -fdx
-cp -r tools/xbox360/gpd-catalog-branch/. .   # from a main worktree
-node PATH_TO_MAIN/tools/xbox360/gpd-catalog.cjs add . YOUR_GPDS/*.gpd
-git add -A && git commit -m "Seed GPD catalog"
+node tools/xbox360/gpd-catalog.cjs pull CATALOG_DIR                # current assets (empty the first time)
+node tools/xbox360/gpd-catalog.cjs add CATALOG_DIR YOUR_GPDS/*.gpd  # reset to locked, rebuild index.json
+node tools/xbox360/gpd-catalog.cjs publish CATALOG_DIR             # verify, create the release if needed, upload
 ```
+
+`publish` re-verifies every file and uploads GPDs before `index.json`.
 
 Opt-in contributions export a locked copy locally and open a prefilled `gpd-contribution` issue;
 nothing is uploaded automatically.

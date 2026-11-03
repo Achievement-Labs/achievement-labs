@@ -3,11 +3,11 @@ using System.Text.Json;
 
 namespace AchievementLabs.Services.Xbox360;
 
-/// <summary>Download-only client for the public GPD catalog on the gpd-catalog branch.</summary>
+/// <summary>Download-only client for the public GPD catalog published as assets of the gpd-catalog release (a prerelease, so updaters ignore it).</summary>
 public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory)
 {
     public sealed record Title(string TitleId, string Name, int Achievements, int Gamerscore, int Bytes, string Sha256);
-    public static readonly Uri BaseUri = new("https://raw.githubusercontent.com/Achievement-Labs/achievement-labs/gpd-catalog/");
+    public static readonly Uri BaseUri = new("https://github.com/Achievement-Labs/achievement-labs/releases/download/gpd-catalog/");
     public static readonly string IssueUri = "https://github.com/Achievement-Labs/achievement-labs/issues/new?template=gpd-contribution.yml&title=";
     private const int IndexLimit = 4 * 1024 * 1024;
     private Dictionary<string, Title> titles = new(StringComparer.Ordinal);
@@ -64,7 +64,7 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
     public async Task<string> DownloadAsync(string titleId, CancellationToken token)
     {
         if (!titles.TryGetValue(titleId, out var title)) throw new InvalidOperationException("That title is not in the GPD catalog.");
-        var data = await GetAsync(new Uri(BaseUri, $"gpd/{titleId}.gpd"), Xbox360GpdTemplate.MaxBytes, token);
+        var data = await GetAsync(new Uri(BaseUri, $"{titleId}.gpd"), Xbox360GpdTemplate.MaxBytes, token);
         if (data.Length != title.Bytes || Convert.ToHexStringLower(SHA256.HashData(data)) != title.Sha256)
             throw new InvalidDataException("The downloaded GPD did not match the catalog checksum.");
         Directory.CreateDirectory(gpdDirectory);
