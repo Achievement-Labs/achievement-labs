@@ -35,7 +35,8 @@ public sealed class Xbox360ProfileGameAddService(Xbox360PackageService packages,
             throw new InvalidDataException("Load a backed-up Achievement Labs working profile before adding a game.");
         if (!Xbox360ConSigner.VerifyFile(fullPath))
             throw new InvalidDataException("The working profile's CON signature or metadata hash is invalid.");
-        var gpd = File.ReadAllBytes(gpdPath);
+        // Catalog and user-supplied GPDs alike are inserted in their locked catalog form.
+        var gpd = Xbox360GpdTemplate.Reset(File.ReadAllBytes(gpdPath));
         var stamp = DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff");
         var nonce = Guid.NewGuid().ToString("N");
         var backup = fullPath + $".before-add-{stamp}-{nonce}.bak";

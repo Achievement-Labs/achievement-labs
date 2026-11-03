@@ -17,29 +17,23 @@ local profile flag; Xbox Live synchronization still happens on the console.
 
 ### Standalone signing
 
-The packaged Windows build includes the validated CON signing identity read from the
-user-supplied Horizon executable. It starts ready to sign without Horizon installed,
-a Horizon import dialog or a previously saved signing setup. Achievement Labs owns
-the rehash/sign/write implementation; it does not execute Horizon code.
-
-Static inspection of Horizon's `Horizon.Server.Config.loadConKeys` found seven
-embedded arrays (128, 64, 64, 64, 64, 64 and 424 bytes) loaded with
-`RuntimeHelpers.InitializeArray` and `addSetting`, rather than a network key fetch
-or derivation from an exported profile. The key/certificate are checked for
-consistency before use. No key bytes are printed in the inspection or test logs.
+The packaged build includes a validated CON signing identity, so it is ready to
+sign as soon as it starts: no external tool, import dialog or saved setup is
+needed. Achievement Labs owns the rehash/sign/write implementation. The key and
+certificate are checked for consistency before use, and no key bytes are printed
+in logs.
 
 The private build input lives under ignored `artifacts/private-signing/` and is
 included only when the local build explicitly supplies `LabsXbox360SigningFile`.
 It is not checked into source control. Unlike the earlier preview ZIPs, this executable
 **does contain a signing identity embedded inside the app's Core assembly** so
 it can operate independently. It does not contain personal profiles, Xbox tokens,
-a console keyvault, the Horizon executable or a separate raw signing-data file.
+a console keyvault or a separate raw signing-data file.
 The private build input remains excluded from source control and PRs.
 
-A custom imported Horizon/keyvault identity can still be remembered encrypted for
-the Windows account. Valid custom setup takes priority; otherwise the bundled
-identity loads automatically. Forgetting custom setup restores the built-in default.
-Source builds without a supplied identity retain the one-time manual setup option.
+Signing works exactly as on mobile: the bundled identity loads automatically and
+there is no signing setup, keyvault import or saved signing store. Source builds
+without the identity cannot sign.
 Console acceptance and sync remain unverified; successful local signature/hash
 checks alone do not prove that the console/server will accept the result.
 
@@ -72,8 +66,8 @@ checks alone do not prove that the console/server will accept the result.
   selected achievements without changing the profile; **Unlock selected** applies
   them. Missing/ambiguous names are skipped. Changing the reference name, game or
   selection clears the old dates. File import remains a collapsed fallback.
-- **Details & tools** contains paths, backup information, reload, signing setup
-  management and the separate **Copy to USB** action. USB copying requires a
+- **Details & tools** contains paths, backup information, reload, signed and original
+  profile exports and the separate **Copy to USB** action. USB copying requires a
   single matching detected profile and verifies its backup before replacement.
 - Ordinary EXE startup uses the normal home page, automatic Xbox app attachment and
   background update checks. Only explicitly passing `--xbox360-local-test` enables
@@ -136,8 +130,7 @@ A separate working copy of the supplied exported profile was used to test single
 online and offline unlocks, signing, full active STFS hash-tree verification,
 achievement readback, dashboard totals, unchanged unselected achievements and
 verified backups. Original bytes were compared before/after and remained unchanged.
-Negative checks reject damaged blocks, altered metadata, invalid signing imports
-and profile switching with pending edits. Additional checks cover encrypted signing restore without Horizon, corrupted saved setup, forgetting custom setup, startup with bundled signing and no cache/Horizon import, one-click online/offline/custom/imported saves, empty selections, future dates and double clicks. Fixture reference lookups exercise name entry, platform filtering, matching, stale-date clearing and blocked-request handling without profile writes. No USB write or console sync was attempted.
+Negative checks reject damaged blocks, altered metadata, profile switching with pending edits. Additional checks cover startup with bundled signing and no setup, one-click online/offline/custom/imported saves, empty selections, future dates and double clicks. Fixture reference lookups exercise name entry, platform filtering, matching, stale-date clearing and blocked-request handling without profile writes. No USB write or console sync was attempted.
 Private test files remain outside the repository/distributable. Deliberately damaged
 negative-test copies must not be used; their untouched backups are retained.
 
@@ -146,8 +139,7 @@ headless application initialization/scroll checks are also run before packaging.
 
 ## Limits of the safeguards
 
-These checks protect profile-file integrity and consistency. Full safeguard parity
-with Horizon has not been established, and there is no server-flag/enforcement
+These checks protect profile-file integrity and consistency. There is no server-flag/enforcement
 prevention guarantee. Valid rehashing/resigning does not prove Microsoft will
 accept edited achievements. Neither console acceptance nor server synchronization
 has been tested. Xbox's current [Community Standards](https://www.xbox.com/en-US/legal/community-standards)
@@ -157,4 +149,3 @@ Windows 1.0.8.14 is one self-contained executable, including the .NET runtime, a
 and helper executables. It extracts bundled dependencies automatically into the
 Windows .NET bundle cache when launched; no companion folder or launcher script is
 required. Its larger EXE size includes files previously shipped beside the launcher.
-No Horizon executable is shipped.

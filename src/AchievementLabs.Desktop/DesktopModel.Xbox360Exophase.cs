@@ -59,7 +59,7 @@ public sealed partial class DesktopModel
                 var local = ProfileReader.ReadAchievements(path,title);
                 if (!local.SequenceEqual(Xbox360Achievements)) throw new IOException("The profile changed. Reload it.");
                 Xbox360PreviewRows = Xbox360TimestampPreview.MatchXbox(local,response?.achievements ?? [],selected,Convert.ToUInt32(title,16)).ToArray();
-                xbox360PreviewFingerprint = fingerprint; Xbox360QuickUnlockMode = "Imported dates";
+                xbox360PreviewFingerprint = fingerprint; xbox360PreviewSourceMode = Xbox360QuickUnlockMode = Xbox360ReferenceMode;
                 Xbox360PreviewStatus = $"{Xbox360PreviewRows.Count(r => r.Result == "Ready for review")} dates matched from Xbox. Click Unlock selected to apply.";
                 return;
             }
@@ -85,7 +85,7 @@ public sealed partial class DesktopModel
             if (!originals.SequenceEqual(Xbox360Achievements)) throw new IOException("The achievement data changed. Reload the profile.");
             Xbox360PreviewRows = Xbox360TimestampPreview.Match(originals,reference,selected).ToArray();
             xbox360PreviewFingerprint = fingerprint;
-            Xbox360QuickUnlockMode = "Imported dates";
+            xbox360PreviewSourceMode = Xbox360QuickUnlockMode = Xbox360ExophaseMode;
             Xbox360PreviewStatus = $"{Xbox360PreviewRows.Count(r => r.Result == "Ready for review")} dates matched · {game.Name}. Click Unlock selected to apply.";
         }
         catch (OperationCanceledException) { ResetXbox360Preview(); Xbox360PreviewStatus = "Reference lookup timed out or was cancelled."; }

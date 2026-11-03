@@ -25,6 +25,7 @@ public sealed record DesktopPreferences
     public bool NotifySpooferStops { get; init; } = true;
     public bool AutoRefreshEvents { get; init; } = true;
     public bool AutoRefreshDlc { get; init; } = true;
+    public bool GpdContributions { get; init; }
     public bool ShowMythicIcon { get; init; } = true;
     public bool HighlightCompletedDlcs { get; init; } = true;
     public string MythicColour { get; init; } = "#70C98A";

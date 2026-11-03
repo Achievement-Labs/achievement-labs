@@ -112,7 +112,7 @@ public partial class MainWindow : Window
                         {
                             foreach (var relative in new[] { "steam-idle/AchievementLabs.SteamIdle.exe", "gfwl/AchievementLabs.GfwlInjector.exe", "StatsCatalog/TitleBasedStats.txt" })
                                 if (!File.Exists(Path.Combine(AppContext.BaseDirectory,relative))) throw new IOException("Missing extracted dependency: "+relative);
-                            if (model.Xbox360NeedsSigningSetup) throw new IOException("Standalone signing identity did not load.");
+                            if (model.Xbox360SigningUnavailable) throw new IOException("Standalone signing identity did not load.");
                             if (!model.IsXbox360Profiles) throw new IOException("Local 360 landing page did not open.");
                             if (Directory.Exists(Path.Combine(AppContext.BaseDirectory,"Events"))) throw new IOException("Unexpected loose Events directory.");
                             await Task.Delay(150);
@@ -285,6 +285,9 @@ public partial class MainWindow : Window
 
     private void ShowGfwl(object? s, RoutedEventArgs e) => model.OpenGfwlWorkspace();
     private void OpenGpdFolder(object? s, RoutedEventArgs e) => model.OpenGpdFolder();
+    private async void LoadGpdCatalog(object? s, RoutedEventArgs e) => await model.LoadGpdCatalogAsync();
+    private async void AddCatalogGpd(object? s, RoutedEventArgs e) { if ((s as Button)?.Tag is GpdCatalogRow row) await model.AddCatalogGameAsync(row); }
+    private void ContributeGpd(object? s, RoutedEventArgs e) => model.ContributeXbox360Gpd();
     private async void AddXbox360Gpd(object? s, RoutedEventArgs e) => await model.AddXbox360GameAsync(model.GpdTitleId);
     private async void AddTitleSearchGpd(object? s, RoutedEventArgs e)
     {
@@ -430,6 +433,18 @@ public partial class MainWindow : Window
     private async void RefreshXbox360EditorProfile(object? s, RoutedEventArgs e) => await model.RefreshXbox360EditorProfileAsync();
     private void RefreshLocalXbox360Profiles(object? s, RoutedEventArgs e) => model.RefreshLocalXbox360Profiles();
     private async void LoadSelectedXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadSelectedXbox360ProfileAsync();
+    private async void OpenExportedXbox360Profile(object? s, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Open exported Xbox 360 profile", AllowMultiple = false });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) await model.OpenExportedXbox360ProfileAsync(path);
+    }
+    private async Task ExportXbox360Profile(bool original)
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = original ? "Export original profile backup" : "Export signed Xbox 360 profile", SuggestedFileName = model.SuggestedXbox360ExportName });
+        if (file?.TryGetLocalPath() is { } path) await model.ExportXbox360ProfileAsync(path, original);
+    }
+    private async void ExportXbox360Profile(object? s, RoutedEventArgs e) => await ExportXbox360Profile(false);
+    private async void ExportXbox360Original(object? s, RoutedEventArgs e) => await ExportXbox360Profile(true);
     private async void LoadXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadXbox360ProfileAsync();
     private async void LoadXbox360Achievements(object? s, RoutedEventArgs e) => await model.LoadXbox360AchievementsAsync();
     private void SelectXbox360Locked(object? s, RoutedEventArgs e) => model.SelectXbox360PreviewAchievements(true);
@@ -475,21 +490,13 @@ public partial class MainWindow : Window
         Grid.SetColumn(row.Children[3],narrow?2:3); Grid.SetColumn(row.Children[4],narrow?3:4);
         row.Children[2].Margin = narrow ? new Thickness(0,5,0,2) : new Thickness(6,0);
     }
-    private async void LoadXbox360Signing(object? s, RoutedEventArgs e)
-    {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Load local Xbox 360 signing data", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Horizon executable or decrypted keyvault") { Patterns = ["*.exe", "*.bin", "*.kv"] }] });
-        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) model.LoadXbox360SigningData(path);
-    }
     private async void QuickUnlockXbox360(object? s, RoutedEventArgs e) => await model.UnlockSelectedXbox360Async();
-    private void ClearXbox360Signing(object? s, RoutedEventArgs e) => model.ClearXbox360SigningData();
     private void StageXbox360Dates(object? s, RoutedEventArgs e) => model.StageXbox360TimestampPreview();
     private async void DiscardXbox360Edits(object? s, RoutedEventArgs e) => await model.DiscardXbox360EditsAsync();
     private void SetXbox360Achievement(object? s, RoutedEventArgs e) => model.SetXbox360Achievement();
     private async void SaveXbox360Edits(object? s, RoutedEventArgs e) => await model.SaveXbox360EditsAsync();
     private async void InjectXbox360Profile(object? s, RoutedEventArgs e) => await model.InjectXbox360ProfileAsync();
     private void OpenProfilesFolder(object? s, RoutedEventArgs e) => model.OpenProfilesFolder();
-    private void RefreshHorizon(object? s, RoutedEventArgs e) => model.RefreshHorizonStatus();
-    private void OpenHorizon(object? s, RoutedEventArgs e) => model.OpenHorizonFolder();
     private async void ScanGfwl(object? s, RoutedEventArgs e) => await model.ScanGfwlAsync();
     private async void InjectGfwl(object? s, RoutedEventArgs e) => await model.InjectGfwlAsync();
     private async void RefreshGfwlAchievements(object? s, RoutedEventArgs e) => await model.RefreshGfwlAchievementsAsync();
