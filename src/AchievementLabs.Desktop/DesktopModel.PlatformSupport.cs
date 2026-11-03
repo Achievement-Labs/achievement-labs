@@ -21,7 +21,6 @@ public sealed partial class DesktopModel
     public string EventTokenRetrievalHelp => DesktopPlatform.IsUnixDesktop
         ? "Uses your Microsoft sign-in on this device and verifies the Xbox account before saving. Existing tokens are kept if retrieval fails. Event tokens do not grant title-spoofing permission."
         : "Retrieves an event token for the connected Xbox account using the Windows account broker. You can also paste a current token manually.";
-    public string SigningSetupDescription => $"The bundled signing identity is ready. Optional local signing setup is remembered encrypted for your {PlatformAccountLabel}; selected executables are never launched.";
     private void PrepareMacSignIn()
     {
         XboxPcAppDetected=false;XboxPcAttached=false;OAuthFallbackAvailable=session==null;

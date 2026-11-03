@@ -39,9 +39,6 @@ public partial class MainWindow
             Directory.CreateDirectory(workspace);
             try
             {
-                var store = Path.Combine(workspace, "identity.protected");
-                Xbox360SigningSession.Remember(store);
-                Xbox360SigningSession.Clear(); Xbox360SigningSession.Restore(store);
                 var fixture = Path.GetFullPath("tools/xbox360/shared/synthetic.dat");
                 var originalHash = SHA256.HashData(File.ReadAllBytes(fixture));
                 var packages = new Xbox360PackageService();

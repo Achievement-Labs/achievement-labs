@@ -8,39 +8,18 @@ static class Xbox360SigningChecks
     static readonly BindingFlags Flags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
     static void Check(bool value, string message) { if (!value) throw new Exception(message); }
     static byte[] Hash(string path) { using var file=File.OpenRead(path); return SHA256.HashData(file); }
-    public static void Run(string source, string horizon, string output)
+    public static void Run(string source, string output)
     {
         Directory.CreateDirectory(output);
         var originalHash=Hash(source);
         Xbox360SigningSession.Clear();
-        if (Xbox360SigningSession.HasBundledIdentity)
+        Check(Xbox360SigningSession.HasBundledIdentity,"This check needs a build with the bundled signing identity");
+        using (var standalone = new DesktopModel())
         {
-            using var standalone = new DesktopModel { Xbox360SigningStorePath=Path.Combine(output,"no-custom-signing.bin") };
             standalone.RestoreXbox360SigningData();
-            Check(Xbox360ConSigner.SigningAvailable,"Standalone signing must start without Horizon or a user cache");
-            Console.WriteLine("PASS: bundled local-build signing identity loads with no Horizon import or saved user setup.");
+            Check(Xbox360ConSigner.SigningAvailable && !standalone.Xbox360SigningUnavailable,"Bundled signing must load with no setup");
         }
-        Xbox360SigningSession.Clear();
-        Check(!Xbox360ConSigner.SigningAvailable,"Signing must start disabled after clearing");
-        Xbox360SigningSession.LoadHorizonFile(horizon);
-        Check(Xbox360ConSigner.SigningAvailable,"Horizon material did not load");
-        Console.WriteLine("PASS: static Horizon signing data import and certificate/key consistency; no executable code loaded.");
-        var badKey=Path.Combine(output,"invalid-signing.bin"); File.WriteAllBytes(badKey,new byte[0x4000]);
-        try { Xbox360SigningSession.LoadKeyvault(badKey); throw new Exception("Invalid keyvault accepted"); } catch(InvalidDataException) { }
-        Check(Xbox360ConSigner.SigningAvailable,"Invalid import must preserve the previous valid session");
-        var remembered=Path.Combine(output,"private-signing.bin");
-        Xbox360SigningSession.Remember(remembered); Xbox360SigningSession.Clear();
-        Xbox360SigningSession.Restore(remembered);
-        Check(Xbox360ConSigner.SigningAvailable,"Encrypted signing restore failed");
-        var corrupt=Path.Combine(output,"invalid-saved-signing.bin"); File.WriteAllBytes(corrupt,new byte[100]);
-        try { Xbox360SigningSession.Restore(corrupt); throw new Exception("Corrupt signing store accepted"); } catch(CryptographicException) { }
-        Check(Xbox360ConSigner.SigningAvailable,"Failed restore must retain current valid signing data");
-        Console.WriteLine("PASS: Windows-user-encrypted signing setup restores without reading Horizon; corrupt saved data rejected.");
-        if (Xbox360SigningSession.HasBundledIdentity)
-        {
-            Xbox360SigningSession.Clear(); Xbox360SigningSession.LoadBundledIdentity();
-            Console.WriteLine("PASS: subsequent profile-save checks use the bundled identity, without reading Horizon during signing.");
-        }
+        Console.WriteLine("PASS: bundled signing identity loads automatically with no setup, import or saved store, as on mobile.");
         var packages=new Xbox360PackageService();
         var profiles=new Xbox360ProfileService(Path.Combine(Path.GetFullPath(output),"private-profile"));
         var working=profiles.ExtractProfileAsync(source).GetAwaiter().GetResult();
@@ -95,7 +74,6 @@ static class Xbox360SigningChecks
         Xbox360StfsIntegrity.VerifyFile(working);
         savedHash=Hash(working);
         Console.WriteLine("PASS: subsequent offline/undated save and full active STFS hash-tree verification.");
-        model.Xbox360SigningStorePath=remembered;
         Check(!model.UnlockSelectedXbox360Async().GetAwaiter().GetResult() && Hash(working).SequenceEqual(savedHash),"Empty quick-unlock selection must not write");
         var quick=model.Xbox360Choices.First(c=>(c.Achievement.Flags&0x20000)==0); quick.Selected=true;
         model.Xbox360QuickUnlockMode="Custom dates"; model.Xbox360PreviewStart="2099-01-01T00:00:00Z";
@@ -116,16 +94,15 @@ static class Xbox360SigningChecks
         Check(customRead[0].UnlockedAt==DateTimeOffset.Parse("2021-01-01T00:00:00Z") && customRead[1].UnlockedAt==DateTimeOffset.Parse("2021-01-01T00:02:00Z"),"Custom timestamp spacing mismatch");
         var imported=model.Xbox360Choices.First(c=>(c.Achievement.Flags&0x20000)==0 && model.Xbox360Choices.Count(x=>x.Name==c.Name)==1); imported.Selected=true;
         var reference=Path.Combine(output,"private-reference-simple.json"); File.WriteAllText(reference,System.Text.Json.JsonSerializer.Serialize(new { list=new[]{new {name=imported.Name,timestamp=1609459200}} }));
-        model.Xbox360ReferenceEditionConfirmed=true; model.PreviewXbox360TimestampsAsync(reference).GetAwaiter().GetResult(); model.Xbox360QuickUnlockMode="Imported dates";
+        model.Xbox360ReferenceEditionConfirmed=true; model.PreviewXbox360TimestampsAsync(reference).GetAwaiter().GetResult(); model.Xbox360QuickUnlockMode="Imported Exophase dates";
         Check(model.UnlockSelectedXbox360Async().GetAwaiter().GetResult(),"One-click imported dates failed: "+model.Xbox360UnlockStatus);
         Check(reader.ReadAchievements(working,sample.game.TitleId).Single(a=>a.Id==imported.Achievement.Id).UnlockedAt==DateTimeOffset.Parse("2021-01-01T00:00:00Z"),"Imported date mismatch");
         Xbox360StfsIntegrity.VerifyFile(working);
         Check(Hash(source).SequenceEqual(originalHash),"One-click operations changed original profile");
         savedHash=Hash(working);
-        model.ClearXbox360SigningData(); Check(!File.Exists(remembered) && Xbox360ConSigner.SigningAvailable==Xbox360SigningSession.HasBundledIdentity,"Forget must remove custom setup and restore the standalone default when present");
         Xbox360SigningSession.Clear();
         Check(!model.UnlockSelectedXbox360Async().GetAwaiter().GetResult() && Hash(working).SequenceEqual(savedHash),"Unlock without signing must not write");
-        Console.WriteLine("PASS: single-action offline/online save-and-resign; empty/future selection and double-click guards; forget signing setup removes encrypted identity; original unchanged.");
+        Console.WriteLine("PASS: single-action offline/online save-and-resign; empty/future selection and double-click guards; original unchanged.");
         var editor=new Xbox360ProfileEditService(packages,profiles);
         try { editor.Save(working,sample.game.TitleId,[written[0] with { Gamerscore=written[0].Gamerscore+1, Flags=written[0].Flags^0x100000u }]); throw new Exception("Changed metadata accepted"); } catch(InvalidDataException) { }
         Check(Hash(working).SequenceEqual(savedHash),"Rejected edit changed working copy");
@@ -133,7 +110,7 @@ static class Xbox360SigningChecks
         typeof(DesktopModel).GetProperty("Xbox360EditorTitleName",Flags)!.SetValue(model,sample.game.Name);
         model.Xbox360ExophaseKind="Exophase profile"; model.Xbox360ExophaseName="fixture"; model.Xbox360ExophaseClientFactory=()=>Exophase360Tests.Fixture(sample.game.Name,referenceChoice.Name);
         model.LoadXbox360ExophaseDatesAsync().GetAwaiter().GetResult();
-        Check(model.Xbox360QuickUnlockMode=="Imported dates" && model.Xbox360PreviewRows.Count(r=>r.Result=="Ready for review")==1,"Profile-name lookup did not prepare dates: "+model.Xbox360PreviewStatus);
+        Check(model.Xbox360QuickUnlockMode=="Imported Exophase dates" && model.Xbox360PreviewRows.Count(r=>r.Result=="Ready for review")==1,"Profile-name lookup did not prepare dates: "+model.Xbox360PreviewStatus);
         Check(Hash(working).SequenceEqual(savedHash),"Reference lookup must not write the profile");
         model.Xbox360ExophaseName="differentfixture"; Check(model.Xbox360PreviewRows.Length==0,"Changing the reference profile must clear old dates");
         model.Xbox360ExophaseClientFactory=()=>Exophase360Tests.Fixture(sample.game.Name,referenceChoice.Name,true);

@@ -11,11 +11,6 @@ public sealed class Xbox360PackageService : IXbox360PackageService
     private const int StfsBlockSize = 0x1000;
     private const int FileEntrySize = 0x40;
 
-    public string HorizonInstallPath { get; } =
-        @"C:\Program Files (x86)\Daring Development\Horizon\Horizon.exe";
-
-    public bool IsHorizonInstalled => File.Exists(HorizonInstallPath);
-
     public Xbox360PackageInfo InspectPackage(string filePath)
     {
         if (string.IsNullOrWhiteSpace(filePath))
