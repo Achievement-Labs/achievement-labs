@@ -6,8 +6,8 @@ namespace AchievementLabs.Services.Xbox360;
 /// <summary>Download-only client for the public GPD catalog published as assets of the gpd-catalog release (a prerelease, so updaters ignore it).</summary>
 public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory)
 {
-    public sealed record Title(string TitleId, string Name, int Achievements, int Gamerscore, int Bytes, string Sha256);
-    public static readonly Uri BaseUri = new("https://github.com/Achievement-Labs/achievement-labs/releases/download/gpd-catalog/");
+    public sealed record Title(string TitleId, string Name, int Achievements, int Gamerscore, int Bytes, string Sha256, string Release);
+    public static readonly Uri BaseUri = new("https://github.com/Achievement-Labs/achievement-labs/releases/download/");
     public static readonly string IssueUri = "https://github.com/Achievement-Labs/achievement-labs/issues/new?template=gpd-contribution.yml&title=";
     private const int IndexLimit = 4 * 1024 * 1024;
     private Dictionary<string, Title> titles = new(StringComparer.Ordinal);
@@ -16,6 +16,10 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
 
     public static bool IsTitleId(string? id) =>
         id is { Length: 8 } && id.All(c => c is >= '0' and <= '9' or >= 'A' and <= 'F') && id != "FFFE07D1";
+
+    /// <summary>GPDs are spread over gpd-catalog-N releases (1000 assets per release); index.json lives in gpd-catalog.</summary>
+    public static bool IsRelease(string id) =>
+        id.StartsWith("gpd-catalog-", StringComparison.Ordinal) && id.Length is > 12 and < 17 && id[12] != '0' && id[12..].All(char.IsAsciiDigit);
 
     public static Dictionary<string, Title> Parse(byte[] json)
     {
@@ -30,12 +34,13 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
         {
             var t = item.Value;
             var size = t.GetProperty("bytes").GetInt32(); var sha = t.GetProperty("sha256").GetString() ?? "";
+            var release = t.TryGetProperty("release", out var r) ? r.GetString() ?? "" : "";
             if (!IsTitleId(item.Name) || size <= 0 || size > Xbox360GpdTemplate.MaxBytes || sha.Length != 64 ||
-                !sha.All(c => c is >= '0' and <= '9' or >= 'a' and <= 'f'))
+                !sha.All(c => c is >= '0' and <= '9' or >= 'a' and <= 'f') || !IsRelease(release))
                 throw new InvalidDataException($"Invalid GPD catalog entry {item.Name}.");
             result[item.Name] = new(item.Name, t.TryGetProperty("name", out var name) ? name.GetString() ?? "" : "",
                 t.TryGetProperty("achievements", out var a) ? a.GetInt32() : 0,
-                t.TryGetProperty("gamerscore", out var g) ? g.GetInt32() : 0, size, sha);
+                t.TryGetProperty("gamerscore", out var g) ? g.GetInt32() : 0, size, sha, release);
         }
         return result;
     }
@@ -45,7 +50,7 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
     {
         try
         {
-            var bytes = await GetAsync(new Uri(BaseUri, "index.json"), IndexLimit, token);
+            var bytes = await GetAsync(new Uri(BaseUri, "gpd-catalog/index.json"), IndexLimit, token);
             titles = Parse(bytes);
             Directory.CreateDirectory(Path.GetDirectoryName(CachePath)!);
             var staged = CachePath + ".partial";
@@ -64,7 +69,7 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
     public async Task<string> DownloadAsync(string titleId, CancellationToken token)
     {
         if (!titles.TryGetValue(titleId, out var title)) throw new InvalidOperationException("That title is not in the GPD catalog.");
-        var data = await GetAsync(new Uri(BaseUri, $"{titleId}.gpd"), Xbox360GpdTemplate.MaxBytes, token);
+        var data = await GetAsync(new Uri(BaseUri, $"{title.Release}/{titleId}.gpd"), Xbox360GpdTemplate.MaxBytes, token);
         if (data.Length != title.Bytes || Convert.ToHexStringLower(SHA256.HashData(data)) != title.Sha256)
             throw new InvalidDataException("The downloaded GPD did not match the catalog checksum.");
         Directory.CreateDirectory(gpdDirectory);

@@ -46,10 +46,10 @@ node tools/xbox360/shared/core-checks.cjs
 
 ## GPD catalog
 
-Desktop and mobile apps add games to a loaded profile from the public GPD catalog: flat assets
-(`index.json`, `TITLEID.gpd`) of the `gpd-catalog` prerelease, downloaded from
-`https://github.com/Achievement-Labs/achievement-labs/releases/download/gpd-catalog/`. It is a
-prerelease so app updaters and the event catalogue skip it. Apps check each download's size and
+Desktop and mobile apps add games to a loaded profile from the public GPD catalog, published as
+release assets: `index.json` in the `gpd-catalog` prerelease, and each `TITLEID.gpd` in the
+`gpd-catalog-N` prerelease named by its index entry (GitHub allows 1000 assets per release, so the
+tool fills each with up to 900). They are prereleases so app updaters and the event catalogue skip them. Apps check each download's size and
 SHA-256 against `index.json`, convert it to the locked catalog form (`Gpd.template` in
 `shared/profile-core.js`, mirrored byte-for-byte by `Xbox360GpdTemplate.cs`), insert it as a new
 STFS file, and re-sign. The console adds the dashboard record on its next sign-in.
@@ -58,7 +58,7 @@ Maintain it with the GitHub CLI signed in to an account that can edit releases:
 
 ```text
 node tools/xbox360/gpd-catalog.cjs pull CATALOG_DIR                # current assets (empty the first time)
-node tools/xbox360/gpd-catalog.cjs add CATALOG_DIR YOUR_GPDS/*.gpd  # reset to locked, rebuild index.json
+node tools/xbox360/gpd-catalog.cjs add CATALOG_DIR YOUR_GPD_FOLDER   # reset to locked, rebuild index.json
 node tools/xbox360/gpd-catalog.cjs publish CATALOG_DIR             # verify, create the release if needed, upload
 ```
 

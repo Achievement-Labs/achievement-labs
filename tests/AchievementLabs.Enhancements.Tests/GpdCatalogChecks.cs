@@ -29,7 +29,7 @@ static class GpdCatalogChecks
 
   var catalogDir=Path.Combine(dir,"catalog-client");if(Directory.Exists(catalogDir))Directory.Delete(catalogDir,true);
   var sha=Convert.ToHexStringLower(SHA256.HashData(expected));
-  string row(string name,string hash)=>"{\"name\":\""+name+"\",\"achievements\":2,\"gamerscore\":40,\"bytes\":"+expected.Length+",\"sha256\":\""+hash+"\"}";
+  string row(string name,string hash)=>"{\"name\":\""+name+"\",\"achievements\":2,\"gamerscore\":40,\"bytes\":"+expected.Length+",\"sha256\":\""+hash+"\",\"release\":\"gpd-catalog-1\"}";
   string index="{\"version\":1,\"titles\":{\"ABCD0001\":"+row("Catalog game",sha)+",\"ABCD0002\":"+row("Tampered",new string('0',64))+"}}";
   var client=new Xbox360GpdCatalogClient(new HttpClient(new Fake(index,expected)),Path.Combine(catalogDir,"GPD"));
   var titles=client.LoadAsync(CancellationToken.None).GetAwaiter().GetResult();
@@ -40,7 +40,7 @@ static class GpdCatalogChecks
   if(File.Exists(Path.Combine(catalogDir,"GPD","ABCD0002.gpd")))throw new Exception("Rejected GPD was written");
   var offline=new Xbox360GpdCatalogClient(new HttpClient(new Fake(null,null)),Path.Combine(catalogDir,"GPD"));
   if(offline.LoadAsync(CancellationToken.None).GetAwaiter().GetResult().Count!=2)throw new Exception("Offline catalog cache fallback failed");
-  try{Xbox360GpdCatalogClient.Parse(Encoding.UTF8.GetBytes("""{"version":1,"titles":{"FFFE07D1":{"bytes":1,"sha256":"x"}}}"""));throw new Exception("Invalid index accepted");}catch(InvalidDataException){}
+  try{Xbox360GpdCatalogClient.Parse(Encoding.UTF8.GetBytes("""{"version":1,"titles":{"ABCD0001":{"bytes":1,"sha256":"0000000000000000000000000000000000000000000000000000000000000000","release":"gpd-catalog/../x"}}}"""));throw new Exception("Invalid index accepted");}catch(InvalidDataException){}
   Console.WriteLine("PASS: C# GPD reset matches profile-core.js byte-for-byte; mobile add-game profile verifies independently (signature, STFS tree, inserted GPD, unchanged files); catalog client checks checksums, refuses tampered GPDs and falls back to its verified cache.");
  }
  sealed class Fake(string? index,byte[]? gpd):HttpMessageHandler
