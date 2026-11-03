@@ -2536,5 +2536,95 @@
     "Stats": {},
     "Name": "Call of Duty®: Black Ops Cold War - Xbox Series X|S",
     "StatsMode": "TitleBased"
+  },
+  "897067440": {
+    "TitleName": "Age of Empires: Definitive Edition",
+    "ServiceConfigId": "bc500100-e9fc-495a-b2f0-4661357829b0",
+    "Stats": {
+      "RankedELO": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RankedEloCalculated"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"EloScore\":4}},\"measurements\":{\"f\":{\"TelemetryTIMESTAMP\":6,\"GameTIMESTAMP\":6}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RankedEloCalculated\",\"serviceConfigId\":\"bc500100-e9fc-495a-b2f0-4661357829b0\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":897067440,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"UniqueGameId\":\"5d1c2a7e-3b84-4f19-9a62-0c7e4b9d2f31\",\"EloScore\":REPLACEVALUE},\"measurements\":{\"TelemetryTIMESTAMP\":1801.0,\"GameTIMESTAMP\":1801.0}}}"
+          }
+        },
+        "SuggestedValue": 1616,
+        "Confidence": "Traced: ranked game-end FUN_7ff72a2f3860 -> FUN_7ff72a45b690"
+      },
+      "ELOGameCount": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UpdateELORankedGameCount"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"ELORankedGameCount\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UpdateELORankedGameCount\",\"serviceConfigId\":\"bc500100-e9fc-495a-b2f0-4661357829b0\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":897067440,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ELORankedGameCount\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "Traced: ranked game-end FUN_7ff72a2f3860 -> FUN_7ff72a459410"
+      },
+      "UnitsKilled": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnUnitDestroyed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnUnitDestroyed\",\"serviceConfigId\":\"bc500100-e9fc-495a-b2f0-4661357829b0\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":897067440,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "Feeder inferred: OnUnitDestroyed{Count} from FUN_7ff72a477e80"
+      },
+      "UnitsConverted": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnUnitConverted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnUnitConverted\",\"serviceConfigId\":\"bc500100-e9fc-495a-b2f0-4661357829b0\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":897067440,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "Feeder inferred: OnUnitConverted{Count} from FUN_7ff72a477dd0"
+      }
+    }
   }
 }
