@@ -1,0 +1,31 @@
+name: Xbox 360 GPD contribution
+description: Offer a locked title GPD for the public Xbox 360 GPD catalog.
+title: "GPD contribution: "
+labels: [gpd-contribution]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Attach the `TITLEID.gpd` file that Achievement Labs exported for you. The app exports a locked copy only:
+        unlocks, timestamps, settings and sync history are removed before the file is written. Do not attach profiles
+        (`.con` files), gamertags, keyvaults or account data.
+  - type: input
+    id: title
+    attributes:
+      label: Title ID
+      description: Eight hexadecimal digits, for example 4D5307E6.
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Game name
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: The attached file was exported by Achievement Labs' contribution action and contains no profile or account data.
+          required: true

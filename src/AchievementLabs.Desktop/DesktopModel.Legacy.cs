@@ -46,7 +46,7 @@ public sealed partial class DesktopModel
     public bool IsXbox360Profiles => page == "Xbox360Profiles";
     public string[] LocalXbox360Profiles { get => localXbox360Profiles; private set { localXbox360Profiles = value; Changed(); } }
     public string? SelectedLocalXbox360Profile { get => selectedLocalXbox360Profile; set { selectedLocalXbox360Profile = value; Changed(); } }
-    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; CaptureXbox360PreviewSource(); Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
+    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; CaptureXbox360PreviewSource(); Changed(); Changed(nameof(CanInjectXbox360Profile)); Changed(nameof(CanContributeXbox360Gpd)); DrawGpdCatalog(); } }
     public string GpdDirectory => GameAdder.GpdDirectory;
     public string GpdTitleId { get => gpdTitleId; set { gpdTitleId = value ?? ""; Changed(); } }
     public string GpdAddStatus { get => gpdAddStatus; private set { gpdAddStatus = value; Changed(); } }

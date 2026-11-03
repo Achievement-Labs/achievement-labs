@@ -39,6 +39,7 @@ static class Test
   if(args.Length==3 && args[0]=="--prepare360-signing"){AchievementLabs.Services.Xbox360.Xbox360SigningSession.LoadHorizonFile(args[1]);AchievementLabs.Services.Xbox360.Xbox360SigningSession.WriteLocalBuildIdentity(args[2]);AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear();Console.WriteLine("Prepared private local-build signing input. No key values printed.");return;}
   if(args.Length==4 && args[0]=="--xbox360-signing-check"){Xbox360SigningChecks.Run(args[1],args[2],args[3]);return;}
   if(args.Length==3 && args[0]=="--xbox360-profile-check"){Xbox360ProfilePreviewChecks.Run(args[1],args[2]);return;}
+  if(args.Length==2 && args[0]=="--gpd-catalog"){GpdCatalogChecks.Run(args[1]);return;}
   if(args.Contains("--exophase-360")){Exophase360Tests.Run();return;}
   if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}

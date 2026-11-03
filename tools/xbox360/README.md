@@ -43,3 +43,25 @@ Checks:
 python -m unittest discover -s tools/xbox360 -p test_prepare.py
 node tools/xbox360/shared/core-checks.cjs
 ```
+
+## GPD catalog
+
+Desktop and mobile apps add games to a loaded profile from the public GPD catalog on the
+`gpd-catalog` branch (served through `raw.githubusercontent.com`). Apps check each download's size
+and SHA-256 against `index.json`, convert it to the locked catalog form (`Gpd.template` in
+`shared/profile-core.js`, mirrored byte-for-byte by `Xbox360GpdTemplate.cs`), insert it as a new
+STFS file, and re-sign. The console adds the dashboard record on its next sign-in.
+
+Publish GPDs with `node tools/xbox360/gpd-catalog.cjs add CATALOG_DIR TITLEID.gpd ...` and check with
+`verify`. To create the branch the first time:
+
+```text
+git switch --orphan gpd-catalog
+git rm -rf --cached . && git clean -fdx
+cp -r tools/xbox360/gpd-catalog-branch/. .   # from a main worktree
+node PATH_TO_MAIN/tools/xbox360/gpd-catalog.cjs add . YOUR_GPDS/*.gpd
+git add -A && git commit -m "Seed GPD catalog"
+```
+
+Opt-in contributions export a locked copy locally and open a prefilled `gpd-contribution` issue;
+nothing is uploaded automatically.

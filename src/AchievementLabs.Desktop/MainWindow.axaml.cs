@@ -285,6 +285,9 @@ public partial class MainWindow : Window
 
     private void ShowGfwl(object? s, RoutedEventArgs e) => model.OpenGfwlWorkspace();
     private void OpenGpdFolder(object? s, RoutedEventArgs e) => model.OpenGpdFolder();
+    private async void LoadGpdCatalog(object? s, RoutedEventArgs e) => await model.LoadGpdCatalogAsync();
+    private async void AddCatalogGpd(object? s, RoutedEventArgs e) { if ((s as Button)?.Tag is GpdCatalogRow row) await model.AddCatalogGameAsync(row); }
+    private void ContributeGpd(object? s, RoutedEventArgs e) => model.ContributeXbox360Gpd();
     private async void AddXbox360Gpd(object? s, RoutedEventArgs e) => await model.AddXbox360GameAsync(model.GpdTitleId);
     private async void AddTitleSearchGpd(object? s, RoutedEventArgs e)
     {
