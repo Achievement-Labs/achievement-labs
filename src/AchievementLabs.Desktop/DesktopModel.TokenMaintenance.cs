@@ -18,6 +18,7 @@ public sealed partial class DesktopModel
 
     private void BeginTokenMaintenance()
     {
+        StopLibrarySupportCheck(); supportAttempted.Clear(); supportUserStopped = false;
         ++sessionGeneration;
         lastAuthorizationRefresh = DateTimeOffset.UtcNow;
         nextAuthorizationRetry = default;

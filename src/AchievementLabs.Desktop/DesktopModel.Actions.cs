@@ -64,6 +64,8 @@ public sealed partial class DesktopModel
         }
         if (version != selectionVersion || lifetime.IsCancellationRequested) return;
         titleComingSoon = nextComingSoon; titleTesting = nextTesting; titlePartial = nextPartial; definitions = nextDefinitions; eventBased = nextEventBased; eventTitleSupported = nextSupported; mappedIds = nextMappedIds; liveAchievements = true;
+        var identifiedMethod = LibrarySupportDiscovery.Classify(JObject.FromObject(response));
+        if (identifiedMethod is { } confirmed) RememberLibraryUnlockMethod(titleId, confirmed);
         ActionSummary = error ?? (eventBased ? $"Event-based title · {mappedIds.Count} mapped achievement IDs" : "Title-based achievements · ready for individual actions");
         NotifyActions();
     }    public async Task UnlockSelectedAsync()

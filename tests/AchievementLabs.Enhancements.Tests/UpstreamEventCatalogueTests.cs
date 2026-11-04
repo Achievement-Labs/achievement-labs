@@ -62,6 +62,17 @@ public static class UpstreamEventCatalogueTests
             folders.RefreshAsync(folderHttp,true).GetAwaiter().GetResult();
             Assert(folders.TitleIds.SequenceEqual(new[]{"101"}),"Indexed archive imports only valid non-reserved titles");
             Assert(folders.PayloadsAsync("101","1","0",default).GetAwaiter().GetResult().Payloads.SequenceEqual(payload.Payloads),"Flat and folder archives produce identical payloads");
+            // Published archives refresh existing titles and persist disabled status without touching source catalogs.
+            var refreshFixture = new Fixture { Archive = Zip(data) }; using var refreshHttp = new HttpClient(refreshFixture);
+            var refreshPath = Path.Combine(dir, "refresh.json"); var refresh = new UpstreamEventCatalogue(refreshPath, ["99"]);
+            refresh.RefreshAsync(refreshHttp, true).GetAwaiter().GetResult();
+            var changedData = (JObject)data.DeepClone(); changedData["101"]!["Achievements"]!["1"]!["Id"]!["Replacement"] = "2";
+            changedData["101"]!["FullySupported"] = true; refreshFixture.Archive = Zip(changedData);
+            refresh.RefreshAsync(refreshHttp, true).GetAwaiter().GetResult();
+            Assert(refresh.LibrarySupport()["101"].FullySupported && JObject.Parse(refresh.PayloadsAsync("101", "1", "0", default).GetAwaiter().GetResult().Payloads[0])["data"]!["baseData"]!["properties"]!["AchievementID"]!.ToString() == "2", "Published existing-title recipe and classification refresh");
+            changedData["101"]!["Enabled"] = false; refreshFixture.Archive = Zip(changedData);
+            refresh.RefreshAsync(refreshHttp, true).GetAwaiter().GetResult();
+            Assert(!refresh.Contains("101") && refresh.KnownTitleIds.Contains("101") && !new UpstreamEventCatalogue(refreshPath, []).LibrarySupport()["101"].Available, "Published disabled status overrides cached mapping and survives restart");
             var calls=fixture.Calls;catalogue.RefreshAsync(http).GetAwaiter().GetResult();Assert(calls==fixture.Calls,"Hourly throttle avoids duplicate downloads");
             fixture.BadDigest=true;catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();Assert(File.ReadAllText(path)==valid && catalogue.Status.Contains("checksum mismatch"),"Bad checksum cannot replace cache");
             fixture.BadDigest=false;fixture.Archive=Zip(data,true);catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();Assert(File.ReadAllText(path)==valid && catalogue.Status.Contains("archive path"),"Unsafe archive paths rejected without extraction or cache mutation");

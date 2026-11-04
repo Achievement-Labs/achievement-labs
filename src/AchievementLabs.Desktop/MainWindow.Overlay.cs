@@ -10,7 +10,7 @@ public partial class MainWindow
     // Prototype: Windows only; Mac/Linux builds keep their existing behaviour.
     private void StartOverlay()
     {
-        if (!OperatingSystem.IsWindows()) return;
+        if (!OperatingSystem.IsWindows() || AppContext.TryGetSwitch("AchievementLabs.OfflineChecks", out var offline) && offline) return;
         overlayHotkey = OverlayHotkey.TryStart(
             () => Dispatcher.UIThread.Post(() => (overlay ??= new OverlayWindow(model, Presentation.AppearanceController.For(this), visible => overlayHotkey?.SetEscapeEnabled(visible))).Toggle()),
             () => Dispatcher.UIThread.Post(() => overlay?.HideOverlay()));

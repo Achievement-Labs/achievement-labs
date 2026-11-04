@@ -41,6 +41,7 @@ try
         var changed = (JObject)data.DeepClone();
         changed["7"]!["Achievements"]!["2"] = changed["7"]!["Achievements"]!["1"]!.DeepClone();
         await File.WriteAllTextAsync(Path.Combine(split, "7", "Data.json"), changed.ToString());
+        Check(local.GetLibrarySupport()["7"].Mapped == 2, "Support badges count mappings from the title file, not its index summary");
         Check((await local.GetTitleAsync("7", default)).AchievementIds.Length == 2, "Per-title edits invalidate validation cache without rewriting index");
     }
     async Task Bad(JObject value, string message)
@@ -61,6 +62,7 @@ try
         Check(mapping.AchievementIds.Length == 91, "Nested embedded mappings and template loaded");
     }
     UpstreamEventCatalogueTests.Run();
+    await PreviewFeatureChecks.RunAsync();
     Console.WriteLine("PASS: legacy and indexed catalogs, lazy loading, cache refresh, schema rejection, embedded resources and archive compatibility. No live requests.");
 }
 finally { Directory.Delete(temporary, true); }
