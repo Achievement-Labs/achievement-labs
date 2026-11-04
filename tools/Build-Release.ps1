@@ -8,7 +8,8 @@ param(
     [string]$BuildRoot = '',
     [string]$PackagesDirectory = '',
     [string]$SigningThumbprint = $env:ACHIEVEMENT_LABS_SIGNING_THUMBPRINT,
-    [string]$TimestampUrl = 'http://timestamp.digicert.com'
+    [string]$TimestampUrl = 'http://timestamp.digicert.com',
+    [string]$Xbox360SigningFile = $env:LABS_XBOX360_SIGNING_FILE
 )
 if ($PSVersionTable.PSVersion.Major -lt 7) {
     throw 'Build-Release.ps1 requires PowerShell 7 or newer. Run it with: pwsh -File tools/Build-Release.ps1'
@@ -23,6 +24,23 @@ if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'gfwlam/engine.dll'))) {
 if ($RefreshCatalog) { & (Join-Path $PSScriptRoot 'Build-SiteGameData.ps1') }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'site/assets/games.json'))) {
     throw 'Public catalog metadata is missing. Prepare it before building or use -RefreshCatalog.'
+}
+# The release exe must carry the full event catalog: v1.3.0 shipped without it and every event title broke
+# for users without a local Events folder. Fail before and after publishing if the catalog is missing.
+$taskEventsSource = [System.IO.Path]::GetFullPath($EventsSource)
+$taskEventsIndex = Join-Path $taskEventsSource 'index.json'
+if (-not (Test-Path -LiteralPath $taskEventsIndex)) { throw "Bundled event catalog is missing: $taskEventsIndex" }
+$taskEventIds = @((Get-Content -LiteralPath $taskEventsIndex -Raw | ConvertFrom-Json).SupportedTitleIDs)
+if ($taskEventIds.Count -lt 1) { throw 'Bundled event catalog lists no supported titles.' }
+foreach ($taskEventId in $taskEventIds) {
+    foreach ($taskEventFile in @("$taskEventId/Data.json", "$taskEventId/$taskEventId.json")) {
+        if (-not (Test-Path -LiteralPath (Join-Path $taskEventsSource $taskEventFile))) { throw "Bundled event file is missing: $taskEventFile" }
+    }
+}
+$taskSigningOptions = @()
+if (-not [string]::IsNullOrWhiteSpace($Xbox360SigningFile)) {
+    if (-not (Test-Path -LiteralPath $Xbox360SigningFile)) { throw 'The Xbox 360 signing file was not found.' }
+    $taskSigningOptions = @("-p:LabsXbox360SigningFile=$([System.IO.Path]::GetFullPath($Xbox360SigningFile))")
 }
 $taskStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
 $taskOutput = Join-Path $taskBuildRoot "releases/$Version-$taskStamp"
@@ -42,8 +60,21 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false @taskBuildOptions -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$([System.IO.Path]::GetFullPath($EventsSource))" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions -o $taskOutput -v:q
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$taskEventsSource" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions @taskSigningOptions -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
+$taskCoreSearch = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { Join-Path $taskRoot 'src/AchievementLabs.Core/obj/Release' } else { Join-Path $taskWork 'build/obj' }
+$taskCore = Get-ChildItem -LiteralPath $taskCoreSearch -Recurse -Filter AchievementLabs.Core.dll | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
+if ($null -eq $taskCore) { throw 'Could not find the compiled AchievementLabs.Core.dll to verify bundled events.' }
+$taskPe = [System.Reflection.PortableExecutable.PEReader]::new([System.IO.File]::OpenRead($taskCore.FullName))
+try {
+    $taskMd = [System.Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($taskPe)
+    $taskEmbedded = @($taskMd.ManifestResources | ForEach-Object { $taskMd.GetString($taskMd.GetManifestResource($_).Name) } | Where-Object { $_ -like 'AchievementLabs.LocalEvents.*' } | ForEach-Object { $_.Replace([char]92, [char]47) })
+} finally { $taskPe.Dispose() }
+foreach ($taskRequired in @('AchievementLabs.LocalEvents.index.json') + @($taskEventIds | ForEach-Object { "AchievementLabs.LocalEvents.$_/Data.json"; "AchievementLabs.LocalEvents.$_/$_.json" })) {
+    if ($taskEmbedded -notcontains $taskRequired) { throw "Release build is missing bundled event resource: $taskRequired" }
+}
+Write-Output "Verified $($taskEventIds.Count) bundled event titles ($($taskEmbedded.Count) event resources)."
+
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }
 $taskExe = $taskFiles[0]
