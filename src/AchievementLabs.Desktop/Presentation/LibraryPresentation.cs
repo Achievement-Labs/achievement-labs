@@ -38,7 +38,10 @@ public static class LibraryPresentation
             var theme=AppearanceController.For(owner);
             count.Name="LibraryAchievementCount";count.TextWrapping=TextWrapping.NoWrap;count.TextTrimming=TextTrimming.CharacterEllipsis;count.FontSize=12;count.VerticalAlignment=VerticalAlignment.Center;
             ToolTip.SetTip(count,Get(game,"ProgressLabel")?.ToString());
-            var countContent=new StackPanel {Spacing=3};countContent.Children.Add(count);
+            var badge=Get(game,"Support");
+            var support=new TextBlock {Name="LibrarySupportBadge",Text=$"{Get(badge!, "Symbol")} {Get(badge!, "Label")}",FontSize=11,TextWrapping=TextWrapping.NoWrap,TextTrimming=TextTrimming.CharacterEllipsis,Foreground=new SolidColorBrush(Color.Parse(Get(badge!,"Colour")?.ToString()??"#A6B4BF"))};
+            ToolTip.SetTip(support,Get(badge!,"Detail")?.ToString());
+            var countContent=new StackPanel {Spacing=3};countContent.Children.Add(support);countContent.Children.Add(count);
             countContent.Children.Add(new TextBlock {Name="LibraryGameCompletionPercentage",Text=CompletionSummary.GamePercentage(game),FontSize=11,Foreground=new SolidColorBrush(Color.Parse("#8FE3BC")),TextWrapping=TextWrapping.NoWrap});
             var countCell=new Border {Name="LibraryAchievementSection",Child=countContent,Background=theme.Panel,BorderBrush=theme.Line,BorderThickness=new Thickness(1),CornerRadius=new CornerRadius(8),Padding=new Thickness(10,7),VerticalAlignment=VerticalAlignment.Center};
             Grid.SetColumn(countCell,2);grid.Children.Add(countCell);
@@ -56,7 +59,7 @@ public static class LibraryPresentation
             void Layout(){
                 bool compact=grid.Bounds.Width<1160;
                 if(currentCompact==compact)return;currentCompact=compact;
-                grid.ColumnDefinitions=new ColumnDefinitions(compact?"44,*,150,28,82":"44,*,150,28,82,Auto");
+                grid.ColumnDefinitions=new ColumnDefinitions(compact?"44,*,180,28,82":"44,*,180,28,82,Auto");
                 grid.RowDefinitions=new RowDefinitions(compact?"Auto,Auto":"Auto");
                 Grid.SetColumn(actions,compact?1:5);Grid.SetRow(actions,compact?1:0);Grid.SetColumnSpan(actions,compact?4:1);
                 actions.HorizontalAlignment=HorizontalAlignment.Right;
@@ -65,7 +68,7 @@ public static class LibraryPresentation
             return row;
         });
     }
-    static object? Get(object model,string name)=>model.GetType().GetProperty(name)?.GetValue(model);
+    static object? Get(object? model,string name)=>model?.GetType().GetProperty(name)?.GetValue(model);
     static void Set(object model,string name,object? value)=>model.GetType().GetProperty(name)?.SetValue(model,value);
     public static void OpenSession(object model,object game,bool preview){
         Set(model,"SelectedLibraryGame",game);Set(model,"SelectedGame",game);
@@ -78,6 +81,8 @@ public static class LibraryPresentation
             owner.Width=size.Item1;owner.Height=size.Item2;await Task.Delay(650);
             var counts=root.GetLogicalDescendants().OfType<TextBlock>().Where(t=>t.Name=="LibraryAchievementCount").Distinct().ToArray();
             var buttons=root.GetLogicalDescendants().OfType<Button>().Where(b=>b.Name=="LibraryOpenGameSession").Distinct().ToArray();
+            var supportBadges=root.GetLogicalDescendants().OfType<TextBlock>().Where(t=>t.Name=="LibrarySupportBadge").Distinct().ToArray();
+            if(supportBadges.Length!=3 || supportBadges.Any(t=>string.IsNullOrWhiteSpace(t.Text)))throw new Exception("Library support badges missing.");
             if(counts.Length!=3 || buttons.Length!=3)throw new Exception("Library preview must contain three aligned rows and session buttons.");
             foreach(var count in counts){if(count.TextWrapping!=TextWrapping.NoWrap || count.Bounds.Height>25 || count.Bounds.Width<125)throw new Exception("Achievement count wrapped or lost its reserved space.");}
             foreach(var button in buttons){var point=button.TranslatePoint(new Point(button.Bounds.Width,button.Bounds.Height),root)!.Value;if(point.X>root.Bounds.Width || button.Bounds.Width<115)throw new Exception("Library session action is clipped.");}

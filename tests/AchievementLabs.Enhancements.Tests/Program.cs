@@ -35,6 +35,7 @@ static class Test
   if(args.Length==4 && args[0]=="--verify-mobile360"){Mobile360Checks.Run(args[1],args[2],args[3]);return;}
   if(args.Length==2 && args[0]=="--description-layout"){AchievementDescriptionLayoutChecks.Run(args[1]);return;}
   if(args.Contains("--queue-descriptions")){SavedGameQueueTests.Run();return;}
+  if(args.Length==2 && args[0]=="--overlay-preview"){OverlayCompatibilityChecks.Run(args[1]);return;}
   if(args.Length is 2 or 3 && args[0]=="--xbox360-layout"){Xbox360LayoutChecks.Run(args[1],args.Length==3?args[2]:null);return;}
   if(args.Length==3 && args[0]=="--xbox360-signing-check"){Xbox360SigningChecks.Run(args[1],args[2]);return;}
   if(args.Length==3 && args[0]=="--xbox360-profile-check"){Xbox360ProfilePreviewChecks.Run(args[1],args[2]);return;}

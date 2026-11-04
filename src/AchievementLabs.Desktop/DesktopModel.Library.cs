@@ -32,7 +32,7 @@ public sealed partial class DesktopModel
     public string TitleLookup { get => titleLookup; set { titleLookup = value ?? ""; Changed(); } }
     public int LegacyTabIndex { get => legacyTabIndex; set { legacyTabIndex = value; Changed(); } }
     public Game? SelectedGfwlTitle { get => selectedGfwlTitle; private set { selectedGfwlTitle = value; Changed(); } }
-    public bool CanQuery => !QueueActive && !busy && session != null;
+    public bool CanQuery => !QueueActive && !busy && !eventRefreshRunning && session != null;
     public bool CanExport => achievements.Length > 0;
     public static bool HasDevice(Game game, string device) => game.Platform.Split('/', StringSplitOptions.TrimEntries).Contains(device, StringComparer.OrdinalIgnoreCase);
     public static bool UsesLegacyEndpoint(Game game) => AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id) || new[] { "Xbox360", "GFWL", "Mobile", "WindowsPhone", "Win8", "Windows8" }.Any(d => HasDevice(game, d));
@@ -123,6 +123,7 @@ public sealed partial class DesktopModel
     public async Task RefreshLibraryAsync()
     {
         if (!CanQuery || LibraryRefreshing) return;
+        libraryEventSupport = null;
         Busy(true); LibraryRefreshing=true; LibraryRefreshPercent=0; LibraryRefreshIndeterminate=true;
         var elapsed = System.Diagnostics.Stopwatch.StartNew();
         LibraryRefreshStatus="Checking account authorization…";
@@ -157,7 +158,7 @@ public sealed partial class DesktopModel
         }
         catch (OperationCanceledException) { LibraryRefreshStatus="Library refresh cancelled; previous list retained."; }
         catch { LibraryRefreshStatus="Library refresh failed; previous list retained. Check your connection and retry."; Notice=LibraryRefreshStatus; }
-        finally { LibraryRefreshing=false; LibraryRefreshIndeterminate=false; Busy(false); }
+        finally { LibraryRefreshing=false; LibraryRefreshIndeterminate=false; Busy(false); QueueLibrarySupportCheck(); }
     }
     private readonly AchievementLabs.Core.SharedAchievementTotals sharedLibraryTotals = AchievementLabs.Core.SharedAchievementTotals.Bundled();
     private readonly Dictionary<string, int> knownLibraryTotals = new();
@@ -165,11 +166,17 @@ public sealed partial class DesktopModel
         ? game with { Total = total, ProgressKnown = game.ProgressKnown && game.Completed <= total, NoDefinitionsReturned = false } : game;
     private async Task RefreshSharedTotalsAsync(CancellationToken ct)
     {
+        await sharedMetadataRefresh.WaitAsync(ct);
+        try
+        {
         using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+        await sharedUnlockMethods.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-unlock-methods.json"), ct);
         await sharedLibraryTotals.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-library-totals.json"), ct);
         if (AutoRefreshDlc && !dlcRefreshRunning) await AchievementLabs.MultiSelect.SharedDlcCatalogue.Current.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-achievement-packs.json"), ct);
         if (!dlcRefreshRunning) UpdateDlcCatalogueStatus();
         TotalsStatus = $"Shared totals available for {sharedLibraryTotals.Count} titles. Fill missing totals checks the remaining titles.";
+        }
+        finally { sharedMetadataRefresh.Release(); }
     }
     private CancellationTokenSource? totalsCancellation;
     private string totalsStatus = "";

@@ -6,14 +6,31 @@ namespace AchievementLabs.Core;
 internal sealed class LocalEventCatalogue
 {
     private readonly JObject data;
+    private readonly bool externalCatalog;
     private readonly EventCatalogStorage storage;
     private readonly HashSet<string> supported;
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, (string Version, Task<EventTitleMapping> Result)> validated = new();
     public string[] ReservedTitleIds => data.Properties().Where(p => uint.TryParse(p.Name, out _)).Select(p => p.Name).ToArray();
+    public string[] ProtectedTitleIds => externalCatalog ? ReservedTitleIds : data.Properties()
+        .Where(p => p.Value is JObject block && ((bool?)block["Enabled"] == false || AchievementLabs.MultiSelect.EditionMapping.Supports(p.Name) || p.Name is "572802557" or "345903534"))
+        .Select(p => p.Name).ToArray();
+    public bool Matches(string id, JObject block, string template)
+    {
+        if (data[id] is not JObject) return false;
+        try
+        {
+            var local = storage.ReadTitleAsync(id, CancellationToken.None).GetAwaiter().GetResult();
+            return (bool?)local["Enabled"] != false && ((bool?)local["FullySupported"] == true) == ((bool?)block["FullySupported"] == true)
+                && JToken.DeepEquals(local["Achievements"], block["Achievements"])
+                && storage.ReadTemplateAsync(id, CancellationToken.None).GetAwaiter().GetResult().Replace("\r\n", "\n").Trim() == template.Replace("\r\n", "\n").Trim();
+        }
+        catch (Exception error) when (error is IOException or InvalidDataException or Newtonsoft.Json.JsonException) { return false; }
+    }
     public string[] TitleIds => supported.Where(id => id != "345903534").ToArray();
     public LocalEventCatalogue(string? path)
     {
         var external = path != null && (File.Exists(Path.Combine(path, "index.json")) || File.Exists(Path.Combine(path, "Data.json")));
+        externalCatalog = external;
         storage = external ? new EventCatalogStorage(path!) : new EventCatalogStorage(HasResource("index.json"),
             (name, ct) => { ct.ThrowIfCancellationRequested(); return Task.FromResult(Resource(name)); });
         data = storage.Index;
@@ -57,6 +74,28 @@ internal sealed class LocalEventCatalogue
             if (JObject.Parse(text)["data"]?["baseData"]?["titleId"]?.ToString() != id)
                 throw new InvalidDataException("The local payload is missing the selected title identity.");
         return new(bodies.ToArray());
+    }
+    private readonly Dictionary<string, (string Version, LibraryEventSupport Support)> supportCache = new();
+    public Dictionary<string, LibraryEventSupport> LibrarySupport()
+    {
+        var result = new Dictionary<string, LibraryEventSupport>();
+        foreach (var property in data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)))
+        {
+            var id = property.Name; var version = storage.Version(id);
+            if (supportCache.TryGetValue(id, out var cached) && cached.Version == version) { result[id] = cached.Support; continue; }
+            try
+            {
+                var block = storage.ReadTitleAsync(id, CancellationToken.None).GetAwaiter().GetResult();
+                EventCatalogSchema.ValidateTitle(block);
+                var item = new LibraryEventSupport(supported.Contains(id), (bool?)block["FullySupported"] == true,
+                    (block["Achievements"] as JObject)?.Count ?? 0,
+                    id == "345903534" ? "Uses the original event service; bundled recipes are not used for this edition." : null);
+                supportCache[id] = (version, item); result[id] = item;
+            }
+            catch (Exception error) when (error is IOException or InvalidDataException or Newtonsoft.Json.JsonException or ArgumentException or InvalidOperationException)
+            { result[id] = new(false, false, 0); }
+        }
+        return result;
     }
     public EventCatalogStatus Status()
     {

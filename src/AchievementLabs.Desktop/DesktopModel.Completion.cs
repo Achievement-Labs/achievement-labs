@@ -34,6 +34,7 @@ public sealed partial class DesktopModel
             completionDirty = true;
         }
         return game with {
+            Support = SupportFor(game),
             BaseComplete = mythic, AddOnsComplete = result.AddOnsComplete, FullyComplete = result.FullyComplete,
             MythicVisible = ShowMythicIcon && mythic,
             MythicColour = ValidColour(MythicColour, "#70C98A"),

@@ -108,6 +108,10 @@ public static class GameSessionWorkspace
         if(achievementPicture!=null)achievementPicture.PropertyChanged+=(_,e)=>{if(e.Property==Image.SourceProperty)UpdateSessionCover();};
         if(model is INotifyPropertyChanged coverModel){PropertyChangedEventHandler coverChanged=(_,e)=>{if(e.PropertyName is "SelectedGame" or "PresenceTitleId")UpdateSessionCover();};coverModel.PropertyChanged+=coverChanged;owner.Closed+=(_,_)=>coverModel.PropertyChanged-=coverChanged;}
         UpdateSessionCover();
+        var openAchievements=new Button {Name="SessionOpenAchievements",Content="Open achievements",HorizontalAlignment=HorizontalAlignment.Left,Margin=new Thickness(0,8,0,0)};
+        openAchievements.Bind(InputElement.IsEnabledProperty,new Binding("CanQuery") {Source=model});
+        openAchievements.Click+=async (_,_)=>{if(!preview && model.GetType().GetMethod("OpenSessionAchievementsAsync")?.Invoke(model,null) is Task task)await task;};
+        title.Children.Add(openAchievements);
         var titleWithCover=new Grid {ColumnDefinitions=new ColumnDefinitions("Auto,*"),ColumnSpacing=16};titleWithCover.Children.Add(coverFrame);Grid.SetColumn(title,1);titleWithCover.Children.Add(title);
         title.Margin=new Thickness(0);var titleGlass=Glass(titleWithCover,image,owner);titleGlass.VerticalAlignment=VerticalAlignment.Center;
         var presenceHeading=presence.Children.OfType<TextBlock>().FirstOrDefault(t=>t.Text=="PRESENCE");if(presenceHeading!=null)presence.Children.Remove(presenceHeading);
@@ -221,6 +225,7 @@ public static class GameSessionWorkspace
             AddPreviewLibrary(model,owner.GetType().Assembly);
             Set(model,"SpoofTitleImageUrl",new Uri(Path.Combine(PreviewFixtures.ArtworkDirectory,"sod2-full-artwork.jpg")).AbsoluteUri);
             model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Spoofer"});await Task.Delay(1600);
+            if(title.GetLogicalDescendants().OfType<Button>().All(b=>b.Name!="SessionOpenAchievements"))throw new Exception("Game Session achievements shortcut missing.");
             if(sessionCover.Source==null || (achievementPicture?.Source!=null && !ReferenceEquals(sessionCover.Source,achievementPicture.Source)))throw new Exception("Game session did not reuse the achievement page's game image.");
             var outdir=Environment.GetCommandLineArgs().SkipWhile(a=>a!="--preview-output").Skip(1).FirstOrDefault();if(outdir==null)return;Directory.CreateDirectory(outdir);
             foreach(var size in new[]{(1440,920,"combined-session.png"),(1120,720,"combined-compact.png"),(1680,1100,"combined-large.png")}){

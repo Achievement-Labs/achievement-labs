@@ -7,22 +7,27 @@ using Newtonsoft.Json.Linq;
 
 namespace AchievementLabs.Core;
 
-/// <summary>Additive public data updates. Author-maintained mappings always win.</summary>
+/// <summary>Validated public updates in a separate cache. Protected/local mappings always win.</summary>
 public sealed class UpstreamEventCatalogue
 {
     public const string BundledSourceCommit = "1a76574db3ca4d5ee02f162a63cf0ce3123b3db9";
     private const string BundledArchiveDigest = "f763e3048d7fda9d9e226dec0f40211937d0ffd454083aa29a7cd3f5af67b159";
     private readonly string cachePath;
     private readonly HashSet<string> reserved;
+    private readonly HashSet<string> bundled;
+    private readonly Func<string, JObject, string, bool>? matchesBundled;
+    public string[] KnownTitleIds => Volatile.Read(ref current).Data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)).Select(p => p.Name).ToArray();
     private readonly SemaphoreSlim refreshGate = new(1, 1);
     private sealed record Snapshot(string Commit, DateTime CheckedUtc, JObject Data, Dictionary<string, string> Templates);
     private Snapshot current = new(BundledArchiveDigest, DateTime.MinValue, new JObject { ["SupportedTitleIDs"] = new JArray() }, new());
-    public string Status { get; private set; } = "Bundled event data loaded; upstream checks add new titles only.";
+    public string Status { get; private set; } = "Bundled event data loaded; updates refresh mappings and support status.";
     public string[] TitleIds => Volatile.Read(ref current).Templates.Keys.OrderBy(x => x, StringComparer.Ordinal).ToArray();
 
-    public UpstreamEventCatalogue(string path, IEnumerable<string> reservedTitleIds)
+    public UpstreamEventCatalogue(string path, IEnumerable<string> reservedTitleIds, Func<string, JObject, string, bool>? matchesBundled = null, IEnumerable<string>? bundledTitleIds = null)
     {
         cachePath = path;
+        this.matchesBundled = matchesBundled;
+        bundled = (bundledTitleIds ?? []).ToHashSet(StringComparer.Ordinal);
         reserved = reservedTitleIds.ToHashSet(StringComparer.Ordinal);
         try
         {
@@ -36,27 +41,37 @@ public sealed class UpstreamEventCatalogue
             var rawTemplates = saved["templates"] as JObject ?? throw new InvalidDataException();
             var templates = new Dictionary<string, string>();
             var safe = new JObject();
-            foreach (var entry in rawTemplates.Properties())
+            foreach (var entry in data.Properties().Where(p => p.Name != "SupportedTitleIDs"))
             {
                 if (reserved.Contains(entry.Name)) continue;
+                if (!EventCatalogStorage.ValidId(entry.Name)) throw new InvalidDataException("Invalid cached title identity.");
                 var block = data[entry.Name] as JObject ?? throw new InvalidDataException();
-                var template = entry.Value.Type == JTokenType.String ? entry.Value.ToString() : throw new InvalidDataException();
+                EventCatalogSchema.ValidateTitle(block);
+                if ((bool?)block["Enabled"] == false) { safe[entry.Name] = DisabledBlock(); continue; }
+                var template = rawTemplates[entry.Name]?.Type == JTokenType.String ? rawTemplates[entry.Name]!.ToString() : throw new InvalidDataException();
                 ValidateAsync(entry.Name, block, template, CancellationToken.None).GetAwaiter().GetResult();
                 safe[entry.Name] = block.DeepClone(); templates.Add(entry.Name, template);
             }
             safe["SupportedTitleIDs"] = new JArray(templates.Keys);
             current = new(commit, (DateTime?)saved["checkedUtc"] ?? DateTime.MinValue, safe, templates);
-            Status = $"Loaded {templates.Count:N0} cached upstream titles (Testing).";
+            Status = $"Loaded {templates.Count:N0} cached upstream titles.";
         }
         catch { Status = "Upstream event cache could not be validated; bundled mappings retained."; }
     }
 
+    public Dictionary<string, LibraryEventSupport> LibrarySupport()
+    {
+        var snapshot = Volatile.Read(ref current);
+        return snapshot.Data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name) && p.Value is JObject)
+            .ToDictionary(p => p.Name, p => new LibraryEventSupport(snapshot.Templates.ContainsKey(p.Name),
+                (bool?)p.Value["FullySupported"] == true, (p.Value["Achievements"] as JObject)?.Count ?? 0));
+    }
     public bool Contains(string titleId) => Volatile.Read(ref current).Templates.ContainsKey(titleId);
     public async Task<int> ImportPackAsync(string text, CancellationToken ct = default)
     {
-        if (Encoding.UTF8.GetByteCount(text) > 32 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 32 MB.");
+        if (Encoding.UTF8.GetByteCount(text) > 64 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 64 MB.");
         var pack = Parse(text);
-        if ((int?)pack["schemaVersion"] != 1 || pack["titles"] is not JObject titles || titles.Count > 5000)
+        if ((int?)pack["schemaVersion"] is not (1 or 2) || pack["titles"] is not JObject titles || titles.Count > 5000)
             throw new InvalidDataException("Choose an event pack containing templates and achievement mappings, not a single game template.");
         await refreshGate.WaitAsync(ct).ConfigureAwait(false);
         try
@@ -68,13 +83,29 @@ public sealed class UpstreamEventCatalogue
             foreach (var title in titles.Properties())
             {
                 ct.ThrowIfCancellationRequested();
-                if (reserved.Contains(title.Name) || templates.ContainsKey(title.Name)) continue;
+                if (!Regex.IsMatch(title.Name, "^[0-9]{1,10}$") || title.Value is not JObject) throw new InvalidDataException("Invalid event title.");
+                bool legacyPack = (int?)pack["schemaVersion"] == 1;
+                if (reserved.Contains(title.Name) || legacyPack && (bundled.Contains(title.Name) || data[title.Name] != null)) continue;
+                var status = title.Value["status"] as JObject;
+                var classification = (string?)status?["classification"];
+                if (classification == "Unsupported")
+                {
+                    if ((int?)status?["count"] != 0 || title.Value["recipes"]?["recipes"] is not JObject { Count: 0 }
+                        || (string?)title.Value["template"] != "" || status?["reason"]?.Type != JTokenType.String)
+                        throw new InvalidDataException("Invalid disabled event record.");
+                    var disabled = DisabledBlock();
+                    if (!JToken.DeepEquals(data[title.Name], disabled)) added++;
+                    data.Remove("SupportedTitleIDs"); data[title.Name] = disabled; templates.Remove(title.Name); continue;
+                }
                 var template = (string?)title.Value["template"] ?? throw new InvalidDataException("Missing event template.");
                 var recipes = title.Value["recipes"]?["recipes"] as JObject ?? throw new InvalidDataException("Missing achievement mappings.");
+                if (status != null && (classification is not ("Supported" or "Testing") || (int?)status["count"] != recipes.Count
+                    || status["reason"] is { Type: not JTokenType.Null })) throw new InvalidDataException("Invalid event support metadata.");
+                if (!legacyPack && status == null) throw new InvalidDataException("Missing event support metadata.");
                 var achievements = new JObject();
                 foreach (var recipe in recipes.Properties())
                 {
-                    if (!Regex.IsMatch(recipe.Name, "^[0-9]{1,10}$") || recipe.Value is not JArray requests || requests.Count is < 1 or > 20) throw new InvalidDataException("Invalid achievement mapping.");
+                    if (!Regex.IsMatch(recipe.Name, "^[0-9]{1,10}$") || recipe.Value is not JArray requests || requests.Count is < 1 or > 1000) throw new InvalidDataException("Invalid achievement mapping.");
                     var converted = new JObject(); int r = 0;
                     foreach (var request in requests)
                     {
@@ -85,27 +116,32 @@ public sealed class UpstreamEventCatalogue
                             if (op["target"]?.Type != JTokenType.String || op["value"]?.Type != JTokenType.String) throw new InvalidDataException("Invalid replacement.");
                             mapped[(n++).ToString()] = new JObject { ["ReplacementType"] = "Replace", ["Target"] = op["target"]!.DeepClone(), ["Replacement"] = op["value"]!.DeepClone() };
                         }
-                        converted[(r++).ToString()] = mapped;
+                        converted["Request" + ++r] = mapped;
                     }
                     achievements[recipe.Name] = converted;
                 }
-                var block = new JObject { ["Achievements"] = achievements };
+                var block = new JObject { ["Enabled"] = true, ["FullySupported"] = classification == "Supported", ["Achievements"] = achievements };
                 await ValidateAsync(title.Name, block, template, ct).ConfigureAwait(false);
-                data.Remove("SupportedTitleIDs"); data[title.Name] = block; templates.Add(title.Name, template); added++;
+                if (JToken.DeepEquals(data[title.Name], block) && templates.GetValueOrDefault(title.Name) == template) continue;
+                data.Remove("SupportedTitleIDs");
+                if (matchesBundled?.Invoke(title.Name, block, template) == true) { data.Remove(title.Name); templates.Remove(title.Name); }
+                else { data[title.Name] = block.DeepClone(); templates[title.Name] = template; }
+                added++;
             }
             data.Remove("SupportedTitleIDs"); data["SupportedTitleIDs"] = new JArray(templates.Keys);
             var next = new Snapshot(previous.Commit, previous.CheckedUtc, data, templates);
             var saved = new JObject { ["commit"] = next.Commit, ["checkedUtc"] = next.CheckedUtc, ["data"] = data, ["templates"] = JObject.FromObject(templates) };
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(cachePath))!);
             var temporary = cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
-            try { await File.WriteAllTextAsync(temporary, saved.ToString(Formatting.None), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
+            try { await File.WriteAllTextAsync(temporary, SerializeCache(saved), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
-            Status = $"Imported {added:N0} new titles from event pack (Testing). Existing titles retained.";
+            Status = $"Imported {added:N0} event updates. Protected mappings retained.";
             return added;
         }
         finally { refreshGate.Release(); }
     }
+    private static JObject DisabledBlock() => new() { ["Enabled"] = false, ["FullySupported"] = false, ["Achievements"] = new JObject() };
     public EventTitleMapping Title(string titleId)
     {
         var state = Volatile.Read(ref current);
@@ -175,12 +211,17 @@ public sealed class UpstreamEventCatalogue
                 var upstream = source.Index;
                 var ids = upstream["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Supported-title list is missing.");
                 if (ids.Count > 5000) throw new InvalidDataException("Title limit exceeded.");
-                stage = "validating new titles";
-                foreach (var id in ids.Select(i => i.ToString()).Distinct(StringComparer.Ordinal))
+                stage = "validating event updates";
+                var enabled = ids.Select(i => i.ToString()).ToHashSet(StringComparer.Ordinal);
+                foreach (var id in upstream.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)).Select(p => p.Name))
                 {
                     ct.ThrowIfCancellationRequested();
-                    if (reserved.Contains(id) || templates.ContainsKey(id)) continue;
-                    if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || upstream[id] is not JObject || (bool?)upstream[id]!["Enabled"] == false) { skipped++; continue; }
+                    if (reserved.Contains(id)) continue;
+                    if (!enabled.Contains(id) || (bool?)upstream[id]!["Enabled"] == false)
+                    {
+                        var disabled = DisabledBlock(); if (!JToken.DeepEquals(data[id], disabled)) added++;
+                        data.Remove("SupportedTitleIDs"); data[id] = disabled; templates.Remove(id); continue;
+                    }
                     JObject block; string template;
                     try {
                         block = await source.ReadTitleAsync(id, ct).ConfigureAwait(false);
@@ -188,7 +229,10 @@ public sealed class UpstreamEventCatalogue
                         await ValidateAsync(id, block, template, ct).ConfigureAwait(false);
                     }
                     catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException) { skipped++; continue; }
-                    data.Remove("SupportedTitleIDs"); data[id] = block.DeepClone(); templates.Add(id, template); added++;
+                    if (matchesBundled?.Invoke(id, block, template) == true)
+                    { if (data.Remove(id)) { templates.Remove(id); added++; } continue; }
+                    if (JToken.DeepEquals(data[id], block) && templates.GetValueOrDefault(id) == template) continue;
+                    data.Remove("SupportedTitleIDs"); data[id] = block.DeepClone(); templates[id] = template; added++;
                 }
             }
             data.Remove("SupportedTitleIDs"); data["SupportedTitleIDs"] = new JArray(templates.Keys);
@@ -197,10 +241,10 @@ public sealed class UpstreamEventCatalogue
             stage = "saving the validated cache";
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(cachePath))!);
             var temporary = cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
-            try { await File.WriteAllTextAsync(temporary, saved.ToString(Formatting.None), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
+            try { await File.WriteAllTextAsync(temporary, SerializeCache(saved), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
-            Status = $"Checked {tag} Events.zip · {added:N0} new titles added · {templates.Count:N0} cached titles (Testing) · {skipped:N0} entries skipped · {next.CheckedUtc.ToLocalTime():g}";
+            Status = $"Checked {tag} Events.zip · {added:N0} title updates · {templates.Count:N0} cached titles · {skipped:N0} entries skipped · {next.CheckedUtc.ToLocalTime():g}";
         }
         catch (OperationCanceledException) { throw; }
         catch (HttpRequestException e) { Status = $"Could not update event data while {stage}: HTTP {(int?)e.StatusCode}. Existing mappings and cache retained; retry Check now."; }
@@ -210,6 +254,12 @@ public sealed class UpstreamEventCatalogue
         finally { refreshGate.Release(); }
     }
 
+    private static string SerializeCache(JObject saved)
+    {
+        var text = saved.ToString(Formatting.None);
+        if (Encoding.UTF8.GetByteCount(text) > 128 * 1024 * 1024) throw new InvalidDataException("Validated cache size limit exceeded.");
+        return text;
+    }
     private static string ReadZip(ZipArchiveEntry entry, int limit)
     {
         if (entry.Length > limit) throw new InvalidDataException("Archive entry exceeds its size limit.");
@@ -239,12 +289,13 @@ public sealed class UpstreamEventCatalogue
     private static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct)
     {
         if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || template.Length > 1024 * 1024 || block["Achievements"] is not JObject achievements || achievements.Count == 0 || achievements.Count > 2000) throw new InvalidDataException();
+        EventCatalogSchema.ValidateTitle(block);
         var catalog = new EventCatalog(new JObject { [id] = block.DeepClone(), ["SupportedTitleIDs"] = new JArray(id) }, (_, _) => Task.FromResult(template));
         foreach (var achievement in achievements.Properties())
         {
             // Auto-import only ordinary deterministic replacements; unsupported schemas need review.
             var ops = (achievement.Value as JObject ?? throw new InvalidDataException()).DescendantsAndSelf().OfType<JObject>().Where(o => o["ReplacementType"] != null).ToArray();
-            if (ops.Length == 0 || ops.Length > 100 || ops.Any(o => (string?)o["ReplacementType"] != "Replace" || string.IsNullOrEmpty((string?)o["Target"]) || o["Replacement"]?.Type != JTokenType.String)) throw new InvalidDataException();
+            if (ops.Length == 0 || ops.Length > 100000 || ops.Any(o => (string?)o["ReplacementType"] != "Replace" || string.IsNullOrEmpty((string?)o["Target"]) || o["Replacement"]?.Type != JTokenType.String)) throw new InvalidDataException();
             var mapping = (JObject)achievement.Value;
             var first = mapping.Properties().First().Value as JObject ?? throw new InvalidDataException();
             var requests = first["ReplacementType"] != null ? new[]{mapping} : mapping.Properties().Select(p => (JObject)p.Value).ToArray();
@@ -261,7 +312,7 @@ public sealed class UpstreamEventCatalogue
                 }
             }
             var bodies = await catalog.BuildPayloadsAsync(id, achievement.Name, "0", DateTime.UnixEpoch, ct).ConfigureAwait(false);
-            if (bodies.Count == 0 || bodies.Count > 20) throw new InvalidDataException();
+            if (bodies.Count == 0 || bodies.Count > 1000) throw new InvalidDataException();
             foreach (var text in bodies)
             {
                 using var strict = System.Text.Json.JsonDocument.Parse(text);

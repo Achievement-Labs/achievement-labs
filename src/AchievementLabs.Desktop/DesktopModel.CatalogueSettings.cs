@@ -6,33 +6,37 @@ namespace AchievementLabs.Desktop;
 public sealed partial class DesktopModel
 {
     private bool eventRefreshRunning;
-    private string eventCatalogueStatus = "Bundled event data loaded. Automatic upstream checks add new titles only.";
+    private string eventCatalogueStatus = "Bundled event data loaded. Upstream checks refresh mappings and support status.";
     public bool CanRefreshEventCatalogue => !eventRefreshRunning;
     public async Task ImportEventPackAsync(string path)
     {
         if (eventRefreshRunning || !CanInteract) return;
-        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue));
+        if (QueueActive || busy) { EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
+        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
         try {
-            if (new FileInfo(path).Length > 32 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 32 MB.");
+            if (new FileInfo(path).Length > 64 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 64 MB.");
             await eventCatalog.ImportEventPackAsync(await File.ReadAllTextAsync(path, lifetime.Token), lifetime.Token);
             EventCatalogueStatus = eventCatalog.UpstreamStatus;
+            RefreshLibrarySupport(); await RefreshSelectedEventSupportAsync();
         } catch (OperationCanceledException) { }
-        catch { EventCatalogueStatus = "Could not import event pack. Choose a pack containing templates and mappings (up to 32 MB). Existing data retained."; }
-        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); }
+        catch { EventCatalogueStatus = "Could not import event pack. Choose a pack containing templates and mappings (up to 64 MB). Existing data retained."; }
+        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
     }
     public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
     public async Task RefreshEventCatalogueAsync(bool force = true)
     {
         if (eventRefreshRunning || !force && !AutoRefreshEvents || OfflineChecks) return;
-        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue));
-        EventCatalogueStatus = "Checking the official repository for new event titles…";
+        if (QueueActive || busy) { if (force) EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
+        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
+        EventCatalogueStatus = "Checking the official repository for event mapping/status updates…";
         try {
             using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(2) };
             await eventCatalog.RefreshUpstreamAsync(http, force, lifetime.Token);
             EventCatalogueStatus = eventCatalog.UpstreamStatus;
+            RefreshLibrarySupport(); await RefreshSelectedEventSupportAsync();
         } catch (OperationCanceledException) { }
         catch { EventCatalogueStatus = "Could not check upstream event data. Existing mappings retained."; }
-        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); }
+        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
     }
     private bool dlcRefreshRunning;
     private string dlcCatalogueStatus = "Bundled DLC sections loaded. Automatic checks run daily while the app is open.";
