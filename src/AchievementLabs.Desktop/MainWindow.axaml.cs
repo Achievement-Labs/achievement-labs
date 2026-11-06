@@ -93,6 +93,7 @@ public partial class MainWindow : Window
         };
         Opened += async (_, _) =>
         {
+            SetWindowsDarkTitleBar();
             MacStartup.Stage("Window opened");
             if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
             if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
@@ -747,4 +748,26 @@ public partial class MainWindow : Window
     {
         model.MintAccent = !model.MintAccent;
     }
+
+    private void SetWindowsDarkTitleBar()
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+            if (handle != IntPtr.Zero)
+            {
+                int darkMode = 1;
+                DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
+                DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                int captionColor = 0x00000000; // Black (COLORREF 0x00BBGGRR)
+                DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
+            }
+        }
+        catch { }
+    }
+
+    [System.Runtime.InteropServices.DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
 }

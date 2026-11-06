@@ -51,7 +51,11 @@ public static class LanPairing
         finally { CryptographicOperations.ZeroMemory(pfx); }
     }
 
+#if NET9_0_OR_GREATER
     internal static X509Certificate2 LoadIdentity(byte[] pfx) => X509CertificateLoader.LoadPkcs12(pfx, null,
+#else
+    internal static X509Certificate2 LoadIdentity(byte[] pfx) => new X509Certificate2(pfx, (string?)null,
+#endif
         X509KeyStorageFlags.Exportable | X509KeyStorageFlags.UserKeySet);
 
     public static string Fingerprint(X509Certificate certificate) => Convert.ToHexString(SHA256.HashData(certificate.GetRawCertData()));

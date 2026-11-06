@@ -70,7 +70,11 @@ public sealed class Xbox360GpdCatalogClient(HttpClient http, string gpdDirectory
     {
         if (!titles.TryGetValue(titleId, out var title)) throw new InvalidOperationException("That title is not in the GPD catalog.");
         var data = await GetAsync(new Uri(BaseUri, $"{title.Release}/{titleId}.gpd"), Xbox360GpdTemplate.MaxBytes, token);
+#if NET9_0_OR_GREATER
         if (data.Length != title.Bytes || Convert.ToHexStringLower(SHA256.HashData(data)) != title.Sha256)
+#else
+        if (data.Length != title.Bytes || Convert.ToHexString(SHA256.HashData(data)).ToLowerInvariant() != title.Sha256)
+#endif
             throw new InvalidDataException("The downloaded GPD did not match the catalog checksum.");
         Directory.CreateDirectory(gpdDirectory);
         var path = Path.Combine(gpdDirectory, titleId + ".gpd"); var staged = path + ".partial";
