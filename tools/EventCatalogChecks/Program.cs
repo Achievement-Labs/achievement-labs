@@ -67,9 +67,20 @@ try
 }
 finally { Directory.Delete(temporary, true); }
 
-if (args.Length == 2 && args[0] == "--render")
+if ((args.Length == 2 && args[0] == "--render") || args is ["--render-bundled"])
 {
-    var catalog = new EventCatalog(args[1]); var index = await catalog.ReadIndexAsync();
+    EventCatalog catalog;
+    if (args is ["--render-bundled"])
+    {
+        // Exercise the app's ZIP reader and its actual storage/parser/rendering path without network access.
+        var type = typeof(EventCatalog).Assembly.GetType("AchievementLabs.Core.LocalEventCatalogue", throwOnError: true)!;
+        var local = type.GetConstructor([typeof(string)])!.Invoke([null]);
+        var storage = type.GetField("storage", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(local)!;
+        catalog = (EventCatalog)Activator.CreateInstance(typeof(EventCatalog), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+            binder: null, args: [storage], culture: null)!;
+    }
+    else catalog = new EventCatalog(args[1]);
+    var index = await catalog.ReadIndexAsync();
     int titles = 0, achievements = 0, payloads = 0; var failures = new List<string>();
     foreach (var title in index.Properties().Where(p => p.Name.All(char.IsDigit)))
     {

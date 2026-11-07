@@ -65,15 +65,10 @@ if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskCoreSearch = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { Join-Path $taskRoot 'src/AchievementLabs.Core/obj/Release' } else { Join-Path $taskWork 'build/obj' }
 $taskCore = Get-ChildItem -LiteralPath $taskCoreSearch -Recurse -Filter AchievementLabs.Core.dll | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1
 if ($null -eq $taskCore) { throw 'Could not find the compiled AchievementLabs.Core.dll to verify bundled events.' }
-$taskPe = [System.Reflection.PortableExecutable.PEReader]::new([System.IO.File]::OpenRead($taskCore.FullName))
-try {
-    $taskMd = [System.Reflection.Metadata.PEReaderExtensions]::GetMetadataReader($taskPe)
-    $taskEmbedded = @($taskMd.ManifestResources | ForEach-Object { $taskMd.GetString($taskMd.GetManifestResource($_).Name) } | Where-Object { $_ -like 'AchievementLabs.LocalEvents.*' } | ForEach-Object { $_.Replace([char]92, [char]47) })
-} finally { $taskPe.Dispose() }
-foreach ($taskRequired in @('AchievementLabs.LocalEvents.index.json') + @($taskEventIds | ForEach-Object { "AchievementLabs.LocalEvents.$_/Data.json"; "AchievementLabs.LocalEvents.$_/$_.json" })) {
-    if ($taskEmbedded -notcontains $taskRequired) { throw "Release build is missing bundled event resource: $taskRequired" }
-}
-Write-Output "Verified $($taskEventIds.Count) bundled event titles ($($taskEmbedded.Count) event resources)."
+# Inspect the compiled resource without executing the app, and verify every packed file against the selected source.
+& dotnet run --project (Join-Path $PSScriptRoot 'CompressEvents/CompressEvents.csproj') --configuration Release --no-launch-profile --property:NuGetAudit=false -- --verify $taskCore.FullName $taskEventsSource
+if ($LASTEXITCODE -ne 0) { throw 'Release build contains a missing, corrupt or stale embedded event bundle.' }
+Write-Output "Verified $($taskEventIds.Count) bundled event titles."
 
 $taskFiles = @(Get-ChildItem -LiteralPath $taskOutput -Recurse -File)
 if ($taskFiles.Count -ne 1 -or $taskFiles[0].Name -ne 'AchievementLabs.exe') { throw 'Release must contain exactly one AchievementLabs.exe.' }
