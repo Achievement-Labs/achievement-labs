@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using Newtonsoft.Json.Linq;
 
 namespace AchievementLabs.Core;
@@ -38,12 +39,32 @@ internal sealed class LocalEventCatalogue
         supported = (data["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Missing supported title IDs."))
             .Select(i => i.ToString()).Where(id => data[id] is JObject b && (bool?)b["Enabled"] != false).ToHashSet(StringComparer.Ordinal);
     }
+    // ZIP indexes independently Brotli-compressed JSON files. Synchronize its shared seekable resource stream.
+    private static readonly Lazy<ZipArchive?> Bundle = new(() =>
+    {
+        var stream = typeof(LocalEventCatalogue).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents.zip");
+        return stream == null ? null : new ZipArchive(stream, ZipArchiveMode.Read);
+    });
     private static string ResourceName(string path) => "AchievementLabs.LocalEvents." + path.Replace('/', '.').Replace('\\', '.');
     private static string? FindResource(string path) => typeof(LocalEventCatalogue).Assembly.GetManifestResourceNames()
         .FirstOrDefault(name => name.Replace('/', '.').Replace('\\', '.') == ResourceName(path));
-    private static bool HasResource(string path) => FindResource(path) != null;
+    private static bool HasResource(string path)
+    {
+        if (Bundle.Value is { } bundle)
+            lock (bundle) if (bundle.GetEntry(path.Replace('\\', '/') + ".br") != null) return true;
+        return FindResource(path) != null;
+    }
     private static string Resource(string path)
     {
+        if (Bundle.Value is { } bundle)
+            lock (bundle)
+                if (bundle.GetEntry(path.Replace('\\', '/') + ".br") is { } entry)
+                {
+                    using var content = entry.Open();
+                    using var decompressed = new BrotliStream(content, CompressionMode.Decompress);
+                    using var text = new StreamReader(decompressed);
+                    return text.ReadToEnd();
+                }
         using var stream = typeof(LocalEventCatalogue).Assembly.GetManifestResourceStream(FindResource(path)
             ?? throw new InvalidDataException("Local event file is missing: " + path))!;
         using var reader = new StreamReader(stream); return reader.ReadToEnd();
