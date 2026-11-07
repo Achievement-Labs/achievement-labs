@@ -111,10 +111,10 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
 
     internal static void StartInstall(string download, UpdateManifest manifest)
     {
-        if (OperatingSystem.IsLinux()) throw new PlatformNotSupportedException("Download Linux preview updates manually.");
+        if (OperatingSystem.IsLinux()) throw new PlatformNotSupportedException("Download Linux updates manually from Achievement-Labs/achievement-labs releases.");
         Verify(download, manifest);
 #if LABS_MACOS
-        if (OperatingSystem.IsMacOS()) throw new PlatformNotSupportedException("Mac preview updates are installed manually from fork releases.");
+        if (OperatingSystem.IsMacOS()) throw new PlatformNotSupportedException("Download Mac updates manually from Achievement-Labs/achievement-labs releases.");
 #endif
         var target = Environment.ProcessPath ?? throw new InvalidOperationException("Application path unavailable.");
         if (!target.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("Use the published Windows EXE to install an update.");

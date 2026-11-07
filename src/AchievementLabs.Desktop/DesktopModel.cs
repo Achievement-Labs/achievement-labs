@@ -124,7 +124,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool CanGoBack => pageHistory.Count > 0;
     public bool CanGoForward => pageForwardHistory.Count > 0;
     public void Navigate(string destination) {
-        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable in this desktop preview."; return; }
+        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable on this platform."; return; }
         if (destination == "Legacy") return;
         if (destination == page) return;
         if (page == "Achievements" && destination != "Achievements" && autoPresenceTask != null) StopPresence();
