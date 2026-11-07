@@ -159,9 +159,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
     private void Busy(bool value) { busy = value; RefreshXbox360Signing(); Changed(nameof(CanAcquireAccountEventToken)); Changed(nameof(CanConnect)); Changed(nameof(CanInteract)); Changed(nameof(CanDisconnect)); Changed(nameof(CanQuery)); Changed(nameof(CanLookupSpoofTitle)); Changed(nameof(CanFillTotals)); Changed(nameof(CanStartPresence)); NotifyActions(); }
     public Task ConnectAsync() => AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? ConnectMacAsync() : AttachXboxPcAppAsync();
 
-    private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method)
+    private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method, BasicProfile? validatedProfile = null)
     {
-        var result = await Task.Run(async () => (Profile: await candidate.GetBasicProfileAsync(), Titles: await candidate.GetGamesListAsync(connected.Xuid)), lifetime.Token);
+        var result = await Task.Run(async () => (Profile: validatedProfile ?? await candidate.GetBasicProfileAsync(lifetime.Token), Titles: await candidate.GetGamesListAsync(connected.Xuid)), lifetime.Token);
         lifetime.Token.ThrowIfCancellationRequested();
         if (result.Titles == null) throw new InvalidDataException("Xbox title history was not returned.");
         client = candidate;
