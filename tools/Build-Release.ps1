@@ -3,6 +3,7 @@
 param(
     [Parameter(Mandatory)][string]$Version,
     [switch]$RefreshCatalog,
+    [switch]$UpdateTest,
     [string]$EventsSource = (Join-Path $PSScriptRoot '../src/AchievementLabs.App/Events'),
     [ValidateRange(0,65534)][int]$BuildRevision = 0,
     [string]$BuildRoot = '',
@@ -49,8 +50,9 @@ $taskHelpers = Join-Path $taskWork 'helpers'
 $env:DOTNET_CLI_HOME = Join-Path $taskBuildRoot '.dotnet'
 $env:NUGET_PACKAGES = if ([string]::IsNullOrWhiteSpace($PackagesDirectory)) { Join-Path $taskBuildRoot '.nuget-packages' } else { [IO.Path]::GetFullPath($PackagesDirectory) }
 $taskBuildOptions = @()
+if ($UpdateTest) { $taskBuildOptions += '-p:LabsUpdateTesting=true' }
 if (-not [string]::IsNullOrWhiteSpace($BuildRoot)) {
-    $taskBuildOptions = @('-p:UseArtifactsOutput=true', "-p:ArtifactsPath=$(Join-Path $taskWork 'build')")
+    $taskBuildOptions += @('-p:UseArtifactsOutput=true', "-p:ArtifactsPath=$(Join-Path $taskWork 'build')")
 }
 New-Item -ItemType Directory -Path $taskOutput,$taskHelpers -Force | Out-Null
 foreach ($taskHelper in @(

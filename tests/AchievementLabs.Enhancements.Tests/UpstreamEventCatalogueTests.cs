@@ -74,6 +74,11 @@ public static class UpstreamEventCatalogueTests
             Assert(new UpstreamEventCatalogue(officialPath, [], bundledTitleIds: ["99", "101", "104"], officialCatalog: true)
                 .LibrarySupport()["101"].PartiallySupported, "Official snapshot survives restart offline");
             bool manualRejected = false;
+            var cachedOfficial = File.ReadAllBytes(officialPath);
+            var startupCalls = officialFixture.Calls;
+            official.RefreshAsync(officialHttp, false, default, startup: true).GetAwaiter().GetResult();
+            Assert(officialFixture.Calls == startupCalls + 1 && File.ReadAllBytes(officialPath).SequenceEqual(cachedOfficial),
+                "Startup rechecks metadata inside the hourly window without rewriting an unchanged catalog");
             try { official.ImportPackAsync("{}").GetAwaiter().GetResult(); } catch (InvalidOperationException) { manualRejected = true; }
             Assert(manualRejected, "Manual packs cannot write the official update cache");
             var fixture=new Fixture{Archive=Zip(data)};using var http=new HttpClient(fixture);

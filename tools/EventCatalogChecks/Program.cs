@@ -64,6 +64,12 @@ try
     }
     using (var official = new EventCatalogClient(true, () => flat, officialCatalog: true))
     {
+#if LABS_UPDATE_TESTING
+        var fixtureBlocked = false;
+        try { await official.GetPayloadsAsync("4294967294", "1", "0", default); }
+        catch (InvalidOperationException) { fixtureBlocked = true; }
+        Check(fixtureBlocked, "Catalog update fixture cannot submit telemetry");
+#endif
         var support = official.GetLibrarySupport();
         var status = await official.GetCatalogAsync(default);
         foreach (var id in new[] { "1041486048", "1144039928", "219630713" })

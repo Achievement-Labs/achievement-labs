@@ -169,10 +169,21 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(startup: true); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(startup: true);
+#if !LABS_UPDATE_TESTING
+                _ = model.RefreshDlcCatalogueAsync(false);
+#endif
+                _ = model.RefreshEventCatalogueAsync(false, startup: true);
+#if LABS_UPDATE_TESTING
+                model.Notice = "PRIVATE UPDATE TEST · isolated profile and fixture feed · account attachment is manual.";
+                Directory.CreateDirectory(AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot);
+                File.WriteAllText(AchievementLabs.Core.AchievementLabsPaths.LocalFile("running-version.json"), System.Text.Json.JsonSerializer.Serialize(new { version = AppUpdater.CurrentVersion.ToString(), pid = Environment.ProcessId }));
+                MacStartup.Stage("Ready"); return;
+#else
                 if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) await model.AttachXboxPcAppAsync();
                 else { await model.AttachXboxPcAppOnStartupAsync(); _ = model.RefreshSteamProfileOnStartupAsync(); }
                 MacStartup.Stage("Ready"); return;
+#endif
             }
             try
             {

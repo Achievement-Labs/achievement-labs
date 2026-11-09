@@ -28,6 +28,10 @@ public partial class MainWindow
                 TextWrapping = TextWrapping.Wrap },
             new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12, HorizontalAlignment = HorizontalAlignment.Right, Children = { later, accept } }
         } };
+#if LABS_UPDATE_TESTING
+        if (Environment.GetEnvironmentVariable("LABS_UPDATE_TEST_AUTOMATION") == "1")
+            dialog.Opened += (_, _) => Avalonia.Threading.Dispatcher.UIThread.Post(() => dialog.Close(true));
+#endif
         var accepted = await dialog.ShowDialog<bool>(this);
         if (ready && accepted && model.InstallUpdate()) Close();
         return accepted;

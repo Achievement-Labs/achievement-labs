@@ -2,6 +2,9 @@ using AchievementLabs.Desktop;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text.Json;
+#if LABS_UPDATE_TESTING
+await TestTransportChecks.RunAsync();
+#endif
 var root = Path.Combine(Path.GetFullPath("artifacts"), "updater-checks-" + Guid.NewGuid().ToString("N"));
 if (AppUpdater.DisplayVersion(new Version(1, 3, 2, 0)) != "1.3.2" || AppUpdater.DisplayVersion(new Version(1, 3, 2, 1)) != "1.3.2.1")
     throw new Exception("Display version must hide only the zero revision; update comparisons retain it.");

@@ -57,7 +57,7 @@ public sealed class EventCatalogClient : IDisposable
         return support;
     }
     public string[] BundledTitleIds => Local?.TitleIds ?? [];
-    public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct) { if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct); }
+    public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct, bool startup = false) { if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct, startup); }
 
     public Task<EventCatalogStatus> GetCatalogAsync(CancellationToken ct)
     {
@@ -81,6 +81,9 @@ public sealed class EventCatalogClient : IDisposable
     }
     public Task<EventPayloads> GetPayloadsAsync(string id, string achievementId, string xuid, CancellationToken ct)
     {
+#if LABS_UPDATE_TESTING
+        if (id == "4294967294") return Task.FromException<EventPayloads>(new InvalidOperationException("The catalog-update fixture cannot submit telemetry."));
+#endif
         if (IsCustom(id)) return Custom!.PayloadsAsync(id, achievementId, xuid, ct);
         var updates = Additions;
         if (updates?.KnownTitleIds.Contains(id) == true)

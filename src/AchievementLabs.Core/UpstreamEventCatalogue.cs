@@ -172,14 +172,14 @@ public sealed class UpstreamEventCatalogue
         return new((await catalogue.BuildPayloadsAsync(titleId, achievementId, xuid, DateTime.UtcNow, ct).ConfigureAwait(false)).ToArray());
     }
 
-    public async Task RefreshAsync(HttpClient http, bool force = false, CancellationToken ct = default)
+    public async Task RefreshAsync(HttpClient http, bool force = false, CancellationToken ct = default, bool startup = false)
     {
         await refreshGate.WaitAsync(ct).ConfigureAwait(false);
         var stage = "reading release metadata";
         try
         {
             var previous = Volatile.Read(ref current);
-            if (!force && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
+            if (!force && !startup && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
             var releaseText = await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100", 4 * 1024 * 1024, ct).ConfigureAwait(false);
             using var releaseReader = new JsonTextReader(new StringReader(releaseText)) { MaxDepth = 64 };
             var releases = JArray.Load(releaseReader, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
