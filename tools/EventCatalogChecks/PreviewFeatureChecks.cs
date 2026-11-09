@@ -36,7 +36,10 @@ static class PreviewFeatureChecks
         var invalid = Metadata(Guid.Empty.ToString()); invalid["achievements"]![0]!["serviceConfigId"] = Guid.Empty.ToString();
         Check(LibrarySupportDiscovery.Classify(invalid) == null, "Invalid SCID remains unknown");
         Check(LibrarySupportBadge.Resolve(false, false, false, false, false, 0, 30).Kind == "supported", "Title-based support");
-        Check(LibrarySupportBadge.Resolve(false, true, true, true, true, 20, 30).Kind == "partial", "Missing mappings cannot claim full support");
+        Check(LibrarySupportBadge.Resolve(false, true, true, true, true, 20, 30).Kind == "supported", "Published support is not downgraded by mapping coverage");
+        Check(LibrarySupportBadge.Resolve(false, true, true, true, false, 20, 30, true).Label == "Partially Supported", "Partial is distinct from Testing");
+        Check(LibrarySupportBadge.Resolve(false, true, true, true, false, 20, 30).Label == "Testing", "Testing is explicit");
+        Check(LibrarySupportBadge.Resolve(false, false, true, true, false, 20, 30, true).Kind == "partial", "Local discovery cannot override official classification");
         Check(LibrarySupportBadge.Resolve(false, true, true, false, true, 30, 30).Kind == "unsupported", "Disabled mapping unsupported");
         Check(LibrarySupportBadge.Resolve(true, false, true, true, true, 30, 30).Kind == "unknown", "Legacy tool availability is not online unlock support");
         using (var fixture = new ReadFixture()) using (var http = new HttpClient(fixture))

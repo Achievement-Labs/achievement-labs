@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     {
         MacStartup.Stage("Loading main window");
         InitializeComponent(); DataContext = model;
+        model.UpdatePrompt = PromptAppUpdateAsync;
         ConfigurePlatformSidebar();
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
         AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
@@ -167,7 +168,7 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(startup: true); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
                 if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) await model.AttachXboxPcAppAsync();
                 else { await model.AttachXboxPcAppOnStartupAsync(); _ = model.RefreshSteamProfileOnStartupAsync(); }
                 MacStartup.Stage("Ready"); return;

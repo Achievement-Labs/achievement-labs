@@ -15,6 +15,8 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
     internal const string Repository = "https://github.com/Achievement-Labs/achievement-labs";
     internal static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs", "Updates");
     internal static Version CurrentVersion => typeof(AppUpdater).Assembly.GetName().Version!;
+    internal static string DisplayVersion(Version version) => version.ToString(version.Revision > 0 ? 4 : 3);
+    internal static string CurrentDisplayVersion => DisplayVersion(CurrentVersion);
     private readonly HttpClient http = client ?? new() { Timeout = TimeSpan.FromMinutes(10) };
     private readonly string root = directory ?? Root;
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);

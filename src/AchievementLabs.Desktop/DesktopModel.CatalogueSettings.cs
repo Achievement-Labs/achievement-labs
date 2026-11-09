@@ -25,7 +25,7 @@ public sealed partial class DesktopModel
     public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
     public async Task RefreshEventCatalogueAsync(bool force = true)
     {
-        if (eventRefreshRunning || !force && !AutoRefreshEvents || OfflineChecks) return;
+        if (eventRefreshRunning || OfflineChecks) return;
         if (QueueActive || busy) { if (force) EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
         eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
         EventCatalogueStatus = "Checking the official repository for event mapping/status updates…";
