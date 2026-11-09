@@ -12,6 +12,7 @@ public static class UpstreamEventCatalogueTests
         public byte[] Archive=[];
         public bool Fail, BadDigest, WrongLocation, IndexedAsset;
         public int Calls;
+        public string Tag = "v1.0.8";
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,CancellationToken ct)
         {
             Calls++;
@@ -20,7 +21,7 @@ public static class UpstreamEventCatalogueTests
             var metadata=request.RequestUri!.AbsolutePath.EndsWith("/releases");
             var digest=BadDigest ? new string('0',64) : Convert.ToHexString(SHA256.HashData(Archive)).ToLowerInvariant();
             var assetName=IndexedAsset ? "Events-Indexed.zip" : "Events.zip";
-            HttpContent content=metadata ? new StringContent(new JArray(new JObject { ["tag_name"]="v99.0.0",["draft"]=false,["prerelease"]=false,["assets"]=new JArray() }, new JObject { ["tag_name"]="v1.0.8",["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]=assetName,["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/v1.0.8/"+assetName }) }).ToString()) : new ByteArrayContent(Archive);
+            HttpContent content=metadata ? new StringContent(new JArray(new JObject { ["tag_name"]="v99.0.0",["draft"]=false,["prerelease"]=false,["assets"]=new JArray() }, new JObject { ["tag_name"]=Tag,["draft"]=false,["prerelease"]=false,["assets"]=new JArray(new JObject { ["name"]=assetName,["digest"]="sha256:"+digest,["browser_download_url"]=WrongLocation ? "https://example.com/Events.zip" : "https://github.com/Achievement-Labs/achievement-labs/releases/download/"+Tag+"/"+assetName }) }).ToString()) : new ByteArrayContent(Archive);
             return Task.FromResult(new HttpResponseMessage(Fail?HttpStatusCode.Forbidden:HttpStatusCode.OK){Content=content});
         }
     }
@@ -49,6 +50,37 @@ public static class UpstreamEventCatalogueTests
         var dir=Path.Combine(Path.GetTempPath(),"labs-zip-update-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(dir);
         try {
             var path=Path.Combine(dir,"cache.json");var data=new JObject{["99"]=Block(),["101"]=Block(),["102"]=Block(),["103"]=Block(),["SupportedTitleIDs"]=new JArray("99","101","102","103")};
+            // Official updates are complete snapshots. A single bad title must roll back everything.
+            var officialPath = Path.Combine(dir, "official.json");
+            var officialData = new JObject { ["99"] = Block(), ["101"] = Block(), ["SupportedTitleIDs"] = new JArray("99", "101") };
+            officialData["101"]!["FullySupported"] = true;
+            var officialFixture = new Fixture { Tag = "v1.3.3", Archive = Zip(officialData, indexed: true), IndexedAsset = true };
+            using var officialHttp = new HttpClient(officialFixture);
+            var official = new UpstreamEventCatalogue(officialPath, [], bundledTitleIds: ["99", "101", "104"], officialCatalog: true);
+            official.RefreshAsync(officialHttp, true).GetAwaiter().GetResult();
+            Assert(official.Contains("99") && official.LibrarySupport()["101"].FullySupported, "Official snapshot includes all titles and published statuses");
+            Assert(official.KnownTitleIds.Contains("104") && !official.LibrarySupport()["104"].Available, "Removed official title cannot fall back to older bundled mapping");
+            var officialBefore = File.ReadAllBytes(officialPath);
+            officialFixture.Archive = Zip(data, indexed: true);
+            official.RefreshAsync(officialHttp, true).GetAwaiter().GetResult();
+            Assert(File.ReadAllBytes(officialPath).SequenceEqual(officialBefore) && official.LibrarySupport()["101"].FullySupported,
+                "Invalid official title preserves the entire previous snapshot and classifications");
+            officialData["101"]!["FullySupported"] = false;
+            officialData["101"]!["PartiallySupported"] = true;
+            officialFixture.Archive = Zip(officialData, indexed: true);
+            official.RefreshAsync(officialHttp, true).GetAwaiter().GetResult();
+            Assert(official.LibrarySupport()["101"].PartiallySupported && !official.LibrarySupport()["101"].FullySupported,
+                "Published partial status is preserved separately from testing");
+            Assert(new UpstreamEventCatalogue(officialPath, [], bundledTitleIds: ["99", "101", "104"], officialCatalog: true)
+                .LibrarySupport()["101"].PartiallySupported, "Official snapshot survives restart offline");
+            bool manualRejected = false;
+            var cachedOfficial = File.ReadAllBytes(officialPath);
+            var startupCalls = officialFixture.Calls;
+            official.RefreshAsync(officialHttp, false, default, startup: true).GetAwaiter().GetResult();
+            Assert(officialFixture.Calls == startupCalls + 1 && File.ReadAllBytes(officialPath).SequenceEqual(cachedOfficial),
+                "Startup rechecks metadata inside the hourly window without rewriting an unchanged catalog");
+            try { official.ImportPackAsync("{}").GetAwaiter().GetResult(); } catch (InvalidOperationException) { manualRejected = true; }
+            Assert(manualRejected, "Manual packs cannot write the official update cache");
             var fixture=new Fixture{Archive=Zip(data)};using var http=new HttpClient(fixture);
             var catalogue=new UpstreamEventCatalogue(path,new[]{"99","345903534"});catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();
             Assert(catalogue.TitleIds.SequenceEqual(new[]{"101"}) && !catalogue.Contains("99"),"Only new structurally valid titles imported; reserved mappings protected");

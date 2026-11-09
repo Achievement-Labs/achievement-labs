@@ -3,6 +3,7 @@
 param(
     [Parameter(Mandatory)][string]$Version,
     [switch]$RefreshCatalog,
+    [switch]$UpdateTest,
     [string]$EventsSource = (Join-Path $PSScriptRoot '../src/AchievementLabs.App/Events'),
     [ValidateRange(0,65534)][int]$BuildRevision = 0,
     [string]$BuildRoot = '',
@@ -17,6 +18,12 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable version such as 1.0.6.' }
 $taskRoot = Split-Path -Parent $PSScriptRoot
+Push-Location $taskRoot
+try {
+    & python -m services.catalog_api.export_client --repo . --check
+    if ($LASTEXITCODE -ne 0) { throw 'Bundled public metadata is stale; regenerate it before packaging.' }
+} finally { Pop-Location }
+
 $taskBuildRoot = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { $taskRoot } else { [IO.Path]::GetFullPath($BuildRoot) }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'gfwlam/engine.dll'))) {
     throw 'Missing prepared GFWL engine: gfwlam/engine.dll. Restore the approved release input before packaging; it is intentionally excluded from Git.'
@@ -49,8 +56,9 @@ $taskHelpers = Join-Path $taskWork 'helpers'
 $env:DOTNET_CLI_HOME = Join-Path $taskBuildRoot '.dotnet'
 $env:NUGET_PACKAGES = if ([string]::IsNullOrWhiteSpace($PackagesDirectory)) { Join-Path $taskBuildRoot '.nuget-packages' } else { [IO.Path]::GetFullPath($PackagesDirectory) }
 $taskBuildOptions = @()
+if ($UpdateTest) { $taskBuildOptions += '-p:LabsUpdateTesting=true' }
 if (-not [string]::IsNullOrWhiteSpace($BuildRoot)) {
-    $taskBuildOptions = @('-p:UseArtifactsOutput=true', "-p:ArtifactsPath=$(Join-Path $taskWork 'build')")
+    $taskBuildOptions += @('-p:UseArtifactsOutput=true', "-p:ArtifactsPath=$(Join-Path $taskWork 'build')")
 }
 New-Item -ItemType Directory -Path $taskOutput,$taskHelpers -Force | Out-Null
 foreach ($taskHelper in @(

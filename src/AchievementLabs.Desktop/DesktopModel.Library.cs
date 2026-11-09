@@ -130,8 +130,6 @@ public sealed partial class DesktopModel
         try
         {
             await EnsureAuthorizationFreshAsync(lifetime.Token);
-            LibraryRefreshStatus="Refreshing shared totals and DLC metadata…";
-            await RefreshSharedTotalsAsync(lifetime.Token);
             LoadLibraryTotals();
             LibraryRefreshStatus="Waiting to read the Xbox library…";
             await requests.WaitAsync(lifetime.Token);
@@ -153,6 +151,7 @@ public sealed partial class DesktopModel
                 Games = result.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
                 LibraryRefreshStatus=$"Refreshed {Games.Length:N0} titles · {Games.Count(g=>g.ProgressKnown):N0} with achievement counts · {elapsed.Elapsed.TotalSeconds:N1}s";
                 LibraryRefreshPercent=100; Notice=LibraryRefreshStatus;
+                _ = RefreshConnectedMetadataAsync(session.Xuid, sessionGeneration, api);
             }
             finally { requests.Release(); }
         }
@@ -171,6 +170,7 @@ public sealed partial class DesktopModel
         {
         using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
         await sharedUnlockMethods.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-unlock-methods.json"), ct);
+        await RefreshApiTotalsAsync(ct);
         await sharedLibraryTotals.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-library-totals.json"), ct);
         if (AutoRefreshDlc && !dlcRefreshRunning) await AchievementLabs.MultiSelect.SharedDlcCatalogue.Current.RefreshAsync(http, AchievementLabs.Core.AchievementLabsPaths.LocalFile("shared-achievement-packs.json"), ct);
         if (!dlcRefreshRunning) UpdateDlcCatalogueStatus();

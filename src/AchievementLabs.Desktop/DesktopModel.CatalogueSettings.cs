@@ -23,16 +23,25 @@ public sealed partial class DesktopModel
         finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
     }
     public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
-    public async Task RefreshEventCatalogueAsync(bool force = true)
+    public async Task RefreshEventCatalogueAsync(bool force = true, bool startup = false)
     {
-        if (eventRefreshRunning || !force && !AutoRefreshEvents || OfflineChecks) return;
+        if (eventRefreshRunning || OfflineChecks) return;
         if (QueueActive || busy) { if (force) EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
         eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
         EventCatalogueStatus = "Checking the official repository for event mapping/status updates…";
         try {
+#if LABS_UPDATE_TESTING
+            using var http = UpdateTestTransport.CreateClient();
+#else
             using var http = new HttpClient { Timeout = TimeSpan.FromMinutes(2) };
-            await eventCatalog.RefreshUpstreamAsync(http, force, lifetime.Token);
+#endif
+            await eventCatalog.RefreshUpstreamAsync(http, force, lifetime.Token, startup);
             EventCatalogueStatus = eventCatalog.UpstreamStatus;
+#if LABS_UPDATE_TESTING
+            EventCatalogueStatus += eventCatalog.GetLibrarySupport().ContainsKey("4294967294") ? " · Test marker: RECEIVED" : " · Test marker: not present";
+            Directory.CreateDirectory(AchievementLabsPaths.UpdateTestRoot);
+            File.WriteAllText(AchievementLabsPaths.LocalFile("catalog-test-status.txt"), EventCatalogueStatus);
+#endif
             RefreshLibrarySupport(); await RefreshSelectedEventSupportAsync();
         } catch (OperationCanceledException) { }
         catch { EventCatalogueStatus = "Could not check upstream event data. Existing mappings retained."; }

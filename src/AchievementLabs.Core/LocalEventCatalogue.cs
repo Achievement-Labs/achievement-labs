@@ -82,21 +82,24 @@ internal sealed class LocalEventCatalogue
                 EventCatalogSchema.ValidateTitle(block);
                 var item = new LibraryEventSupport(supported.Contains(id), (bool?)block["FullySupported"] == true,
                     (block["Achievements"] as JObject)?.Count ?? 0,
-                    id == "345903534" ? "Uses the original event service; bundled recipes are not used for this edition." : null);
+                    id == "345903534" ? "Uses the original event service; bundled recipes are not used for this edition." : null,
+                    (bool?)block["PartiallySupported"] == true);
                 supportCache[id] = (version, item); result[id] = item;
             }
             catch (Exception error) when (error is IOException or InvalidDataException or Newtonsoft.Json.JsonException or ArgumentException or InvalidOperationException)
-            { result[id] = new(false, false, 0); }
+            {
+                var summary = (JObject)property.Value;
+                result[id] = new(supported.Contains(id), (bool?)summary["FullySupported"] == true, 0,
+                    "Catalog data could not be loaded. Retry the official catalog update.", (bool?)summary["PartiallySupported"] == true);
+            }
         }
         return result;
     }
     public EventCatalogStatus Status()
     {
-        using var stream = typeof(LocalEventCatalogue).Assembly.GetManifestResourceStream("AchievementLabs.LocalPublicCatalog.json")!;
-        using var reader = new StreamReader(stream); var rows = JArray.Parse(reader.ReadToEnd());
-        string[] Ids(string status) => rows.Where(r => (string?)r["status"] == status).Select(r => r["titleId"]!.ToString()).ToArray();
-        var supportedIds = Ids("supported"); var coming = Ids("coming-soon");
-        // Partial titles stay in the testing list (unknown statuses fall through to it anyway) and are also reported separately.
-        return new(supportedIds, Ids("testing").Concat(TitleIds.Except(supportedIds).Except(coming)).Distinct().ToArray(), coming, Ids("partial"));
+        var support = LibrarySupport();
+        return new(support.Where(p => p.Value.Available && p.Value.FullySupported).Select(p => p.Key).ToArray(),
+            support.Where(p => p.Value.Available && !p.Value.FullySupported).Select(p => p.Key).ToArray(), [],
+            support.Where(p => p.Value.Available && p.Value.PartiallySupported && !p.Value.FullySupported).Select(p => p.Key).ToArray());
     }
 }

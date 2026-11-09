@@ -60,7 +60,7 @@ public sealed partial class DesktopModel
             libraryEventSupport ??= eventCatalog.GetLibrarySupport();
             libraryEventSupport.TryGetValue(game.Id, out var entry);
             bool? method = LibraryUnlockMethods.TryGetValue(game.Id, out var local) ? local : entry != null ? null : sharedUnlockMethods.Find(game.Id);
-            var badge = LibrarySupportBadge.Resolve(false, method, entry != null, entry?.Available == true, entry?.FullySupported == true, entry?.Mapped ?? 0, game.Total);
+            var badge = LibrarySupportBadge.Resolve(false, method, entry != null, entry?.Available == true, entry?.FullySupported == true, entry?.Mapped ?? 0, game.Total, entry?.PartiallySupported == true);
             return entry?.Note is { } note ? badge with { Detail = badge.Detail + " " + note } : badge;
         }
         catch { return LibrarySupportBadge.Unknown; }

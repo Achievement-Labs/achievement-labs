@@ -2,11 +2,18 @@ namespace AchievementLabs.Core;
 
 public static class AchievementLabsPaths
 {
+#if LABS_UPDATE_TESTING
+    public static string UpdateTestRoot => Path.GetFullPath(Environment.GetEnvironmentVariable("LABS_UPDATE_TEST_ROOT")
+        ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs-UpdateTest"));
+#endif
     private const string CurrentFolder = "AchievementLabs";
     private const string LegacyFolder = "UltimateAchievementLabs";
 
     public static string LocalFile(string fileName)
     {
+#if LABS_UPDATE_TESTING
+        return Path.Combine(UpdateTestRoot, fileName);
+#else
         var local = OperatingSystem.IsMacOS() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Application Support") : Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         var current = Path.Combine(local, CurrentFolder, fileName);
         var legacy = Path.Combine(local, LegacyFolder, fileName);
@@ -16,5 +23,6 @@ public static class AchievementLabsPaths
             File.Copy(legacy, current, false);
         }
         return current;
+#endif
     }
 }

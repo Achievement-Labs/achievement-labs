@@ -27,4 +27,4 @@
    <FileWrites Include="$(EventBundlePath)" />
   </ItemGroup>
  </Target>
-</Project>
+<ItemGroup><EmbeddedResource Include="../../catalog/public-metadata.json" LogicalName="AchievementLabs.PublicMetadata.json"/></ItemGroup></Project>

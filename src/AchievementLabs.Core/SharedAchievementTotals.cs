@@ -38,6 +38,7 @@ public sealed class SharedAchievementTotals
             if (!entries.TryGetValue(entry.TitleId, out var old) || entry.CheckedAt > old.CheckedAt)
                 entries[entry.TitleId] = entry;
     }
+    public string Export() => JsonSerializer.Serialize(new Catalogue(1, entries.Values.ToArray()), Json);
     public bool TryGet(string titleId, string platform, out int total)
     {
         total = 0;

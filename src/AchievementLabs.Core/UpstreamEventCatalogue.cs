@@ -15,17 +15,30 @@ public sealed class UpstreamEventCatalogue
     private readonly string cachePath;
     private readonly HashSet<string> reserved;
     private readonly HashSet<string> bundled;
+    private readonly bool officialCatalog;
+    // This client changes catalog authority. Older releases must not restore the previous labels.
+    public static Version MinimumOfficialRelease
+    {
+        get
+        {
+            var baseline = new Version(1, 3, 3);
+            var installed = System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version;
+            var release = installed is { Build: >= 0 } ? new Version(installed.Major, installed.Minor, installed.Build) : baseline;
+            return release > baseline ? release : baseline;
+        }
+    }
     private readonly Func<string, JObject, string, bool>? matchesBundled;
     public string[] KnownTitleIds => Volatile.Read(ref current).Data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)).Select(p => p.Name).ToArray();
     private readonly SemaphoreSlim refreshGate = new(1, 1);
-    private sealed record Snapshot(string Commit, DateTime CheckedUtc, JObject Data, Dictionary<string, string> Templates);
+    private sealed record Snapshot(string Commit, DateTime CheckedUtc, JObject Data, Dictionary<string, string> Templates, Version? ReleaseVersion = null);
     private Snapshot current = new(BundledArchiveDigest, DateTime.MinValue, new JObject { ["SupportedTitleIDs"] = new JArray() }, new());
     public string Status { get; private set; } = "Bundled event data loaded; updates refresh mappings and support status.";
     public string[] TitleIds => Volatile.Read(ref current).Templates.Keys.OrderBy(x => x, StringComparer.Ordinal).ToArray();
 
-    public UpstreamEventCatalogue(string path, IEnumerable<string> reservedTitleIds, Func<string, JObject, string, bool>? matchesBundled = null, IEnumerable<string>? bundledTitleIds = null)
+    public UpstreamEventCatalogue(string path, IEnumerable<string> reservedTitleIds, Func<string, JObject, string, bool>? matchesBundled = null, IEnumerable<string>? bundledTitleIds = null, bool officialCatalog = false)
     {
         cachePath = path;
+        this.officialCatalog = officialCatalog;
         this.matchesBundled = matchesBundled;
         bundled = (bundledTitleIds ?? []).ToHashSet(StringComparer.Ordinal);
         reserved = reservedTitleIds.ToHashSet(StringComparer.Ordinal);
@@ -34,8 +47,11 @@ public sealed class UpstreamEventCatalogue
             if (!File.Exists(path)) return;
             var info = new FileInfo(path);
             if (info.Length > 128 * 1024 * 1024) throw new InvalidDataException();
-            var saved = Parse(File.ReadAllText(path));
+            var saved = Parse(ReadCache(path));
             var commit = (string?)saved["commit"] ?? "";
+            Version? releaseVersion = null;
+            if (officialCatalog && (!Version.TryParse(((string?)saved["release"] ?? "").TrimStart('v'), out releaseVersion)
+                || releaseVersion < MinimumOfficialRelease)) throw new InvalidDataException("Old catalog release.");
             if (!Regex.IsMatch(commit, "^(?:[a-f0-9]{40}|[a-f0-9]{64})$")) throw new InvalidDataException();
             var data = saved["data"] as JObject ?? throw new InvalidDataException();
             var rawTemplates = saved["templates"] as JObject ?? throw new InvalidDataException();
@@ -49,11 +65,11 @@ public sealed class UpstreamEventCatalogue
                 EventCatalogSchema.ValidateTitle(block);
                 if ((bool?)block["Enabled"] == false) { safe[entry.Name] = DisabledBlock(); continue; }
                 var template = rawTemplates[entry.Name]?.Type == JTokenType.String ? rawTemplates[entry.Name]!.ToString() : throw new InvalidDataException();
-                ValidateAsync(entry.Name, block, template, CancellationToken.None).GetAwaiter().GetResult();
+                ValidateAsync(entry.Name, block, template, CancellationToken.None, officialCatalog).GetAwaiter().GetResult();
                 safe[entry.Name] = block.DeepClone(); templates.Add(entry.Name, template);
             }
             safe["SupportedTitleIDs"] = new JArray(templates.Keys);
-            current = new(commit, (DateTime?)saved["checkedUtc"] ?? DateTime.MinValue, safe, templates);
+            current = new(commit, (DateTime?)saved["checkedUtc"] ?? DateTime.MinValue, safe, templates, releaseVersion);
             Status = $"Loaded {templates.Count:N0} cached upstream titles.";
         }
         catch { Status = "Upstream event cache could not be validated; bundled mappings retained."; }
@@ -64,11 +80,13 @@ public sealed class UpstreamEventCatalogue
         var snapshot = Volatile.Read(ref current);
         return snapshot.Data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name) && p.Value is JObject)
             .ToDictionary(p => p.Name, p => new LibraryEventSupport(snapshot.Templates.ContainsKey(p.Name),
-                (bool?)p.Value["FullySupported"] == true, (p.Value["Achievements"] as JObject)?.Count ?? 0));
+                (bool?)p.Value["FullySupported"] == true, (p.Value["Achievements"] as JObject)?.Count ?? 0,
+                PartiallySupported: (bool?)p.Value["PartiallySupported"] == true));
     }
     public bool Contains(string titleId) => Volatile.Read(ref current).Templates.ContainsKey(titleId);
     public async Task<int> ImportPackAsync(string text, CancellationToken ct = default)
     {
+        if (officialCatalog) throw new InvalidOperationException("Official catalog updates must come from a verified release archive.");
         if (Encoding.UTF8.GetByteCount(text) > 64 * 1024 * 1024) throw new InvalidDataException("Event pack exceeds 64 MB.");
         var pack = Parse(text);
         if ((int?)pack["schemaVersion"] is not (1 or 2) || pack["titles"] is not JObject titles || titles.Count > 5000)
@@ -133,7 +151,7 @@ public sealed class UpstreamEventCatalogue
             var saved = new JObject { ["commit"] = next.Commit, ["checkedUtc"] = next.CheckedUtc, ["data"] = data, ["templates"] = JObject.FromObject(templates) };
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(cachePath))!);
             var temporary = cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
-            try { await File.WriteAllTextAsync(temporary, SerializeCache(saved), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
+            try { await WriteCacheAsync(temporary, saved, ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
             Status = $"Imported {added:N0} event updates. Protected mappings retained.";
@@ -154,14 +172,14 @@ public sealed class UpstreamEventCatalogue
         return new((await catalogue.BuildPayloadsAsync(titleId, achievementId, xuid, DateTime.UtcNow, ct).ConfigureAwait(false)).ToArray());
     }
 
-    public async Task RefreshAsync(HttpClient http, bool force = false, CancellationToken ct = default)
+    public async Task RefreshAsync(HttpClient http, bool force = false, CancellationToken ct = default, bool startup = false)
     {
         await refreshGate.WaitAsync(ct).ConfigureAwait(false);
         var stage = "reading release metadata";
         try
         {
             var previous = Volatile.Read(ref current);
-            if (!force && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
+            if (!force && !startup && DateTime.UtcNow - previous.CheckedUtc < TimeSpan.FromHours(1)) return;
             var releaseText = await ReadAsync(http, "https://api.github.com/repos/Achievement-Labs/achievement-labs/releases?per_page=100", 4 * 1024 * 1024, ct).ConfigureAwait(false);
             using var releaseReader = new JsonTextReader(new StringReader(releaseText)) { MaxDepth = 64 };
             var releases = JArray.Load(releaseReader, new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
@@ -172,6 +190,13 @@ public sealed class UpstreamEventCatalogue
                 ?? throw new InvalidDataException("No stable release containing Events.zip was found.");
             if ((bool?)release["draft"] != false || (bool?)release["prerelease"] != false) throw new InvalidDataException("No stable published release.");
             var tag = (string?)release["tag_name"] ?? "";
+            Version? releaseVersion = null;
+            if (officialCatalog && (!Version.TryParse(tag.TrimStart('v'), out releaseVersion)
+                || releaseVersion < MinimumOfficialRelease || releaseVersion < previous.ReleaseVersion))
+            {
+                Status = "Bundled/last verified official catalog retained; no newer compatible catalog release is published.";
+                return;
+            }
             if (!Regex.IsMatch(tag, "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:[-.][A-Za-z0-9.-]+)?$")) throw new InvalidDataException("Unexpected release tag.");
             var availableAssets = (release["assets"] as JArray ?? throw new InvalidDataException("Release assets are missing.")).OfType<JObject>().ToArray();
             var assetName = availableAssets.Any(a => (string?)a["name"] == "Events-Indexed.zip") ? "Events-Indexed.zip" : "Events.zip";
@@ -182,11 +207,18 @@ public sealed class UpstreamEventCatalogue
             var revision = digest[7..].ToLowerInvariant();
             var url = "https://github.com/Achievement-Labs/achievement-labs/releases/download/" + tag + "/" + assetName;
             if ((string?)asset["browser_download_url"] != url) throw new InvalidDataException("Unexpected archive location.");
+            if (officialCatalog && revision == previous.Commit && !force)
+            {
+                Volatile.Write(ref current, previous with { CheckedUtc = DateTime.UtcNow });
+                Status = $"Official catalog {tag} is up to date · {previous.Templates.Count:N0} cached titles.";
+                return;
+            }
             var data = (JObject)previous.Data.DeepClone();
             var templates = new Dictionary<string, string>(previous.Templates, StringComparer.Ordinal);
             int added = 0, skipped = 0;
             if (revision != previous.Commit || force)
             {
+                if (officialCatalog) { data = new JObject(); templates.Clear(); }
                 stage = "downloading Events.zip";
                 var bytes = await ReadBytesAsync(http, url, 32 * 1024 * 1024, ct).ConfigureAwait(false);
                 if (Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() != revision) throw new InvalidDataException("Archive checksum mismatch.");
@@ -226,22 +258,28 @@ public sealed class UpstreamEventCatalogue
                     try {
                         block = await source.ReadTitleAsync(id, ct).ConfigureAwait(false);
                         template = await source.ReadTemplateAsync(id, ct).ConfigureAwait(false);
-                        await ValidateAsync(id, block, template, ct).ConfigureAwait(false);
+                        await ValidateAsync(id, block, template, ct, officialCatalog).ConfigureAwait(false);
                     }
-                    catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException) { skipped++; continue; }
-                    if (matchesBundled?.Invoke(id, block, template) == true)
+                    catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException)
+                    {
+                        if (officialCatalog) throw new InvalidDataException("Official catalog rejected at title " + id + ": " + e.Message, e);
+                        skipped++; continue;
+                    }
+                    if (!officialCatalog && matchesBundled?.Invoke(id, block, template) == true)
                     { if (data.Remove(id)) { templates.Remove(id); added++; } continue; }
                     if (JToken.DeepEquals(data[id], block) && templates.GetValueOrDefault(id) == template) continue;
                     data.Remove("SupportedTitleIDs"); data[id] = block.DeepClone(); templates[id] = template; added++;
                 }
+                if (officialCatalog)
+                    foreach (var id in bundled.Where(id => !reserved.Contains(id) && upstream[id] == null)) data[id] = DisabledBlock();
             }
             data.Remove("SupportedTitleIDs"); data["SupportedTitleIDs"] = new JArray(templates.Keys);
-            var next = new Snapshot(revision, DateTime.UtcNow, data, templates);
+            var next = new Snapshot(revision, DateTime.UtcNow, data, templates, releaseVersion);
             var saved = new JObject { ["commit"] = revision, ["release"] = tag, ["checkedUtc"] = next.CheckedUtc, ["data"] = data, ["templates"] = JObject.FromObject(templates) };
             stage = "saving the validated cache";
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(cachePath))!);
             var temporary = cachePath + "." + Guid.NewGuid().ToString("N") + ".tmp";
-            try { await File.WriteAllTextAsync(temporary, SerializeCache(saved), ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
+            try { await WriteCacheAsync(temporary, saved, ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
             Status = $"Checked {tag} Events.zip · {added:N0} title updates · {templates.Count:N0} cached titles · {skipped:N0} entries skipped · {next.CheckedUtc.ToLocalTime():g}";
@@ -254,10 +292,34 @@ public sealed class UpstreamEventCatalogue
         finally { refreshGate.Release(); }
     }
 
-    private static string SerializeCache(JObject saved)
+    private string ReadCache(string path)
+    {
+        if (!officialCatalog) return File.ReadAllText(path);
+        using var file = File.OpenRead(path);
+        using var compressed = new BrotliStream(file, CompressionMode.Decompress);
+        using var output = new MemoryStream(); var buffer = new byte[81920];
+        while (true)
+        {
+            int count = compressed.Read(buffer);
+            if (count == 0) break;
+            if (output.Length + count > 512L * 1024 * 1024) throw new InvalidDataException("Official cache expansion limit exceeded.");
+            output.Write(buffer, 0, count);
+        }
+        return Encoding.UTF8.GetString(output.GetBuffer(), 0, checked((int)output.Length));
+    }
+    private async Task WriteCacheAsync(string path, JObject saved, CancellationToken ct)
+    {
+        var text = SerializeCache(saved);
+        if (!officialCatalog) { await File.WriteAllTextAsync(path, text, ct).ConfigureAwait(false); return; }
+        await using var file = File.Create(path);
+        await using var compressed = new BrotliStream(file, CompressionLevel.Optimal);
+        await using var writer = new StreamWriter(compressed, new UTF8Encoding(false));
+        await writer.WriteAsync(text.AsMemory(), ct).ConfigureAwait(false);
+    }
+    private string SerializeCache(JObject saved)
     {
         var text = saved.ToString(Formatting.None);
-        if (Encoding.UTF8.GetByteCount(text) > 128 * 1024 * 1024) throw new InvalidDataException("Validated cache size limit exceeded.");
+        if (Encoding.UTF8.GetByteCount(text) > (officialCatalog ? 512L : 128L) * 1024 * 1024) throw new InvalidDataException("Validated cache size limit exceeded.");
         return text;
     }
     private static string ReadZip(ZipArchiveEntry entry, int limit)
@@ -286,11 +348,21 @@ public sealed class UpstreamEventCatalogue
         while (true) { var count = await input.ReadAsync(bytes, ct).ConfigureAwait(false); if (count == 0) break; if (buffer.Length + count > limit) throw new InvalidDataException("Event download exceeds limit."); buffer.Write(bytes, 0, count); }
         return buffer.ToArray();
     }
-    private static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct)
+    private static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct, bool officialCatalog = false)
     {
-        if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || template.Length > 1024 * 1024 || block["Achievements"] is not JObject achievements || achievements.Count == 0 || achievements.Count > 2000) throw new InvalidDataException();
+        if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || template.Length > 1024 * 1024 || block["Achievements"] is not JObject achievements || (!officialCatalog && achievements.Count == 0) || achievements.Count > 2000) throw new InvalidDataException();
         EventCatalogSchema.ValidateTitle(block);
         var catalog = new EventCatalog(new JObject { [id] = block.DeepClone(), ["SupportedTitleIDs"] = new JArray(id) }, (_, _) => Task.FromResult(template));
+        if (officialCatalog)
+        {
+            foreach (var achievement in achievements.Properties())
+            {
+                var rendered = await catalog.BuildPayloadsAsync(id, achievement.Name, "0", DateTime.UnixEpoch, ct).ConfigureAwait(false);
+                if (rendered.Count == 0 || rendered.Any(body => body.Length > 2 * 1024 * 1024))
+                    throw new InvalidDataException("Invalid official event payload count or size.");
+            }
+            return;
+        }
         foreach (var achievement in achievements.Properties())
         {
             // Auto-import only ordinary deterministic replacements; unsupported schemas need review.

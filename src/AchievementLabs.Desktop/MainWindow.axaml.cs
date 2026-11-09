@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     {
         MacStartup.Stage("Loading main window");
         InitializeComponent(); DataContext = model;
+        model.UpdatePrompt = PromptAppUpdateAsync;
         ConfigurePlatformSidebar();
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
         AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
@@ -93,11 +94,12 @@ public partial class MainWindow : Window
         };
         Opened += async (_, _) =>
         {
+            SetWindowsDarkTitleBar();
             MacStartup.Stage("Window opened");
             if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
             if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
             // Headless regression tests must never attach to a real account.
-            if (offlineChecks)
+            if (offlineChecks && !Environment.GetCommandLineArgs().Contains("--release-smoke-test"))
             {
                 if (Environment.GetCommandLineArgs().Contains("--platform-ui-check")) { await CheckPlatformUiAsync(); return; }
                 if (Environment.GetCommandLineArgs().Contains("--steam-ui-check")) { await CheckSteamUiAsync(); return; }
@@ -167,10 +169,21 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(startup: true);
+#if !LABS_UPDATE_TESTING
+                _ = model.RefreshDlcCatalogueAsync(false);
+#endif
+                _ = model.RefreshEventCatalogueAsync(false, startup: true);
+#if LABS_UPDATE_TESTING
+                model.Notice = "PRIVATE UPDATE TEST · isolated profile and fixture feed · account attachment is manual.";
+                Directory.CreateDirectory(AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot);
+                File.WriteAllText(AchievementLabs.Core.AchievementLabsPaths.LocalFile("running-version.json"), System.Text.Json.JsonSerializer.Serialize(new { version = AppUpdater.CurrentVersion.ToString(), pid = Environment.ProcessId }));
+                MacStartup.Stage("Ready"); return;
+#else
                 if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) await model.AttachXboxPcAppAsync();
                 else { await model.AttachXboxPcAppOnStartupAsync(); _ = model.RefreshSteamProfileOnStartupAsync(); }
                 MacStartup.Stage("Ready"); return;
+#endif
             }
             try
             {
@@ -712,6 +725,7 @@ public partial class MainWindow : Window
         if (await dialog.ShowDialog<bool>(this)) model.Navigate("Settings");
     }
     private async void TestEventReplacements(object? s, RoutedEventArgs e) => await model.TestEventReplacementsAsync();
+    private async void SearchPublicCatalog(object? s, RoutedEventArgs e) => await model.SearchPublicCatalogAsync();
     private async void InspectCatalog(object? s, RoutedEventArgs e) => await model.InspectCatalogAsync();
     private async void Disconnect(object? s, RoutedEventArgs e) => await model.DisconnectAsync();
     private async void ForgetSavedSession(object? s, RoutedEventArgs e) => await model.ForgetSavedSessionAsync();
@@ -747,4 +761,30 @@ public partial class MainWindow : Window
     {
         model.MintAccent = !model.MintAccent;
     }
+
+    private void SetWindowsDarkTitleBar()
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            // Leave system contrast themes in control of native caption colors.
+            if (Application.Current?.PlatformSettings?.GetColorValues().ContrastPreference is { } contrast && contrast != default) return;
+            var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+            if (handle != IntPtr.Zero)
+            {
+                int darkMode = 1;
+                var result = DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
+                if (result < 0) result = DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                if (result < 0) return;
+                int captionColor = 0x00000000; // Black (COLORREF 0x00BBGGRR)
+                // Optional on older Windows versions; failure leaves the default caption.
+                _ = DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
+            }
+        }
+        catch { }
+    }
+
+    [System.Runtime.InteropServices.DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
 }
