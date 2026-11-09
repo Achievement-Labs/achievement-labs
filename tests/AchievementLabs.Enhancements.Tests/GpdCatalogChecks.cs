@@ -28,7 +28,7 @@ static class GpdCatalogChecks
    if(!packages.ReadEntryBytes(added,entry.Path).SequenceEqual(packages.ReadEntryBytes(original,entry.Path)))throw new Exception("Existing profile file changed: "+entry.Path);
 
   var catalogDir=Path.Combine(dir,"catalog-client");if(Directory.Exists(catalogDir))Directory.Delete(catalogDir,true);
-  var sha=Convert.ToHexString(SHA256.HashData(expected)).ToLowerInvariant();
+  var sha=Convert.ToHexStringLower(SHA256.HashData(expected));
   string row(string name,string hash)=>"{\"name\":\""+name+"\",\"achievements\":2,\"gamerscore\":40,\"bytes\":"+expected.Length+",\"sha256\":\""+hash+"\",\"release\":\"gpd-catalog-1\"}";
   string index="{\"version\":1,\"titles\":{\"ABCD0001\":"+row("Catalog game",sha)+",\"ABCD0002\":"+row("Tampered",new string('0',64))+"}}";
   var client=new Xbox360GpdCatalogClient(new HttpClient(new Fake(index,expected)),Path.Combine(catalogDir,"GPD"));

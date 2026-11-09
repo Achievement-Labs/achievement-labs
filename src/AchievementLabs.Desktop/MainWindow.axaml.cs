@@ -754,14 +754,18 @@ public partial class MainWindow : Window
         if (!OperatingSystem.IsWindows()) return;
         try
         {
+            // Leave system contrast themes in control of native caption colors.
+            if (Application.Current?.PlatformSettings?.GetColorValues().ContrastPreference is { } contrast && contrast != default) return;
             var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
             if (handle != IntPtr.Zero)
             {
                 int darkMode = 1;
-                DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
-                DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                var result = DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
+                if (result < 0) result = DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                if (result < 0) return;
                 int captionColor = 0x00000000; // Black (COLORREF 0x00BBGGRR)
-                DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
+                // Optional on older Windows versions; failure leaves the default caption.
+                _ = DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
             }
         }
         catch { }

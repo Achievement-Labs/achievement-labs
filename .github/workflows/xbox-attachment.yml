@@ -1,0 +1,24 @@
+name: Xbox attachment checks
+on:
+  pull_request:
+    paths:
+      - 'src/AchievementLabs.Core/**'
+      - 'src/AchievementLabs.App/Util/Memory/**'
+      - 'src/AchievementLabs.Desktop/**'
+      - 'tests/XboxAttachmentChecks/**'
+      - '.github/workflows/xbox-attachment.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-checks:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Check attachment parsing and read-only process access
+        run: dotnet run --project tests/XboxAttachmentChecks -c Release
+      - name: Build Windows desktop
+        run: dotnet build src/AchievementLabs.Desktop -c Release --nologo

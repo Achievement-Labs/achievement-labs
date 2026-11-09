@@ -20,12 +20,56 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"StageClear\":4,\"Value\":4,\"Count\":4,\"STAGE_CLEAR\":4,\"StageId\":4,\"Stage\":4,\"StageNo\":4,\"StageIndex\":4,\"StageID\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4,\"Stage\":4}}}}},\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StageClear\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StageClear\":1,\"Value\":1,\"Count\":1,\"STAGE_CLEAR\":1,\"StageId\":15,\"Stage\":15,\"StageNo\":15,\"StageIndex\":15,\"StageID\":15},\"measurements\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StageClear\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":1,\"Stage\":15},\"measurements\":{}}}"
+          }
+        },
+        "Request2": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StageClear"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4,\"Stage\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StageClear\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":1,\"Stage\":15},\"measurements\":{}}}"
+          },
+          "AppVersionReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"!App\"",
+            "Replacement": "\"1.0.0.2_x64_!warsR.exe\""
+          }
+        },
+        "Request3": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StageClear"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StageClear\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{}}}"
+          },
+          "AppVersionReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"!App\"",
+            "Replacement": "\"1.0.0.2_x64_!warsR.exe\""
           }
         }
       },
@@ -452,12 +496,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"CorrectRedstarrings\":4,\"Value\":4,\"Count\":4,\"CORRECT_REDSTARRINGS\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CorrectRedstarrings\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CorrectRedstarrings\":120,\"Value\":120,\"Count\":120,\"CORRECT_REDSTARRINGS\":120},\"measurements\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CorrectRedstarrings\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":3},\"measurements\":{}}}"
           }
         }
       },
@@ -547,12 +591,12 @@
           "MetaDataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEMETADATA",
-            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"TakeRingCount\":4,\"Value\":4,\"Count\":4,\"TAKE_RING_COUNT\":4}}}}},\"policies\":0}"
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"Value\":4}}}}},\"policies\":0}"
           },
           "DataReplacement": {
             "ReplacementType": "Replace",
             "Target": "REPLACEDATA",
-            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TakeRingCount\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TakeRingCount\":10000,\"Value\":10000,\"Count\":10000,\"TAKE_RING_COUNT\":10000},\"measurements\":{}}}"
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TakeRingCount\",\"serviceConfigId\":\"04680100-fb25-4d84-9994-761007b5597e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":129325438,\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":100},\"measurements\":{}}}"
           }
         }
       },

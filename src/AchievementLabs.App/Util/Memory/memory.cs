@@ -63,6 +63,10 @@ namespace Memory
         /// <returns>Process opened successfully or failed.</returns>
         /// <param name="FailReason">Show reason open process fails</param>
         public bool OpenProcess(int pid, out string FailReason)
+            => OpenProcess(pid, out FailReason, readOnly: false);
+
+        /// <summary>Optionally open with query/read rights only, without module access.</summary>
+        public bool OpenProcess(int pid, out string FailReason, bool readOnly)
         {
             /*if (!IsAdmin())
             {
@@ -77,7 +81,7 @@ namespace Memory
             }
 
 
-            if (mProc.Process != null && mProc.Process.Id == pid)
+            if (mProc.Handle != IntPtr.Zero && mProc.Process != null && mProc.Process.Id == pid)
             {
                 FailReason = "mProc.Process is null";
                 return true;
@@ -87,21 +91,20 @@ namespace Memory
             {
                 mProc.Process = Process.GetProcessById(pid);
 
-                if (mProc.Process != null && !mProc.Process.Responding)
+                if (!readOnly && mProc.Process != null && !mProc.Process.Responding)
                 {
                     Debug.WriteLine("ERROR: OpenProcess: Process is not responding or null.");
                     FailReason = "Process is not responding or null.";
                     return false;
                 }
 
-                mProc.Handle = Imps.OpenProcess(0x1F0FFF, true, pid);
+                mProc.Handle = Imps.OpenProcess(readOnly ? 0x0410u : 0x1F0FFFu, !readOnly, pid);
 
                 if (mProc.Handle == IntPtr.Zero)
                 {
                     var eCode = Marshal.GetLastWin32Error();
                     Debug.WriteLine("ERROR: OpenProcess has failed opening a handle to the target process (GetLastWin32ErrorCode: " + eCode + ")");
-                    Process.LeaveDebugMode();
-                    mProc = null;
+                    if (!readOnly) Process.LeaveDebugMode();
                     FailReason = "failed opening a handle to the target process(GetLastWin32ErrorCode: " + eCode + ")";
                     return false;
                 }
@@ -109,7 +112,7 @@ namespace Memory
                 // Lets set the process to 64bit or not here (cuts down on api calls)
                 mProc.Is64Bit = Environment.Is64BitOperatingSystem && (IsWow64Process(mProc.Handle, out bool retVal) && !retVal);
 
-                mProc.MainModule = mProc.Process.MainModule;
+                if (!readOnly) mProc.MainModule = mProc.Process.MainModule;
 
                 //GetModules();
 

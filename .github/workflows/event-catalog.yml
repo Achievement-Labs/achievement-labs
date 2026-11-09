@@ -8,6 +8,11 @@ on:
       - 'tools/event_catalog.py'
       - 'tools/test_event_catalog.py'
       - 'tools/EventCatalogChecks/**'
+      - 'tools/CompressEvents/**'
+      - 'tools/Build-Release.ps1'
+      - 'src/AchievementLabs.Desktop/Workflows/StatsEditorViewModel.cs'
+      - 'tests/AchievementLabs.Enhancements.Tests/BundledStatsChecks.cs'
+      - 'tests/AchievementLabs.Enhancements.Tests/Program.cs'
       - 'tools/mobile/**'
       - 'tests/AchievementLabs.Enhancements.Tests/UpstreamEventCatalogueTests.cs'
       - '.github/workflows/event-catalog.yml'
@@ -28,3 +33,7 @@ jobs:
       - run: python -m unittest discover -s tools -p test_event_catalog.py
       - run: python -m unittest discover -s tools/mobile -p test_publish_events.py
       - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --render Events
+      - run: dotnet run --project tools/CompressEvents -p:NuGetAudit=false -- --self-test
+      - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --render-bundled
+      - run: dotnet run --project tools/CompressEvents -c Release -p:NuGetAudit=false -- --verify src/AchievementLabs.Core/bin/Release/net9.0-windows/AchievementLabs.Core.dll src/AchievementLabs.App/Events
+      - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --bundled-stats

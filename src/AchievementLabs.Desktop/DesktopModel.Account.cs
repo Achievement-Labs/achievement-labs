@@ -15,17 +15,17 @@ public sealed partial class DesktopModel
     public void RefreshXboxPcAppPresence()
     {
         if (!OperatingSystem.IsWindows()) return;
-        using var process = Process.GetProcessesByName("XboxPcApp").FirstOrDefault();
-        XboxPcAppDetected = process != null;
-        if (XboxPcAttached && process == null)
+        var processIds = XboxPcAppAuthorizationReader.FindProcessIds();
+        XboxPcAppDetected = processIds.Length > 0;
+        if (XboxPcAttached && processIds.Length == 0)
         {
             XboxPcAttached = false;
             XboxPcAttachmentLabel = "Xbox PC app is no longer running";
             XboxPcAttachmentDetail = session == null ? "Open the Xbox app and retry attachment." : "The current Achievement Labs session remains connected, but it is no longer attached to the Xbox app process.";
         }
-        else if (session == null && process != null && !busy)
+        else if (session == null && processIds.Length > 0 && !busy)
         {
-            XboxPcAttachmentLabel = $"Xbox PC app ready (PID {process.Id})";
+            XboxPcAttachmentLabel = $"Xbox PC app ready (PID {processIds[0]})";
             XboxPcAttachmentDetail = "Select Attach Xbox PC app to use its signed-in account.";
         }
     }
@@ -45,28 +45,31 @@ public sealed partial class DesktopModel
         if (!CanConnect) return;
         Busy(true);
         XboxApiClient? candidate = null;
+        string? attachmentStage = null;
         try
         {
-            var processes = Process.GetProcessesByName("XboxPcApp");
+            var processes = XboxPcAppAuthorizationReader.FindProcessIds();
             XboxPcAppDetected = processes.Length > 0;
             XboxPcAttached = false;
-            XboxPcAttachmentLabel = XboxPcAppDetected ? $"Xbox PC app detected (PID {processes[0].Id})" : "Xbox PC app is not running";
+            XboxPcAttachmentLabel = XboxPcAppDetected ? $"Xbox PC app detected (PID {processes[0]})" : "Xbox PC app is not running";
             XboxPcAttachmentDetail = XboxPcAppDetected ? "Reading the active Xbox session…" : "Open the Xbox app, sign in, then retry attachment.";
             if (!XboxPcAppDetected) throw new InvalidOperationException("XboxPcApp is not running.");
 
             Notice = "Attaching to the Xbox PC app…";
-            var authorization = await XboxPcAppAuthorizationReader.TryReadValidatedAsync(null, RegionOverride, lifetime.Token);
+            var validated = await XboxPcAppAuthorizationReader.TryReadValidatedSessionAsync(null, RegionOverride, lifetime.Token, stage => attachmentStage = stage);
+            var authorization = validated?.Authorization;
             if (string.IsNullOrWhiteSpace(authorization)) throw new InvalidDataException("No active Xbox authorization was found in XboxPcApp.");
+            attachmentStage = "Xbox validated the account, but loading the library failed.";
             candidate = new XboxApiClient(authorization, RegionOverride);
-            var profile = await Task.Run(candidate.GetBasicProfileAsync, lifetime.Token);
+            var profile = validated!.Profile;
             var user = profile?.ProfileUsers.FirstOrDefault() ?? throw new InvalidDataException("Xbox profile validation failed.");
             if (string.IsNullOrWhiteSpace(user.Id)) throw new InvalidDataException("Xbox user ID was not returned.");
             var connected = new ConnectedXboxSession(authorization, user.Id, savedEventsToken);
-            await ActivateXboxSessionAsync(connected, candidate, "Xbox PC app");
+            await ActivateXboxSessionAsync(connected, candidate, "Xbox PC app", profile);
             candidate = null;
             XboxPcAttached = true;
             OAuthFallbackAvailable = false;
-            XboxPcAttachmentLabel = $"Attached to Xbox PC app (PID {processes[0].Id})";
+            XboxPcAttachmentLabel = $"Attached to Xbox PC app (PID {validated.ProcessId})";
             XboxPcAttachmentDetail = $"Using {ProfileName}. The Xbox app remains the source of this session.";
             Notice = $"Attached to Xbox PC app. Loaded {Games.Length} titles.";
         }
@@ -77,7 +80,7 @@ public sealed partial class DesktopModel
             XboxPcAttached = false;
             XboxPcAttachmentLabel = XboxPcAppDetected ? "Xbox PC app detected, but attachment failed" : "Xbox PC app is not running";
             XboxPcAttachmentDetail = XboxPcAppDetected
-                ? "Make sure the Xbox app is signed in and fully loaded, then retry. Microsoft OAuth is now available as a fallback."
+                ? (attachmentStage ?? "Could not check the Xbox app session.") + " Make sure the Xbox app is signed in and fully loaded, then retry. Microsoft OAuth is available as a fallback."
                 : "Open the Xbox app and sign in, or use Microsoft OAuth below as a fallback.";
             Notice = XboxPcAttachmentDetail;
         }

@@ -1,6 +1,6 @@
 # Complete event title catalog
 
-558 titles: **352 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
+576 titles: **353 Supported**, **89 Partially Supported**, **134 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
 Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.
 
@@ -171,6 +171,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | DARK SOULS III | Xbox One, Xbox Series X\|S | 1041486048 | 43 |
 | Dead Rising 2 Off the Record | Xbox One, Xbox Series X\|S | 274219762 | 50 |
 | Deadpool | Xbox One, Xbox Series X\|S | 629798227 | 50 |
+| Dear Esther: Landmark Edition | Xbox One, Xbox Series X\|S | 903716936 | 10 |
 | Destiny | Xbox One, Xbox Series X\|S | 247546985 | 58 |
 | Destiny 2 | Windows PC | 144389848 | 23 |
 | Dishonored 2 | Xbox One, Xbox Series X\|S | 527255540 | 50 |
@@ -273,8 +274,8 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Microsoft Ultimate Word Games | Windows PC | 534004979 | 38 |
 | Minecraft | Xbox One, Xbox Series X\|S | 1828326430 | 123 |
 | Minecraft for Gear VR | Gear VR | 1909043648 | 94 |
-| Minecraft for Nintendo Switch 2 | Nintendo Switch 2 | 1977135090 | 109 |
-| Minecraft for Windows 10 Mobile | Mobile, Windows PC | 1916611344 | 88 |
+| Minecraft for Nintendo Switch 2 | Nintendo Switch 2 | 1977135090 | 119 |
+| Minecraft for Windows 10 Mobile | Mobile, Windows PC | 1916611344 | 95 |
 | Minecraft: Story Mode - A Telltale Games Series | Windows PC | 849609009 | 50 |
 | Minecraft: Story Mode - Episode 1: The Order of the Stone | Xbox One | 2014650813 | 50 |
 | Minecraft: Story Mode - Season Two | Windows PC | 148376670 | 30 |
@@ -409,10 +410,10 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Microsoft Solitaire Collection | Windows PC | 85494077 | 73 |
 | Minecraft | Apple TV | 1835298427 | 121 |
 | Minecraft for Android | Android | 1739947436 | 121 |
-| Minecraft for iOS | iOS | 1810924247 | 121 |
+| Minecraft for iOS | iOS | 1810924247 | 134 |
 | Minecraft for Kindle Fire | Kindle Fire | 1944307183 | 121 |
-| Minecraft for Nintendo Switch | Nintendo Switch | 2047319603 | 109 |
-| Minecraft for Windows | Windows PC | 896928775 | 123 |
+| Minecraft for Nintendo Switch | Nintendo Switch | 2047319603 | 119 |
+| Minecraft for Windows | Windows PC | 896928775 | 139 |
 | Minecraft: Xbox One Edition | Durango | 345903534 | 87 |
 | MONOPOLY PLUS | Xbox One, Xbox Series X\|S | 1918441274 | 15 |
 | NBA LIVE 14 | Xbox One, Xbox Series X\|S | 1616270757 | 2 |
@@ -466,15 +467,18 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Assassin's Creed IV Black Flag | Xbox One, Xbox Series X\|S | 556718860 | 60 |
 | Assassin's Creed Unity | Xbox One, Xbox Series X\|S | 1998461943 | 57 |
 | Assassin's Creed® The Ezio Collection | Xbox One, Xbox Series X\|S | 514291876 | 149 |
+| Bastion | Xbox One, Xbox Series X\|S | 122277778 | 22 |
 | Batman: Return to Arkham - Arkham Asylum | Xbox One, Xbox Series X\|S | 20391045 | 47 |
 | Batman: Return to Arkham - Arkham City | Xbox One, Xbox Series X\|S | 514006173 | 70 |
 | BATTLE GAREGGA Rev.2016 | Xbox One, Xbox Series X\|S | 366603565 | 37 |
 | BIOHAZARD RE:2 Z Version | Windows PC, Xbox One, Xbox Series X\|S | 918284490 | 11 |
 | BioShock 2 Remastered | Xbox One, Xbox Series X\|S | 996030243 | 53 |
-| BioShock Infinite: The Complete Edition | Xbox One, Xbox Series X\|S | 699731308 | 11 |
+| BioShock Infinite: The Complete Edition | Xbox One, Xbox Series X\|S | 699731308 | 80 |
 | BioShock Remastered | Xbox One, Xbox Series X\|S | 367004125 | 63 |
 | Borderlands 2 | Xbox One, Xbox Series X\|S | 1204533074 | 13 |
 | Borderlands: The Pre-Sequel | Xbox One, Xbox Series X\|S | 1246613109 | 63 |
+| Bridge Constructor Portal | Xbox One, Xbox Series X\|S | 58039508 | 26 |
+| Brothers: a Tale of Two Sons | Xbox One, Xbox Series X\|S | 73782745 | 12 |
 | Cars 3: Driven to Win | Xbox One, Xbox Series X\|S | 386788672 | 21 |
 | Crimson Dragon | Xbox One, Xbox Series X\|S | 461173340 | 45 |
 | Crimsonland | Xbox One, Xbox Series X\|S | 706918470 | 22 |
@@ -489,6 +493,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Dead Island Retro Revenge | Xbox One, Xbox Series X\|S | 502883447 | 13 |
 | Dead Island: Riptide Definitive Edition | Xbox One, Xbox Series X\|S | 907587004 | 35 |
 | Dead Rising | Xbox One, Xbox Series X\|S | 406842057 | 50 |
+| Devil May Cry HD Collection | Xbox One, Xbox Series X\|S | 528369592 | 99 |
 | DOOM | Xbox One, Xbox Series X\|S | 1327376519 | 54 |
 | DRAGON BALL: THE BREAKERS | Xbox One, Xbox Series X\|S | 1954227024 | 42 |
 | Duke Nukem 3D: 20th Anniversary World Tour | Xbox One, Xbox Series X\|S | 886999858 | 27 |
@@ -508,6 +513,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Fighter Within | Xbox One | 1569388578 | 99 |
 | FINAL FANTASY XIV Online | Xbox Series X\|S | 1855426799 | 246 |
 | FOR HONOR | Xbox One, Xbox Series X\|S | 1198088771 | 60 |
+| Guacamelee! Super Turbo Championship Edition | Xbox One, Xbox Series X\|S | 1958071699 | 35 |
 | Just Dance 2014 | Xbox One, Xbox Series X\|S | 1006362568 | 48 |
 | Just Dance 2015 | Xbox One, Xbox Series X\|S | 1117499725 | 55 |
 | Just Dance 2015 (second title ID) | Xbox One, Xbox Series X\|S | 259480539 | 34 |
@@ -520,6 +526,8 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | LEGO Bricktales | Xbox One, Xbox Series X\|S | 2005013689 | 21 |
 | LEGO Worlds | Xbox One, Xbox Series X\|S | 867642949 | 71 |
 | LIMBO | Xbox One, Xbox Series X\|S | 398011207 | 13 |
+| Little Nightmares | Xbox One, Xbox Series X\|S | 572268056 | 22 |
+| Lords of the Fallen (2014) | Xbox One, Xbox Series X\|S | 1271641024 | 56 |
 | Mad Max | Xbox One, Xbox Series X\|S | 2029730324 | 49 |
 | Madden NFL 15 | Xbox One, Xbox Series X\|S | 2147358433 | 2 |
 | Madden NFL 16 | Xbox One, Xbox Series X\|S | 1249526091 | 2 |
@@ -533,6 +541,8 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Madden NFL 25 | Xbox One, Xbox Series X\|S | 142841733 | 2 |
 | Madden NFL 25 Xbox One | Xbox One, Xbox Series X\|S | 1876694512 | 28 |
 | Madden NFL 25 Xbox Series X\|S | Xbox Series X\|S | 2072546746 | 28 |
+| Mafia: Definitive Edition | Xbox One, Xbox Series X\|S | 1720075101 | 43 |
+| Max: The Curse of Brotherhood | Xbox One, Xbox Series X\|S | 1649675719 | 36 |
 | METAL GEAR SURVIVE | Xbox One, Xbox Series X\|S | 888477147 | 51 |
 | MONSTER HUNTER: WORLD™ | Xbox One, Xbox Series X\|S | 226054795 | 98 |
 | NBA LIVE 18: The One Edition | Xbox One, Xbox Series X\|S | 83029588 | 2 |
@@ -540,7 +550,9 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Need for Speed Rivals | Xbox One, Xbox Series X\|S | 956568979 | 25 |
 | NHL® 15 Full Game | Xbox One, Xbox Series X\|S | 1907337607 | 2 |
 | NHL™ 94 REWIND | Xbox One, Xbox Series X\|S | 1634565765 | 2 |
+| Oxenfree | Windows PC | 35717019 | 13 |
 | Pinball FX2 Windows 10 Edition | Windows PC | 1818736509 | 87 |
+| Plague Inc: Evolved | Xbox One, Xbox Series X\|S | 1542414577 | 187 |
 | Prey | Xbox One, Xbox Series X\|S | 907086072 | 58 |
 | PUBG: BATTLEGROUNDS | Xbox One, Xbox Series X\|S | 950328474 | 37 |
 | Resident Evil | Xbox One, Xbox Series X\|S | 1278031123 | 11 |
@@ -558,11 +570,16 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Saints Row IV: Re-Elected (AUS) | Xbox One, Xbox Series X\|S | 429066719 | 70 |
 | Satisfactory | Xbox Series X\|S | 1966276493 | 44 |
 | Skylanders Trap Team | Xbox One, Xbox Series X\|S | 1147123126 | 46 |
+| Sleeping Dogs™ Definitive Edition | Xbox One, Xbox Series X\|S | 367254866 | 59 |
 | Sonic Forces | Xbox One, Xbox Series X\|S | 129325438 | 48 |
 | STEEP | Xbox One, Xbox Series X\|S | 265691378 | 47 |
 | STEINS;GATE 0 | Xbox One, Xbox Series X\|S | 441478569 | 28 |
 | Sunset Overdrive | Xbox One, Xbox Series X\|S | 1579532320 | 88 |
+| SUPERHOT | Xbox One, Xbox Series X\|S | 240091546 | 25 |
+| The Binding of Isaac: Rebirth | Xbox One, Xbox Series X\|S | 794552001 | 79 |
 | The Evil Within® 2 | Xbox One, Xbox Series X\|S | 170773198 | 51 |
+| The Town of Light | Xbox One, Xbox Series X\|S | 24728415 | 20 |
+| The Town of Light | Xbox One, Xbox Series X\|S | 94098725 | 20 |
 | Thief | Xbox One, Xbox Series X\|S | 1181281124 | 37 |
 | Tiny Tina's Assault on Dragon Keep: A Wonderlands One-shot Adventure | Xbox One, Xbox Series X\|S | 1807962365 | 11 |
 | Tom Clancy's Ghost Recon Wildlands | Xbox One, Xbox Series X\|S | 346683864 | 44 |
@@ -574,6 +591,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Trials Rising | Xbox One, Xbox Series X\|S | 19060482 | 53 |
 | UFC® 4 | Xbox One, Xbox Series X\|S | 465979625 | 2 |
 | UNO | Xbox One, Xbox Series X\|S | 183968596 | 12 |
+| What Remains of Edith Finch | Xbox One, Xbox Series X\|S | 861949148 | 10 |
 | ZOMBI | Xbox One, Xbox Series X\|S | 1717071867 | 20 |
 | サイコブレイク2 (The Evil Within 2 JP) | Xbox One, Xbox Series X\|S | 452142470 | 51 |
 

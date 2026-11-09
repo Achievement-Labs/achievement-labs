@@ -93,7 +93,7 @@ public static class EditionMapping
                     TitleId=b.GetProperty("titleId").ToString(), Scid=b.GetProperty("serviceConfigId").GetString(),
                     Properties=Optional("properties"), Measurements=Optional("measurements")});
             }
-            if(!DeepEquals(JsonSerializer.SerializeToElement(signatures),entry.Expected))
+            if(!JsonElement.DeepEquals(JsonSerializer.SerializeToElement(signatures),entry.Expected))
                 throw new InvalidOperationException();
         }
         catch(Exception ex) when(ex is JsonException or InvalidOperationException or KeyNotFoundException)
@@ -102,16 +102,5 @@ public static class EditionMapping
             throw new InvalidOperationException($"{entry.Name}: the supplied event data differs from the reviewed mapping. This achievement's event data was not submitted; the mapping needs review.",ex);
         }
         return value;
-    }
-
-    static bool DeepEquals(JsonElement a, JsonElement b)
-    {
-#if NET9_0_OR_GREATER
-        return JsonElement.DeepEquals(a, b);
-#else
-        return System.Text.Json.Nodes.JsonNode.DeepEquals(
-            System.Text.Json.Nodes.JsonNode.Parse(a.GetRawText()),
-            System.Text.Json.Nodes.JsonNode.Parse(b.GetRawText()));
-#endif
     }
 }

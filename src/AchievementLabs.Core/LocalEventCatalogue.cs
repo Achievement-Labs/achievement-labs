@@ -1,5 +1,3 @@
-using System.IO.Compression;
-using System.Text;
 using Newtonsoft.Json.Linq;
 
 namespace AchievementLabs.Core;
@@ -40,57 +38,9 @@ internal sealed class LocalEventCatalogue
         supported = (data["SupportedTitleIDs"] as JArray ?? throw new InvalidDataException("Missing supported title IDs."))
             .Select(i => i.ToString()).Where(id => data[id] is JObject b && (bool?)b["Enabled"] != false).ToHashSet(StringComparer.Ordinal);
     }
-
-    private static readonly Dictionary<string, byte[]> CompressedEntries = LoadCompressedEntries();
-
-    private static Dictionary<string, byte[]> LoadCompressedEntries()
-    {
-        var dict = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
-        using var stream = typeof(LocalEventCatalogue).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents.deflate");
-        if (stream == null) return dict;
-        using var reader = new BinaryReader(stream, Encoding.UTF8);
-        var magic = new string(reader.ReadChars(4));
-        if (magic != "LEV1") return dict;
-        int count = reader.ReadInt32();
-        for (int i = 0; i < count; i++)
-        {
-            string rel = reader.ReadString().Replace('\\', '/');
-            reader.ReadInt32(); // uncompressed length
-            int compLen = reader.ReadInt32();
-            dict[rel] = reader.ReadBytes(compLen);
-        }
-        return dict;
-    }
-
-    private static string ResourceName(string path) => "AchievementLabs.LocalEvents." + path.Replace('/', '.').Replace('\\', '.');
-    private static string? FindLegacyResource(string path) => typeof(LocalEventCatalogue).Assembly.GetManifestResourceNames()
-        .FirstOrDefault(name => name.Replace('/', '.').Replace('\\', '.') == ResourceName(path));
-
-    private static bool HasResource(string path) =>
-        CompressedEntries.ContainsKey(path.Replace('\\', '/')) || FindLegacyResource(path) != null;
-
-    private static string Resource(string path)
-    {
-        var key = path.Replace('\\', '/');
-        if (CompressedEntries.TryGetValue(key, out var compressedBytes))
-        {
-            using var ms = new MemoryStream(compressedBytes);
-            using var def = new DeflateStream(ms, CompressionMode.Decompress);
-            using var reader = new StreamReader(def, Encoding.UTF8);
-            return reader.ReadToEnd();
-        }
-
-        var legacy = FindLegacyResource(path);
-        if (legacy != null)
-        {
-            using var stream = typeof(LocalEventCatalogue).Assembly.GetManifestResourceStream(legacy)!;
-            using var reader = new StreamReader(stream, Encoding.UTF8);
-            return reader.ReadToEnd();
-        }
-
-        throw new InvalidDataException("Local event file is missing: " + path);
-    }
-
+    private static bool HasResource(string path) => BundledEventFiles.Contains(path);
+    private static string Resource(string path) => BundledEventFiles.Read(path)
+        ?? throw new InvalidDataException("Local event file is missing: " + path);
     public bool Contains(string id) => id != "345903534" && supported.Contains(id) && data[id] is JObject;
     public Task<EventTitleMapping> TitleAsync(string id, CancellationToken ct)
     {
