@@ -1,0 +1,26 @@
+name: Public catalog API
+on:
+  pull_request:
+    paths:
+      - 'services/catalog_api/**'
+      - 'Events/**'
+      - 'site/assets/games.json'
+      - 'catalog/achievement-totals.json'
+      - '.github/workflows/catalog-api.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  metadata-api:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest services.catalog_api.test_api -v
+      - run: python -m services.catalog_api.build --repo . --output artifacts/catalog-api/catalog.sqlite
+      - run: python -m services.catalog_api.check_snapshot --repo . --database artifacts/catalog-api/catalog.sqlite
