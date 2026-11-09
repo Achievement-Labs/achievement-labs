@@ -18,6 +18,12 @@ if ($PSVersionTable.PSVersion.Major -lt 7) {
 $ErrorActionPreference = 'Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw 'Use a stable version such as 1.0.6.' }
 $taskRoot = Split-Path -Parent $PSScriptRoot
+Push-Location $taskRoot
+try {
+    & python -m services.catalog_api.export_client --repo . --check
+    if ($LASTEXITCODE -ne 0) { throw 'Bundled public metadata is stale; regenerate it before packaging.' }
+} finally { Pop-Location }
+
 $taskBuildRoot = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { $taskRoot } else { [IO.Path]::GetFullPath($BuildRoot) }
 if (-not (Test-Path -LiteralPath (Join-Path $taskRoot 'gfwlam/engine.dll'))) {
     throw 'Missing prepared GFWL engine: gfwlam/engine.dll. Restore the approved release input before packaging; it is intentionally excluded from Git.'

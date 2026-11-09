@@ -99,7 +99,7 @@ public partial class MainWindow : Window
             if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
             if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
             // Headless regression tests must never attach to a real account.
-            if (offlineChecks)
+            if (offlineChecks && !Environment.GetCommandLineArgs().Contains("--release-smoke-test"))
             {
                 if (Environment.GetCommandLineArgs().Contains("--platform-ui-check")) { await CheckPlatformUiAsync(); return; }
                 if (Environment.GetCommandLineArgs().Contains("--steam-ui-check")) { await CheckSteamUiAsync(); return; }
@@ -725,6 +725,7 @@ public partial class MainWindow : Window
         if (await dialog.ShowDialog<bool>(this)) model.Navigate("Settings");
     }
     private async void TestEventReplacements(object? s, RoutedEventArgs e) => await model.TestEventReplacementsAsync();
+    private async void SearchPublicCatalog(object? s, RoutedEventArgs e) => await model.SearchPublicCatalogAsync();
     private async void InspectCatalog(object? s, RoutedEventArgs e) => await model.InspectCatalogAsync();
     private async void Disconnect(object? s, RoutedEventArgs e) => await model.DisconnectAsync();
     private async void ForgetSavedSession(object? s, RoutedEventArgs e) => await model.ForgetSavedSessionAsync();

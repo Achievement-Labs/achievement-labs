@@ -43,6 +43,9 @@ static class ReleaseUiChecks
         var model = (DesktopModel)window.DataContext!;
         Check(!model.BuildVersionLabel.EndsWith(".0"), "Display version hides the zero revision");
         Render(window, "release-home.png");
+        model.Navigate("Diagnostics"); Render(window, "catalog-search.png");
+        window.Width = 900; window.Height = 650; Render(window, "catalog-search-compact.png");
+        window.Width = 1440; window.Height = 920; model.Navigate("Home");
         foreach (var ready in new[] { false, true })
         {
             var method = typeof(MainWindow).GetMethod("PromptAppUpdateAsync", BindingFlags.Instance | BindingFlags.NonPublic)!;

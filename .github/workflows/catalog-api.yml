@@ -6,6 +6,7 @@ on:
       - 'Events/**'
       - 'site/assets/games.json'
       - 'catalog/achievement-totals.json'
+      - 'catalog/public-metadata.json'
       - '.github/workflows/catalog-api.yml'
   workflow_dispatch:
 permissions:
@@ -24,3 +25,4 @@ jobs:
       - run: python -m unittest services.catalog_api.test_api -v
       - run: python -m services.catalog_api.build --repo . --output artifacts/catalog-api/catalog.sqlite
       - run: python -m services.catalog_api.check_snapshot --repo . --database artifacts/catalog-api/catalog.sqlite
+      - run: python -m services.catalog_api.export_client --repo . --check

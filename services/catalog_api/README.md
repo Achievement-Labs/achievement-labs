@@ -144,3 +144,47 @@ draft PR #51 are not duplicated here: rebuilding after that PR merges publishes
 the corrected source flags. Existing apps do not start calling this API until a
 subsequent client integration change. App-side loading improvements, hosted
 definition collection, account progress, and cross-device sync are later increments.
+
+## Hosted desktop integration (v1.3.3)
+
+Production base URL: https://achievementlabs.org/api/v2/catalog
+The desktop Event catalog > Search catalog tab queries this service without
+Xbox authorization, cookies, XUIDs, or account progress. Results show published
+support classifications and definition totals. A failed/offline request uses the
+bundled public metadata snapshot and explicitly labels it offline. Searches show
+up to 100 matches; refine the query to see other matches. Library name filtering
+continues to work locally on the user's own library.
+
+Library background refresh requests missing definition totals in batches of 100
+IDs, validates one catalog revision across batches, and merges verified totals
+into the existing bundled/cache fallback. Earned counts remain Xbox-sourced;
+missing API IDs never become zero counts or Unsupported. Event recipes/templates
+continue to ship in full and update through the verified GitHub event archive.
+The API cannot grant or remove access to runtime mappings.
+
+Regenerate bundled search metadata after canonical catalog changes:
+`python -m services.catalog_api.export_client --repo .`
+CI checks the projection against canonical inputs. The production build helper
+checks it too, so stale metadata cannot ship silently.
+
+Hosting uses `serve.py` with Waitress in a separate, restricted container on the
+site's private network. Only public code and the read-only SQLite snapshot are
+mounted. No licensing database, secret mount or host port is shared. The existing
+site reverse proxy adds only `/api/v2/catalog` and its descendants, rate-limited
+at 10 requests/second with a burst of 40. Existing licensing routes are unchanged.
+
+To deploy a new snapshot, stage the module source under services/catalog_api,
+its validated catalog.sqlite, and deploy.py in a new timestamped server folder.
+Run `python3 deploy.py --stage /path/to/new-stage` on the existing host. The helper
+pins the already-installed production Python/Waitress image by image ID, saves
+the previous nginx configuration, starts the new service, checks its WSGI response,
+validates nginx, then reloads it. Each version and its previous proxy config are
+retained under /opt/achievement-labs/catalog-api. It rolls back routing on failure.
+After deployment, verify the public HTTPS endpoints with the app user agent and
+check website/licensing health. Rollback: restore the recorded proxyBackup into
+the existing nginx.conf inode, run nginx -t, then reload ual-site; previous service
+containers and snapshots are retained for that purpose.
+
+Deploying metadata is an explicit maintenance operation; the service does not
+pull arbitrary GitHub branches or mutate the served snapshot in place. Publish a
+new validated snapshot whenever canonical labels, titles or verified totals change.

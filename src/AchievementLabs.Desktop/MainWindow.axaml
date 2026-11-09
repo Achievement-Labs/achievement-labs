@@ -529,11 +529,18 @@
      </StackPanel></ScrollViewer></TabItem>
 </TabControl>
    </Grid>
-   <Grid Grid.Row="1" IsVisible="{Binding IsDiagnostics}" RowDefinitions="Auto,Auto,*">
+   <TabControl Grid.Row="1" IsVisible="{Binding IsDiagnostics}">
+    <TabItem Header="Search catalog"><Grid RowDefinitions="Auto,Auto,*" Margin="0,12,0,0">
+     <StackPanel Spacing="10"><TextBlock Text="Official event catalog" FontSize="24"/><TextBlock Text="Search title names or IDs for published support status and verified definition totals. Account progress stays with Xbox." TextWrapping="Wrap" Classes="muted"/><Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding PublicCatalogQuery, Mode=TwoWay}" MaxLength="200" PlaceholderText="Search title name or ID"/><Button Grid.Column="1" Content="Search" Click="SearchPublicCatalog" IsEnabled="{Binding CanSearchPublicCatalog}" Margin="10,0,0,0"/></Grid></StackPanel>
+     <TextBlock Grid.Row="1" Text="{Binding PublicCatalogStatus}" TextWrapping="Wrap" Margin="0,12"/>
+     <ListBox Grid.Row="2" ItemsSource="{Binding PublicCatalogTitles}"><ListBox.ItemTemplate><DataTemplate x:DataType="core:PublicCatalogClient+Title"><Grid ColumnDefinitions="*,140,110" Margin="8"><StackPanel Spacing="4"><TextBlock Text="{Binding Name}" TextWrapping="Wrap"/><TextBlock Text="{Binding TitleId}" Classes="muted"/></StackPanel><TextBlock Grid.Column="1" Text="{Binding StatusLabel}" TextWrapping="Wrap"/><TextBlock Grid.Column="2" Text="{Binding TotalLabel}" TextWrapping="Wrap"/></Grid></DataTemplate></ListBox.ItemTemplate></ListBox>
+    </Grid></TabItem>
+    <TabItem Header="Local integrity">   <Grid RowDefinitions="Auto,Auto,*">
     <Border Classes="panel" Padding="24"><StackPanel Spacing="12"><TextBlock Text="Event catalog integrity" FontSize="24"/><TextBlock Text="Check title blocks, supported IDs, and standalone template files. This inspection does not modify the catalog." TextWrapping="Wrap" Classes="muted"/><TextBlock Text="{Binding EventsDirectory}" TextWrapping="Wrap"/><WrapPanel><Button Content="Inspect catalog" Click="InspectCatalog" IsEnabled="{Binding CanInteract}"/><Button Content="Test event replacements" Click="TestEventReplacements" IsEnabled="{Binding CanInteract}" Margin="10,0"/></WrapPanel></StackPanel></Border>
     <TextBlock Grid.Row="1" Text="{Binding CatalogSummary}" Margin="0,18" TextWrapping="Wrap"/>
     <ListBox Grid.Row="2" ItemsSource="{Binding CatalogFindings}" Background="Transparent"><ListBox.ItemTemplate><DataTemplate x:DataType="core:CatalogFinding"><Grid ColumnDefinitions="120,170,*" Margin="10"><TextBlock Text="{Binding TitleId}"/><TextBlock Grid.Column="1" Text="{Binding Status}"/><TextBlock Grid.Column="2" Text="{Binding Detail}" TextWrapping="Wrap" Classes="muted"/></Grid></DataTemplate></ListBox.ItemTemplate></ListBox>
-   </Grid>
+   </Grid></TabItem>
+   </TabControl>
   </Grid><Border Grid.Row="1" Grid.Column="1" Background="#050606" BorderBrush="#24272A" BorderThickness="0,1,0,0" Padding="24,0"><Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center"><TextBlock Text="{Binding Notice}" Classes="muted" FontSize="10"/></Grid></Border>
  </Grid>
 </Window>

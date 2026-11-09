@@ -41,5 +41,6 @@ jobs:
       - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --official-release Events
       - run: dotnet run --project tools/CompressEvents -c Release -p:NuGetAudit=false -- --verify src/AchievementLabs.Core/bin/Release/net9.0-windows/AchievementLabs.Core.dll src/AchievementLabs.App/Events
       - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --bundled-stats
+      - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --public-api
       - run: dotnet run --project tools/UpdaterChecks -c Release -p:NuGetAudit=false
       - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --release-ui artifacts/release-ui
