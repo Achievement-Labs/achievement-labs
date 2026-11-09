@@ -94,6 +94,7 @@ public partial class MainWindow : Window
         };
         Opened += async (_, _) =>
         {
+            SetWindowsDarkTitleBar();
             MacStartup.Stage("Window opened");
             if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
             if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
@@ -748,4 +749,30 @@ public partial class MainWindow : Window
     {
         model.MintAccent = !model.MintAccent;
     }
+
+    private void SetWindowsDarkTitleBar()
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            // Leave system contrast themes in control of native caption colors.
+            if (Application.Current?.PlatformSettings?.GetColorValues().ContrastPreference is { } contrast && contrast != default) return;
+            var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+            if (handle != IntPtr.Zero)
+            {
+                int darkMode = 1;
+                var result = DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
+                if (result < 0) result = DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                if (result < 0) return;
+                int captionColor = 0x00000000; // Black (COLORREF 0x00BBGGRR)
+                // Optional on older Windows versions; failure leaves the default caption.
+                _ = DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
+            }
+        }
+        catch { }
+    }
+
+    [System.Runtime.InteropServices.DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
 }
