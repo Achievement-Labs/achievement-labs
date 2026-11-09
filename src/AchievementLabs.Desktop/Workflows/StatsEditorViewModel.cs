@@ -937,8 +937,12 @@ namespace AchievementLabs.Desktop.Workflows
         private static IEnumerable<string> GetStatCatalogRoots()
         {
             yield return Path.Combine(AppContext.BaseDirectory, "StatsCatalog");
+#if LABS_UPDATE_TESTING
+            yield return AchievementLabs.Core.AchievementLabsPaths.LocalFile("StatsCatalog");
+#else
             yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "StatsCatalog");
             yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+#endif
         }
 
         private static void LoadStatModeFile(string path, HashSet<string> destination)
@@ -1393,6 +1397,9 @@ namespace AchievementLabs.Desktop.Workflows
                     "AchievementLabs",
                     "Debug",
                     "StatsEditorLoads");
+#if LABS_UPDATE_TESTING
+                root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "StatsEditorLoads"));
+#endif
                 Directory.CreateDirectory(root);
 
                 var capturedUtc = DateTime.UtcNow;
@@ -2044,6 +2051,9 @@ namespace AchievementLabs.Desktop.Workflows
         private string CreateStatDebugDirectory(string statName)
         {
             var root = DebugRootDirectory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Debug", "StatEdits");
+#if LABS_UPDATE_TESTING
+            root = DebugRootDirectory ?? AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "StatEdits"));
+#endif
             Directory.CreateDirectory(root);
 
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");

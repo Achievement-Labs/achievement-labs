@@ -198,6 +198,9 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "TitleHubStats");
+#if LABS_UPDATE_TESTING
+            root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "TitleHubStats"));
+#endif
             Directory.CreateDirectory(root);
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
             File.WriteAllText(Path.Combine(root, $"{timestamp}_{titleId}_raw.json"), responseBody);
@@ -259,6 +262,9 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "GamesList");
+#if LABS_UPDATE_TESTING
+            root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "GamesList"));
+#endif
             Directory.CreateDirectory(root);
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
             File.WriteAllText(Path.Combine(root, $"{timestamp}_raw.json"), responseBody);
@@ -672,6 +678,9 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "Heartbeat");
+#if LABS_UPDATE_TESTING
+            root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "Heartbeat"));
+#endif
             Directory.CreateDirectory(root);
 
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
@@ -763,6 +772,9 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "Achievements");
+#if LABS_UPDATE_TESTING
+            root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "Achievements"));
+#endif
             Directory.CreateDirectory(root);
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
             File.WriteAllText(Path.Combine(root, $"{timestamp}_{titleId}_raw.json"), responseBody);

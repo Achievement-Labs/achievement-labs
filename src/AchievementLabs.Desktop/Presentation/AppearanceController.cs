@@ -27,7 +27,11 @@ public sealed class AppearanceController : IDisposable
     AppearanceController(Window owner,bool preview)
     {
         this.owner=owner;this.preview=preview;
+#if LABS_UPDATE_TESTING
+        var dir=AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot;
+#else
         var dir=preview?Path.Combine(AppContext.BaseDirectory,"preview-profile"):Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"AchievementLabs");
+#endif
         file=Path.Combine(dir,"visual-appearance.json");cache=Path.Combine(dir,"last-game-background.png");
         Preferences=AppearancePreferences.Load(file);
         if(Preferences.PersistentGameArtwork && File.Exists(cache))try{remembered=new Bitmap(cache);}catch{}
