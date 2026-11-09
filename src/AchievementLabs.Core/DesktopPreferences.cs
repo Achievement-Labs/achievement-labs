@@ -3,8 +3,13 @@ namespace AchievementLabs.Core;
 
 public sealed record DesktopPreferences
 {
+#if LABS_UPDATE_TESTING
+    public string EventsDirectory { get; init; } = AchievementLabsPaths.LocalFile("Events");
+    public string SessionPath { get; init; } = AchievementLabsPaths.LocalFile("legacy-auth.json");
+#else
     public string EventsDirectory { get; init; } = Path.Combine(DesktopPlatform.DocumentsDirectory, "AchievementLabs", "Events");
     public string SessionPath { get; init; } = Path.Combine(DesktopPlatform.DocumentsDirectory, "AchievementLabs", "auth.json");
+#endif
     public bool RememberWindowSize { get; init; }
     public bool AutoMaximize { get; init; }
     public bool RegionOverride { get; init; }
@@ -25,6 +30,7 @@ public sealed record DesktopPreferences
     public bool NotifySpooferStops { get; init; } = true;
     public bool AutoRefreshEvents { get; init; } = true;
     public bool AutoRefreshDlc { get; init; } = true;
+    public bool GpdContributions { get; init; }
     public bool ShowMythicIcon { get; init; } = true;
     public bool HighlightCompletedDlcs { get; init; } = true;
     public string MythicColour { get; init; } = "#70C98A";

@@ -10,6 +10,9 @@ static async Task Reject(Func<Task> action, string message)
 static JObject Block() => JObject.Parse("""{"Enabled":true,"FullySupported":false,"Achievements":{"1":{"Request1":{"Id":{"ReplacementType":"Replace","Target":"REPLACEACH","Replacement":"1"}},"Request2":{"Id":{"ReplacementType":"Replace","Target":"REPLACEACH","Replacement":"2"}}}}}""");
 static string Template(string id) => """{"name":"Microsoft.XboxLive.TID.Test","data":{"baseData":{"titleId":"ID","name":"Test","serviceConfigId":"11111111-2222-3333-4444-555555555555","userId":"REPLACEXUID","achievement":REPLACEACH}}}""".Replace("TID", "T" + id).Replace("\"ID\"", "\"" + id + "\"");
 var temporary = Path.Combine(Path.GetTempPath(), "labs-catalog-checks-" + Guid.NewGuid().ToString("N"));
+if (args is ["--public-api-live"]) { await PublicCatalogChecks.LiveAsync(); return; }
+if (args is ["--public-api"]) { await PublicCatalogChecks.RunAsync(); return; }
+if (args is ["--official-release", var sourceDirectory]) { await OfficialReleaseChecks.RunAsync(sourceDirectory); return; }
 Directory.CreateDirectory(temporary);
 try
 {
@@ -41,6 +44,7 @@ try
         var changed = (JObject)data.DeepClone();
         changed["7"]!["Achievements"]!["2"] = changed["7"]!["Achievements"]!["1"]!.DeepClone();
         await File.WriteAllTextAsync(Path.Combine(split, "7", "Data.json"), changed.ToString());
+        Check(local.GetLibrarySupport()["7"].Mapped == 2, "Support badges count mappings from the title file, not its index summary");
         Check((await local.GetTitleAsync("7", default)).AchievementIds.Length == 2, "Per-title edits invalidate validation cache without rewriting index");
     }
     async Task Bad(JObject value, string message)
@@ -60,14 +64,50 @@ try
         var mapping = await bundled.GetTitleAsync("572802557", default);
         Check(mapping.AchievementIds.Length == 91, "Nested embedded mappings and template loaded");
     }
+    using (var official = new EventCatalogClient(true, () => flat, officialCatalog: true))
+    {
+#if LABS_UPDATE_TESTING
+        var fixtureBlocked = false;
+        try { await official.GetPayloadsAsync("4294967294", "1", "0", default); }
+        catch (InvalidOperationException) { fixtureBlocked = true; }
+        Check(fixtureBlocked, "Catalog update fixture cannot submit telemetry");
+#endif
+        var support = official.GetLibrarySupport();
+        var status = await official.GetCatalogAsync(default);
+        foreach (var id in new[] { "1041486048", "1144039928", "219630713" })
+        {
+            Check(support[id].Available && support[id].FullySupported && status.TitleIds.Contains(id), "Confirmed title is supported consistently: " + id);
+            Check(LibrarySupportBadge.Resolve(false, true, true, support[id].Available, support[id].FullySupported,
+                support[id].Mapped, 700, support[id].PartiallySupported).Kind == "supported", "Counts cannot downgrade confirmed title: " + id);
+            Check((await official.GetTitleAsync(id, default)).AchievementIds.Length > 0, "External folder cannot hide official title: " + id);
+        }
+        foreach (var entry in support)
+        {
+            Check(status.TitleIds.Contains(entry.Key) == (entry.Value.Available && entry.Value.FullySupported), "Access and badge status agree: " + entry.Key);
+            Check((status.PartialTitleIds ?? []).Contains(entry.Key) == (entry.Value.Available && entry.Value.PartiallySupported && !entry.Value.FullySupported), "Partial classification agrees: " + entry.Key);
+        }
+        Console.WriteLine($"PASS: {support.Count} official title labels match access lists; local override ignored; all three confirmed titles accessible.");
+    }
     UpstreamEventCatalogueTests.Run();
+    await PreviewFeatureChecks.RunAsync();
     Console.WriteLine("PASS: legacy and indexed catalogs, lazy loading, cache refresh, schema rejection, embedded resources and archive compatibility. No live requests.");
 }
 finally { Directory.Delete(temporary, true); }
 
-if (args.Length == 2 && args[0] == "--render")
+if ((args.Length == 2 && args[0] == "--render") || args is ["--render-bundled"])
 {
-    var catalog = new EventCatalog(args[1]); var index = await catalog.ReadIndexAsync();
+    EventCatalog catalog;
+    if (args is ["--render-bundled"])
+    {
+        // Exercise the app's ZIP reader and its actual storage/parser/rendering path without network access.
+        var type = typeof(EventCatalog).Assembly.GetType("AchievementLabs.Core.LocalEventCatalogue", throwOnError: true)!;
+        var local = type.GetConstructor([typeof(string)])!.Invoke([null]);
+        var storage = type.GetField("storage", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!.GetValue(local)!;
+        catalog = (EventCatalog)Activator.CreateInstance(typeof(EventCatalog), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic,
+            binder: null, args: [storage], culture: null)!;
+    }
+    else catalog = new EventCatalog(args[1]);
+    var index = await catalog.ReadIndexAsync();
     int titles = 0, achievements = 0, payloads = 0; var failures = new List<string>();
     foreach (var title in index.Properties().Where(p => p.Name.All(char.IsDigit)))
     {

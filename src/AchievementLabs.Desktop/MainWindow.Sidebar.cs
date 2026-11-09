@@ -10,13 +10,13 @@ public partial class MainWindow
         var groups = names.Select(n => this.FindControl<Expander>(n)).OfType<Expander>().ToArray();
         foreach (var group in groups)
         {
-            group.Height = group.IsExpanded ? double.NaN : 36;
+            group.Height = group.IsExpanded ? double.NaN : 46;
             group.MinHeight = 0;
             group.Margin = new Avalonia.Thickness(0);
             group.PropertyChanged += (_, e) =>
             {
                 if (e.Property != Expander.IsExpandedProperty) return;
-                group.Height = group.IsExpanded ? double.NaN : 36;
+                group.Height = group.IsExpanded ? double.NaN : 46;
                 if (group.IsExpanded) foreach (var other in groups) if (other != group) other.IsExpanded = false;
             };
         }

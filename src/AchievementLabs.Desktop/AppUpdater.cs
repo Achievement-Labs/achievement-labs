@@ -13,9 +13,19 @@ internal sealed record UpdatePlan(int ParentPid, long ParentStartTicks, string T
 internal sealed class AppUpdater(HttpClient? client = null, string? directory = null) : IDisposable
 {
     internal const string Repository = "https://github.com/Achievement-Labs/achievement-labs";
+#if LABS_UPDATE_TESTING
+    internal static string Root => AchievementLabs.Core.AchievementLabsPaths.LocalFile("Updates");
+#else
     internal static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs", "Updates");
+#endif
     internal static Version CurrentVersion => typeof(AppUpdater).Assembly.GetName().Version!;
+    internal static string DisplayVersion(Version version) => version.ToString(version.Revision > 0 ? 4 : 3);
+    internal static string CurrentDisplayVersion => DisplayVersion(CurrentVersion);
+#if LABS_UPDATE_TESTING
+    private readonly HttpClient http = client ?? UpdateTestTransport.CreateClient();
+#else
     private readonly HttpClient http = client ?? new() { Timeout = TimeSpan.FromMinutes(10) };
+#endif
     private readonly string root = directory ?? Root;
     private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
 
@@ -176,6 +186,9 @@ internal sealed class AppUpdater(HttpClient? client = null, string? directory = 
                 var backup = ReplaceAndLaunch(plan.Download, plan.Target, plan.Manifest, path =>
                 {
                     var start = new ProcessStartInfo(path) { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(path)! };
+#if LABS_UPDATE_TESTING
+                    if (Environment.GetEnvironmentVariable("LABS_UPDATE_TEST_AUTOMATION") == "1") start.WindowStyle = ProcessWindowStyle.Hidden;
+#endif
                     start.ArgumentList.Add("--update-health"); start.ArgumentList.Add(health);
                     using var child = Process.Start(start) ?? throw new IOException("Updated app could not start.");
                     var timeout = Stopwatch.StartNew();

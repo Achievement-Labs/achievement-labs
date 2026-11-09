@@ -49,7 +49,7 @@ class Program
             AppContext.SetSwitch("AchievementLabs.StartOnXbox360", true);
             AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
         }
-        if (args.Contains("--visual-preview") || args.Contains("--steam-ui-check") || args.Contains("--platform-ui-check")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+        if (args.Contains("--visual-preview") || args.Contains("--release-smoke-test") || args.Contains("--steam-ui-check") || args.Contains("--platform-ui-check")) AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
     }
 
     // Avalonia configuration, don't remove; also used by visual designer.

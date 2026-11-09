@@ -46,24 +46,12 @@ public sealed partial class DesktopModel
     public bool IsXbox360Profiles => page == "Xbox360Profiles";
     public string[] LocalXbox360Profiles { get => localXbox360Profiles; private set { localXbox360Profiles = value; Changed(); } }
     public string? SelectedLocalXbox360Profile { get => selectedLocalXbox360Profile; set { selectedLocalXbox360Profile = value; Changed(); } }
-    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; CaptureXbox360PreviewSource(); Changed(); Changed(nameof(CanInjectXbox360Profile)); } }
+    public string LoadedXbox360Profile { get => string.IsNullOrEmpty(loadedXbox360Profile) ? "No profile loaded" : loadedXbox360Profile; private set { loadedXbox360Profile = value; CaptureXbox360PreviewSource(); Changed(); Changed(nameof(CanInjectXbox360Profile)); Changed(nameof(CanContributeXbox360Gpd)); DrawGpdCatalog(); } }
     public string GpdDirectory => GameAdder.GpdDirectory;
     public string GpdTitleId { get => gpdTitleId; set { gpdTitleId = value ?? ""; Changed(); } }
     public string GpdAddStatus { get => gpdAddStatus; private set { gpdAddStatus = value; Changed(); } }
     public string Xbox360EditorTitleName { get => xbox360EditorTitleName; private set { xbox360EditorTitleName = value; Changed(); } }
-    public string Xbox360EditorTitleId { get => xbox360EditorTitleId; private set { xbox360EditorTitleId = value; Xbox360QuickUnlockMode = "Offline (no date)"; Xbox360UnlockStatus = "Select achievements to unlock."; Changed(); } }
-    public string HorizonStatus => packages.IsHorizonInstalled ? "Horizon reference found: " + packages.HorizonInstallPath : "Horizon reference not installed; package inspection remains available.";
-    public void RefreshHorizonStatus() { Changed(nameof(HorizonStatus)); }
-    public void OpenHorizonFolder()
-    {
-        try
-        {
-            var folder = Path.GetDirectoryName(packages.HorizonInstallPath)!;
-            if (!Directory.Exists(folder)) { Notice = "The Horizon reference folder was not found."; return; }
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(folder) { UseShellExecute = true });
-        }
-        catch { Notice = "Could not open the Horizon reference folder."; }
-    }
+    public string Xbox360EditorTitleId { get => xbox360EditorTitleId; private set { xbox360EditorTitleId = value; Xbox360QuickUnlockMode = "Offline (no date)"; Xbox360UnlockStatus = "Select achievements to unlock."; Changed(); Changed(nameof(CanContributeXbox360Gpd)); } }
     public string[] SaveGames => saveTools.Select(t => t.DisplayName).ToArray();
     public string SelectedSaveGame { get => selectedSaveGame; set { selectedSaveGame = value; Changed(); } }
     public string LegacyXuid { get => legacyXuid; set { legacyXuid = value; Changed(); } }
@@ -79,7 +67,7 @@ public sealed partial class DesktopModel
     public string Xbox360UnlockTimeText { get => xbox360UnlockTimeText; set { xbox360UnlockTimeText = value; Changed(); } }
     public int PendingXbox360EditCount => pendingXbox360Edits.Count;
     public bool CanModifyXbox360Profile => Xbox360ConSigner.SigningAvailable && HasValidatedXbox360WorkingCopy;
-    public string Xbox360SigningStatus => !Xbox360ConSigner.SigningAvailable ? "Signing setup needed" : "Signing ready · saves resign automatically";
+    public string Xbox360SigningStatus => !Xbox360ConSigner.SigningAvailable ? "Built-in signing unavailable" : "Signing ready · saves resign automatically";
     public bool CanSaveXbox360Edits => !busy && CanModifyXbox360Profile && pendingXbox360Edits.Count > 0;
     public bool CanInjectXbox360Profile => !busy && HasValidatedXbox360WorkingCopy && pendingXbox360Edits.Count == 0;
     public string ProfilesDirectory => profiles.ProfilesDirectory;
@@ -143,6 +131,7 @@ public sealed partial class DesktopModel
             var backup = await Task.Run(() => GameAdder.Add(loadedXbox360Profile, key), lifetime.Token);
             GpdAddStatus = $"Added {titleName ?? key} ({key}) to the local profile. Backup: {backup}. Inject this working copy to USB, sync the profile on Xbox 360, then extract and load the synced profile again. Achievement editing stays unavailable until that sync.";
             LookupOutput = GpdAddStatus;
+            RefreshXbox360Files();
         }
         catch (Exception error)
         {

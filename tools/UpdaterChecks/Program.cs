@@ -2,7 +2,12 @@ using AchievementLabs.Desktop;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text.Json;
+#if LABS_UPDATE_TESTING
+await TestTransportChecks.RunAsync();
+#endif
 var root = Path.Combine(Path.GetFullPath("artifacts"), "updater-checks-" + Guid.NewGuid().ToString("N"));
+if (AppUpdater.DisplayVersion(new Version(1, 3, 2, 0)) != "1.3.2" || AppUpdater.DisplayVersion(new Version(1, 3, 2, 1)) != "1.3.2.1")
+    throw new Exception("Display version must hide only the zero revision; update comparisons retain it.");
 Directory.CreateDirectory(root);
 var bytes = new byte[] { 77, 90, 1, 2, 3, 4 };
 var hash = Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
@@ -14,6 +19,7 @@ var feed = "[" + JsonSerializer.Serialize(new { draft=false, prerelease=false, t
 } }) + "]";
 using var updater = new AppUpdater(new HttpClient(new Handler(url => url.Contains("/releases?per_page=100",StringComparison.Ordinal) ? new StringContent(feed) : url.EndsWith("update.json") ? new StringContent(JsonSerializer.Serialize(manifest,new JsonSerializerOptions(JsonSerializerDefaults.Web))) : new ByteArrayContent(bytes))),root);
 var update = await updater.CheckAsync(new Version(1,0,6,0),default) ?? throw new Exception("Revision update missing");
+await UpdatePromptChecks.RunAsync(updater);
 if (await updater.CheckAsync(new Version(1,0,6,1),default) != null) throw new Exception("Same revision offered");
 var badHandler = new Handler(url => url.Contains("/releases?per_page=100",StringComparison.Ordinal) ? new StringContent(feed.Replace("sha256:"+hash,"sha256:"+new string('0',64))) : new StringContent(JsonSerializer.Serialize(manifest,new JsonSerializerOptions(JsonSerializerDefaults.Web))));
 using (var mismatch = new AppUpdater(new HttpClient(badHandler),root)) {

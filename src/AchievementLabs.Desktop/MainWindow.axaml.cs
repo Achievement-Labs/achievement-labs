@@ -25,6 +25,7 @@ public partial class MainWindow : Window
     {
         MacStartup.Stage("Loading main window");
         InitializeComponent(); DataContext = model;
+        model.UpdatePrompt = PromptAppUpdateAsync;
         ConfigurePlatformSidebar();
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
         AddHandler(PointerPressedEvent, NavigationPointerPressed, Avalonia.Interactivity.RoutingStrategies.Tunnel, true); model.EventTokenRequired = ShowEventTokenRequiredAsync;
@@ -43,6 +44,7 @@ public partial class MainWindow : Window
         };
         AchievementLabs.MultiSelect.BatchPicker.Attach(this);
         Presentation.GameSessionWorkspace.Attach(this);
+        StartOverlay();
         ApplyMacPlatformControls();
         AchievementLabs.MultiSelect.SearchClearButtons.Attach(this);
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
@@ -92,11 +94,12 @@ public partial class MainWindow : Window
         };
         Opened += async (_, _) =>
         {
+            SetWindowsDarkTitleBar();
             MacStartup.Stage("Window opened");
             if (Environment.GetCommandLineArgs().Contains("--linux-smoke-test")) { await RunLinuxSmokeAsync(); return; }
             if (Environment.GetCommandLineArgs().Contains("--mac-smoke-test")) { await RunMacSmokeAsync(); return; }
             // Headless regression tests must never attach to a real account.
-            if (offlineChecks)
+            if (offlineChecks && !Environment.GetCommandLineArgs().Contains("--release-smoke-test"))
             {
                 if (Environment.GetCommandLineArgs().Contains("--platform-ui-check")) { await CheckPlatformUiAsync(); return; }
                 if (Environment.GetCommandLineArgs().Contains("--steam-ui-check")) { await CheckSteamUiAsync(); return; }
@@ -112,7 +115,7 @@ public partial class MainWindow : Window
                         {
                             foreach (var relative in new[] { "steam-idle/AchievementLabs.SteamIdle.exe", "gfwl/AchievementLabs.GfwlInjector.exe", "StatsCatalog/TitleBasedStats.txt" })
                                 if (!File.Exists(Path.Combine(AppContext.BaseDirectory,relative))) throw new IOException("Missing extracted dependency: "+relative);
-                            if (model.Xbox360NeedsSigningSetup) throw new IOException("Standalone signing identity did not load.");
+                            if (model.Xbox360SigningUnavailable) throw new IOException("Standalone signing identity did not load.");
                             if (!model.IsXbox360Profiles) throw new IOException("Local 360 landing page did not open.");
                             if (Directory.Exists(Path.Combine(AppContext.BaseDirectory,"Events"))) throw new IOException("Unexpected loose Events directory.");
                             await Task.Delay(150);
@@ -166,10 +169,21 @@ public partial class MainWindow : Window
             if (!Environment.GetCommandLineArgs().Contains("--smoke-test")) {
                 var health = Environment.GetCommandLineArgs().SkipWhile(a => a != "--update-health").Skip(1).FirstOrDefault();
                 if (health != null && AppUpdater.IsUpdatePath(health)) File.WriteAllText(health, "Ready");
-                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(); _ = model.RefreshDlcCatalogueAsync(false); _ = model.RefreshEventCatalogueAsync(false);
+                await model.LoadPreferencesAsync(); RestoreWindowPreferences(); _ = model.CheckForUpdatesAsync(startup: true);
+#if !LABS_UPDATE_TESTING
+                _ = model.RefreshDlcCatalogueAsync(false);
+#endif
+                _ = model.RefreshEventCatalogueAsync(false, startup: true);
+#if LABS_UPDATE_TESTING
+                model.Notice = "PRIVATE UPDATE TEST · isolated profile and fixture feed · account attachment is manual.";
+                Directory.CreateDirectory(AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot);
+                File.WriteAllText(AchievementLabs.Core.AchievementLabsPaths.LocalFile("running-version.json"), System.Text.Json.JsonSerializer.Serialize(new { version = AppUpdater.CurrentVersion.ToString(), pid = Environment.ProcessId }));
+                MacStartup.Stage("Ready"); return;
+#else
                 if (AchievementLabs.Core.DesktopPlatform.IsUnixDesktop) await model.AttachXboxPcAppAsync();
                 else { await model.AttachXboxPcAppOnStartupAsync(); _ = model.RefreshSteamProfileOnStartupAsync(); }
                 MacStartup.Stage("Ready"); return;
+#endif
             }
             try
             {
@@ -285,6 +299,9 @@ public partial class MainWindow : Window
 
     private void ShowGfwl(object? s, RoutedEventArgs e) => model.OpenGfwlWorkspace();
     private void OpenGpdFolder(object? s, RoutedEventArgs e) => model.OpenGpdFolder();
+    private async void LoadGpdCatalog(object? s, RoutedEventArgs e) => await model.LoadGpdCatalogAsync();
+    private async void AddCatalogGpd(object? s, RoutedEventArgs e) { if ((s as Button)?.Tag is GpdCatalogRow row) await model.AddCatalogGameAsync(row); }
+    private void ContributeGpd(object? s, RoutedEventArgs e) => model.ContributeXbox360Gpd();
     private async void AddXbox360Gpd(object? s, RoutedEventArgs e) => await model.AddXbox360GameAsync(model.GpdTitleId);
     private async void AddTitleSearchGpd(object? s, RoutedEventArgs e)
     {
@@ -430,6 +447,18 @@ public partial class MainWindow : Window
     private async void RefreshXbox360EditorProfile(object? s, RoutedEventArgs e) => await model.RefreshXbox360EditorProfileAsync();
     private void RefreshLocalXbox360Profiles(object? s, RoutedEventArgs e) => model.RefreshLocalXbox360Profiles();
     private async void LoadSelectedXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadSelectedXbox360ProfileAsync();
+    private async void OpenExportedXbox360Profile(object? s, RoutedEventArgs e)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Open exported Xbox 360 profile", AllowMultiple = false });
+        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) await model.OpenExportedXbox360ProfileAsync(path);
+    }
+    private async Task ExportXbox360Profile(bool original)
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = original ? "Export original profile backup" : "Export signed Xbox 360 profile", SuggestedFileName = model.SuggestedXbox360ExportName });
+        if (file?.TryGetLocalPath() is { } path) await model.ExportXbox360ProfileAsync(path, original);
+    }
+    private async void ExportXbox360Profile(object? s, RoutedEventArgs e) => await ExportXbox360Profile(false);
+    private async void ExportXbox360Original(object? s, RoutedEventArgs e) => await ExportXbox360Profile(true);
     private async void LoadXbox360Profile(object? s, RoutedEventArgs e) => await model.LoadXbox360ProfileAsync();
     private async void LoadXbox360Achievements(object? s, RoutedEventArgs e) => await model.LoadXbox360AchievementsAsync();
     private void SelectXbox360Locked(object? s, RoutedEventArgs e) => model.SelectXbox360PreviewAchievements(true);
@@ -475,21 +504,13 @@ public partial class MainWindow : Window
         Grid.SetColumn(row.Children[3],narrow?2:3); Grid.SetColumn(row.Children[4],narrow?3:4);
         row.Children[2].Margin = narrow ? new Thickness(0,5,0,2) : new Thickness(6,0);
     }
-    private async void LoadXbox360Signing(object? s, RoutedEventArgs e)
-    {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions { Title = "Load local Xbox 360 signing data", AllowMultiple = false, FileTypeFilter = [new FilePickerFileType("Horizon executable or decrypted keyvault") { Patterns = ["*.exe", "*.bin", "*.kv"] }] });
-        if (files.FirstOrDefault()?.TryGetLocalPath() is { } path) model.LoadXbox360SigningData(path);
-    }
     private async void QuickUnlockXbox360(object? s, RoutedEventArgs e) => await model.UnlockSelectedXbox360Async();
-    private void ClearXbox360Signing(object? s, RoutedEventArgs e) => model.ClearXbox360SigningData();
     private void StageXbox360Dates(object? s, RoutedEventArgs e) => model.StageXbox360TimestampPreview();
     private async void DiscardXbox360Edits(object? s, RoutedEventArgs e) => await model.DiscardXbox360EditsAsync();
     private void SetXbox360Achievement(object? s, RoutedEventArgs e) => model.SetXbox360Achievement();
     private async void SaveXbox360Edits(object? s, RoutedEventArgs e) => await model.SaveXbox360EditsAsync();
     private async void InjectXbox360Profile(object? s, RoutedEventArgs e) => await model.InjectXbox360ProfileAsync();
     private void OpenProfilesFolder(object? s, RoutedEventArgs e) => model.OpenProfilesFolder();
-    private void RefreshHorizon(object? s, RoutedEventArgs e) => model.RefreshHorizonStatus();
-    private void OpenHorizon(object? s, RoutedEventArgs e) => model.OpenHorizonFolder();
     private async void ScanGfwl(object? s, RoutedEventArgs e) => await model.ScanGfwlAsync();
     private async void InjectGfwl(object? s, RoutedEventArgs e) => await model.InjectGfwlAsync();
     private async void RefreshGfwlAchievements(object? s, RoutedEventArgs e) => await model.RefreshGfwlAchievementsAsync();
@@ -704,6 +725,7 @@ public partial class MainWindow : Window
         if (await dialog.ShowDialog<bool>(this)) model.Navigate("Settings");
     }
     private async void TestEventReplacements(object? s, RoutedEventArgs e) => await model.TestEventReplacementsAsync();
+    private async void SearchPublicCatalog(object? s, RoutedEventArgs e) => await model.SearchPublicCatalogAsync();
     private async void InspectCatalog(object? s, RoutedEventArgs e) => await model.InspectCatalogAsync();
     private async void Disconnect(object? s, RoutedEventArgs e) => await model.DisconnectAsync();
     private async void ForgetSavedSession(object? s, RoutedEventArgs e) => await model.ForgetSavedSessionAsync();
@@ -739,4 +761,30 @@ public partial class MainWindow : Window
     {
         model.MintAccent = !model.MintAccent;
     }
+
+    private void SetWindowsDarkTitleBar()
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            // Leave system contrast themes in control of native caption colors.
+            if (Application.Current?.PlatformSettings?.GetColorValues().ContrastPreference is { } contrast && contrast != default) return;
+            var handle = TryGetPlatformHandle()?.Handle ?? IntPtr.Zero;
+            if (handle != IntPtr.Zero)
+            {
+                int darkMode = 1;
+                var result = DwmSetWindowAttribute(handle, 20, ref darkMode, sizeof(int));
+                if (result < 0) result = DwmSetWindowAttribute(handle, 19, ref darkMode, sizeof(int));
+                if (result < 0) return;
+                int captionColor = 0x00000000; // Black (COLORREF 0x00BBGGRR)
+                // Optional on older Windows versions; failure leaves the default caption.
+                _ = DwmSetWindowAttribute(handle, 35, ref captionColor, sizeof(int));
+            }
+        }
+        catch { }
+    }
+
+    [System.Runtime.InteropServices.DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
 }

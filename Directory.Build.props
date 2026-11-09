@@ -1,5 +1,6 @@
 <Project>
   <PropertyGroup>
+    <DefineConstants Condition="'$(LabsUpdateTesting)' == 'true'">$(DefineConstants);LABS_UPDATE_TESTING</DefineConstants>
     <LabsPortableDesktop Condition="'$(LabsMacOS)' == 'true' Or '$(LabsLinux)' == 'true'">true</LabsPortableDesktop>
   </PropertyGroup>
   <Target Name="ValidateDesktopPlatform" BeforeTargets="PrepareForBuild" Condition="'$(LabsMacOS)' == 'true' And '$(LabsLinux)' == 'true'">

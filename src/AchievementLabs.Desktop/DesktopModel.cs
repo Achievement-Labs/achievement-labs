@@ -24,6 +24,7 @@ public record Achievement(string Id, string Name, string Description, int Score,
 }
 public record Game(string Id, string Name, string Platform, int Completed, int Total, int Score, bool ProgressKnown = true, string? ImageUrl = null, DateTime? LastPlayed = null, bool NoDefinitionsReturned = false)
 {
+    public LibrarySupportBadge Support { get; init; } = LibrarySupportBadge.Unknown;
     public bool BaseComplete { get; init; }
     public bool AddOnsComplete { get; init; }
     public bool FullyComplete { get; init; }
@@ -110,7 +111,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool NoResults => VisibleAchievements.Length == 0;
     public bool HasSelection => SelectedAchievement != null;
     public bool CanConnect => !QueueActive && !busy && session == null;
-    public bool CanInteract => !QueueActive && !busy;
+    public bool CanInteract => !QueueActive && !busy && !eventRefreshRunning;
     public string ProfileName { get => PrivacyMode ? "Private profile" : profileName; private set { profileName = value; Changed(); Changed(nameof(HomeXboxSummary)); } }
     public string? ProfileImageUrl { get => PrivacyMode ? null : profileImageUrl; private set { profileImageUrl = value; Changed(); } }
     public string XboxGamerscore { get => PrivacyMode ? "Hidden" : xboxGamerscore; private set { xboxGamerscore = value; Changed(); Changed(nameof(HomeXboxSummary)); } }
@@ -158,24 +159,24 @@ public sealed partial class DesktopModel : Observable, IDisposable
     private void Busy(bool value) { busy = value; RefreshXbox360Signing(); Changed(nameof(CanAcquireAccountEventToken)); Changed(nameof(CanConnect)); Changed(nameof(CanInteract)); Changed(nameof(CanDisconnect)); Changed(nameof(CanQuery)); Changed(nameof(CanLookupSpoofTitle)); Changed(nameof(CanFillTotals)); Changed(nameof(CanStartPresence)); NotifyActions(); }
     public Task ConnectAsync() => AchievementLabs.Core.DesktopPlatform.IsUnixDesktop ? ConnectMacAsync() : AttachXboxPcAppAsync();
 
-    private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method)
+    private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method, BasicProfile? validatedProfile = null)
     {
-        var result = await Task.Run(async () => (Profile: await candidate.GetBasicProfileAsync(), Titles: await candidate.GetGamesListAsync(connected.Xuid)), lifetime.Token);
+        var result = await Task.Run(async () => (Profile: validatedProfile ?? await candidate.GetBasicProfileAsync(lifetime.Token), Titles: await candidate.GetGamesListAsync(connected.Xuid)), lifetime.Token);
         lifetime.Token.ThrowIfCancellationRequested();
         if (result.Titles == null) throw new InvalidDataException("Xbox title history was not returned.");
         client = candidate;
         session = connected;
-        await RefreshSharedTotalsAsync(lifetime.Token);
         LoadLibraryTotals();
         LoadCompletionCache();
         connectionMethod = method;
         BeginTokenMaintenance();
         ApplyXboxProfile(result.Profile?.ProfileUsers.FirstOrDefault());
-        Games = result.Titles.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, true, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+        Games = result.Titles.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
         Changed(nameof(ConnectionLabel)); Changed(nameof(CanDisconnect)); Changed(nameof(HomeXboxSummary));
-        await ImportCompletionExportsAsync(false);
+        _ = RefreshConnectedMetadataAsync(connected.Xuid, sessionGeneration, candidate);
     }
-    public async Task SelectGameAsync(Game game)
+    public Task SelectGameAsync(Game game) => SelectGameCoreAsync(game, true);
+    private async Task SelectGameCoreAsync(Game game, bool startAutoSpoof)
     {
         if (HasDevice(game, "GFWL") || IsKnownGfwlTitle(game.Id)) { OpenGfwlTitle(game); return; }
         if (busy) return;
@@ -185,7 +186,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         ResetGamePlaytime();
         SelectedGame = game; achievements = []; Search = ""; Filter("All"); Navigate("Achievements");
         if (client == null || session == null) { GamePlaytimeText = "Xbox-recorded playtime: Unavailable"; return; }
-        if (AutoSpoof && !UsesLegacyEndpoint(game))
+        if (startAutoSpoof && AutoSpoof && !UsesLegacyEndpoint(game))
         {
             if (autoPresenceTask != null) { StopPresence(); await autoPresenceTask; }
             PresenceTitleId = game.Id; autoPresenceTask = StartPresenceAsync();
@@ -284,6 +285,6 @@ public sealed partial class DesktopModel : Observable, IDisposable
             .Select(value => value.Type == JTokenType.String ? value.Value<string>() : null)
             .FirstOrDefault(value => value != null && (value.StartsWith("http", StringComparison.OrdinalIgnoreCase) || value.StartsWith("//", StringComparison.Ordinal)));
     }
-    public void Dispose() { mirror?.Dispose(); AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
+    public void Dispose() { StopLibrarySupportCheck(); mirror?.Dispose(); AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
     private async Task DisposeClientAsync() { await requests.WaitAsync(); client?.Dispose(); requests.Release(); }
 }

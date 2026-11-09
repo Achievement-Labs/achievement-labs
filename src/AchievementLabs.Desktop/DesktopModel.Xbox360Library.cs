@@ -22,7 +22,7 @@ public sealed partial class DesktopModel
     public string Xbox360LibrarySearch { get => xbox360LibrarySearch; set { xbox360LibrarySearch = value ?? ""; RefreshXbox360Library(); } }
     public string Xbox360LibrarySort { get => xbox360LibrarySort; set { xbox360LibrarySort = value; RefreshXbox360Library(); } }
     public string Xbox360LibraryFilter { get => xbox360LibraryFilter; set { xbox360LibraryFilter = value; RefreshXbox360Library(); } }
-    public string[] Xbox360LibrarySorts { get; } = ["Recently played", "A–Z", "Completion"];
+    public string[] Xbox360LibrarySorts { get; } = ["Recently played", "A–Z", "Z–A", "Completion"];
     public string[] Xbox360LibraryFilters { get; } = ["All", "Incomplete", "Completed"];
     private IEnumerable<Xbox360LibraryEntry> Xbox360LibraryEntries => Xbox360Games.Select(g => new Xbox360LibraryEntry(g,
         Games.FirstOrDefault(x => uint.TryParse(x.Id, out var id) && id.ToString("X8") == g.TitleId)?.ImageUrl));
@@ -35,6 +35,7 @@ public sealed partial class DesktopModel
                     uint.Parse(g.TitleId, NumberStyles.HexNumber).ToString().Contains(Xbox360LibrarySearch)) &&
                 (Xbox360LibraryFilter == "All" || Xbox360LibraryFilter == "Completed" && g.Complete || Xbox360LibraryFilter == "Incomplete" && !g.Complete));
             return Xbox360LibrarySort switch { "A–Z" => items.OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase),
+                "Z–A" => items.OrderByDescending(g => g.Name, StringComparer.OrdinalIgnoreCase),
                 "Completion" => items.OrderByDescending(g => g.Completion).ThenBy(g => g.Name),
                 _ => items.OrderByDescending(g => g.ProfileGame.LastPlayed).ThenBy(g => g.Name) };
         }

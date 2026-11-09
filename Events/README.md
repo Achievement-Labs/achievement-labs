@@ -1,6 +1,6 @@
 # Event title catalogue
 
-557 titles: **351 Supported**, **89 Partially Supported**, **117 Testing**, **0 Coming Soon**. This is the author-maintained catalogue included in the next release and synchronized to the hosted catalogue.
+576 titles: **353 Supported**, **89 Partially Supported**, **134 Testing**, **0 Coming Soon**. This is the author-maintained catalogue included in the next release and synchronized to the hosted catalogue.
 
 Classifications follow the author’s data. Mapped counts describe recipes, not the full achievement list. Xbox 360, GFWL and Steam use separate workflows.
 
@@ -142,6 +142,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Axiom Verge | Xbox One, Xbox Series X\|S | `55549300` | 29 | Supported | [55549300.json](55549300/55549300.json) |
 | Back to the Future: The Game - 30th Anniversary Edition | Xbox One | `975485641` | 59 | Supported | [975485641.json](975485641/975485641.json) |
 | Bard's Gold | Xbox One, Xbox Series X\|S | `892299738` | 27 | Supported | [892299738.json](892299738/892299738.json) |
+| Bastion | Xbox One, Xbox Series X\|S | `122277778` | 22 | Testing | [122277778.json](122277778/122277778.json) |
 | Batman - The Telltale Series - Episode 1: Realm of Shadows | Xbox One, Xbox Series X\|S | `23570566` | 30 | Supported | [23570566.json](23570566/23570566.json) |
 | Batman: Return to Arkham - Arkham Asylum | Xbox One, Xbox Series X\|S | `20391045` | 47 | Testing | [20391045.json](20391045/20391045.json) |
 | Batman: Return to Arkham - Arkham City | Xbox One, Xbox Series X\|S | `514006173` | 70 | Testing | [514006173.json](514006173/514006173.json) |
@@ -160,7 +161,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | BIOHAZARD 7 resident evil グロテスクVer. | Windows PC | `298354887` | 58 | Supported | [298354887.json](298354887/298354887.json) |
 | BIOHAZARD RE:2 Z Version | Windows PC, Xbox One, Xbox Series X\|S | `918284490` | 11 | Testing | [918284490.json](918284490/918284490.json) |
 | BioShock 2 Remastered | Xbox One, Xbox Series X\|S | `996030243` | 53 | Testing | [996030243.json](996030243/996030243.json) |
-| BioShock Infinite: The Complete Edition | Xbox One, Xbox Series X\|S | `699731308` | 11 | Testing | [699731308.json](699731308/699731308.json) |
+| BioShock Infinite: The Complete Edition | Xbox One, Xbox Series X\|S | `699731308` | 80 | Testing | [699731308.json](699731308/699731308.json) |
 | BioShock Remastered | Xbox One, Xbox Series X\|S | `367004125` | 63 | Testing | [367004125.json](367004125/367004125.json) |
 | Blue Estate | Xbox One, Xbox Series X\|S | `2038811741` | 27 | Partially Supported | [2038811741.json](2038811741/2038811741.json) |
 | Boom Ball 2 for Kinect | Xbox One | `412294483` | 22 | Partially Supported | [412294483.json](412294483/412294483.json) |
@@ -168,7 +169,9 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Boom Ball for Kinect | Xbox One | `480844745` | 24 | Partially Supported | [480844745.json](480844745/480844745.json) |
 | Borderlands 2 | Xbox One, Xbox Series X\|S | `1204533074` | 13 | Testing | [1204533074.json](1204533074/1204533074.json) |
 | Borderlands: The Pre-Sequel | Xbox One, Xbox Series X\|S | `1246613109` | 63 | Testing | [1246613109.json](1246613109/1246613109.json) |
+| Bridge Constructor Portal | Xbox One, Xbox Series X\|S | `58039508` | 26 | Testing | [58039508.json](58039508/58039508.json) |
 | Bridge Constructor: The Walking Dead | Windows PC, Xbox One, Xbox Series X\|S | `2030417191` | 13 | Supported | [2030417191.json](2030417191/2030417191.json) |
+| Brothers: a Tale of Two Sons | Xbox One, Xbox Series X\|S | `73782745` | 12 | Testing | [73782745.json](73782745/73782745.json) |
 | Bunny Factory | Windows PC, Xbox One, Xbox Series X\|S | `1945255835` | 37 | Supported | [1945255835.json](1945255835/1945255835.json) |
 | Burnout Paradise Remastered | Xbox One, Xbox Series X\|S | `1037514907` | 56 | Partially Supported | [1037514907.json](1037514907/1037514907.json) |
 | Call of Duty: Black Ops III | Xbox One, Xbox Series X\|S | `80579825` | 98 | Supported | [80579825.json](80579825/80579825.json) |
@@ -212,8 +215,10 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Dead Rising 4 | Xbox One, Xbox Series X\|S | `1270951403` | 104 | Partially Supported | [1270951403.json](1270951403/1270951403.json) |
 | Dead Rising 4 (PC) | Windows PC | `749916287` | 104 | Partially Supported | [749916287.json](749916287/749916287.json) |
 | Deadpool | Xbox One, Xbox Series X\|S | `629798227` | 50 | Supported | [629798227.json](629798227/629798227.json) |
+| Dear Esther: Landmark Edition | Xbox One, Xbox Series X\|S | `903716936` | 10 | Supported | [903716936.json](903716936/903716936.json) |
 | Destiny | Xbox One, Xbox Series X\|S | `247546985` | 58 | Supported | [247546985.json](247546985/247546985.json) |
 | Destiny 2 | Windows PC | `144389848` | 23 | Supported | [144389848.json](144389848/144389848.json) |
+| Devil May Cry HD Collection | Xbox One, Xbox Series X\|S | `528369592` | 99 | Testing | [528369592.json](528369592/528369592.json) |
 | Dishonored 2 | Xbox One, Xbox Series X\|S | `527255540` | 50 | Supported | [527255540.json](527255540/527255540.json) |
 | Dishonored® Definitive Edition | Xbox One, Xbox Series X\|S | `1100121502` | 80 | Supported | [1100121502.json](1100121502/1100121502.json) |
 | Dishonored® Definitive Edition (PC) | Windows PC | `1627819535` | 80 | Supported | [1627819535.json](1627819535/1627819535.json) |
@@ -309,6 +314,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Grand Theft Auto Online (Xbox Series X\|S) | Xbox Series X\|S | `1778348973` | 77 | Supported | [1778348973.json](1778348973/1778348973.json) |
 | Grand Theft Auto V | Xbox One, Xbox Series X\|S | `1050025307` | 77 | Supported | [1050025307.json](1050025307/1050025307.json) |
 | Grand Theft Auto V (Xbox One) | Xbox One, Xbox Series X\|S | `972249091` | 77 | Supported | [972249091.json](972249091/972249091.json) |
+| Guacamelee! Super Turbo Championship Edition | Xbox One, Xbox Series X\|S | `1958071699` | 35 | Testing | [1958071699.json](1958071699/1958071699.json) |
 | Guitar Hero Live | Xbox One, Xbox Series X\|S | `453673951` | 50 | Supported | [453673951.json](453673951/453673951.json) |
 | Halo 5: Forge | Windows PC | `766737132` | 25 | Supported | [766737132.json](766737132/766737132.json) |
 | Halo 5: Guardians | Xbox One, Xbox Series X\|S | `219630713` | 73 | Partially Supported | [219630713.json](219630713/219630713.json) |
@@ -353,6 +359,8 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | LEGO The Hobbit | Xbox One, Xbox Series X\|S | `1764536463` | 39 | Partially Supported | [1764536463.json](1764536463/1764536463.json) |
 | LEGO Worlds | Xbox One, Xbox Series X\|S | `867642949` | 71 | Testing | [867642949.json](867642949/867642949.json) |
 | LIMBO | Xbox One, Xbox Series X\|S | `398011207` | 13 | Testing | [398011207.json](398011207/398011207.json) |
+| Little Nightmares | Xbox One, Xbox Series X\|S | `572268056` | 22 | Testing | [572268056.json](572268056/572268056.json) |
+| Lords of the Fallen (2014) | Xbox One, Xbox Series X\|S | `1271641024` | 56 | Testing | [1271641024.json](1271641024/1271641024.json) |
 | Mad Max | Xbox One, Xbox Series X\|S | `2029730324` | 49 | Testing | [2029730324.json](2029730324/2029730324.json) |
 | Madden NFL 15 | Xbox One, Xbox Series X\|S | `2147358433` | 2 | Testing | [2147358433.json](2147358433/2147358433.json) |
 | Madden NFL 16 | Xbox One, Xbox Series X\|S | `1249526091` | 2 | Testing | [1249526091.json](1249526091/1249526091.json) |
@@ -371,10 +379,12 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Madden NFL 25 | Xbox One, Xbox Series X\|S | `142841733` | 2 | Testing | [142841733.json](142841733/142841733.json) |
 | Madden NFL 25 Xbox One | Xbox One, Xbox Series X\|S | `1876694512` | 28 | Testing | [1876694512.json](1876694512/1876694512.json) |
 | Madden NFL 25 Xbox Series X\|S | Xbox Series X\|S | `2072546746` | 28 | Testing | [2072546746.json](2072546746/2072546746.json) |
+| Mafia: Definitive Edition | Xbox One, Xbox Series X\|S | `1720075101` | 43 | Testing | [1720075101.json](1720075101/1720075101.json) |
 | Marathon | Xbox Series X\|S | `1921177861` | 14 | Supported | [1921177861.json](1921177861/1921177861.json) |
 | Marvel's Guardians of the Galaxy: The Telltale Series | Windows PC | `1041197334` | 30 | Supported | [1041197334.json](1041197334/1041197334.json) |
 | Marvel’s Guardians of the Galaxy: The Telltale Series - Episode 1 | Xbox One, Xbox Series X\|S | `1029188769` | 30 | Supported | [1029188769.json](1029188769/1029188769.json) |
 | Mass Effect: Andromeda | Xbox One, Xbox Series X\|S | `1590411380` | 55 | Supported | [1590411380.json](1590411380/1590411380.json) |
+| Max: The Curse of Brotherhood | Xbox One, Xbox Series X\|S | `1649675719` | 36 | Testing | [1649675719.json](1649675719/1649675719.json) |
 | Mega Man™ Legacy Collection | Xbox One, Xbox Series X\|S | `1535750831` | 24 | Supported | [1535750831.json](1535750831/1535750831.json) |
 | Metal Gear Solid V: Ground Zeroes | Xbox One, Xbox Series X\|S | `650249872` | 15 | Supported | [650249872.json](650249872/650249872.json) |
 | METAL GEAR SOLID V: THE PHANTOM PAIN | Xbox One, Xbox Series X\|S | `148020354` | 42 | Supported | [148020354.json](148020354/148020354.json) |
@@ -390,11 +400,12 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Minecraft | Xbox One, Xbox Series X\|S | `1828326430` | 123 | Supported | [1828326430.json](1828326430/1828326430.json) |
 | Minecraft for Android | Android | `1739947436` | 121 | Partially Supported | [1739947436.json](1739947436/1739947436.json) |
 | Minecraft for Gear VR | Gear VR | `1909043648` | 94 | Supported | [1909043648.json](1909043648/1909043648.json) |
-| Minecraft for iOS | iOS | `1810924247` | 121 | Partially Supported | [1810924247.json](1810924247/1810924247.json) |
+| Minecraft for iOS | iOS | `1810924247` | 134 | Partially Supported | [1810924247.json](1810924247/1810924247.json) |
 | Minecraft for Kindle Fire | Kindle Fire | `1944307183` | 121 | Partially Supported | [1944307183.json](1944307183/1944307183.json) |
-| Minecraft for Nintendo Switch | Nintendo Switch | `2047319603` | 109 | Partially Supported | [2047319603.json](2047319603/2047319603.json) |
-| Minecraft for Windows | Windows PC | `896928775` | 123 | Partially Supported | [896928775.json](896928775/896928775.json) |
-| Minecraft for Windows 10 Mobile | Mobile, Windows PC | `1916611344` | 88 | Supported | [1916611344.json](1916611344/1916611344.json) |
+| Minecraft for Nintendo Switch | Nintendo Switch | `2047319603` | 119 | Partially Supported | [2047319603.json](2047319603/2047319603.json) |
+| Minecraft for Nintendo Switch 2 | Nintendo Switch 2 | `1977135090` | 119 | Supported | [1977135090.json](1977135090/1977135090.json) |
+| Minecraft for Windows | Windows PC | `896928775` | 139 | Partially Supported | [896928775.json](896928775/896928775.json) |
+| Minecraft for Windows 10 Mobile | Mobile, Windows PC | `1916611344` | 95 | Supported | [1916611344.json](1916611344/1916611344.json) |
 | Minecraft: Story Mode - A Telltale Games Series | Windows PC | `849609009` | 50 | Supported | [849609009.json](849609009/849609009.json) |
 | Minecraft: Story Mode - Episode 1: The Order of the Stone | Xbox One | `2014650813` | 50 | Supported | [2014650813.json](2014650813/2014650813.json) |
 | Minecraft: Story Mode - Season Two | Windows PC | `148376670` | 30 | Supported | [148376670.json](148376670/148376670.json) |
@@ -414,12 +425,14 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Ori and the Blind Forest: Definitive Edition | Windows PC | `559544937` | 57 | Supported | [559544937.json](559544937/559544937.json) |
 | Overcooked | Xbox One, Xbox Series X\|S | `340920273` | 11 | Supported | [340920273.json](340920273/340920273.json) |
 | Overwatch 2 | Xbox One, Xbox Series X\|S | `94618376` | 162 | Supported | [94618376.json](94618376/94618376.json) |
+| Oxenfree | Windows PC | `35717019` | 13 | Testing | [35717019.json](35717019/35717019.json) |
 | Party Hard | Xbox One, Xbox Series X\|S | `916339986` | 26 | Supported | [916339986.json](916339986/916339986.json) |
 | PAYDAY 2: CRIMEWAVE EDITION | Xbox One, Xbox Series X\|S | `1479895282` | 110 | Supported | [1479895282.json](1479895282/1479895282.json) |
 | Peggle 2 | Xbox One, Xbox Series X\|S | `848717329` | 34 | Partially Supported | [848717329.json](848717329/848717329.json) |
 | Phantom Dust | Windows PC, Xbox One | `267248679` | 45 | Partially Supported | [267248679.json](267248679/267248679.json) |
 | Pinball FX2 Windows 10 Edition | Windows PC | `1818736509` | 87 | Testing | [1818736509.json](1818736509/1818736509.json) |
 | Pixel Piracy | Xbox One, Xbox Series X\|S | `819060983` | 12 | Partially Supported | [819060983.json](819060983/819060983.json) |
+| Plague Inc: Evolved | Xbox One, Xbox Series X\|S | `1542414577` | 187 | Testing | [1542414577.json](1542414577/1542414577.json) |
 | Plants vs. Zombies Garden Warfare | Xbox One, Xbox Series X\|S | `860666361` | 65 | Supported | [860666361.json](860666361/860666361.json) |
 | Plants vs. Zombies Garden Warfare 2 | Xbox One, Xbox Series X\|S | `728655825` | 63 | Supported | [728655825.json](728655825/728655825.json) |
 | Prey | Xbox One, Xbox Series X\|S | `907086072` | 58 | Testing | [907086072.json](907086072/907086072.json) |
@@ -469,6 +482,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Shovel Knight: Treasure Trove | Windows PC | `1074352212` | 85 | Supported | [1074352212.json](1074352212/1074352212.json) |
 | Shovel Knight: Treasure Trove | Xbox One, Xbox Series X\|S | `247124088` | 105 | Supported | [247124088.json](247124088/247124088.json) |
 | Skylanders Trap Team | Xbox One, Xbox Series X\|S | `1147123126` | 46 | Testing | [1147123126.json](1147123126/1147123126.json) |
+| Sleeping Dogs™ Definitive Edition | Xbox One, Xbox Series X\|S | `367254866` | 59 | Testing | [367254866.json](367254866/367254866.json) |
 | Slender: The Arrival (2015) | Xbox One, Xbox Series X\|S | `1166935255` | 20 | Supported | [1166935255.json](1166935255/1166935255.json) |
 | Slime Rancher | Windows PC, Xbox One, Xbox Series X\|S | `625948041` | 57 | Supported | [625948041.json](625948041/625948041.json) |
 | Snake Pass | Windows PC, Xbox One | `595091631` | 34 | Supported | [595091631.json](595091631/595091631.json) |
@@ -485,12 +499,14 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | SUBJECT 13 | Windows PC, Xbox One, Xbox Series X\|S | `208741763` | 13 | Supported | [208741763.json](208741763/208741763.json) |
 | Sunset Overdrive | Xbox One, Xbox Series X\|S | `1579532320` | 88 | Testing | [1579532320.json](1579532320/1579532320.json) |
 | Super Night Riders | Xbox One, Xbox Series X\|S | `900300132` | 20 | Supported | [900300132.json](900300132/900300132.json) |
+| SUPERHOT | Xbox One, Xbox Series X\|S | `240091546` | 25 | Testing | [240091546.json](240091546/240091546.json) |
 | Supermarket Shriek | Windows PC, Xbox One, Xbox Series X\|S | `979032440` | 42 | Supported | [979032440.json](979032440/979032440.json) |
 | T-Kara Puzzles | Windows PC, Mobile, Xbox One | `869284932` | 15 | Supported | [869284932.json](869284932/869284932.json) |
 | Tales from the Borderlands - Episode 1: Zer0 Sum | Xbox One, Xbox Series X\|S | `2141647881` | 35 | Supported | [2141647881.json](2141647881/2141647881.json) |
 | Tapping Skill Test | Xbox One | `875079140` | 9 | Partially Supported | [875079140.json](875079140/875079140.json) |
 | Terraria | Xbox One, Xbox Series X\|S | `389597738` | 38 | Partially Supported | [389597738.json](389597738/389597738.json) |
 | The Amazing Spider-Man 2™ | Xbox One, Xbox Series X\|S | `1999803984` | 46 | Partially Supported | [1999803984.json](1999803984/1999803984.json) |
+| The Binding of Isaac: Rebirth | Xbox One, Xbox Series X\|S | `794552001` | 79 | Testing | [794552001.json](794552001/794552001.json) |
 | The Bunker | Windows PC, Xbox One, Xbox Series X\|S | `181110324` | 28 | Supported | [181110324.json](181110324/181110324.json) |
 | The Crew | Xbox One, Xbox Series X\|S | `1979014977` | 50 | Supported | [1979014977.json](1979014977/1979014977.json) |
 | The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | `1285166951` | 179 | Partially Supported | [1285166951.json](1285166951/1285166951.json) |
@@ -506,6 +522,8 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | The Evil Within® 2 (PC) | Windows PC | `1790921256` | 51 | Supported | [1790921256.json](1790921256/1790921256.json) |
 | The LEGO Movie Videogame | Xbox One, Xbox Series X\|S | `1755825192` | 48 | Partially Supported | [1755825192.json](1755825192/1755825192.json) |
 | The Long Dark | Windows PC | `690285705` | 75 | Supported | [690285705.json](690285705/690285705.json) |
+| The Town of Light | Xbox One, Xbox Series X\|S | `24728415` | 20 | Testing | [24728415.json](24728415/24728415.json) |
+| The Town of Light | Xbox One, Xbox Series X\|S | `94098725` | 20 | Testing | [94098725.json](94098725/94098725.json) |
 | The Walking Dead Collection - The Telltale Series | Xbox One | `946930585` | 139 | Supported | [946930585.json](946930585/946930585.json) |
 | The Walking Dead: A New Frontier | Windows PC | `333693662` | 30 | Supported | [333693662.json](333693662/333693662.json) |
 | The Walking Dead: A New Frontier - Episode 1 | Xbox One, Xbox Series X\|S | `282062756` | 30 | Supported | [282062756.json](282062756/282062756.json) |
@@ -553,6 +571,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | Wasteland 2: Director's Cut | Windows PC, Xbox One, Xbox Series X\|S | `2019181131` | 46 | Supported | [2019181131.json](2019181131/2019181131.json) |
 | Watch Dogs 2 | Xbox One, Xbox Series X\|S | `415619002` | 55 | Supported | [415619002.json](415619002/415619002.json) |
 | We Happy Few | Windows PC | `974586226` | 70 | Supported | [974586226.json](974586226/974586226.json) |
+| What Remains of Edith Finch | Xbox One, Xbox Series X\|S | `861949148` | 10 | Testing | [861949148.json](861949148/861949148.json) |
 | Wolfenstein: The New Order | Xbox One, Xbox Series X\|S | `1981403899` | 50 | Supported | [1981403899.json](1981403899/1981403899.json) |
 | Wolfenstein: The New Order (PC) | Windows PC | `1677025209` | 50 | Supported | [1677025209.json](1677025209/1677025209.json) |
 | Wolfenstein: The Old Blood | Xbox One, Xbox Series X\|S | `1159891781` | 50 | Supported | [1159891781.json](1159891781/1159891781.json) |

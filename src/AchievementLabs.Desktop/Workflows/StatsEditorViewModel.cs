@@ -90,13 +90,8 @@ namespace AchievementLabs.Desktop.Workflows
             var path = File.Exists(Path.Combine(account.EventsDirectory, "index.json"))
                 ? Path.Combine(account.EventsDirectory, TitleId, TitleId + ".json") : Path.Combine(account.EventsDirectory, TitleId + ".json");
             if (File.Exists(path)) return File.ReadAllText(path);
-            var assembly = typeof(AchievementLabs.Core.StatCatalogStore).Assembly;
-            var indexed = assembly.GetManifestResourceNames().Contains("AchievementLabs.LocalEvents.index.json");
-            var expected = "AchievementLabs.LocalEvents." + (indexed ? TitleId + "." : "") + TitleId + ".json";
-            var resource = assembly.GetManifestResourceNames().FirstOrDefault(name => name.Replace('/', '.').Replace('\\', '.') == expected);
-            using var stream = resource == null ? null : assembly.GetManifestResourceStream(resource);
-            if (stream == null) return null;
-            using var reader = new StreamReader(stream); return reader.ReadToEnd();
+            var indexed = AchievementLabs.Core.BundledEventFiles.Contains("index.json");
+            return AchievementLabs.Core.BundledEventFiles.Read(indexed ? TitleId + "/" + TitleId + ".json" : TitleId + ".json");
         }
         public void RefreshSupport()
         {
@@ -106,10 +101,10 @@ namespace AchievementLabs.Desktop.Workflows
                 CheckEventData();
                 var mode = CurrentStatMode;
                 StatModeLabel = "Stats type: " + (mode == "Event" ? "Event-based" : mode == "Title" ? "Title-based" : "Unknown");
-                StatSupportLabel = mode == "Title" ? "Supported Â· title-based stats (available writable stats are checked when loaded)."
-                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported Â· mapped event stats in Stats.json."
-                    : mode == "Event" ? "Not Supported Â· Stats.json needs event-stat recipes and a standalone title template."
-                    : "Not Supported Â· no known stat mode or mapped event-stat recipes.";
+                StatSupportLabel = mode == "Title" ? "Supported · title-based stats (available writable stats are checked when loaded)."
+                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported · mapped event stats in Stats.json."
+                    : mode == "Event" ? "Not Supported · Stats.json needs event-stat recipes and a standalone title template."
+                    : "Not Supported · no known stat mode or mapped event-stat recipes.";
             }
             OnPropertyChanged(nameof(StatModeLabel)); OnPropertyChanged(nameof(StatSupportLabel));
         }
@@ -313,7 +308,7 @@ namespace AchievementLabs.Desktop.Workflows
                 StatusText = "Resolving title stats...";
                 var serviceConfigId = await GetRestAPI().GetTitleServiceConfigIdAsync(account.XUIDOnly, TitleId);
 
-                // Get stats â€” first try with MinutesPlayed to see what stat names exist
+                // Get stats — first try with MinutesPlayed to see what stat names exist
                 StatusText = "Fetching stats...";
 
                 // Build stat name list from event data if available
@@ -710,9 +705,9 @@ namespace AchievementLabs.Desktop.Workflows
                 if (File.Exists(dataPath)) json = File.ReadAllText(dataPath);
                 else
                 {
-                    using var stream = typeof(AchievementLabs.Core.StatCatalogStore).Assembly.GetManifestResourceStream("AchievementLabs.LocalEvents.Stats.json");
-                    if (stream == null) return;
-                    using var reader = new StreamReader(stream); json = reader.ReadToEnd();
+                    var bundled = AchievementLabs.Core.BundledEventFiles.Read("Stats.json");
+                    if (bundled == null) return;
+                    json = bundled;
                 }
                 var allData = JObject.Parse(json);
                 _eventsDataForTitle = allData[TitleId] as JObject;
@@ -942,8 +937,12 @@ namespace AchievementLabs.Desktop.Workflows
         private static IEnumerable<string> GetStatCatalogRoots()
         {
             yield return Path.Combine(AppContext.BaseDirectory, "StatsCatalog");
+#if LABS_UPDATE_TESTING
+            yield return AchievementLabs.Core.AchievementLabsPaths.LocalFile("StatsCatalog");
+#else
             yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "StatsCatalog");
             yield return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+#endif
         }
 
         private static void LoadStatModeFile(string path, HashSet<string> destination)
@@ -1398,6 +1397,9 @@ namespace AchievementLabs.Desktop.Workflows
                     "AchievementLabs",
                     "Debug",
                     "StatsEditorLoads");
+#if LABS_UPDATE_TESTING
+                root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "StatsEditorLoads"));
+#endif
                 Directory.CreateDirectory(root);
 
                 var capturedUtc = DateTime.UtcNow;
@@ -2049,6 +2051,9 @@ namespace AchievementLabs.Desktop.Workflows
         private string CreateStatDebugDirectory(string statName)
         {
             var root = DebugRootDirectory ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "AchievementLabs", "Debug", "StatEdits");
+#if LABS_UPDATE_TESTING
+            root = DebugRootDirectory ?? AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "StatEdits"));
+#endif
             Directory.CreateDirectory(root);
 
             var timestamp = DateTime.UtcNow.ToString("yyyyMMdd_HHmmss_fff");
@@ -2177,7 +2182,7 @@ namespace AchievementLabs.Desktop.Workflows
                         return true;
                     }
                 case "StatValue":
-                    // Direct stat value replacement â€” the target placeholder gets the user's value
+                    // Direct stat value replacement — the target placeholder gets the user's value
                     requestbody = requestbody.Replace(ReplacementData.Target.ToString(), statValue);
                     return true;
                 default:

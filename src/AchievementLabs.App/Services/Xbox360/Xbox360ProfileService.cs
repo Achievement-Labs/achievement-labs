@@ -55,11 +55,33 @@ public sealed class Xbox360ProfileService(string? profilesDirectory = null)
             .OrderByDescending(File.GetLastWriteTimeUtc).ToArray();
     }
 
-    public async Task<string> ExtractProfileAsync(string source, CancellationToken cancellationToken = default)
+    public Task<string> ExtractProfileAsync(string source, CancellationToken cancellationToken = default)
     {
         var id = Path.GetFileName(source);
         if (!IsProfileId(id) || !IsProfilePackage(source, id))
             throw new InvalidDataException("The selected file is not a matching Xbox 360 profile package.");
+        return CopyToWorkingAsync(source, id, cancellationToken);
+    }
+
+    // Exported profiles may be renamed, so the profile ID comes from the CON header instead of the file name.
+    public Task<string> ImportProfileAsync(string source, CancellationToken cancellationToken = default)
+    {
+        var header = new byte[0x379];
+        using (var stream = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        {
+            if (stream.Length < header.Length) throw new InvalidDataException("The selected file is not an Xbox 360 profile package.");
+            stream.ReadExactly(header);
+        }
+        var id = Convert.ToHexString(header.AsSpan(0x371, 8));
+        if (id.All(c => c == '0') || !IsProfilePackage(source, id))
+            throw new InvalidDataException("The selected file is not an Xbox 360 profile package.");
+        return CopyToWorkingAsync(source, id, cancellationToken);
+    }
+
+    public static string OriginalBackupPath(string workingCopy) => workingCopy + ".bak";
+
+    private async Task<string> CopyToWorkingAsync(string source, string id, CancellationToken cancellationToken)
+    {
 
         var folder = Path.Combine(ProfilesDirectory, id + "-working");
         Directory.CreateDirectory(folder);

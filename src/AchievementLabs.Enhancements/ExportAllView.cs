@@ -16,7 +16,12 @@ public static class ExportAllView
     const BindingFlags Flags=BindingFlags.Instance|BindingFlags.Public|BindingFlags.NonPublic;
     static object? Prop(object? o,string name)=>o?.GetType().GetProperty(name,Flags)?.GetValue(o);
     static object? Field(object? o,string name)=>o?.GetType().GetField(name,Flags)?.GetValue(o);
+#if LABS_UPDATE_TESTING
+    static readonly string TestRoot=Path.GetFullPath(Environment.GetEnvironmentVariable("LABS_UPDATE_TEST_ROOT")??Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"AchievementLabs-UpdateTest"));
+    static readonly string Preference=Path.Combine(TestRoot,"export-folder.txt");
+#else
     static readonly string Preference=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"AchievementLabs","export-folder.txt");
+#endif
     static void Busy(object model,bool value)=>model.GetType().GetMethod("Busy",Flags)!.Invoke(model,new object[]{value});
     public static void Attach(Window owner,object model)
     {
@@ -48,7 +53,11 @@ public static class ExportAllView
         var root=new StackPanel {Spacing=13,Margin=new Thickness(24)};
         root.Children.Add(new TextBlock {Text="Export all achievements",FontSize=24,FontWeight=FontWeight.SemiBold});
         root.Children.Add(new TextBlock {Text="Scan the connected Xbox account’s full game history, including locked achievements. Game and achievement filters do not limit this export.",TextWrapping=TextWrapping.Wrap});
+#if LABS_UPDATE_TESTING
+        string initial=Path.Combine(TestRoot,"Exports");
+#else
         string initial=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"AchievementLabs Exports");
+#endif
         try{if(File.Exists(Preference))initial=File.ReadAllText(Preference);}catch(IOException){}catch(UnauthorizedAccessException){}
         var folder=new TextBox {Text=initial,PlaceholderText="Choose an export folder",HorizontalAlignment=HorizontalAlignment.Stretch};
         var choose=new Button {Content="Choose folder…"};
