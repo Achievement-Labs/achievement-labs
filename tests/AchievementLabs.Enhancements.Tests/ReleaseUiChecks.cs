@@ -16,6 +16,16 @@ static class ReleaseUiChecks
         Directory.CreateDirectory(output);
         AppBuilder.Configure<App>().UseSkia().UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false }).SetupWithoutStarting();
         var window = new MainWindow(); window.Show();
+#if LABS_UPDATE_TESTING
+        var appearance = AchievementLabs.Desktop.Presentation.AppearanceController.For(window);
+        foreach (var field in new[] { "file", "cache" })
+        {
+            var path = (string)appearance.GetType().GetField(field, BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(appearance)!;
+            Check(path.StartsWith(AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot), "Appearance path must use the isolated profile");
+        }
+        var exportPath = (string)typeof(AchievementLabs.MultiSelect.ExportAllView).GetField("Preference", BindingFlags.Static | BindingFlags.NonPublic)!.GetValue(null)!;
+        Check(exportPath.StartsWith(AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot), "Export preference must use the isolated profile");
+#endif
         void Pump() { for (int i = 0; i < 15; i++) { Dispatcher.UIThread.RunJobs(); Thread.Sleep(10); } }
         void Render(Window target, string name)
         {
