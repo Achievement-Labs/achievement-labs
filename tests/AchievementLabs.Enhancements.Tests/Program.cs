@@ -85,7 +85,7 @@ static class Test
    Assert(Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementFilter") && Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementSort"),"360 filter and sort controls are bound in the real window");
    Assert(!Desc<TextBlock>(window).Any(t=>t.Text=="Settings, saved queues & tools"),"Redundant queue heading removed");
    var platformFilters = Desc<ItemsControl>(window).Single(c=>c.Name=="TitleSearchPlatformFilters");
-   Assert(platformFilters.Items.Count==9,"Nine title-search platforms available");
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().Select(p=>p.Key).ToHashSet().SetEquals(new[]{"series","one","360","pc","gfwl","win32","win8","mobile","ios","android","phone","web","appletv","kindle","vr","switch","other"}),"All catalog title-search platforms available");
    Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsNone"));
    Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>!p.Selected),"None clears all platform toggles");
    Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsAll"));
