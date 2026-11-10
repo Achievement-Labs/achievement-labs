@@ -198,7 +198,7 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "TitleHubStats");
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
             root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "TitleHubStats"));
 #endif
             Directory.CreateDirectory(root);
@@ -262,7 +262,7 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "GamesList");
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
             root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "GamesList"));
 #endif
             Directory.CreateDirectory(root);
@@ -678,7 +678,7 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "Heartbeat");
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
             root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "Heartbeat"));
 #endif
             Directory.CreateDirectory(root);
@@ -772,7 +772,7 @@ public class XboxApiClient : IDisposable
         {
             var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "AchievementLabs", "Debug", "Achievements");
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
             root = AchievementLabs.Core.AchievementLabsPaths.LocalFile(Path.Combine("Debug", "Achievements"));
 #endif
             Directory.CreateDirectory(root);

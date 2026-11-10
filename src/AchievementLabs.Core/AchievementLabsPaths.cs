@@ -6,12 +6,18 @@ public static class AchievementLabsPaths
     public static string UpdateTestRoot => Path.GetFullPath(Environment.GetEnvironmentVariable("LABS_UPDATE_TEST_ROOT")
         ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs-UpdateTest"));
 #endif
+#if LABS_OPTIMIZATION_TEST
+    public static string OptimizationTestRoot => Path.GetFullPath(Environment.GetEnvironmentVariable("LABS_OPTIMIZATION_TEST_ROOT")
+        ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs-OptimizationTest"));
+#endif
     private const string CurrentFolder = "AchievementLabs";
     private const string LegacyFolder = "UltimateAchievementLabs";
 
     public static string LocalFile(string fileName)
     {
-#if LABS_UPDATE_TESTING
+#if LABS_OPTIMIZATION_TEST
+        return Path.Combine(OptimizationTestRoot, fileName);
+#elif LABS_UPDATE_TESTING
         return Path.Combine(UpdateTestRoot, fileName);
 #else
         var local = OperatingSystem.IsMacOS() ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Application Support") : Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
