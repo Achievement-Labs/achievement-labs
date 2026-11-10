@@ -57,9 +57,6 @@ public sealed partial class DesktopModel
             if (OperatingSystem.IsWindows() && AutoLaunchXboxApp) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(@"shell:appsFolder\Microsoft.GamingApp_8wekyb3d8bbwe!Microsoft.Xbox.App") { UseShellExecute = true, WindowStyle = LaunchXboxAppHidden ? System.Diagnostics.ProcessWindowStyle.Hidden : System.Diagnostics.ProcessWindowStyle.Normal }); }
         catch (OperationCanceledException) { }
         catch { Notice = "Native settings could not be read. Defaults are in use; save only after reviewing them."; }
-        try { await Task.Run(() => ManagedEventCatalog.EnsureCurrent(EventsDirectory), lifetime.Token); }
-        catch (OperationCanceledException) { }
-        catch (Exception error) { Notice = "Events folder could not be updated. Close other instances and restart to retry. " + error.Message; }
         LoadAutoUnlockPreferences();
     }
     public async Task SavePreferencesAsync()
@@ -116,7 +113,7 @@ public sealed partial class DesktopModel
         Busy(true); ++selectionVersion;
         await requests.WaitAsync();
         StopLibrarySupportCheck();
-        try { apiServer?.Stop(); ServerAddress = "Stopped"; client?.Dispose(); client = null; ClearPcPresence(); session = null; ++sessionGeneration; AuthorizationStatus = "Xbox disconnected."; connectionMethod = ""; XboxPcAttached = false; ResetWorkflowAccount(); AccountSummary = "Connect an account to view its profile."; ProfileImageUrl = null; Games = []; achievements = []; ResetActions(); SelectedGame = null; Refresh(); ProfileName = "Not connected"; Changed(nameof(ConnectionLabel)); Changed(nameof(HomeXboxSummary)); Navigate("Home"); Notice = "Disconnected. Use Attach Xbox PC app to reconnect."; }
+        try { apiServer?.Stop(); ServerAddress = "Stopped"; client?.Dispose(); client = null; ClearPcPresence(); session = null; AccountMythicsUnlocked = null; ++sessionGeneration; AuthorizationStatus = "Xbox disconnected."; connectionMethod = ""; XboxPcAttached = false; ResetWorkflowAccount(); AccountSummary = "Connect an account to view its profile."; ProfileImageUrl = null; Games = []; achievements = []; ResetActions(); SelectedGame = null; Refresh(); ProfileName = "Not connected"; Changed(nameof(ConnectionLabel)); Changed(nameof(HomeXboxSummary)); Navigate("Home"); Notice = "Disconnected. Use Attach Xbox PC app to reconnect."; }
         finally { requests.Release(); Busy(false); }
     }
     public async Task ForgetSavedSessionAsync()

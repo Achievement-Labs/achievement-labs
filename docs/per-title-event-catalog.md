@@ -32,35 +32,30 @@ catalogs remain readable. An explicit indexed catalog takes precedence; malforme
 data is reported rather than silently falling back to a different catalog.
 `F:\Events` is not migrated automatically.
 
-## App-managed Documents catalog upgrades
+## Desktop storage and explicit catalog exports
 
-On startup, the desktop app refreshes its default Events folder from the embedded
-catalog when the bundled catalog checksum changes. The first run also replaces
-legacy flat catalogs. It stages the runtime allowlist (`index.json`, `Stats.json`
-and each indexed title's mapping/template pair), validates every title through
-`EventCatalogStorage`, then swaps directories. The previous folder is retained
-unchanged as a sibling `Events.backup-<UTC timestamp>-<unique ID>`.
+Normal startup reads the compressed embedded catalog without expanding it into
+Documents. The official achievement client ignores a legacy Documents catalog;
+custom imports and verified release updates remain separate. Local stat recipes
+and deliberate custom-path editing remain supported. Support badges use the
+compact published metadata projection; actual recipes are loaded and validated
+through the consumer only for the selected title. Release checks must keep that
+metadata projection synchronized with the event catalog.
 
-The checksum receipt and update lock are sibling files outside the runtime
-catalog. Repeat launches with the same bundle do not rewrite the catalog. A
-staging or validation failure leaves the active folder and receipt unchanged;
-a failed directory swap restores the previous folder. Errors are shown in the
-app and retried on the next launch. Separately stored local stats and legacy
-embedded stats are retained, with user stat values taking precedence over bundled
-values. Conflicting legacy/local stat recipes abort the refresh for review.
-Local achievement/template changes remain available in the complete backup;
-the refreshed managed folder uses the shipped achievement catalog.
-
-Custom paths, including `F:\Events`, are never migrated automatically. The official
-achievement client continues using the embedded/verified official catalog; the
-Documents refresh keeps local stats and catalog diagnostics current. An old
-Documents folder alone does not imply that official achievement mappings are stale.
-
-Check upgrade behavior offline with:
+A full directory export is opt-in, for inspection/editing rather than startup:
 
 ```powershell
-dotnet run --project tools/EventCatalogChecks -- --managed-upgrade
+dotnet run --project tools/EventCatalogChecks -- --install-bundled C:/staging/Events
 ```
+
+The exporter stages only runtime catalog files and checks every title through the
+consumer before replacing its destination. Existing destinations are retained as
+sibling backups. Local stat recipes are preserved; conflicting legacy/local stat
+recipes abort the operation. Receipt/lock files live outside the runtime catalog.
+`F:\Events` is never selected by the app automatically. No research fields are
+added to runtime JSON. The exporter regression checks are available with
+`--managed-upgrade`. To exercise all bundled replacements offline, use
+`--render-bundled`.
 
 ## Migration and authoring
 

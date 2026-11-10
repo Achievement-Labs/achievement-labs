@@ -25,6 +25,7 @@ public record Achievement(string Id, string Name, string Description, int Score,
 public record Game(string Id, string Name, string Platform, int Completed, int Total, int Score, bool ProgressKnown = true, string? ImageUrl = null, DateTime? LastPlayed = null, bool NoDefinitionsReturned = false)
 {
     public LibrarySupportBadge Support { get; init; } = LibrarySupportBadge.Unknown;
+    public bool? AccountBaseComplete { get; init; }
     public bool BaseComplete { get; init; }
     public bool AddOnsComplete { get; init; }
     public bool FullyComplete { get; init; }
@@ -32,7 +33,9 @@ public record Game(string Id, string Name, string Platform, int Completed, int T
     public string MythicColour { get; init; } = "#70C98A";
     public string CompletionBackground { get; init; } = "Transparent";
     public string PlatformLabel => AchievementLabs.MultiSelect.GfwlTitles.Label(Id, Platform);
-    public string CompletionTooltip => FullyComplete ? "100% completed: all achievements, including DLC and title updates" : "Base game completed (local indicator from verified achievement progress)";
+    public string CompletionTooltip => FullyComplete ? "100% completed: all achievements, including DLC and title updates" : AccountBaseComplete == true ? "Base game completed: reported by Xbox" : "Base game completed: verified local achievement progress";
+    private string? searchName, searchKey;
+    public string SearchKey { get { if (searchName != Name) { searchName = Name; searchKey = TitleSearchText.Key(Name); } return searchKey!; } }
     public string ShortName => Name;
     public string Monogram => string.Concat(Name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(p => p[0]));
     public string Color => "#70C98A";
@@ -60,10 +63,18 @@ public sealed partial class DesktopModel : Observable, IDisposable
     private int selectionVersion;
     private readonly Stack<string> pageHistory = [];
     private readonly Stack<string> pageForwardHistory = [];
-    private IEnumerable<Game> CombinedXboxGames => Games.Concat(Xbox360Games
-        .Where(local => !Games.Any(game => game.Id == Convert.ToUInt32(local.TitleId, 16).ToString()))
-        .Select(local => new Game(Convert.ToUInt32(local.TitleId, 16).ToString(), local.Name,
-            "Xbox360", local.UnlockedCount, local.AchievementCount, local.GamerscoreUnlocked)));
+    private IEnumerable<Game> CombinedXboxGames
+    {
+        get
+        {
+            var ids = Games.Select(g => g.Id).ToHashSet(StringComparer.Ordinal);
+            return Games.Concat(Xbox360Games
+                .Where(local => ids.Add(Convert.ToUInt32(local.TitleId, 16).ToString()))
+                .Select(local => WithLibraryPresentation(new Game(Convert.ToUInt32(local.TitleId, 16).ToString(), local.Name,
+                    "Xbox360", local.UnlockedCount, local.AchievementCount, local.GamerscoreUnlocked))));
+        }
+    }
+    public Game[] CompletionGames => CombinedXboxGames.ToArray();
     public Game[] Games
     {
         get => games;
@@ -82,7 +93,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
     {
         get
         {
-            var filtered = CombinedXboxGames.Where(g => MatchesPlatform(g, PlatformFilter) && (AchievementLabs.Core.TitleSearchText.Matches(g.Name, LibrarySearch) || g.Id == LibrarySearch.Trim()));
+            var query = LibrarySearch.Trim(); var key = TitleSearchText.Key(query);
+            var filtered = CombinedXboxGames.Where(g => MatchesPlatform(g, PlatformFilter) &&
+                (query.Length == 0 || (key.Length > 0 ? g.SearchKey.Contains(key, StringComparison.Ordinal) : g.Name.Contains(query, StringComparison.OrdinalIgnoreCase)) || g.Id == query));
             return LibrarySort switch
             {
                 "Z-A" => filtered.OrderByDescending(g => g.Name, StringComparer.OrdinalIgnoreCase).ThenBy(g => g.Id),
@@ -171,7 +184,8 @@ public sealed partial class DesktopModel : Observable, IDisposable
         connectionMethod = method;
         BeginTokenMaintenance();
         ApplyXboxProfile(result.Profile?.ProfileUsers.FirstOrDefault());
-        Games = result.Titles.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+        AccountMythicsUnlocked = result.Titles.AchievementSummary?.MythicsUnlocked;
+        Games = result.Titles.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed) { AccountBaseComplete = t.Achievement?.BaseComplete }).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
         Changed(nameof(ConnectionLabel)); Changed(nameof(CanDisconnect)); Changed(nameof(HomeXboxSummary));
         _ = RefreshConnectedMetadataAsync(connected.Xuid, sessionGeneration, candidate);
     }

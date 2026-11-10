@@ -10,7 +10,7 @@ public sealed partial class DesktopModel
     private readonly ConcurrentDictionary<string, bool> gfwlTitleCache = new();
     private int legacyTabIndex;
     private Game? selectedGfwlTitle;
-    public string[] PlatformFilters { get; } = ["All", "Xbox One/Series", "PC", "GFWL", "Xbox 360", "Win32", "Windows 8/Legacy", "Incomplete Games"];
+    public string[] PlatformFilters { get; } = ["All", "Xbox One/Series", "PC", "GFWL", "Xbox 360", "Win32", "Windows 8/Legacy", "Incomplete Games", "Mythics", "Completion unverified"];
     private string librarySort = "A-Z";
     private readonly string librarySortPath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("library-sort.txt");
     public string[] LibrarySortOptions { get; } = ["A-Z", "Z-A", "Last Played"];
@@ -40,7 +40,9 @@ public sealed partial class DesktopModel
     {
         "Xbox One/Series" => HasDevice(game, "XboxOne") || HasDevice(game, "XboxSeries"),
         "PC" => HasDevice(game, "PC") || HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "GFWL" => HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "Xbox 360" => HasDevice(game, "Xbox360") && !AchievementLabs.MultiSelect.GfwlTitles.IsExclusive(game.Id), "Win32" => HasDevice(game, "Win32"),
-        "Windows 8/Legacy" => UsesLegacyEndpoint(game), "Incomplete Games" => game.ProgressKnown && game.Completed < game.Total, _ => true
+        "Windows 8/Legacy" => UsesLegacyEndpoint(game), "Incomplete Games" => game.ProgressKnown && game.Completed < game.Total,
+        "Mythics" => game.BaseComplete,
+        "Completion unverified" => !game.BaseComplete && game.AccountBaseComplete == null && (!game.ProgressKnown || game.Total <= 0), _ => true
     };
     public static bool IsKnownGfwlTitle(string titleId)
     {
@@ -148,7 +150,8 @@ public sealed partial class DesktopModel
                 var result = await Task.Run(() => api.GetGamesListAsync(xuid,progress,lifetime.Token), lifetime.Token) ?? throw new InvalidDataException();
                 lifetime.Token.ThrowIfCancellationRequested();
                 LibraryRefreshStatus="Applying library progress and completion metadata…";
-                Games = result.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed)).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+                AccountMythicsUnlocked = result.AchievementSummary?.MythicsUnlocked;
+                Games = result.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed) { AccountBaseComplete = t.Achievement?.BaseComplete }).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
                 LibraryRefreshStatus=$"Refreshed {Games.Length:N0} titles · {Games.Count(g=>g.ProgressKnown):N0} with achievement counts · {elapsed.Elapsed.TotalSeconds:N1}s";
                 LibraryRefreshPercent=100; Notice=LibraryRefreshStatus;
                 _ = RefreshConnectedMetadataAsync(session.Xuid, sessionGeneration, api);

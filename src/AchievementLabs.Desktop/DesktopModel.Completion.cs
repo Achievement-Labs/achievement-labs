@@ -13,6 +13,8 @@ public sealed partial class DesktopModel
     private CancellationTokenSource? completionScanCancellation;
     private bool completionImportRunning, completionDirty;
     private string completionStatus = "Completion indicators use verified groups and account-specific progress.";
+    private int? accountMythicsUnlocked;
+    public int? AccountMythicsUnlocked { get => accountMythicsUnlocked; private set { accountMythicsUnlocked = value is >= 0 ? value : null; Changed(); } }
     public string CompletionStatus { get => completionStatus; private set { completionStatus = value; Changed(); } }
     public bool CompletionScanRunning => completionScanCancellation != null;
     public bool CanScanCompletion => session != null && !busy && !CompletionScanRunning && !completionImportRunning;
@@ -26,8 +28,9 @@ public sealed partial class DesktopModel
         var title = SharedDlcCatalogue.Current.Find(game.Id, game.Platform);
         completionProgress.TryGetValue(game.Id, out var cached);
         var result = CompletionMarkers.Evaluate(title, cached?.Rows ?? [], game.Total, game.Completed, game.ProgressKnown);
-        bool mythic = result.BaseComplete || cached?.MythicEarned == true;
-        if (title?.IsHub == true) mythic = false;
+        // Use Xbox's explicit marker even when totalAchievements is unavailable.
+        bool mythic = game.AccountBaseComplete ?? (result.BaseComplete || cached?.MythicEarned == true);
+        if (game.AccountBaseComplete == null && title?.IsHub == true) mythic = false;
         if (mythic && cached?.MythicEarned != true && CompletionAccount != null)
         {
             completionProgress[game.Id] = (cached ?? new([], DateTimeOffset.MinValue)) with { MythicEarned = true };

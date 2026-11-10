@@ -56,11 +56,19 @@ public sealed class PublicCatalogClient(HttpClient http)
         if (page.Items.Select(t => t.TitleId).Distinct().Count() != page.Items.Length) throw new InvalidDataException("Duplicate title metadata.");
         return page;
     }
-    public static Page BundledSearch(string query)
+    private static readonly Lazy<Page> Bundled = new(LoadBundled);
+    internal static IReadOnlyDictionary<string, Title> BundledTitles { get; } = Bundled.Value.Items.ToDictionary(t => t.TitleId, StringComparer.Ordinal);
+    private static Page LoadBundled()
     {
         using var stream = typeof(PublicCatalogClient).Assembly.GetManifestResourceStream("AchievementLabs.PublicMetadata.json")
             ?? throw new InvalidDataException("Bundled public metadata missing.");
         var all = JsonSerializer.Deserialize<Page>(stream, Json) ?? throw new InvalidDataException("Bundled public metadata invalid.");
+        foreach (var title in all.Items) Validate(title);
+        return all;
+    }
+    public static Page BundledSearch(string query)
+    {
+        var all = Bundled.Value;
         var filtered = all.Items.Where(t => t.Name.Contains(query, StringComparison.OrdinalIgnoreCase) || t.TitleId.Contains(query, StringComparison.Ordinal) ||
             t.Aliases.Any(a => a.Contains(query, StringComparison.OrdinalIgnoreCase))).ToArray();
         return all with { Items = filtered.Take(100).ToArray(), TotalMatched = filtered.Length, NextCursor = null, Offline = true };
