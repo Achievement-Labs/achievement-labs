@@ -96,7 +96,7 @@ and the Steam idle helper. Its output stays under `releases/` and is not committ
 - `server/licensing/` — self-hosted event catalog and account service.
 - `site/assets/games.json` — generated public game catalog embedded in the desktop client.
 - `tools/` — release and catalog build tools required by the current application.
-- `SteamAchievementManager-7.0.41/` — vendored upstream dependency with its license retained.
+- `vendor/SteamAchievementManager/` — vendored upstream dependency with its license retained.
 
 ## Event support states
 

@@ -24,6 +24,13 @@ public static class CompletionPresentationTests
         AchievementLabs.Desktop.Achievement[] incomplete = [new("69","First","",10,false),new("70","Second","",20,false),new("71","Third","",30,false)];
         Assert(!DesktopModel.CanReplaceAchievementProgress(knownLegacy,incomplete), "Definition-only response cannot zero known library progress");
         Assert(DesktopModel.CanReplaceAchievementProgress(knownLegacy,[incomplete[0] with {Unlocked=true},incomplete[1] with {Unlocked=true},incomplete[2]]), "Matching earned count accepts account progress");
+        var account = Newtonsoft.Json.JsonConvert.DeserializeObject<TitlesList>("""{"achievementSummary":{"mythicsUnlocked":908},"titles":[]}""")!;
+        Assert(account.AchievementSummary?.MythicsUnlocked == 908, "Xbox account Mythic total is retained independently of loaded titles");
+        var flagged = Newtonsoft.Json.JsonConvert.DeserializeObject<BasicAchievementDetails>("""{"isMythic":true,"totalAchievements":0,"currentAchievements":43}""")!;
+        Assert(flagged.BaseComplete == true, "Xbox Mythic flag proves base completion despite missing definition totals");
+        Assert(new BasicAchievementDetails { IsMythic=false, BaseGameCount=1, BaseGameCompleted=1 }.BaseComplete == false, "Explicit server false takes precedence over inferred completion");
+        Assert(new BasicAchievementDetails { BaseGameCount=2, BaseGameCompleted=1 }.BaseComplete == false, "Part of a multi-base title does not complete the whole title");
+        Assert(new BasicAchievementDetails().BaseComplete == null, "Absent fields are unknown, not false");
         var title = new SharedDlcCatalogue.Title("70", ["XboxOne"], "https://example.com/verified", [
             new("Base game", "base", [new("1","First"),new("2","Second")]),
             new("Expansion", "dlc", [new("3","Third")])]);
@@ -58,6 +65,10 @@ public static class CompletionPresentationTests
         using var model = new DesktopModel();
         typeof(DesktopModel).GetProperty("Games")!.SetValue(model,new AchievementLabs.Desktop.Game[]{new("70","Complete","XboxOne",3,3,1500)});
         Assert(model.Games.Single().MythicVisible && model.Games.Single().CompletionBackground != "Transparent", "Both completion decorations rendered independently");
+        typeof(DesktopModel).GetProperty("Games")!.SetValue(model,new AchievementLabs.Desktop.Game[]{new("75","Missing legacy totals","Windows8",43,0,980) { AccountBaseComplete=true },new("76","Server incomplete","GFWL",2,2,1000) { AccountBaseComplete=false }});
+        Assert(model.Games[0].BaseComplete && !model.Games[1].BaseComplete, "Explicit Xbox markers override unavailable totals and local aggregate inference");
+        Assert(DesktopModel.MatchesPlatform(model.Games[0],"Mythics"), "Mythics can be inspected in library filter");
+        typeof(DesktopModel).GetProperty("Games")!.SetValue(model,new AchievementLabs.Desktop.Game[]{new("70","Complete","XboxOne",3,3,1500)});
         model.ShowMythicIcon = false; model.HighlightCompletedDlcs = false;
         Assert(!model.Games.Single().MythicVisible && model.Games.Single().CompletionBackground == "Transparent", "Opt-out restores original appearance");
         model.ShowMythicIcon = true; model.HighlightCompletedDlcs = true; model.MythicColour = "#AA1122"; model.CompletedDlcColour="#223344";

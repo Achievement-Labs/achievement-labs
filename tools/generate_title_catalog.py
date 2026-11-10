@@ -12,6 +12,7 @@ import json
 import sys
 from pathlib import Path
 from event_catalog import read_catalog, template_path
+from export_xbox_catalog import load_snapshot
 
 ROOT = Path(__file__).resolve().parent.parent
 RELEASE = sys.argv[1] if len(sys.argv) > 1 else 'the next release'
@@ -21,7 +22,7 @@ MANUAL = {
     '1835298427': ('Minecraft', ['Apple TV']),
 }
 DEVICE_LABELS = {'PC': 'Windows PC', 'Windows': 'Windows PC', 'Desktop': 'Windows PC',
-                 'XboxOne': 'Xbox One', 'XboxSeries': 'Xbox Series X|S', 'Xbox360': 'Xbox 360'}
+                 'XboxOne': 'Xbox One', 'XboxSeries': 'Xbox Series X|S', 'Xbox360': 'Xbox 360', 'Windows8':'Windows 8', 'GFWL':'GFWL (PC)'}
 ORDER = ['Supported', 'Partially Supported', 'Testing', 'Coming Soon']
 
 
@@ -41,7 +42,7 @@ def cell(text):
 def rows():
     data = read_catalog(ROOT / 'Events')
     assert list(data)[-1] == 'SupportedTitleIDs', 'SupportedTitleIDs must be the last key'
-    xbox = {str(e['TitleId']): e for e in json.loads((ROOT / 'XboxTitleIDs.json').read_text(encoding='utf-8'))}
+    xbox = {e['TitleId']: e for e in load_snapshot(ROOT / 'catalog/xbox-title-catalog.json.gz')['Titles']}
     listed = {str(x) for x in data['SupportedTitleIDs']}
     out = []
     for tid, block in data.items():
@@ -50,7 +51,7 @@ def rows():
         record = xbox.get(tid, {})
         manual = MANUAL.get(tid, (None, None))
         name = block.get('TitleName') or record.get('Name') or block.get('Name') or manual[0] or f'Title {tid}'
-        devices = block.get('Devices') or record.get('Devices') or manual[1]
+        devices = block.get('Devices') or record.get('Platforms') or record.get('Devices') or manual[1]
         available = (block.get('Enabled') is not False and tid in listed
                      and template_path(ROOT / 'src/AchievementLabs.App/Events', tid).exists())
         if not available: status = 'Coming Soon'

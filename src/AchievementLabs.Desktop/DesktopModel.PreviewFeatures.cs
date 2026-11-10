@@ -14,7 +14,7 @@ public sealed partial class DesktopModel
             await RefreshSharedTotalsAsync(lifetime.Token);
             if (session?.Xuid != owner || sessionGeneration != generation || client != attachedClient) return;
             games = games.Select(WithSharedTotal).ToArray(); RefreshLibraryPresentation();
-            await ImportCompletionExportsAsync(false); QueueLibrarySupportCheck();
+            await ImportCompletionExportsAsync(false);
         }
         catch (OperationCanceledException) { }
         catch { }

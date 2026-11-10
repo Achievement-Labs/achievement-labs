@@ -35,7 +35,7 @@ public sealed record CompletionSummary(int Titles,int Mythics,int FullyCompleted
 
 public sealed class CompletionOverview
 {
-    readonly Window owner;readonly object model;readonly bool preview;object? lastGames;bool pending,closed;
+    readonly Window owner;readonly object model;readonly bool preview;bool pending,closed;object? lastGames,lastLocalGames;int? lastAccountMythics;
     readonly List<Action<CompletionSummary>> displays=new();
     CompletionOverview(Window owner,object model,bool preview){this.owner=owner;this.model=model;this.preview=preview;}
     public static void Attach(Window owner,object model,IEnumerable<ILogical> original,bool preview){
@@ -48,14 +48,19 @@ public sealed class CompletionOverview
         foreach(var child in layout.Children.ToArray())if(Grid.GetRow(child)>=1)Grid.SetRow(child,Grid.GetRow(child)+1);
         layout.RowDefinitions=new RowDefinitions("Auto,Auto,Auto,*");
         var stats=overview.BuildStats("LibraryCompletionOverview",true);Grid.SetRow(stats,1);layout.Children.Add(stats);
-        PropertyChangedEventHandler handler=(_,e)=>{if(e.PropertyName is "Games" or "VisibleGames")overview.QueueUpdate();};
+        PropertyChangedEventHandler handler=(_,e)=>{if(e.PropertyName is "Games" or "VisibleGames" or "AccountMythicsUnlocked")overview.QueueUpdate();};
         if(model is INotifyPropertyChanged npc){npc.PropertyChanged+=handler;owner.Closed+=(_,_)=>npc.PropertyChanged-=handler;}
         owner.Closed+=(_,_)=>overview.closed=true;overview.QueueUpdate();
     }
     void QueueUpdate(){
         if(pending || closed)return;pending=true;
         Dispatcher.UIThread.Post(()=>{
-            pending=false;if(closed)return;var source=CompletionSummary.Read(model,"Games");if(ReferenceEquals(lastGames,source))return;lastGames=source;
+            pending=false;if(closed)return;
+            var library=CompletionSummary.Read(model,"Games");var local=CompletionSummary.Read(model,"Xbox360Games");
+            var accountMythics=CompletionSummary.Read(model,"AccountMythicsUnlocked") as int?;
+            if(ReferenceEquals(lastGames,library) && ReferenceEquals(lastLocalGames,local) && lastAccountMythics==accountMythics)return;
+            lastGames=library;lastLocalGames=local;lastAccountMythics=accountMythics;
+            var source=CompletionSummary.Read(model,"CompletionGames")??library;
             var games=(source as IEnumerable)?.Cast<object>().ToArray()??Array.Empty<object>();
             if(preview)foreach(var game in games){var id=CompletionSummary.Read(game,"Id")?.ToString();if(id is "1289871275" or "1144039928"){game.GetType().GetProperty("BaseComplete")?.SetValue(game,true);game.GetType().GetProperty("FullyComplete")?.SetValue(game,id=="1289871275");}}
             var summary=CompletionSummary.Calculate(games);foreach(var display in displays)display(summary);
@@ -71,10 +76,11 @@ public sealed class CompletionOverview
             values[i]=Text("—",compact?23:28);values[i].FontWeight=FontWeight.SemiBold;stack.Children.Add(values[i]);descriptions[i]=Text("",11);stack.Children.Add(descriptions[i]);
             var tile=new Border {Child=stack,Padding=new Thickness(compact?12:16),CornerRadius=new CornerRadius(14),Background=theme.Panel,BorderBrush=theme.Line,BorderThickness=new Thickness(1)};Grid.SetColumn(tile,i);grid.Children.Add(tile);
         }
-        ToolTip.SetTip(grid,"Mythics use the app's earned base-game marker, regardless of icon visibility. Fully completed uses the app's completion flag, including add-ons. Achievement completion is unlocked / total known achievements across the loaded Xbox library; unavailable progress is excluded.");
+        ToolTip.SetTip(grid,"Mythics use the Xbox account total when returned; otherwise the verified loaded-title count. The Mythics library filter shows available title rows. Icon visibility does not affect counts. Fully completed uses the app's completion flag, including add-ons. Achievement completion is unlocked / total known achievements across the loaded Xbox library; unavailable progress is excluded.");
         displays.Add(s=>{
             values[0].Text=s.Titles.ToString("N0");descriptions[0].Text="loaded titles";
-            values[1].Text=s.Mythics.ToString("N0");descriptions[1].Text="base-game completion";
+            var accountMythics=CompletionSummary.Read(model,"AccountMythicsUnlocked") as int?;
+            values[1].Text=(accountMythics??s.Mythics).ToString("N0");descriptions[1].Text=accountMythics.HasValue?$"Xbox account; {s.Mythics:N0} in loaded titles":"base-game completion; loaded titles";
             values[2].Text=s.FullyCompleted.ToString("N0");descriptions[2].Text="including add-ons";
             values[3].Text=s.Percentage is double percentage?$"{percentage:0.#}%":"—";
             descriptions[3].Text=s.KnownTitles>0?$"{s.Unlocked:N0} / {s.Achievements:N0} · {s.KnownTitles:N0}/{s.Titles:N0} titles with progress":"No known progress loaded";

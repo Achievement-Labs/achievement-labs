@@ -45,7 +45,9 @@ static class Test
   if(args.Contains("--exophase-360")){Exophase360Tests.Run();return;}
   if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
+  if(args.Contains("--xbox-title-catalog")){XboxTitleCatalogTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
+  if(args.Contains("--library-cache")){LibraryCacheTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--platform-libraries")){AppBuilder.Configure<Application>().UseSkia().UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false }).SetupWithoutStarting();PlatformLibraryTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}
@@ -83,7 +85,7 @@ static class Test
    Assert(Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementFilter") && Desc<ComboBox>(window).Any(c=>c.Name=="Xbox360AchievementSort"),"360 filter and sort controls are bound in the real window");
    Assert(!Desc<TextBlock>(window).Any(t=>t.Text=="Settings, saved queues & tools"),"Redundant queue heading removed");
    var platformFilters = Desc<ItemsControl>(window).Single(c=>c.Name=="TitleSearchPlatformFilters");
-   Assert(platformFilters.Items.Count==9,"Nine title-search platforms available");
+   Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().Select(p=>p.Key).ToHashSet().SetEquals(new[]{"series","one","360","pc","gfwl","win32","win8","mobile","ios","android","phone","web","appletv","kindle","vr","switch","other"}),"All catalog title-search platforms available");
    Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsNone"));
    Assert(platformFilters.Items.Cast<AchievementLabs.Desktop.TitlePlatformFilter>().All(p=>!p.Selected),"None clears all platform toggles");
    Click(Desc<Button>(window).Single(b=>b.Name=="TitlePlatformsAll"));

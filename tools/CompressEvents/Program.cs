@@ -27,12 +27,25 @@ internal static class BundlePacker
         source = Path.GetFullPath(source);
         if (!Directory.Exists(source)) throw new DirectoryNotFoundException(source);
         var files = new SortedDictionary<string, string>(StringComparer.Ordinal);
-        foreach (var file in Directory.EnumerateFiles(source, "*.json", SearchOption.AllDirectories))
+        void Add(string relative)
         {
-            var relative = Path.GetRelativePath(source, file).Replace('\\', '/');
-            if (!relative.Contains("backup", StringComparison.OrdinalIgnoreCase)) files.Add(relative, file);
+            var path = Path.Combine(source, relative.Replace('/', Path.DirectorySeparatorChar));
+            if (!File.Exists(path)) throw new InvalidDataException("Required runtime event file missing: " + relative);
+            files.Add(relative, path);
         }
-        if (files.Count == 0) throw new InvalidDataException("Cannot bundle an empty event source.");
+        var indexed = File.Exists(Path.Combine(source, "index.json"));
+        var index = indexed ? "index.json" : "Data.json";
+        Add(index);
+        using var document = System.Text.Json.JsonDocument.Parse(File.ReadAllBytes(files[index]));
+        foreach (var property in document.RootElement.EnumerateObject())
+        {
+            if (property.Name == "SupportedTitleIDs") continue;
+            if (!uint.TryParse(property.Name, out var id) || id == 0 || property.Name != id.ToString())
+                throw new InvalidDataException("Invalid event title identity.");
+            if (indexed) Add(property.Name + "/Data.json");
+            Add((indexed ? property.Name + "/" : "") + property.Name + ".json");
+        }
+        if (File.Exists(Path.Combine(source, "Stats.json"))) Add("Stats.json");
         return files;
     }
 
