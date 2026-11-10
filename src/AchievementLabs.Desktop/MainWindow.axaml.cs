@@ -367,7 +367,7 @@ public partial class MainWindow : Window
     {
         if ((s as Button)?.Tag is not TitleSearchResult result || !model.CanQuery) return;
         var known = model.Games.FirstOrDefault(game => game.Id == result.TitleId);
-        var game = known ?? new Game(result.TitleId, result.Name, result.Platform == "GFWL" ? "GFWL" : DesktopModel.IsKnownWindows8Title(result.TitleId) ? "Windows8" : result.CanAddXbox360Gpd ? "Xbox360" : "XboxOne", 0, 0, 0, false, result.ImageUrl);
+        var game = known ?? DesktopModel.CatalogGame(result.TitleId,result.Name,result.ImageUrl);
         if (await model.IsGfwlTitleAsync(game)) { model.OpenGfwlTitle(game); return; }
         await model.SelectGameAsync(game);
     }
@@ -550,6 +550,11 @@ public partial class MainWindow : Window
     private void SavePlatformConfig(object? s, RoutedEventArgs e) => model.SavePlatformConfig();
     private void InstallUbisoftSpool(object? s, RoutedEventArgs e) => model.InstallSelectedUbisoftSpool();
     private void InstallUbisoftOverlay(object? s, RoutedEventArgs e) => model.InstallUbisoftOverlay();
+    private async void ChooseUbisoftSpoolSource(object? s, RoutedEventArgs e)
+    {
+        var folders=await StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions {Title="Select local spool library",AllowMultiple=false});
+        if(folders.FirstOrDefault()?.TryGetLocalPath() is {} path)model.UbisoftSpoolSourceDirectory=path;
+    }
     private async void ChooseUbisoftSpoolFolder(object? s, RoutedEventArgs e)
     {
         var folders = await StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions { Title = "Select Ubisoft achievement spool folder", AllowMultiple = false });

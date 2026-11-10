@@ -13,7 +13,7 @@ internal sealed record UpdatePlan(int ParentPid, long ParentStartTicks, string T
 internal sealed class AppUpdater(HttpClient? client = null, string? directory = null) : IDisposable
 {
     internal const string Repository = "https://github.com/Achievement-Labs/achievement-labs";
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
     internal static string Root => AchievementLabs.Core.AchievementLabsPaths.LocalFile("Updates");
 #else
     internal static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "AchievementLabs", "Updates");

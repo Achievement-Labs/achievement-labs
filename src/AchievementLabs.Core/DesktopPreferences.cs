@@ -3,7 +3,7 @@ namespace AchievementLabs.Core;
 
 public sealed record DesktopPreferences
 {
-#if LABS_UPDATE_TESTING
+#if LABS_UPDATE_TESTING || LABS_OPTIMIZATION_TEST
     public string EventsDirectory { get; init; } = AchievementLabsPaths.LocalFile("Events");
     public string SessionPath { get; init; } = AchievementLabsPaths.LocalFile("legacy-auth.json");
 #else

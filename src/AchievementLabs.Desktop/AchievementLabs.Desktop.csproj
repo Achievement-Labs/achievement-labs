@@ -14,10 +14,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(LabsPortableDesktop)' != 'true'">
-    <Version>1.3.3</Version>
-    <AssemblyVersion>1.3.3.0</AssemblyVersion>
-    <FileVersion>1.3.3.0</FileVersion>
-    <InformationalVersion>1.3.3</InformationalVersion>
+    <Version>1.3.4</Version>
+    <AssemblyVersion>1.3.4.0</AssemblyVersion>
+    <FileVersion>1.3.4.0</FileVersion>
+    <InformationalVersion>1.3.4</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup><ProjectReference Include="../AchievementLabs.Enhancements/AchievementLabs.Enhancements.csproj" /></ItemGroup>
@@ -35,10 +35,10 @@
 <AvaloniaResource Include="../AchievementLabs.App/app.ico" Link="Assets/achievement-labs.ico"/>
 <AvaloniaResource Include="../AchievementLabs.App/Assets/Branding/podium-full-soft-mint-512.png" Link="Assets/achievement-labs-full-logo.png"/>
 <AvaloniaResource Include="../AchievementLabs.App/Assets/Branding/podium-wordmark-horizontal-soft-mint.png" Link="Assets/achievement-labs-wordmark.png"/>
-<AvaloniaResource Include="../../images.jpg" Link="Assets/xbox-logo.jpg"/>
-<AvaloniaResource Include="../../Steam_icon_logo.svg.webp" Link="Assets/steam-logo.webp"/>
-<AvaloniaResource Include="../../Epic_Games_Store_logo_2023_vertical_black.png" Link="Assets/epic-logo.png"/>
-<AvaloniaResource Include="../../Ubisoft_logo.png" Link="Assets/ubisoft-logo.png"/>
+<AvaloniaResource Include="Assets/xbox-logo.jpg"/>
+<AvaloniaResource Include="Assets/steam-logo.webp"/>
+<AvaloniaResource Include="Assets/epic-logo.png"/>
+<AvaloniaResource Include="Assets/ubisoft-logo.png"/>
 <AvaloniaResource Include="Assets/ea-play-logo.png"/>
 <AvaloniaResource Include="Assets/gog-galaxy-logo.png"/>
 <EmbeddedResource Include="../../site/assets/games.json" LogicalName="AchievementLabs.PublicCatalog.json"/>
@@ -47,7 +47,6 @@
 <Content Include="../../gfwlam/**/*.*" LinkBase="gfwlam" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../tools/Submit-ColdAlleyAchievements.ps1" Link="tools/Submit-ColdAlleyAchievements.ps1" CopyToOutputDirectory="PreserveNewest"/>
 <Content Include="../../uplayachievements/**/*.*" LinkBase="uplayachievements" CopyToOutputDirectory="PreserveNewest"/>
-<Content Include="../../Uplay spools/**/*.spool" LinkBase="Uplay spools" CopyToOutputDirectory="PreserveNewest"/>
 </ItemGroup>
 <Target Name="BuildNativeHelpers" Condition="'$(LabsSingleFile)' != 'true' And '$(LabsPortableDesktop)' != 'true'" BeforeTargets="Build">
 <RemoveDir Directories="$(MSBuildProjectDirectory)/obj/steam-idle;$(MSBuildProjectDirectory)/obj/gfwl-injector" />
@@ -83,7 +82,7 @@
   <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>1.1.0.0</AssemblyVersion><FileVersion>1.1.0.0</FileVersion><InformationalVersion>1.1.0-macos</InformationalVersion>
 </PropertyGroup>
 <ItemGroup Condition="'$(LabsPortableDesktop)' == 'true'">
-  <Content Remove="../../gfwlam/**/*.*;../../uplayachievements/**/*.*;../../Uplay spools/**/*.spool;../../tools/Submit-ColdAlleyAchievements.ps1" />
+  <Content Remove="../../gfwlam/**/*.*;../../uplayachievements/**/*.*;../../tools/Submit-ColdAlleyAchievements.ps1" />
 </ItemGroup>
 <PropertyGroup Condition="'$(LabsLinux)' == 'true'">
   <DefineConstants>$(DefineConstants);LABS_LINUX</DefineConstants>

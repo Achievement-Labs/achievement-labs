@@ -173,7 +173,7 @@ internal static partial class OfflineChecks
         if (DesktopModel.ConvertTitleIdToDecimal("0D174C79") != "219630713")
             throw new Exception("Title search did not convert the hexadecimal Xbox title ID to decimal.");
         if (DesktopModel.NormalizeLookalikes("Lord of the Сlick") != "Lord of the Click" ||
-            !DesktopModel.SearchSpellings("Lord of the Click").Contains("Lord of the Сlick"))
+            !AchievementLabs.Core.TitleSearchText.Matches("Lord of the Сlick","Lord of the Click"))
             throw new Exception("Title search did not handle mixed-script lookalike letters.");
         var darkSoulsGfwl = new Game(Convert.ToUInt32("4E4D0FA1", 16).ToString(), "Dark Souls: Prepare to Die Edition", "GFWL", 0, 0, 0);
         if (!DesktopModel.IsKnownGfwlTitle(darkSoulsGfwl.Id) ||

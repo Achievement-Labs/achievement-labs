@@ -14,6 +14,10 @@ public sealed partial class DesktopModel
     public bool CanCheckUpdates => !checkingUpdate;
     public async Task CheckForUpdatesAsync(bool manual = false, bool startup = false)
     {
+#if LABS_OPTIMIZATION_TEST
+        UpdateStatus = "Local optimization test build; app updates are disabled.";
+        await Task.CompletedTask;
+#else
         if (OperatingSystem.IsLinux()) { UpdateStatus = "Linux updates: download the Linux package manually from Achievement-Labs/achievement-labs releases."; return; }
         if (OperatingSystem.IsMacOS()) { UpdateStatus = "Mac updates: download manually from Achievement-Labs/achievement-labs releases. Windows packages are excluded."; return; }
         if (checkingUpdate || UpdateReady || (!manual && !startup && !AutomaticallyCheckUpdates)) return;
@@ -36,6 +40,7 @@ public sealed partial class DesktopModel
         catch (OperationCanceledException) { }
         catch (Exception error) { UpdateStatus = "Update check/download failed: " + error.Message + " Retry in Settings. Your current app is unchanged."; }
         finally { checkingUpdate = false; Changed(nameof(CanCheckUpdates)); }
+#endif
     }
     public bool InstallUpdate()
     {

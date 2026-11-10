@@ -101,10 +101,10 @@ namespace AchievementLabs.Desktop.Workflows
                 CheckEventData();
                 var mode = CurrentStatMode;
                 StatModeLabel = "Stats type: " + (mode == "Event" ? "Event-based" : mode == "Title" ? "Title-based" : "Unknown");
-                StatSupportLabel = mode == "Title" ? "Supported · title-based stats (available writable stats are checked when loaded)."
-                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported · mapped event stats in Stats.json."
-                    : mode == "Event" ? "Not Supported · Stats.json needs event-stat recipes and a standalone title template."
-                    : "Not Supported · no known stat mode or mapped event-stat recipes.";
+                StatSupportLabel = mode == "Title" ? "Supported Â· title-based stats (available writable stats are checked when loaded)."
+                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported Â· mapped event stats in Stats.json."
+                    : mode == "Event" ? "Not Supported Â· Stats.json needs event-stat recipes and a standalone title template."
+                    : "Not Supported Â· no known stat mode or mapped event-stat recipes.";
             }
             OnPropertyChanged(nameof(StatModeLabel)); OnPropertyChanged(nameof(StatSupportLabel));
         }
@@ -308,7 +308,7 @@ namespace AchievementLabs.Desktop.Workflows
                 StatusText = "Resolving title stats...";
                 var serviceConfigId = await GetRestAPI().GetTitleServiceConfigIdAsync(account.XUIDOnly, TitleId);
 
-                // Get stats — first try with MinutesPlayed to see what stat names exist
+                // Get stats â€” first try with MinutesPlayed to see what stat names exist
                 StatusText = "Fetching stats...";
 
                 // Build stat name list from event data if available
@@ -932,7 +932,12 @@ namespace AchievementLabs.Desktop.Workflows
             return catalog;
         }
 
-        internal static string GetCatalogStatMode(string titleId) => StatCatalog.Value.GetMode(titleId.Trim());
+        internal static string GetCatalogStatMode(string titleId)
+        {
+            var local=StatCatalog.Value.GetMode(titleId.Trim());
+            if(local!="Unknown")return local;
+            return AchievementLabs.Core.XboxTitleCatalog.Find(titleId.Trim())?.StatsType switch { "Title Based"=>"Title","Event Based"=>"Event",_=>"Unknown" };
+        }
 
         private static IEnumerable<string> GetStatCatalogRoots()
         {
@@ -2182,7 +2187,7 @@ namespace AchievementLabs.Desktop.Workflows
                         return true;
                     }
                 case "StatValue":
-                    // Direct stat value replacement — the target placeholder gets the user's value
+                    // Direct stat value replacement â€” the target placeholder gets the user's value
                     requestbody = requestbody.Replace(ReplacementData.Target.ToString(), statValue);
                     return true;
                 default:

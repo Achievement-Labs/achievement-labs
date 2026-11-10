@@ -210,6 +210,11 @@ public class XboxTitle
 
 public class BasicAchievementDetails
 {
+    public bool? IsMythic { get; set; }
+    public int? BaseGameCount { get; set; }
+    public int? BaseGameCompleted { get; set; }
+    public bool? BaseComplete => IsMythic ?? (BaseGameCount is > 0 && BaseGameCompleted is >= 0
+        ? BaseGameCompleted >= BaseGameCount : null);
     public int CurrentAchievements { get; set; }
     public int TotalAchievements { get; set; }
     public int CurrentGamerscore { get; set; }
@@ -303,8 +308,15 @@ public class Title
 
 }
 
+public class AccountAchievementSummary
+{
+    public int? MythicsUnlocked { get; set; }
+    public long? TotalAchievementsUnlocked { get; set; }
+}
+
 public class TitlesList
 {
+    public AccountAchievementSummary? AchievementSummary { get; set; }
     public string? Xuid { get; set; }
 
     public List<Title> Titles { get; set; } = new List<Title>();

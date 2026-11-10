@@ -78,6 +78,17 @@ internal sealed class LocalEventCatalogue
             if (supportCache.TryGetValue(id, out var cached) && cached.Version == version) { result[id] = cached.Support; continue; }
             try
             {
+                // Badges need only published counts/status, never the full event recipes.
+                // External editing catalogs still use the consumer validation below.
+                if (!externalCatalog && PublicCatalogClient.BundledTitles.TryGetValue(id, out var metadata))
+                {
+                    var summary = (JObject)property.Value;
+                    var badge = new LibraryEventSupport(supported.Contains(id), (bool?)summary["FullySupported"] == true,
+                        metadata.MappedAchievementCount,
+                        id == "345903534" ? "Uses the original event service; bundled recipes are not used for this edition." : null,
+                        (bool?)summary["PartiallySupported"] == true);
+                    supportCache[id] = (version, badge); result[id] = badge; continue;
+                }
                 var block = storage.ReadTitleAsync(id, CancellationToken.None).GetAwaiter().GetResult();
                 EventCatalogSchema.ValidateTitle(block);
                 var item = new LibraryEventSupport(supported.Contains(id), (bool?)block["FullySupported"] == true,

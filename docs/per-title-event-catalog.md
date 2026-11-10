@@ -32,6 +32,31 @@ catalogs remain readable. An explicit indexed catalog takes precedence; malforme
 data is reported rather than silently falling back to a different catalog.
 `F:\Events` is not migrated automatically.
 
+## Desktop storage and explicit catalog exports
+
+Normal startup reads the compressed embedded catalog without expanding it into
+Documents. The official achievement client ignores a legacy Documents catalog;
+custom imports and verified release updates remain separate. Local stat recipes
+and deliberate custom-path editing remain supported. Support badges use the
+compact published metadata projection; actual recipes are loaded and validated
+through the consumer only for the selected title. Release checks must keep that
+metadata projection synchronized with the event catalog.
+
+A full directory export is opt-in, for inspection/editing rather than startup:
+
+```powershell
+dotnet run --project tools/EventCatalogChecks -- --install-bundled C:/staging/Events
+```
+
+The exporter stages only runtime catalog files and checks every title through the
+consumer before replacing its destination. Existing destinations are retained as
+sibling backups. Local stat recipes are preserved; conflicting legacy/local stat
+recipes abort the operation. Receipt/lock files live outside the runtime catalog.
+`F:\Events` is never selected by the app automatically. No research fields are
+added to runtime JSON. The exporter regression checks are available with
+`--managed-upgrade`. To exercise all bundled replacements offline, use
+`--render-bundled`.
+
 ## Migration and authoring
 
 Create a new snapshot and a complete backup before replacing any catalog:

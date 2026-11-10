@@ -9,6 +9,15 @@ static async Task Reject(Func<Task> action, string message)
 }
 static JObject Block() => JObject.Parse("""{"Enabled":true,"FullySupported":false,"Achievements":{"1":{"Request1":{"Id":{"ReplacementType":"Replace","Target":"REPLACEACH","Replacement":"1"}},"Request2":{"Id":{"ReplacementType":"Replace","Target":"REPLACEACH","Replacement":"2"}}}}}""");
 static string Template(string id) => """{"name":"Microsoft.XboxLive.TID.Test","data":{"baseData":{"titleId":"ID","name":"Test","serviceConfigId":"11111111-2222-3333-4444-555555555555","userId":"REPLACEXUID","achievement":REPLACEACH}}}""".Replace("TID", "T" + id).Replace("\"ID\"", "\"" + id + "\"");
+if (args is ["--profile-catalog"]) { CatalogPerformanceChecks.Run(); return; }
+if (args is ["--managed-upgrade"]) { await ManagedEventCatalogChecks.RunAsync(); return; }
+if (args is ["--install-bundled", var destination])
+{
+    typeof(ManagedEventCatalog).GetMethod("Install", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!
+        .Invoke(null, [destination, "offline-bundle-check", (Func<string, string?>)BundledEventFiles.Read]);
+    Console.WriteLine("PASS: full bundle installed and validated through consumer into " + destination);
+    return;
+}
 var temporary = Path.Combine(Path.GetTempPath(), "labs-catalog-checks-" + Guid.NewGuid().ToString("N"));
 if (args is ["--public-api-live"]) { await PublicCatalogChecks.LiveAsync(); return; }
 if (args is ["--public-api"]) { await PublicCatalogChecks.RunAsync(); return; }

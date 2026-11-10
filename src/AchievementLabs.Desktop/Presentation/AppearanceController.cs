@@ -27,7 +27,9 @@ public sealed class AppearanceController : IDisposable
     AppearanceController(Window owner,bool preview)
     {
         this.owner=owner;this.preview=preview;
-#if LABS_UPDATE_TESTING
+#if LABS_OPTIMIZATION_TEST
+        var dir=AchievementLabs.Core.AchievementLabsPaths.OptimizationTestRoot;
+#elif LABS_UPDATE_TESTING
         var dir=AchievementLabs.Core.AchievementLabsPaths.UpdateTestRoot;
 #else
         var dir=preview?Path.Combine(AppContext.BaseDirectory,"preview-profile"):Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"AchievementLabs");
