@@ -10,7 +10,7 @@ public sealed partial class DesktopModel
     private readonly ConcurrentDictionary<string, bool> gfwlTitleCache = new();
     private int legacyTabIndex;
     private Game? selectedGfwlTitle;
-    public string[] PlatformFilters { get; } = ["All", "Xbox One/Series", "PC", "GFWL", "Xbox 360", "Win32", "Windows 8/Legacy", "Incomplete Games", "Mythics", "Completion unverified"];
+    public string[] PlatformFilters { get; } = ["All", "Xbox One/Series", "PC", "GFWL", "Xbox 360", "Win32", "Windows 8", "Windows 8/Legacy", "iOS", "Android", "Web", "WindowsPhone", "Mobile", "Apple TV", "Kindle Fire", "Gear VR", "Nintendo Switch", "Unknown", "Incomplete Games", "Mythics", "Completion unverified"];
     private string librarySort = "A-Z";
     private readonly string librarySortPath = AchievementLabs.Core.AchievementLabsPaths.LocalFile("library-sort.txt");
     public string[] LibrarySortOptions { get; } = ["A-Z", "Z-A", "Last Played"];
@@ -35,11 +35,19 @@ public sealed partial class DesktopModel
     public bool CanQuery => !QueueActive && !busy && !eventRefreshRunning && session != null;
     public bool CanExport => achievements.Length > 0;
     public static bool HasDevice(Game game, string device) => game.Platform.Split('/', StringSplitOptions.TrimEntries).Contains(device, StringComparer.OrdinalIgnoreCase);
-    public static bool UsesLegacyEndpoint(Game game) => AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id) || new[] { "Xbox360", "GFWL", "Mobile", "WindowsPhone", "Win8", "Windows8" }.Any(d => HasDevice(game, d));
+    public static bool UsesLegacyEndpoint(Game game)
+    {
+        if(AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id) || IsKnownWindows8Title(game.Id) || new[]{"Xbox360","GFWL","Win8","Windows8"}.Any(d=>HasDevice(game,d)))return true;
+        var source=AchievementLabs.Core.XboxTitleCatalog.Find(game.Id)?.SourceVersion;
+        if(source is 1 or 2)return source==1;
+        return HasDevice(game,"Mobile") || HasDevice(game,"WindowsPhone");
+    }
     public static bool MatchesPlatform(Game game, string filter) => filter switch
     {
         "Xbox One/Series" => HasDevice(game, "XboxOne") || HasDevice(game, "XboxSeries"),
-        "PC" => HasDevice(game, "PC") || HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "GFWL" => HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "Xbox 360" => HasDevice(game, "Xbox360") && !AchievementLabs.MultiSelect.GfwlTitles.IsExclusive(game.Id), "Win32" => HasDevice(game, "Win32"),
+        "PC" => HasDevice(game, "PC") || HasDevice(game,"Windows8") || HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "GFWL" => HasDevice(game, "GFWL") || AchievementLabs.MultiSelect.GfwlTitles.Supports(game.Id), "Xbox 360" => HasDevice(game, "Xbox360") && !AchievementLabs.MultiSelect.GfwlTitles.IsExclusive(game.Id), "Win32" => HasDevice(game, "Win32"),
+        "Windows 8" => HasDevice(game,"Windows8") || HasDevice(game,"Win8"),
+        "iOS" or "Android" or "Web" or "WindowsPhone" or "Mobile" or "Apple TV" or "Kindle Fire" or "Gear VR" or "Nintendo Switch" or "Unknown" => HasDevice(game,filter),
         "Windows 8/Legacy" => UsesLegacyEndpoint(game), "Incomplete Games" => game.ProgressKnown && game.Completed < game.Total,
         "Mythics" => game.BaseComplete,
         "Completion unverified" => !game.BaseComplete && game.AccountBaseComplete == null && (!game.ProgressKnown || game.Total <= 0), _ => true
@@ -47,6 +55,8 @@ public sealed partial class DesktopModel
     public static bool IsKnownGfwlTitle(string titleId)
     {
         if (AchievementLabs.MultiSelect.GfwlTitles.Supports(titleId)) return AchievementLabs.MultiSelect.GfwlTitles.IsExclusive(titleId);
+        var metadata=AchievementLabs.Core.XboxTitleCatalog.Find(titleId);
+        if(metadata?.SourceVersion is 1 or 2)return metadata.Platforms.Contains("GFWL") && !metadata.Platforms.Contains("Xbox360");
         if (!uint.TryParse(titleId, out var id)) return false;
         var hex = id.ToString("X8");
         return hex == "4E4D0FA1" || (id & 0xFFFF) is >= 0x0FA0 and <= 0x0FFF;
@@ -70,14 +80,19 @@ public sealed partial class DesktopModel
     private static string ClassifyXboxPlatform(string titleId, IEnumerable<string> devices)
     {
         if (IsKnownWindows8Title(titleId)) return "Windows8";
+        var metadata=AchievementLabs.Core.XboxTitleCatalog.Find(titleId);
+        if(metadata?.Platforms is {Length:>0} known && !known.Contains("Unknown"))
+            return string.Join(" / ",metadata.SourceVersion==1 || known.Contains("GFWL") || known.Contains("Windows8") ? known : devices.Concat(known).Distinct(StringComparer.OrdinalIgnoreCase));
         var platform = string.Join(" / ", devices);
         return IsKnownGfwlTitle(titleId) || devices.Contains("GFWL", StringComparer.OrdinalIgnoreCase) ||
             devices.Contains("PC", StringComparer.OrdinalIgnoreCase) && devices.Contains("Xbox360", StringComparer.OrdinalIgnoreCase)
-            ? "GFWL" : platform;
+            ? "GFWL" : string.IsNullOrWhiteSpace(platform) ? "Unknown" : platform;
     }
     public async Task<bool> IsGfwlTitleAsync(Game game)
     {
         if (HasDevice(game, "GFWL") || IsKnownGfwlTitle(game.Id)) return true;
+        var metadata=AchievementLabs.Core.XboxTitleCatalog.Find(game.Id);
+        if(metadata!=null && !metadata.Platforms.Contains("Unknown"))return metadata.Platforms.Contains("GFWL");
         if (!HasDevice(game, "Xbox360")) return false;
         if (gfwlTitleCache.TryGetValue(game.Id, out var cached)) return cached;
         if (!uint.TryParse(game.Id, out var numeric)) return false;
@@ -101,12 +116,17 @@ public sealed partial class DesktopModel
         OpenGfwlWorkspace();
         Notice = $"{game.Name} is a Games for Windows LIVE title. Use the GFWL workflow with the PC game running.";
     }
+    public static Game CatalogGame(string titleId,string? name=null,string? image=null)
+    {
+        var metadata=AchievementLabs.Core.XboxTitleCatalog.Find(titleId);
+        return new Game(titleId,name??metadata?.Name??("Title "+titleId),ClassifyXboxPlatform(titleId,[]),0,metadata?.TotalAchievements??0,0,false,image);
+    }
     public async Task LookupTitleAsync()
     {
         if (!CanQuery) return;
         if (!uint.TryParse(TitleLookup.Trim(), out var id) || id == 0) { Notice = "Enter a numeric Xbox title ID."; return; }
         var key = id.ToString();
-        var game = Games.FirstOrDefault(g => g.Id == key) ?? new Game(key, "Title " + key, "XboxOne", 0, 0, 0, false);
+        var game = Games.FirstOrDefault(g => g.Id == key) ?? CatalogGame(key);
         if (await IsGfwlTitleAsync(game)) { OpenGfwlTitle(game); return; }
         await SelectGameAsync(game);
     }
@@ -166,8 +186,15 @@ public sealed partial class DesktopModel
     }
     private readonly AchievementLabs.Core.SharedAchievementTotals sharedLibraryTotals = AchievementLabs.Core.SharedAchievementTotals.Bundled();
     private readonly Dictionary<string, int> knownLibraryTotals = new();
-    private Game WithSharedTotal(Game game) => game.Total <= 0 && sharedLibraryTotals.TryGet(game.Id, game.Platform, out var total)
-        ? game with { Total = total, ProgressKnown = game.ProgressKnown && game.Completed <= total, NoDefinitionsReturned = false } : game;
+    private Game WithSharedTotal(Game game)
+    {
+        if(game.Total>0)return game;
+        var metadataTotal=AchievementLabs.Core.XboxTitleCatalog.Find(game.Id)?.TotalAchievements
+            ?? AchievementLabs.Core.XboxTitleCatalog.Find(ResolveWindows8TitleId(game.Id))?.TotalAchievements ?? 0;
+        var total=sharedLibraryTotals.TryGet(game.Id,game.Platform,out var verified) ? verified : metadataTotal;
+        if(total<game.Completed)total=metadataTotal;
+        return total>0 && total>=game.Completed ? game with {Total=total,NoDefinitionsReturned=false} : game;
+    }
     private async Task RefreshSharedTotalsAsync(CancellationToken ct)
     {
         await sharedMetadataRefresh.WaitAsync(ct);

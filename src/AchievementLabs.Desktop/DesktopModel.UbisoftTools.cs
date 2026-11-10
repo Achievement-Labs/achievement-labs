@@ -7,6 +7,24 @@ public sealed partial class DesktopModel
     private UbisoftSpoolItem[] ubisoftSpools = [];
     private UbisoftSpoolItem? selectedUbisoftSpool;
     private string ubisoftSpoolTarget = DefaultUbisoftSpoolTarget();
+    private static string SavedSpoolLibrary()
+    {
+        if(OfflineChecks)return "";
+        try {var path=AchievementLabs.Core.AchievementLabsPaths.LocalFile("ubisoft-spool-library.txt");return File.Exists(path)?File.ReadAllText(path).Trim():"";}
+        catch(Exception error) when(error is IOException or UnauthorizedAccessException){return "";}
+    }
+    private string ubisoftSpoolSourceDirectory = SavedSpoolLibrary();
+    public string UbisoftSpoolSourceDirectory
+    {
+        get=>ubisoftSpoolSourceDirectory;
+        set
+        {
+            ubisoftSpoolSourceDirectory=value??"";Changed();LoadUbisoftTools();
+            if(!OfflineChecks)
+                try {var path=AchievementLabs.Core.AchievementLabsPaths.LocalFile("ubisoft-spool-library.txt");Directory.CreateDirectory(Path.GetDirectoryName(path)!);File.WriteAllText(path,ubisoftSpoolSourceDirectory);}
+                catch(Exception error) when(error is IOException or UnauthorizedAccessException){UbisoftToolStatus+=" Source folder could not be remembered.";}
+        }
+    }
     private string ubisoftOverlayTarget = "";
     private string ubisoftOverlayArchitecture = "x64";
     private string ubisoftToolStatus = "Choose a spool or an Ubisoft game folder.";
@@ -21,14 +39,19 @@ public sealed partial class DesktopModel
 
     public void LoadUbisoftTools()
     {
-        var root = Path.Combine(AppContext.BaseDirectory, "Uplay spools");
-        UbisoftSpools = Directory.Exists(root)
-            ? Directory.EnumerateFiles(root, "*.spool", SearchOption.AllDirectories)
-                .Select(path => new UbisoftSpoolItem(Path.GetFileNameWithoutExtension(path), Path.GetRelativePath(root, path), path))
-                .OrderBy(item => item.RelativePath, StringComparer.OrdinalIgnoreCase).ToArray()
-            : [];
-        SelectedUbisoftSpool ??= UbisoftSpools.FirstOrDefault();
-        UbisoftToolStatus = $"{UbisoftSpools.Length} spool files available.";
+        var root = UbisoftSpoolSourceDirectory;
+        try
+        {
+            UbisoftSpools = Directory.Exists(root)
+                ? Directory.EnumerateFiles(root,"*.spool",SearchOption.AllDirectories).Take(10000)
+                    .Select(path=>new UbisoftSpoolItem(Path.GetFileNameWithoutExtension(path),Path.GetRelativePath(root,path),path))
+                    .OrderBy(item=>item.RelativePath,StringComparer.OrdinalIgnoreCase).ToArray()
+                : [];
+        }
+        catch(Exception error) when(error is IOException or UnauthorizedAccessException)
+        { UbisoftSpools=[];SelectedUbisoftSpool=null;UbisoftToolStatus="The local spool library could not be read. Choose an accessible folder.";return; }
+        SelectedUbisoftSpool = UbisoftSpools.FirstOrDefault();
+        UbisoftToolStatus = UbisoftSpools.Length>0 ? $"{UbisoftSpools.Length} external spool files available." : "Choose your local spool library. Spool packs are no longer bundled.";
     }
 
     public void InstallSelectedUbisoftSpool()

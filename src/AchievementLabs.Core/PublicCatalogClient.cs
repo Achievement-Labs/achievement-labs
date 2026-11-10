@@ -11,7 +11,11 @@ public sealed class PublicCatalogClient(HttpClient http)
     public sealed record Title(string TitleId, string Name, string[] Aliases, string[] Platforms, string Status,
         bool EventAvailable, int MappedAchievementCount, int? DefinitionAchievementCount)
     {
-        public string StatusLabel => Status == "PartiallySupported" ? "Partially supported" : Status;
+        public string? AchievementsType { get; init; }
+        public string? StatsType { get; init; }
+        public string PlatformLabel => string.Join(" / ",Platforms).Replace("Windows8","Windows 8");
+        public string TechnologyLabel => "Achievements: " + (AchievementsType??"Unknown") + " | Stats: " + (StatsType??"Unknown");
+        public string StatusLabel => Status == "Unknown" ? "No event-recipe classification" : Status == "PartiallySupported" ? "Partially supported" : Status;
         public string TotalLabel => DefinitionAchievementCount is int total ? $"{total} achievements" : "Total unverified";
     }
     public sealed record Page(string CatalogRevision, string SourceRevision, int TotalMatched, Title[] Items, string? NextCursor)

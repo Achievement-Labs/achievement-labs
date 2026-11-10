@@ -32,7 +32,7 @@ public record Game(string Id, string Name, string Platform, int Completed, int T
     public bool MythicVisible { get; init; }
     public string MythicColour { get; init; } = "#70C98A";
     public string CompletionBackground { get; init; } = "Transparent";
-    public string PlatformLabel => AchievementLabs.MultiSelect.GfwlTitles.Label(Id, Platform);
+    public string PlatformLabel => AchievementLabs.MultiSelect.GfwlTitles.Label(Id, Platform.Replace("Windows8","Windows 8"));
     public string CompletionTooltip => FullyComplete ? "100% completed: all achievements, including DLC and title updates" : AccountBaseComplete == true ? "Base game completed: reported by Xbox" : "Base game completed: verified local achievement progress";
     private string? searchName, searchKey;
     public string SearchKey { get { if (searchName != Name) { searchName = Name; searchKey = TitleSearchText.Key(Name); } return searchKey!; } }

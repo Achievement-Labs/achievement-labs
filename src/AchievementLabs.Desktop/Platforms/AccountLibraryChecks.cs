@@ -47,7 +47,7 @@ internal static class AccountLibraryChecks
         if (!rejected) throw new Exception("Repeated cursor silently yielded a partial library");
         if (AccountLibraryClient.NormalizeImage("//images.gog.com/cover_{formatter}.{ext}") != "https://images.gog.com/cover_.jpg" || AccountLibraryClient.NormalizeImage("javascript:alert(1)").Length != 0) throw new Exception("Artwork URL normalization");
         if (PlatformBrowserLogin.IsLoginHost("Epic", "https://www.epicgames.com.attacker.invalid/id/api/redirect") || PlatformBrowserLogin.IsLoginHost("GOG", "https://user:secret@embed.gog.com/on_login_success") || PlatformBrowserLogin.IsLoginHost("EA", "http://accounts.ea.com/connect/auth")) throw new Exception("Sign-in origin validation");
-        foreach (var imageFile in new[] { "src/AchievementLabs.App/Assets/achievement-labs-icon.png", "Steam_icon_logo.svg.webp", "images.jpg" })
+        foreach (var imageFile in new[] { "src/AchievementLabs.App/Assets/achievement-labs-icon.png", "src/AchievementLabs.Desktop/Assets/steam-logo.webp", "src/AchievementLabs.Desktop/Assets/xbox-logo.jpg" })
         {
             using var images = new HttpClient(new ImageHandler(File.ReadAllBytes(imageFile)));
             using var bitmap = await RemoteImage.FetchBitmapAsync(images, new Uri("https://fixture.invalid/cover"));

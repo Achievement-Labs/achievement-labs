@@ -15,16 +15,6 @@ static class PreviewFeatureChecks
         ["recipes"] = new JObject { ["recipes"] = classification == "Unsupported" ? new JObject() : new JObject { ["1"] = new JArray { new JArray { new JObject { ["target"] = "REPLACEACH", ["value"] = value } } } } }
     };
     static string Template(string id) => "{\"name\":\"Microsoft.XboxLive.T" + id + ".Test\",\"data\":{\"baseData\":{\"titleId\":\""+id+"\",\"serviceConfigId\":\"11111111-2222-3333-4444-555555555555\",\"name\":\"Test\",\"value\":REPLACEACH}}}";
-    sealed class ReadFixture : HttpMessageHandler
-    {
-        internal int Calls;
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
-        {
-            Calls++; Check(request.Method == HttpMethod.Get && request.RequestUri!.Host == "achievements.xboxlive.com", "Support checks are GET only on Xbox achievement host");
-            Check(request.Headers.GetValues("x-xbl-contract-version").Single() == "4", "Modern metadata contract");
-            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(Metadata(Guid.Empty.ToString()).ToString()) });
-        }
-    }
     public static async Task RunAsync()
     {
         Check(LibrarySupportDiscovery.Classify(Metadata(Guid.Empty.ToString())) == false, "Sentinel requirement confirms title-based metadata");
@@ -42,12 +32,7 @@ static class PreviewFeatureChecks
         Check(LibrarySupportBadge.Resolve(false, false, true, true, false, 20, 30, true).Kind == "partial", "Local discovery cannot override official classification");
         Check(LibrarySupportBadge.Resolve(false, true, true, false, true, 30, 30).Kind == "unsupported", "Disabled mapping unsupported");
         Check(LibrarySupportBadge.Resolve(true, false, true, true, true, 30, 30).Kind == "unknown", "Legacy tool availability is not online unlock support");
-        using (var fixture = new ReadFixture()) using (var http = new HttpClient(fixture))
-        {
-            Check(await LibrarySupportDiscovery.ReadAsync(http, "synthetic", "0", "7", default) == false && fixture.Calls == 1, "Read-only discovery fixture");
-            using var cancel = new CancellationTokenSource(); cancel.Cancel();
-            try { await LibrarySupportDiscovery.ReadAsync(http, "synthetic", "0", "7", cancel.Token); throw new Exception("Expected cancellation"); } catch (OperationCanceledException) { }
-        }
+        // Classification consumes metadata already loaded for a selected game; no standalone probe exists.
         var exported = SharedUnlockMethods.Export(new Dictionary<string,bool> { ["7"] = true, ["8"] = false });
         Check(SharedUnlockMethods.Parse(exported).Count == 2 && !exported.Contains("synthetic"), "Confirmed export contains methods only");
         foreach (var bad in new[] { "{\"schemaVersion\":1,\"methods\":{\"7\":true,\"7\":false}}", "{\"schemaVersion\":1,\"methods\":{\"7\":\"yes\"}}", "{\"schemaVersion\":1,\"methods\":{\"07\":true}}" })
@@ -90,6 +75,6 @@ static class PreviewFeatureChecks
             Check(data.Properties().Last().Name == "SupportedTitleIDs" && ((JObject)data["7"]!).Properties().All(p => p.Name is "Enabled" or "FullySupported" or "Achievements"), "Runtime cache excludes research and keeps supported IDs last");
         }
         finally { Directory.Delete(folder, true); }
-        Console.WriteLine("PASS: support classification, badges, read-only discovery, strict exports, v2 mapping refresh, disabled persistence, rendering and rollback. Synthetic responses only.");
+        Console.WriteLine("PASS: support classification, badges, cached metadata classification, strict exports, v2 mapping refresh, disabled persistence, rendering and rollback. Synthetic responses only.");
     }
 }

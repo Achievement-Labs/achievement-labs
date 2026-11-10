@@ -9,7 +9,14 @@ $events = Join-Path $repo 'src/AchievementLabs.App/Events'
 $indexed = Test-Path -LiteralPath (Join-Path $events 'index.json')
 $indexFile = if ($indexed) { 'index.json' } else { 'Data.json' }
 $data = Get-Content -LiteralPath (Join-Path $events $indexFile) -Raw | ConvertFrom-Json -AsHashtable
-$catalog = Get-Content -LiteralPath (Join-Path $repo 'XboxTitleIDs.json') -Raw | ConvertFrom-Json
+$catalogStream = [IO.File]::OpenRead((Join-Path $repo 'catalog/xbox-title-catalog.json.gz'))
+try {
+    $catalogGzip = [IO.Compression.GZipStream]::new($catalogStream, [IO.Compression.CompressionMode]::Decompress)
+    try {
+        $catalogReader = [IO.StreamReader]::new($catalogGzip)
+        try { $catalog = ($catalogReader.ReadToEnd() | ConvertFrom-Json).Titles } finally { $catalogReader.Dispose() }
+    } finally { $catalogGzip.Dispose() }
+} finally { $catalogStream.Dispose() }
 $byId = @{}
 foreach ($entry in $catalog) { $byId[[string]$entry.TitleId] = $entry }
 
@@ -28,6 +35,8 @@ function Get-PlatformLabel([object[]]$Devices) {
             'XboxOne' { 'Xbox One' }
             'XboxSeries' { 'Xbox Series X|S' }
             'Xbox360' { 'Xbox 360' }
+            'Windows8' { 'Windows 8' }
+            'GFWL' { 'GFWL (PC)' }
             default { [string]$device }
         }
     }
@@ -39,7 +48,7 @@ $rows = foreach ($titleId in $data.Keys | Where-Object { $_ -match '^\d+$' }) {
     $record = $byId[$titleId]
     $fallback = $manual[$titleId]
     $title = if ($block.TitleName) { $block.TitleName } elseif ($record.Name) { $record.Name } elseif ($block.Name) { $block.Name } elseif ($fallback.Title) { $fallback.Title } else { "Title $titleId" }
-    $devices = if ($block.Devices) { @($block.Devices) } elseif ($record.Devices) { @($record.Devices) } else { @($fallback.Devices) }
+    $devices = if ($block.Devices) { @($block.Devices) } elseif ($record.Platforms) { @($record.Platforms) } elseif ($record.Devices) { @($record.Devices) } else { @($fallback.Devices) }
     # Match hosted catalog eligibility; a block alone does not make it available.
     $available = $block.Enabled -ne $false -and
         $titleId -in @($data.SupportedTitleIDs | ForEach-Object { [string]$_ }) -and

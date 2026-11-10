@@ -3,40 +3,30 @@ using System.Text.Json;
 namespace AchievementLabs.Desktop;
 public sealed partial class DesktopModel
 {
-    private string publicCatalogQuery = "", publicCatalogStatus = "Bundled catalog: first 100 titles. Search names or IDs for current hosted results.";
-    private bool searchingPublicCatalog;
+    private string publicCatalogQuery = "", publicCatalogStatus = "Local Xbox catalog; search names or exact title IDs. No Xbox requests are made by catalog search.";
     private CancellationTokenSource? publicCatalogSearchCancellation;
     private static readonly HttpClient publicMetadataHttp = PublicCatalogClient.CreateHttpClient();
-    private PublicCatalogClient.Title[] publicCatalogTitles = PublicCatalogClient.BundledSearch("").Items;
-    public string PublicCatalogQuery { get => publicCatalogQuery; set { publicCatalogQuery = value ?? ""; publicCatalogSearchCancellation?.Cancel(); Changed(); } }
-    public string PublicCatalogStatus { get => publicCatalogStatus; private set { publicCatalogStatus = value; Changed(); } }
-    public PublicCatalogClient.Title[] PublicCatalogTitles { get => publicCatalogTitles; private set { publicCatalogTitles = value; Changed(); } }
-    public bool CanSearchPublicCatalog => !searchingPublicCatalog;
+    private PublicCatalogClient.Title[] publicCatalogTitles = XboxTitleCatalog.Search("").Items;
+    public string PublicCatalogQuery { get => publicCatalogQuery; set { publicCatalogQuery=value??""; publicCatalogSearchCancellation?.Cancel(); Changed(); } }
+    public string PublicCatalogStatus { get => publicCatalogStatus; private set { publicCatalogStatus=value; Changed(); } }
+    public PublicCatalogClient.Title[] PublicCatalogTitles { get => publicCatalogTitles; private set { publicCatalogTitles=value; Changed(); } }
+    public bool CanSearchPublicCatalog => true;
     public async Task SearchPublicCatalogAsync()
     {
-        if (searchingPublicCatalog) return;
-        searchingPublicCatalog = true; Changed(nameof(CanSearchPublicCatalog));
-        using var search = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
-        publicCatalogSearchCancellation = search;
-        var query = PublicCatalogQuery.Trim();
-        PublicCatalogTitles = PublicCatalogClient.BundledSearch(query).Items;
-        PublicCatalogStatus = "Showing local results; checking the hosted catalog...";
+        publicCatalogSearchCancellation?.Cancel();
+        using var search=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token);
+        publicCatalogSearchCancellation=search;
         try
         {
-            PublicCatalogClient.Page page;
-            try
-            {
-                if (OfflineChecks) throw new IOException("Offline preview");
-                page = await new PublicCatalogClient(publicMetadataHttp).SearchAsync(query, search.Token);
-            }
-            catch (OperationCanceledException) when (search.IsCancellationRequested) { return; }
-            catch { page = PublicCatalogClient.BundledSearch(query); }
-            PublicCatalogTitles = page.Items;
-            PublicCatalogStatus = $"{(page.Offline ? "Bundled offline catalog" : "Hosted official catalog")} · {page.TotalMatched} matches · showing {page.Items.Length}."
-                + (page.TotalMatched > page.Items.Length ? " Refine your search to see other matches." : "")
-                + $" Revision {page.CatalogRevision[..12]}.";
+            var query=PublicCatalogQuery;
+            var page=await Task.Run(()=>XboxTitleCatalog.Search(query),search.Token);
+            if(search.IsCancellationRequested)return;
+            PublicCatalogTitles=page.Items;
+            PublicCatalogStatus=$"Local SQLite-derived catalog: {XboxTitleCatalog.Count:N0} titles | {page.TotalMatched:N0} matches | showing {page.Items.Length}. No Xbox requests.";
         }
-        finally { publicCatalogSearchCancellation = null; searchingPublicCatalog = false; Changed(nameof(CanSearchPublicCatalog)); }
+        catch(OperationCanceledException) { }
+        catch(ArgumentException error) { PublicCatalogStatus=error.Message; }
+        finally { if(ReferenceEquals(publicCatalogSearchCancellation,search))publicCatalogSearchCancellation=null; }
     }
     private async Task RefreshApiTotalsAsync(CancellationToken ct)
     {
