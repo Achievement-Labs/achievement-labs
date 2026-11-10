@@ -57,6 +57,9 @@ public sealed partial class DesktopModel
             if (OperatingSystem.IsWindows() && AutoLaunchXboxApp) System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(@"shell:appsFolder\Microsoft.GamingApp_8wekyb3d8bbwe!Microsoft.Xbox.App") { UseShellExecute = true, WindowStyle = LaunchXboxAppHidden ? System.Diagnostics.ProcessWindowStyle.Hidden : System.Diagnostics.ProcessWindowStyle.Normal }); }
         catch (OperationCanceledException) { }
         catch { Notice = "Native settings could not be read. Defaults are in use; save only after reviewing them."; }
+        try { await Task.Run(() => ManagedEventCatalog.EnsureCurrent(EventsDirectory), lifetime.Token); }
+        catch (OperationCanceledException) { }
+        catch (Exception error) { Notice = "Events folder could not be updated. Close other instances and restart to retry. " + error.Message; }
         LoadAutoUnlockPreferences();
     }
     public async Task SavePreferencesAsync()
