@@ -46,6 +46,7 @@ static class Test
   if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
   if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
+  if(args.Contains("--library-cache")){LibraryCacheTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--library-refresh")){LibraryRefreshTests.Run();return;}
   if(args.Contains("--platform-libraries")){AppBuilder.Configure<Application>().UseSkia().UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false }).SetupWithoutStarting();PlatformLibraryTests.Run();return;}
   if(args.Contains("--token-validation")){EventTokenRegressionTests.Run();return;}

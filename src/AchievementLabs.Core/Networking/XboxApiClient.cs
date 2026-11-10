@@ -33,7 +33,7 @@ public class XboxApiClient : IDisposable
         {
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
         };
-        _httpClient = new HttpClient(handler);
+        _httpClient = new HttpClient(new AchievementLabs.Core.XboxReadThrottle(handler));
 
         var spooferHandler = new HttpClientHandler()
         {
@@ -56,7 +56,7 @@ public class XboxApiClient : IDisposable
     public XboxApiClient(string xauth, HttpMessageHandler transport, bool regionOverride = false) : this(xauth, regionOverride)
     {
         _httpClient.Dispose();
-        _httpClient = new HttpClient(transport);
+        _httpClient = new HttpClient(new AchievementLabs.Core.XboxReadThrottle(transport));
     }
 
     private void SetDefaultHeaders()
@@ -729,7 +729,7 @@ public class XboxApiClient : IDisposable
     public async Task<AchievementLabs.Core.AchievementTotals.Counts> GetAchievementCountsAsync(string xuid, string titleId, CancellationToken ct, bool legacy = false)
     {
         if (!ulong.TryParse(xuid, out _) || !uint.TryParse(titleId, out _)) throw new ArgumentException("Invalid Xbox identifiers.");
-        using var http = new HttpClient();
+        using var http = new HttpClient(new AchievementLabs.Core.XboxReadThrottle(new HttpClientHandler()));
         http.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", _xauth);
         http.DefaultRequestHeaders.TryAddWithoutValidation("x-xbl-contract-version", legacy ? "3" : "4");
         return await AchievementLabs.Core.AchievementTotals.MeasureAsync(async continuation =>

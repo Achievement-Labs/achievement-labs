@@ -148,6 +148,8 @@ public sealed partial class DesktopModel
                         + (p.Titles>0 ? $" · {p.Titles:N0} titles received" : "") + $" · {elapsed.Elapsed.TotalSeconds:N0}s";
                 });
                 var result = await Task.Run(() => api.GetGamesListAsync(xuid,progress,lifetime.Token), lifetime.Token) ?? throw new InvalidDataException();
+                try { await new AchievementLabs.Core.AccountLibraryCache(AchievementLabs.Core.AchievementLabsPaths.LocalFile("LibraryCache")).SaveAsync(xuid,result,null,lifetime.Token); }
+                catch (Exception error) when (error is IOException or UnauthorizedAccessException) { }
                 lifetime.Token.ThrowIfCancellationRequested();
                 LibraryRefreshStatus="Applying library progress and completion metadata…";
                 AccountMythicsUnlocked = result.AchievementSummary?.MythicsUnlocked;
@@ -160,7 +162,7 @@ public sealed partial class DesktopModel
         }
         catch (OperationCanceledException) { LibraryRefreshStatus="Library refresh cancelled; previous list retained."; }
         catch { LibraryRefreshStatus="Library refresh failed; previous list retained. Check your connection and retry."; Notice=LibraryRefreshStatus; }
-        finally { LibraryRefreshing=false; LibraryRefreshIndeterminate=false; Busy(false); QueueLibrarySupportCheck(); }
+        finally { LibraryRefreshing=false; LibraryRefreshIndeterminate=false; Busy(false); }
     }
     private readonly AchievementLabs.Core.SharedAchievementTotals sharedLibraryTotals = AchievementLabs.Core.SharedAchievementTotals.Bundled();
     private readonly Dictionary<string, int> knownLibraryTotals = new();
@@ -266,6 +268,7 @@ public sealed partial class DesktopModel
                 catch (OperationCanceledException) when (cancel.IsCancellationRequested) { throw; }
                 catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound && attempt == 0)
                 { previous = TotalsFailureReason(ex); }
+                catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.TooManyRequests) { throw; }
                 catch (Exception ex)
                 { return new(game.Id, game.Name, game.Platform, endpoint, 0, previous.Length > 0 ? previous + "; " + TotalsFailureReason(ex) : TotalsFailureReason(ex)); }
                 if (attempt == 0) { legacy = !legacy; endpoint += legacy ? " → Legacy" : " → Modern"; }
@@ -291,10 +294,12 @@ public sealed partial class DesktopModel
                 if (updates.Count > 0)
                     Games = Games.Select(g => updates.TryGetValue(g.Id, out var result) ? result.Result == "Updated" ? g with { Total = result.Total, Completed = result.PersistentUnlocked ?? g.Completed, ProgressKnown = result.PersistentUnlocked.HasValue || g.ProgressKnown, NoDefinitionsReturned = false } : g with { NoDefinitionsReturned = g.Completed == 0 && g.Score == 0 } : g).ToArray();
                 checkedCount++;
+                if (checkedCount < pending.Length) await Task.Delay(2000,cancel.Token);
             }
             var reasons = string.Join("; ", totalsReport.Where(r => r.Result != "Updated").GroupBy(r => r.Result).Select(g => $"{g.Key}: {g.Count()}"));
             TotalsStatus = $"Totals updated: {filled}; unavailable: {failed}. {reasons}";
         }
+        catch (HttpRequestException error) when (error.StatusCode == System.Net.HttpStatusCode.TooManyRequests) { TotalsStatus = $"Totals scan paused by Xbox; {filled} results saved. " + error.Message; }
         catch (OperationCanceledException) { TotalsStatus = $"Totals scan stopped; {filled} results saved."; }
         finally { totalsCancellation = null;  Changed(nameof(CanExportVerifiedTotals)); Changed(nameof(TotalsRunning)); Changed(nameof(CanFillTotals)); Changed(nameof(CanDisconnect)); }
     }

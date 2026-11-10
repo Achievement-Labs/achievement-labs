@@ -112,7 +112,6 @@ public sealed partial class DesktopModel
         if (!CanDisconnect) return;
         Busy(true); ++selectionVersion;
         await requests.WaitAsync();
-        StopLibrarySupportCheck();
         try { apiServer?.Stop(); ServerAddress = "Stopped"; client?.Dispose(); client = null; ClearPcPresence(); session = null; AccountMythicsUnlocked = null; ++sessionGeneration; AuthorizationStatus = "Xbox disconnected."; connectionMethod = ""; XboxPcAttached = false; ResetWorkflowAccount(); AccountSummary = "Connect an account to view its profile."; ProfileImageUrl = null; Games = []; achievements = []; ResetActions(); SelectedGame = null; Refresh(); ProfileName = "Not connected"; Changed(nameof(ConnectionLabel)); Changed(nameof(HomeXboxSummary)); Navigate("Home"); Notice = "Disconnected. Use Attach Xbox PC app to reconnect."; }
         finally { requests.Release(); Busy(false); }
     }

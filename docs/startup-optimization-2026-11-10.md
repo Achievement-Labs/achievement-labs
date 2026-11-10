@@ -93,3 +93,42 @@ Third-party tracker logins are not required for these fixes.
 - Actual offline consumer renders 576 titles, 25,830 achievement mappings and
   177,860 payloads with zero failures.
 - No telemetry, achievement unlocks, release publication or API deployment.
+
+## Account caching and removal of support scans
+
+The app no longer probes unknown library titles to discover unlock methods.
+Startup/library-refresh scan hooks, scan preferences/buttons and the standalone
+network probe have been removed. Catalog data and previously confirmed methods
+remain readable. Opening an individual game's achievements can classify the
+response already required by that view; it does not add a discovery request.
+Missing classifications remain unknown until authoritative metadata is supplied.
+No database integration or database modification is part of this change.
+
+Successful bulk library reads save an account-partitioned, allowlisted display
+snapshot under the app profile's LibraryCache directory. It contains title names,
+platforms, displayed progress, explicit Mythic flags/account total, images/last-played
+metadata and selected public profile labels. It contains no authorization headers,
+OAuth tokens or executable unlock recipes. Account filenames and the payload's
+account binding use a SHA-256 account key. Authentication is still performed live.
+
+On attachment, a snapshot up to ten minutes old avoids another bulk library read.
+Older snapshots up to thirty days old can be shown with their timestamp if the
+library read fails. Refresh library explicitly bypasses the freshness policy and
+updates the snapshot. Missing definition totals remain unknown and continue to
+use the existing separate verified-total caches. Corrupt/wrong-account snapshots
+are rejected. Snapshot replacement is atomic and preserves the previous file if
+cancelled.
+
+Main Xbox GET readers, support-independent achievement-total reads and bulk
+library reads share per-service Retry-After deadlines. Cooldown deadlines persist
+in the app profile, so restarting does not immediately repeat a throttled read.
+The policy does not intercept or replay writes. A manual totals scan stops on its
+first 429, retaining previously saved results, instead of continuing through the
+rest of the library. These changes reduce unnecessary requests; they cannot
+promise that Xbox will never throttle other legitimate requests.
+
+Synthetic cache/cooldown checks:
+
+```powershell
+dotnet run --project tests/AchievementLabs.Enhancements.Tests -- --library-cache
+```

@@ -174,7 +174,34 @@ public sealed partial class DesktopModel : Observable, IDisposable
 
     private async Task ActivateXboxSessionAsync(ConnectedXboxSession connected, XboxApiClient candidate, string method, BasicProfile? validatedProfile = null)
     {
-        var result = await Task.Run(async () => (Profile: validatedProfile ?? await candidate.GetBasicProfileAsync(lifetime.Token), Titles: await candidate.GetGamesListAsync(connected.Xuid)), lifetime.Token);
+        // Authentication is always live; display snapshots never restore authorization.
+        var profile = validatedProfile ?? await candidate.GetBasicProfileAsync(lifetime.Token);
+        var snapshots = new AccountLibraryCache(AchievementLabsPaths.LocalFile("LibraryCache"));
+        var saved = await snapshots.LoadAsync(connected.Xuid, lifetime.Token);
+        TitlesList? titles;
+        string librarySource;
+        if (saved?.Fresh == true)
+        {
+            titles = saved.ToTitles();
+            librarySource = $"Cached library from {saved.CheckedAt.LocalDateTime:g}; Refresh library reads Xbox again.";
+        }
+        else
+        {
+            try
+            {
+                titles = await Task.Run(() => candidate.GetGamesListAsync(connected.Xuid, cancellationToken: lifetime.Token),lifetime.Token);
+                librarySource = "Live Xbox library loaded.";
+                if (titles != null)
+                    try { await snapshots.SaveAsync(connected.Xuid,titles,profile,lifetime.Token); }
+                    catch (Exception error) when (error is IOException or UnauthorizedAccessException) { librarySource += " Snapshot could not be saved."; }
+            }
+            catch (Exception error) when (saved != null && (error is HttpRequestException || error is OperationCanceledException && !lifetime.IsCancellationRequested))
+            {
+                titles = saved.ToTitles();
+                librarySource = $"Xbox library unavailable; showing cached data from {saved.CheckedAt.LocalDateTime:g}. Refresh later for current progress.";
+            }
+        }
+        var result = (Profile: profile, Titles: titles);
         lifetime.Token.ThrowIfCancellationRequested();
         if (result.Titles == null) throw new InvalidDataException("Xbox title history was not returned.");
         client = candidate;
@@ -186,6 +213,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         ApplyXboxProfile(result.Profile?.ProfileUsers.FirstOrDefault());
         AccountMythicsUnlocked = result.Titles.AchievementSummary?.MythicsUnlocked;
         Games = result.Titles.Titles.Where(t => t.TitleId != null).Select(t => new Game(t.TitleId!, t.Name ?? t.TitleId!, ClassifyXboxPlatform(t.TitleId!, t.Devices), t.Achievement?.CurrentAchievements ?? 0, t.Achievement?.TotalAchievements ?? 0, t.Achievement?.CurrentGamerscore ?? 0, t.Achievement != null, ResolveTitleImage(t.DisplayImage, t.Images), t.TitleHistory?.LastTimePlayed) { AccountBaseComplete = t.Achievement?.BaseComplete }).OrderBy(g => g.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+        LibraryRefreshStatus = librarySource; Notice = librarySource;
         Changed(nameof(ConnectionLabel)); Changed(nameof(CanDisconnect)); Changed(nameof(HomeXboxSummary));
         _ = RefreshConnectedMetadataAsync(connected.Xuid, sessionGeneration, candidate);
     }
@@ -299,6 +327,6 @@ public sealed partial class DesktopModel : Observable, IDisposable
             .Select(value => value.Type == JTokenType.String ? value.Value<string>() : null)
             .FirstOrDefault(value => value != null && (value.StartsWith("http", StringComparison.OrdinalIgnoreCase) || value.StartsWith("//", StringComparison.Ordinal)));
     }
-    public void Dispose() { StopLibrarySupportCheck(); mirror?.Dispose(); AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
+    public void Dispose() { mirror?.Dispose(); AchievementLabs.Services.Xbox360.Xbox360SigningSession.Clear(); completionScanCancellation?.Cancel(); Windows8.Dispose(); gfwlSession?.Dispose(); eventCatalog.Dispose(); apiServer?.Dispose(); StopQueues(); steam.StopSpoofSession(); browserLogin?.Dispose(); lifetime.Cancel(); updater.Dispose(); /* Requests may still own the client; dispose after completion. */ _ = DisposeClientAsync(); }
     private async Task DisposeClientAsync() { await requests.WaitAsync(); client?.Dispose(); requests.Release(); }
 }
