@@ -18,8 +18,8 @@ public sealed partial class DesktopModel
         UpdateStatus = "Local optimization test build; app updates are disabled.";
         await Task.CompletedTask;
 #else
-        if (OperatingSystem.IsLinux()) { UpdateStatus = "Linux preview updates: download the Linux package manually from Achievement-Labs/achievement-labs releases."; return; }
-        if (OperatingSystem.IsMacOS()) { UpdateStatus = "Mac preview updates: download manually from Achievement-Labs/achievement-labs releases. Windows packages are excluded."; return; }
+        if (OperatingSystem.IsLinux()) { UpdateStatus = "Linux updates: download the Linux package manually from Achievement-Labs/achievement-labs releases."; return; }
+        if (OperatingSystem.IsMacOS()) { UpdateStatus = "Mac updates: download manually from Achievement-Labs/achievement-labs releases. Windows packages are excluded."; return; }
         if (checkingUpdate || UpdateReady || (!manual && !startup && !AutomaticallyCheckUpdates)) return;
         checkingUpdate = true; Changed(nameof(CanCheckUpdates));
         try
