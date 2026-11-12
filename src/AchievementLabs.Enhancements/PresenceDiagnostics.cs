@@ -22,7 +22,7 @@ public static class PresenceDiagnostics
     public static string Explain(int code)=>code switch
     {
         401=>"Xbox rejected presence authorization. Reconnect your Xbox account. An event token is separate and cannot repair this login.",
-        403=>"Xbox refused this presence request. No automatic retries or authentication bypass were attempted.",
+        403=>"Xbox refused this presence request on every known presence endpoint. No authentication bypass was attempted.",
         429=>"Presence requests are being rate limited.",
         >=200 and <300=>"Heartbeat accepted. This does not guarantee that Xbox will increase recorded playtime.",
         _=>"Heartbeat was not accepted."
