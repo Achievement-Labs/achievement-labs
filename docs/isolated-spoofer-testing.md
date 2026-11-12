@@ -11,7 +11,7 @@ dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -- --sp
 Pins the exact wire format in `AchievementLabs.Core.SpoofRequest`:
 
 - `SanitizeXauth` trims a raw memory-scanned token to `XBL3.0 x=<digits>;<payload>`.
-- `BuildHeartbeatBody` produces `{"titles":[{"expiration":600,"id":<numeric>,"state":"active","sandbox":"RETAIL"}]}` — presence refuses a quoted string title id.
+- The heartbeat body stays the app's `HeartbeatRequest` serialization (`{"titles":[{"expiration":600,"id":"<id>","state":"active","sandbox":"RETAIL"}]}`); the harness pins it. A/B tested live 2026-11-11: both quoted-string and numeric id shapes returned HTTP 200 from presence-heartbeat, so the wire format was deliberately left unchanged.
 - `HeartbeatUris(xuid)` is the four-URI presence chain (userpresence and presence-heartbeat, xuid and /me variants). Send walks the chain until a 2xx and aborts immediately on 401; stop/cleanup DELETEs across all four (404 on a variant never set is normal).
 
 ## Live probe (real presence requests)

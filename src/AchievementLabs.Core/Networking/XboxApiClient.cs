@@ -615,7 +615,16 @@ public class XboxApiClient : IDisposable
 
         SetDefaultSpooferHeaders();
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.ContractVersion, HeaderValues.ContractVersion3);
-        var requestBody = AchievementLabs.Core.SpoofRequest.BuildHeartbeatBody(spoofedTitleId);
+        var requestBody = JsonConvert.SerializeObject(new HeartbeatRequest()
+        {
+            titles = new List<TitleRequest>()
+            {
+                new TitleRequest()
+                {
+                    id = spoofedTitleId
+                }
+            }
+        });
         (int StatusCode, string Body) result = (-1, "No presence endpoint accepted the request.");
         foreach (var requestUrl in AchievementLabs.Core.SpoofRequest.HeartbeatUris(xuid))
         {

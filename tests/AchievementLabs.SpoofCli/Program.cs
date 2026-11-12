@@ -10,6 +10,7 @@
 // profile API) and print HTTP status AND response body per presence URI. Tokens are
 // never printed. A `run` is a REAL spoof: presence is left set until `stop` clears it.
 using System.Diagnostics;
+using Newtonsoft.Json;
 using AchievementLabs.Core;
 
 static class Program
@@ -74,7 +75,10 @@ static class Program
             Console.WriteLine($"Profile settings: {string.Join(", ", profile?.Settings.Select(s => $"{s.Id}={s.Value}") ?? Array.Empty<string>())}");
             if (title == null) return 0;
             var me = profile?.Id ?? "";
-            var body = SpoofRequest.BuildHeartbeatBody(title);
+            var body = JsonConvert.SerializeObject(new HeartbeatRequest()
+            {
+                titles = new List<TitleRequest> { new() { id = title } }
+            });
             Console.WriteLine($"Heartbeat body: {body}");
             var result = await client.SendHeartbeatAsync(me, title);
             Console.WriteLine($"SendHeartbeatAsync: HTTP {result.StatusCode}");
