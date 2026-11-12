@@ -676,6 +676,9 @@ public class XboxApiClient : IDisposable
             Console.WriteLine($"Heartbeat DELETE response: {(int)response.StatusCode} {response.StatusCode} - {body}");
 #endif
             result = ((int)response.StatusCode, body);
+#if DEBUG
+            Console.WriteLine($"Stop DELETE {requestUrl}: HTTP {result.StatusCode}");
+#endif
             // 404 on a variant that was never set is normal; keep clearing the rest.
             if (result.StatusCode is >= 200 and < 300) break;
         }

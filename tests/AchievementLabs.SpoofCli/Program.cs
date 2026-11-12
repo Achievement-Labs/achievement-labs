@@ -101,7 +101,10 @@ static class Program
                 var (status, body) = await client.SendHeartbeatAsync(me, title);
                 attempt++; accepted += status is >= 200 and < 300 ? 1 : 0;
                 Console.WriteLine($"heartbeat #{attempt}: HTTP {status} {body}");
-                await Task.Delay(TimeSpan.FromMinutes(5));
+                var delay = TimeSpan.FromMinutes(5);
+                var remaining = until - DateTimeOffset.UtcNow;
+                if (remaining < delay) delay = remaining;
+                if (delay > TimeSpan.Zero) await Task.Delay(delay);
             }
             Console.WriteLine($"Heartbeat window elapsed: {accepted}/{attempt} accepted.");
             var stop = await client.StopHeartbeatAsync(me);
