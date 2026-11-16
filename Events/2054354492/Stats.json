@@ -1,0 +1,82 @@
+{
+  "2054354492": {
+    "TitleName": "Fruit Ninja Kinect 2",
+    "ServiceConfigId": "309e0100-2c2f-4e09-90ae-397d7a72f63c",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "CurrentNinjaRank": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Ninja Rank [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CurrentNinjaRank"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CurrentNinjaRank\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2054354492\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ObjectsSlashed.TypeId.0": {
+        "Type": "Integer",
+        "PayloadField": "TypeId",
+        "SuggestedValue": 0,
+        "DisplayName": "Fruit Slashed [TypeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectsSlashed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectsSlashed\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2054354492\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TypeId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TotalScore.ExitStatusId.0": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 0,
+        "DisplayName": "Total Points Earned [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalScore"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalScore\",\"serviceConfigId\":\"309e0100-2c2f-4e09-90ae-397d7a72f63c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2054354492\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:FNK2-WW_6rm40ky9yd5pg!App\",\"ver\":\"1.0.22.0_x64_!XboxOnePlayer.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    2054354492
+  ]
+}

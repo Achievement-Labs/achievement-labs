@@ -1,0 +1,233 @@
+{
+  "1667928394": {
+    "TitleName": "Halo Wars 2",
+    "ServiceConfigId": "e7c70100-92e8-4a04-8b33-b9f8636a914a",
+    "Stats": {
+      "Multiplayer Matches Won": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerRoundEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"LeaderId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerRoundEnd\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"LeaderId\":1},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: block shape {LeaderId}; no win field in client event; likely server-side (Waypoint TotalMatchesWon); 1 event = +1 (no value field)"
+      },
+      "Units destroyed with Leader Powers": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerUnitKilledWithPower"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"LeaderPowerId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerUnitKilledWithPower\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"LeaderPowerId\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe table: MultiplayerUnitKilledWithPower{LeaderPowerId}; never sent; built on MultiplayerUnitKilled envelope"
+      },
+      "Blitz Matches Won": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzMatchEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsFirefight\":4,\"IsTutorial\":4,\"IsWin\":4,\"LeaderId\":4,\"Score\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzMatchEnd\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsFirefight\":0,\"IsTutorial\":0,\"IsWin\":REPLACEVALUE,\"LeaderId\":1,\"Score\":1},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 62)"
+      },
+      "Blitz Cards Played": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzPlayCard"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CardId\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzPlayCard\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CardId\":25},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 63); 1 event = 1 card; 1 event = +1 (no value field)"
+      },
+      "Highest Blitz Firefight wave reached": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzFirefightWaveCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"WaveNumber\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzFirefightWaveCompleted\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"WaveNumber\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 25,
+        "Confidence": "block shape (ach 7)"
+      },
+      "BlitzCardPlayedCount": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Blitz cards played [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzCardPlayedCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzCardPlayedCount\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "BlitzHighestWaveCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Highest Blitz Firefight wave reached [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzHighestWaveCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzHighestWaveCompleted\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "BlitzMatchCompleteCount.IsWin.1": {
+        "Type": "Integer",
+        "PayloadField": "IsWin",
+        "SuggestedValue": 1,
+        "DisplayName": "Blitz matches won [IsWin]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BlitzMatchCompleteCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BlitzMatchCompleteCount\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsWin\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MPUnitKilledWithPowerCount": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Units destroyed with Leader Powers [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MPUnitKilledWithPowerCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MPUnitKilledWithPowerCount\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.1": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 1,
+        "DisplayName": "Multiplayer matches won [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"e7c70100-92e8-4a04-8b33-b9f8636a914a\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1667928394\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"1\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.HoganThreshold_1.11.2931.2_x64__8wekyb3d8bbwe!xgame.App\",\"ver\":\"1.11.2931.2_x64_!2019/02/22:03:36:34!0!halowars2_winappdx12final.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1667928394
+  ]
+}

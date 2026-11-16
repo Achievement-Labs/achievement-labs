@@ -1,0 +1,189 @@
+{
+  "766737132": {
+    "TitleName": "Halo 5: Forge",
+    "ServiceConfigId": "e51a0100-805a-4b6c-b777-5d492db37aec",
+    "Stats": {
+      "Time Spent Forging": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ForgeEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SecondsPlayed\":4,\"ObjectsPlaced\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ForgeEnd\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SecondsPlayed\":REPLACEVALUE,\"ObjectsPlaced\":1},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "bond: ForgeEnd{uint64 SecondsPlayed,int32 ObjectsPlaced}; never sent"
+      },
+      "Objects Placed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ForgeEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SecondsPlayed\":4,\"ObjectsPlaced\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ForgeEnd\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SecondsPlayed\":60,\"ObjectsPlaced\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "bond: ForgeEnd"
+      },
+      "Custom Games Played in a Fireteam of 4+": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CustomGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Headshots\":4,\"MapObjectCount\":4,\"NumPlayers\":4,\"PlayerCreatedMap\":4,\"UserCreatedMap\":4,\"Won\":4}},\"measurements\":{\"f\":{\"KDA\":6}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CustomGameComplete\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Headshots\":0,\"MapObjectCount\":573,\"NumPlayers\":REPLACEVALUE,\"PlayerCreatedMap\":0,\"UserCreatedMap\":0,\"Won\":0},\"measurements\":{\"KDA\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape; NumPlayers>=4"
+      },
+      "Custom Games Won in a Fireteam of 4+": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CustomGameComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Headshots\":4,\"MapObjectCount\":4,\"NumPlayers\":4,\"PlayerCreatedMap\":4,\"UserCreatedMap\":4,\"Won\":4}},\"measurements\":{\"f\":{\"KDA\":6}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CustomGameComplete\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Headshots\":0,\"MapObjectCount\":573,\"NumPlayers\":4,\"PlayerCreatedMap\":0,\"UserCreatedMap\":0,\"Won\":REPLACEVALUE},\"measurements\":{\"KDA\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape; NumPlayers>=4 and Won=1"
+      },
+      "CustomGameScriptedEventMet.EventId.PlayedWith3Friends": {
+        "Type": "String",
+        "PayloadField": "EventId",
+        "SuggestedValue": "PlayedWith3Friends",
+        "DisplayName": "Custom Games Played in a Fireteam of 4+ [EventId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CustomGameScriptedEventMet"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CustomGameScriptedEventMet\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "CustomGameScriptedEventMet.EventId.WonWith3Friends": {
+        "Type": "String",
+        "PayloadField": "EventId",
+        "SuggestedValue": "WonWith3Friends",
+        "DisplayName": "Custom Games Won in a Fireteam of 4+ [EventId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CustomGameScriptedEventMet"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CustomGameScriptedEventMet\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EventId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "ForgeObjectsPlaced": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Objects Placed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ForgeObjectsPlaced"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ForgeObjectsPlaced\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ForgeSecondsPlayed": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Time Spent Forging [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ForgeSecondsPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ForgeSecondsPlayed\",\"serviceConfigId\":\"e51a0100-805a-4b6c-b777-5d492db37aec\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"766737132\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.Halo5Forge_1.194.6192.2_x64__8wekyb3d8bbwe!Ausar\",\"ver\":\"1.194.6192.2_x64_!2018/03/06:08:41:06!55ED9DD!halo5forge.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    766737132
+  ]
+}

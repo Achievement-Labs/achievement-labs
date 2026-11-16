@@ -1,0 +1,523 @@
+{
+  "836467065": {
+    "Stats": {
+      "ACH_SIDEKICKS_UNLOCKED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BuddyUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuddyUnlocked\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BuddyUnlocked\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuddyUnlocked\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "BUDDYS_UNLOCKED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BuddyUnlocked"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuddyUnlocked\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BuddyUnlocked\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuddyUnlocked\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "BUDDYFOOD_HARVESTED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BuddyFed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuddyFed\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BuddyFed\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuddyFed\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "BUDDYFOOD_UNIQUE_COLLECTED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlantHarvested"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PlantHarvested\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlantHarvested\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlantHarvested\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_FEATS_COMPLETE": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "FeatCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"FeatCompleted\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FeatCompleted\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"FeatCompleted\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_COMPLETE_ALL_INTERIOR_TUTORIALS": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "InteriorTutorialComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"InteriorTutorialComplete\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"InteriorTutorialComplete\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"InteriorTutorialComplete\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_COMPLETE_ALL_TOYBOX_TUTORIALS": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ToyboxTutorialsComplete"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ToyboxTutorialsComplete\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ToyboxTutorialsComplete\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ToyboxTutorialsComplete\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_SIDEKICK_EQUIPMENT_COLLECTED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SideKickEquipmentCollected"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SideKickEquipmentCollected\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SideKickEquipmentCollected\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SideKickEquipmentCollected\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_DEFEAT_ENEMY_AI": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AIDefeated"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AIDefeated\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AIDefeated\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AIDefeated\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_NUMBER_OF_AVATARS_DESTROYED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AIDefeated"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"AIDefeated\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AIDefeated\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AIDefeated\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_SKILLPOINT_EARNED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillPointEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SkillPointEarned\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkillPointEarned\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SkillPointEarned\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_SAVE_NUMBER_TOYBOX_WORLDS": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ToyboxSaved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ToyboxSaved\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ToyboxSaved\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ToyboxSaved\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_RACING_WORLDS_VISITED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RacingWorldsVisited"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"RacingWorldsVisited\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RacingWorldsVisited\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RacingWorldsVisited\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_COMBAT_WORLDS_VISITED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CombatWorldsVisited"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CombatWorldsVisited\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CombatWorldsVisited\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CombatWorldsVisited\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_LOGIC_WORLDS_VISITED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LogicWorldsVisited"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"LogicWorldsVisited\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LogicWorldsVisited\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"LogicWorldsVisited\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_PLATFORM_WORLDS_VISITED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlatformingWorldsVisited"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PlatformingWorldsVisited\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlatformingWorldsVisited\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlatformingWorldsVisited\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_BUDDY_WORLDS_VISITED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BuddyWorldsVisited"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuddyWorldsVisited\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BuddyWorldsVisited\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuddyWorldsVisited\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_THEATER_UGC": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayDownloadedUGCTheater"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PlayDownloadedUGCTheater\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayDownloadedUGCTheater\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayDownloadedUGCTheater\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_INTERIOR_ROOMS": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UpdateInteriorRoomCount"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"UpdateInteriorRoomCount\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UpdateInteriorRoomCount\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"UpdateInteriorRoomCount\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_HUB_TERRAIN_REVEALED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HubTerrainRevealed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"HubTerrainRevealed\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HubTerrainRevealed\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"HubTerrainRevealed\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_PARTY_ROOM_PLAYED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PartyRoomPlayed"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PartyRoomPlayed\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PartyRoomPlayed\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PartyRoomPlayed\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "ACH_TOY_PRESENTS_EARNED": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ToyPresentEarned"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ToyPresentEarned\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ToyPresentEarned\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ToyPresentEarned\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "numEnemiesDefeated": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Enemies Defeated [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "numEnemiesDefeated"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"numEnemiesDefeated\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "numSkillPointsEarned": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Skill Points Earned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "numSkillPointsEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"numSkillPointsEarned\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "numSparksInInventory": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Sparks Collected [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "numSparksInInventory"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"numSparksInInventory\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "numUgcDownloaded": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Toy Boxes Downloaded [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "numUgcDownloaded"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"numUgcDownloaded\",\"serviceConfigId\":\"42770100-5ee0-4274-ace9-d49e31db7979\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"836467065\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "TitleName": "Disney Infinity 3.0 Edition",
+    "ServiceConfigId": "42770100-5ee0-4274-ace9-d49e31db7979",
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"dvcSample\":42.97,\"flags\":51875152432,\"edition\":48,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"10.0.19045.0.amd64fre\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Disney.DisneyInfinityToyBox3.0_1.1.1.0_x86__6rarf9sa4v8jt!App\",\"ver\":\"1.1.1.0_x86_!GameWin10.win32.Release.exe\",\"is1P\":2,\"asId\":3219},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    836467065
+  ]
+}

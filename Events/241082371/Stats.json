@@ -1,0 +1,82 @@
+{
+  "241082371": {
+    "TitleName": "ACA NEOGEO SAMURAI SHODOWN",
+    "ServiceConfigId": "5c6a0100-70ba-4490-9c66-3d3c0e5ea003",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "CaravanMode": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "CARAVAN MODE [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CaravanMode"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CaravanMode\",\"serviceConfigId\":\"5c6a0100-70ba-4490-9c66-3d3c0e5ea003\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"241082371\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "HighScoreMode": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "HI SCORE MODE [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighScoreMode"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighScoreMode\",\"serviceConfigId\":\"5c6a0100-70ba-4490-9c66-3d3c0e5ea003\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"241082371\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "OriginalMode": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "ORIGINAL MODE [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OriginalMode"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OriginalMode\",\"serviceConfigId\":\"5c6a0100-70ba-4490-9c66-3d3c0e5ea003\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"241082371\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"dvcSample\":42.97,\"flags\":52009370160,\"edition\":48,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"10.0.26200.8246.amd64fre.ge_release.240331-1435\",\"expId\":\"1\"},\"app\":{\"id\":\"U:HAMSTERCorporation.6761fc02-331f-4663-9331-a1ffff3_2.0.0.0_x64__7xd3265gdqs6r!SAMURAI.SHODOWN\",\"ver\":\"2.0.0.0_x64_!2026/03/02:07:24:38!0!samurai shodown.exe\",\"is1P\":2,\"asId\":13937},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    241082371
+  ]
+}

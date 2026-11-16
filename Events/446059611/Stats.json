@@ -1,0 +1,344 @@
+{
+  "446059611": {
+    "TitleName": "Forza Horizon 2",
+    "ServiceConfigId": "788f0100-a4bc-46c3-b19b-d1001a96545b",
+    "Stats": {
+      "Cars Owned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CarAddedToGarage"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarId\":4,\"Manufacturer\":4,\"NumCarsInGarage\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"CarAddedToGarage\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CarId\":1218,\"Manufacturer\":22,\"NumCarsInGarage\":REPLACEVALUE},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 50,
+        "Confidence": "credited FH2 block shape (ach 28)"
+      },
+      "Best Skill Chain": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkillChainCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarBucket\":4,\"HasHotWheelsGrade\":4,\"IsSkillSong\":4,\"NumChainedSkills\":4,\"Payout\":4,\"PlayerCarId\":4,\"PlayerCarManufacturerId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"SkillChainCompleted\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CarBucket\":34,\"HasHotWheelsGrade\":0,\"IsSkillSong\":1,\"LocationName\":\"StormIsland\",\"NumChainedSkills\":20,\"Payout\":REPLACEVALUE,\"PlayerCarId\":1218,\"PlayerCarManufacturerId\":22},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 100000,
+        "Confidence": "credited FH2 block shape (ach 80)"
+      },
+      "Road Trips Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoadTripEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CompletionPercent\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"RoadTripEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CompletionPercent\":REPLACEVALUE},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 100,
+        "Confidence": "credited FH2 block shape (ach 4)"
+      },
+      "Championships Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChampionshipEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{\"ChampionshipId\":4,\"ChampionshipID\":4,\"CampaignId\":4,\"Place\":4,\"DestinationID\":4,\"TotalCompleted\":4,\"TotalWon\":4,\"Points\":4}}}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"ChampionshipEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"ChampionshipId\":1,\"ChampionshipID\":1,\"CampaignId\":1,\"Place\":1,\"DestinationID\":6,\"TotalCompleted\":REPLACEVALUE,\"TotalWon\":1,\"Points\":100},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "credited FH2 block shape (ach 19)"
+      },
+      "Total XP": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "XPGained"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Amount\":4,\"InCarClub\":4,\"Wristband\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"XPGained\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"Amount\":REPLACEVALUE,\"InCarClub\":0,\"Source\":\"Event\",\"Wristband\":1},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 250000,
+        "Confidence": "credited FH2 block shape (ach 22)"
+      },
+      "Barn Finds Restored": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarnFindRestored"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"BarnFindRestored\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CarId\":REPLACEVALUE},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 326,
+        "Confidence": "credited FH2 block shape (ach 42)"
+      },
+      "Online Races Won": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AnthemOnlineRaceEnd"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CarBaseCost\":4,\"CarBucket\":4,\"CarClass\":4,\"CarClassStock\":4,\"CarMeetId\":4,\"CoopRace\":4,\"CreditReward\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"GameplayModeId\":4,\"InputDeviceType\":4,\"IsPlaygroundEvent\":4,\"IsRivals\":4,\"IsTeamEvent\":4,\"ManufacturerId\":4,\"Place\":4,\"RaceMode\":4,\"RouteId\":4,\"SectionId\":4,\"TeamPlace\":4,\"VehicleId\":4,\"Wet\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"AnthemOnlineRaceEnd\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"properties\":{\"CarBaseCost\":1000000,\"CarBucket\":26,\"CarClass\":5,\"CarClassStock\":5,\"CarMeetId\":-1,\"CoopRace\":0,\"CreditReward\":2124,\"DifficultyLevelId\":0,\"ExitStatusId\":0,\"GameplayModeId\":3,\"InputDeviceType\":0,\"IsPlaygroundEvent\":1,\"IsRivals\":0,\"IsTeamEvent\":0,\"ManufacturerId\":156,\"MultiplayerCorrelationId\":\"00000000-0000-0000-0000-000000000000\",\"Place\":REPLACEVALUE,\"RaceMode\":6,\"RoundId\":\"00000000-0000-0000-0000-000000000000\",\"RouteId\":3044,\"SectionId\":0,\"SessionPrivacy\":\"InviteOnly\",\"TeamPlace\":0,\"VehicleId\":1218,\"Wet\":0},\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"titleId\":446059611,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "credited FH2 block shape (ach 43)"
+      },
+      "BarnFindsRestored": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Barn Finds Restored [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarnFindsRestored"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BarnFindsRestored\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CarsInGarage": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Cars Owned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CarsInGarage"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CarsInGarage\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ChampionshipsCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Championships Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChampionshipsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChampionshipsCompleted\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "FavouriteCar": {
+        "Type": "String",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Favorite Car [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "FavouriteCar"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"FavouriteCar\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HighScore": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Best Skill Chain [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighScore"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighScore\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "OnlineRacesCompleted.Place.1": {
+        "Type": "Integer",
+        "PayloadField": "Place",
+        "SuggestedValue": 1,
+        "DisplayName": "Online Races Won [Place]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineRacesCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineRacesCompleted\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Place\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoadTripsCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Road Trips Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoadTripsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoadTripsCompleted\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "XPGained": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total XP [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "XPGained"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"XPGained\",\"serviceConfigId\":\"788f0100-a4bc-46c3-b19b-d1001a96545b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"446059611\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.ForzaHorizon2_8wekyb3d8bbwe!ReleaseFinal\",\"ver\":\"1.0.0.64\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    446059611
+  ]
+}

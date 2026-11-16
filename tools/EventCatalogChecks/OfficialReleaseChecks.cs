@@ -34,7 +34,16 @@ static class OfficialReleaseChecks
                 }
             using var http = new HttpClient(new Release(bytes.ToArray()));
             using var bundled = new EventCatalogClient(true, officialCatalog: true);
-            var expected = bundled.GetLibrarySupport();
+            // Compare with embedded data, not a developer's previously downloaded official cache.
+            var index = JObject.Parse(BundledEventFiles.Read("index.json") ?? throw new Exception("Missing bundled index."));
+            var supported = ((JArray)index["SupportedTitleIDs"]!).Select(x => x.ToString()).ToHashSet();
+            var expected = index.Properties().Where(p => uint.TryParse(p.Name, out _)).ToDictionary(p => p.Name, p =>
+            {
+                var title = JObject.Parse(BundledEventFiles.Read(p.Name + "/Data.json") ?? throw new Exception("Missing bundled title."))[p.Name]!;
+                return new LibraryEventSupport(supported.Contains(p.Name) && (bool?)title["Enabled"] != false,
+                    (bool?)title["FullySupported"] == true, ((JObject)title["Achievements"]!).Count,
+                    PartiallySupported: (bool?)title["PartiallySupported"] == true);
+            });
             var catalog = new UpstreamEventCatalogue(Path.Combine(temporary, "official.json"), ["345903534"], bundledTitleIds: expected.Keys, officialCatalog: true);
             await catalog.RefreshAsync(http, true);
             if (catalog.Status.StartsWith("Could not") || catalog.TitleIds.Length != expected.Count - 1) throw new Exception(catalog.Status);

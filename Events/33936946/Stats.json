@@ -1,0 +1,409 @@
+{
+  "33936946": {
+    "TitleName": "Zoo Tycoon: Ultimate Animal Collection",
+    "ServiceConfigId": "91a60100-976e-4112-b7fb-849b0205d632",
+    "Stats": {
+      "Total Animals Bred": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BredAnimalOfType"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0,\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{}}}}},\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BredAnimalOfType\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AnimalType\":\"Tiger\"},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe writer 0x140137550 {AnimalType string}; 1 event = 1 birth; 1 event = +1 (no value field)"
+      },
+      "Total Animals Released to the Wild": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ReleasedAnimalOfType"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0,\"f\":{\"baseData\":{\"f\":{\"ver\":2,\"properties\":{\"f\":{}}}}},\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ReleasedAnimalOfType\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AnimalType\":\"Tiger\"},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe writer 0x140143cb0 {AnimalType string}; 1 event = +1 (no value field)"
+      },
+      "Total Amount of Money Earned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EarnedMoney"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Amount\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EarnedMoney\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Amount\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape; Amount UInt32"
+      },
+      "Number of Challenges Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CompletedChallenge"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0,\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CompletedChallenge\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ChallengeName\":\"challenge\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape {ChallengeName}; 1 event = +1 (no value field)"
+      },
+      "Number of Awards Received": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NewNumAwardsCurrentZoo"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NumAwardsCurrentZoo\":4}},\"ver\":2}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NewNumAwardsCurrentZoo\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumAwardsCurrentZoo\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape; per-zoo count (UI total may sum zoos)"
+      },
+      "Total Colour Variant Animals Bred": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BredNewColorVariant"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0,\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BredNewColorVariant\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (zero-field); alt NewNumCoreColorVariantsBred; 1 event = +1 (no value field)"
+      },
+      "Number of Animal Poops Cleared Up": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ClearedUpPoop"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0,\"f\":{\"baseData\":{\"f\":{\"ver\":2}}},\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ClearedUpPoop\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (1200 reqs); 1 event = +1 (no value field)"
+      },
+      "Distance Ran": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RanDistance"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Distance\":6}},\"ver\":2,\"properties\":{\"f\":{}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RanDistance\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Distance\":REPLACEVALUE},\"properties\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe writer 0x140143490 measurements{Distance double}"
+      },
+      "Distance Driven": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DroveDistance"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Distance\":6}},\"ver\":2,\"properties\":{\"f\":{}}}}},\"policies\":0,\"privTags\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DroveDistance\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Distance\":REPLACEVALUE},\"properties\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe writer 0x14013c660 measurements{Distance double}"
+      },
+      "DistanceDriven": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Distance Driven [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DistanceDriven"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DistanceDriven\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "DistanceRun": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Distance Ran [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DistanceRun"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DistanceRun\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumAnimalsBred": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Animals Bred [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumAnimalsBred"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumAnimalsBred\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumAnimalsReleased": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Animals Released to the Wild [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumAnimalsReleased"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumAnimalsReleased\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumAwardsReceived": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Number of Awards Received [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumAwardsReceived"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumAwardsReceived\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumChallengesCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Number of Challenges Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumChallengesCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumChallengesCompleted\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumCoreAnimalTypesBred": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Colour Variant Animals Bred [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumCoreAnimalTypesBred"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumCoreAnimalTypesBred\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumPoopsClearedUp": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Number of Animal Poops Cleared Up [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumPoopsClearedUp"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumPoopsClearedUp\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalEarned": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Amount of Money Earned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalEarned\",\"serviceConfigId\":\"91a60100-976e-4112-b7fb-849b0205d632\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"33936946\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":1,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.ZooTycoon_1.1806.51917.2_x64__8wekyb3d8bbwe!MSTycoon.App\",\"ver\":\"1.1806.51917.2_x64_!2018/06/19:15:34:06!0!mstycoon.final.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    33936946
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "419391420": {
+    "TitleName": "EA SPORTS™ NBA LIVE 15",
+    "ServiceConfigId": "2dd00100-5450-4206-927e-b54e18ff67bc",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "RoundsCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Online Games Played [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"2dd00100-5450-4206-927e-b54e18ff67bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"419391420\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Completed Online Games Won [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"2dd00100-5450-4206-927e-b54e18ff67bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"419391420\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.3": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 3,
+        "DisplayName": "Completed Online Games Lost [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"2dd00100-5450-4206-927e-b54e18ff67bc\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"419391420\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.NBALive15_q5ha1ztykcgvj!Game\",\"ver\":\"1\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    419391420
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "1033937373": {
+    "TitleName": "Don't Starve Together: Console Edition",
+    "ServiceConfigId": "f2570100-ba9e-4443-9b01-def33da0a1dd",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "DaysSurvived": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Max days survived [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaysSurvived"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaysSurvived\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalEnemiesKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total of Enemies Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalEnemiesKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalEnemiesKilled\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalFollowersAcquired": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Number of Followers [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalFollowersAcquired"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalFollowersAcquired\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalItemsCrafted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total of Items Crafted [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalItemsCrafted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalItemsCrafted\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalPlayersKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Human Players Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalPlayersKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalPlayersKilled\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalPlayingDays": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total played days [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalPlayingDays"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalPlayingDays\",\"serviceConfigId\":\"f2570100-ba9e-4443-9b01-def33da0a1dd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1033937373\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":281587075381460992,\"eventFlags\":514,\"pgName\":\"XBOX\",\"dvcSample\":42.97,\"flags\":52412023344,\"edition\":48,\"epoch\":\"7700330\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":79,\"name\":\"Windows\",\"ver\":\"10.0.26300.9550.amd64fre.ge_release.240331-1435\",\"expId\":\"NG:25E274,MD:283BAEF,ME:3A53D55,ME:3A53F1C,MD:3A53F34,ME:3536BD9,MD:2FE0A31,MD:2FE0A40,MD:2FE0A4F,MD:37B239D,PD:3536CF8,PD:33CDA4D,MD:36AF640,MD:9999,CD:2608D\"},\"app\":{\"id\":\"U:KleiEntertainment.DontStarveTogetherConsoleEdition_h1qwf79amjr38!App\",\"ver\":\"1\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"System manufacturer\",\"devModel\":\"System Product Name\",\"ticketKeys\":[\"335666354\",\"335666359\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"-04:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1033937373
+  ]
+}

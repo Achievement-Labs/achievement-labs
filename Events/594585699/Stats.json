@@ -1,0 +1,151 @@
+{
+  "594585699": {
+    "TitleName": "Nidhogg 2",
+    "ServiceConfigId": "75fd0100-155e-49fd-abc5-67ee2370a863",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "OnlineBowKills.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Bow Kills [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineBowKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineBowKills\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "OnlineKnifeKills.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Knife Kills [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineKnifeKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineKnifeKills\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "OnlineLongswordKills.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Longsword Kills [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineLongswordKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineLongswordKills\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "OnlineRapierKills.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Rapier Kills [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineRapierKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineRapierKills\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "OnlineUnarmedKills.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Unarmed Kills [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineUnarmedKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineUnarmedKills\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "OnlineWins.Count.0": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 0,
+        "DisplayName": "Online Wins [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlineWins"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlineWins\",\"serviceConfigId\":\"75fd0100-155e-49fd-abc5-67ee2370a863\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"594585699\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:MesshofLLC.Nidhogg2_qar5mgcjpahcy!App\",\"ver\":\"1\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Xbox\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    594585699
+  ]
+}

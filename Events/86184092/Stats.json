@@ -1,0 +1,197 @@
+{
+  "86184092": {
+    "TitleName": "Squid Hero for Kinect",
+    "ServiceConfigId": "e70d0100-60a8-4b46-939e-6b6d0523109c",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "AnimalFriend": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Animals Saved [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AnimalFriend"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AnimalFriend\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ArtfulDodger": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Mines Dodged [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ArtfulDodger"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ArtfulDodger\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "BestMineChainReaction": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Highest Mine Chain Reaction [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BestMineChainReaction"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BestMineChainReaction\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ChunksBroken": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Ice Chunks Smashed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ChunksBroken"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ChunksBroken\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "HighestComboCount": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Highest Combo [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighestComboCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighestComboCount\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "LongShotBonus": {
+        "Type": "Integer",
+        "PayloadField": "NumberOfBonuses",
+        "SuggestedValue": "",
+        "DisplayName": "Long Shots [NumberOfBonuses]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LongShotBonus"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LongShotBonus\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumberOfBonuses\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "SuperLongShotBonus": {
+        "Type": "Integer",
+        "PayloadField": "NumberOfBonuses",
+        "SuggestedValue": "",
+        "DisplayName": "Super Long Shots [NumberOfBonuses]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SuperLongShotBonus"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SuperLongShotBonus\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NumberOfBonuses\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "WorldsRichestSquid": {
+        "Type": "Integer",
+        "PayloadField": "MoneyAmountEarned",
+        "SuggestedValue": "",
+        "DisplayName": "Coins Picked Up [MoneyAmountEarned]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WorldsRichestSquid"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WorldsRichestSquid\",\"serviceConfigId\":\"e70d0100-60a8-4b46-939e-6b6d0523109c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"86184092\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MoneyAmountEarned\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:VirtualAirGuitarCompany.SquidHeroforKinect_5szhxr0y5cs0r!App\",\"ver\":\"1.2.1853.0_x64_!XboxOnePlayer.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    86184092
+  ]
+}

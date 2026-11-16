@@ -1,0 +1,82 @@
+{
+  "1835818566": {
+    "TitleName": "CHAOS;CHILD",
+    "ServiceConfigId": "a8380100-870c-4448-bc75-f7ad6d6c5e46",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "LookDelusions.DelusionType.0": {
+        "Type": "Integer",
+        "PayloadField": "DelusionType",
+        "SuggestedValue": 0,
+        "DisplayName": "妄想をしなかった回数 [DelusionType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LookDelusions"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LookDelusions\",\"serviceConfigId\":\"a8380100-870c-4448-bc75-f7ad6d6c5e46\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1835818566\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DelusionType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "LookDelusions.DelusionType.1": {
+        "Type": "Integer",
+        "PayloadField": "DelusionType",
+        "SuggestedValue": 1,
+        "DisplayName": "ポジティブ妄想を見た回数 [DelusionType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LookDelusions"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LookDelusions\",\"serviceConfigId\":\"a8380100-870c-4448-bc75-f7ad6d6c5e46\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1835818566\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DelusionType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "LookDelusions.DelusionType.2": {
+        "Type": "Integer",
+        "PayloadField": "DelusionType",
+        "SuggestedValue": 2,
+        "DisplayName": "ネガティブ妄想を見た回数 [DelusionType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LookDelusions"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LookDelusions\",\"serviceConfigId\":\"a8380100-870c-4448-bc75-f7ad6d6c5e46\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1835818566\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DelusionType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:CHAOS-CHILD_mrv935vgm8cz6!App\",\"ver\":\"1.0.0.1_x64_WW!adv11.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1835818566
+  ]
+}

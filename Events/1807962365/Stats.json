@@ -1,0 +1,151 @@
+{
+  "1807962365": {
+    "TitleName": "Tiny Tina's Assault on Dragon Keep: A Wonderlands One-shot Adventure",
+    "ServiceConfigId": "00000000-0000-0000-0000-00006bc350fd",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "HeroStat.StatID.1": {
+        "Type": "Integer",
+        "PayloadField": "StatID",
+        "SuggestedValue": 1,
+        "DisplayName": "Shots Fired [StatID]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStat\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatID\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStat.StatID.2": {
+        "Type": "Integer",
+        "PayloadField": "StatID",
+        "SuggestedValue": 2,
+        "DisplayName": "Kills [StatID]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStat\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatID\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStat.StatID.4": {
+        "Type": "Integer",
+        "PayloadField": "StatID",
+        "SuggestedValue": 4,
+        "DisplayName": "Challenges Completed [StatID]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStat\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatID\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStat.StatID.5": {
+        "Type": "Integer",
+        "PayloadField": "StatID",
+        "SuggestedValue": 5,
+        "DisplayName": "Total Items Found [StatID]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStat\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatID\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStat.StatID.6": {
+        "Type": "Integer",
+        "PayloadField": "StatID",
+        "SuggestedValue": 6,
+        "DisplayName": "Legendary Items Found [StatID]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStat\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatID\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MaxLevelReached": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Max Level [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MaxLevelReached"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MaxLevelReached\",\"serviceConfigId\":\"00000000-0000-0000-0000-00006bc350fd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1807962365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:2K-Gearbox.PawPaw_5c2m1mad6jpnr!App\",\"ver\":\"10.5.0.2_x64_!2023/03/30:07:55:18!0!re7.exe\",\"is1P\":1,\"asId\":1},\"metadata\":REPLACEMETADATA,\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1807962365
+  ]
+}

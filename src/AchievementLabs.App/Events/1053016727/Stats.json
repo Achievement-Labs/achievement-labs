@@ -1,0 +1,82 @@
+{
+  "1053016727": {
+    "TitleName": "Air Guitar Warrior for Kinect",
+    "ServiceConfigId": "98e00100-c223-46e0-84a2-2e693ec3c297",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "MonstersKilled.GuitarId.7": {
+        "Type": "Integer",
+        "PayloadField": "GuitarId",
+        "SuggestedValue": 7,
+        "DisplayName": "Monsters Killed with The Legend [GuitarId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MonstersKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MonstersKilled\",\"serviceConfigId\":\"98e00100-c223-46e0-84a2-2e693ec3c297\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1053016727\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GuitarId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PercentageLevelsCompleted": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Levels Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PercentageLevelsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PercentageLevelsCompleted\",\"serviceConfigId\":\"98e00100-c223-46e0-84a2-2e693ec3c297\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1053016727\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PlayerRank": {
+        "Type": "Integer",
+        "PayloadField": "Rank",
+        "SuggestedValue": "",
+        "DisplayName": "Player Rank [Rank]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerRank"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerRank\",\"serviceConfigId\":\"98e00100-c223-46e0-84a2-2e693ec3c297\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1053016727\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Rank\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:VirtualAirGuitarCompany.AirGuitarWarriorforKinect_5szhxr0y5cs0r!App\",\"ver\":\"1.1.2312.0_x64_!VAGC.AirGuitarWarrior.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1053016727
+  ]
+}

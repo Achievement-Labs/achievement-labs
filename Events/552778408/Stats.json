@@ -1,0 +1,151 @@
+{
+  "552778408": {
+    "TitleName": "EA SPORTS™ UFC® 2",
+    "ServiceConfigId": "43c20100-15e7-43bd-a523-e60d20f2baa8",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "RoundsCompleted.GameplayModeId.1.ExitStatusId.2": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 1,
+        "DisplayName": "Championships Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":\"STATPAYLOADINPUT\",\"ExitStatusId\":2},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.GameplayModeId.11.ExitStatusId.2": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 11,
+        "DisplayName": "UFC Ultimate Team Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":\"STATPAYLOADINPUT\",\"ExitStatusId\":2},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.GameplayModeId.6.ExitStatusId.2": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 6,
+        "DisplayName": "Rivalries Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":\"STATPAYLOADINPUT\",\"ExitStatusId\":2},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.GameplayModeId.1.ExitStatusId.2 [ExitStatusId]": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Championships Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":1,\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.GameplayModeId.11.ExitStatusId.2 [ExitStatusId]": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "UFC Ultimate Team Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":11,\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.GameplayModeId.6.ExitStatusId.2 [ExitStatusId]": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Rivalries Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"43c20100-15e7-43bd-a523-e60d20f2baa8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552778408\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":6,\"ExitStatusId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.UFC2_q5ha1ztykcgvj!Game\",\"ver\":\"1\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    552778408
+  ]
+}

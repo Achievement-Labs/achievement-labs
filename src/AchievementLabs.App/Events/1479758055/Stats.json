@@ -1,0 +1,365 @@
+{
+  "1479758055": {
+    "TitleName": "Batman™: Arkham Knight",
+    "ServiceConfigId": "bedbd988-e7f9-4523-9ad5-a3bbc92658a5",
+    "Stats": {
+      "Most Wanted Missions Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":6}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroMissionsComplete\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1.0,
+        "Confidence": "capture: double (2.8)"
+      },
+      "Riddles solved": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroRiddlesSolved\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "capture: int"
+      },
+      "AR Challenge Stars": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":6}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroChallengeStars\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1.0,
+        "Confidence": "capture: double"
+      },
+      "WayneTech upgrades purchased": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroUpgradesPurchased\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "memory only; type assumed int"
+      },
+      "Number of Perfect Shots on drone tanks": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatAdd\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Delta\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatAdd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Delta\":REPLACEVALUE,\"RefName\":\"HeroPerfectShots\"},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "memory only; type assumed int like ThugsDefeated"
+      },
+      "Number of thugs defeated": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatAdd\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Delta\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatAdd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"Delta\":REPLACEVALUE,\"RefName\":\"HeroThugsDefeated\"},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "capture: int"
+      },
+      "Highest FreeFlow combo": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroHighestFreeflowCombo\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "capture: int (9)"
+      },
+      "Longest Batmobile jump": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatAchieve1\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T1479758055.EvStatSimpleFloatMax\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"AchievementId\": 4\n                            }\n                        },\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Value\":6}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {},\n            \"name\": \"EvStatAchieve1\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {\n                \"AchievementId\": REPLACEACHIEVEMENTID\n            },\n            \"serviceConfigId\": \"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\n            \"titleId\": 1479758055,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"EvStatSimpleFloatMax\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"RefName\":\"HeroLongestBatmobileJump\",\"Value\":REPLACEVALUE},\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"titleId\":1479758055,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1.0,
+        "Confidence": "memory only (1.0); type assumed double"
+      },
+      "StatSimpleFloatAdd.RefName.HeroPerfectShots": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroPerfectShots",
+        "DisplayName": "Number of Perfect Shots on drone tanks [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatAdd"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatAdd\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatAdd.RefName.HeroThugsDefeated": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroThugsDefeated",
+        "DisplayName": "Number of thugs defeated [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatAdd"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatAdd\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroChallengeStars": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroChallengeStars",
+        "DisplayName": "AR Challenge Stars [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroHighestFreeflowCombo": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroHighestFreeflowCombo",
+        "DisplayName": "Highest FreeFlow combo [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroLongestBatmobileJump": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroLongestBatmobileJump",
+        "DisplayName": "Longest Batmobile jump [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroMissionsComplete": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroMissionsComplete",
+        "DisplayName": "Most Wanted Missions Completed [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroRiddlesSolved": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroRiddlesSolved",
+        "DisplayName": "Riddles solved [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatSimpleFloatMax.RefName.HeroUpgradesPurchased": {
+        "Type": "String",
+        "PayloadField": "RefName",
+        "SuggestedValue": "HeroUpgradesPurchased",
+        "DisplayName": "WayneTech upgrades purchased [RefName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatSimpleFloatMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatSimpleFloatMax\",\"serviceConfigId\":\"bedbd988-e7f9-4523-9ad5-a3bbc92658a5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1479758055\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"RefName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:WarnerBros.Interactive.7b0450f1-4a73-4eb9-b96a-e8f_1.0.0.0_x64__ktmk1xygcecda!Game\",\"ver\":\"1.0.0.0_x64_!2026/04/26:13:35:02!33F5939!batmanak.exe\",\"is1P\":2,\"asId\":10046},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1479758055
+  ]
+}

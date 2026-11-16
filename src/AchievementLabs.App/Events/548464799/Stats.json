@@ -1,0 +1,151 @@
+{
+  "548464799": {
+    "TitleName": "EA SPORTS™ UFC®",
+    "ServiceConfigId": "8d8b0100-5234-4413-b285-e0df20b0e89f",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.1": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Online Championships Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\",\"GameplayModeId\":1},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.4": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Online Quick Match Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\",\"GameplayModeId\":4},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.6": {
+        "Type": "Integer",
+        "PayloadField": "ExitStatusId",
+        "SuggestedValue": 2,
+        "DisplayName": "Online Rivalries Wins [ExitStatusId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":\"STATPAYLOADINPUT\",\"GameplayModeId\":6},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.1 [GameplayModeId]": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 1,
+        "DisplayName": "Online Championships Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":2,\"GameplayModeId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.4 [GameplayModeId]": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 4,
+        "DisplayName": "Online Quick Match Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":2,\"GameplayModeId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsCompleted.ExitStatusId.2.GameplayModeId.6 [GameplayModeId]": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 6,
+        "DisplayName": "Online Rivalries Wins [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsCompleted\",\"serviceConfigId\":\"8d8b0100-5234-4413-b285-e0df20b0e89f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"548464799\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ExitStatusId\":2,\"GameplayModeId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.UFC14_q5ha1ztykcgvj!Game\",\"ver\":\"1\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    548464799
+  ]
+}
