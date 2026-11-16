@@ -60,11 +60,23 @@ internal static class EventStatsCatalogChecks
         var failures = new List<string>();
         foreach (var title in stats.Properties().Where(p => uint.TryParse(p.Name, out _) && p.Value is JObject))
         {
+            var definitions = (JObject)title.Value["Stats"]!;
+            var expectedRecipes = definitions.Properties().Where(stat => stat.Value is JObject map &&
+                map.Properties().Any(op => System.Text.RegularExpressions.Regex.IsMatch(op.Name, "^Request[0-9]+$") ||
+                    op.Value is JObject operation && operation["ReplacementType"] != null))
+                .Select(stat => stat.Name).ToHashSet(StringComparer.Ordinal);
             vm.TitleId = title.Name; vm.RefreshSupport();
-            if (!vm.StatModeLabel.Contains("Event-based") || !vm.StatSupportLabel.StartsWith("Supported")) continue;
+            if (!vm.StatModeLabel.Contains("Event-based") || !vm.StatSupportLabel.StartsWith("Supported"))
+            {
+                if (expectedRecipes.Count != 0)
+                    failures.Add(title.Name + ": editor skipped mapped stats.");
+                continue;
+            }
             await vm.LoadStats();
             capture.TitleId = title.Name;
             var editable = vm.StatItems.Where(s => s.IsEditable && s.IsEventBasedStat).ToArray();
+            foreach (var missing in expectedRecipes.Except(editable.Select(s => s.Name)))
+                failures.Add(title.Name + "/" + missing + ": editor did not load mapped stat.");
             var before = capture.Count;
             foreach (var item in editable)
             {
