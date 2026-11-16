@@ -1,0 +1,105 @@
+{
+  "301917535": {
+    "TitleName": "Battlefield Hardline",
+    "ServiceConfigId": "4dae0100-5f8f-4764-b3d6-85c811fee55f",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "GameStat.Code.cash": {
+        "Type": "String",
+        "PayloadField": "Code",
+        "SuggestedValue": "cash",
+        "DisplayName": "Total Cash Earned [Code]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameStat\",\"serviceConfigId\":\"4dae0100-5f8f-4764-b3d6-85c811fee55f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"301917535\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Code\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "GameStat.Code.legendary": {
+        "Type": "String",
+        "PayloadField": "Code",
+        "SuggestedValue": "legendary",
+        "DisplayName": "LEGENDARY [Code]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameStat\",\"serviceConfigId\":\"4dae0100-5f8f-4764-b3d6-85c811fee55f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"301917535\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Code\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "GameStat.Code.mvp": {
+        "Type": "String",
+        "PayloadField": "Code",
+        "SuggestedValue": "mvp",
+        "DisplayName": "Number of times as best player (MVP): [Code]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameStat\",\"serviceConfigId\":\"4dae0100-5f8f-4764-b3d6-85c811fee55f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"301917535\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Code\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "GameStat.Code.rank": {
+        "Type": "String",
+        "PayloadField": "Code",
+        "SuggestedValue": "rank",
+        "DisplayName": "RANK [Code]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameStat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameStat\",\"serviceConfigId\":\"4dae0100-5f8f-4764-b3d6-85c811fee55f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"301917535\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Code\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":1,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.BattlefieldHardline_q5ha1ztykcgvj!\",\"ver\":\"!\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    301917535
+  ]
+}

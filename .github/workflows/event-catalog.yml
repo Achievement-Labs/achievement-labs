@@ -6,6 +6,9 @@ on:
       - 'src/AchievementLabs.App/Events/**'
       - 'src/AchievementLabs.Core/**'
       - 'tools/event_catalog.py'
+      - 'tools/check_event_catalog_integrity.py'
+      - 'tools/build_event_stat_recipes.py'
+      - 'tests/AchievementLabs.Enhancements.Tests/EventStatsCatalogChecks.cs'
       - 'tools/test_event_catalog.py'
       - 'tools/EventCatalogChecks/**'
       - 'tools/CompressEvents/**'
@@ -27,12 +30,23 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Validate catalog files and detect removed mappings
+        env:
+          CATALOG_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if ($env:CATALOG_BASE) {
+            python tools/check_event_catalog_integrity.py --base $env:CATALOG_BASE
+          } else {
+            python tools/check_event_catalog_integrity.py
+          }
       - run: python -m unittest discover -s tools -p test_event_catalog.py
       - run: python -m unittest discover -s tools/mobile -p test_publish_events.py
       - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --render Events
@@ -41,6 +55,7 @@ jobs:
       - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --official-release Events
       - run: dotnet run --project tools/CompressEvents -c Release -p:NuGetAudit=false -- --verify src/AchievementLabs.Core/bin/Release/net9.0-windows/AchievementLabs.Core.dll src/AchievementLabs.App/Events
       - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --bundled-stats
+      - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --event-stats-catalog Events artifacts/event-stats-report.json
       - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --public-api
       - run: dotnet run --project tools/UpdaterChecks -c Release -p:NuGetAudit=false
       - run: dotnet run --project tests/AchievementLabs.Enhancements.Tests -c Release -p:NuGetAudit=false -- --release-ui artifacts/release-ui

@@ -1,0 +1,243 @@
+{
+  "2109344129": {
+    "TitleName": "FINAL FANTASY XV WINDOWS EDITION",
+    "ServiceConfigId": "b5330100-8e41-4577-b8ed-4a547dba0981",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "Counter.Slot.4": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 4,
+        "DisplayName": "Gil Acquired [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Counter"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Counter\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Counter.Slot.5": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 5,
+        "DisplayName": "Monsters Defeated [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Counter"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Counter\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Counter.Slot.6": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 6,
+        "DisplayName": "Photographs Taken [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Counter"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Counter\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Distance.Slot.7": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 7,
+        "DisplayName": "Distance Walked (in meters) [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Distance"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Distance\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Distance.Slot.8": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 8,
+        "DisplayName": "Regalia Mileage (in meters) [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Distance"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Distance\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Distance.Slot.9": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 9,
+        "DisplayName": "Chocobo Mileage (in meters) [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Distance"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Distance\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerLevel.Slot.0": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 0,
+        "DisplayName": "Noctis's Level [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLevel"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLevel\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerLevel.Slot.1": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 1,
+        "DisplayName": "Gladiolus's Level [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLevel"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLevel\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerLevel.Slot.2": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 2,
+        "DisplayName": "Ignis's Level [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLevel"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLevel\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerLevel.Slot.3": {
+        "Type": "Integer",
+        "PayloadField": "Slot",
+        "SuggestedValue": 3,
+        "DisplayName": "Prompto's Level [Slot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLevel"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLevel\",\"serviceConfigId\":\"b5330100-8e41-4577-b8ed-4a547dba0981\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"2109344129\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Slot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:39EA002F.FINALFANTASYXVforPC_1.1.605.2_x64__n746a19ndrrjg!App\",\"ver\":\"1.1.605.2_x64_!2020/03/12:03:34:45!6DF6817!ffxv_u.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    2109344129
+  ]
+}

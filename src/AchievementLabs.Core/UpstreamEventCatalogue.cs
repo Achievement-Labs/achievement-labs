@@ -231,7 +231,7 @@ public sealed class UpstreamEventCatalogue
                     if (name.StartsWith('/') || name.Split('/').Any(part => part is ".." or ".") || !name.StartsWith("Events/", StringComparison.Ordinal)) throw new InvalidDataException("Unexpected archive path.");
                     if (name.EndsWith('/')) continue;
                     var relative = name[7..];
-                    if ((relative.Contains('/') && !Regex.IsMatch(relative, @"^[0-9]{1,10}/(?:Data|[0-9]{1,10})\.json$")) || !entries.TryAdd(relative, entry)) throw new InvalidDataException("Ambiguous archive entry.");
+                    if ((relative.Contains('/') && !Regex.IsMatch(relative, @"^[0-9]{1,10}/(?:Data|Stats|[0-9]{1,10})\.json$")) || !entries.TryAdd(relative, entry)) throw new InvalidDataException("Ambiguous archive entry.");
                 }
                 var indexed = entries.ContainsKey("index.json");
                 if (!entries.ContainsKey(indexed ? "index.json" : "Data.json")) throw new InvalidDataException("Events catalog index is missing.");

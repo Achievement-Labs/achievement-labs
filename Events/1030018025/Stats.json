@@ -1,0 +1,523 @@
+{
+  "1030018025": {
+    "Stats": {
+      "MinutesPlayed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameTimeMinutes"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GAMETIMEMINUTES\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameTimeMinutes\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GAMETIMEMINUTES\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "Skulls": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":0,\"Completed\":15,\"GoldMedals\":15,\"Legendary\":15,\"Skulls\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "PlayerSkullBits": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":0,\"Completed\":15,\"GoldMedals\":15,\"Legendary\":15,\"Skulls\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "LifetimeScore": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LB2SPCLifetimePosted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Coop\":4,\"Metadata1\":4,\"Metadata2\":4,\"Score\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LB2SPCLifetimePosted\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Coop\":0,\"Metadata1\":1,\"Metadata2\":0,\"Platform\":\"PC\",\"Score\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "PlayedTime": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameTimeMinutes"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GAMETIMEMINUTES\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameTimeMinutes\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GAMETIMEMINUTES\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "HighestScore": {},
+      "MaximumSPCLifetimeLeaderboardScore": {},
+      "TotalScore": {},
+      "CampaignScore": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LB2SPCLifetimePosted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Coop\":4,\"Metadata1\":4,\"Metadata2\":4,\"Score\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LB2SPCLifetimePosted\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Coop\":0,\"Metadata1\":1,\"Metadata2\":0,\"Platform\":\"PC\",\"Score\":REPLACEVALUE}}}"
+          }
+        }
+      },
+      "MissionScore": {},
+      "BAIMissionScore": {},
+      "CompletedScenario": {},
+      "PHXscn01": {},
+      "PHXscn02": {},
+      "PHXscn03": {},
+      "PHXscn04": {},
+      "PHXscn05": {},
+      "PHXscn06": {},
+      "PHXscn07": {},
+      "PHXscn08": {},
+      "PHXscn09": {},
+      "PHXscn10": {},
+      "PHXscn11": {},
+      "PHXscn12": {},
+      "PHXscn13": {},
+      "PHXscn14": {},
+      "PHXscn15": {},
+      "Units Destroyed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Units\":4,\"Kills\":4,\"Buildings\":4,\"Wins\":4,\"Games\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Units\":REPLACEVALUE,\"Kills\":0,\"Buildings\":0,\"Wins\":0,\"Games\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe strings only: SkirmishHeroStats{Units,Kills,Buildings,Wins,Games}; never sent; Units vs Kills unclear"
+      },
+      "Buildings Destroyed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Units\":4,\"Kills\":4,\"Buildings\":4,\"Wins\":4,\"Games\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Units\":0,\"Kills\":0,\"Buildings\":REPLACEVALUE,\"Wins\":0,\"Games\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe strings only: SkirmishHeroStats{Units,Kills,Buildings,Wins,Games}; never sent"
+      },
+      "Skirmish Wins": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Units\":4,\"Kills\":4,\"Buildings\":4,\"Wins\":4,\"Games\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Units\":0,\"Kills\":0,\"Buildings\":0,\"Wins\":REPLACEVALUE,\"Games\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe strings only: SkirmishHeroStats{Units,Kills,Buildings,Wins,Games}; never sent"
+      },
+      "Completed Skirmish Games": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Units\":4,\"Kills\":4,\"Buildings\":4,\"Wins\":4,\"Games\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Units\":0,\"Kills\":0,\"Buildings\":0,\"Wins\":0,\"Games\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "exe strings only: SkirmishHeroStats{Units,Kills,Buildings,Wins,Games}; never sent"
+      },
+      "Legendary Missions": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":0,\"Completed\":0,\"GoldMedals\":0,\"Legendary\":REPLACEVALUE,\"Skulls\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats shape (CampaignHeroStats); fields=exe strings"
+      },
+      "Completed Missions": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":0,\"Completed\":REPLACEVALUE,\"GoldMedals\":0,\"Legendary\":0,\"Skulls\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats shape (CampaignHeroStats); fields=exe strings"
+      },
+      "Gold Medals": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":0,\"Completed\":0,\"GoldMedals\":REPLACEVALUE,\"Legendary\":0,\"Skulls\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats shape (CampaignHeroStats); fields=exe strings"
+      },
+      "Black Boxes": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignHeroStats"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "\"metadata\":{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Blackboxes\":4,\"Completed\":4,\"GoldMedals\":4,\"Legendary\":4,\"Skulls\":4}}}}},\"policies\":0},"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignHeroStats\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Blackboxes\":REPLACEVALUE,\"Completed\":0,\"GoldMedals\":0,\"Legendary\":0,\"Skulls\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats shape (CampaignHeroStats); fields=exe strings"
+      },
+      "BuildingsDestroyed": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Buildings Destroyed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BuildingsDestroyed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BuildingsDestroyed\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CampaignBlackboxes": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Black Boxes [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignBlackboxes"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignBlackboxes\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CampaignCompletedMissions": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Completed Missions [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignCompletedMissions"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignCompletedMissions\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CampaignGoldMedals": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Gold Medals [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignGoldMedals"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignGoldMedals\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CampaignLegendaryCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Legendary Missions [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignLegendaryCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignLegendaryCompleted\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CampaignSkulls": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Skulls [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CampaignSkulls"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CampaignSkulls\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "SkirmishGames": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Completed Skirmish Games [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishGames"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishGames\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "SkirmishWins": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Skirmish Wins [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SkirmishWins"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SkirmishWins\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "UnitsDestroyed": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Units Destroyed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UnitsDestroyed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UnitsDestroyed\",\"serviceConfigId\":\"6fa90100-88a3-442b-a8b1-8cf53d64d3e9\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1030018025\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "TitleName": "Halo Wars: Definitive Edition (PC)",
+    "ServiceConfigId": "6fa90100-88a3-442b-a8b1-8cf53d64d3e9",
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"1\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.BulldogThreshold_1.12186.1.2_x64__8wekyb3d8bbwe!xgameFinal\",\"ver\":\"1.12186.1.2_x64_!2017/06/21:23:05:09!0!xgamefinal.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1030018025
+  ]
+}

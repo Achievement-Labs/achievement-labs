@@ -1,0 +1,243 @@
+{
+  "856892583": {
+    "TitleName": "Darksiders II Deathinitive Edition",
+    "ServiceConfigId": "e5eb0100-9a5d-467c-b56d-9d42331324a7",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "HeroStatDoubleMaximums.StatName.HighestComboDamage": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "HighestComboDamage",
+        "DisplayName": "Highest Damage Dealt in Single Combo [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatDoubleMaximums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatDoubleMaximums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatDoubleMaximums.StatName.HighestDamage": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "HighestDamage",
+        "DisplayName": "Highest Damage Dealt with Single Attack [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatDoubleMaximums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatDoubleMaximums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatDoubleSums.StatName.DistanceTraveledOnRuin": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "DistanceTraveledOnRuin",
+        "DisplayName": "Total Distance Traveled on Ruin [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatDoubleSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatDoubleSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatDoubleSums.StatName.TotalDamage": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalDamage",
+        "DisplayName": "Total Damage Dealt [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatDoubleSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatDoubleSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntMaximums.StatName.HighestCombo": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "HighestCombo",
+        "DisplayName": "Highest Combo [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntMaximums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntMaximums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntMaximums.StatName.MaxLevelReached": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "MaxLevelReached",
+        "DisplayName": "Current Player Level [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntMaximums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntMaximums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntSums.StatName.ChestsOpened": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "ChestsOpened",
+        "DisplayName": "Total Number of Chests Opened [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntSums.StatName.TotalExp": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalExp",
+        "DisplayName": "Total Number of EXP Earned [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntSums.StatName.TotalGold": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalGold",
+        "DisplayName": "Total Amount of Gold Collected [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStatIntSums.StatName.TotalKills": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalKills",
+        "DisplayName": "Total Number of Kills [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStatIntSums"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStatIntSums\",\"serviceConfigId\":\"e5eb0100-9a5d-467c-b56d-9d42331324a7\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"856892583\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:NordicGames.Darksiders2DeathinitiveEdition_46xc33nm0q0f8!\",\"ver\":\"!\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:00000000-0000-0000-0000-000000000000\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    856892583
+  ]
+}

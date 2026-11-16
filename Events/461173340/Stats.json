@@ -1,0 +1,105 @@
+{
+  "461173340": {
+    "TitleName": "Crimson Dragon",
+    "ServiceConfigId": "a1edbbbe-392e-4cc6-97ba-cfaabea26dcf",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "MEScore.GameplayModeId.0.QuestId.-1": {
+        "Type": "Integer",
+        "PayloadField": "GameplayModeId",
+        "SuggestedValue": 0,
+        "DisplayName": "Total High Scores [GameplayModeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MEScore"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MEScore\",\"serviceConfigId\":\"a1edbbbe-392e-4cc6-97ba-cfaabea26dcf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"461173340\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":\"STATPAYLOADINPUT\",\"QuestId\":-1},\"measurements\":{}}}"
+          }
+        }
+      },
+      "ObjectivesCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Clear Count [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ObjectivesCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ObjectivesCompleted\",\"serviceConfigId\":\"a1edbbbe-392e-4cc6-97ba-cfaabea26dcf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"461173340\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PDPlayerLevel": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Player Level [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PDPlayerLevel"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PDPlayerLevel\",\"serviceConfigId\":\"a1edbbbe-392e-4cc6-97ba-cfaabea26dcf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"461173340\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MEScore.GameplayModeId.0.QuestId.-1 [QuestId]": {
+        "Type": "Integer",
+        "PayloadField": "QuestId",
+        "SuggestedValue": -1,
+        "DisplayName": "Total High Scores [QuestId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MEScore"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MEScore\",\"serviceConfigId\":\"a1edbbbe-392e-4cc6-97ba-cfaabea26dcf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"461173340\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameplayModeId\":0,\"QuestId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.96189af7-51ae-48d1-9e6f-8df07f64a9fd_8wekyb3d8bbwe!App\",\"ver\":\"!App\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    461173340
+  ]
+}

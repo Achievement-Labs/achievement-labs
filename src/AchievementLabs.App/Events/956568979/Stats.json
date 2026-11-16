@@ -1,0 +1,82 @@
+{
+  "956568979": {
+    "TitleName": "Need for Speed Rivals",
+    "ServiceConfigId": "56420100-bede-4fd3-afec-9cbf39041593",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "BustedRacers.Busted.1": {
+        "Type": "Integer",
+        "PayloadField": "Busted",
+        "SuggestedValue": 1,
+        "DisplayName": "Drop Spike Strips [Busted]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BustedRacers"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BustedRacers\",\"serviceConfigId\":\"56420100-bede-4fd3-afec-9cbf39041593\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"956568979\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Busted\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "DropSpikeStrips.SpikeStrip.1": {
+        "Type": "Integer",
+        "PayloadField": "SpikeStrip",
+        "SuggestedValue": 1,
+        "DisplayName": "Busted Racers [SpikeStrip]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DropSpikeStrips"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DropSpikeStrips\",\"serviceConfigId\":\"56420100-bede-4fd3-afec-9cbf39041593\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"956568979\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SpikeStrip\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "EscapedPursuits.EscapedPursuit.1": {
+        "Type": "Integer",
+        "PayloadField": "EscapedPursuit",
+        "SuggestedValue": 1,
+        "DisplayName": "Escaped Pursuits [EscapedPursuit]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EscapedPursuits"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EscapedPursuits\",\"serviceConfigId\":\"56420100-bede-4fd3-afec-9cbf39041593\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"956568979\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EscapedPursuit\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":1,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.NeedForSpeedRivals_q5ha1ztykcgvj!\",\"ver\":\"!\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    956568979
+  ]
+}

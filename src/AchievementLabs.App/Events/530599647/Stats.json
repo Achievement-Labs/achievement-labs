@@ -1,0 +1,128 @@
+{
+  "530599647": {
+    "TitleName": "Homefront®: The Revolution",
+    "ServiceConfigId": "75850100-60ac-4e87-aca0-f66f1fa04edf",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "HeroStats.Stat.0": {
+        "Type": "Integer",
+        "PayloadField": "Stat",
+        "SuggestedValue": 0,
+        "DisplayName": "Takedown Kills [Stat]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStats"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStats\",\"serviceConfigId\":\"75850100-60ac-4e87-aca0-f66f1fa04edf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"530599647\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Stat\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStats.Stat.1": {
+        "Type": "Integer",
+        "PayloadField": "Stat",
+        "SuggestedValue": 1,
+        "DisplayName": "Guerrilla Toolkit Kills [Stat]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStats"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStats\",\"serviceConfigId\":\"75850100-60ac-4e87-aca0-f66f1fa04edf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"530599647\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Stat\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStats.Stat.3": {
+        "Type": "Integer",
+        "PayloadField": "Stat",
+        "SuggestedValue": 3,
+        "DisplayName": "Resistance Mode Mission Victories [Stat]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStats"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStats\",\"serviceConfigId\":\"75850100-60ac-4e87-aca0-f66f1fa04edf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"530599647\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Stat\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStats.Stat.4": {
+        "Type": "Integer",
+        "PayloadField": "Stat",
+        "SuggestedValue": 4,
+        "DisplayName": "Resistance Mode Skill Points Spent [Stat]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStats"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStats\",\"serviceConfigId\":\"75850100-60ac-4e87-aca0-f66f1fa04edf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"530599647\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Stat\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroStats.Stat.5": {
+        "Type": "Integer",
+        "PayloadField": "Stat",
+        "SuggestedValue": 5,
+        "DisplayName": "Resistance Mode Teammates Revived [Stat]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroStats"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroStats\",\"serviceConfigId\":\"75850100-60ac-4e87-aca0-f66f1fa04edf\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"530599647\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Stat\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"1\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:DeepSilver.Homefront2_1.0.64222.130_x64__hmv7qcest37me!HF2Release\",\"ver\":\"1.0.64222.130_x64_!1!HF2_Release.exe\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    530599647
+  ]
+}

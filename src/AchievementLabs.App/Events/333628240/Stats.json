@@ -1,0 +1,421 @@
+{
+  "333628240": {
+    "TitleName": "Quantum Break",
+    "ServiceConfigId": "636a0100-392d-4116-9c4f-e0c513e2c350",
+    "Stats": {
+      "Story Completion": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T333628240.ProgressionEvent\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T333628240.ProgressionEvent\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"ProgressionData\": 4\n                            }\n                        }\n                    }\n                }\n            },\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ProgressionData\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"name\": \"ProgressionEvent\",\n            \"serviceConfigId\": \"636a0100-392d-4116-9c4f-e0c513e2c350\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"titleId\": \"333628240\",\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1,\n            \"properties\": {\n                \"ProgressionData\": REPLACEINDEX\n            },\n            \"measurements\": {}\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ProgressionEvent\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ProgressionData\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: block ProgressionEvent{ProgressionData}; achievement ids 10.. map to 1..; completion % semantics unknown"
+      },
+      "Game Completion": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T333628240.ProgressionEvent\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T333628240.ProgressionEvent\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"ProgressionData\": 4\n                            }\n                        }\n                    }\n                }\n            },\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ProgressionData\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"name\": \"ProgressionEvent\",\n            \"serviceConfigId\": \"636a0100-392d-4116-9c4f-e0c513e2c350\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"titleId\": \"333628240\",\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1,\n            \"properties\": {\n                \"ProgressionData\": REPLACEINDEX\n            },\n            \"measurements\": {}\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ProgressionEvent\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ProgressionData\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: same event as Story Completion"
+      },
+      "Headshots": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"Microsoft.XboxLive.T333628240.ProgressionEvent\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T333628240.EnemyDeath\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"properties\": {\n                            \"f\": {\n                                \"ProgressionData\": 4\n                            }\n                        }\n                    }\n                }\n            },\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ActId\":4,\"BlastKills\":4,\"Cause\":4,\"CauseType\":4,\"DamageDealt\":4,\"EnemyType\":4,\"EnemyX\":4,\"EnemyY\":4,\"EnemyZ\":4,\"Health\":4,\"InFocus\":4,\"InTimeStop\":4,\"PartId\":4,\"PositionX\":4,\"PositionY\":4,\"PositionZ\":4,\"WeapondTypeEquipped\":4,\"TimeResourceBlast\":4,\"TimeResourceDodge\":4,\"TimeResourceRush\":4,\"TimeResourceShield\":4,\"TimeResourceTimeStop\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"name\": \"ProgressionEvent\",\n            \"serviceConfigId\": \"636a0100-392d-4116-9c4f-e0c513e2c350\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"titleId\": \"333628240\",\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1,\n            \"properties\": {\n                \"ProgressionData\": REPLACEINDEX\n            },\n            \"measurements\": {}\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemyDeath\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ActId\":5,\"BlastKills\":2,\"Cause\":9,\"CauseId\":\"#act6_part3::Jack::Jack\",\"CauseType\":0,\"CheckpointId\":\"Act5Part3Check1\",\"DamageDealt\":100,\"EnemyId\":\"#act6_part3::A02_CombatPhase::S1_Combat::enemies::intro::technician_005\",\"EnemyType\":2,\"EnemyX\":-541,\"EnemyY\":80,\"EnemyZ\":2884,\"Health\":0,\"InFocus\":0,\"InTimeStop\":0,\"LifeId\":\"11111111-1111-1111-1111-111111111111\",\"PartId\":3,\"PositionX\":-561,\"PositionY\":79,\"PositionZ\":2883,\"WeaponIdEquipped\":\"pistol_burst_fire\",\"WeapondTypeEquipped\":0,\"TimeResourceBlast\":100,\"TimeResourceDodge\":100,\"TimeResourceRush\":100,\"TimeResourceShield\":100,\"TimeResourceTimeStop\":100},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: block EnemyDeath (no headshot flag; Cause code may encode it); 1 event = +1 (no value field)"
+      },
+      "CollectibleProgress": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Collectibles Unlocked [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectibleProgress"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CollectibleProgress\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GameProgress": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Game Completion [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameProgress"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameProgress\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "HeadshotCount.Cause.4": {
+        "Type": "Integer",
+        "PayloadField": "Cause",
+        "SuggestedValue": 4,
+        "DisplayName": "Headshots [Cause]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeadshotCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeadshotCount\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Cause\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "LevelProgress": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Story Completion [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LevelProgress"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LevelProgress\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PlayerDeath": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Player Deaths [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerDeath"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerDeath\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.0.Failed.0": {
+        "Type": "Integer",
+        "PayloadField": "TimePowerType",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Rush Usage [TimePowerType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":\"STATPAYLOADINPUT\",\"Failed\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.1.Failed.0": {
+        "Type": "Integer",
+        "PayloadField": "TimePowerType",
+        "SuggestedValue": 1,
+        "DisplayName": "Time Dodge Usage [TimePowerType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":\"STATPAYLOADINPUT\",\"Failed\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.3.Failed.0": {
+        "Type": "Integer",
+        "PayloadField": "TimePowerType",
+        "SuggestedValue": 3,
+        "DisplayName": "Time Stop Usage [TimePowerType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":\"STATPAYLOADINPUT\",\"Failed\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.5.Failed.0": {
+        "Type": "Integer",
+        "PayloadField": "TimePowerType",
+        "SuggestedValue": 5,
+        "DisplayName": "Time Blast Usage [TimePowerType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":\"STATPAYLOADINPUT\",\"Failed\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.6.Failed.0": {
+        "Type": "Integer",
+        "PayloadField": "TimePowerType",
+        "SuggestedValue": 6,
+        "DisplayName": "Time Shield Usage [TimePowerType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":\"STATPAYLOADINPUT\",\"Failed\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.0.Failed.0 [Failed]": {
+        "Type": "Integer",
+        "PayloadField": "Failed",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Rush Usage [Failed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":0,\"Failed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.1.Failed.0 [Failed]": {
+        "Type": "Integer",
+        "PayloadField": "Failed",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Dodge Usage [Failed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":1,\"Failed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.3.Failed.0 [Failed]": {
+        "Type": "Integer",
+        "PayloadField": "Failed",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Stop Usage [Failed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":3,\"Failed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.5.Failed.0 [Failed]": {
+        "Type": "Integer",
+        "PayloadField": "Failed",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Blast Usage [Failed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":5,\"Failed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TimesUsedPower.TimePowerType.6.Failed.0 [Failed]": {
+        "Type": "Integer",
+        "PayloadField": "Failed",
+        "SuggestedValue": 0,
+        "DisplayName": "Time Shield Usage [Failed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TimesUsedPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TimesUsedPower\",\"serviceConfigId\":\"636a0100-392d-4116-9c4f-e0c513e2c350\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"333628240\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"TimePowerType\":6,\"Failed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.QuantumBreak_2.5.0.0_x64__8wekyb3d8bbwe!App\",\"ver\":\"2.5.0.0_x64_!2016/06/23:08:26:02!13D67C0!quantumbreak.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    333628240
+  ]
+}

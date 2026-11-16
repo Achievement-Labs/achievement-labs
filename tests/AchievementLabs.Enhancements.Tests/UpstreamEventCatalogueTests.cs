@@ -39,6 +39,7 @@ public static class UpstreamEventCatalogueTests
                     Put("Events/"+title.Name+"/Data.json",new JObject { [title.Name]=title.Value.DeepClone(),["SupportedTitleIDs"]=new JArray(title.Name) }.ToString());
                 }
                 index["SupportedTitleIDs"]=data["SupportedTitleIDs"]!.DeepClone();Put("Events/index.json",index.ToString());
+                Put("Events/99/Stats.json","{\"99\":{\"Stats\":{}},\"SupportedTitleIDs\":[\"99\"]}");
                 Put("Events/99/99.json",Template("99"));Put("Events/101/101.json",Template("101"));Put("Events/102/102.json",Template("999"));
             } else { Put("Events/Data.json",data.ToString()); Put("Events/99.json",Template("99")); Put("Events/101.json",Template("101")); Put("Events/102.json",Template("999")); }
             if(unsafePath)Put("Events/../escape.json","{}");

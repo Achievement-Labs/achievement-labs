@@ -1,0 +1,82 @@
+{
+  "407534069": {
+    "TitleName": "Neverwinter",
+    "ServiceConfigId": "8dd60100-6cc0-42f2-bb3e-c47b184a79f5",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "DungeonsCompleted.IsEpic.0": {
+        "Type": "Integer",
+        "PayloadField": "IsEpic",
+        "SuggestedValue": 0,
+        "DisplayName": "Total Dungeons Completed [IsEpic]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DungeonsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DungeonsCompleted\",\"serviceConfigId\":\"8dd60100-6cc0-42f2-bb3e-c47b184a79f5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"407534069\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsEpic\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "EnemiesKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Kills [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemiesKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemiesKilled\",\"serviceConfigId\":\"8dd60100-6cc0-42f2-bb3e-c47b184a79f5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"407534069\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "EnemiesKilled.IsPlayer.1": {
+        "Type": "Integer",
+        "PayloadField": "IsPlayer",
+        "SuggestedValue": 1,
+        "DisplayName": "Players Defeated [IsPlayer]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemiesKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemiesKilled\",\"serviceConfigId\":\"8dd60100-6cc0-42f2-bb3e-c47b184a79f5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"407534069\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsPlayer\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:PerfectWorldEntertainment.NeverwinterRoW_jrajkyc4tsa6w!App\",\"ver\":\"1\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Xbox\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    407534069
+  ]
+}

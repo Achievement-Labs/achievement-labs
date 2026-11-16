@@ -1,0 +1,82 @@
+{
+  "170773198": {
+    "TitleName": "The Evil Within® 2",
+    "ServiceConfigId": "8e970100-ac83-47c5-9eb6-96d30a2dcace",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "CraftItemsBERO": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Batches of Items Crafted [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CraftItemsBERO"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CraftItemsBERO\",\"serviceConfigId\":\"8e970100-ac83-47c5-9eb6-96d30a2dcace\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"170773198\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "KillEnemiesBERO": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Enemies Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillEnemiesBERO"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillEnemiesBERO\",\"serviceConfigId\":\"8e970100-ac83-47c5-9eb6-96d30a2dcace\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"170773198\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PlayerDeathesBERO": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Deaths [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerDeathesBERO"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerDeathesBERO\",\"serviceConfigId\":\"8e970100-ac83-47c5-9eb6-96d30a2dcace\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"170773198\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"dvcSample\":42.97,\"flags\":51875152432,\"edition\":48,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":78,\"name\":\"Windows\",\"ver\":\"10.0.26200.9550.amd64fre.ge_release.240331-1435\",\"expId\":\"RS:407D5,MD:283BAEF,ME:3A53D55,ME:3A53F1C,MD:3A53F34,ME:3536BD9,MD:2FE0A31,MD:2FE0A40,MD:2FE0A4F,MD:37B239D,PD:3536CF8,PD:33CDA4D,MD:36AF640,MD:9999,CD:2608D\"},\"app\":{\"id\":\"U:BethesdaSoftworks.TEW2-Core_3275kfvn8vcwc!Game\",\"ver\":\"1.9.0.0_x64_!2021/06/02:16:09:34!0!tew2.exe\",\"is1P\":2,\"asId\":32673},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"System manufacturer\",\"devModel\":\"System Product Name\",\"ticketKeys\":[\"259096390\",\"259096391\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"-04:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    170773198
+  ]
+}

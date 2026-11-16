@@ -1,0 +1,365 @@
+{
+  "1144039928": {
+    "TitleName": "Halo: The Master Chief Collection",
+    "ServiceConfigId": "77290100-225e-4768-9373-98164430a9f8",
+    "Stats": {
+      "Total Missions Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.MissionCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Multiplier\":4,\"SkullMultiplier\":4}},\"properties\":{\"f\":{\"Coop\":4,\"DatePlayedUTC\":4,\"DifficultyId\":4,\"GameCategoryId\":4,\"Kills\":4,\"MapId\":4,\"MissionScore64\":4,\"NumPlayers\":4,\"Penalties\":4,\"SkullUsedFlags\":4,\"TimePlayedMS\":4,\"TotalCoopMissionsComplete\":4,\"TotalSoloMissionsComplete\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"Multiplier\":39.467453002929695,\"SkullMultiplier\":3.2889544963836674},\"name\":\"MissionCompleted\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"Coop\":0,\"DatePlayedUTC\":134010480842810000,\"DifficultyId\":3,\"GameCategoryId\":19,\"HaloTitleId\":\"Halo1\",\"Kills\":37,\"MapId\":0,\"MissionScore64\":23022,\"NumPlayers\":1,\"Penalties\":0,\"PlayerSectionStats\":\"{\\\\\\\"scores\\\\\\\":[],\\\\\\\"interpolatedScores\\\\\\\":[],\\\\\\\"times\\\\\\\":[],\\\\\\\"sectionIDs\\\\\\\":[],\\\\\\\"deaths\\\\\\\":0,\\\\\\\"numPlayers\\\\\\\":1,\\\\\\\"skullMask\\\\\\\":78081096,\\\\\\\"skullCount\\\\\\\":12}\",\"SkullUsedFlags\":78081096,\"TimePlayedMS\":399166,\"TotalCoopMissionsComplete\":0,\"TotalSoloMissionsComplete\":6},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 783); 1 event = 1 count; 1 event = +1 (no value field)"
+      },
+      "Total Playlists Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.PlaylistCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"IsCoop\":4,\"Penalties\":4,\"PlaylistId\":4,\"Score64\":4,\"TimeMS\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlaylistCompleted\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"HaloTitleId\":\"Halo3\",\"IsCoop\":0,\"MissionStats\":\"\",\"Penalties\":0,\"PlaylistId\":642665089,\"Score64\":0,\"TimeMS\":600039000},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 109); 1 event = 1 count; 1 event = +1 (no value field)"
+      },
+      "Total Campaign Medals Earned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.RealtimeMedal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GameCategoryId\":4,\"GameMode\":4,\"MapId\":4,\"MatchMade\":4,\"MedalCount\":4,\"MedalType\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"RealtimeMedal\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"GameCategoryId\":1,\"GameMode\":3,\"HaloTitleId\":\"Groundhog\",\"MapId\":155,\"MatchMade\":1,\"MedalCount\":REPLACEVALUE,\"MedalType\":29},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 387)"
+      },
+      "Total Multiplayer Games Won": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.PlayerGameResults"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Assists\":4,\"CustomStat1\":4,\"CustomStat2\":4,\"CustomStat3\":4,\"CustomStat4\":4,\"DatePlayedUTC\":4,\"Deaths\":4,\"FirstPlace\":4,\"GameCategoryId\":4,\"GameIndex\":4,\"GameIndexByCategory\":4,\"GameIndexByTitle\":4,\"GameIndexByTitleCategory\":4,\"HeadShots\":4,\"Kills\":4,\"MapId\":4,\"MatchMade\":4,\"MedalCount\":4,\"MostKillsInARow\":4,\"Score64\":4,\"Standing\":4,\"TimePlayedMS\":4,\"Won\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerGameResults\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"Assists\":0,\"CustomStat1\":1,\"CustomStat1ID\":\"Kills\",\"CustomStat2\":0,\"CustomStat2ID\":\"\",\"CustomStat3\":0,\"CustomStat3ID\":\"\",\"CustomStat4\":0,\"CustomStat4ID\":\"\",\"DatePlayedUTC\":134011875679350000,\"Deaths\":0,\"FirstPlace\":1,\"GameCategoryId\":1,\"GameIndex\":7,\"GameIndexByCategory\":44,\"GameIndexByTitle\":44,\"GameIndexByTitleCategory\":53,\"HaloTitleId\":\"Groundhog\",\"HeadShots\":0,\"Kills\":1,\"MapId\":155,\"MatchId\":\"11111111-1111-1111-1111-111111111111\",\"MatchMade\":0,\"MedalCount\":4,\"MostKillsInARow\":1,\"Score64\":1,\"Standing\":0,\"TimePlayedMS\":20100,\"Won\":REPLACEVALUE},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 149)"
+      },
+      "Total Multiplayer Kills": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.PlayerGameResults"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Assists\":4,\"CustomStat1\":4,\"CustomStat2\":4,\"CustomStat3\":4,\"CustomStat4\":4,\"DatePlayedUTC\":4,\"Deaths\":4,\"FirstPlace\":4,\"GameCategoryId\":4,\"GameIndex\":4,\"GameIndexByCategory\":4,\"GameIndexByTitle\":4,\"GameIndexByTitleCategory\":4,\"HeadShots\":4,\"Kills\":4,\"MapId\":4,\"MatchMade\":4,\"MedalCount\":4,\"MostKillsInARow\":4,\"Score64\":4,\"Standing\":4,\"TimePlayedMS\":4,\"Won\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerGameResults\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"Assists\":0,\"CustomStat1\":1,\"CustomStat1ID\":\"Kills\",\"CustomStat2\":0,\"CustomStat2ID\":\"\",\"CustomStat3\":0,\"CustomStat3ID\":\"\",\"CustomStat4\":0,\"CustomStat4ID\":\"\",\"DatePlayedUTC\":134011875679350000,\"Deaths\":0,\"FirstPlace\":1,\"GameCategoryId\":1,\"GameIndex\":7,\"GameIndexByCategory\":44,\"GameIndexByTitle\":44,\"GameIndexByTitleCategory\":53,\"HaloTitleId\":\"Groundhog\",\"HeadShots\":0,\"Kills\":REPLACEVALUE,\"MapId\":155,\"MatchId\":\"11111111-1111-1111-1111-111111111111\",\"MatchMade\":0,\"MedalCount\":4,\"MostKillsInARow\":1,\"Score64\":1,\"Standing\":0,\"TimePlayedMS\":20100,\"Won\":1},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 149)"
+      },
+      "Total Multiplayer Deaths": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.PlayerGameResults"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Assists\":4,\"CustomStat1\":4,\"CustomStat2\":4,\"CustomStat3\":4,\"CustomStat4\":4,\"DatePlayedUTC\":4,\"Deaths\":4,\"FirstPlace\":4,\"GameCategoryId\":4,\"GameIndex\":4,\"GameIndexByCategory\":4,\"GameIndexByTitle\":4,\"GameIndexByTitleCategory\":4,\"HeadShots\":4,\"Kills\":4,\"MapId\":4,\"MatchMade\":4,\"MedalCount\":4,\"MostKillsInARow\":4,\"Score64\":4,\"Standing\":4,\"TimePlayedMS\":4,\"Won\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerGameResults\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"Assists\":0,\"CustomStat1\":1,\"CustomStat1ID\":\"Kills\",\"CustomStat2\":0,\"CustomStat2ID\":\"\",\"CustomStat3\":0,\"CustomStat3ID\":\"\",\"CustomStat4\":0,\"CustomStat4ID\":\"\",\"DatePlayedUTC\":134011875679350000,\"Deaths\":REPLACEVALUE,\"FirstPlace\":1,\"GameCategoryId\":1,\"GameIndex\":7,\"GameIndexByCategory\":44,\"GameIndexByTitle\":44,\"GameIndexByTitleCategory\":53,\"HaloTitleId\":\"Groundhog\",\"HeadShots\":0,\"Kills\":1,\"MapId\":155,\"MatchId\":\"11111111-1111-1111-1111-111111111111\",\"MatchMade\":0,\"MedalCount\":4,\"MostKillsInARow\":1,\"Score64\":1,\"Standing\":0,\"TimePlayedMS\":20100,\"Won\":1},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 149)"
+      },
+      "Total Game Variants saved": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.GameVarSaved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BaseGameCategory\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GameVarSaved\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"BaseGameCategory\":1,\"GameVarName\":\"11111111\",\"HaloTitleId\":\"Halo2\"},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 642); 1 event = 1 count; 1 event = +1 (no value field)"
+      },
+      "Total Map Variants Saved": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENT",
+            "Replacement": "Microsoft.XboxLive.T1144039928.MapVarSaved"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BaseMapId\":4}},\"ver\":2}}},\"privTags\":1,\"policies\":1}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"MapVarSaved\",\"playerSessionId\":\"11111111-1111-1111-1111-111111111111\",\"properties\":{\"BaseMapId\":155,\"HaloTitleId\":\"Groundhog\",\"MapVarName\":\"11111111\"},\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"titleId\":1144039928,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "global MCC block (ach 647); 1 event = 1 count; 1 event = +1 (no value field)"
+      },
+      "TotalGameVarsSaved": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Game Variants Saved [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalGameVarsSaved"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalGameVarsSaved\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalMapVarsSaved": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Map Variants Saved [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMapVarsSaved"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMapVarsSaved\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalMedals.GameCategoryId.18": {
+        "Type": "Integer",
+        "PayloadField": "GameCategoryId",
+        "SuggestedValue": 18,
+        "DisplayName": "Total Campaign Medals Earned [GameCategoryId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMedals"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMedals\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameCategoryId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TotalMissionsCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Missions Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMissionsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMissionsCompleted\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalMultiplayerDeaths": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Multiplayer Deaths [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMultiplayerDeaths"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMultiplayerDeaths\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalMultiplayerGamesWon": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Multiplayer Games Won [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMultiplayerGamesWon"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMultiplayerGamesWon\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalMultiplayerKills": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Multiplayer Kills [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalMultiplayerKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalMultiplayerKills\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalPlaylistsCompleted": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Playlists Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalPlaylistsCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalPlaylistsCompleted\",\"serviceConfigId\":\"77290100-225e-4768-9373-98164430a9f8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1144039928\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":1,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.Chelan_1.3528.0.0_x64__8wekyb3d8bbwe!HaloMCCShipping\",\"ver\":\"1.3528.0.0_x64_!2024/01/03:17:50:38!3E58AE2!mccwinstore-win64-shipping.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1144039928
+  ]
+}

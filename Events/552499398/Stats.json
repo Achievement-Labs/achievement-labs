@@ -1,0 +1,425 @@
+{
+  "552499398": {
+    "TitleName": "Gears of War 4",
+    "ServiceConfigId": "780f0100-3c66-41ff-b8cc-964f20ee78c6",
+    "Stats": {
+      "Ranked Match Wins": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerVersusMatchEnd"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchJoinId\":4,\"GameModeId\":4,\"GameType\":4,\"GameTypeId\":4,\"MatchTypeId\":4,\"Ranked\":4,\"IsRanked\":4,\"ResultType\":4,\"IsWin\":4,\"WasMVP\":4,\"Score\":4,\"Kills\":4,\"Deaths\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerVersusMatchEnd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":0,\"MultiplayerCorrelationId\":\"REPLACESESSIONGUID\",\"RoundId\":\"REPLACESESSIONGUID\",\"PlaylistId\":\"Versus_Core_TDM\",\"GameFormat\":\"Core\",\"GameMode\":\"TDM\",\"GameModeId\":1,\"GameType\":1,\"GameTypeId\":1,\"MatchTypeId\":0,\"Ranked\":1,\"IsRanked\":1,\"ResultType\":0,\"IsWin\":REPLACEVALUE,\"WasMVP\":0,\"Score\":5000,\"Kills\":15,\"Deaths\":0},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 65), Ranked/IsRanked=1; ranked playlist id unknown"
+      },
+      "Ribbons Earned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GearsRibbonEarned"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchJoinId\":4,\"RibbonCount\":4,\"RoundNumber\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"GearsRibbonEarned\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":4,\"RibbonCount\":REPLACEVALUE,\"RibbonName\":\"Annihilation\",\"RoundNumber\":0},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "CAPTURE (E:\\Stats)"
+      },
+      "Horde Kills": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerKilledEnemy"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DamageType\":4,\"EnemyType\":4,\"EnemyWasSpotted\":4,\"GameType\":4,\"HordeClass\":4,\"KillerWasInCover\":4,\"KillerWasSpotted\":4,\"MatchJoinId\":4,\"PreviousDeaths\":4,\"RoundNumber\":4,\"SequenceId\":4,\"WasDBNO\":4,\"WasExecution\":4,\"WasHeadshot\":4,\"WasHoldingMeatshield\":4,\"WasLeader\":4,\"WaveNumber\":4,\"WeaponName\":4,\"WeaponType\":4}},\"measurements\":{\"f\":{\"EnemyOrientation\":6,\"KillerOrientation\":6}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"EnemyOrientation\":0.0,\"KillerOrientation\":0.0},\"name\":\"PlayerKilledEnemy\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"DamageType\":13,\"EnemyLocation\":\"0,0,0\",\"EnemyType\":0,\"EnemyWasSpotted\":0,\"GameType\":3,\"HordeClass\":5,\"KillerLocation\":\"0,0,0\",\"KillerWasInCover\":0,\"KillerWasSpotted\":0,\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":27,\"PreviousDeaths\":0,\"RoundNumber\":1,\"SequenceId\":REPLACEVALUE,\"WasDBNO\":0,\"WasExecution\":0,\"WasHeadshot\":0,\"WasHoldingMeatshield\":0,\"WasLeader\":0,\"WaveNumber\":1,\"WeaponName\":15,\"WeaponType\":6},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (6007 reqs); 1 event = 1 kill; Horde GameType value (3?) unconfirmed"
+      },
+      "Social Versus Wins": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerVersusMatchEnd"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchJoinId\":4,\"GameModeId\":4,\"GameType\":4,\"GameTypeId\":4,\"MatchTypeId\":4,\"Ranked\":4,\"IsRanked\":4,\"ResultType\":4,\"IsWin\":4,\"WasMVP\":4,\"Score\":4,\"Kills\":4,\"Deaths\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerVersusMatchEnd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":0,\"MultiplayerCorrelationId\":\"REPLACESESSIONGUID\",\"RoundId\":\"REPLACESESSIONGUID\",\"PlaylistId\":\"Versus_Core_TDM\",\"GameFormat\":\"Core\",\"GameMode\":\"TDM\",\"GameModeId\":1,\"GameType\":1,\"GameTypeId\":1,\"MatchTypeId\":0,\"Ranked\":0,\"IsRanked\":0,\"ResultType\":0,\"IsWin\":REPLACEVALUE,\"WasMVP\":0,\"Score\":5000,\"Kills\":15,\"Deaths\":0},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 65), Ranked=0"
+      },
+      "Collectibles Found": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectibleFound"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchJoinId\":4,\"CollectibleId\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"CollectibleFound\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":0,\"CollectibleId\":REPLACEVALUE},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 58); 1 event = 1 collectible; alt CollectibleCollected.CollectiblesFound total"
+      },
+      "Horde Waves Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerRoundEnd"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchJoinId\":4,\"DifficultyLevelId\":4,\"ExitStatusId\":4,\"GameType\":4,\"GameplayModeId\":4,\"HordeClass\":4,\"IronManMode\":4,\"LastManStanding\":4,\"MatchTypeId\":4,\"MaxConsecutiveWavesCompleted\":4,\"ResultType\":4,\"RoundNumber\":4,\"SectionId\":4,\"WasLeader\":4,\"WaveNumber\":4}},\"measurements\":{\"f\":{\"TimeInSeconds\":6}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"TimeInSeconds\":80.0},\"name\":\"MultiplayerRoundEnd\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":0,\"DifficultyLevelId\":3,\"ExitStatusId\":0,\"GameType\":3,\"GameplayModeId\":10,\"HordeClass\":4,\"IronManMode\":0,\"LastManStanding\":0,\"MapName\":\"MPSlab\",\"MatchTypeId\":1,\"MaxConsecutiveWavesCompleted\":1,\"MultiplayerCorrelationId\":\"REPLACESESSIONGUID\",\"ResultType\":0,\"RoundId\":\"REPLACESESSIONGUID\",\"RoundNumber\":1,\"SectionId\":0,\"WasLeader\":0,\"WaveNumber\":REPLACEVALUE},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 27, Horde GameType 3); per-wave vs per-match unclear"
+      },
+      "Headshots": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerAccuracyData"
+          },
+          "ContextReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEXT",
+            "Replacement": "{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA}"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"GameType\":4,\"Headshots\":4,\"Hits\":4,\"MatchJoinId\":4,\"Misses\":4,\"WeaponName\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{},\"name\":\"PlayerAccuracyData\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{\"GameType\":0,\"Headshots\":REPLACEVALUE,\"Hits\":1,\"MatchId\":\"REPLACESESSIONGUID\",\"MatchJoinId\":27,\"Misses\":0,\"WeaponName\":0},\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"titleId\":552499398,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "CAPTURE (E:\\Stats); alt PlayerKilledEnemy.WasHeadshot"
+      },
+      "CollectiblesFound": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Collectibles Found [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectiblesFound"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CollectiblesFound\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MatchesPlayed.GameType.0.ResultType.0": {
+        "Type": "Integer",
+        "PayloadField": "GameType",
+        "SuggestedValue": 0,
+        "DisplayName": "Social Versus Wins [GameType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchesPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":\"STATPAYLOADINPUT\",\"ResultType\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MatchesPlayed.GameType.1.ResultType.0": {
+        "Type": "Integer",
+        "PayloadField": "GameType",
+        "SuggestedValue": 1,
+        "DisplayName": "Ranked Match Wins [GameType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchesPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":\"STATPAYLOADINPUT\",\"ResultType\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerKilledEnemy.GameType.3": {
+        "Type": "Integer",
+        "PayloadField": "GameType",
+        "SuggestedValue": 3,
+        "DisplayName": "Horde Kills [GameType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerKilledEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerKilledEnemy\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerKilledEnemy.WasHeadshot.1": {
+        "Type": "Integer",
+        "PayloadField": "WasHeadshot",
+        "SuggestedValue": 1,
+        "DisplayName": "Headshots [WasHeadshot]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerKilledEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerKilledEnemy\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"WasHeadshot\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RibbonsEarned": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Ribbons Earned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RibbonsEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RibbonsEarned\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "RoundsPlayed.GameType.3.ResultType.0": {
+        "Type": "Integer",
+        "PayloadField": "GameType",
+        "SuggestedValue": 3,
+        "DisplayName": "Horde Waves Completed [GameType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":\"STATPAYLOADINPUT\",\"ResultType\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MatchesPlayed.GameType.0.ResultType.0 [ResultType]": {
+        "Type": "Integer",
+        "PayloadField": "ResultType",
+        "SuggestedValue": 0,
+        "DisplayName": "Social Versus Wins [ResultType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchesPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":0,\"ResultType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MatchesPlayed.GameType.1.ResultType.0 [ResultType]": {
+        "Type": "Integer",
+        "PayloadField": "ResultType",
+        "SuggestedValue": 0,
+        "DisplayName": "Ranked Match Wins [ResultType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchesPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":1,\"ResultType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "RoundsPlayed.GameType.3.ResultType.0 [ResultType]": {
+        "Type": "Integer",
+        "PayloadField": "ResultType",
+        "SuggestedValue": 0,
+        "DisplayName": "Horde Waves Completed [ResultType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoundsPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoundsPlayed\",\"serviceConfigId\":\"780f0100-3c66-41ff-b8cc-964f20ee78c6\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"552499398\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"GameType\":3,\"ResultType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":11,\"name\":\"Windows\",\"ver\":\"10.0.22631.3880.amd64fre.ni_release.220506-1250\",\"expId\":\"MD:1\"},\"app\":{\"id\":\"U:Microsoft.SpartaUWP_14.4.0.2_x64__8wekyb3d8bbwe!GearGameShippingPublic\",\"ver\":\"14.4.0.2_x64_!2019/06/27:23:38:26!9474C5E!geargame.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"Micro-Star International Co., Ltd.\",\"devModel\":\"MS-7D48\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"+01:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    552499398
+  ]
+}

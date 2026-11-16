@@ -1,0 +1,365 @@
+{
+  "1938834516": {
+    "TitleName": "State of Decay 2: Juggernaut Edition",
+    "ServiceConfigId": "e0f40100-a32e-42ff-9d9a-222473904454",
+    "Stats": {
+      "Zombies Killed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ZombieKilled"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ZOMBIETYPEID\":4,\"WASHEADSHOT\":4,\"WASBLOODPLAGUE\":4,\"WEAPONTYPEID\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ZombieKilled\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ZOMBIETYPEID\":1,\"WASHEADSHOT\":false,\"WASBLOODPLAGUE\":false,\"WEAPONTYPEID\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 10); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Ferals Outwitted": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillFeral"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillFeral\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 34); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Juggernauts Brought Down": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillJuggernaut"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillJuggernaut\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 36); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Plague Hearts Destroyed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DestroyPlagueHeart"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"NIGHTTIME\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DestroyPlagueHeart\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NIGHTTIME\":false}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 19); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Survivors Recruited": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RecruitSurvivor"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RecruitSurvivor\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 21); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Tragic Deaths": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CommunityMemberDied"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"REASON\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CommunityMemberDied\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"REASON\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 11); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Legacies Achieved": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinGame"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"LEADERTYPE\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinGame\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"LEADERTYPE\":3}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 52); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "Daybreak Victories": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaybreakVictory"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"ANYDEATHS\":4,\"ANYWALLSDESTROYED\":4,\"NUMCLEODROPSOPENED\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaybreakVictory\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ANYDEATHS\":true,\"ANYWALLSDESTROYED\":true,\"NUMCLEODROPSOPENED\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block shape (ach 87); 1 event = 1; 1 event = +1 (no value field)"
+      },
+      "CommunityMembersDied": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Tragic Deaths [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CommunityMembersDied"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CommunityMembersDied\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "DaybreakVictory": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Daybreak Victories [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaybreakVictory"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaybreakVictory\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "DestroyPlagueHeart": {
+        "Type": "Boolean",
+        "PayloadField": "NIGHTTIME",
+        "SuggestedValue": "",
+        "DisplayName": "Plague Hearts Destroyed [NIGHTTIME]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DestroyPlagueHeart"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DestroyPlagueHeart\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"NIGHTTIME\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "KillFeral": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Ferals Outwitted [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillFeral"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillFeral\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "KillJuggernaut": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Juggernauts Brought Down [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillJuggernaut"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillJuggernaut\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "RecruitSurvivor": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Survivors Recruited [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RecruitSurvivor"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RecruitSurvivor\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "WinGame": {
+        "Type": "Integer",
+        "PayloadField": "LEADERTYPE",
+        "SuggestedValue": "",
+        "DisplayName": "Legacies Achieved [LEADERTYPE]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinGame"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinGame\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"LEADERTYPE\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "ZombieKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Zombies Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ZombieKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ZombieKilled\",\"serviceConfigId\":\"e0f40100-a32e-42ff-9d9a-222473904454\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1938834516\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.Dayton_2.741.435.0_x64__8wekyb3d8bbwe!Shipping\",\"ver\":\"2.741.435.0_x64_!2024/11/19:11:46:02!0!stateofdecay2-win64-shipping.exe\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1938834516
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "748474487": {
+    "TitleName": "Cities: Skylines - Windows 10 Edition",
+    "ServiceConfigId": "0aae0100-6d93-4917-97e8-ec7f2c9cd077",
+    "Stats": {
+      "Days Passed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"REPLACCSEEVENT\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T748474487.DaysPassed\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"DaysPassed\":4}}}}},\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"name\": \"REPLACECCSCRITERA\",\n            \"serviceConfigId\": \"0aae0100-6d93-4917-97e8-ec7f2c9cd077\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"titleId\": \"748474487\",\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1,\n            \"measurements\": {\n                \"PlayerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n                \"UserId\": \"REPLACEXUID\"\n            }\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaysPassed\",\"serviceConfigId\":\"0aae0100-6d93-4917-97e8-ec7f2c9cd077\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"748474487\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"DaysPassed\":REPLACEVALUE,\"PlayerSessionId\":\"{f2247325-8837-448b-9c1b-963aab737888}\",\"UserId\":\"2535426297085011\"}}}"
+          }
+        },
+        "SuggestedValue": 11,
+        "Confidence": "CAPTURE; measurements also carry PlayerSessionId/UserId strings"
+      },
+      "AddDaysPassed": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Days Passed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AddDaysPassed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AddDaysPassed\",\"serviceConfigId\":\"0aae0100-6d93-4917-97e8-ec7f2c9cd077\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"748474487\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PopulationBoom": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Fewest days to reach 100,000 population [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PopulationBoom"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PopulationBoom\",\"serviceConfigId\":\"0aae0100-6d93-4917-97e8-ec7f2c9cd077\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"748474487\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "UpdateTotalCash": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Cash [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "UpdateTotalCash"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"UpdateTotalCash\",\"serviceConfigId\":\"0aae0100-6d93-4917-97e8-ec7f2c9cd077\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"748474487\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ParadoxInteractive.81845321AE_14.2.41626.2_x64__zfnrdv2de78ny!App\",\"ver\":\"14.2.41626.2_x64_!2023/06/19:16:52:48!0!citiesskylines.exe\",\"is1P\":1,\"asId\":1},\"metadata\":REPLACEMETADATA,\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    748474487
+  ]
+}

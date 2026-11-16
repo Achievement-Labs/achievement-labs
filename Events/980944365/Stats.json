@@ -1,0 +1,105 @@
+{
+  "980944365": {
+    "TitleName": "Need for Speed",
+    "ServiceConfigId": "5d960100-a04c-4b80-b3c3-b62d3a7805ed",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "NamedStatReplace.StatName.RepLevel": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "RepLevel",
+        "DisplayName": "REP Level [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NamedStatReplace"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NamedStatReplace\",\"serviceConfigId\":\"5d960100-a04c-4b80-b3c3-b62d3a7805ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"980944365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "NamedStatReplace.StatName.TotalDistanceDriven": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalDistanceDriven",
+        "DisplayName": "Total Distance Driven (miles) [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NamedStatReplace"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NamedStatReplace\",\"serviceConfigId\":\"5d960100-a04c-4b80-b3c3-b62d3a7805ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"980944365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "NamedStatReplace.StatName.TotalDistanceDrivenKm": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalDistanceDrivenKm",
+        "DisplayName": "Total Distance Driven (km) [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NamedStatReplace"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NamedStatReplace\",\"serviceConfigId\":\"5d960100-a04c-4b80-b3c3-b62d3a7805ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"980944365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "NamedStatReplace.StatName.TotalLikes": {
+        "Type": "String",
+        "PayloadField": "StatName",
+        "SuggestedValue": "TotalLikes",
+        "DisplayName": "Total Likes [StatName]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NamedStatReplace"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NamedStatReplace\",\"serviceConfigId\":\"5d960100-a04c-4b80-b3c3-b62d3a7805ed\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"980944365\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"StatName\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":1,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ElectronicArtsMobile.NFS16_q5ha1ztykcgvj!\",\"ver\":\"!\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    980944365
+  ]
+}

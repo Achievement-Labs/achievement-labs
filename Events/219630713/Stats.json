@@ -1,0 +1,105 @@
+{
+  "219630713": {
+    "TitleName": "Halo 5: Guardians",
+    "ServiceConfigId": "1370999b-fca2-4c53-8ec5-73493bcb67e5",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "MultiplayerGameComplete.IsMatchmaking.1.Won.1": {
+        "Type": "Integer",
+        "PayloadField": "IsMatchmaking",
+        "SuggestedValue": 1,
+        "DisplayName": "Matchmaking Victories [IsMatchmaking]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"219630713\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMatchmaking\":\"STATPAYLOADINPUT\",\"Won\":1},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlatformStatsImpulse.Impulse.BossKill": {
+        "Type": "String",
+        "PayloadField": "Impulse",
+        "SuggestedValue": "BossKill",
+        "DisplayName": "Warzone Bosses Killed [Impulse]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlatformStatsImpulse"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlatformStatsImpulse\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"219630713\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Impulse\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlatformStatsImpulse.Impulse.SpartanKill": {
+        "Type": "String",
+        "PayloadField": "Impulse",
+        "SuggestedValue": "SpartanKill",
+        "DisplayName": "Multiplayer Spartans Killed [Impulse]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlatformStatsImpulse"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlatformStatsImpulse\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"219630713\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Impulse\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MultiplayerGameComplete.IsMatchmaking.1.Won.1 [Won]": {
+        "Type": "Integer",
+        "PayloadField": "Won",
+        "SuggestedValue": 1,
+        "DisplayName": "Matchmaking Victories [Won]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MultiplayerGameComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MultiplayerGameComplete\",\"serviceConfigId\":\"1370999b-fca2-4c53-8ec5-73493bcb67e5\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"219630713\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMatchmaking\":1,\"Won\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.932f965d-6544-4d70-88ae-13c9d57f3c1c_8wekyb3d8bbwe!App\",\"ver\":\"1.0.0.0_x64_!halo5.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    219630713
+  ]
+}

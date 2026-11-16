@@ -1,0 +1,151 @@
+{
+  "1482870140": {
+    "TitleName": "Warframe",
+    "ServiceConfigId": "a2b70100-d7d8-4f43-8a59-dd4a5862cd7c",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "Count.Tag.CIPHERSOLVED": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "CIPHERSOLVED",
+        "DisplayName": "Ciphers Solved [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Count"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Count\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Count.Tag.ITEMCRAFTED": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "ITEMCRAFTED",
+        "DisplayName": "Items Crafted [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Count"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Count\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Max.Tag.ITEMUPGRADECOUNT": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "ITEMUPGRADECOUNT",
+        "DisplayName": "Mods Applied [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Max"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Max\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Max.Tag.PLAYERRANK": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "PLAYERRANK",
+        "DisplayName": "Mastery Rank [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Max"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Max\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Max.Tag.POWERSUITCOUNT": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "POWERSUITCOUNT",
+        "DisplayName": "Warframes Owned [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Max"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Max\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Max.Tag.SENTINELCOUNT": {
+        "Type": "String",
+        "PayloadField": "Tag",
+        "SuggestedValue": "SENTINELCOUNT",
+        "DisplayName": "Sentinels Owned [Tag]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Max"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Max\",\"serviceConfigId\":\"a2b70100-d7d8-4f43-8a59-dd4a5862cd7c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1482870140\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Tag\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:DigitalExtremes.8d4ca390-4cd1-44b8-a82a-912b115115_0n634089h64j8!App\",\"ver\":\"!App\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1482870140
+  ]
+}

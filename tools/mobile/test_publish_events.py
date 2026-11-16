@@ -29,6 +29,7 @@ class FeedChecks(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(flat)) as source,zipfile.ZipFile(buffer,'w') as target:
             target.writestr('Events/index.json',json.dumps({'7':{},'SupportedTitleIDs':['7']}))
             target.writestr('Events/7/Data.json',json.dumps(data))
+            target.writestr('Events/7/Stats.json',json.dumps({'7':{'Stats':{}},'SupportedTitleIDs':['7']}))
             target.writestr('Events/7/7.json',source.read('Events/7.json'))
         archive=buffer.getvalue();r['assets'][0]['digest']='sha256:'+hashlib.sha256(archive).hexdigest()
         self.assertEqual(build(r,archive,set())[0]['titles'],build(self.archive(data)[0],flat,set())[0]['titles'])

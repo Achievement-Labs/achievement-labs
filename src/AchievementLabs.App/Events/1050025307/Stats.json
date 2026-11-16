@@ -1,0 +1,197 @@
+{
+  "1050025307": {
+    "TitleName": "Grand Theft Auto V",
+    "ServiceConfigId": "d7e70100-66b7-42f8-badc-f3b23e961d5b",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "ARCHENEMY": {
+        "Type": "String",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Arch Enemy In GTA Online [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ARCHENEMY"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ARCHENEMY\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HighestRankMP": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Character Rank In GTA Online [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HighestRankMP"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HighestRankMP\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MPPLAYINGTIME": {
+        "Type": "String",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Playing Time In GTA Online [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MPPLAYINGTIME"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MPPLAYINGTIME\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "MPPLYKILLDEATHRATIO": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Kill Death Ratio in GTA Online [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MPPLYKILLDEATHRATIO"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MPPLYKILLDEATHRATIO\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MPPLYTOTALEVC": {
+        "Type": "String",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Cash Earned In GTA Online [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MPPLYTOTALEVC"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MPPLYTOTALEVC\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "NUMBERSTOLENCARS": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Number Of Cars Stolen In GTA V [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NUMBERSTOLENCARS"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NUMBERSTOLENCARS\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "STARSATTAINED": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Stars Attained In GTA V [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "STARSATTAINED"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"STARSATTAINED\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TOTALCASHEARNED": {
+        "Type": "String",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Cash Earned In GTA V [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TOTALCASHEARNED"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TOTALCASHEARNED\",\"serviceConfigId\":\"d7e70100-66b7-42f8-badc-f3b23e961d5b\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1050025307\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Value\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:RockstarGamesInc.BonaireJapan_k2ss7vbb13xte!App\",\"ver\":\"1.5.0.0_x64_!game_durango_final.exe\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:00000000-0000-0000-0000-000000000000\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1050025307
+  ]
+}
