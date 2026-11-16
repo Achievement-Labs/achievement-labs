@@ -81,7 +81,7 @@ public class XboxApiClient : IDisposable
     private void SetDefaultSpooferHeaders()
     {
         _spooferClient.DefaultRequestHeaders.Clear();
-        _spooferClient.DefaultRequestHeaders.Add(HeaderNames.Authorization, _xauth);
+        _spooferClient.DefaultRequestHeaders.Add(HeaderNames.Authorization, AchievementLabs.Core.SpoofRequest.SanitizeXauth(_xauth));
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.AcceptLanguage, _requestedResponseLanguage);
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.AcceptEncoding, HeaderValues.AcceptEncoding);
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.Accept, HeaderValues.Accept);
@@ -615,7 +615,7 @@ public class XboxApiClient : IDisposable
 
         SetDefaultSpooferHeaders();
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.ContractVersion, HeaderValues.ContractVersion3);
-        var heartbeatRequest = new HeartbeatRequest()
+        var requestBody = JsonConvert.SerializeObject(new HeartbeatRequest()
         {
             titles = new List<TitleRequest>()
             {
@@ -624,25 +624,31 @@ public class XboxApiClient : IDisposable
                     id = spoofedTitleId
                 }
             }
-        };
-        var requestBody = JsonConvert.SerializeObject(heartbeatRequest);
-        var requestUrl = string.Format(InterpolatedXboxAPIUrls.HeartbeatUrl, xuid);
-        var sw = Stopwatch.StartNew();
-        var response = await _spooferClient.PostAsync(
-            requestUrl,
-            new StringContent(requestBody, Encoding.UTF8, HeaderValues.Accept));
-        var body = await response.Content.ReadAsStringAsync();
-        sw.Stop();
+        });
+        (int StatusCode, string Body) result = (-1, "No presence endpoint accepted the request.");
+        foreach (var requestUrl in AchievementLabs.Core.SpoofRequest.HeartbeatUris(xuid))
+        {
+            var sw = Stopwatch.StartNew();
+            var response = await _spooferClient.PostAsync(
+                requestUrl,
+                new StringContent(requestBody, Encoding.UTF8, HeaderValues.Accept));
+            var body = await response.Content.ReadAsStringAsync();
+            sw.Stop();
 
-        WriteHeartbeatDebugLog("POST", spoofedTitleId, xuid, requestUrl, requestBody,
-            (int)response.StatusCode, response.ReasonPhrase, body, sw.ElapsedMilliseconds,
-            response.Headers);
+            WriteHeartbeatDebugLog("POST", spoofedTitleId, xuid, requestUrl, requestBody,
+                (int)response.StatusCode, response.ReasonPhrase, body, sw.ElapsedMilliseconds,
+                response.Headers);
 
 #if DEBUG
-        Console.WriteLine($"Heartbeat POST response: {(int)response.StatusCode} {response.StatusCode} - {body}");
+            Console.WriteLine($"Heartbeat POST response: {(int)response.StatusCode} {response.StatusCode} - {body}");
 #endif
+            result = ((int)response.StatusCode, body);
+            if (result.StatusCode is >= 200 and < 300) break;
+            // Token rejection is endpoint-independent; only request-shape refusals walk the chain.
+            if (result.StatusCode == 401) break;
+        }
         return await AchievementLabs.MultiSelect.PresenceDiagnostics.Observe(
-            Task.FromResult(((int)response.StatusCode, body)), this, spoofedTitleId);
+            Task.FromResult(result), this, spoofedTitleId);
     }
 
     public async Task<(int StatusCode, string Body)> StopHeartbeatAsync(string xuid, bool useFakeSignature = false)
@@ -654,20 +660,29 @@ public class XboxApiClient : IDisposable
 
         SetDefaultSpooferHeaders();
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.ContractVersion, HeaderValues.ContractVersion3);
-        var requestUrl = string.Format(InterpolatedXboxAPIUrls.HeartbeatUrl, xuid);
-        var sw = Stopwatch.StartNew();
-        var response = await _spooferClient.DeleteAsync(requestUrl);
-        var body = await response.Content.ReadAsStringAsync();
-        sw.Stop();
+        (int StatusCode, string Body) result = (-1, "No presence endpoint answered the stop request.");
+        foreach (var requestUrl in AchievementLabs.Core.SpoofRequest.HeartbeatUris(xuid))
+        {
+            var sw = Stopwatch.StartNew();
+            var response = await _spooferClient.DeleteAsync(requestUrl);
+            var body = await response.Content.ReadAsStringAsync();
+            sw.Stop();
 
-        WriteHeartbeatDebugLog("DELETE", "stop", xuid, requestUrl, null,
-            (int)response.StatusCode, response.ReasonPhrase, body, sw.ElapsedMilliseconds,
-            response.Headers);
+            WriteHeartbeatDebugLog("DELETE", "stop", xuid, requestUrl, null,
+                (int)response.StatusCode, response.ReasonPhrase, body, sw.ElapsedMilliseconds,
+                response.Headers);
 
 #if DEBUG
-        Console.WriteLine($"Heartbeat DELETE response: {(int)response.StatusCode} {response.StatusCode} - {body}");
+            Console.WriteLine($"Heartbeat DELETE response: {(int)response.StatusCode} {response.StatusCode} - {body}");
 #endif
-        return ((int)response.StatusCode, body);
+            result = ((int)response.StatusCode, body);
+#if DEBUG
+            Console.WriteLine($"Stop DELETE {requestUrl}: HTTP {result.StatusCode}");
+#endif
+            // 404 on a variant that was never set is normal; keep clearing the rest.
+            if (result.StatusCode is >= 200 and < 300) break;
+        }
+        return result;
     }
 
     private void WriteHeartbeatDebugLog(string method, string titleId, string xuid, string url,

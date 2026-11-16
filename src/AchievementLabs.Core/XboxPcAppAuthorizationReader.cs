@@ -15,7 +15,8 @@ public static class XboxPcAppAuthorizationReader
 {
     public sealed record ValidatedSession(string Authorization, BasicProfile Profile, int ProcessId);
 
-    private static readonly string[] ProcessNames = ["XboxPcApp", "XboxPcAppCE"];
+    // The signed-in token migrates to the full-trust host across app updates; scan both.
+    private static readonly string[] ProcessNames = ["XboxPcApp", "XboxPcAppCE", "XboxPcAppFT"];
 
     private const string AuthorizationPrefix = "XBL3.0 x=";
 
