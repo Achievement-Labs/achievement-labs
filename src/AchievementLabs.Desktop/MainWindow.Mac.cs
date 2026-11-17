@@ -10,12 +10,13 @@ using AchievementLabs.Services.Xbox360;
 namespace AchievementLabs.Desktop;
 public partial class MainWindow
 {
-    private void ApplyMacPlatformControls()
+    private void ApplyMacPlatformControls(Control? root = null)
     {
         if(!AchievementLabs.Core.DesktopPlatform.IsUnixDesktop)return;
-        foreach(var text in this.GetLogicalDescendants().OfType<TextBlock>().Where(t=>t.Text is "STEAM" or "EPIC GAMES" or "UBISOFT CONNECT"))
+        root ??= this;
+        foreach(var text in root.GetLogicalDescendants().OfType<TextBlock>().Where(t=>t.Text is "STEAM" or "EPIC GAMES" or "UBISOFT CONNECT"))
         { var card=text.GetLogicalAncestors().OfType<Border>().FirstOrDefault(b=>b.Classes.Contains("panel"));if(card!=null)card.IsVisible=false; }
-        foreach(var button in this.GetLogicalDescendants().OfType<Button>())
+        foreach(var button in root.GetLogicalDescendants().OfType<Button>())
         {
             if(button.Content is string content)
             {
@@ -23,7 +24,7 @@ public partial class MainWindow
                 if(content.Contains("Windows account",StringComparison.OrdinalIgnoreCase))button.IsVisible=false;
             }
         }
-        foreach(var toggle in this.GetLogicalDescendants().OfType<CheckBox>())
+        foreach(var toggle in root.GetLogicalDescendants().OfType<CheckBox>())
             if(toggle.Content is string content && (content.Contains("Xbox app",StringComparison.OrdinalIgnoreCase)||content.Contains("launch hidden",StringComparison.OrdinalIgnoreCase)))toggle.IsVisible=false;
     }
     private async void MacRememberSignInClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => await model.ApplyMacRememberSignInAsync();
@@ -57,7 +58,8 @@ public partial class MainWindow
             if (notificationStatus < 100 || notificationStatus > 104) throw new Exception("Native Mac notification status query failed.");
             await MacEventTokenChecks.RunAsync();
             PcPresenceChecks.Run();
-            if (this.FindControl<CheckBox>("MacRememberSignInToggle")?.IsVisible != true) throw new Exception("Mac remember sign-in option is hidden.");
+            model.Navigate("Settings");
+            if (this.GetLogicalDescendants().OfType<CheckBox>().SingleOrDefault(toggle => toggle.Name == "MacRememberSignInToggle")?.IsVisible != true) throw new Exception("Mac remember sign-in option is hidden.");
             await MacRememberSignInChecks.RunAsync(model);
             var syntheticExpiry = DateTimeOffset.UtcNow.AddMinutes(30);
             await EventTokenIssuerExpiry.SaveAsync("synthetic-event-token", syntheticExpiry, CancellationToken.None);
