@@ -13,8 +13,9 @@ public static class QueueToolTests
   var desktop=new Desktop();QueueTools.OpenForGame(desktop);Assert(desktop.Opens==1&&desktop.XboxQueue.TitleId=="572802557"&&desktop.PresenceTitleId=="572802557","Game ID transferred without starting");desktop.QueueActive=true;QueueTools.OpenForGame(desktop);Assert(desktop.Opens==1,"Running queue protected");
   var done=new Entry{Completed=true};var pending=new Entry{DelaySeconds=90};
   var cleanup=new State{Queue=[done,pending],CurrentIndex=1,RemainingDelaySeconds=37};var cleaner=new Model{_state=cleanup};
-  cleaner.IsRunning=true;Assert(QueueTools.RemoveCompleted(cleaner,cleanup)==0,"Cleanup protected during run");cleaner.IsRunning=false;
-  Assert(QueueTools.RemoveCompleted(cleaner,cleanup)==1 && cleanup.CurrentIndex==0 && cleanup.RemainingDelaySeconds==37 && cleanup.Queue[0]==pending,"Cleanup preserves next item and countdown");
+  cleaner.IsRunning=true;cleanup.IsRunning=true;
+  Assert(QueueTools.RemoveCompleted(cleaner,cleanup)==1 && cleanup.IsRunning && cleaner.IsRunning && cleanup.CurrentIndex==0 && cleanup.RemainingDelaySeconds==37 && cleanup.Queue[0]==pending,"Live cleanup preserves the active item, running state and countdown");
+  pending.Completed=true;Assert(QueueTools.RemoveCompleted(cleaner,cleanup)==0,"Live cleanup cannot remove the current entry even during its completion transition");pending.Completed=false;cleaner.IsRunning=false;cleanup.IsRunning=false;
   Assert(QueueTools.RemoveCompleted(cleaner,cleanup)==0,"Cleanup no-op with no completed entries");
   var a=new Entry{Completed=true,DelaySeconds=10};var b=new Entry{Completed=true,DelaySeconds=15};var c=new Entry{DelaySeconds=20};var e=new Entry{DelaySeconds=25};
   var state=new State{Queue=[a,b,c,e],CurrentIndex=2,RemainingDelaySeconds=73};var model=new Model{_state=state};
