@@ -91,5 +91,9 @@
 <ItemGroup Condition="'$(LabsLinux)' == 'true'">
   <Content Include="../../tools/linux/microsoft-signin.py" Link="Helpers/microsoft-signin.py" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
 </ItemGroup>
+<ItemGroup Condition="'$(LabsPortableDesktop)' != 'true'">
+  <Content Include="../../vendor/gfw8-license-grabber/**/*" LinkBase="vendor/gfw8-license-grabber" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  <Content Include="../../tools/Acquire-Windows8License.ps1" Link="tools/Acquire-Windows8License.ps1" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+</ItemGroup>
 </Project>
 

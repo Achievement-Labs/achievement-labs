@@ -16,9 +16,39 @@ public static class XboxTitleCatalog
     private sealed record Document(int SchemaVersion,string Revision,Entry[] Titles);
     private static readonly Lazy<Document> Data=new(Load);
     private static readonly Lazy<Dictionary<string,Entry>> ById=new(()=>Data.Value.Titles.ToDictionary(t=>t.TitleId,StringComparer.Ordinal));
+    private static readonly Lazy<Dictionary<string, Entry[]>> Windows8Aliases = new(() =>
+        ById.Value.Values.Where(t => t.Platforms.Contains("Windows8") &&
+                !string.IsNullOrEmpty(t.ModernTitleId) && t.ModernTitleId != t.TitleId)
+            .GroupBy(t => t.ModernTitleId!, StringComparer.Ordinal)
+            .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal));
+    private static readonly Dictionary<string, string> VerifiedWindows8Aliases = new(StringComparer.Ordinal)
+    {
+        ["2024867567"] = "1297292152", // Cold Alley
+        ["1791554324"] = "1297292148", // Fishdom 3
+        ["1941986744"] = "1297292157", // Halo: Spartan Assault
+        ["2122543949"] = "1297292194", // Halo: Spartan Strike
+        ["1679995514"] = "1297292136"  // TY the Tasmanian Tiger
+    };
+
+    public static string ResolveWindows8TitleId(string id)
+    {
+        if (Find(id)?.Platforms.Contains("Windows8") == true) return id;
+        if (VerifiedWindows8Aliases.TryGetValue(id, out var legacy)) return legacy;
+        return Windows8Aliases.Value.TryGetValue(id, out var entries) && entries.Length == 1
+            ? entries[0].TitleId : id;
+    }
+
+    private static Entry[] SearchEditions(Entry entry)
+    {
+        if (entry.Platforms.Contains("Windows8")) return [entry];
+        if (Windows8Aliases.Value.TryGetValue(entry.TitleId, out var editions)) return editions;
+        var legacyId = ResolveWindows8TitleId(entry.TitleId);
+        return legacyId != entry.TitleId && Find(legacyId) is { } legacy ? [legacy] : [entry];
+    }
+
     public static int Count=>Data.Value.Titles.Length;
     public static string Revision=>Data.Value.Revision;
-    public static Entry? Find(string id)=>ById.Value.GetValueOrDefault(id);
+    public static Entry? Find(string id) => ById.Value.GetValueOrDefault(id);
     private static Document Load()
     {
         using var source=typeof(XboxTitleCatalog).Assembly.GetManifestResourceStream("AchievementLabs.XboxTitleCatalog.json.gz")
@@ -38,6 +68,7 @@ public static class XboxTitleCatalog
         var key=TitleSearchText.Key(query);
         return Data.Value.Titles.Where(t=>query.Length==0 || t.TitleId==query || t.ModernTitleId==query ||
             (key.Length>0 ? t.SearchKey.Contains(key,StringComparison.Ordinal) : t.Name.Contains(query,StringComparison.OrdinalIgnoreCase)))
+            .SelectMany(SearchEditions).DistinctBy(t => t.TitleId)
             .OrderBy(t=>t.Name,StringComparer.OrdinalIgnoreCase).ThenBy(t=>t.TitleId,StringComparer.Ordinal).ToArray();
     }
     public static PublicCatalogClient.Page Search(string query)

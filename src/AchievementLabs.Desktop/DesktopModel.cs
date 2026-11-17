@@ -226,7 +226,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         ResetActions();
         if (busy) return;
         ResetGamePlaytime();
-        SelectedGame = game; achievements = []; Search = ""; Filter("All"); Navigate("Achievements");
+        SelectedGame = game; achievements = []; Search = ""; Filter("All"); Navigate("Achievements"); _ = RefreshWin8PageAsync();
         if (client == null || session == null) { GamePlaytimeText = "Xbox-recorded playtime: Unavailable"; return; }
         if (startAutoSpoof && AutoSpoof && !UsesLegacyEndpoint(game))
         {
@@ -294,7 +294,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
                 ? resolvedGame with { Completed = loaded.Count(a => a.Unlocked), Total = loaded.Length, Score = loaded.Where(a => a.Unlocked).Sum(a => a.Score), ProgressKnown = loaded.All(a => a.ProgressKnown) }
                 : resolvedGame with { Total = loaded.Length > 0 ? loaded.Length : game.Total });
             RememberLibraryTotal(updated.Id, updated.Total);
+            var platformChanged = SelectedGame?.Platform != updated.Platform;
             SelectedGame = updated;
+            if (platformChanged) _ = RefreshWin8PageAsync();
             Games = Games.Select(g => g.Id == updated.Id ? updated : g).ToArray();
             Refresh(); Notice = progressComplete ? $"Loaded {loaded.Length} achievements for {game.Name}." : "Xbox returned incomplete achievement progress. Known library counts were retained; unconfirmed rows show Not available. Refresh to retry.";
             _ = LoadGamePlaytimeAsync(updated, version);
@@ -315,6 +317,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         achievements = Map(response);
         var title = response.achievements[0].titleAssociations.FirstOrDefault();
         SelectedGame = new Game(title?.id ?? Path.GetFileNameWithoutExtension(path), title?.name ?? Path.GetFileNameWithoutExtension(path), string.Join(" / ", response.achievements.SelectMany(a => a.platforms).Distinct(StringComparer.OrdinalIgnoreCase)), achievements.Count(a => a.Unlocked), achievements.Length, achievements.Where(a => a.Unlocked).Sum(a => a.Score), achievements.All(a => a.ProgressKnown));
+        _ = RefreshWin8PageAsync();
         GamePlaytimeText = "Xbox-recorded playtime: Unavailable for local export";
         Search = ""; Filter("All"); Navigate("Achievements"); Notice = $"Opened {achievements.Length} achievements from a local export.";
     }

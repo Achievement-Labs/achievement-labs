@@ -43,7 +43,6 @@ public static class BatchPicker
         {
             PlaytimeView.Attach(owner,model);
             PresenceDiagnostics.Attach(owner,model);
-            EventTokenView.Attach(owner,model);
             QueueTools.Attach(owner,model);
             Button? single = owner.GetLogicalDescendants().OfType<Button>().FirstOrDefault(b => (b.Content as string)?.Trim() == "Unlock / retry");
             if (single?.Parent is not Panel panel) throw new InvalidOperationException("Achievement action panel was not found.");
