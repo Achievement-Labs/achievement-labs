@@ -149,7 +149,7 @@
      <SelectableTextBlock Text="{Binding AchievementCatalogStatus}" FontSize="11" TextWrapping="Wrap" Classes="muted"/>
      <SelectableTextBlock Text="{Binding TitleId}" FontSize="11" Classes="muted"/>
     </StackPanel>
-    <StackPanel Grid.Column="2" Spacing="6"><Button Content="Open achievements" Tag="{Binding}" Click="OpenSearchTitle"/><Button Content="Copy Title ID" Tag="{Binding}" Click="CopySearchTitleId"/><Button Content="Add GPD to profile" Tag="{Binding}" Click="AddTitleSearchGpd" IsVisible="{Binding CanAddXbox360Gpd}"/><Button Content="Add GPD to profile" Tag="{Binding}" Click="AddTitleSearchGpd" IsVisible="{Binding CanAddXbox360Gpd}"/></StackPanel>
+    <StackPanel Grid.Column="2" Spacing="6"><Button Content="Open achievements" Tag="{Binding}" Click="OpenSearchTitle"/><Button Content="Copy Title ID" Tag="{Binding}" Click="CopySearchTitleId"/><Button Content="Add GPD to profile" Tag="{Binding}" Click="AddTitleSearchGpd" IsVisible="{Binding CanAddXbox360Gpd}"/></StackPanel>
    </Grid>
    <Expander Header="Achievement support details" HorizontalAlignment="Stretch">
     <StackPanel Spacing="8" Margin="0,8,0,0"><Button Content="Load mapping coverage" Tag="{Binding}" Click="LoadTitleSupportDetails" IsEnabled="{Binding CanLoadSupportDetails}" HorizontalAlignment="Left"/><SelectableTextBlock Text="{Binding SupportDetails}" TextWrapping="Wrap" FontSize="12"/></StackPanel>
