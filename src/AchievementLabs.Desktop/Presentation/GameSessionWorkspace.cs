@@ -163,9 +163,6 @@ public static class GameSessionWorkspace
         AppGlassTheme.Apply(owner);
         appearance.Configure(background,gameArt,image,backdrop,sideArt,all.OfType<Control>());
         _=new WideArtwork(owner,model,coverImage,gameArt,preview);
-        var settingsTabs=all.OfType<TabControl>().First(t=>t.Items.OfType<TabItem>().Any(i=>Equals(i.Header,"App")) && t.Items.OfType<TabItem>().Any(i=>Equals(i.Header,"Account")));
-        var appearanceTab=new TabItem {Header="Appearance",Name="AppearanceTab",Content=appearance.BuildSettings()};settingsTabs.Items.Add(appearanceTab);
-        foreach(var saveButton in all.OfType<Button>().Where(b=>string.Equals(b.Content?.ToString(),"Save all settings",StringComparison.OrdinalIgnoreCase)))saveButton.Click+=(_,_)=>appearance.Save();
         var refreshPlaytime=all.OfType<Button>().First(b=>b.Name=="RefreshXboxPlaytime");PlaytimeAutoRefresh.Attach(owner,model,refreshPlaytime,preview);
         spoofer.Bind(Visual.IsVisibleProperty,new Binding("IsVisible") {Source=sessionVisibility});sessionScroll.Bind(Visual.IsVisibleProperty,new Binding("IsVisible") {Source=sessionVisibility});
         var header=main.Children.OfType<Grid>().First(g=>Grid.GetRow(g)==0);
@@ -280,7 +277,7 @@ public static class GameSessionWorkspace
             appearance.Preferences.BackgroundMode="Game artwork";appearance.Preferences.PersistentGameArtwork=false;appearance.Apply();model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Home"});await Task.Delay(200);
             if(image.IsVisible || backdrop.IsVisible || sideArt.IsVisible)throw new Exception("Game artwork remained visible with persistence disabled outside the session.");Capture("home-artwork-off.png");
             appearance.Preferences.PersistentGameArtwork=true;appearance.Apply();
-            model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Settings"});settingsTabs.SelectedItem=appearanceTab;await Task.Delay(300);Capture("appearance-settings.png");
+            model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Settings"});var settingsTabs = owner.GetLogicalDescendants().OfType<TabControl>().Single(tab => tab.Name == "DesktopSettingsTabs");settingsTabs.SelectedItem=settingsTabs.Items.OfType<TabItem>().Single(tab => tab.Name == "AppearanceTab");await Task.Delay(300);Capture("appearance-settings.png");
             model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Achievements"});await Task.Delay(250);Capture("achievements-unified-button.png");
             if(all.OfType<Button>().Any(b=>Equals(b.Content,"Open Auto Unlock")&&b.IsVisible))throw new Exception("A separate Auto Unlock shortcut is still visible.");
             model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Spoofer"});sessionScroll.Offset=new Vector();

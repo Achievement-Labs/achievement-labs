@@ -3,10 +3,10 @@ using Avalonia.LogicalTree;
 namespace AchievementLabs.MultiSelect;
 public static class EventTokenView
 {
-    public static void Attach(Window owner, object model)
+    public static void Attach(Window owner, Control settings)
     {
-        var save = owner.GetLogicalDescendants().OfType<Button>().FirstOrDefault(b => Equals(b.Content, "Save event token"));
-        var input = owner.GetLogicalDescendants().OfType<TextBox>().FirstOrDefault(t => t.PlaceholderText == "Paste event token");
+        var save = settings.GetLogicalDescendants().OfType<Button>().FirstOrDefault(b => Equals(b.Content, "Save event token"));
+        var input = settings.GetLogicalDescendants().OfType<TextBox>().FirstOrDefault(t => t.PlaceholderText == "Paste event token");
         if (input == null || save?.Parent is not Control actions || actions.Parent is not Panel panel) return;
         var mask = input.PasswordChar;
         var reveal = new CheckBox { Name = "ShowEventToken", Content = "Show event token", IsChecked = false };

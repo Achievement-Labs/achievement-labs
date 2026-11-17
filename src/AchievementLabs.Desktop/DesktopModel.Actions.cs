@@ -30,10 +30,12 @@ public sealed partial class DesktopModel
     public ObservableCollection<ActionReport> ActionReports { get; } = [];
     public bool UnlockAllEnabled { get => unlockAllEnabled; set { unlockAllEnabled = value; Changed(); NotifyActions(); } }
     public string ActionSummary { get => actionSummary; private set { actionSummary = value; Changed(); } }
-    public bool CanUnlockSelected => AchievementLabs.MultiSelect.BatchPicker.CanUnlockSelected(this);
+    public bool CanUnlockSelected => IsWindows8Page
+        ? CanSendWin8 && SelectedAchievement is { } selected && achievements.Contains(selected)
+        : AchievementLabs.MultiSelect.BatchPicker.CanUnlockSelected(this);
     public bool CanUnlockAll => CanQuery && liveAchievements && !eventBased && UnlockAllEnabled && SelectedGame != null && !UsesLegacyEndpoint(SelectedGame) && achievements.Any(a => !a.Unlocked);
     private void NotifyActions() { Changed(nameof(TitleComingSoon)); Changed(nameof(TitleTesting)); Changed(nameof(TitlePartial)); Changed(nameof(TitleNotSupported)); Changed(nameof(CanUnlockSelected)); Changed(nameof(CanUnlockAll)); }
-    private void ResetActions() { titleComingSoon = false; titleTesting = false; titlePartial = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
+    private void ResetActions() { ActionReports.Clear(); titleComingSoon = false; titleTesting = false; titlePartial = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
     private async Task LoadActionMetadataAsync(AchievementsResponse response, string titleId, int version)
     {
         var nextDefinitions = response.achievements.ToDictionary(a => a.id);
@@ -70,8 +72,13 @@ public sealed partial class DesktopModel
         NotifyActions();
     }    public async Task UnlockSelectedAsync()
     {
-        if (!CanUnlockSelected || SelectedAchievement == null) return;
-        await SubmitAchievementsAsync([SelectedAchievement.Id]);
+        if (!CanUnlockSelected || SelectedAchievement is not { } selected) return;
+        if (IsWindows8Page)
+        {
+            await SendWin8RequestAsync(selected);
+            return;
+        }
+        await SubmitAchievementsAsync([selected.Id]);
     }
     public async Task UnlockAllAsync()
     {
@@ -81,11 +88,11 @@ public sealed partial class DesktopModel
     private async Task SubmitAchievementsAsync(string[] ids)
     {
         if(client==null || session==null || SelectedGame==null)return;
-        var game=SelectedGame;var source=definitions;var useEvents=eventBased;
+        var game=SelectedGame;var source=definitions;var useEvents=eventBased;var version=selectionVersion;
         Busy(true);ActionReports.Clear();ActionSummary="Sending selected achievements together…";
         try {
             await EnsureAuthorizationFreshAsync(lifetime.Token);
-            if(useEvents) { try { await EnsureEventTokenAsync(lifetime.Token); } catch(InvalidOperationException error) { ActionSummary=error.Message;if(EventTokenRequired!=null)await EventTokenRequired();return; } }
+            if(useEvents) { try { await EnsureEventTokenAsync(lifetime.Token); } catch(InvalidOperationException error) { if(version==selectionVersion)ActionSummary=error.Message;if(EventTokenRequired!=null)await EventTokenRequired();return; } }
             await requests.WaitAsync(lifetime.Token);
             try {
                 var account=session;if(account==null)return;
@@ -113,13 +120,13 @@ public sealed partial class DesktopModel
                 }
                 foreach(var batch in ids.Distinct().Chunk(3)) {
                     var results=await Task.WhenAll(batch.Select(Send));
-                    foreach(var result in results)ActionReports.Add(new(result.Name,result.Message));
+                    if(version==selectionVersion)foreach(var result in results)ActionReports.Add(new(result.Name,result.Message));
                     if(results.Any(x=>x.Rejected)) { MarkEventTokenRejected();if(EventTokenRequired!=null)await EventTokenRequired();break; }
                 }
             } finally { requests.Release(); }
-            ActionSummary=$"Finished {ActionReports.Count} selected actions. Refresh to verify Xbox progress.";
-        } catch(OperationCanceledException) { ActionSummary="Stopped. Previously sent requests may have completed; refresh before retrying."; }
-        catch(Exception error) { ActionSummary=error.Message; }
+            if(version==selectionVersion)ActionSummary=$"Finished {ActionReports.Count} selected actions. Refresh to verify Xbox progress.";
+        } catch(OperationCanceledException) { if(version==selectionVersion)ActionSummary="Stopped. Previously sent requests may have completed; refresh before retrying."; }
+        catch(Exception error) { if(version==selectionVersion)ActionSummary=error.Message; }
         finally { Busy(false); }
     }
     private static string SummarizeEventError(string? responseBody)

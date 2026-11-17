@@ -25,6 +25,23 @@ static class XboxTitleCatalogTests
         Check(model.TitleSearchResults.Length>10 && model.LookupOutput.Contains("no Xbox or DBox"),"Main title search uses local catalog without per-result verification");
         model.TitleSearch="1297292157";await model.SearchTitlesAsync();
         Check(model.TitleSearchResults.Any(t=>t.Platform.Contains("Windows 8")),"Main search labels legacy Windows explicitly");
+        foreach (var query in new[] { "Modern Combat 5", "1744505425", "1195776867" })
+        {
+            model.TitleSearch = query;
+            await model.SearchTitlesAsync();
+            Check(model.TitleSearchResults.Length == 1 &&
+                model.TitleSearchResults[0] is { TitleId: "1195776867", Platform: "Windows 8" },
+                "Modern Combat 5 name and either ID show a single legacy Windows 8 result");
+        }
+        Check(DesktopModel.ResolveWindows8TitleId("1744505425") == "1195776867" &&
+            DesktopModel.CatalogGame("1195776867").Platform == "Windows8",
+            "Opening either Modern Combat 5 ID uses the Windows 8 achievement route");
+        Check(XboxTitleCatalog.SearchEntries("1656611287").Select(t => t.TitleId).SequenceEqual(["826940249"]),
+            "An alias taken from the snapshot resolves to the original ExZeus 2 ID");
+        var editions = XboxTitleCatalog.SearchEntries("1653696130");
+        Check(editions.Length > 1 && editions.All(t => t.TitleId != "1653696130") &&
+            XboxTitleCatalog.ResolveWindows8TitleId("1653696130") == "1653696130",
+            "An ambiguous alias shows separate editions without guessing an achievement route");
         var temp=Path.Combine(Path.GetTempPath(),"labs-external-spools-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(temp);
         try {File.WriteAllText(Path.Combine(temp,"fixture.spool"),"synthetic");model.UbisoftSpoolSourceDirectory=temp;Check(model.UbisoftSpools.Length==1,"External spool library remains usable");}
         finally{Directory.Delete(temp,true);}

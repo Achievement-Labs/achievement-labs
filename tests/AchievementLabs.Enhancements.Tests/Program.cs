@@ -17,6 +17,8 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  if(args.Contains("--win8-license")){Windows8LicenseTests.Run();return;}
+  if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
   if(args.Contains("--startup-mode"))
   {
    var configure=typeof(AchievementLabs.Desktop.MainWindow).Assembly.GetType("AchievementLabs.Desktop.Program")!.GetMethod("ConfigureStartup",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static)!;
@@ -46,6 +48,7 @@ static class Test
   if(args.Contains("--exophase-360")){Exophase360Tests.Run();return;}
   if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
+  if(args.Contains("--deferred-workspaces")){DeferredWorkspaceTests.Run();return;}
   if(args.Contains("--xbox-title-catalog")){XboxTitleCatalogTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
   if(args.Contains("--library-cache")){LibraryCacheTests.RunAsync().GetAwaiter().GetResult();return;}
@@ -77,6 +80,9 @@ static class Test
    var appType=assembly.GetTypes().Single(t=>t.Name=="App" && typeof(Application).IsAssignableFrom(t));
    AppBuilder.Configure(()=> (Application)Activator.CreateInstance(appType)!).UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();
    var window=(Window)Activator.CreateInstance(assembly.GetTypes().Single(t=>t.Name=="MainWindow"))!;
+   ((AchievementLabs.Desktop.DesktopModel)window.DataContext!).Navigate("Settings");
+   Dispatcher.UIThread.RunJobs();
+   ((AchievementLabs.Desktop.DesktopModel)window.DataContext!).GoBack();
    var saveAll = Desc<Button>(window).Single(b=>b.Name=="SaveAllSettings");
    Assert(Desc<Button>(window).Any(b=>b.Name=="UnlockXbox360Selected" && !b.IsEnabled),"360 unlock is one explicit action and starts gated");
    Assert(!Desc<Button>(window).Any(b=>b.Name is "StageXbox360Review" or "SaveXbox360WorkingCopy"),"Separate stage/save actions removed from normal 360 workflow");

@@ -80,7 +80,7 @@ public sealed partial class DesktopModel
             var query=NormalizeLookalikes(TitleSearch.Trim());
             var entries=await Task.Run(()=>AchievementLabs.Core.XboxTitleCatalog.SearchEntries(query),lifetime.Token);
             var artwork=Games.GroupBy(g=>g.Id).ToDictionary(g=>g.Key,g=>g.First().ImageUrl);
-            allTitleSearchResults=entries.Select(t=>new TitleSearchResult(t.TitleId,t.Name,string.Join(", ",t.Platforms.Select(FormatXboxPlatform)),artwork.GetValueOrDefault(t.TitleId))
+            allTitleSearchResults=entries.Select(t=>new TitleSearchResult(t.TitleId,t.Name,string.Join(", ",t.Platforms.Select(FormatXboxPlatform)),artwork.GetValueOrDefault(t.TitleId) ?? (t.ModernTitleId is { } alias ? artwork.GetValueOrDefault(alias) : null))
                 {CatalogAchievementCount=t.TotalAchievements,AchievementType=t.AchievementsType??(t.SourceVersion==1 ? "Legacy" : null),StatType=t.StatsType}).ToArray();
             titleSearchWarning=" Local database snapshot; no Xbox or DBox verification requests. Up to 300 filtered results are shown.";
             ApplyTitleSearchFilters();
