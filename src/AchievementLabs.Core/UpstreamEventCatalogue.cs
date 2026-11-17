@@ -8,8 +8,11 @@ using Newtonsoft.Json.Linq;
 namespace AchievementLabs.Core;
 
 /// <summary>Validated public updates in a separate cache. Protected/local mappings always win.</summary>
+public sealed record EventUpdateSkip(string TitleId, string Name, string Reason);
+
 public sealed class UpstreamEventCatalogue
 {
+    public IReadOnlyList<EventUpdateSkip> SkippedEntries { get; private set; } = Array.Empty<EventUpdateSkip>();
     public const string BundledSourceCommit = "1a76574db3ca4d5ee02f162a63cf0ce3123b3db9";
     private const string BundledArchiveDigest = "f763e3048d7fda9d9e226dec0f40211937d0ffd454083aa29a7cd3f5af67b159";
     private readonly string cachePath;
@@ -98,12 +101,19 @@ public sealed class UpstreamEventCatalogue
             var data = (JObject)previous.Data.DeepClone();
             var templates = new Dictionary<string, string>(previous.Templates, StringComparer.Ordinal);
             int added = 0;
+            var skippedEntries = new List<EventUpdateSkip>();
             foreach (var title in titles.Properties())
             {
                 ct.ThrowIfCancellationRequested();
                 if (!Regex.IsMatch(title.Name, "^[0-9]{1,10}$") || title.Value is not JObject) throw new InvalidDataException("Invalid event title.");
                 bool legacyPack = (int?)pack["schemaVersion"] == 1;
-                if (reserved.Contains(title.Name) || legacyPack && (bundled.Contains(title.Name) || data[title.Name] != null)) continue;
+                if (reserved.Contains(title.Name) || legacyPack && (bundled.Contains(title.Name) || data[title.Name] != null))
+                {
+                    skippedEntries.Add(new(title.Name, (string?)title.Value["name"] ?? "", reserved.Contains(title.Name)
+                        ? "Protected mapping or title already owned by the bundled/official catalogue."
+                        : "Legacy pack cannot replace an existing title. Use a schema 2 pack."));
+                    continue;
+                }
                 var status = title.Value["status"] as JObject;
                 var classification = (string?)status?["classification"];
                 if (classification == "Unsupported")
@@ -154,7 +164,8 @@ public sealed class UpstreamEventCatalogue
             try { await WriteCacheAsync(temporary, saved, ct).ConfigureAwait(false); ct.ThrowIfCancellationRequested(); File.Move(temporary, cachePath, true); }
             finally { if (File.Exists(temporary)) File.Delete(temporary); }
             Volatile.Write(ref current, next);
-            Status = $"Imported {added:N0} event updates. Protected mappings retained.";
+            SkippedEntries = skippedEntries.ToArray();
+            Status = $"Imported {added:N0} event updates · {skippedEntries.Count:N0} entries skipped. Open skipped-entry details for the reasons.";
             return added;
         }
         finally { refreshGate.Release(); }
@@ -176,6 +187,8 @@ public sealed class UpstreamEventCatalogue
     {
         await refreshGate.WaitAsync(ct).ConfigureAwait(false);
         var stage = "reading release metadata";
+        var skippedEntries = new List<EventUpdateSkip>();
+        SkippedEntries = Array.Empty<EventUpdateSkip>();
         try
         {
             var previous = Volatile.Read(ref current);
@@ -248,7 +261,12 @@ public sealed class UpstreamEventCatalogue
                 foreach (var id in upstream.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)).Select(p => p.Name))
                 {
                     ct.ThrowIfCancellationRequested();
-                    if (reserved.Contains(id)) continue;
+                    if (reserved.Contains(id))
+                    {
+                        skipped++;
+                        skippedEntries.Add(new(id, (string?)upstream[id]?["TitleName"] ?? "", "Protected route retained. This title uses an explicit local or remote edition guard."));
+                        continue;
+                    }
                     if (!enabled.Contains(id) || (bool?)upstream[id]!["Enabled"] == false)
                     {
                         var disabled = DisabledBlock(); if (!JToken.DeepEquals(data[id], disabled)) added++;
@@ -262,7 +280,10 @@ public sealed class UpstreamEventCatalogue
                     }
                     catch (Exception e) when (e is InvalidDataException or JsonException or System.Text.Json.JsonException or ArgumentException or InvalidCastException or FormatException or KeyNotFoundException or InvalidOperationException)
                     {
-                        if (officialCatalog) throw new InvalidDataException("Official catalog rejected at title " + id + ": " + e.Message, e);
+                        var reason = e.Message.Replace('\r', ' ').Replace('\n', ' ');
+                        if (reason.Length > 400) reason = reason[..400];
+                        skippedEntries.Add(new(id, (string?)upstream[id]?["TitleName"] ?? "", "Validation failed: " + reason));
+                        if (officialCatalog) throw new InvalidDataException("Official catalog rejected at title " + id + ": " + reason, e);
                         skipped++; continue;
                     }
                     if (!officialCatalog && matchesBundled?.Invoke(id, block, template) == true)
@@ -289,7 +310,7 @@ public sealed class UpstreamEventCatalogue
         catch (InvalidDataException e) { Status = $"Could not update event data while {stage}: {e.Message} Existing mappings and cache retained."; }
         catch (JsonException) { Status = $"Could not update event data while {stage}: invalid catalogue JSON. Existing mappings and cache retained."; }
         catch { Status = $"Could not update event data while {stage}. Existing mappings and cache retained; retry Check now."; }
-        finally { refreshGate.Release(); }
+        finally { SkippedEntries = skippedEntries.ToArray(); refreshGate.Release(); }
     }
 
     private string ReadCache(string path)
