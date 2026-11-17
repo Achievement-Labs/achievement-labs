@@ -106,7 +106,12 @@ if($PrivatePayloadPath){$payload=[IO.File]::ReadAllText((Resolve-Path $PrivatePa
   $prefix=[Text.Encoding]::UTF8.GetBytes($inputTicket+"`n")
   $receiptBytes=[IO.File]::ReadAllBytes((Resolve-Path $ReceiptPath).Path)
   [IO.File]::WriteAllBytes($inputFile,([byte[]]($prefix+$receiptBytes)))
-  Add-Type -Path (Join-Path $PSScriptRoot 'ActivateHelper.cs')
+  $activationAssembly=Join-Path $PSScriptRoot 'ActivateHelper.dll'
+  if(Test-Path -LiteralPath $activationAssembly -PathType Leaf){
+    Add-Type -Path $activationAssembly
+  }else{
+    Add-Type -Path (Join-Path $PSScriptRoot 'ActivateHelper.cs')
+  }
   $silentActivation=($UseNativeTicket -and !$Reauthenticate -and !$PromptIfNeeded)
   $helperPid=if($silentActivation){[ProbeActivation]::LaunchSilent(($pkg.PackageFamilyName+'!'+$HelperAppId),$session)}else{[ProbeActivation]::Launch(($pkg.PackageFamilyName+'!'+$HelperAppId),$session)}
   if(!$helperPid){throw 'Activation returned no helper process ID.'}
