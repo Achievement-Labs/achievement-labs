@@ -107,6 +107,7 @@ namespace AchievementLabs.Desktop.Workflows
         {
             this.account = account;
             _snackbarService = snackbarService;
+            QueueItems.CollectionChanged += QueueSearchItemsChanged;
         }
 
         #region Observable Properties
@@ -179,6 +180,33 @@ namespace AchievementLabs.Desktop.Workflows
         [ObservableProperty] private double _speedMultiplier = 1.0;
         [ObservableProperty] private string _speedDisplay = "Speed: 1.0x (Real Time)";
         [ObservableProperty] private ObservableCollection<AutoUnlockQueueDisplay> _queueItems = new();
+        [ObservableProperty] private string _queueSearch = "";
+
+        public IEnumerable<AutoUnlockQueueDisplay> VisibleQueueItems
+        {
+            get
+            {
+                var query = (QueueSearch ?? "").Trim();
+                return query.Length == 0 ? QueueItems : QueueItems.Where(item =>
+                    item.AchievementName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                    (item.AchievementDescription ?? "").Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                    item.AchievementId.Contains(query, StringComparison.OrdinalIgnoreCase)).ToArray();
+            }
+        }
+
+        partial void OnQueueSearchChanged(string value) => OnPropertyChanged(nameof(VisibleQueueItems));
+        partial void OnQueueItemsChanging(ObservableCollection<AutoUnlockQueueDisplay> value) =>
+            QueueItems.CollectionChanged -= QueueSearchItemsChanged;
+        partial void OnQueueItemsChanged(ObservableCollection<AutoUnlockQueueDisplay> value)
+        {
+            value.CollectionChanged += QueueSearchItemsChanged;
+            OnPropertyChanged(nameof(VisibleQueueItems));
+        }
+
+        private void QueueSearchItemsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs args)
+        {
+            if (!string.IsNullOrWhiteSpace(QueueSearch)) OnPropertyChanged(nameof(VisibleQueueItems));
+        }
         [ObservableProperty] private bool _hasExistingState = false;
         [ObservableProperty] private string _existingStateInfo = "";
 

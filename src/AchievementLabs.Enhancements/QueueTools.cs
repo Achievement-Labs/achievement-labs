@@ -107,7 +107,15 @@ public static class QueueTools
    var apply=new Button{Content="Remove selected"};var cancel=new Button{Content="Cancel"};var message=new TextBlock{Text="Select achievements to remove. Saved progress and remaining entries are kept.",TextWrapping=Avalonia.Media.TextWrapping.Wrap};
    var checks=snapshot.Select(x=>new CheckBox{Content=$"{P(x,"AchievementName")} ({P(x,"AchievementId")})",Tag=x,Margin=new Thickness(0,5,0,5)}).ToArray();
    var choices=new StackPanel();foreach(var c in checks)choices.Children.Add(c);
-   bottom.Children.Add(apply);bottom.Children.Add(cancel);DockPanel.SetDock(bottom,Dock.Bottom);root.Children.Add(bottom);DockPanel.SetDock(message,Dock.Top);root.Children.Add(message);root.Children.Add(new ScrollViewer{Content=choices});dialog.Content=root;
+   var search = new TextBox { PlaceholderText = "Search achievements to remove", Margin = new Thickness(0, 8, 0, 8) };
+   search.TextChanged += (_, _) =>
+   {
+    var query = (search.Text ?? "").Trim();
+    foreach (var check in checks)
+     check.IsVisible = check.Content?.ToString()?.Contains(query, StringComparison.OrdinalIgnoreCase) == true ||
+                       P(check.Tag, "AchievementDescription")?.ToString()?.Contains(query, StringComparison.OrdinalIgnoreCase) == true;
+   };
+   bottom.Children.Add(apply);bottom.Children.Add(cancel);DockPanel.SetDock(bottom,Dock.Bottom);root.Children.Add(bottom);DockPanel.SetDock(message,Dock.Top);root.Children.Add(message);DockPanel.SetDock(search,Dock.Top);root.Children.Add(search);root.Children.Add(new ScrollViewer{Content=choices});dialog.Content=root;
    cancel.Click+=(_,_)=>dialog.Close();apply.Click+=(_,_)=>
    {
     try{if(P(q,"IsRunning") is true || !ReferenceEquals(state,F(q,"_state")) || !list.Cast<object>().SequenceEqual(snapshot,ReferenceEqualityComparer.Instance)){message.Text="The queue changed. Close this window and reopen it before removing entries.";return;}
