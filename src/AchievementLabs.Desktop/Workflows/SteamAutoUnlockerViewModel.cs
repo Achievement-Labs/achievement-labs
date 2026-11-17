@@ -32,6 +32,22 @@ public partial class SteamAutoUnlockerViewModel : ObservableObject, INativePageL
     [ObservableProperty] private int _completedCount;
 
     public ObservableCollection<SteamAutoUnlockQueueItem> QueueItems { get; } = new();
+    [ObservableProperty] private string _queueSearch = "";
+
+    public IEnumerable<SteamAutoUnlockQueueItem> VisibleQueueItems
+    {
+        get
+        {
+            var query = (QueueSearch ?? "").Trim();
+            return query.Length == 0 ? QueueItems : QueueItems.Where(item =>
+                item.Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                item.Description.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                item.Id.Contains(query, StringComparison.OrdinalIgnoreCase)).ToArray();
+        }
+    }
+
+    partial void OnQueueSearchChanged(string value) => OnPropertyChanged(nameof(VisibleQueueItems));
+
     public string ProgressText => $"{CompletedCount} / {CompletedCount + QueuedCount} achievements completed";
     partial void OnCompletedCountChanged(int value) => OnPropertyChanged(nameof(ProgressText));
     partial void OnQueuedCountChanged(int value) => OnPropertyChanged(nameof(ProgressText));
@@ -40,6 +56,10 @@ public partial class SteamAutoUnlockerViewModel : ObservableObject, INativePageL
     {
         _steamAchievementService = steamAchievementService;
         _snackbarService = snackbarService;
+        QueueItems.CollectionChanged += (_, _) =>
+        {
+            if (!string.IsNullOrWhiteSpace(QueueSearch)) OnPropertyChanged(nameof(VisibleQueueItems));
+        };
     }
 
     public void OnNavigatedTo()
