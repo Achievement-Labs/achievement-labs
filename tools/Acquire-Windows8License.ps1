@@ -5,7 +5,7 @@ param(
  [switch]$OfflineCheck
 )
 $ErrorActionPreference='Stop'
-$source=Join-Path $PSScriptRoot '..\vendor\gfw8-license-grabber\backend'
+$source=Join-Path $PSScriptRoot 'Windows8License'
 . (Join-Path $source 'Core.ps1')
 $games=(Get-Content -LiteralPath (Join-Path $source 'games.json') -Raw|ConvertFrom-Json).games
 $matches=@($games|Where-Object {[string]$_.legacy_xbox_title_id -eq $TitleId})
@@ -34,7 +34,7 @@ try{
  if(!$locked){$result.message='Another license/token operation is running. Wait for it to finish.';throw $result.message}
  if($matches.Count -ne 1){$result.message='No unique license/token route is available for this title.';throw $result.message}
  $game=$matches[0]
- $runtimeDirectory=Join-Path $licenseRoot 'backend-b01eb217'
+ $runtimeDirectory=Join-Path $licenseRoot 'runtime-1'
  if(!(Test-Path -LiteralPath $runtimeDirectory)){
   $stage=New-PrivateFolder (Join-Path $licenseRoot ('staging-'+$RequestId))
   Copy-Item -Path (Join-Path $source '*') -Destination $stage -Recurse

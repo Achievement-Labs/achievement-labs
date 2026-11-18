@@ -25,9 +25,6 @@ function New-PrivateFolder([string]$Path){
 function New-PoCRun([int]$GameId){
  New-PrivateFolder (Join-Path $script:DataRoot ('Game-'+$GameId+'-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss-fff')+'-'+[guid]::NewGuid().ToString('N').Substring(0,8)))
 }
-function Read-YesNo([string]$Question){
- while($true){Write-Host ($Question+' [Y/N]');$answer=Read-Host;if($answer -ieq 'Y'){return $true};if($answer -ieq 'N'){return $false};Write-Host 'Type Y for yes or N for no. Enter does not choose for you.'}
-}
 function Format-Time([DateTimeOffset]$Value){$Value.ToLocalTime().ToString('yyyy-MM-dd HH:mm:ss zzz')+' (UTC '+$Value.UtcDateTime.ToString('yyyy-MM-dd HH:mm:ss')+')'}
 function Get-ReceiptWindow([DateTimeOffset]$Minted,[DateTimeOffset]$Now=[DateTimeOffset]::UtcNow){
  $expires=$Minted.AddHours(24)
@@ -59,14 +56,6 @@ function Read-Receipt([string]$Path,$Game,[switch]$SkipSignature){
  $minted=[DateTimeOffset]::Parse($doc.DocumentElement.GetAttribute('ReceiptDate'),[Globalization.CultureInfo]::InvariantCulture)
  $window=Get-ReceiptWindow $minted
  [pscustomobject]@{Path=[IO.Path]::GetFullPath($Path);Bytes=$bytes;Hash=(Get-ResearchFileHash $Path).Hash;Minted=$window.Minted;Expires=$window.Expires;Valid=$window.Valid;Future=$window.Future;SignatureVerified=(!$SkipSignature);AppId=$appId;LicenseType=$licenseType}
-}
-function Show-Receipt($Info){
- Write-Host 'Receipt signature and selected edition verified.' -ForegroundColor Green
- Write-Host ('Receipt license type: '+$Info.LicenseType+'.')
- Write-Host ('Issued (XML ReceiptDate): '+(Format-Time $Info.Minted))
- Write-Host ('Expires (ReceiptDate + 24 hours): '+(Format-Time $Info.Expires))
- Write-Host ('Saved pop.bin: '+$Info.Path)
- if(!$Info.Valid){Write-Host 'This receipt is expired or its clock is in the future. Token acquisition is blocked.' -ForegroundColor Yellow}
 }
 function Get-StoreCredential {
  Initialize-PublicWam
@@ -284,82 +273,4 @@ function Request-GameToken($Game,$Receipt,[string]$Run,[switch]$Reauthenticate,[
  Write-Host ('Private token: '+(Join-Path $export 'issued-token.xml'))
  Write-Host ('After token expiry, reuse this exact pop.bin to request another token until '+(Format-Time $Receipt.Expires)+'. Renewal is subject to Xbox acceptance.')
  [pscustomobject]@{Export=$export;Report=$report;Window=$window;Receipt=$Receipt}
-}
-function Invoke-XboxJson([string]$Auth,[string]$Url,[string]$Method='GET',$Body=$null){
- if(([uri]$Url).Host -notin @('profile.xboxlive.com','userpresence.xboxlive.com','progress.xboxlive.com')){throw 'Endpoint is outside the PoC scope.'}
- if($Method -notin @('GET','POST','DELETE')){throw 'Method outside PoC scope.'}
- $web=[Net.HttpWebRequest]::Create($Url);$web.Proxy=$null;$web.AllowAutoRedirect=$false;$web.Method=$Method;$web.Timeout=25000;$web.ReadWriteTimeout=25000
- $web.Headers['Authorization']=$Auth;$web.Headers['x-xbl-contract-version']='1';$web.Accept='application/json';$web.ContentType='application/json'
- if($null -ne $Body){$bytes=[Text.Encoding]::UTF8.GetBytes(($Body|ConvertTo-Json -Compress -Depth 6));$web.ContentLength=$bytes.Length;$stream=$web.GetRequestStream();try{$stream.Write($bytes,0,$bytes.Length)}finally{$stream.Close()}}
- try{$response=$web.GetResponse()}catch [Net.WebException]{if(!$_.Exception.Response){return [pscustomobject]@{Status=$null;Body=$null;Error='Network or TLS failure';XErr=$null}};$response=$_.Exception.Response}
- try{$status=[int]$response.StatusCode;$xerr=$response.Headers['X-Err'];$reader=New-Object IO.StreamReader($response.GetResponseStream());try{$raw=$reader.ReadToEnd()}finally{$reader.Dispose()}}finally{$response.Close();$web.Headers.Remove('Authorization')}
- $parsed=$null;if($raw){try{$parsed=$script:Json.DeserializeObject($raw)}catch{}}
- [pscustomobject]@{Status=$status;Body=$parsed;XErr=$xerr;Error=$null}
-}
-function Get-PresenceView($Body,[string]$TitleId){
- $matches=@()
- if($Body -is [Collections.IDictionary] -and $Body.ContainsKey('devices')){
-  foreach($device in $Body['devices']){
-   foreach($title in $device['titles']){
-    if([string]$title['id'] -eq $TitleId){$matches+=,[pscustomobject]@{device=$device['type'];id=[string]$title['id'];state=$title['state']}}
-   }
-  }
- }
- [pscustomobject]@{Present=($matches.Count -gt 0);Active=(@($matches|Where-Object state -ieq 'Active').Count -gt 0);Matches=$matches}
-}
-function Test-GamePresence($Game,$Token,[string]$Run){
- if([DateTimeOffset]::UtcNow -ge $Token.Window.Expires){throw 'Token expired. Request another token before Presence.'}
- $xml=[IO.File]::ReadAllText((Join-Path $Token.Export 'issued-token.xml')).Trim()
- if($xml -match '[\r\n]'){throw 'Unexpected token format.'}
- $auth='XBL2.0 x='+$xml
- $record=[ordered]@{gameId=$Game.index;titleId=$Game.legacy_xbox_title_id;calls=@();achievementRequests=0;presenceWriteAccepted=$false;activeReadback=$false;lastPlayedWriteAccepted=$false;cleanupRequired=$false;cleanupAccepted=$null;targetAbsentAfterCleanup=$null}
- function Record-Call([string]$Label,$Response){$record.calls+=,[pscustomobject]@{label=$Label;httpStatus=$Response.Status;xErr=$Response.XErr;error=$Response.Error};Write-Host ($Label+': HTTP '+$Response.Status+$(if($Response.XErr){' / '+$Response.XErr})+$(if($Response.Error){' ('+$Response.Error+')'}))}
- try{
-  $identity=Invoke-XboxJson $auth 'https://profile.xboxlive.com/users/me/id';Record-Call 'Profile' $identity
-  if($identity.Status -ne 200 -or !($identity.Body -is [Collections.IDictionary]) -or [string]$identity.Body['xuid'] -notmatch '^\d{10,20}$'){throw 'Xbox profile validation failed. Token expiry, authorization, network and endpoint errors must be distinguished.'}
-  $xuid=[string]$identity.Body['xuid'];$gamertag=[string]$identity.Body['gamertag'];if(!$gamertag){$gamertag=[string]$identity.Body['gamerTag']}
-  Write-Host ('Xbox token account: '+$gamertag) -ForegroundColor Cyan
-  $read='https://userpresence.xboxlive.com/users/xuid('+$xuid+')?level=all'
-  $write='https://userpresence.xboxlive.com/users/xuid('+$xuid+')/devices/current/titles/current'
-  $baseline=Invoke-XboxJson $auth $read;Record-Call 'Presence baseline' $baseline
-  if($baseline.Status -ne 200){throw 'Presence baseline failed; no write attempted. This does not by itself prove an invalid token.'}
-  $before=Get-PresenceView $baseline.Body ([string]$Game.legacy_xbox_title_id)
-  $record.preexistingActive=$before.Active;$record.cleanupRequired=!$before.Active
-  $attempted=$false
-  try{
-   $attempted=$true
-   $post=Invoke-XboxJson $auth $write 'POST' @{id=[string]$Game.legacy_xbox_title_id;state='active';placement='full'};Record-Call 'Presence POST' $post
-   $record.presenceWriteAccepted=($post.Status -in @(200,201,204))
-   if($record.presenceWriteAccepted){
-    foreach($delay in @(0,2,5,10)){
-     if($delay){Start-Sleep -Seconds $delay}
-     $response=Invoke-XboxJson $auth $read;Record-Call 'Presence readback' $response
-     $view=Get-PresenceView $response.Body ([string]$Game.legacy_xbox_title_id)
-     if($response.Status -eq 200 -and $view.Active){$record.activeReadback=$true;$record.observed=$view.Matches;break}
-    }
-    # Separate legacy title-history submission; accepted HTTP is not an Xbox-profile UI readback.
-    $history=Invoke-XboxJson $auth ('https://progress.xboxlive.com/users/xuid('+$xuid+')/history/titles') 'POST' @{titleId=[string]$Game.legacy_xbox_title_id;lastPlayed=[DateTime]::UtcNow.ToString('o')}
-    Record-Call 'Last Played submission' $history
-    $record.lastPlayedWriteAccepted=($history.Status -in @(200,201,204))
-   }
-  }finally{
-   if($attempted -and $record.cleanupRequired){
-    $cleanup=Invoke-XboxJson $auth $write 'DELETE';Record-Call 'Remove test presence' $cleanup
-    $record.cleanupAccepted=($cleanup.Status -in @(200,201,204));$record.targetAbsentAfterCleanup=$false
-    foreach($delay in @(0,2,5,10,20)){
-     if($delay){Start-Sleep -Seconds $delay}
-     $after=Invoke-XboxJson $auth $read;Record-Call 'Cleanup readback' $after
-     $view=Get-PresenceView $after.Body ([string]$Game.legacy_xbox_title_id)
-     if($after.Status -eq 200 -and !$view.Present){$record.targetAbsentAfterCleanup=$true;break}
-    }
-    if(!$record.cleanupAccepted -or !$record.targetAbsentAfterCleanup){Write-Host 'Presence cleanup is not fully confirmed. Keep this result and check Xbox activity before another test.' -ForegroundColor Yellow}
-   }elseif($record.preexistingActive){Write-Host 'Existing active presence preserved; no DELETE sent.'}
-  }
-  if($record.presenceWriteAccepted -and $record.activeReadback){Write-Host 'CONFIRMED: Xbox accepted this token for Presence and reports the game active.' -ForegroundColor Green}
-  elseif($record.presenceWriteAccepted){Write-Host 'Presence write accepted; active readback not yet confirmed. Propagation may be delayed.' -ForegroundColor Yellow}
-  else{Write-Host 'Presence failed. Check the HTTP/error code; this alone does not prove a bad token or a Microsoft server fault.' -ForegroundColor Yellow}
-  if($record.lastPlayedWriteAccepted){Write-Host 'Last Played submission accepted. Check your Xbox profile for the resulting history; UI propagation is not verified here.'}
-  elseif($record.presenceWriteAccepted){Write-Host 'Presence accepted, but Last Played submission did not pass. These are separate results.' -ForegroundColor Yellow}
- }finally{$auth=$null;$xml=$null;$record|ConvertTo-Json -Depth 7|Set-Content (Join-Path $Run 'presence-result.json')}
- return [pscustomobject]$record
 }
