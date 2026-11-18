@@ -12,9 +12,9 @@
 
   <ItemGroup>
     <Compile
-      Include="..\..\vendor\SteamAchievementManager\SAM.API\**\*.cs"
+      Include="..\..\src\Shared\Steam\SAM.API\**\*.cs"
       LinkBase="References\SAM.API"
-      Exclude="..\..\vendor\SteamAchievementManager\SAM.API\GlobalSuppressions.cs;..\..\vendor\SteamAchievementManager\SAM.API\bin\**\*.cs;..\..\vendor\SteamAchievementManager\SAM.API\obj\**\*.cs" />
+      Exclude="..\..\src\Shared\Steam\SAM.API\GlobalSuppressions.cs;..\..\src\Shared\Steam\SAM.API\bin\**\*.cs;..\..\src\Shared\Steam\SAM.API\obj\**\*.cs" />
   </ItemGroup>
 
 </Project>
