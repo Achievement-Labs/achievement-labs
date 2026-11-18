@@ -36,7 +36,7 @@ public static class Windows8LicenseTests
             try { Windows8LicenseClient.VerifyAccountAsync(http, auth, "123", default).GetAwaiter().GetResult(); } catch (InvalidOperationException) { rejected = true; }
             Assert(rejected, "Wrong account and rejected token cannot become ready");
         }
-        var root = Path.Combine(AppContext.BaseDirectory, "vendor", "gfw8-license-grabber", "backend");
+        var root = Path.Combine(AppContext.BaseDirectory, "tools", "Windows8License");
         using var games = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "games.json")));
         using var identities = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "runtime", "jetpack-auth-investigation", "shared-auth-helper", "identities.json")));
         var configs = identities.RootElement.EnumerateArray().ToDictionary(x => x.GetProperty("gameId").GetInt32());
