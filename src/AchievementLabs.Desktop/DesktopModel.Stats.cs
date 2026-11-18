@@ -119,7 +119,14 @@ public sealed partial class DesktopModel
                 await requests.WaitAsync(cancellation.Token);
                 try
                 {
-                    var result = await api.SendHeartbeatAsync(xuid, titleId);
+                    var result = await PresenceRecovery.RunAsync(async token =>
+                    {
+                        var reply = await api.SendHeartbeatAsync(xuid, titleId);
+                        if (PresenceRecovery.RetryableStatus(reply.StatusCode))
+                            throw new HttpRequestException($"Heartbeat HTTP {reply.StatusCode}", null, (System.Net.HttpStatusCode)reply.StatusCode);
+                        return reply;
+                    }, cancellation.Token, (attempt, wait) =>
+                        PresenceHeartbeat = $"Heartbeat interrupted. Retry {attempt}/3 in {wait.TotalSeconds:0} seconds.");
                     StatsOutput = $"Presence heartbeat for {titleId}: HTTP {result.StatusCode}";
                     if (result.StatusCode < 200 || result.StatusCode >= 300)
                     {

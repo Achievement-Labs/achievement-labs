@@ -7,6 +7,15 @@ public sealed partial class DesktopModel
 {
     private Dictionary<string, OneCoreAchievementResponse> definitions = [];
     private HashSet<string> mappedIds = [];
+    private bool eventCoverageKnown;
+
+    private Achievement[] ApplyEventMappingBadges(Achievement[] rows)
+    {
+        if (!eventBased || !eventCoverageKnown) return rows.Select(row =>
+            row.EventMappingAvailable == null ? row : row with { EventMappingAvailable = null }).ToArray();
+
+        return rows.Select(row => row with { EventMappingAvailable = mappedIds.Contains(row.Id) }).ToArray();
+    }
     private bool liveAchievements, eventBased, eventTitleSupported, titleTesting, titlePartial, unlockAllEnabled;
     private static readonly (HashSet<string> Testing, HashSet<string> ComingSoon, HashSet<string> Partial) localCatalog = LoadLocalCatalog();
     private static (HashSet<string>, HashSet<string>, HashSet<string>) LoadLocalCatalog()
@@ -35,7 +44,7 @@ public sealed partial class DesktopModel
         : AchievementLabs.MultiSelect.BatchPicker.CanUnlockSelected(this);
     public bool CanUnlockAll => CanQuery && liveAchievements && !eventBased && UnlockAllEnabled && SelectedGame != null && !UsesLegacyEndpoint(SelectedGame) && achievements.Any(a => !a.Unlocked);
     private void NotifyActions() { Changed(nameof(TitleComingSoon)); Changed(nameof(TitleTesting)); Changed(nameof(TitlePartial)); Changed(nameof(TitleNotSupported)); Changed(nameof(CanUnlockSelected)); Changed(nameof(CanUnlockAll)); }
-    private void ResetActions() { ActionReports.Clear(); titleComingSoon = false; titleTesting = false; titlePartial = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
+    private void ResetActions() { ActionReports.Clear(); titleComingSoon = false; titleTesting = false; titlePartial = false; eventBased = false; eventTitleSupported = false; liveAchievements = false; definitions = []; mappedIds = []; eventCoverageKnown = false; ActionSummary = "Load achievements from your account to enable actions."; NotifyActions(); }
     private async Task LoadActionMetadataAsync(AchievementsResponse response, string titleId, int version)
     {
         var nextDefinitions = response.achievements.ToDictionary(a => a.id);
@@ -43,6 +52,7 @@ public sealed partial class DesktopModel
         var nextMappedIds = new HashSet<string>();
         string? error = null;
         var nextSupported = false;
+        var nextCoverageKnown = false;
         var nextTesting = nextEventBased && localCatalog.Testing.Contains(titleId);
         var nextComingSoon = nextEventBased && localCatalog.ComingSoon.Contains(titleId);
         var nextPartial = nextEventBased && localCatalog.Partial.Contains(titleId);
@@ -60,12 +70,13 @@ public sealed partial class DesktopModel
                     nextMappedIds = (await eventCatalog.GetTitleAsync(titleId, lifetime.Token)).AchievementIds.ToHashSet();
                 }
                 else error = nextComingSoon ? "Coming Soon — this title is still being tested." : "This event-based title is not currently supported.";
+                nextCoverageKnown = true;
             }
             catch (OperationCanceledException) { throw; }
             catch { error = nextComingSoon ? "Coming Soon — this title is still being tested." : "Event template service unavailable. Try again shortly."; }
         }
         if (version != selectionVersion || lifetime.IsCancellationRequested) return;
-        titleComingSoon = nextComingSoon; titleTesting = nextTesting; titlePartial = nextPartial; definitions = nextDefinitions; eventBased = nextEventBased; eventTitleSupported = nextSupported; mappedIds = nextMappedIds; liveAchievements = true;
+        titleComingSoon = nextComingSoon; titleTesting = nextTesting; titlePartial = nextPartial; definitions = nextDefinitions; eventBased = nextEventBased; eventTitleSupported = nextSupported; mappedIds = nextMappedIds; eventCoverageKnown = nextCoverageKnown; liveAchievements = true;
         var identifiedMethod = LibrarySupportDiscovery.Classify(JObject.FromObject(response));
         if (identifiedMethod is { } confirmed) RememberLibraryUnlockMethod(titleId, confirmed);
         ActionSummary = error ?? (eventBased ? $"Event-based title · {mappedIds.Count} mapped achievement IDs" : "Title-based achievements · ready for individual actions");
