@@ -23,7 +23,12 @@ public sealed partial class DesktopModel
     {
         if (!liveAchievements || !eventBased || SelectedGame is not { } game || definitions.Count == 0) return;
         var response = new AchievementsResponse { achievements = definitions.Values.ToList() };
-        await LoadActionMetadataAsync(response, game.Id, selectionVersion);
+        var version = selectionVersion;
+        await LoadActionMetadataAsync(response, game.Id, version);
+        if (version != selectionVersion) return;
+        var selectedId = SelectedAchievement?.Id;
+        achievements = ApplyEventMappingBadges(achievements);
+        if (selectedId != null) SelectedAchievement = achievements.FirstOrDefault(row => row.Id == selectedId);
         Refresh();
     }
     public async Task OpenSessionAchievementsAsync()

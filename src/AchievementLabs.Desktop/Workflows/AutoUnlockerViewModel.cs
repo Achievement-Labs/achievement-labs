@@ -937,6 +937,22 @@ namespace AchievementLabs.Desktop.Workflows
             catch { /* Optional display metadata must never prevent loading an existing queue. */ }
         }
 
+        public void RemoveQueueItem(AutoUnlockQueueDisplay item)
+        {
+            if (IsRunning || _state == null || !QueueItems.Contains(item)) return;
+            int index = item.Index - 1;
+            if (index < 0 || index >= _state.Queue.Count || _state.Queue[index].AchievementId != item.AchievementId) return;
+            try
+            {
+                AchievementLabs.MultiSelect.QueueTools.Remove(this, _state, [_state.Queue[index]]);
+            }
+            catch
+            {
+                try { SaveState(); } catch { }
+                StatusText = "Could not save the queue edit. The previous queue was restored.";
+            }
+        }
+
         private void PopulateQueueDisplay()
         {
             if (_state == null) return;

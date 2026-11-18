@@ -22,7 +22,8 @@ public sealed partial class DesktopModel
         catch { EventCatalogueStatus = "Could not import event pack. Choose a pack containing templates and mappings (up to 64 MB). Existing data retained."; }
         finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
     }
-    public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
+    public IReadOnlyList<EventUpdateSkip> EventUpdateSkipped => eventCatalog.SkippedEntries;
+    public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); Changed(nameof(EventUpdateSkipped)); } }
     public async Task RefreshEventCatalogueAsync(bool force = true, bool startup = false)
     {
         if (eventRefreshRunning || OfflineChecks) return;
