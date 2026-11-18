@@ -119,10 +119,10 @@ public sealed partial class DesktopModel
                 await requests.WaitAsync(cancellation.Token);
                 try
                 {
-                    var result = await PresenceRecovery.RunAsync(async token =>
+                    var result = await AchievementLabs.Core.PresenceRecovery.RunAsync(async token =>
                     {
                         var reply = await api.SendHeartbeatAsync(xuid, titleId);
-                        if (PresenceRecovery.RetryableStatus(reply.StatusCode))
+                        if (AchievementLabs.Core.PresenceRecovery.RetryableStatus(reply.StatusCode))
                             throw new HttpRequestException($"Heartbeat HTTP {reply.StatusCode}", null, (System.Net.HttpStatusCode)reply.StatusCode);
                         return reply;
                     }, cancellation.Token, (attempt, wait) =>
