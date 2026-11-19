@@ -530,7 +530,7 @@ Classifications follow the author’s data. Mapped counts describe recipes, not 
 | The Binding of Isaac: Rebirth | Xbox One, Xbox Series X\|S | `794552001` | 79 | Testing | [794552001.json](794552001/794552001.json) |
 | The Bunker | Windows PC, Xbox One, Xbox Series X\|S | `181110324` | 28 | Supported | [181110324.json](181110324/181110324.json) |
 | The Crew | Xbox One, Xbox Series X\|S | `1979014977` | 50 | Supported | [1979014977.json](1979014977/1979014977.json) |
-| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | `1285166951` | 179 | Partially Supported | [1285166951.json](1285166951/1285166951.json) |
+| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | `1285166951` | 178 | Partially Supported | [1285166951.json](1285166951/1285166951.json) |
 | The Elder Scrolls V: Skyrim Special Edition | Xbox One, Xbox Series X\|S | `252034287` | 75 | Supported | [252034287.json](252034287/252034287.json) |
 | The Elder Scrolls V: Skyrim Special Edition (PC) | Windows PC | `1688839217` | 75 | Supported | [1688839217.json](1688839217/1688839217.json) |
 | The Escapists | Xbox One | `1128640842` | 19 | Partially Supported | [1128640842.json](1128640842/1128640842.json) |

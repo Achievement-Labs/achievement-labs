@@ -252,11 +252,21 @@ public sealed class Xbox360PackageService : IXbox360PackageService
             var topHash = new byte[20];
             stream.Position = 0x381;
             stream.ReadExactly(topHash);
-            var levelOneOffset = SelectHashTable(stream, 0xB6000, topHash);
-            var levelZeroHash = new byte[20];
-            stream.Position = levelOneOffset + group * 0x18L;
-            stream.ReadExactly(levelZeroHash);
-            tableOffset = SelectHashTable(stream, tableOffset, levelZeroHash);
+            Span<byte> allocatedBytes = stackalloc byte[4];
+            stream.Position = 0x395;
+            stream.ReadExactly(allocatedBytes);
+            var allocatedBlocks = System.Buffers.Binary.BinaryPrimitives.ReadUInt32BigEndian(allocatedBytes);
+            // Small profiles have a level-zero root; no level-one table exists yet.
+            if (allocatedBlocks <= 0xAA)
+                tableOffset = SelectHashTable(stream, tableOffset, topHash);
+            else
+            {
+                var levelOneOffset = SelectHashTable(stream, 0xB6000, topHash);
+                var levelZeroHash = new byte[20];
+                stream.Position = levelOneOffset + group * 0x18L;
+                stream.ReadExactly(levelZeroHash);
+                tableOffset = SelectHashTable(stream, tableOffset, levelZeroHash);
+            }
         }
         var recordOffset = tableOffset + (blockNumber % 0xAA) * 0x18 + 0x15;
         if (recordOffset < 0 || recordOffset + 3 > stream.Length) return -1;
