@@ -11,6 +11,7 @@ on:
       - 'tests/AchievementLabs.Enhancements.Tests/EventStatsCatalogChecks.cs'
       - 'tools/test_event_catalog.py'
       - 'tools/EventCatalogChecks/**'
+      - 'tools/xbox360/package-checks/**'
       - 'tools/CompressEvents/**'
       - 'tools/UpdaterChecks/**'
       - 'src/AchievementLabs.Desktop/**'
@@ -48,8 +49,14 @@ jobs:
             python tools/check_event_catalog_integrity.py
           }
       - run: python -m unittest discover -s tools -p test_event_catalog.py
+      - run: python -m unittest discover -s tools -p test_event_catalog_integrity.py
       - run: python -m unittest discover -s tools/mobile -p test_publish_events.py
       - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --render Events
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --reported-mappings Events
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --reported-mappings src/AchievementLabs.App/Events
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --idarb-mappings Events
+      - run: dotnet run --project tools/EventCatalogChecks -p:NuGetAudit=false -- --idarb-mappings src/AchievementLabs.App/Events
+      - run: dotnet run --project tools/xbox360/package-checks -p:NuGetAudit=false
       - run: dotnet run --project tools/CompressEvents -p:NuGetAudit=false -- --self-test
       - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --render-bundled
       - run: dotnet run --project tools/EventCatalogChecks -c Release -p:NuGetAudit=false -- --official-release Events
