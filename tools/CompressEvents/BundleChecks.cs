@@ -34,6 +34,14 @@ internal static class BundleChecks
             var stamp = File.GetLastWriteTimeUtc(output); var bytes = File.ReadAllBytes(output);
             BundlePacker.Pack(source, output);
             Check(stamp == File.GetLastWriteTimeUtc(output) && bytes.SequenceEqual(File.ReadAllBytes(output)), "Unchanged output rewritten.");
+            Directory.CreateDirectory(Path.Combine(source, "11"));
+            File.WriteAllText(Path.Combine(source, "11", "11.json"), "stat-only template");
+            File.WriteAllText(Path.Combine(source, "11", "Stats.json"), "{\"11\":{\"Stats\":{}},\"SupportedTitleIDs\":[\"11\"]}");
+            File.WriteAllText(Path.Combine(source, "Stats.json"), "{\"11\":{\"Stats\":{}}}");
+            BundlePacker.Pack(source, output); Verify(output, source);
+            using (var packed = ZipFile.OpenRead(output))
+                Check(packed.GetEntry("11/11.json.br") != null && packed.GetEntry("11/Stats.json.br") != null && packed.GetEntry("11/Data.json.br") == null,
+                    "Stat-only title lost its template or gained achievement mappings.");
             var template=Path.Combine(source,"7","7.json");
             File.WriteAllText(template,"modified");File.SetLastWriteTimeUtc(template,DateTime.UnixEpoch);
             BundlePacker.Pack(source, output); Verify(output, source);

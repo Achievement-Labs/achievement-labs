@@ -31,7 +31,7 @@ internal static class BundlePacker
         {
             var path = Path.Combine(source, relative.Replace('/', Path.DirectorySeparatorChar));
             if (!File.Exists(path)) throw new InvalidDataException("Required runtime event file missing: " + relative);
-            files.Add(relative, path);
+            files.TryAdd(relative, path);
         }
         var indexed = File.Exists(Path.Combine(source, "index.json"));
         var index = indexed ? "index.json" : "Data.json";
@@ -45,7 +45,20 @@ internal static class BundlePacker
             if (indexed) Add(property.Name + "/Data.json");
             Add((indexed ? property.Name + "/" : "") + property.Name + ".json");
         }
-        if (File.Exists(Path.Combine(source, "Stats.json"))) Add("Stats.json");
+        if (File.Exists(Path.Combine(source, "Stats.json")))
+        {
+            Add("Stats.json");
+            using var stats = System.Text.Json.JsonDocument.Parse(File.ReadAllBytes(files["Stats.json"]));
+            foreach (var title in stats.RootElement.EnumerateObject())
+            {
+                if (!uint.TryParse(title.Name, out var id) || id == 0 || title.Name != id.ToString())
+                    throw new InvalidDataException("Invalid stat title identity.");
+                // Stat-only titles must not become event-achievement titles just to ship a template.
+                var prefix = indexed ? title.Name + "/" : "";
+                foreach (var relative in new[] { prefix + title.Name + ".json", indexed ? prefix + "Stats.json" : "" })
+                    if (relative.Length > 0 && File.Exists(Path.Combine(source, relative.Replace('/', Path.DirectorySeparatorChar)))) Add(relative);
+            }
+        }
         return files;
     }
 

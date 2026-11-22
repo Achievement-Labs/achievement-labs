@@ -11,6 +11,7 @@ static JObject Block() => JObject.Parse("""{"Enabled":true,"FullySupported":fals
 static string Template(string id) => """{"name":"Microsoft.XboxLive.TID.Test","data":{"baseData":{"titleId":"ID","name":"Test","serviceConfigId":"11111111-2222-3333-4444-555555555555","userId":"REPLACEXUID","achievement":REPLACEACH}}}""".Replace("TID", "T" + id).Replace("\"ID\"", "\"" + id + "\"");
 if (args is ["--profile-catalog"]) { CatalogPerformanceChecks.Run(); return; }
 if (args is ["--reported-mappings", var eventsDirectory]) { await ReportedMappingChecks.RunAsync(eventsDirectory); return; }
+if (args is ["--stat-templates", var statDirectory, var statInventory]) { await StatTemplateChecks.RunAsync(statDirectory, statInventory); return; }
 if (args is ["--idarb-mappings", var idarbDirectory]) { await IdarbMappingChecks.RunAsync(idarbDirectory); return; }
 if (args is ["--managed-upgrade"]) { await ManagedEventCatalogChecks.RunAsync(); return; }
 if (args is ["--install-bundled", var destination])

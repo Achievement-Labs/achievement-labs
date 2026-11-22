@@ -88,9 +88,8 @@ namespace AchievementLabs.Desktop.Workflows
             : HasEditableEventData ? "Event" : "Unknown";
         private string? ReadStatTemplate()
         {
-            var path = File.Exists(Path.Combine(account.EventsDirectory, "index.json"))
-                ? Path.Combine(account.EventsDirectory, TitleId, TitleId + ".json") : Path.Combine(account.EventsDirectory, TitleId + ".json");
-            if (File.Exists(path)) return File.ReadAllText(path);
+            var path = AchievementLabs.Core.EventCatalogFileLocator.Find(account.EventsDirectory, TitleId, TitleId + ".json");
+            if (path != null) return File.ReadAllText(path);
             var indexed = AchievementLabs.Core.BundledEventFiles.Contains("index.json");
             return AchievementLabs.Core.BundledEventFiles.Read(indexed ? TitleId + "/" + TitleId + ".json" : TitleId + ".json");
         }
@@ -702,15 +701,14 @@ namespace AchievementLabs.Desktop.Workflows
             EventDataInfo = "";
             TitleMetadataInfo = "";
 
-            string dataPath = Path.Combine(account.EventsDirectory, "Stats.json");
-
             try
             {
-                var file = new FileInfo(dataPath);
-                var version = file.Exists ? (file.FullName, file.LastWriteTimeUtc, file.Length) : ("", DateTime.MinValue, 0L);
+                var dataPath = AchievementLabs.Core.EventCatalogFileLocator.Find(account.EventsDirectory, TitleId, "Stats.json");
+                var file = dataPath == null ? null : new FileInfo(dataPath);
+                var version = file != null ? (file.FullName, file.LastWriteTimeUtc, file.Length) : ("bundled", DateTime.MinValue, 0L);
                 if (_cachedStatsVersion != version)
                 {
-                    var json = file.Exists ? File.ReadAllText(dataPath) : AchievementLabs.Core.BundledEventFiles.Read("Stats.json");
+                    var json = dataPath != null ? File.ReadAllText(dataPath) : AchievementLabs.Core.BundledEventFiles.Read("Stats.json");
                     _cachedStats = json == null ? null : JObject.Parse(json);
                     _cachedStatsVersion = version;
                 }
@@ -736,7 +734,11 @@ namespace AchievementLabs.Desktop.Workflows
                     TitleMetadataInfo = BuildTitleMetadataInfo(_eventsDataForTitle);
                 }
             }
-            catch { }
+            catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or Newtonsoft.Json.JsonException or ArgumentException)
+            {
+                _eventsDataForTitle = null;
+                EventDataInfo = "Could not load local stat definitions: " + error.Message;
+            }
         }
 
         private static bool IsEditableStatDefinition(JToken? statData)
