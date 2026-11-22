@@ -12,7 +12,7 @@ static class Test
  static void Assert(bool v,string message) { if(!v)throw new Exception(message); }
  static void Click(Button b) { b.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));Dispatcher.UIThread.RunJobs(); }
  static IEnumerable<T> Desc<T>(Control c)=>c.GetLogicalDescendants().OfType<T>();
- static Window Open(FakeWindow w) { Click(Desc<Button>(w).Single(b=>(b.Content as string)=="Select multipleâ€¦"));return w.OwnedWindows.Single(); }
+ static Window Open(FakeWindow w) { Click(Desc<Button>(w).Single(b=>(b.Content as string)=="Select multiple…"));return w.OwnedWindows.Single(); }
  static void SelectAll(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Select all eligible"));
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
@@ -165,7 +165,7 @@ static class Test
    Assert(!Desc<Button>(window).Any(b=>Equals(b.Content,"Legacy tools")),"Legacy tools navigation is removed");
    Assert(Desc<ComboBox>(window).Any(c=>c.Name=="AchievementPackFilter"),"Pack filter in real window");
    Assert(Desc<ListBox>(window).Any(l=>l.Name=="AchievementLabsAchievementList"),"Named real achievement list");
-   Assert(Desc<Button>(window).Any(b=>(b.Content as string)=="Select multipleâ€¦"),"Batch button in real window");
+   Assert(Desc<Button>(window).Any(b=>(b.Content as string)=="Select multiple…"),"Batch button in real window");
       Assert(Desc<Button>(window).Count(b=>b.Name=="ExportAllAchievements")==1,"Single permanent Settings export button");
    Assert(Desc<Button>(window).Single(b=>b.Name=="ExportAllAchievements").Parent is StackPanel,"Export lives in Settings tile");
    Assert(Desc<Button>(window).Single(b=>b.Name=="RefreshDlcCatalogueNow").IsEnabled,"Public catalogue refresh available disconnected");
@@ -194,7 +194,7 @@ static class Test
    Assert(Desc<Button>(window).Count(b=>b.Name=="RemoveQueueAchievements")==1,"Queue removal attached");
    Assert(Desc<Button>(window).Count(b=>b.Name=="RemoveCompletedQueueAchievements")==1,"Completed queue cleanup attached");
    Assert(Desc<Button>(window).Count(b=>b.Name=="OpenGameTitleSpoofer")==1,"Game spoofer shortcut present");
-   var searchBox=Desc<TextBox>(window).First(b=>b.PlaceholderText=="Search achievementsâ€¦");
+   var searchBox=Desc<TextBox>(window).First(b=>b.PlaceholderText=="Search achievements…");
    Assert(searchBox.InnerRightContent is Button,"Search clearing control attached");
    searchBox.Text="test search";Dispatcher.UIThread.RunJobs();
    Click((Button)searchBox.InnerRightContent!);Dispatcher.UIThread.RunJobs();
@@ -235,10 +235,10 @@ static class Test
     Assert(libraryRow.GetLogicalDescendants().OfType<Button>().Select(b=>b.Content?.ToString()).SequenceEqual(new[]{"Copy ID","Open achievements","Open stats","Open Game Session"}),"Library has four actions including the unified game session");
     var spooferPlaytime=Desc<TextBlock>(window).Single(t=>t.Name=="QueueRecordedPlaytime");
     Assert(Desc<TextBlock>(window).Any(t=>t.Text=="TITLE SPOOFER"), "Separate spoofer status tile present in Auto Unlock");
-    typedModel.GetType().GetProperty("ActiveSpoofTitle")!.SetValue(typedModel,"Synthetic title Â· 42");
+    typedModel.GetType().GetProperty("ActiveSpoofTitle")!.SetValue(typedModel,"Synthetic title · 42");
     typedModel.GetType().GetProperty("PresenceElapsed")!.SetValue(typedModel,"Session: 26.50 hours");
     Dispatcher.UIThread.RunJobs();
-    Assert(Desc<SelectableTextBlock>(window).Any(t=>t.Text=="Synthetic title Â· 42") && Desc<TextBlock>(window).Any(t=>t.Text=="Session: 26.50 hours"), "Active title and total hours propagate to queue tile");
+    Assert(Desc<SelectableTextBlock>(window).Any(t=>t.Text=="Synthetic title · 42") && Desc<TextBlock>(window).Any(t=>t.Text=="Session: 26.50 hours"), "Active title and total hours propagate to queue tile");
     var updateElapsed=typedModel.GetType().GetMethod("UpdatePresenceElapsed",flags)!;
     updateElapsed.Invoke(typedModel,new object[] { TimeSpan.FromHours(26)+TimeSpan.FromMinutes(30)+TimeSpan.FromSeconds(3) });
     Dispatcher.UIThread.RunJobs();
@@ -338,7 +338,7 @@ static class Test
   d=Open(w);SelectAll(d);Submit(d);Dispatcher.UIThread.RunJobs();Assert(m.Sent.SequenceEqual(new[]{"1","2"}) && m.Calls==2,"One batch call for multiple checked achievements");
   d=Open(w);SelectAll(d);Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Cancel"));Assert(m.Calls==2,"Cancel sends nothing");
   d=Open(w);SelectAll(d);m.SelectedGame=new Game();Submit(d);Assert(m.Calls==2 && d.IsVisible,"Stale game rejected");d.Close();Dispatcher.UIThread.RunJobs();
-  m.CanQuery=false;m.Notify();Assert(!Desc<Button>(w).Single(b=>(b.Content as string)=="Select multipleâ€¦").IsEnabled,"Busy disables batch button");w.Close();
+  m.CanQuery=false;m.Notify();Assert(!Desc<Button>(w).Single(b=>(b.Content as string)=="Select multiple…").IsEnabled,"Busy disables batch button");w.Close();
   Assert(AchievementView.Ghosts.Count==91,"All 91 mapped");
   Assert(AchievementView.Packs.Skip(1).Take(5).Select(p=>AchievementView.Ghosts.Values.Count(v=>v==p)).SequenceEqual(new[]{50,11,10,10,10}),"Pack counts 50/11/10/10/10");
   Assert(!AchievementView.Supports(new Game {Id="wrong",Name="Call of Duty: Ghosts"}),"Wrong version never matched by name");
@@ -349,11 +349,11 @@ static class Test
   Assert(!AchievementView.StartsGroup(null,boundaries[0]),"Cleared virtual list safe");
   Assert(AchievementView.Group(new Row("92","Hat Trick",true))=="Nemesis","Hat Trick is Nemesis");
   Assert(AchievementView.Group(new Row("x","UNKNOWN",false))=="Unclassified","Unknown not guessed as base");
-  Assert(AchievementView.Group(new Row("x","YOUâ€™VE EARNED IT",false))=="Base game","Punctuation and case matching");
+  Assert(AchievementView.Group(new Row("x","YOU’VE EARNED IT",false))=="Base game","Punctuation and case matching");
   var sortRows=new[]{new Row("z","zebra",false),new Row("a","Apple",false),new Row("b","banana",false)};
   Assert(AchievementView.Arrange(sortRows,false,1,"All packs").Cast<Row>().Select(r=>r.Id).SequenceEqual(new[]{"a","b","z"}),"A-Z sorting");
   Assert(AchievementView.Arrange(sortRows,false,2,"All packs").Cast<Row>().Select(r=>r.Id).SequenceEqual(new[]{"z","b","a"}),"Z-A sorting");
-  m=new Model {SelectedGame=new Game {Id="572802557",Name="Call of DutyÂ®: Ghosts"},VisibleAchievements=new[]{new Row("1","Hat Trick",true),new Row("2","Always Hard",false),new Row("3","Ghost Stories",false)}};
+  m=new Model {SelectedGame=new Game {Id="572802557",Name="Call of Duty®: Ghosts"},VisibleAchievements=new[]{new Row("1","Hat Trick",true),new Row("2","Always Hard",false),new Row("3","Ghost Stories",false)}};
   m.mappedIds.Add("3");
   var state=AchievementView.For(m);state.Sort=1;state.Pack="Nemesis";
   var transformed=AchievementView.Transform(m.VisibleAchievements,m);
