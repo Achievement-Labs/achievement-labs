@@ -268,7 +268,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
                 try { response = await Task.Run(() => api.GetAchievementsForTitleAsync(xuid, game.Id), lifetime.Token); }
                 catch (Exception error) when (error is not OperationCanceledException) { primaryError = error; }
                 loaded = response == null ? [] : Map(response);
-                if (loaded.Length == 0)
+                // An empty/failed modern response must not silently open another
+                // edition's legacy list or expose its Windows 8 unlock controls.
+                if (loaded.Length == 0 && XboxTitleCatalog.Find(game.Id)?.SourceVersion != 2)
                 {
                     try
                     {

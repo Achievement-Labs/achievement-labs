@@ -32,7 +32,10 @@ public static class XboxTitleCatalog
 
     public static string ResolveWindows8TitleId(string id)
     {
-        if (Find(id)?.Platforms.Contains("Windows8") == true) return id;
+        var exact = Find(id);
+        // A source-v2 achievement edition is distinct from the legacy entry's
+        // modern title-hub alias, even when both records share a display name.
+        if (exact?.SourceVersion == 2 || exact?.Platforms.Contains("Windows8") == true) return id;
         if (VerifiedWindows8Aliases.TryGetValue(id, out var legacy)) return legacy;
         return Windows8Aliases.Value.TryGetValue(id, out var entries) && entries.Length == 1
             ? entries[0].TitleId : id;
@@ -40,7 +43,7 @@ public static class XboxTitleCatalog
 
     private static Entry[] SearchEditions(Entry entry)
     {
-        if (entry.Platforms.Contains("Windows8")) return [entry];
+        if (entry.SourceVersion == 2 || entry.Platforms.Contains("Windows8")) return [entry];
         if (Windows8Aliases.Value.TryGetValue(entry.TitleId, out var editions)) return editions;
         var legacyId = ResolveWindows8TitleId(entry.TitleId);
         return legacyId != entry.TitleId && Find(legacyId) is { } legacy ? [legacy] : [entry];
@@ -66,6 +69,7 @@ public static class XboxTitleCatalog
         query=query.Trim();
         if(query.Length>200)throw new ArgumentException("Search must be at most 200 characters.");
         var key=TitleSearchText.Key(query);
+        if (Find(query) is { SourceVersion: 2 } modern) return [modern];
         return Data.Value.Titles.Where(t=>query.Length==0 || t.TitleId==query || t.ModernTitleId==query ||
             (key.Length>0 ? t.SearchKey.Contains(key,StringComparison.Ordinal) : t.Name.Contains(query,StringComparison.OrdinalIgnoreCase)))
             .SelectMany(SearchEditions).DistinctBy(t => t.TitleId)
