@@ -68,7 +68,7 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -m:1 -nr:false -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false @taskBuildOptions -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-$taskActivationPath = 'vendor/gfw8-license-grabber/backend/runtime/jetpack-auth-investigation'
+$taskActivationPath = 'tools/Windows8License/runtime/jetpack-auth-investigation'
 $taskActivationSource = Join-Path $taskRoot "$taskActivationPath/ActivateHelper.cs"
 $taskActivationOutput = Join-Path $taskHelpers "$taskActivationPath/ActivateHelper.dll"
 $taskFrameworkCompiler = Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'

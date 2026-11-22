@@ -255,7 +255,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
             {
                 using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", session.Authorization);
-                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", "en-GB");
+                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", XboxResponseLanguage.Resolve(RegionOverride));
                 var reader = new AchievementLabs.MultiSelect.AchievementExport(http, xuid);
                 var rows = await reader.Achievements(new(game.Id, game.Name, game.Platform.Replace(" / ", ", "), game.Score), lifetime.Token);
                 loaded = rows.Select(a => new Achievement(a.Id, a.Name, a.Description,

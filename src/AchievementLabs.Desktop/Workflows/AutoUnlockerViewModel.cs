@@ -92,6 +92,7 @@ namespace AchievementLabs.Desktop.Workflows
                 _lastKnownXauth = account.XAUTH;
                 _xboxRestAPI = new XboxApiClient(account.XAUTH);
             }
+            _xboxRestAPI.SetRegionOverride(account.RegionOverride);
             return _xboxRestAPI;
         }
 

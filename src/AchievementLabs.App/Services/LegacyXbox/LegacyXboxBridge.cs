@@ -13,9 +13,11 @@ public sealed class LegacyXboxBridge : ILegacyXboxBridge
     private const string ProgressContractVersion = "1";
     private IXboxRequestSigner? _win8RequestSigner;
     private string? _win8SignedAuthorizationHeader;
+    private readonly Func<string>? _responseLanguage;
 
-    public LegacyXboxBridge()
+    public LegacyXboxBridge(Func<string>? responseLanguage = null)
     {
+        _responseLanguage = responseLanguage;
         var handler = new HttpClientHandler
         {
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
@@ -302,7 +304,7 @@ public sealed class LegacyXboxBridge : ILegacyXboxBridge
         request.Headers.TryAddWithoutValidation(HeaderNames.Authorization, authorizationHeader);
         request.Headers.TryAddWithoutValidation(HeaderNames.Accept, HeaderValues.Accept);
         request.Headers.TryAddWithoutValidation(HeaderNames.AcceptEncoding, HeaderValues.AcceptEncoding);
-        request.Headers.TryAddWithoutValidation(HeaderNames.AcceptLanguage, "en-US");
+        request.Headers.TryAddWithoutValidation(HeaderNames.AcceptLanguage, _responseLanguage?.Invoke() ?? "en-US");
         request.Headers.TryAddWithoutValidation(
             HeaderNames.ContractVersion,
             source == LegacyAchievementReadSource.Progress ? ProgressContractVersion : HeaderValues.ContractVersion4);

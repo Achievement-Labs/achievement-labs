@@ -14,6 +14,7 @@ public sealed class NativeAccountContext
     public string XAUTH { get; set; } = "";
     public string XUIDOnly { get; set; } = "";
     public string EventsToken { get; set; } = "";
+    public bool RegionOverride { get; set; }
     public XboxAuthNet.OAuth.MicrosoftOAuthResponse? LastOAuthResponse { get; set; }
     public bool InitComplete => XAUTH.Length > 0;
     public string SpoofedTitleID { get; set; } = "0";

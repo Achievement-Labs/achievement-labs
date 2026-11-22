@@ -5,7 +5,7 @@ public sealed partial class DesktopModel
 {
     private Workflows.StatsEditorViewModel? statsEditor;
     public Workflows.StatsEditorViewModel StatsEditor => statsEditor ??= ObserveWorkflow(new Workflows.StatsEditorViewModel(new Workflows.NativeNotices(message => Notice = message), queueAccount));
-    public void OpenStats() { queueAccount.XAUTH = session?.Authorization ?? ""; queueAccount.XUIDOnly = session?.Xuid ?? ""; queueAccount.EventsToken = session?.EventsToken ?? ""; queueAccount.EventsDirectory = EventsDirectory; StatsEditor.OnNavigatedTo(); Navigate("Stats"); }
+    public void OpenStats() { queueAccount.RegionOverride = RegionOverride; queueAccount.XAUTH = session?.Authorization ?? ""; queueAccount.XUIDOnly = session?.Xuid ?? ""; queueAccount.EventsToken = session?.EventsToken ?? ""; queueAccount.EventsDirectory = EventsDirectory; StatsEditor.OnNavigatedTo(); Navigate("Stats"); }
     public void OpenLibraryStats(Game game)
     {
         if (StatsEditor.IsBusy) { Notice = "Wait for the current stat operation before selecting another title."; return; }

@@ -20,7 +20,9 @@ public class XboxApiClient : IDisposable
 
     // User specifics
     private readonly string _xauth;
-    private readonly string _requestedResponseLanguage;
+    private bool _forceEnglish;
+    private string RequestedResponseLanguage => AchievementLabs.Core.XboxResponseLanguage.Resolve(_forceEnglish);
+    public void SetRegionOverride(bool forceEnglish) => _forceEnglish = forceEnglish;
     public string LastAchievementsRawResponse { get; private set; } = string.Empty;
     public string LastGameStatsRawResponse { get; private set; } = string.Empty;
     public string LastTitleHubStatsRawResponse { get; private set; } = string.Empty;
@@ -28,7 +30,7 @@ public class XboxApiClient : IDisposable
     public XboxApiClient(string xauth, bool regionOverride = false)
     {
         _xauth = xauth;
-        _requestedResponseLanguage = regionOverride ? "en-GB" : System.Globalization.CultureInfo.CurrentCulture.Name;
+        _forceEnglish = regionOverride;
         var handler = new HttpClientHandler()
         {
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
@@ -63,7 +65,7 @@ public class XboxApiClient : IDisposable
     {
         _httpClient.DefaultRequestHeaders.Clear();
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Authorization, _xauth);
-        _httpClient.DefaultRequestHeaders.Add(HeaderNames.AcceptLanguage, _requestedResponseLanguage);
+        _httpClient.DefaultRequestHeaders.Add(HeaderNames.AcceptLanguage, RequestedResponseLanguage);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.AcceptEncoding, HeaderValues.AcceptEncoding);
         _httpClient.DefaultRequestHeaders.Add(HeaderNames.Accept, HeaderValues.Accept);
 
@@ -82,7 +84,7 @@ public class XboxApiClient : IDisposable
     {
         _spooferClient.DefaultRequestHeaders.Clear();
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.Authorization, AchievementLabs.Core.SpoofRequest.SanitizeXauth(_xauth));
-        _spooferClient.DefaultRequestHeaders.Add(HeaderNames.AcceptLanguage, _requestedResponseLanguage);
+        _spooferClient.DefaultRequestHeaders.Add(HeaderNames.AcceptLanguage, RequestedResponseLanguage);
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.AcceptEncoding, HeaderValues.AcceptEncoding);
         _spooferClient.DefaultRequestHeaders.Add(HeaderNames.Accept, HeaderValues.Accept);
 

@@ -108,7 +108,7 @@ public sealed partial class DesktopModel
             try {
                 var account=session;if(account==null)return;
                 async Task<(string Name,string Message,bool Rejected)> Send(string id) {
-                    var definition=source[id];using var api=new XboxApiClient(account.Authorization);
+                    var definition=source[id];using var api=new XboxApiClient(account.Authorization, RegionOverride);
                     MirrorExpectXbox(game.Id,id,definition.name);
                     try {
                         if(session?.Xuid!=account.Xuid)throw new OperationCanceledException();
