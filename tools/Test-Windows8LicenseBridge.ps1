@@ -1,10 +1,10 @@
 $ErrorActionPreference='Stop'
 $repo=Split-Path -Parent $PSScriptRoot
 $fixture=Join-Path $repo ('artifacts\win8-fixture-'+[guid]::NewGuid().ToString('N'))
-$backend=Join-Path $fixture 'vendor\gfw8-license-grabber\backend'
+$backend=Join-Path $fixture 'tools\Windows8License'
 $null=New-Item -ItemType Directory -Force (Join-Path $fixture 'tools'),(Join-Path $backend 'runtime\jetpack-auth-investigation')
 Copy-Item -LiteralPath (Join-Path $repo 'tools\Acquire-Windows8License.ps1') -Destination (Join-Path $fixture 'tools\Acquire-Windows8License.ps1')
-$originalCore=(Join-Path $repo 'vendor\gfw8-license-grabber\backend\Core.ps1').Replace("'","''")
+$originalCore=(Join-Path $repo 'tools\Windows8License\Core.ps1').Replace("'","''")
 $mock=@'
 . '__CORE__'
 $script:Runtime=Join-Path $PSScriptRoot 'runtime'
