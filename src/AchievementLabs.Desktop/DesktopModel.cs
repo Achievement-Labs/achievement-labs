@@ -18,6 +18,10 @@ public record Achievement(string Id, string Name, string Description, int Score,
     public string Status => !ProgressKnown ? "Not available" : Unlocked ? "Unlocked" : "Locked";
     public string Symbol => Unlocked ? "✓" : "◇";
     public string ScoreLabel => ScoreKnown ? $"{Score} G" : "Not available";
+    public bool? EventMappingAvailable { get; init; }
+    public bool HasEventMappingBadge => EventMappingAvailable.HasValue;
+    public string EventMappingLabel => EventMappingAvailable == true ? "✓ Mapped" : "⊗ Unsupported";
+    public string EventMappingColour => EventMappingAvailable == true ? "#86D7AC" : "#FF8B8B";
     public string CompactScoreLabel => ScoreKnown ? ScoreLabel : "—";
     public string BadgeForeground => Unlocked ? "#8BCBB0" : "#B9BEC8";
     public string BadgeBackground => Unlocked ? "#253B34" : "#2A303B";
@@ -288,7 +292,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
             if (version != selectionVersion || lifetime.IsCancellationRequested) return;
             bool progressComplete = CanReplaceAchievementProgress(game, loaded);
             if (!progressComplete) loaded = loaded.Select(a => a.Unlocked ? a : a with { ProgressKnown = false }).ToArray();
-            achievements = loaded;
+            achievements = ApplyEventMappingBadges(loaded);
             if (progressComplete) RememberCompletion(resolvedGame, loaded.Select(a => new AchievementLabs.MultiSelect.CompletionMarkers.Row(a.Id, a.Name, a.Unlocked, a.ProgressKnown)).ToArray());
             var updated = WithLibraryPresentation(progressComplete
                 ? resolvedGame with { Completed = loaded.Count(a => a.Unlocked), Total = loaded.Length, Score = loaded.Where(a => a.Unlocked).Sum(a => a.Score), ProgressKnown = loaded.All(a => a.ProgressKnown) }

@@ -46,6 +46,7 @@ public sealed class EventCatalogClient : IDisposable
         AchievementLabsPaths.LocalFile("custom-event-packs-v2.json"), catalog.ReservedTitleIds.Concat(Additions!.KnownTitleIds)) : null;
     private bool IsCustom(string id) => officialCatalog && Local?.ReservedTitleIds.Contains(id) != true
         && Additions?.KnownTitleIds.Contains(id) != true && Custom?.KnownTitleIds.Contains(id) == true;
+    public IReadOnlyList<EventUpdateSkip> SkippedEntries => (Additions?.SkippedEntries ?? Array.Empty<EventUpdateSkip>()).Concat(Custom?.SkippedEntries ?? Array.Empty<EventUpdateSkip>()).ToArray();
     public string UpstreamStatus => Additions?.Status ?? "New-title updates unavailable.";
     public Task<int> ImportEventPackAsync(string text, CancellationToken ct) => (Custom ?? Additions ?? throw new InvalidOperationException("Local event data is unavailable.")).ImportPackAsync(text, ct);
     public Dictionary<string, LibraryEventSupport> GetLibrarySupport()

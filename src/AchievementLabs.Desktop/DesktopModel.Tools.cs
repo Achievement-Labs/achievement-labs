@@ -1,4 +1,6 @@
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
+using AchievementLabs.Core;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http;
@@ -6,13 +8,34 @@ using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Text;
 namespace AchievementLabs.Desktop;
-public sealed record TitleSearchResult(string TitleId, string Name, string Platform, string? ImageUrl, bool? HasDboxAchievements = null, bool? HasXboxAchievements = null)
+public sealed record TitleSearchResult(string TitleId, string Name, string Platform, string? ImageUrl, bool? HasDboxAchievements = null, bool? HasXboxAchievements = null) : INotifyPropertyChanged
 {
     public string Monogram => string.Concat(Name.Split(' ', StringSplitOptions.RemoveEmptyEntries).Take(2).Select(word => char.ToUpperInvariant(word[0])));
     public bool CanAddXbox360Gpd => Platform.Contains("Xbox 360", StringComparison.OrdinalIgnoreCase);
     public int? CatalogAchievementCount { get; init; }
     public string? AchievementType { get; init; }
     public string? StatType { get; init; }
+    private LibrarySupportBadge support = LibrarySupportBadge.Unknown;
+    public LibrarySupportBadge Support { get => support; init => support = value; }
+    public void RefreshSupport(LibrarySupportBadge value)
+    {
+        support = value;
+        PropertyChanged?.Invoke(this, new(nameof(Support)));
+        SetSupportDetails("Catalogue updated. Load mapping coverage to inspect the current entries.");
+    }
+    public string DefinitionPlatform { get; init; } = "";
+    private string supportDetails = "Load the current mapping list to see which achievements are covered.";
+    private bool loadingSupportDetails;
+    public string SupportDetails => supportDetails;
+    public bool CanLoadSupportDetails => !loadingSupportDetails;
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public void SetSupportDetails(string text, bool loading = false)
+    {
+        supportDetails = text;
+        loadingSupportDetails = loading;
+        PropertyChanged?.Invoke(this, new(nameof(SupportDetails)));
+        PropertyChanged?.Invoke(this, new(nameof(CanLoadSupportDetails)));
+    }
     private HashSet<string>? platformKeys;
     public HashSet<string> PlatformKeys=>platformKeys??=AchievementLabs.Core.TitleSearchPlatforms.Classify(Platform.Split([',','/'],StringSplitOptions.TrimEntries));
     public bool HasVerifiedAchievements => CatalogAchievementCount>0 || HasDboxAchievements == true || HasXboxAchievements == true;
@@ -81,7 +104,9 @@ public sealed partial class DesktopModel
             var entries=await Task.Run(()=>AchievementLabs.Core.XboxTitleCatalog.SearchEntries(query),lifetime.Token);
             var artwork=Games.GroupBy(g=>g.Id).ToDictionary(g=>g.Key,g=>g.First().ImageUrl);
             allTitleSearchResults=entries.Select(t=>new TitleSearchResult(t.TitleId,t.Name,string.Join(", ",t.Platforms.Select(FormatXboxPlatform)),artwork.GetValueOrDefault(t.TitleId) ?? (t.ModernTitleId is { } alias ? artwork.GetValueOrDefault(alias) : null))
-                {CatalogAchievementCount=t.TotalAchievements,AchievementType=t.AchievementsType??(t.SourceVersion==1 ? "Legacy" : null),StatType=t.StatsType}).ToArray();
+                {CatalogAchievementCount=t.TotalAchievements,AchievementType=t.AchievementsType??(t.SourceVersion==1 ? "Legacy" : null),StatType=t.StatsType,
+                    DefinitionPlatform=string.Join(" / ",t.Devices.Length>0?t.Devices:t.Platforms),
+                    Support=SupportFor(new Game(t.TitleId,t.Name,string.Join(" / ",t.Devices.Length>0?t.Devices:t.Platforms),0,t.TotalAchievements??0,0,false))}).ToArray();
             titleSearchWarning=" Local database snapshot; no Xbox or DBox verification requests. Up to 300 filtered results are shown.";
             ApplyTitleSearchFilters();
             if(allTitleSearchResults.Length==0)LookupOutput="No matching titles in the local database snapshot.";
@@ -90,6 +115,73 @@ public sealed partial class DesktopModel
         catch(Exception error) { LookupOutput="Title search failed: "+error.Message; }
         finally {Busy(false);}
     }
+    private void RefreshTitleSearchSupport()
+    {
+        if (allTitleSearchResults.Length == 0) return;
+        foreach (var title in allTitleSearchResults)
+            title.RefreshSupport(SupportFor(new Game(title.TitleId,title.Name,title.DefinitionPlatform,0,title.CatalogAchievementCount??0,0,false)));
+        ApplyTitleSearchFilters();
+    }
+    public async Task LoadTitleSupportDetailsAsync(TitleSearchResult title)
+    {
+        if (!title.CanLoadSupportDetails) return;
+        title.SetSupportDetails("Reading the current event catalogue…", true);
+        try
+        {
+            var support = eventCatalog.GetLibrarySupport().GetValueOrDefault(title.TitleId);
+            if (support == null || !support.Available)
+            {
+                title.SetSupportDetails(title.Support.Detail);
+                return;
+            }
+            var mapping = await eventCatalog.GetTitleAsync(title.TitleId, lifetime.Token);
+            var mapped = mapping.AchievementIds.ToHashSet(StringComparer.Ordinal);
+            var catalogue = AchievementLabs.MultiSelect.SharedDlcCatalogue.Current.Find(title.TitleId, title.DefinitionPlatform);
+            var definitions = catalogue?.Packs.SelectMany(pack => pack.Achievements).DistinctBy(a => a.Id).ToArray() ?? [];
+            bool incompleteNames = definitions.Length == 0 || title.CatalogAchievementCount > definitions.Length;
+            string definitionNotice = "";
+            if (incompleteNames && session != null && !OfflineChecks && !QueueActive && !busy)
+            {
+                Busy(true);
+                try
+                {
+                    await EnsureAuthorizationFreshAsync(lifetime.Token);
+                    await requests.WaitAsync(lifetime.Token);
+                    try
+                    {
+                        var response = await ReadQueueAchievementsAsync(title.TitleId, lifetime.Token);
+                        var live = response?.achievements.Where(a => !string.IsNullOrWhiteSpace(a.id))
+                            .Select(a => new AchievementLabs.MultiSelect.SharedDlcCatalogue.Definition(a.id, a.name ?? a.id))
+                            .DistinctBy(a => a.Id).ToArray();
+                        if (live is { Length: > 0 } && live.Length >= definitions.Length) definitions = live;
+                    }
+                    finally { requests.Release(); }
+                }
+                catch (OperationCanceledException) { throw; }
+                catch { definitionNotice = "Xbox definitions are unavailable. The list below uses the local named catalogue."; }
+                finally { Busy(false); }
+            }
+            if (definitions.Length == 0)
+            {
+                title.SetSupportDetails($"{mapped.Count} mapped achievement IDs. A complete named achievement list is unavailable in the local catalogue. Open achievements to inspect this game's live list.");
+                return;
+            }
+            var missing = definitions.Where(a => !mapped.Contains(a.Id)).ToArray();
+            var lines = new List<string> {
+                $"{definitions.Count(a => mapped.Contains(a.Id))} / {definitions.Length} named achievements mapped in the current catalogue.",
+                title.Support.Detail
+            };
+            if (definitionNotice.Length > 0) lines.Add(definitionNotice);
+            lines.Add(missing.Length == 0 ? "All named achievements have mappings." : $"Missing mappings ({missing.Length})");
+            lines.AddRange(missing.Select(a => $"• {a.Name} · ID {a.Id}"));
+            if (title.CatalogAchievementCount > definitions.Length)
+                lines.Add($"{title.CatalogAchievementCount - definitions.Length} additional definitions are missing from the local named list. Connect Xbox and load coverage again to identify them.");
+            title.SetSupportDetails(string.Join(Environment.NewLine, lines));
+        }
+        catch (OperationCanceledException) { title.SetSupportDetails("Mapping lookup cancelled."); }
+        catch { title.SetSupportDetails("Could not read mapping coverage. Check the event catalogue status in Settings → Sync."); }
+    }
+
     internal static string NormalizeLookalikes(string value)=>AchievementLabs.Core.TitleSearchText.NormalizeLookalikes(value);
     internal static string ConvertTitleIdToDecimal(string hexadecimalId) =>
         uint.TryParse(hexadecimalId, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var parsed)

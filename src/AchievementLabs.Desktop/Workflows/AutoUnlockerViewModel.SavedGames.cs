@@ -81,7 +81,7 @@ public partial class AutoUnlockerViewModel
     private bool OwnSavedState(AutoUnlockState state) => Regex.IsMatch(account.XUIDOnly,@"^\d{1,20}$") && state.OwnerXuid == account.XUIDOnly && uint.TryParse(state.TitleId,out var title) && title != 0;
     private void SaveGameQueueSnapshot(AutoUnlockState state)
     {
-        if (!OwnSavedState(state) || state.Queue.Count == 0) return;
+        if (!OwnSavedState(state)) return;
         Directory.CreateDirectory(SavedGamesDirectory);
         var path = Path.Combine(SavedGamesDirectory,state.TitleId+".json");
         File.WriteAllText(path+".tmp",JsonConvert.SerializeObject(state,Formatting.Indented));
