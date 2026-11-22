@@ -255,7 +255,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
             {
                 using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", session.Authorization);
-                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", "en-GB");
+                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", XboxResponseLanguage.Resolve(RegionOverride));
                 var reader = new AchievementLabs.MultiSelect.AchievementExport(http, xuid);
                 var rows = await reader.Achievements(new(game.Id, game.Name, game.Platform.Replace(" / ", ", "), game.Score), lifetime.Token);
                 loaded = rows.Select(a => new Achievement(a.Id, a.Name, a.Description,
@@ -268,7 +268,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
                 try { response = await Task.Run(() => api.GetAchievementsForTitleAsync(xuid, game.Id), lifetime.Token); }
                 catch (Exception error) when (error is not OperationCanceledException) { primaryError = error; }
                 loaded = response == null ? [] : Map(response);
-                if (loaded.Length == 0)
+                // An empty/failed modern response must not silently open another
+                // edition's legacy list or expose its Windows 8 unlock controls.
+                if (loaded.Length == 0 && XboxTitleCatalog.Find(game.Id)?.SourceVersion != 2)
                 {
                     try
                     {

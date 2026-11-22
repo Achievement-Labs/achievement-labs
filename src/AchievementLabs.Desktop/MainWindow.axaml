@@ -463,7 +463,8 @@
       <Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding EventsDirectory, Mode=TwoWay}"/><Button Grid.Column="1" Content="Browse…" Click="ChooseEvents" Margin="10,0,0,0"/></Grid>
       <TextBlock Text="Saved Xbox session file"/>
       <Grid ColumnDefinitions="*,Auto"><TextBox Text="{Binding SessionPath, Mode=TwoWay}"/><Button Grid.Column="1" Content="Browse…" Click="ChooseSession" Margin="10,0,0,0"/></Grid>
-      <CheckBox Content="Region override (applies on next connection)" IsChecked="{Binding RegionOverride, Mode=TwoWay}"/>
+      <CheckBox Content="Force English" IsChecked="{Binding RegionOverride, Mode=TwoWay}"/>
+      <TextBlock Text="Request English Xbox game and achievement text. Turn off to use your Windows display language. Refresh lists after changing this setting; save settings to remember it." TextWrapping="Wrap" Classes="muted"/>
       <Border Classes="panel" Padding="16"><StackPanel Spacing="10"><TextBlock Text="Event token" FontSize="18"/><TextBlock Text="{Binding EventTokenRetrievalHelp}" Classes="muted" TextWrapping="Wrap"/><TextBox Text="{Binding EventTokenInput, Mode=TwoWay}" PasswordChar="●" PlaceholderText="Paste event token" Tag="save-token" KeyDown="SubmitTextField"/><TextBlock Text="{Binding EventTokenStatus}" Classes="muted" TextWrapping="Wrap"/><TextBlock Text="{Binding AuthorizationStatus}" Classes="muted" TextWrapping="Wrap"/><WrapPanel><Button Name="AcquireConnectedAccountEventToken" Content="{Binding EventTokenRetrievalLabel}" Click="AcquireAccountEventToken" IsEnabled="{Binding CanAcquireAccountEventToken}"/><Button Content="Save event token" Click="SaveEventToken" Classes="primary"/><Button Content="Remove saved token" Click="ClearEventToken"/></WrapPanel></StackPanel></Border>
       </StackPanel></Border>
 <Border Classes="panel" Padding="24"><StackPanel Spacing="14">

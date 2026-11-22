@@ -121,6 +121,13 @@ def backup_catalog(source, backup):
             paths.append(source / tid / 'Data.json')
         paths.append(template_path(source, tid))
     paths += [source / name for name in ['Stats.json', 'meta.json'] if (source / name).exists()]
+    if (source / 'Stats.json').exists():
+        for tid in parse((source / 'Stats.json').read_bytes()):
+            if not ID.fullmatch(tid):
+                raise ValueError('Invalid stat title identity: ' + tid)
+            # Ship stat-only files without adding fake achievement mappings to the index.
+            paths += [path for path in (template_path(source, tid), source / tid / 'Stats.json') if path.is_file()]
+    paths = list(dict.fromkeys(paths))
     if any(not path.is_file() for path in paths):
         raise ValueError('Cannot back up an incomplete catalog')
     backup.mkdir(parents=True)
@@ -236,6 +243,12 @@ def archive(source, output):
             paths.append(source / tid / 'Data.json')
         paths.append(template_path(source, tid))
     paths += [source / name for name in ['Stats.json', 'meta.json'] if (source / name).exists()]
+    if (source / 'Stats.json').exists():
+        for tid in parse((source / 'Stats.json').read_bytes()):
+            if not ID.fullmatch(tid):
+                raise ValueError('Invalid stat title identity: ' + tid)
+            paths += [path for path in (template_path(source, tid), source / tid / 'Stats.json') if path.is_file()]
+    paths = list(dict.fromkeys(paths))
     for path in paths:
         if not path.is_file() or path.stat().st_size >= 100 * 1024 * 1024:
             raise ValueError('Missing or oversized catalog file: ' + str(path))

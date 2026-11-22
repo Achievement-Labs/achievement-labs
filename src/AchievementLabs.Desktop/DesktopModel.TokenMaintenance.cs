@@ -39,6 +39,7 @@ public sealed partial class DesktopModel
         queueAccount.XAUTH = session?.Authorization ?? "";
         queueAccount.XUIDOnly = session?.Xuid ?? "";
         queueAccount.EventsToken = session?.EventsToken ?? "";
+        queueAccount.RegionOverride = RegionOverride;
         queueAccount.LastOAuthResponse = session?.OAuthResponse;
         queueAccount.EnsureAuthorizationAsync = token => EnsureAuthorizationFreshAsync(token);
         queueAccount.EnsureEventTokenAsync = EnsureEventTokenAsync;

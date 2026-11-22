@@ -9,11 +9,11 @@ namespace AchievementLabs.Desktop;
 public sealed partial class DesktopModel
 {
     private Workflows.Windows8ViewModel? windows8;
-    public Workflows.Windows8ViewModel Windows8 => windows8 ??= new(() => (session?.Authorization ?? "", session?.Xuid ?? ""));
+    public Workflows.Windows8ViewModel Windows8 => windows8 ??= new(() => (session?.Authorization ?? "", session?.Xuid ?? "")) { ForceEnglish = RegionOverride };
     private Workflows.Win8SaveToolsViewModel? win8Tools;
     public Workflows.Win8SaveToolsViewModel Win8Tools => win8Tools ??= ObserveWorkflow(new Workflows.Win8SaveToolsViewModel(saveTools, new Workflows.NativeNotices(message => Notice = message), queueAccount));
     private Workflows.HaloLegacyViewModel? legacyBridge;
-    public Workflows.HaloLegacyViewModel LegacyBridge => legacyBridge ??= ObserveWorkflow(new Workflows.HaloLegacyViewModel(new AchievementLabs.Services.LegacyXbox.LegacyXboxBridge(), new Workflows.NativeNotices(message => Notice = message), queueAccount));
+    public Workflows.HaloLegacyViewModel LegacyBridge => legacyBridge ??= ObserveWorkflow(new Workflows.HaloLegacyViewModel(new AchievementLabs.Services.LegacyXbox.LegacyXboxBridge(() => AchievementLabs.Core.XboxResponseLanguage.Resolve(RegionOverride)), new Workflows.NativeNotices(message => Notice = message), queueAccount));
     private readonly IWin8SaveTool[] saveTools = [new ColdAlleySaveTool(), new CutTheRopeWin8Tool(), new Fishdom3SaveTool(), new MicrosoftBingoLocalSyncTool(), new TyWin8SaveTool(new TySaveReader())];
     private readonly GfwlAchievementManagerService gfwl = new();
     private readonly Xbox360PackageService packages = new();

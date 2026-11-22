@@ -62,6 +62,22 @@ class CatalogChecks(unittest.TestCase):
         self.assertEqual(read_catalog(output)['SupportedTitleIDs'], ['7'])
         self.assertEqual((output / '7/7.json').read_text(), '{"other":REPLACEID}')
 
+    def test_archive_preserves_stat_only_templates_without_achievement_entries(self):
+        output = self.root / 'split'
+        write_split(self.source, output, self.root / 'backup')
+        dump(output / 'Stats.json', {'9': {'Stats': {}}})
+        dump(output / '9/Stats.json', {'9': {'Stats': {}}, 'SupportedTitleIDs': ['9']})
+        (output / '9/9.json').write_text('stat-only template')
+        (output / '9/research.json').write_text('not runtime')
+        zipped = self.root / 'Events.zip'
+        archive(output, zipped)
+        with zipfile.ZipFile(zipped) as stream:
+            self.assertIn('Events/9/9.json', stream.namelist())
+            self.assertIn('Events/9/Stats.json', stream.namelist())
+            self.assertNotIn('Events/9/Data.json', stream.namelist())
+            self.assertNotIn('Events/9/research.json', stream.namelist())
+        self.assertNotIn('9', read_index(output))
+
     def test_reject_unsupported_operations_and_overlapping_paths(self):
         block = copy.deepcopy(self.block)
         block['Achievements']['1']['Request1_Event']['Id']['ReplacementType'] = 'RawBody'

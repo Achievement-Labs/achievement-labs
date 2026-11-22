@@ -79,7 +79,7 @@ public sealed partial class DesktopModel : IMirrorHost
         if (string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId == Guid.Empty.ToString())
             throw new InvalidDataException("Xbox didn't return this title's service configuration.");
         var active = session ?? throw new InvalidOperationException("Attach the Xbox PC app first.");
-        using var api = new XboxApiClient(active.Authorization);
+        using var api = new XboxApiClient(active.Authorization, RegionOverride);
         await api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId, titleId, active.Xuid, achievementId, FakeSignature);
     }
 
@@ -184,7 +184,7 @@ public sealed partial class DesktopModel : IMirrorHost
     {
         await EnsureAuthorizationFreshAsync(cancellationToken);
         var active = session ?? throw new InvalidOperationException("Attach the Xbox PC app first.");
-        using var api = new XboxApiClient(active.Authorization);
+        using var api = new XboxApiClient(active.Authorization, RegionOverride);
         var response = await api.GetAchievementsForTitleAsync(active.Xuid, titleId, writeDebugLog: false);
         cancellationToken.ThrowIfCancellationRequested();
         if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");

@@ -33,6 +33,7 @@ static class Test
    Console.WriteLine("PASS: ordinary startup enables normal Xbox attachment; only explicit preview/test arguments isolate the 360 page.");return;
   }
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--force-english")){ForceEnglishTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Length==3 && args[0]=="--event-stats-catalog"){EventStatsCatalogChecks.RunAsync(args[1],args[2]).GetAwaiter().GetResult();return;}
   if(args.Length==2 && args[0]=="--release-ui"){ReleaseUiChecks.Run(args[1]);return;}
