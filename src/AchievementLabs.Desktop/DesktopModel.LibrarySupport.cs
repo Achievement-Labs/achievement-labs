@@ -60,5 +60,5 @@ public sealed partial class DesktopModel
         catch { SupportMetadataStatus = "Support results updated, but their local cache could not be saved."; }
     }
     private void RememberLibraryUnlockMethod(string title, bool events) { CacheLibraryUnlockMethod(title, events); RefreshLibraryPresentation(); }
-    private void RefreshLibrarySupport() { libraryEventSupport = null; RefreshLibraryPresentation(); }
+    private void RefreshLibrarySupport() { libraryEventSupport = null; RefreshLibraryPresentation(); RefreshTitleSearchSupport(); }
 }

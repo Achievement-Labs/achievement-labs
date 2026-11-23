@@ -20,6 +20,7 @@ public partial class Windows8ViewModel : ObservableObject, IDisposable
     private readonly HttpClient http;
     private readonly Func<(string Authorization, string Xuid)> currentSession;
     private bool bridgeSession;
+    public bool ForceEnglish { get; set; }
     public Windows8ViewModel() : this(() => ("", "")) { }
     public Windows8ViewModel(Func<(string Authorization, string Xuid)> currentSession, HttpMessageHandler? handler = null)
     {
@@ -218,6 +219,7 @@ public partial class Windows8ViewModel : ObservableObject, IDisposable
         {
         var suffix = continuation == null ? "" : "&continuationToken=" + Uri.EscapeDataString(continuation);
         using var request = new HttpRequestMessage(HttpMethod.Get, $"https://{hostPath}/xuid({xuid})/{route}?titleId={title}&maxItems=1000{suffix}");
+        request.Headers.TryAddWithoutValidation("Accept-Language", AchievementLabs.Core.XboxResponseLanguage.Resolve(ForceEnglish));
         request.Headers.TryAddWithoutValidation("Authorization", readAuth);
         request.Headers.TryAddWithoutValidation("x-xbl-contract-version", "1");
         using var response = await http.SendAsync(request);

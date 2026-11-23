@@ -32,6 +32,9 @@ public sealed class TransferGame
 {
     [JsonProperty("titleId")] public string TitleId { get; set; } = "";
     [JsonProperty("name")] public string Name { get; set; } = "";
+    [JsonProperty("windows8StartDate", NullValueHandling = NullValueHandling.Ignore)] public string? Windows8StartDate { get; set; }
+    [JsonProperty("windows8StartTime", NullValueHandling = NullValueHandling.Ignore)] public string? Windows8StartTime { get; set; }
+    [JsonProperty("windows8BaseTimestampUtc", NullValueHandling = NullValueHandling.Ignore)] public DateTimeOffset? Windows8BaseTimestampUtc { get; set; }
     [JsonProperty("items")] public List<TransferAchievement> Items { get; set; } = [];
 }
 public sealed class TransferAchievement
@@ -40,5 +43,6 @@ public sealed class TransferAchievement
     [JsonProperty("name")] public string Name { get; set; } = "";
     [JsonProperty("delaySeconds")] public double DelaySeconds { get; set; }
     [JsonProperty("remainingDelaySeconds")] public double? RemainingDelaySeconds { get; set; }
+    [JsonProperty("windows8TimestampUtc", NullValueHandling = NullValueHandling.Ignore)] public DateTimeOffset? Windows8TimestampUtc { get; set; }
     [JsonProperty("status")] public string Status { get; set; } = "Waiting";
 }

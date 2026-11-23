@@ -18,6 +18,9 @@ static class Test
  public static void Main(string[] args)
  {
   if(args.Contains("--win8-license")){Windows8LicenseTests.Run();return;}
+  if(args.Contains("--win8-timestamps")){Windows8TimestampTests.Run();return;}
+  if(args.Contains("--win8-queue")){AppBuilder.Configure<Application>().UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();Windows8QueueTests.Run();return;}
+  if(args.Contains("--win8-reference")){Windows8ReferenceTests.Run();return;}
   if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
   if(args.Contains("--signed-catalog")){SignedEventCatalogTests.Run();return;}
   if(args.Contains("--startup-mode"))
@@ -34,6 +37,8 @@ static class Test
    Console.WriteLine("PASS: ordinary startup enables normal Xbox attachment; only explicit preview/test arguments isolate the 360 page.");return;
   }
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--force-english")){ForceEnglishTests.RunAsync().GetAwaiter().GetResult();return;}
+  if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
   // The default (verify -Full) run includes the catalog suites: the signed catalog and the --port integration path.
   if(args.Length==0){SignedEventCatalogTests.Run();PortTests.Run();}
   if(args.Length==3 && args[0]=="--event-stats-catalog"){EventStatsCatalogChecks.RunAsync(args[1],args[2]).GetAwaiter().GetResult();return;}
@@ -71,6 +76,7 @@ static class Test
   if(args.Contains("--integration") || args.Contains("--scroll"))
   {
    AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
    string testRoot=Environment.GetEnvironmentVariable("AL_TEST_ROOT")??AppContext.BaseDirectory;
    string root=System.IO.Path.GetFullPath(testRoot);
    System.Runtime.Loader.AssemblyLoadContext.Default.Resolving+=(_,name)=>
@@ -110,6 +116,17 @@ static class Test
    var settingsTabs=Desc<TabControl>(window).Single(t=>t.Name=="DesktopSettingsTabs");
    Assert(settingsTabs.Items.OfType<TabItem>().Select(t=>t.Header?.ToString()).SequenceEqual(new[]{"Account","Sync","Library","App","Debug","Guides","Appearance"}),"Desktop settings categories are explicit and complete");
    Assert(Desc<Button>(window).Count(b=>b.Name=="SaveAllSettings")==1,"One global save remains accessible above settings tabs");
+   {
+       var desktop=(AchievementLabs.Desktop.DesktopModel)window.DataContext!;var queue=desktop.XboxQueue;
+       var stateField=queue.GetType().GetField("_state",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)!;
+       var oldState=stateField.GetValue(queue);
+       stateField.SetValue(queue,new AchievementLabs.Models.AutoUnlockState { CurrentIndex=1, IsRunning=true, Queue=new(){new(){Completed=true},new(){}} });
+       queue.IsRunning=true;
+       Dispatcher.UIThread.RunJobs();
+       Assert(Desc<Button>(window).Single(b=>b.Name=="RemoveCompletedQueueAchievements").IsEffectivelyEnabled,"Remove completed is clickable during Auto Unlock even when CanQuery is false");
+       queue.IsRunning=false;stateField.SetValue(queue,oldState);
+   }
+
    using (var routeClient = new AchievementLabs.Core.EventCatalogClient(true)) {
        Assert(!routeClient.BundledTitleIds.Contains("345903534"),"Legacy Minecraft uses upstream route rather than Bedrock bundled data");
        Assert(routeClient.BundledTitleIds.Contains("1828326430"),"Other Minecraft editions retain bundled route");

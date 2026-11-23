@@ -62,12 +62,21 @@ public sealed partial class DesktopModel : IMirrorHost
             .Select(a => new MirrorAchievement(a.id, a.name, a.description ?? a.lockedDescription ?? "", a.progressState == "Achieved", ParseXboxUnlockTime(a.progression?.timeUnlocked)))
             .ToArray();
         var name = response.achievements.SelectMany(a => a.titleAssociations).FirstOrDefault(t => t.id == titleId)?.name
-            ?? response.achievements.SelectMany(a => a.titleAssociations).FirstOrDefault()?.name ?? "";
+            ?? response.achievements.SelectMany(a => a.titleAssociations).FirstOrDefault()?.name
+            ?? AchievementLabs.Core.XboxTitleCatalog.Find(ResolveWindows8TitleId(titleId))?.Name ?? "";
         return (list, name);
     }
 
+    Task IMirrorHost.EnsureXboxWriteReadyAsync(string titleId, CancellationToken cancellationToken) =>
+        IsKnownWindows8Title(titleId) ? EnsureWindows8TokenAsync(titleId, cancellationToken) : Task.CompletedTask;
+
     async Task IMirrorHost.UnlockXboxAsync(string titleId, string achievementId, CancellationToken cancellationToken)
     {
+        if (IsKnownWindows8Title(titleId))
+        {
+            await SendWindows8AchievementAsync(titleId, achievementId, null, cancellationToken);
+            return;
+        }
         var response = await ReadMirrorXboxResponseAsync(titleId, cancellationToken);
         var definition = response.achievements.FirstOrDefault(a => a.id == achievementId)
             ?? throw new InvalidOperationException("Xbox no longer lists this achievement.");
@@ -79,7 +88,7 @@ public sealed partial class DesktopModel : IMirrorHost
         if (string.IsNullOrWhiteSpace(definition.serviceConfigId) || definition.serviceConfigId == Guid.Empty.ToString())
             throw new InvalidDataException("Xbox didn't return this title's service configuration.");
         var active = session ?? throw new InvalidOperationException("Attach the Xbox PC app first.");
-        using var api = new XboxApiClient(active.Authorization);
+        using var api = new XboxApiClient(active.Authorization, RegionOverride);
         await api.UnlockTitleBasedAchievementAsync(definition.serviceConfigId, titleId, active.Xuid, achievementId, FakeSignature);
     }
 
@@ -184,7 +193,14 @@ public sealed partial class DesktopModel : IMirrorHost
     {
         await EnsureAuthorizationFreshAsync(cancellationToken);
         var active = session ?? throw new InvalidOperationException("Attach the Xbox PC app first.");
-        using var api = new XboxApiClient(active.Authorization);
+        if (IsKnownWindows8Title(titleId))
+        {
+            using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+            var legacy = await Windows8Achievements.ReadQueueAsync(http, active.Authorization, active.Xuid, ResolveWindows8TitleId(titleId), cancellationToken);
+            if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");
+            return legacy;
+        }
+        using var api = new XboxApiClient(active.Authorization, RegionOverride);
         var response = await api.GetAchievementsForTitleAsync(active.Xuid, titleId, writeDebugLog: false);
         cancellationToken.ThrowIfCancellationRequested();
         if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");

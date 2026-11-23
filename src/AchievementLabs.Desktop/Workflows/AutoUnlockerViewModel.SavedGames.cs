@@ -72,6 +72,8 @@ public partial class AutoUnlockerViewModel
     private void ClearLoadedQueueForTitle(string titleId)
     {
         _state = null; QueueItems.Clear(); TitleId = titleId; SelectedSavedGameQueue = null;
+        OnPropertyChanged(nameof(CanEditWindows8Start));
+        Windows8StartDate = ""; Windows8StartTime = "";
         HasExistingState = false; ExistingStateInfo = ""; GameName = "Game: None";
         ReferenceInfo = "Reference User: None"; ProgressText = "Progress: 0/0";
         NextUnlockText = "Next Unlock: N/A"; TimeRemainingText = "Time Until Next: N/A";
@@ -81,7 +83,7 @@ public partial class AutoUnlockerViewModel
     private bool OwnSavedState(AutoUnlockState state) => Regex.IsMatch(account.XUIDOnly,@"^\d{1,20}$") && state.OwnerXuid == account.XUIDOnly && uint.TryParse(state.TitleId,out var title) && title != 0;
     private void SaveGameQueueSnapshot(AutoUnlockState state)
     {
-        if (!OwnSavedState(state) || state.Queue.Count == 0) return;
+        if (!OwnSavedState(state)) return;
         Directory.CreateDirectory(SavedGamesDirectory);
         var path = Path.Combine(SavedGamesDirectory,state.TitleId+".json");
         File.WriteAllText(path+".tmp",JsonConvert.SerializeObject(state,Formatting.Indented));

@@ -22,7 +22,8 @@ public sealed partial class DesktopModel
         catch { EventCatalogueStatus = "Could not import event pack. Choose a pack containing templates and mappings (up to 64 MB). Existing data retained."; }
         finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
     }
-    public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); } }
+    public IReadOnlyList<EventUpdateSkip> EventUpdateSkipped => eventCatalog.SkippedEntries;
+    public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); Changed(nameof(EventUpdateSkipped)); } }
     // Catalog refresh runs even while Auto Unlock or an action is running: the catalog swaps its snapshot atomically,
     // so an in-flight achievement finishes on the old data and the next one uses the new. It therefore does not
     // set eventRefreshRunning (which blocks interaction); only pack import does.

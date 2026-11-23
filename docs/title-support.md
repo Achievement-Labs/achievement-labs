@@ -462,7 +462,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Tapping Skill Test | Xbox One | 875079140 | 9 |
 | Terraria | Xbox One, Xbox Series X\|S | 389597738 | 38 |
 | The Amazing Spider-Man 2™ | Xbox One, Xbox Series X\|S | 1999803984 | 46 |
-| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | 1285166951 | 179 |
+| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | 1285166951 | 178 |
 | The Escapists | Xbox One | 1128640842 | 19 |
 | The Escapists 2 | Xbox One | 759485819 | 56 |
 | The Escapists: The Walking Dead | Windows PC | 199875921 | 19 |

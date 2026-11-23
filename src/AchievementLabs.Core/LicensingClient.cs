@@ -51,6 +51,7 @@ public sealed class EventCatalogClient : IDisposable
         CacheFile("custom-event-packs-v2.json"), catalog.ReservedTitleIds.Concat(Additions!.KnownTitleIds)) : null;
     private bool IsCustom(string id) => officialCatalog && Local?.ReservedTitleIds.Contains(id) != true
         && Additions?.KnownTitleIds.Contains(id) != true && Custom?.KnownTitleIds.Contains(id) == true;
+    public IReadOnlyList<EventUpdateSkip> SkippedEntries => (Additions?.SkippedEntries ?? Array.Empty<EventUpdateSkip>()).Concat(Custom?.SkippedEntries ?? Array.Empty<EventUpdateSkip>()).ToArray();
     // Signed catalog (official mode only). Precedence per title, see CatalogPrecedence:
     //   custom pack > removed tombstone > max-revision of { signed cache, release-zip cache, bundled (snapshot title or Events/) }.
     // Revision scale: catalog title revisions and manifest revisions share one global counter (`git rev-list --count`

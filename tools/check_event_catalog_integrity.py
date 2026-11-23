@@ -37,6 +37,21 @@ def previous(base, path):
     return parse(subprocess.check_output(["git", "show", f"{base}:{path}"]))
 
 
+def known_mapping_correction(tid, old, current):
+    """Recognize the exact reviewed corrections, without allowing other removals."""
+    if tid == "1050025307":
+        # GTA V's event recipes were keyed one higher than the Xbox IDs after 49.
+        corrected = {str(int(key) - 1) if int(key) >= 51 else key: recipe
+                     for key, recipe in old.items()}
+        return len(corrected) == len(old) and current == corrected
+    if tid == "1285166951" and "107" in old:
+        # The old Imperial Lightbringer recipe actually unlocked Horror of Horrors.
+        corrected = {key: recipe for key, recipe in old.items() if key != "107"}
+        corrected["109"] = old["107"]
+        return current == corrected
+    return False
+
+
 def reject_removals(base, data, stats, supported):
     old_index = previous(base, "Events/index.json")
     old_stats = previous(base, "Events/Stats.json")
@@ -51,7 +66,8 @@ def reject_removals(base, data, stats, supported):
                                   if path.endswith("/Data.json")}
     for tid in sorted(changed_achievement_titles & old_index.keys()):
         old = previous(base, f"Events/{tid}/Data.json")[tid]["Achievements"]
-        if old.keys() - data[tid]["Achievements"].keys():
+        current = data[tid]["Achievements"]
+        if old.keys() - current.keys() and not known_mapping_correction(tid, old, current):
             raise ValueError(f"{tid}: removed achievement mappings")
     for tid, block in old_stats.items():
         mapped = {name for name, item in block.get("Stats", {}).items()

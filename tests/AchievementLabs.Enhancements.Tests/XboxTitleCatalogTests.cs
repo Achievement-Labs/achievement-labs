@@ -39,9 +39,22 @@ static class XboxTitleCatalogTests
         Check(XboxTitleCatalog.SearchEntries("1656611287").Select(t => t.TitleId).SequenceEqual(["826940249"]),
             "An alias taken from the snapshot resolves to the original ExZeus 2 ID");
         var editions = XboxTitleCatalog.SearchEntries("1653696130");
-        Check(editions.Length > 1 && editions.All(t => t.TitleId != "1653696130") &&
+        Check(editions.Length == 1 && editions[0].TitleId == "1653696130" &&
             XboxTitleCatalog.ResolveWindows8TitleId("1653696130") == "1653696130",
-            "An ambiguous alias shows separate editions without guessing an achievement route");
+            "Exact modern Mahjong ID retains the source-v2 achievement edition");
+        foreach (var (name, modernId, legacyId) in new[] {
+            ("Microsoft Jigsaw", "2003863742", "1297292166"),
+            ("Microsoft Mahjong", "1653696130", "1297290382") })
+        {
+            var matches = XboxTitleCatalog.SearchEntries(name);
+            Check(matches.Any(t => t.TitleId == modernId) && matches.Any(t => t.TitleId == legacyId),
+                name + " keeps modern and Windows 8 editions in name search");
+            Check(XboxTitleCatalog.SearchEntries(modernId).Select(t => t.TitleId).SequenceEqual([modernId]) &&
+                DesktopModel.ResolveWindows8TitleId(modernId) == modernId &&
+                !DesktopModel.IsKnownWindows8Title(modernId) &&
+                !DesktopModel.CatalogGame(modernId).Platform.Contains("Windows8"),
+                name + " modern ID cannot expose legacy achievement routing or Windows 8 controls");
+        }
         var temp=Path.Combine(Path.GetTempPath(),"labs-external-spools-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(temp);
         try {File.WriteAllText(Path.Combine(temp,"fixture.spool"),"synthetic");model.UbisoftSpoolSourceDirectory=temp;Check(model.UbisoftSpools.Length==1,"External spool library remains usable");}
         finally{Directory.Delete(temp,true);}

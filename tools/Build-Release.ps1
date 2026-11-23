@@ -95,6 +95,14 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -m:1 -nr:false -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false @taskBuildOptions -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
+$taskActivationPath = 'tools/Windows8License/runtime/jetpack-auth-investigation'
+$taskActivationSource = Join-Path $taskRoot "$taskActivationPath/ActivateHelper.cs"
+$taskActivationOutput = Join-Path $taskHelpers "$taskActivationPath/ActivateHelper.dll"
+$taskFrameworkCompiler = Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
+New-Item -ItemType Directory -Path (Split-Path -Parent $taskActivationOutput) -Force | Out-Null
+& $taskFrameworkCompiler /nologo /target:library /optimize+ "/out:$taskActivationOutput" $taskActivationSource
+if ($LASTEXITCODE -ne 0) { throw 'Windows 8 activation helper compilation failed.' }
+
 & dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -m:1 -nr:false -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$taskEventsSource" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions @taskSigningOptions @taskCatalogOptions -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskCoreSearch = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { Join-Path $taskRoot 'src/AchievementLabs.Core/obj/Release' } else { Join-Path $taskWork 'build/obj' }
