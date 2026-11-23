@@ -27,6 +27,10 @@ public sealed class UpstreamEventCatalogue
             return release > baseline ? release : baseline;
         }
     }
+    /// <summary>Installed app release (major.minor.patch), or null when the entry assembly has no usable version.</summary>
+    public static Version? InstalledRelease => System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version is { Build: >= 0 } v ? new Version(v.Major, v.Minor, v.Build) : null;
+    /// <summary>Release tag the official cache was downloaded from; null outside official mode or before the first refresh.</summary>
+    public Version? CachedReleaseVersion => Volatile.Read(ref current).ReleaseVersion;
     private readonly Func<string, JObject, string, bool>? matchesBundled;
     public string[] KnownTitleIds => Volatile.Read(ref current).Data.Properties().Where(p => EventCatalogStorage.ValidId(p.Name)).Select(p => p.Name).ToArray();
     private readonly SemaphoreSlim refreshGate = new(1, 1);
@@ -348,7 +352,7 @@ public sealed class UpstreamEventCatalogue
         while (true) { var count = await input.ReadAsync(bytes, ct).ConfigureAwait(false); if (count == 0) break; if (buffer.Length + count > limit) throw new InvalidDataException("Event download exceeds limit."); buffer.Write(bytes, 0, count); }
         return buffer.ToArray();
     }
-    private static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct, bool officialCatalog = false)
+    internal static async Task ValidateAsync(string id, JObject block, string template, CancellationToken ct, bool officialCatalog = false)
     {
         if (!Regex.IsMatch(id, "^[0-9]{1,10}$") || template.Length > 1024 * 1024 || block["Achievements"] is not JObject achievements || (!officialCatalog && achievements.Count == 0) || achievements.Count > 2000) throw new InvalidDataException();
         EventCatalogSchema.ValidateTitle(block);

@@ -19,6 +19,7 @@ static class Test
  {
   if(args.Contains("--win8-license")){Windows8LicenseTests.Run();return;}
   if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
+  if(args.Contains("--signed-catalog")){SignedEventCatalogTests.Run();return;}
   if(args.Contains("--startup-mode"))
   {
    var configure=typeof(AchievementLabs.Desktop.MainWindow).Assembly.GetType("AchievementLabs.Desktop.Program")!.GetMethod("ConfigureStartup",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static)!;

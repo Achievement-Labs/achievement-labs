@@ -46,18 +46,99 @@ public sealed class EventCatalogClient : IDisposable
         AchievementLabsPaths.LocalFile("custom-event-packs-v2.json"), catalog.ReservedTitleIds.Concat(Additions!.KnownTitleIds)) : null;
     private bool IsCustom(string id) => officialCatalog && Local?.ReservedTitleIds.Contains(id) != true
         && Additions?.KnownTitleIds.Contains(id) != true && Custom?.KnownTitleIds.Contains(id) == true;
-    public string UpstreamStatus => Additions?.Status ?? "New-title updates unavailable.";
+    // Signed catalog (official mode only). Precedence per title, see CatalogPrecedence:
+    //   custom pack > max-revision of { signed cache, release-zip cache, bundled (snapshot title or Events/) }.
+    private SignedEventCatalog? signed;
+    private SignedEventCatalog? Signed => officialCatalog && useLocal ? signed ??= new(AchievementLabsPaths.LocalFile("signed-event-catalog"),
+        ["345903534"], BundledCatalogSnapshot.Present ? BundledCatalogSnapshot.Read : null) : null;
+    private bool usedLegacyFallback;
+    private int Marker => Signed?.BundledRevision ?? 0;
+    private enum Winner { None, Custom, Signed, Legacy, Local }
+    private Winner Resolve(string id, out SignedEventCatalog.Title? signedTitle)
+    {
+        signedTitle = null;
+        if (IsCustom(id)) return Winner.Custom;
+        var s = Signed; var cached = s?.Cached(id); var snapshot = s?.BundledTitle(id);
+        int? bundled = snapshot?.Revision ?? (Local?.ReservedTitleIds.Contains(id) == true ? Marker : null);
+        int? legacy = Additions?.KnownTitleIds.Contains(id) == true
+            ? (Additions.CachedReleaseVersion is { } release && UpstreamEventCatalogue.InstalledRelease is { } installed && release > installed ? Marker : -1)
+            : null;
+        switch (CatalogPrecedence.Choose(cached?.Revision, legacy, bundled))
+        {
+            case CatalogPrecedence.Tier.Catalog: signedTitle = cached; return Winner.Signed;
+            case CatalogPrecedence.Tier.Legacy: return Winner.Legacy;
+            case CatalogPrecedence.Tier.Bundled: if (snapshot != null) { signedTitle = snapshot; return Winner.Signed; } return Winner.Local;
+            default: return Winner.None;
+        }
+    }
+    private bool OfficialSourceHas(string id) => Signed?.KnownTitleIds.Contains(id) == true || Local?.ReservedTitleIds.Contains(id) == true || Additions?.KnownTitleIds.Contains(id) == true;
+    /// <summary>Revision, source and last error for one title (official mode). Custom packs report OverridesOfficial.</summary>
+    public EventTitleCatalogStatus? TitleCatalogStatus(string id)
+    {
+        var winner = Resolve(id, out var title);
+        var error = Signed?.LastError(id);
+        return winner switch
+        {
+            Winner.Custom => new(id, 0, EventCatalogSource.Custom, error, OfficialSourceHas(id)),
+            Winner.Signed => new(id, title!.Revision, ReferenceEquals(title, Signed!.Cached(id)) ? EventCatalogSource.Catalog : EventCatalogSource.Bundled, error),
+            Winner.Legacy => new(id, Marker, EventCatalogSource.Catalog, error),
+            Winner.Local => new(id, Marker, EventCatalogSource.Bundled, error),
+            _ => null
+        };
+    }
+    public string UpstreamStatus => Signed is { } s
+        ? s.Status + (usedLegacyFallback && Additions is { } a ? " · Release-zip fallback: " + a.Status : "")
+        : Additions?.Status ?? "New-title updates unavailable.";
     public Task<int> ImportEventPackAsync(string text, CancellationToken ct) => (Custom ?? Additions ?? throw new InvalidOperationException("Local event data is unavailable.")).ImportPackAsync(text, ct);
     public Dictionary<string, LibraryEventSupport> GetLibrarySupport()
     {
         var support = Local?.LibrarySupport() ?? new();
+        if (Signed is { } catalog)
+        {
+            // Official mode: each title answers from the tier CatalogPrecedence picks.
+            var localSupport = support; var legacySupport = Additions?.LibrarySupport() ?? new();
+            var customSupport = Custom?.LibrarySupport() ?? new();
+            var result = new Dictionary<string, LibraryEventSupport>();
+            foreach (var id in localSupport.Keys.Concat(legacySupport.Keys).Concat(catalog.KnownTitleIds).Concat(customSupport.Keys).Distinct().ToArray())
+            {
+                if (TitleCatalogStatus(id) is not { } status) continue;
+                LibraryEventSupport? item = Resolve(id, out var title) switch
+                {
+                    Winner.Custom => customSupport.GetValueOrDefault(id) is { } c ? c with { FullySupported = false, PartiallySupported = false, Note = "Custom event pack; not an official support classification." } : null,
+                    Winner.Signed => SignedEventCatalog.Support(title!),
+                    Winner.Legacy => legacySupport.GetValueOrDefault(id),
+                    Winner.Local => localSupport.GetValueOrDefault(id),
+                    _ => null
+                };
+                if (item != null) result[id] = item with { CatalogRevision = status.Revision, CatalogSource = status.Source, CatalogError = status.LastError, CustomOverride = status.OverridesOfficial };
+            }
+            return result;
+        }
         if (Additions is { } updates) foreach (var item in updates.LibrarySupport()) support[item.Key] = item.Value;
         if (Custom is { } packs) foreach (var item in packs.LibrarySupport().Where(p => IsCustom(p.Key)))
             support[item.Key] = item.Value with { FullySupported = false, PartiallySupported = false, Note = "Custom event pack; not an official support classification." };
         return support;
     }
     public string[] BundledTitleIds => Local?.TitleIds ?? [];
-    public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct, bool startup = false) { if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct, startup); }
+    /// <summary>
+    /// Signed catalog first. Only when it is unreachable (network/HTTP failure, or no signing key in this build) does the
+    /// legacy release-zip refresh run; a bad signature or rollback is a rejection, not an outage, so it does not fall back.
+    /// Safe while Auto Unlock runs: each source swaps its snapshot atomically.
+    /// </summary>
+    public async Task RefreshUpstreamAsync(HttpClient sourceHttp, bool force, CancellationToken ct, bool startup = false)
+    {
+#if LABS_DEV
+        return; // Dev builds stay local-only.
+#else
+        if (Signed is { } s)
+        {
+            var outcome = await s.RefreshAsync(sourceHttp, force, ct, startup).ConfigureAwait(false);
+            if (outcome != CatalogRefreshOutcome.Unreachable) { usedLegacyFallback = false; return; }
+            usedLegacyFallback = true;
+        }
+        if (Additions is { } a) await a.RefreshAsync(sourceHttp, force, ct, startup).ConfigureAwait(false);
+#endif
+    }
 
     public Task<EventCatalogStatus> GetCatalogAsync(CancellationToken ct)
     {
@@ -72,6 +153,14 @@ public sealed class EventCatalogClient : IDisposable
     public Task<EventTitleMapping> GetTitleAsync(string id, CancellationToken ct)
     {
         if (IsCustom(id)) return Custom!.Contains(id) ? Task.FromResult(Custom.Title(id)) : Task.FromResult(new EventTitleMapping([]));
+        if (Signed != null)
+            switch (Resolve(id, out var signedTitle))
+            {
+                case Winner.Signed: return signedTitle!.Enabled
+                    ? AchievementLabs.MultiSelect.EventIdMapping.NormalizeCatalog(Task.FromResult(SignedEventCatalog.Mapping(signedTitle)), id)
+                    : Task.FromResult(new EventTitleMapping([]));
+                case Winner.Local: return AchievementLabs.MultiSelect.EventIdMapping.NormalizeCatalog(Local!.Contains(id) ? Local.TitleAsync(id, ct) : Task.FromResult(new EventTitleMapping([])), id);
+            }
         var updates = Additions;
         if (updates?.KnownTitleIds.Contains(id) == true)
             return updates.Contains(id) ? AchievementLabs.MultiSelect.EventIdMapping.NormalizeCatalog(Task.FromResult(updates.Title(id)), id)
@@ -85,6 +174,14 @@ public sealed class EventCatalogClient : IDisposable
         if (id == "4294967294") return Task.FromException<EventPayloads>(new InvalidOperationException("The catalog-update fixture cannot submit telemetry."));
 #endif
         if (IsCustom(id)) return Custom!.PayloadsAsync(id, achievementId, xuid, ct);
+        // Read the winning snapshot once: an in-flight achievement finishes on it even if a refresh swaps the catalog.
+        if (Signed != null)
+            switch (Resolve(id, out var signedTitle))
+            {
+                case Winner.Signed: return SignedEventCatalog.PayloadsAsync(signedTitle!, AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId), xuid, ct);
+                case Winner.Local: return Local!.Contains(id) ? Local.PayloadsAsync(id, AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId), xuid, ct)
+                    : Task.FromException<EventPayloads>(new InvalidOperationException("Event mapping is disabled for this title."));
+            }
         var updates = Additions;
         if (updates?.KnownTitleIds.Contains(id) == true)
             return updates.Contains(id) ? updates.PayloadsAsync(id, achievementId, xuid, ct)
