@@ -33,6 +33,8 @@ namespace AchievementLabs.Models
         public bool EventSubmissionPendingVerification { get; set; }
         public string LastVerificationProgress { get; set; } = "";
         public int EventRequestIndex { get; set; }
+        /// <summary>Recipe fingerprint stored when EventRequestIndex first goes above 0; a mismatch on resume restarts at 0.</summary>
+        public string EventPayloadFingerprint { get; set; } = "";
         public DateTimeOffset? Windows8TimestampUtc { get; set; }
     }
 

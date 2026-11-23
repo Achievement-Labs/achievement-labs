@@ -7,10 +7,10 @@ public sealed partial class DesktopModel
 {
     private bool eventRefreshRunning;
     private string eventCatalogueStatus = "Bundled event data loaded. Upstream checks refresh mappings and support status.";
-    public bool CanRefreshEventCatalogue => !eventRefreshRunning;
+    public bool CanRefreshEventCatalogue => !eventRefreshRunning && !eventCatalogRefreshRunning;
     public async Task ImportEventPackAsync(string path)
     {
-        if (eventRefreshRunning || !CanInteract) return;
+        if (eventRefreshRunning || eventCatalogRefreshRunning || !CanInteract) return;
         if (QueueActive || busy) { EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
         eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
         try {
@@ -24,11 +24,14 @@ public sealed partial class DesktopModel
     }
     public IReadOnlyList<EventUpdateSkip> EventUpdateSkipped => eventCatalog.SkippedEntries;
     public string EventCatalogueStatus { get => eventCatalogueStatus; private set { eventCatalogueStatus = value; Changed(); Changed(nameof(EventUpdateSkipped)); } }
+    // Catalog refresh runs even while Auto Unlock or an action is running: the catalog swaps its snapshot atomically,
+    // so an in-flight achievement finishes on the old data and the next one uses the new. It therefore does not
+    // set eventRefreshRunning (which blocks interaction); only pack import does.
+    private bool eventCatalogRefreshRunning;
     public async Task RefreshEventCatalogueAsync(bool force = true, bool startup = false)
     {
-        if (eventRefreshRunning || OfflineChecks) return;
-        if (QueueActive || busy) { if (force) EventCatalogueStatus = "Pause Auto Unlock and wait for current actions before updating event data."; return; }
-        eventRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions();
+        if (eventCatalogRefreshRunning || eventRefreshRunning || OfflineChecks) return;
+        eventCatalogRefreshRunning = true; Changed(nameof(CanRefreshEventCatalogue));
         EventCatalogueStatus = "Checking the official repository for event mapping/status updates…";
         try {
 #if LABS_UPDATE_TESTING
@@ -43,10 +46,11 @@ public sealed partial class DesktopModel
             Directory.CreateDirectory(AchievementLabsPaths.UpdateTestRoot);
             File.WriteAllText(AchievementLabsPaths.LocalFile("catalog-test-status.txt"), EventCatalogueStatus);
 #endif
-            RefreshLibrarySupport(); await RefreshSelectedEventSupportAsync();
+            RefreshLibrarySupport();
+            if (!QueueActive && !busy) await RefreshSelectedEventSupportAsync();
         } catch (OperationCanceledException) { }
         catch { EventCatalogueStatus = "Could not check upstream event data. Existing mappings retained."; }
-        finally { eventRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); Changed(nameof(CanQuery)); Changed(nameof(CanInteract)); NotifyActions(); }
+        finally { eventCatalogRefreshRunning = false; Changed(nameof(CanRefreshEventCatalogue)); }
     }
     private bool dlcRefreshRunning;
     private string dlcCatalogueStatus = "Bundled DLC sections loaded. Automatic checks run daily while the app is open.";

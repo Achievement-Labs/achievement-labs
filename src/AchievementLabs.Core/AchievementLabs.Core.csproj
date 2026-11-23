@@ -28,4 +28,11 @@
    <FileWrites Include="$(EventBundlePath)" />
   </ItemGroup>
  </Target>
-<ItemGroup><EmbeddedResource Include="../../catalog/public-metadata.json" LogicalName="AchievementLabs.PublicMetadata.json"/></ItemGroup></Project>
+<ItemGroup><EmbeddedResource Include="../../catalog/public-metadata.json" LogicalName="AchievementLabs.PublicMetadata.json"/></ItemGroup>
+ <!-- Optional signed-catalog snapshot (manifest + title bundles), pinned by the release build: -p:LabsCatalogSnapshot=<dist folder>. -->
+ <ItemGroup Condition="'$(LabsCatalogSnapshot)' != ''">
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/manifest.json" LogicalName="AchievementLabs.CatalogSnapshot/manifest.json" />
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/manifest.json.sig" Condition="Exists('$(LabsCatalogSnapshot)/manifest.json.sig')" LogicalName="AchievementLabs.CatalogSnapshot/manifest.json.sig" />
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/titles/*.json" LogicalName="AchievementLabs.CatalogSnapshot/titles/%(Filename)%(Extension)" />
+ </ItemGroup>
+</Project>

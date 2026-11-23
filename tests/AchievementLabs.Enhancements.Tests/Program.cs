@@ -22,6 +22,7 @@ static class Test
   if(args.Contains("--win8-queue")){AppBuilder.Configure<Application>().UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();Windows8QueueTests.Run();return;}
   if(args.Contains("--win8-reference")){Windows8ReferenceTests.Run();return;}
   if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
+  if(args.Contains("--signed-catalog")){SignedEventCatalogTests.Run();return;}
   if(args.Contains("--startup-mode"))
   {
    var configure=typeof(AchievementLabs.Desktop.MainWindow).Assembly.GetType("AchievementLabs.Desktop.Program")!.GetMethod("ConfigureStartup",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static)!;
@@ -38,6 +39,8 @@ static class Test
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
   if(args.Contains("--force-english")){ForceEnglishTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
+  // The default (verify -Full) run includes the catalog suites: the signed catalog and the --port integration path.
+  if(args.Length==0){SignedEventCatalogTests.Run();PortTests.Run();}
   if(args.Length==3 && args[0]=="--event-stats-catalog"){EventStatsCatalogChecks.RunAsync(args[1],args[2]).GetAwaiter().GetResult();return;}
   if(args.Length==2 && args[0]=="--release-ui"){ReleaseUiChecks.Run(args[1]);return;}
   if(args.Contains("--bundled-stats")){BundledStatsChecks.RunAsync().GetAwaiter().GetResult();return;}
