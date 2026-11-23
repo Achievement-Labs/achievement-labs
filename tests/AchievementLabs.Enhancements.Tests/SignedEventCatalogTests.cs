@@ -151,8 +151,13 @@ public static class SignedEventCatalogTests
             server.Offline = true;
             Assert(catalog.RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Unreachable && Achievement(catalog, "101") == "3", "Unreachable catalog keeps data and signals fallback");
             server.Offline = false; Publish(server, key, v3);
-            Assert(new SignedEventCatalog(cache, [], null, SignedEventCatalog.PublicKeyPem).RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Unreachable
-                && SignedEventCatalog.IsPlaceholderKey(SignedEventCatalog.PublicKeyPem), "Placeholder signing key falls back instead of trusting unsigned data");
+            Assert(new SignedEventCatalog(cache, [], null, SignedEventCatalog.PlaceholderKeyPem).RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Unreachable
+                && SignedEventCatalog.IsPlaceholderKey(SignedEventCatalog.PlaceholderKeyPem), "Placeholder signing key falls back instead of trusting unsigned data");
+            Assert(!SignedEventCatalog.IsPlaceholderKey(SignedEventCatalog.PublicKeyPem), "Shipped catalog key is a real key, not the placeholder");
+            using (var shipped = System.Security.Cryptography.ECDsa.Create()) {
+                shipped.ImportFromPem(SignedEventCatalog.PublicKeyPem);
+                Assert(shipped.KeySize == 256 && shipped.ExportParameters(false).Curve.Oid.Value == "1.2.840.10045.3.1.7", "Shipped catalog key is P-256");
+            }
 
             // Stale cache vs newer bundled snapshot: bundled must win, and the cache's older copy is not re-downloaded.
             var bundledSnapshot = Catalog(20, ("101", 7, Bundle("101", 7, "7")), ("105", 1, Bundle("105", 1, "1")));

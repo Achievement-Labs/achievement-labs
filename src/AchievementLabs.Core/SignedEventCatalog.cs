@@ -55,10 +55,15 @@ public sealed class SignedEventCatalog
     public const string ManifestUrl = "https://achievement-labs.github.io/achievement-labs-catalog/v1/manifest.json";
     /// <summary>Optional second mirror of the same manifest and titles. Empty means no mirror.</summary>
     public const string MirrorManifestUrl = "";
-    // ===== PLACEHOLDER: SIGNING KEY =====
-    // Replace with the catalog repository's ECDSA P-256 public key (SubjectPublicKeyInfo PEM). Public key only.
-    // While this placeholder is present no manifest can verify, and the client falls back to the release zip.
-    public const string PublicKeyPem = "-----BEGIN PUBLIC KEY-----\nPLACEHOLDER-CATALOG-SIGNING-KEY\n-----END PUBLIC KEY-----";
+    // Catalog signing public key: ECDSA P-256 SubjectPublicKeyInfo PEM. Public key only.
+    // This must match keys/catalog-signing-public.pem in Achievement-Labs/achievement-labs-catalog.
+    // The private key exists only as that repo's CATALOG_SIGNING_KEY secret. Rotating the key needs an app release.
+    public const string PublicKeyPem = "-----BEGIN PUBLIC KEY-----\n"
+        + "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEpgLRhe0Pc9DtsBK6cX9zw0z5AuZX\n"
+        + "JvGwVuouFEvbSO8FZhHA9SJ1dLBwYxptyLNL0tHgqYw6R61f9rrEaSWqUQ==\n"
+        + "-----END PUBLIC KEY-----";
+    // A key containing this marker is never trusted. The client falls back to the release zip.
+    public const string PlaceholderKeyPem = "-----BEGIN PUBLIC KEY-----\nPLACEHOLDER-CATALOG-SIGNING-KEY\n-----END PUBLIC KEY-----";
     public static bool IsPlaceholderKey(string pem) => pem.Contains("PLACEHOLDER", StringComparison.Ordinal);
 
     // Removed: an accepted manifest later dropped the title. It stays disabled and outranks bundled/legacy data.
