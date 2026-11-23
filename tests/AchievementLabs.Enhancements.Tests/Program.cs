@@ -18,6 +18,9 @@ static class Test
  public static void Main(string[] args)
  {
   if(args.Contains("--win8-license")){Windows8LicenseTests.Run();return;}
+  if(args.Contains("--win8-timestamps")){Windows8TimestampTests.Run();return;}
+  if(args.Contains("--win8-queue")){AppBuilder.Configure<Application>().UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();Windows8QueueTests.Run();return;}
+  if(args.Contains("--win8-reference")){Windows8ReferenceTests.Run();return;}
   if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
   if(args.Contains("--startup-mode"))
   {

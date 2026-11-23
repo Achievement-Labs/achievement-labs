@@ -33,6 +33,7 @@ namespace AchievementLabs.Models
         public bool EventSubmissionPendingVerification { get; set; }
         public string LastVerificationProgress { get; set; } = "";
         public int EventRequestIndex { get; set; }
+        public DateTimeOffset? Windows8TimestampUtc { get; set; }
     }
 
     public class AutoUnlockState
@@ -105,6 +106,10 @@ namespace AchievementLabs.Models
         /// Whether this game uses event-based unlocking (telemetry) instead of title-based
         /// </summary>
         public bool IsEventBased { get; set; }
+        public bool IsWindows8 { get; set; }
+        public string Windows8StartDate { get; set; } = "";
+        public string Windows8StartTime { get; set; } = "";
+        public DateTimeOffset? Windows8BaseTimestampUtc { get; set; }
 
         public static string GetSavePath()
         {

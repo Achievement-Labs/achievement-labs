@@ -17,9 +17,16 @@ public sealed class Exophase360Client : IDisposable
     public Exophase360Client(HttpMessageHandler? handler = null)
     {
         http = new HttpClient(handler ?? new HttpClientHandler { AllowAutoRedirect = false, UseCookies = false }) { Timeout = Timeout.InfiniteTimeSpan };
-        http.DefaultRequestHeaders.UserAgent.ParseAdd("AchievementLabs/1.0 (Xbox360-reference-lookup)");
+        http.DefaultRequestHeaders.UserAgent.ParseAdd("AchievementLabs/1.0 (reference-lookup)");
     }
     public async Task<IReadOnlyList<Exophase360Game>> FindGamesAsync(string name, bool xboxGamertag, CancellationToken cancellation = default)
+        => await FindGamesCoreAsync(name, xboxGamertag, "xbox360", cancellation);
+
+    public async Task<IReadOnlyList<Exophase360Game>> FindWindows8GamesAsync(string name, bool xboxGamertag, CancellationToken cancellation = default)
+        => await FindGamesCoreAsync(name, xboxGamertag, "windows8", cancellation);
+
+    private async Task<IReadOnlyList<Exophase360Game>> FindGamesCoreAsync(string name, bool xboxGamertag,
+        string platform, CancellationToken cancellation)
     {
         name = name.Trim().Normalize(NormalizationForm.FormKC);
         if (name.Length is < 1 or > 64 || name.Any(c => !char.IsLetterOrDigit(c) && c is not (' ' or '_' or '-' or '.')))
@@ -47,9 +54,10 @@ public sealed class Exophase360Client : IDisposable
                 if (!game.TryGetProperty("master_id",out var id) || !id.TryGetInt64(out var numeric) || numeric <= 0 ||
                     !game.TryGetProperty("meta",out var meta) || !meta.TryGetProperty("title",out var title) || title.ValueKind != JsonValueKind.String ||
                     !meta.TryGetProperty("platforms",out var platforms) || platforms.ValueKind != JsonValueKind.Array) continue;
-                var is360 = platforms.EnumerateArray().Any(p => Platform(p,"slug") == "xbox360" || Platform(p,"name") == "xbox360");
+                var onPlatform = platforms.EnumerateArray().Any(p => Platform(p,"slug") == platform || Platform(p,"name") == platform ||
+                    platform == "windows8" && (Platform(p,"slug") == "win8" || Platform(p,"name") == "win8"));
                 var gameName = title.GetString()?.Trim();
-                if (is360 && !string.IsNullOrEmpty(gameName) && gameName.Length <= 300) result[numeric] = new(numeric,gameName);
+                if (onPlatform && !string.IsNullOrEmpty(gameName) && gameName.Length <= 300) result[numeric] = new(numeric,gameName);
             }
         }
         throw new InvalidDataException("Too many Exophase pages to finish this lookup. Try a smaller public profile.");

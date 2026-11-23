@@ -2,6 +2,7 @@ param(
  [Parameter(Mandatory=$true)][ValidatePattern('^\d+$')][string]$TitleId,
  [Parameter(Mandatory=$true)][string]$DataDirectory,
  [Parameter(Mandatory=$true)][ValidatePattern('^[a-f0-9]{32}$')][string]$RequestId,
+ [string]$ReceiptPath,
  [switch]$OfflineCheck
 )
 $ErrorActionPreference='Stop'
@@ -34,7 +35,7 @@ try{
  if(!$locked){$result.message='Another license/token operation is running. Wait for it to finish.';throw $result.message}
  if($matches.Count -ne 1){$result.message='No unique license/token route is available for this title.';throw $result.message}
  $game=$matches[0]
- $runtimeDirectory=Join-Path $licenseRoot 'runtime-1'
+ $runtimeDirectory=Join-Path $licenseRoot 'runtime-2'
  if(!(Test-Path -LiteralPath $runtimeDirectory)){
   $stage=New-PrivateFolder (Join-Path $licenseRoot ('staging-'+$RequestId))
   Copy-Item -Path (Join-Path $source '*') -Destination $stage -Recurse
@@ -46,11 +47,20 @@ try{
  $script:DataRoot=Join-Path $licenseRoot 'runs'
  if(!(Test-Path -LiteralPath $script:DataRoot)){$null=New-PrivateFolder $script:DataRoot}
  $run=New-PoCRun $game.index
- $result.message='Receipt acquisition failed. Check Windows Microsoft-account sign-in and the private diagnostics.'
- $receipt=Request-GameReceipt $game $run
+ if($ReceiptPath){
+  $sourceReceipt=(Read-Receipt $ReceiptPath $game)
+  if(!$sourceReceipt.Valid){throw 'The selected pop.bin is expired or not yet valid.'}
+  $privateReceipt=Join-Path $run 'pop.bin'
+  [IO.File]::WriteAllBytes($privateReceipt,$sourceReceipt.Bytes)
+  $receipt=Read-Receipt $privateReceipt $game
+  if($receipt.Hash -ne $sourceReceipt.Hash){throw 'The selected pop.bin changed while it was copied.'}
+ }else{
+  $result.message='Receipt acquisition failed. Check Windows Microsoft-account sign-in and the private diagnostics.'
+  $receipt=Request-GameReceipt $game $run
+  # Fresh service receipts are checked again against the pinned Microsoft certificate before authentication.
+  $receipt=Read-Receipt $receipt.Path $game
+ }
  $result.receiptPath=$receipt.Path
- # Fresh service receipts are checked again against the pinned Microsoft certificate before authentication.
- $receipt=Read-Receipt $receipt.Path $game
  $result.message='Receipt saved. Token acquisition failed; see the private diagnostics.'
  . (Join-Path $script:Runtime 'jetpack-auth-investigation\TemporaryAuthHelper.ps1')
  $config=Get-TemporaryAuthConfig $game.index

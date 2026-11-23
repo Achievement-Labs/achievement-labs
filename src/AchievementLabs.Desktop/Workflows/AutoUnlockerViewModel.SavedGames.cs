@@ -72,6 +72,8 @@ public partial class AutoUnlockerViewModel
     private void ClearLoadedQueueForTitle(string titleId)
     {
         _state = null; QueueItems.Clear(); TitleId = titleId; SelectedSavedGameQueue = null;
+        OnPropertyChanged(nameof(CanEditWindows8Start));
+        Windows8StartDate = ""; Windows8StartTime = "";
         HasExistingState = false; ExistingStateInfo = ""; GameName = "Game: None";
         ReferenceInfo = "Reference User: None"; ProgressText = "Progress: 0/0";
         NextUnlockText = "Next Unlock: N/A"; TimeRemainingText = "Time Until Next: N/A";
