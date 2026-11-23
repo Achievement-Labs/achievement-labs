@@ -88,6 +88,11 @@ public sealed class UpstreamEventCatalogue
                 PartiallySupported: (bool?)p.Value["PartiallySupported"] == true));
     }
     public bool Contains(string titleId) => Volatile.Read(ref current).Templates.ContainsKey(titleId);
+    public string? Fingerprint(string titleId, string achievementId)
+    {
+        var state = Volatile.Read(ref current);
+        return EventCheckpoint.Fingerprint(state.Data[titleId]?["Achievements"]?[achievementId], state.Templates.GetValueOrDefault(titleId));
+    }
     public async Task<int> ImportPackAsync(string text, CancellationToken ct = default)
     {
         if (officialCatalog) throw new InvalidOperationException("Official catalog updates must come from a verified release archive.");

@@ -58,7 +58,11 @@ if (-not [string]::IsNullOrWhiteSpace($CatalogDist)) {
     if ($taskCatalog.schema -ne 1 -or $null -eq $taskCatalog.revision) { throw 'Catalog snapshot manifest has an unsupported schema or no revision.' }
     foreach ($taskCatalogTitle in $taskCatalog.titles.PSObject.Properties) {
         $taskEntry = $taskCatalogTitle.Value
+        if ($taskCatalogTitle.Name -notmatch '^[0-9]{1,10}$') { throw "Catalog snapshot has an invalid title id: $($taskCatalogTitle.Name)" }
+        if ([int64]$taskEntry.revision -gt [int64]$taskCatalog.revision) { throw "Catalog snapshot title $($taskCatalogTitle.Name) has a revision above the manifest revision." }
         if (-not $taskEntry.enabled) { continue }
+        # Only titles/<id>.<12 hex>.json is allowed: no traversal, absolute paths or other folders.
+        if ([string]$taskEntry.path -cnotmatch ('^titles/' + $taskCatalogTitle.Name + '\.[0-9a-f]{12}\.json$')) { throw "Catalog snapshot title path is not allowed: $($taskEntry.path)" }
         $taskTitleFile = Join-Path $taskCatalogDist $taskEntry.path
         if (-not (Test-Path -LiteralPath $taskTitleFile)) { throw "Catalog snapshot title is missing: $($taskEntry.path)" }
         $taskTitleHash = (Get-FileHash -LiteralPath $taskTitleFile -Algorithm SHA256).Hash.ToLowerInvariant()

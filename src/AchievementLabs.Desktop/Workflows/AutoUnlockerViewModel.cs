@@ -1080,12 +1080,26 @@ namespace AchievementLabs.Desktop.Workflows
             if (entry.EventSubmissionPendingVerification) return true;
 
             if (EventCatalog == null) return false;
-            var requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, entry.AchievementId, account.XUIDOnly, token)).Payloads.ToList();
+            // Catalog refreshes can land mid-queue. Read the recipe fingerprint around the payload build so both come from
+            // the same catalog snapshot, then resume only if it matches the one the checkpoint started with.
+            List<string> requestBodies; string? fingerprint; int attempt = 0;
+            do
+            {
+                fingerprint = EventCatalog.PayloadFingerprint(_state.TitleId, entry.AchievementId);
+                requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, entry.AchievementId, account.XUIDOnly, token)).Payloads.ToList();
+            } while (++attempt < 3 && fingerprint != EventCatalog.PayloadFingerprint(_state.TitleId, entry.AchievementId));
             if (requestBodies.Count == 0) return false;
+            var start = AchievementLabs.Core.EventCheckpoint.Resume(entry, fingerprint, requestBodies.Count, out var checkpointReset);
+            if (checkpointReset != null)
+            {
+                System.Diagnostics.Trace.TraceWarning(checkpointReset);
+                StatusText = checkpointReset;
+                SaveState();
+            }
             if (entry.EventRequestIndex > requestBodies.Count) throw new InvalidDataException("The event checkpoint no longer matches this achievement's payloads.");
 
             // Send all request(s)
-            for (int reqIdx = entry.EventRequestIndex; reqIdx < requestBodies.Count; reqIdx++)
+            for (int reqIdx = start; reqIdx < requestBodies.Count; reqIdx++)
             {
                 await WaitForCredentialsAsync(true, token);
                 token.ThrowIfCancellationRequested();
@@ -1104,7 +1118,7 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     throw new HttpRequestException($"Event request {reqIdx + 1}/{requestBodies.Count} failed: HTTP {statusCode}.", null, (System.Net.HttpStatusCode)statusCode);
                 }
-                entry.EventRequestIndex = reqIdx + 1;
+                AchievementLabs.Core.EventCheckpoint.Advance(entry, reqIdx + 1, fingerprint);
                 SaveState();
             }
 

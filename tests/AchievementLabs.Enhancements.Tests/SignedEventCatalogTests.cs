@@ -13,11 +13,13 @@ public static class SignedEventCatalogTests
     {
         public readonly Dictionary<string, byte[]> Files = new();
         public bool Offline;
-        public int TitleDownloads;
+        public int TitleDownloads, ReleaseCalls;
         public TaskCompletionSource? TitleGate;
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
         {
             var url = request.RequestUri!.AbsoluteUri;
+            // The legacy release-zip fallback talks to GitHub; count it and answer 403 so it leaves its cache untouched.
+            if (url.StartsWith("https://api.github.com/repos/Achievement-Labs/achievement-labs/", StringComparison.Ordinal)) { ReleaseCalls++; return new HttpResponseMessage(HttpStatusCode.Forbidden); }
             Assert(url.StartsWith(Base, StringComparison.Ordinal), "Only the catalog endpoint is contacted: " + url);
             Assert(request.Method == HttpMethod.Get && !request.Headers.Contains("Authorization"), "Public read only; no tokens");
             if (Offline) throw new HttpRequestException("offline");
@@ -26,6 +28,26 @@ public static class SignedEventCatalogTests
         }
     }
 
+    // Two requests for achievement 1, so a checkpoint can sit between them.
+    static JObject TwoRequestBlock(string value) => JObject.Parse("{\"Enabled\":true,\"FullySupported\":true,\"Achievements\":{\"1\":{\"Request1\":{\"0\":{\"ReplacementType\":\"Replace\",\"Target\":\"REPLACEACH\",\"Replacement\":\"" + value + "\"}},\"Request2\":{\"0\":{\"ReplacementType\":\"Replace\",\"Target\":\"REPLACEACH\",\"Replacement\":\"" + value + "b\"}}}}}");
+    static byte[] TwoRequestBundle(string id, int revision, string value) => Encoding.UTF8.GetBytes(new JObject
+    { ["titleId"] = id, ["revision"] = revision, ["data"] = TwoRequestBlock(value), ["template"] = Template(id), ["stats"] = null }.ToString());
+    /// <summary>Writes an indexed Events/ folder (index.json + per-title Data.json and template) for the given titles.</summary>
+    static string EventsFolder(string root, params (string Id, string Value)[] titles)
+    {
+        Directory.CreateDirectory(root); var index = new JObject();
+        foreach (var (id, value) in titles)
+        {
+            var block = Block(value); Directory.CreateDirectory(Path.Combine(root, id));
+            File.WriteAllText(Path.Combine(root, id, "Data.json"), new JObject { [id] = block, ["SupportedTitleIDs"] = new JArray(id) }.ToString());
+            File.WriteAllText(Path.Combine(root, id, id + ".json"), Template(id));
+            var summary = (JObject)block.DeepClone(); summary.Remove("Achievements"); index[id] = summary;
+        }
+        index["SupportedTitleIDs"] = new JArray(titles.Select(t => t.Id)); File.WriteAllText(Path.Combine(root, "index.json"), index.ToString());
+        return root;
+    }
+    static string ClientAchievement(EventCatalogClient client, string id, int request = 0) =>
+        JObject.Parse(client.GetPayloadsAsync(id, "1", "0", default).GetAwaiter().GetResult().Payloads[request])["data"]!["baseData"]!["properties"]!["AchievementID"]!.ToString();
     static JObject Block(string value) => JObject.Parse("{\"Enabled\":true,\"FullySupported\":true,\"Achievements\":{\"1\":{\"Id\":{\"ReplacementType\":\"Replace\",\"Target\":\"REPLACEACH\",\"Replacement\":\"" + value + "\"}}}}");
     static string Template(string id) => new JObject { ["name"] = "Microsoft.XboxLive.T" + id + ".AchievementUnlock", ["data"] = new JObject { ["baseData"] = new JObject { ["titleId"] = id, ["serviceConfigId"] = "11111111-2222-3333-4444-555555555555", ["name"] = "AchievementUnlock", ["userId"] = "REPLACEXUID", ["properties"] = new JObject { ["AchievementID"] = "REPLACEACH" } } } }.ToString();
     static byte[] Bundle(string id, int revision, string value, string? templateId = null) => Encoding.UTF8.GetBytes(new JObject
@@ -168,12 +190,101 @@ public static class SignedEventCatalogTests
             withSnapshot.RefreshAsync(http, true).GetAwaiter().GetResult();
             Assert(Achievement(withSnapshot, "101") == "8", "Re-published title becomes available again");
 
-            // Corrupt cache state fails closed to bundled data.
-            File.WriteAllText(statePath, "broken");
-            var corrupt = Open(Snapshot(bundledSnapshot));
-            Assert(corrupt.LibrarySupport()["101"].CatalogSource == "bundled" && corrupt.AcceptedRevision == 0 && Achievement(corrupt, "101") == "7", "Corrupt cache falls back to bundled snapshot");
+            // Review fixes ---------------------------------------------------------------------------------------
+
+            // A snapshot title listed in an accepted manifest at the same revision (never downloaded or cached) and then
+            // dropped must stay unavailable, including after restart.
+            var tombCache = Path.Combine(dir, "tomb");
+            var tombSnapshot = Snapshot(Catalog(30, ("401", 5, Bundle("401", 5, "5")), ("402", 5, Bundle("402", 5, "5"))));
+            var tomb = new SignedEventCatalog(tombCache, [], tombSnapshot, pem);
+            Publish(server, key, Catalog(30, ("401", 5, Bundle("401", 5, "5")), ("402", 5, Bundle("402", 5, "5"))));
+            downloads = server.TitleDownloads; tomb.RefreshAsync(http, true).GetAwaiter().GetResult();
+            Assert(server.TitleDownloads == downloads && Achievement(tomb, "401") == "5", "Same-revision snapshot title is served bundled without download");
+            Publish(server, key, Catalog(31, ("402", 5, Bundle("402", 5, "5"))));
+            tomb.RefreshAsync(http, true).GetAwaiter().GetResult();
+            Assert(!tomb.LibrarySupport()["401"].Available && tomb.LibrarySupport()["402"].Available, "Never-cached snapshot title dropped by the catalog is unavailable");
+            Assert(!new SignedEventCatalog(tombCache, [], tombSnapshot, pem).LibrarySupport()["401"].Available, "Dropped never-cached title stays off after restart");
+
+            // state.json is not authoritative: a corrupted floor is ignored and real manifests are still accepted.
+            var floorCache = Path.Combine(dir, "floor");
+            Publish(server, key, Catalog(5, ("301", 5, Bundle("301", 5, "5"))));
+            new SignedEventCatalog(floorCache, [], null, pem).RefreshAsync(http, true).GetAwaiter().GetResult();
+            var floorState = Path.Combine(floorCache, "state.json");
+            var tamperedState = JObject.Parse(File.ReadAllText(floorState)); tamperedState["manifestRevision"] = 2147483647; File.WriteAllText(floorState, tamperedState.ToString());
+            var floorCatalog = new SignedEventCatalog(floorCache, [], null, pem);
+            Assert(floorCatalog.AcceptedRevision == 5 && Achievement(floorCatalog, "301") == "5", "Floor and titles come from the verified cached manifest, not state.json");
+            Publish(server, key, Catalog(6, ("301", 6, Bundle("301", 6, "6"))));
+            Assert(floorCatalog.RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Applied && Achievement(floorCatalog, "301") == "6", "Real newer manifest accepted despite a corrupted state floor");
+            // A cached manifest whose signature no longer verifies discards the cache: floor 0, bundled data wins.
+            File.WriteAllText(Path.Combine(floorCache, "manifests", "6.json.sig"), Convert.ToBase64String(new byte[64]));
+            var discarded = new SignedEventCatalog(floorCache, [], Snapshot(Catalog(4, ("301", 4, Bundle("301", 4, "4")))), pem);
+            Assert(discarded.AcceptedRevision == 0 && Achievement(discarded, "301") == "4", "Unverifiable cache is discarded and bundled data wins");
+
+            // Title revision above its manifest revision breaks the shared scale and is rejected.
+            Publish(server, key, Catalog(7, ("301", 8, Bundle("301", 8, "8"))));
+            Assert(discarded.RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Rejected && discarded.Status.Contains("above manifest revision"), "Title revision above manifest revision rejected");
+
+            // Only P-256 keys verify (curve OID 1.2.840.10045.3.1.7), even with a valid signature from another curve.
+            using (var p384 = ECDsa.Create(ECCurve.NamedCurves.nistP384))
+            {
+                var other = new SignedEventCatalog(Path.Combine(dir, "p384"), [], null, p384.ExportSubjectPublicKeyInfoPem());
+                Publish(server, p384, Catalog(9, ("301", 9, Bundle("301", 9, "9"))));
+                Assert(other.RefreshAsync(http, true).GetAwaiter().GetResult() == CatalogRefreshOutcome.Rejected, "Non-P-256 key rejected");
+            }
+
+            // End to end through EventCatalogClient: snapshot marker (50) above title revisions, plus an Events/-only title.
+            var clientRoot = Path.Combine(dir, "client");
+            var events = EventsFolder(Path.Combine(clientRoot, "Events"), ("501", "events"), ("502", "events"));
+            var clientSnapshot = Snapshot(Catalog(50, ("502", 30, TwoRequestBundle("502", 30, "s30")), ("503", 30, Bundle("503", 30, "s30"))));
+            var clientSigned = new SignedEventCatalog(Path.Combine(clientRoot, "signed"), ["345903534"], clientSnapshot, pem);
+            using var client = new EventCatalogClient(clientSigned, events, Path.Combine(clientRoot, "cache"));
+            Publish(server, key, Catalog(60, ("502", 40, TwoRequestBundle("502", 40, "c40")), ("503", 20, Bundle("503", 20, "c20")), ("504", 60, Bundle("504", 60, "c60"))));
+            var releaseCalls = server.ReleaseCalls;
+            client.RefreshUpstreamAsync(http, true, default).GetAwaiter().GetResult();
+            Assert(server.ReleaseCalls == releaseCalls, "Applied signed refresh does not touch the release-zip fallback");
+            Assert(client.GetTitleAsync("502", default).GetAwaiter().GetResult().AchievementIds.SequenceEqual(new[] { "1" }), "Title mapping loads");
+            Assert(ClientAchievement(client, "502") == "c40" && client.TitleCatalogStatus("502") is { Revision: 40, Source: "catalog" }, "Cache title 40 beats snapshot title 30 even though the marker is 50");
+            Assert(ClientAchievement(client, "503") == "s30" && client.TitleCatalogStatus("503") is { Revision: 30, Source: "bundled" }, "Snapshot title 30 beats catalog title 20");
+            client.GetTitleAsync("501", default).GetAwaiter().GetResult();
+            Assert(ClientAchievement(client, "501") == "events" && client.TitleCatalogStatus("501") is { Revision: 50, Source: "bundled" }, "Events/-only title answers from Events/ at the marker revision");
+            var support = client.GetLibrarySupport();
+            Assert(support["501"].CatalogSource == "bundled" && support["502"].CatalogRevision == 40 && support["504"].Available, "Library support carries per-title revision and source");
+
+            // Refresh between the two requests of one achievement: the resume checkpoint must restart at request 1.
+            var entry = new AchievementLabs.Models.AutoUnlockQueueEntry { AchievementId = "1" };
+            var before2 = client.PayloadFingerprint("502", "1");
+            Assert(before2 != null && EventCheckpoint.Resume(entry, before2, 2, out _) == 0, "Fresh entry starts at 0");
+            EventCheckpoint.Advance(entry, 1, before2);
+            var persisted = Newtonsoft.Json.JsonConvert.DeserializeObject<AchievementLabs.Models.AutoUnlockQueueEntry>(Newtonsoft.Json.JsonConvert.SerializeObject(entry))!;
+            Assert(persisted.EventRequestIndex == 1 && persisted.EventPayloadFingerprint == before2, "Checkpoint fingerprint survives restart");
+            Assert(EventCheckpoint.Resume(persisted, client.PayloadFingerprint("502", "1"), 2, out var noReset) == 1 && noReset == null, "Unchanged recipe resumes at request 2");
+            Publish(server, key, Catalog(61, ("502", 61, TwoRequestBundle("502", 61, "c61")), ("503", 20, Bundle("503", 20, "c20")), ("504", 60, Bundle("504", 60, "c60"))));
+            client.RefreshUpstreamAsync(http, true, default).GetAwaiter().GetResult();
+            var after2 = client.PayloadFingerprint("502", "1");
+            Assert(after2 != before2 && EventCheckpoint.Resume(persisted, after2, 2, out var resetReason) == 0 && persisted.EventRequestIndex == 0
+                && resetReason != null && resetReason.Contains("changed"), "Changed recipe after a mid-achievement refresh restarts at request 1 and says why");
+            Assert(ClientAchievement(client, "502", 0) == "c61" && ClientAchievement(client, "502", 1) == "c61b", "Restarted achievement sends the new recipe's requests");
+            var legacyEntry = new AchievementLabs.Models.AutoUnlockQueueEntry { AchievementId = "1", EventRequestIndex = 1 };
+            Assert(EventCheckpoint.Resume(legacyEntry, after2, 2, out _) == 1, "Checkpoints saved before fingerprints keep the old resume behaviour");
+
+            // Release-zip fallback only on Unreachable, never on Rejected.
+            releaseCalls = server.ReleaseCalls;
+            Publish(server, key, Catalog(62, ("502", 61, TwoRequestBundle("502", 61, "c61"))), signatureOverride: new byte[64]);
+            client.RefreshUpstreamAsync(http, true, default).GetAwaiter().GetResult();
+            Assert(server.ReleaseCalls == releaseCalls && ClientAchievement(client, "502") == "c61", "Rejected signed catalog does not fall back to the release zip");
+            server.Offline = true;
+            client.RefreshUpstreamAsync(http, true, default).GetAwaiter().GetResult();
+            server.Offline = false;
+            Assert(server.ReleaseCalls == releaseCalls + 1 && client.UpstreamStatus.Contains("Release-zip fallback") && ClientAchievement(client, "502") == "c61", "Unreachable signed catalog falls back to the release zip; data retained");
+
+            // A custom pack overrides an official title and is flagged.
+            var pack = new JObject { ["schemaVersion"] = 1, ["titles"] = new JObject { ["504"] = new JObject { ["template"] = Template("504"),
+                ["recipes"] = new JObject { ["recipes"] = new JObject { ["1"] = new JArray { new JArray { new JObject { ["target"] = "REPLACEACH", ["value"] = "custom" } } } } } } } };
+            Assert(client.ImportEventPackAsync(pack.ToString(), default).GetAwaiter().GetResult() == 1, "Custom pack imported");
+            Assert(client.GetLibrarySupport()["504"] is { CustomOverride: true, CatalogSource: "custom" } && client.TitleCatalogStatus("504") is { OverridesOfficial: true }, "Custom override is flagged");
+            Assert(ClientAchievement(client, "504") == "custom", "Custom pack wins for its title");
         }
         finally { Directory.Delete(dir, true); }
-        Console.WriteLine("PASS: signed catalog: precedence, per-title isolation, signature, rollback, sha mismatch, no-op refresh, bundled snapshot, refresh during queue, fallback signal.");
+        Console.WriteLine("PASS: signed catalog: precedence, per-title isolation, signature, rollback, sha mismatch, no-op refresh, bundled snapshot, refresh during queue, fallback signal, never-cached tombstones, signed cache authority, revision scale, P-256 OID, client end-to-end, checkpoint reset, fallback only on Unreachable, custom override.");
     }
 }

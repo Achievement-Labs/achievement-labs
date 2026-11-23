@@ -28,6 +28,11 @@ public sealed class EventCatalogClient : IDisposable
     public EventCatalogClient() { }
     public EventCatalogClient(bool useBundledCatalog, Func<string?>? eventsDirectory = null, bool officialCatalog = false)
     { useLocal = useBundledCatalog; directory = officialCatalog ? null : eventsDirectory; this.officialCatalog = officialCatalog; }
+    /// <summary>Official-mode client over injected sources: a signed catalog, an Events/ folder and a cache folder (tests).</summary>
+    public EventCatalogClient(SignedEventCatalog signedCatalog, string eventsDirectory, string cacheDirectory)
+    { useLocal = true; officialCatalog = true; signed = signedCatalog; directory = () => eventsDirectory; cacheRoot = cacheDirectory; }
+    private readonly string? cacheRoot;
+    private string CacheFile(string name) => cacheRoot != null ? Path.Combine(cacheRoot, name) : AchievementLabsPaths.LocalFile(name);
     private LocalEventCatalogue? Local
     {
         get
@@ -40,14 +45,17 @@ public sealed class EventCatalogClient : IDisposable
         }
     }
     private UpstreamEventCatalogue? Additions => Local is { } catalog ? additions ??= new(
-        AchievementLabsPaths.LocalFile(officialCatalog ? "official-event-catalog-v2.json.br" : "upstream-event-additions.json"),
+        CacheFile(officialCatalog ? "official-event-catalog-v2.json.br" : "upstream-event-additions.json"),
         officialCatalog ? ["345903534"] : catalog.ProtectedTitleIds, catalog.Matches, catalog.ReservedTitleIds, officialCatalog) : null;
     private UpstreamEventCatalogue? Custom => officialCatalog && Local is { } catalog ? custom ??= new(
-        AchievementLabsPaths.LocalFile("custom-event-packs-v2.json"), catalog.ReservedTitleIds.Concat(Additions!.KnownTitleIds)) : null;
+        CacheFile("custom-event-packs-v2.json"), catalog.ReservedTitleIds.Concat(Additions!.KnownTitleIds)) : null;
     private bool IsCustom(string id) => officialCatalog && Local?.ReservedTitleIds.Contains(id) != true
         && Additions?.KnownTitleIds.Contains(id) != true && Custom?.KnownTitleIds.Contains(id) == true;
     // Signed catalog (official mode only). Precedence per title, see CatalogPrecedence:
-    //   custom pack > max-revision of { signed cache, release-zip cache, bundled (snapshot title or Events/) }.
+    //   custom pack > removed tombstone > max-revision of { signed cache, release-zip cache, bundled (snapshot title or Events/) }.
+    // Revision scale: catalog title revisions and manifest revisions share one global counter (`git rev-list --count`
+    // of the catalog repository; a title's revision is the count at the last change to its folder). That is what
+    // makes the bundled marker (the snapshot's manifest revision) comparable with per-title revisions here.
     private SignedEventCatalog? signed;
     private SignedEventCatalog? Signed => officialCatalog && useLocal ? signed ??= new(AchievementLabsPaths.LocalFile("signed-event-catalog"),
         ["345903534"], BundledCatalogSnapshot.Present ? BundledCatalogSnapshot.Read : null) : null;
@@ -86,6 +94,26 @@ public sealed class EventCatalogClient : IDisposable
             Winner.Local => new(id, Marker, EventCatalogSource.Bundled, error),
             _ => null
         };
+    }
+    /// <summary>
+    /// Fingerprint of the recipe that would currently build this achievement's payloads (mapping + template of the
+    /// winning source), used to invalidate a multi-request resume checkpoint after a catalog update. Null when unknown.
+    /// </summary>
+    public string? PayloadFingerprint(string id, string achievementId)
+    {
+        try
+        {
+            if (IsCustom(id)) return "custom:" + Custom!.Fingerprint(id, achievementId);
+            if (Signed != null)
+                switch (Resolve(id, out var t))
+                {
+                    case Winner.Signed: return t!.Enabled ? "signed:" + EventCheckpoint.Fingerprint(t.Block["Achievements"]?[AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId)], t.Template) : null;
+                    case Winner.Local: return "local:" + Local!.Fingerprint(id, AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId));
+                }
+            if (Additions?.KnownTitleIds.Contains(id) == true) return "release:" + Additions.Fingerprint(id, achievementId);
+            return Local?.Contains(id) == true ? "local:" + Local.Fingerprint(id, AchievementLabs.MultiSelect.EventIdMapping.PayloadId(id, achievementId)) : null;
+        }
+        catch (Exception e) when (e is InvalidOperationException or InvalidDataException or KeyNotFoundException or IOException or Newtonsoft.Json.JsonException or ArgumentException) { return null; }
     }
     public string UpstreamStatus => Signed is { } s
         ? s.Status + (usedLegacyFallback && Additions is { } a ? " · Release-zip fallback: " + a.Status : "")

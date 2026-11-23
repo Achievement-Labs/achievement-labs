@@ -39,6 +39,12 @@ public static class CatalogPrecedence
     }
 }
 
+/// <remarks>
+/// Revision scale (shared with the catalog builder): the manifest revision is `git rev-list --count` of the catalog
+/// repository, and each title's revision is that same global count for the last change touching the title's folder.
+/// So a title revision is never above its manifest's revision, and a snapshot's manifest revision (the bundled
+/// marker) is directly comparable with any title revision. Manifests that break this are rejected.
+/// </remarks>
 /// <summary>
 /// Signed catalog published separately from app releases (Achievement-Labs/achievement-labs-catalog).
 /// The manifest is verified with an embedded ECDSA P-256 key; title bundles are verified by sha256 and size,
@@ -56,9 +62,12 @@ public sealed class SignedEventCatalog
     public static bool IsPlaceholderKey(string pem) => pem.Contains("PLACEHOLDER", StringComparison.Ordinal);
 
     // Removed: an accepted manifest later dropped the title. It stays disabled and outranks bundled/legacy data.
-    internal sealed record Title(string Id, int Revision, string Sha256, string? FileName, bool Enabled, JObject Block, string Template, bool Removed = false);
+    // FromManifest: revision of the signed manifest that vouches for this title's revision, sha256 and size.
+    internal sealed record Title(string Id, int Revision, string Sha256, string? FileName, bool Enabled, JObject Block, string Template, bool Removed = false, int FromManifest = 0);
     private sealed record Failure(string Sha256, string Error);
-    private sealed record Snapshot(int ManifestRevision, string Commit, DateTime CheckedUtc, Dictionary<string, Title> Cached, Dictionary<string, Failure> Failures);
+    // Listed: every title id that appeared in an accepted manifest; ids later dropped become removed tombstones.
+    private sealed record Snapshot(int ManifestRevision, string Commit, DateTime CheckedUtc, Dictionary<string, Title> Cached, Dictionary<string, Failure> Failures,
+        HashSet<string> Listed, byte[]? ManifestBytes = null);
 
     private readonly string cacheDirectory;
     private readonly string publicKeyPem;
@@ -66,7 +75,7 @@ public sealed class SignedEventCatalog
     private readonly HashSet<string> reserved;
     private readonly Dictionary<string, Title> bundled = new(StringComparer.Ordinal);
     private readonly SemaphoreSlim gate = new(1, 1);
-    private Snapshot current = new(0, "", DateTime.MinValue, new(StringComparer.Ordinal), new(StringComparer.Ordinal));
+    private Snapshot current = new(0, "", DateTime.MinValue, new(StringComparer.Ordinal), new(StringComparer.Ordinal), new(StringComparer.Ordinal));
 
     /// <summary>Manifest revision of the snapshot embedded in this exe; the marker for revision-less legacy data.</summary>
     public int BundledRevision { get; }
@@ -97,14 +106,14 @@ public sealed class SignedEventCatalog
         if (read("manifest.json") is not { } bytes) return null;
         var manifest = Parse(Encoding.UTF8.GetString(bytes));
         var revision = (int?)manifest["revision"] ?? throw new InvalidDataException("Snapshot revision missing.");
-        foreach (var (id, entry) in Entries(manifest))
+        foreach (var (id, entry) in Entries(manifest).ToList())
         {
             if (reserved.Contains(id)) continue;
             if (!entry.Enabled) { bundled[id] = Disabled(id, entry.Revision); continue; }
             try
             {
                 var file = read(entry.Path!) ?? throw new InvalidDataException("Snapshot title file missing.");
-                bundled[id] = ParseBundle(id, entry, file);
+                bundled[id] = ParseBundle(id, entry, file, revision);
             }
             catch (Exception e) when (IsDataError(e)) { }
         }
@@ -114,32 +123,60 @@ public sealed class SignedEventCatalog
     private string StatePath => Path.Combine(cacheDirectory, "state.json");
     private string TitlePath(string fileName) => Path.Combine(cacheDirectory, "titles", fileName);
 
+    private string ManifestFolder => Path.Combine(cacheDirectory, "manifests");
+    private string ManifestPath(int revision) => Path.Combine(ManifestFolder, revision.ToString(System.Globalization.CultureInfo.InvariantCulture) + ".json");
+
+    /// <summary>
+    /// Authority comes only from signed manifests kept in the cache (manifests/&lt;rev&gt;.json + .sig), re-verified here.
+    /// The rollback floor is the newest verified manifest; each title's revision, sha256 and size come from a verified
+    /// manifest. state.json is advisory only (check time, failure messages, ids seen in earlier manifests). If nothing
+    /// verifies, the cache is discarded: floor 0 and bundled data wins.
+    /// </summary>
     private void LoadCache()
     {
-        if (!File.Exists(StatePath)) return;
-        var state = Parse(File.ReadAllText(StatePath));
+        var verified = new SortedDictionary<int, (JObject Manifest, Dictionary<string, Entry> Entries, byte[] Bytes)>();
+        if (Directory.Exists(ManifestFolder) && !IsPlaceholderKey(publicKeyPem))
+            foreach (var file in Directory.EnumerateFiles(ManifestFolder, "*.json"))
+            {
+                try
+                {
+                    if (!int.TryParse(Path.GetFileNameWithoutExtension(file), System.Globalization.NumberStyles.None, System.Globalization.CultureInfo.InvariantCulture, out var rev)) continue;
+                    var bytes = File.ReadAllBytes(file);
+                    if (!VerifySignature(bytes, File.ReadAllText(file + ".sig").Trim())) continue;
+                    var manifest = Parse(Encoding.UTF8.GetString(bytes).TrimStart('\uFEFF'));
+                    if ((int?)manifest["revision"] != rev) continue;
+                    verified[rev] = (manifest, Entries(manifest).ToDictionary(e => e.Id, e => e.Entry, StringComparer.Ordinal), bytes);
+                }
+                catch (Exception e) when (IsDataError(e) || e is IOException or UnauthorizedAccessException) { }
+            }
+        if (verified.Count == 0) { Status = "No verified signed catalog cached; bundled data in use."; return; }
+        var floor = verified.Keys.Max(); var top = verified[floor];
+        var state = new JObject();
+        try { if (File.Exists(StatePath)) state = Parse(File.ReadAllText(StatePath)); } catch (Exception e) when (IsDataError(e) || e is IOException) { }
+        var listed = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var v in verified.Values) listed.UnionWith(v.Entries.Keys);
+        // Advisory: ids seen in manifests no longer retained. They can only produce removed tombstones (disable), never data.
+        foreach (var token in state["listed"] as JArray ?? new JArray()) if (EventCatalogStorage.ValidId(token.ToString())) listed.Add(token.ToString());
         var cached = new Dictionary<string, Title>(StringComparer.Ordinal);
         var failures = new Dictionary<string, Failure>(StringComparer.Ordinal);
-        foreach (var p in (state["titles"] as JObject ?? new()).Properties())
+        foreach (var id in listed)
         {
-            if (!EventCatalogStorage.ValidId(p.Name) || reserved.Contains(p.Name) || p.Value is not JObject t) continue;
-            var revision = (int?)t["revision"] ?? 0;
-            if ((bool?)t["enabled"] == false) { cached[p.Name] = Disabled(p.Name, revision) with { Removed = (bool?)t["removed"] == true }; continue; }
-            try
+            if (reserved.Contains(id)) continue;
+            if (!top.Entries.TryGetValue(id, out var entry)) { cached[id] = Disabled(id, 0) with { Removed = true, FromManifest = floor }; continue; }
+            if (!entry.Enabled) { cached[id] = Disabled(id, entry.Revision) with { FromManifest = floor }; continue; }
+            // Newest retained manifest whose title file is present and matches (a failed title keeps an older good one).
+            foreach (var (rev, v) in verified.Reverse())
             {
-                var fileName = (string?)t["file"] ?? throw new InvalidDataException();
-                if (!Regex.IsMatch(fileName, @"^[0-9]{1,10}\.[0-9a-f]{12}\.json$")) throw new InvalidDataException();
-                var bytes = File.ReadAllBytes(TitlePath(fileName));
-                var entry = new Entry(revision, (string?)t["sha256"] ?? "", bytes.Length, "titles/" + fileName, true);
-                // Integrity only: the bytes were fully validated before they were first written.
-                cached[p.Name] = ParseBundle(p.Name, entry, bytes, validate: false);
+                if (!v.Entries.TryGetValue(id, out var e) || !e.Enabled) continue;
+                try { cached[id] = ParseBundle(id, e, File.ReadAllBytes(TitlePath(e.Path![7..])), rev, validate: false); break; }
+                catch (Exception error) when (IsDataError(error) || error is IOException or UnauthorizedAccessException) { }
             }
-            catch (Exception e) when (IsDataError(e) || e is IOException) { failures[p.Name] = new("", "Cached title file is missing or corrupt."); }
         }
         foreach (var p in (state["failures"] as JObject ?? new()).Properties())
-            if (p.Value is JObject f) failures.TryAdd(p.Name, new((string?)f["sha256"] ?? "", (string?)f["error"] ?? "Rejected."));
-        Volatile.Write(ref current, new((int?)state["manifestRevision"] ?? 0, (string?)state["commit"] ?? "",
-            (DateTime?)state["checkedUtc"] ?? DateTime.MinValue, cached, failures));
+            if (p.Value is JObject f) failures[p.Name] = new((string?)f["sha256"] ?? "", (string?)f["error"] ?? "Rejected.");
+        DateTime checkedUtc = DateTime.MinValue;
+        try { checkedUtc = (DateTime?)state["checkedUtc"] ?? DateTime.MinValue; } catch (Exception e) when (IsDataError(e)) { }
+        Volatile.Write(ref current, new(floor, (string?)top.Manifest["commit"] ?? "", checkedUtc, cached, failures, listed, top.Bytes));
         Status = StatusLine(Volatile.Read(ref current), null);
     }
 
@@ -147,12 +184,15 @@ public sealed class SignedEventCatalog
     private static IEnumerable<(string Id, Entry Entry)> Entries(JObject manifest)
     {
         if ((int?)manifest["schema"] != 1) throw new InvalidDataException("Unsupported catalog schema.");
+        var manifestRevision = (int?)manifest["revision"] ?? throw new InvalidDataException("Manifest revision missing.");
+        if (manifestRevision < 0) throw new InvalidDataException("Invalid manifest revision.");
         var titles = manifest["titles"] as JObject ?? throw new InvalidDataException("Manifest titles are missing.");
         if (titles.Count > 5000) throw new InvalidDataException("Title limit exceeded.");
         foreach (var p in titles.Properties())
         {
             if (!EventCatalogStorage.ValidId(p.Name) || p.Value is not JObject t) throw new InvalidDataException("Invalid manifest title.");
             var revision = (int?)t["revision"] ?? throw new InvalidDataException("Title revision missing.");
+            if (revision < 0 || revision > manifestRevision) throw new InvalidDataException("Title " + p.Name + " revision " + revision + " is above manifest revision " + manifestRevision + ".");
             var enabled = (bool?)t["enabled"] ?? throw new InvalidDataException("Title enabled flag missing.");
             if (!enabled) { yield return (p.Name, new(revision, "", 0, null, false)); continue; }
             var sha = (string?)t["sha256"] ?? ""; var path = (string?)t["path"] ?? ""; var size = (long?)t["size"] ?? -1;
@@ -166,7 +206,7 @@ public sealed class SignedEventCatalog
     private static Title Disabled(string id, int revision) =>
         new(id, revision, "", null, false, new JObject { ["Enabled"] = false, ["FullySupported"] = false, ["Achievements"] = new JObject() }, "");
 
-    private static Title ParseBundle(string id, Entry entry, byte[] bytes, bool validate = true)
+    private static Title ParseBundle(string id, Entry entry, byte[] bytes, int fromManifest, bool validate = true)
     {
         if (bytes.LongLength != entry.Size) throw new InvalidDataException("Title size mismatch.");
         if (Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant() != entry.Sha256) throw new InvalidDataException("Title sha256 mismatch.");
@@ -178,7 +218,7 @@ public sealed class SignedEventCatalog
         EventCatalogSchema.ValidateTitle(block);
         if ((bool?)block["Enabled"] == false) throw new InvalidDataException("Enabled title bundle carries a disabled block.");
         if (validate) UpstreamEventCatalogue.ValidateAsync(id, block, template, CancellationToken.None, officialCatalog: true).GetAwaiter().GetResult();
-        return new(id, entry.Revision, entry.Sha256, entry.Path![7..], true, block, template);
+        return new(id, entry.Revision, entry.Sha256, entry.Path![7..], true, block, template, FromManifest: fromManifest);
     }
 
     internal Title? Cached(string id) => Volatile.Read(ref current).Cached.GetValueOrDefault(id);
@@ -247,6 +287,8 @@ public sealed class SignedEventCatalog
             var revision = (int?)manifest["revision"] ?? throw new InvalidDataException("Manifest revision missing.");
             if (revision < previous.ManifestRevision)
             { Status = $"Signed catalog rejected: revision {revision} is older than accepted revision {previous.ManifestRevision}. Existing data retained."; return CatalogRefreshOutcome.Rejected; }
+            if (revision == previous.ManifestRevision && previous.ManifestBytes is { } accepted && !accepted.AsSpan().SequenceEqual(manifestBytes))
+            { Status = $"Signed catalog rejected: revision {revision} was republished with different content. Existing data retained."; return CatalogRefreshOutcome.Rejected; }
             var entries = Entries(manifest).ToList();
 
             var cached = new Dictionary<string, Title>(StringComparer.Ordinal);
@@ -257,17 +299,17 @@ public sealed class SignedEventCatalog
                 ct.ThrowIfCancellationRequested();
                 if (reserved.Contains(id)) continue;
                 var old = previous.Cached.GetValueOrDefault(id);
-                if (!entry.Enabled) { cached[id] = Disabled(id, entry.Revision); continue; }
+                if (!entry.Enabled) { cached[id] = Disabled(id, entry.Revision) with { FromManifest = revision }; continue; }
                 if (old is { Enabled: true } && old.Sha256 == entry.Sha256) { cached[id] = old; continue; }
                 // A bundled title at the same or newer revision wins anyway; no need to download it.
-                if (bundled.GetValueOrDefault(id) is { } snap && snap.Revision >= entry.Revision) { if (old != null) cached[id] = old; continue; }
+                if (bundled.GetValueOrDefault(id) is { } snap && snap.Revision >= entry.Revision) { if (old is { Removed: false }) cached[id] = old; continue; }
                 if (!force && previous.Failures.GetValueOrDefault(id) is { } failed && failed.Sha256 == entry.Sha256)
-                { failures[id] = failed; if (old != null) cached[id] = old; continue; }
+                { failures[id] = failed; if (old is { Removed: false }) cached[id] = old; continue; }
                 try
                 {
                     var bytes = await ReadBytesAsync(http, baseUrl + entry.Path, checked((int)entry.Size), ct).ConfigureAwait(false);
                     downloaded++;
-                    var title = ParseBundle(id, entry, bytes);
+                    var title = ParseBundle(id, entry, bytes, revision);
                     Directory.CreateDirectory(Path.Combine(cacheDirectory, "titles"));
                     await WriteAtomicAsync(TitlePath(title.FileName!), bytes, ct).ConfigureAwait(false);
                     cached[id] = title;
@@ -277,15 +319,21 @@ public sealed class SignedEventCatalog
                 {
                     // Per-title isolation: keep the previous good version (or let the bundled one win) and continue.
                     failures[id] = new(entry.Sha256, e is HttpRequestException h ? $"HTTP {(int?)h.StatusCode}" : e.Message);
-                    if (old != null) cached[id] = old;
+                    if (old is { Removed: false }) cached[id] = old;
                 }
             }
             // A title dropped after appearing in an accepted manifest counts as disabled (old official behaviour):
             // it is kept as a removed tombstone so neither the bundled snapshot nor legacy data can revive it.
-            var listed = entries.Select(e => e.Id).ToHashSet(StringComparer.Ordinal);
-            foreach (var gone in previous.Cached.Values.Where(t => !listed.Contains(t.Id) && !reserved.Contains(t.Id)))
-                cached[gone.Id] = Disabled(gone.Id, gone.Revision) with { Removed = true };
-            var next = new Snapshot(revision, (string?)manifest["commit"] ?? "", DateTime.UtcNow, cached, failures);
+            // Tombstones are computed against every id listed by any accepted manifest, cached or not, so a title that
+            // only ever came from the bundled snapshot cannot be revived after the catalog drops it.
+            var inManifest = entries.Select(e => e.Id).ToHashSet(StringComparer.Ordinal);
+            var listed = new HashSet<string>(previous.Listed, StringComparer.Ordinal); listed.UnionWith(inManifest);
+            foreach (var gone in listed.Where(id => !inManifest.Contains(id) && !reserved.Contains(id)))
+                cached[gone] = Disabled(gone, previous.Cached.GetValueOrDefault(gone)?.Revision ?? 0) with { Removed = true, FromManifest = revision };
+            var next = new Snapshot(revision, (string?)manifest["commit"] ?? "", DateTime.UtcNow, cached, failures, listed, manifestBytes);
+            Directory.CreateDirectory(ManifestFolder);
+            await WriteAtomicAsync(ManifestPath(revision) + ".sig", Encoding.ASCII.GetBytes(signature), ct).ConfigureAwait(false);
+            await WriteAtomicAsync(ManifestPath(revision), manifestBytes, ct).ConfigureAwait(false);
             await SaveStateAsync(next, ct).ConfigureAwait(false);
             Volatile.Write(ref current, next);
             PruneTitleFiles(next);
@@ -317,21 +365,21 @@ public sealed class SignedEventCatalog
         try
         {
             using var key = ECDsa.Create(); key.ImportFromPem(publicKeyPem);
-            if (key.KeySize != 256) return false;
+            // Require P-256 exactly: key size and the named-curve OID 1.2.840.10045.3.1.7 (secp256r1 / nistP256).
+            var oid = key.ExportParameters(false).Curve.Oid;
+            var value = oid?.Value ?? (oid?.FriendlyName is { } friendly ? Oid.FromFriendlyName(friendly, OidGroup.All).Value : null);
+            if (key.KeySize != 256 || value != "1.2.840.10045.3.1.7") return false;
             return key.VerifyData(manifest, Convert.FromBase64String(signature), HashAlgorithmName.SHA256, DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
         }
-        catch (Exception e) when (e is FormatException or CryptographicException or ArgumentException) { return false; }
+        catch (Exception e) when (e is FormatException or CryptographicException or ArgumentException or PlatformNotSupportedException) { return false; }
     }
 
+    // Advisory state only; see LoadCache. Title data and revisions are re-derived from the signed manifests.
     private async Task SaveStateAsync(Snapshot s, CancellationToken ct)
     {
-        var titles = new JObject();
-        foreach (var t in s.Cached.Values.OrderBy(t => t.Id, StringComparer.Ordinal))
-            titles[t.Id] = t.Enabled ? new JObject { ["revision"] = t.Revision, ["sha256"] = t.Sha256, ["file"] = t.FileName, ["enabled"] = true }
-                : new JObject { ["revision"] = t.Revision, ["enabled"] = false, ["removed"] = t.Removed };
         var failures = new JObject();
         foreach (var f in s.Failures.OrderBy(f => f.Key, StringComparer.Ordinal)) failures[f.Key] = new JObject { ["sha256"] = f.Value.Sha256, ["error"] = f.Value.Error };
-        var state = new JObject { ["manifestRevision"] = s.ManifestRevision, ["commit"] = s.Commit, ["checkedUtc"] = s.CheckedUtc, ["titles"] = titles, ["failures"] = failures };
+        var state = new JObject { ["manifestRevision"] = s.ManifestRevision, ["checkedUtc"] = s.CheckedUtc, ["listed"] = new JArray(s.Listed.OrderBy(x => x, StringComparer.Ordinal)), ["failures"] = failures };
         Directory.CreateDirectory(cacheDirectory);
         await WriteAtomicAsync(StatePath, new UTF8Encoding(false).GetBytes(state.ToString(Formatting.None)), ct).ConfigureAwait(false);
     }
@@ -341,6 +389,10 @@ public sealed class SignedEventCatalog
         try
         {
             var keep = s.Cached.Values.Where(t => t.FileName != null).Select(t => t.FileName!).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var manifests = s.Cached.Values.Where(t => t.Enabled).Select(t => t.FromManifest).Append(s.ManifestRevision).ToHashSet();
+            if (Directory.Exists(ManifestFolder))
+                foreach (var file in Directory.EnumerateFiles(ManifestFolder, "*.json"))
+                    if (!int.TryParse(Path.GetFileNameWithoutExtension(file), out var rev) || !manifests.Contains(rev)) { File.Delete(file); if (File.Exists(file + ".sig")) File.Delete(file + ".sig"); }
             var folder = Path.Combine(cacheDirectory, "titles");
             if (Directory.Exists(folder))
                 foreach (var file in Directory.EnumerateFiles(folder, "*.json")) if (!keep.Contains(Path.GetFileName(file))) File.Delete(file);
