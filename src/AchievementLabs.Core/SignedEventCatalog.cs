@@ -55,7 +55,8 @@ public sealed class SignedEventCatalog
     public const string PublicKeyPem = "-----BEGIN PUBLIC KEY-----\nPLACEHOLDER-CATALOG-SIGNING-KEY\n-----END PUBLIC KEY-----";
     public static bool IsPlaceholderKey(string pem) => pem.Contains("PLACEHOLDER", StringComparison.Ordinal);
 
-    internal sealed record Title(string Id, int Revision, string Sha256, string? FileName, bool Enabled, JObject Block, string Template);
+    // Removed: an accepted manifest later dropped the title. It stays disabled and outranks bundled/legacy data.
+    internal sealed record Title(string Id, int Revision, string Sha256, string? FileName, bool Enabled, JObject Block, string Template, bool Removed = false);
     private sealed record Failure(string Sha256, string Error);
     private sealed record Snapshot(int ManifestRevision, string Commit, DateTime CheckedUtc, Dictionary<string, Title> Cached, Dictionary<string, Failure> Failures);
 
@@ -123,7 +124,7 @@ public sealed class SignedEventCatalog
         {
             if (!EventCatalogStorage.ValidId(p.Name) || reserved.Contains(p.Name) || p.Value is not JObject t) continue;
             var revision = (int?)t["revision"] ?? 0;
-            if ((bool?)t["enabled"] == false) { cached[p.Name] = Disabled(p.Name, revision); continue; }
+            if ((bool?)t["enabled"] == false) { cached[p.Name] = Disabled(p.Name, revision) with { Removed = (bool?)t["removed"] == true }; continue; }
             try
             {
                 var fileName = (string?)t["file"] ?? throw new InvalidDataException();
@@ -190,6 +191,7 @@ public sealed class SignedEventCatalog
     internal Title? Effective(string id)
     {
         var cache = Cached(id); var snap = BundledTitle(id);
+        if (cache is { Removed: true }) return cache;
         return CatalogPrecedence.Choose(cache?.Revision, null, snap?.Revision) == CatalogPrecedence.Tier.Catalog ? cache : snap;
     }
     internal bool EffectiveIsCached(string id) => Effective(id) is { } t && ReferenceEquals(t, Cached(id));
@@ -278,7 +280,11 @@ public sealed class SignedEventCatalog
                     if (old != null) cached[id] = old;
                 }
             }
-            // Titles dropped from the manifest leave the cache; the bundled tier answers for them again.
+            // A title dropped after appearing in an accepted manifest counts as disabled (old official behaviour):
+            // it is kept as a removed tombstone so neither the bundled snapshot nor legacy data can revive it.
+            var listed = entries.Select(e => e.Id).ToHashSet(StringComparer.Ordinal);
+            foreach (var gone in previous.Cached.Values.Where(t => !listed.Contains(t.Id) && !reserved.Contains(t.Id)))
+                cached[gone.Id] = Disabled(gone.Id, gone.Revision) with { Removed = true };
             var next = new Snapshot(revision, (string?)manifest["commit"] ?? "", DateTime.UtcNow, cached, failures);
             await SaveStateAsync(next, ct).ConfigureAwait(false);
             Volatile.Write(ref current, next);
@@ -322,7 +328,7 @@ public sealed class SignedEventCatalog
         var titles = new JObject();
         foreach (var t in s.Cached.Values.OrderBy(t => t.Id, StringComparer.Ordinal))
             titles[t.Id] = t.Enabled ? new JObject { ["revision"] = t.Revision, ["sha256"] = t.Sha256, ["file"] = t.FileName, ["enabled"] = true }
-                : new JObject { ["revision"] = t.Revision, ["enabled"] = false };
+                : new JObject { ["revision"] = t.Revision, ["enabled"] = false, ["removed"] = t.Removed };
         var failures = new JObject();
         foreach (var f in s.Failures.OrderBy(f => f.Key, StringComparer.Ordinal)) failures[f.Key] = new JObject { ["sha256"] = f.Value.Sha256, ["error"] = f.Value.Error };
         var state = new JObject { ["manifestRevision"] = s.ManifestRevision, ["commit"] = s.Commit, ["checkedUtc"] = s.CheckedUtc, ["titles"] = titles, ["failures"] = failures };

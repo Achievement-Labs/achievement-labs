@@ -59,6 +59,7 @@ public sealed class EventCatalogClient : IDisposable
         signedTitle = null;
         if (IsCustom(id)) return Winner.Custom;
         var s = Signed; var cached = s?.Cached(id); var snapshot = s?.BundledTitle(id);
+        if (cached is { Removed: true }) { signedTitle = cached; return Winner.Signed; } // Removed from the signed catalog: stays off.
         int? bundled = snapshot?.Revision ?? (Local?.ReservedTitleIds.Contains(id) == true ? Marker : null);
         int? legacy = Additions?.KnownTitleIds.Contains(id) == true
             ? (Additions.CachedReleaseVersion is { } release && UpstreamEventCatalogue.InstalledRelease is { } installed && release > installed ? Marker : -1)

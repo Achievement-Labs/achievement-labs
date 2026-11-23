@@ -157,6 +157,17 @@ public static class SignedEventCatalogTests
             Assert(refresh.GetAwaiter().GetResult() == CatalogRefreshOutcome.Applied && Achievement(queued, "201") == "2", "Next achievement uses the new snapshot");
             server.TitleGate = null;
 
+            // A title dropped from a later accepted manifest stays disabled; the bundled snapshot cannot revive it.
+            Publish(server, key, Catalog(22, ("105", 1, Bundle("105", 1, "1"))));
+            withSnapshot.RefreshAsync(http, true).GetAwaiter().GetResult();
+            Assert(!withSnapshot.LibrarySupport()["101"].Available && withSnapshot.LibrarySupport()["101"].CatalogSource == "catalog", "Removed title is disabled, not bundled");
+            bool removedBlocked = false;
+            try { withSnapshot.PayloadsAsync("101", "1", "0", default).GetAwaiter().GetResult(); } catch (InvalidOperationException) { removedBlocked = true; }
+            Assert(removedBlocked && !Open(Snapshot(bundledSnapshot)).LibrarySupport()["101"].Available, "Removed title stays off after restart");
+            Publish(server, key, Catalog(23, ("101", 8, Bundle("101", 8, "8")), ("105", 1, Bundle("105", 1, "1"))));
+            withSnapshot.RefreshAsync(http, true).GetAwaiter().GetResult();
+            Assert(Achievement(withSnapshot, "101") == "8", "Re-published title becomes available again");
+
             // Corrupt cache state fails closed to bundled data.
             File.WriteAllText(statePath, "broken");
             var corrupt = Open(Snapshot(bundledSnapshot));
