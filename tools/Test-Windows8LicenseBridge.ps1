@@ -12,7 +12,7 @@ function Request-GameReceipt($Game,[string]$Run){
  $path=Join-Path $Run 'pop.bin';[IO.File]::WriteAllText($path,'synthetic receipt')
  [pscustomobject]@{Path=$path;Hash='synthetic';Valid=$true}
 }
-function Read-Receipt([string]$Path,$Game){[pscustomobject]@{Path=$Path;Hash='synthetic';Valid=$true}}
+function Read-Receipt([string]$Path,$Game){[pscustomobject]@{Path=$Path;Hash='synthetic';Valid=$true;Bytes=[IO.File]::ReadAllBytes($Path)}}
 function Get-AppxPackage { param([string]$Name) if($env:LABS_WIN8_FIXTURE_INSTALLED -eq '1'){[pscustomobject]@{Name=$Name}} }
 function Request-GameToken($Game,$Receipt,[string]$Run){
  $export=New-PrivateFolder (Join-Path $Run 'token')
@@ -37,5 +37,21 @@ foreach($installed in @('0','1')){
   if($exitCode -eq 0 -or $result.success -or $result.tokenPath -or !(Test-Path -LiteralPath $result.receiptPath) -or $result.message -notlike '*uninstalled*'){throw 'Installed-game fixture failed.'}
  }
 }
+$import=Join-Path $fixture 'import\pop.bin';$null=New-Item -ItemType Directory -Force (Split-Path $import -Parent)
+[IO.File]::WriteAllText($import,'synthetic receipt')
+$request=[guid]::NewGuid().ToString('N')
+$env:LABS_WIN8_FIXTURE_INSTALLED='0'
+& powershell.exe -NoProfile -MTA -ExecutionPolicy Bypass -File $script -TitleId 123 -DataDirectory $data -RequestId $request -ReceiptPath $import
+$result=Get-Content -LiteralPath (Join-Path $data ($request+'.json')) -Raw|ConvertFrom-Json
+if($LASTEXITCODE -ne 0 -or !$result.success -or !(Test-Path -LiteralPath $result.tokenPath) -or
+   $result.receiptPath -eq $import -or [IO.File]::ReadAllText($import) -ne 'synthetic receipt')
+{throw 'Selected pop.bin fixture failed or changed the source receipt.'}
 Remove-Item Env:\LABS_WIN8_FIXTURE_INSTALLED
-Write-Output 'PASS: real wrapper staging/private ACL/result protocol with synthetic receipt/token backend; installed game retains receipt and blocks token. No live calls or package changes.'
+. (Join-Path $repo 'tools\Windows8License\runtime\jetpack-auth-investigation\TemporaryAuthHelper.ps1')
+$script:fixtureKnown=(Get-Content -LiteralPath (Join-Path $script:SharedHelperRoot 'identities.json') -Raw | ConvertFrom-Json)[0].name
+function Get-AppxPackage {
+ [pscustomobject]@{Name=$script:fixtureKnown;IsDevelopmentMode=$true;InstallLocation=$null}
+ [pscustomobject]@{Name=$script:fixtureKnown;IsDevelopmentMode=$true;InstallLocation=$script:SharedHelperRoot}
+}
+if(@(Get-TemporaryAuthRegistrations).Count -ne 1){throw 'Null Appx install location was not safely skipped.'}
+Write-Output 'PASS: fresh and selected pop.bin paths and null Appx install-location handling. No live calls or package changes.'

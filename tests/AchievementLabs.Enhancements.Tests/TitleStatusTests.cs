@@ -17,14 +17,16 @@ public static class TitleStatusTests
         model.SelectGameAsync(a).GetAwaiter().GetResult();
         var first = Version();
         Report(first, a.Id, "HTTP 200");
-        Assert(model.ActionReports.Count == 1 && model.Win8Status.Contains("HTTP 200"), "Current title receives its result");
+        Assert(model.ActionReports.Count == 1 && model.ActionReports[0].Result.Contains("HTTP 200") && !model.Win8Status.Contains("HTTP 200"),
+            "Current title keeps its result per achievement inside the Windows 8 panel");
         model.SelectGameAsync(b).GetAwaiter().GetResult();
         Assert(model.ActionReports.Count == 0 && !model.Win8Status.Contains("HTTP 200"), "Title switch clears reports and status");
         var status = model.Win8Status;
         Report(first, a.Id, "HTTP 404");
         Assert(model.ActionReports.Count == 0 && model.Win8Status == status, "Late result from A cannot update B");
         Report(Version(), b.Id, "HTTP 404");
-        Assert(model.ActionReports.Count == 1 && model.Win8Status.Contains("HTTP 404"), "B receives only its own result");
+        Assert(model.ActionReports.Count == 1 && model.ActionReports[0].Result.Contains("HTTP 404") && !model.Win8Status.Contains("HTTP 404"),
+            "B receives only its own per-achievement result");
         model.SelectGameAsync(a).GetAwaiter().GetResult();
         Report(first, a.Id, "HTTP 200");
         Assert(model.ActionReports.Count == 0, "A to B to A rejects the previous A visit's late result");

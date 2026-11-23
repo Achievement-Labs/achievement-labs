@@ -604,6 +604,49 @@ public partial class MainWindow : Window
     private async void LaunchWin8Game(object? s, RoutedEventArgs e) => await model.LaunchWin8GameAsync();
     private async void GrabWin8Token(object? s, RoutedEventArgs e) => await model.GrabWin8TokenAsync();
     private async void AcquireWin8Token(object? s, RoutedEventArgs e) => await model.AcquireWin8TokenAsync();
+    private void RandomizeWin8Time(object? s, RoutedEventArgs e) => model.RandomizeWin8Time();
+    private async void AcquireWin8QueueToken(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        if ((string?)button.Tag == "build") await model.XboxBuildQueue.AcquireWindows8TokenAsync();
+        else await model.XboxQueue.AcquireWindows8TokenAsync();
+    }
+    private async void OpenWin8Receipt(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        try
+        {
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select this game's signed pop.bin", AllowMultiple = false,
+                FileTypeFilter = [new FilePickerFileType("Windows 8 receipt") { Patterns = ["*.bin"] }]
+            });
+            if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+            switch ((string?)button.Tag)
+            {
+                case "build": await model.XboxBuildQueue.AcquireWindows8TokenAsync(path); break;
+                case "auto": await model.XboxQueue.AcquireWindows8TokenAsync(path); break;
+                default: await model.AcquireWin8TokenAsync(path); break;
+            }
+        }
+        catch (Exception error) { model.Notice = error.Message; }
+    }
+    private async void ImportWin8QueueReference(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        try
+        {
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select saved reference achievements page or JSON", AllowMultiple = false,
+                FileTypeFilter = [new FilePickerFileType("Saved page or JSON") { Patterns = ["*.html", "*.htm", "*.json"] }]
+            });
+            if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+            if ((string?)button.Tag == "build") await model.XboxBuildQueue.ImportWindows8ReferenceAsync(path);
+            else await model.XboxQueue.ImportWindows8ReferenceAsync(path);
+        }
+        catch (Exception error) { model.Notice = error.Message; }
+    }
     private async void ExportVerifiedTotals(object? sender, RoutedEventArgs e)
     {
         var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Export all cached successful totals", SuggestedFileName = "achievement-verified-totals.csv", DefaultExtension = "csv" });

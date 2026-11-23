@@ -28,14 +28,18 @@ function Get-TemporaryAuthReceiptIdentity([int]$GameId,[string]$ReceiptPath,$Con
 }
 function Get-TemporaryAuthRegistrations {
  $known=@((Get-Content -LiteralPath (Join-Path $script:SharedHelperRoot 'identities.json') -Raw | ConvertFrom-Json).name)
- Get-AppxPackage | Where-Object {$_.Name -in $known -and $_.IsDevelopmentMode -and $_.InstallLocation.TrimEnd('\') -eq $script:SharedHelperRoot.TrimEnd('\')}
+ Get-AppxPackage | Where-Object {$_.Name -in $known -and $_.IsDevelopmentMode -and (Test-TemporaryAuthLocation $_)}
+}
+function Test-TemporaryAuthLocation($Package){
+ $location=[string]$Package.InstallLocation
+ return ($location.Length -gt 0 -and $location.TrimEnd('\') -eq $script:SharedHelperRoot.TrimEnd('\'))
 }
 function Test-TemporaryAuthReady([int]$GameId){
  $c=Get-TemporaryAuthConfig $GameId
  $inventory=Get-Content -LiteralPath (Join-Path $script:SharedHelperRoot 'payload-inventory.json') -Raw | ConvertFrom-Json
  foreach($file in $inventory){if((Get-ResearchFileHash (Join-Path $script:SharedHelperRoot $file.path)).Hash -ne $file.sha256){throw 'Shared payload file hash mismatch.'}}
  foreach($p in @(Get-AppxPackage -Name $c.name)){
-  if(!$p.IsDevelopmentMode -or $p.InstallLocation.TrimEnd('\') -ne $script:SharedHelperRoot.TrimEnd('\')){throw 'A real game or another helper occupies a target identity. No package will be replaced.'}
+  if(!$p.IsDevelopmentMode -or !(Test-TemporaryAuthLocation $p)){throw 'A real game or another helper occupies a target identity. No package will be replaced.'}
  }
  return $c
 }
@@ -51,7 +55,7 @@ function Assert-TemporaryAuthDataUnchanged($Snapshot){
  foreach($file in $Snapshot){if(!(Test-Path -LiteralPath $file.path) -or (Get-ResearchFileHash $file.path).Hash -ne $file.sha256){throw 'Existing app-data changed; stop and inspect the preserved backup.'}}
 }
 function Remove-VerifiedTemporaryAuthRegistration($Package){
- if(!$Package.IsDevelopmentMode -or $Package.InstallLocation.TrimEnd('\') -ne $script:SharedHelperRoot.TrimEnd('\')){throw 'Refusing to unregister a package outside the shared helper workspace.'}
+ if(!$Package.IsDevelopmentMode -or !(Test-TemporaryAuthLocation $Package)){throw 'Refusing to unregister a package outside the shared helper workspace.'}
  if(Get-Process Probe -ErrorAction SilentlyContinue){throw 'A helper is still running; registration retained until exit is confirmed.'}
  Remove-AppxPackage -Package $Package.PackageFullName -PreserveApplicationData -ErrorAction Stop
  if(Get-AppxPackage -Name $Package.Name){throw 'Temporary registration remains after removal.'}
@@ -86,7 +90,7 @@ function Invoke-TemporaryXboxAuth {
   Add-AppxPackage -Register $manifest -ErrorAction Stop
   $registered=$true
   $p=Get-AppxPackage -Name $c.name
-  if(!$p -or !$p.IsDevelopmentMode -or $p.InstallLocation.TrimEnd('\') -ne $script:SharedHelperRoot.TrimEnd('\') -or [string]$p.Version -ne $c.version -or $p.PackageFamilyName -ne $c.family){throw 'Temporary package identity verification failed.'}
+  if(!$p -or !$p.IsDevelopmentMode -or !(Test-TemporaryAuthLocation $p) -or [string]$p.Version -ne $c.version -or $p.PackageFamilyName -ne $c.family){throw 'Temporary package identity verification failed.'}
   $life.registeredDuring=@(Get-TemporaryAuthRegistrations).Count
   if($life.registeredDuring -ne 1){throw 'Expected only one temporary registered identity.'}
   if($InjectFailureAfterRegistration){throw 'Injected failure after registration; no helper activation or network exchange.'}
@@ -108,7 +112,7 @@ function Invoke-TemporaryXboxAuth {
   if($lock){
    try{
     $remaining=Get-AppxPackage -Name $c.name
-    if($remaining -and $remaining.InstallLocation.TrimEnd('\') -eq $script:SharedHelperRoot.TrimEnd('\')){Remove-VerifiedTemporaryAuthRegistration $remaining}
+    if($remaining -and (Test-TemporaryAuthLocation $remaining)){Remove-VerifiedTemporaryAuthRegistration $remaining}
     $life.registeredAfter=@(Get-TemporaryAuthRegistrations).Count
     $life.registrationRemoved=($life.registeredAfter -eq 0)
     if(!$life.registrationRemoved){throw 'A temporary identity is still registered.'}
