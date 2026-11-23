@@ -59,8 +59,8 @@ public sealed class SignedEventCatalog
     // This must match keys/catalog-signing-public.pem in Achievement-Labs/achievement-labs-catalog.
     // The private key exists only as that repo's CATALOG_SIGNING_KEY secret. Rotating the key needs an app release.
     public const string PublicKeyPem = "-----BEGIN PUBLIC KEY-----\n"
-        + "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEpgLRhe0Pc9DtsBK6cX9zw0z5AuZX\n"
-        + "JvGwVuouFEvbSO8FZhHA9SJ1dLBwYxptyLNL0tHgqYw6R61f9rrEaSWqUQ==\n"
+        + "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEiIaqzqlQ/shFS/tYo29/IajITEX4\n"
+        + "btn8NSaCx3tCVYWy1fkvBGWWqYIGKg5uouLJ93m5mFNYg8Nk7QfDDUoYEw==\n"
         + "-----END PUBLIC KEY-----";
     // A key containing this marker is never trusted. The client falls back to the release zip.
     public const string PlaceholderKeyPem = "-----BEGIN PUBLIC KEY-----\nPLACEHOLDER-CATALOG-SIGNING-KEY\n-----END PUBLIC KEY-----";
