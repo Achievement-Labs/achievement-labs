@@ -1,0 +1,151 @@
+{
+  "558797228": {
+    "TitleName": "Rocket League®",
+    "ServiceConfigId": "90c40100-9123-47d6-bc6b-35d3214e91ac",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "GoalsScored": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Goals [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GoalsScored"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GoalsScored\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MatchesWon": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Wins [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchesWon"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchesWon\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumAssists": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Assists [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumAssists"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumAssists\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumShotsOnGoal": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Shots [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumShotsOnGoal"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumShotsOnGoal\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumberOfMVPAwards": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "MVPs [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumberOfMVPAwards"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumberOfMVPAwards\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "NumberOfSaves": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Saves [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "NumberOfSaves"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"NumberOfSaves\",\"serviceConfigId\":\"90c40100-9123-47d6-bc6b-35d3214e91ac\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"558797228\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:PsyonixInc.RocketLeague_24yhbbr7hv30r!TAGameDingoShipping\",\"ver\":\"1.1.4.3_x64_!TAGame-Dingo-Shipping.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    558797228
+  ]
+}

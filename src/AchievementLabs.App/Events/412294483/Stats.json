@@ -1,0 +1,151 @@
+{
+  "412294483": {
+    "TitleName": "Boom Ball 2 for Kinect",
+    "ServiceConfigId": "1e1c0100-baf4-480a-80ad-ca5118931d53",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "BallsThrown": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Balls Thrown [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BallsThrown"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BallsThrown\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CubeHit": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Cubes Hit [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CubeHit"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CubeHit\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GoldMedalPercentage": {
+        "Type": "Double",
+        "PayloadField": "GoldMedalPercentage",
+        "SuggestedValue": "",
+        "DisplayName": "Gold Times Reached [GoldMedalPercentage]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GoldMedalPercentage"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GoldMedalPercentage\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"GoldMedalPercentage\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PaddleHit": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Paddle Bounces [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PaddleHit"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PaddleHit\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "SilverMedalPercentage": {
+        "Type": "Double",
+        "PayloadField": "SilverMedalPercentage",
+        "SuggestedValue": "",
+        "DisplayName": "Silver Times Reached [SilverMedalPercentage]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "SilverMedalPercentage"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"SilverMedalPercentage\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"SilverMedalPercentage\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "TotalBallAirTime": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Ball Air Time [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TotalBallAirTime"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TotalBallAirTime\",\"serviceConfigId\":\"1e1c0100-baf4-480a-80ad-ca5118931d53\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"412294483\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:VirtualAirGuitarCompany.BoomBall2forKinect_5szhxr0y5cs0r!App\",\"ver\":\"1.1.3394.0_x64_!VAGC.BoomBall2.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    412294483
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "1056122017": {
+    "TitleName": "Bedlam - The Game By Christopher Brookmyre",
+    "ServiceConfigId": "78950100-3500-4b2e-85d8-5e2e3ef324a1",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "LimbsDetachedSum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Limbs Detached [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LimbsDetachedSum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LimbsDetachedSum\",\"serviceConfigId\":\"78950100-3500-4b2e-85d8-5e2e3ef324a1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1056122017\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "LongestRangedKillMax": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Longest Ranged Kill [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LongestRangedKillMax"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LongestRangedKillMax\",\"serviceConfigId\":\"78950100-3500-4b2e-85d8-5e2e3ef324a1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1056122017\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "MeleeKillsSum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Melee Kills [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MeleeKillsSum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MeleeKillsSum\",\"serviceConfigId\":\"78950100-3500-4b2e-85d8-5e2e3ef324a1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1056122017\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PickupsPickedUpSum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Pickups Picked Up [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PickupsPickedUpSum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PickupsPickedUpSum\",\"serviceConfigId\":\"78950100-3500-4b2e-85d8-5e2e3ef324a1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1056122017\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:VisionGamesPublishing.Bedlam-TheGamebyChristopherB_nk48gwbhxsf5t!App\",\"ver\":\"1\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Xbox\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1056122017
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "1015340672": {
+    "TitleName": "Thimbleweed Park",
+    "ServiceConfigId": "a3ab0100-75f1-4191-81ef-64573c84de80",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "BooksRead": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Books Read [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BooksRead"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BooksRead\",\"serviceConfigId\":\"a3ab0100-75f1-4191-81ef-64573c84de80\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1015340672\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "DustCollected": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Dust Collected [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DustCollected"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DustCollected\",\"serviceConfigId\":\"a3ab0100-75f1-4191-81ef-64573c84de80\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1015340672\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "RoomsVisited": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Rooms Visited [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "RoomsVisited"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"RoomsVisited\",\"serviceConfigId\":\"a3ab0100-75f1-4191-81ef-64573c84de80\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1015340672\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:TerribleToybox.ThimbleweedPark_0.7.2.1002_x64__1gqq6c01ymkxp!App\",\"ver\":\"0.7.2.1002_x64_!2017/09/08:18:22:58!0!thimbleweedpark.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1015340672
+  ]
+}

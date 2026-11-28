@@ -1,0 +1,82 @@
+{
+  "80579825": {
+    "TitleName": "Call of Duty: Black Ops III",
+    "ServiceConfigId": "f4ad0100-febf-441e-9f12-5f1204cd8cf1",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "ACHIEVEMENTS-COMPLETED-CP": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Campaign achievements unlocked [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ACHIEVEMENTS-COMPLETED-CP"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ACHIEVEMENTS-COMPLETED-CP\",\"serviceConfigId\":\"f4ad0100-febf-441e-9f12-5f1204cd8cf1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"80579825\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ACHIEVEMENTS-COMPLETED-MP": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Multiplayer achievements unlocked [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ACHIEVEMENTS-COMPLETED-MP"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ACHIEVEMENTS-COMPLETED-MP\",\"serviceConfigId\":\"f4ad0100-febf-441e-9f12-5f1204cd8cf1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"80579825\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "ACHIEVEMENTS-COMPLETED-ZM": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Zombies achievements unlocked [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ACHIEVEMENTS-COMPLETED-ZM"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ACHIEVEMENTS-COMPLETED-ZM\",\"serviceConfigId\":\"f4ad0100-febf-441e-9f12-5f1204cd8cf1\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"80579825\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:bo3Submission_ht1qfjb0gaftw!codShip\",\"ver\":\"1.0.34.0_x64_!cod_ship.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:00000000-0000-0000-0000-000000000000\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    80579825
+  ]
+}

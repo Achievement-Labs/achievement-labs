@@ -5,7 +5,7 @@ namespace AchievementLabs.MultiSelect;
 
 public static class SearchClearButtons
 {
-    public static void Attach(Window owner)
+    public static void Attach(Control owner)
     {
         foreach (var box in owner.GetLogicalDescendants().OfType<TextBox>())
         {

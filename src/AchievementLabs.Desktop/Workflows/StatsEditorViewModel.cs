@@ -47,6 +47,7 @@ namespace AchievementLabs.Desktop.Workflows
                 _lastKnownXauth = account.XAUTH;
                 _xboxRestAPI = clientFactory(account.XAUTH);
             }
+            _xboxRestAPI.SetRegionOverride(account.RegionOverride);
             return _xboxRestAPI;
         }
 
@@ -81,15 +82,14 @@ namespace AchievementLabs.Desktop.Workflows
         }
         public string StatModeLabel { get; private set; } = "Stats type: Unknown";
         public string StatSupportLabel { get; private set; } = "Choose a title to check stat support.";
-        private string CurrentStatMode => GetCatalogStatMode(TitleId) is var mode && mode != "Unknown" ? mode
+        private string CurrentStatMode => _eventsDataForTitle?["StatTemplate"] != null ? "Event" : GetCatalogStatMode(TitleId) is var mode && mode != "Unknown" ? mode
             : _eventsDataForTitle?["StatsMode"]?.ToString() is "Event" or "EventBased" ? "Event"
             : _eventsDataForTitle?["StatsMode"]?.ToString() is "Title" or "TitleBased" ? "Title"
             : HasEditableEventData ? "Event" : "Unknown";
         private string? ReadStatTemplate()
         {
-            var path = File.Exists(Path.Combine(account.EventsDirectory, "index.json"))
-                ? Path.Combine(account.EventsDirectory, TitleId, TitleId + ".json") : Path.Combine(account.EventsDirectory, TitleId + ".json");
-            if (File.Exists(path)) return File.ReadAllText(path);
+            var path = AchievementLabs.Core.EventCatalogFileLocator.Find(account.EventsDirectory, TitleId, TitleId + ".json");
+            if (path != null) return File.ReadAllText(path);
             var indexed = AchievementLabs.Core.BundledEventFiles.Contains("index.json");
             return AchievementLabs.Core.BundledEventFiles.Read(indexed ? TitleId + "/" + TitleId + ".json" : TitleId + ".json");
         }
@@ -102,7 +102,7 @@ namespace AchievementLabs.Desktop.Workflows
                 var mode = CurrentStatMode;
                 StatModeLabel = "Stats type: " + (mode == "Event" ? "Event-based" : mode == "Title" ? "Title-based" : "Unknown");
                 StatSupportLabel = mode == "Title" ? "Supported · title-based stats (available writable stats are checked when loaded)."
-                    : mode == "Event" && HasEditableEventData && ReadStatTemplate() != null ? "Supported · mapped event stats in Stats.json."
+                    : mode == "Event" && HasEditableEventData && (_eventsDataForTitle?["StatTemplate"] != null || ReadStatTemplate() != null) ? "Supported · mapped event stats in Stats.json."
                     : mode == "Event" ? "Not Supported · Stats.json needs event-stat recipes and a standalone title template."
                     : "Not Supported · no known stat mode or mapped event-stat recipes.";
             }
@@ -229,6 +229,8 @@ namespace AchievementLabs.Desktop.Workflows
 
         // Cached event data for the current title
         private JObject? _eventsDataForTitle;
+        private JObject? _cachedStats;
+        private (string Path, DateTime Stamp, long Length)? _cachedStatsVersion;
 
         public void OnNavigatedTo()
         {
@@ -269,10 +271,12 @@ namespace AchievementLabs.Desktop.Workflows
             {
                 StatItems.Clear();
                 GameName = $"Title ID: {TitleId}";
-                if (HasEditableEventData && ReadStatTemplate() != null && _eventsDataForTitle?["Enabled"]?.Value<bool>() != false)
+                if (HasEditableEventData && (_eventsDataForTitle?["StatTemplate"] != null || ReadStatTemplate() != null) && _eventsDataForTitle?["Enabled"]?.Value<bool>() != false)
                 {
                     foreach (var stat in ((JObject)_eventsDataForTitle!["Stats"]!).Properties())
                         StatItems.Add(new StatDisplayItem { Name = stat.Name, Type = (string?)stat.Value["Type"] ?? "Unknown", CurrentValue = "Not loaded",
+                            DisplayName = (string?)stat.Value["DisplayName"] ?? "",
+                            SuggestedValue = (string?)stat.Value["SuggestedValue"] ?? "",
                             IsEditable = IsEditableStatDefinition(stat.Value), IsEventBasedStat = true, TitleId = TitleId, OwnerXuid = loadingXuid,
                             Source = "Stats.json", EditStatus = IsEditableStatDefinition(stat.Value) ? "Mapped event stat" : "Not Supported" });
                     loadedTitleId = loadingTitleId; loadedXuid = loadingXuid;
@@ -697,20 +701,18 @@ namespace AchievementLabs.Desktop.Workflows
             EventDataInfo = "";
             TitleMetadataInfo = "";
 
-            string dataPath = Path.Combine(account.EventsDirectory, "Stats.json");
-
             try
             {
-                string json;
-                if (File.Exists(dataPath)) json = File.ReadAllText(dataPath);
-                else
+                var dataPath = AchievementLabs.Core.EventCatalogFileLocator.Find(account.EventsDirectory, TitleId, "Stats.json");
+                var file = dataPath == null ? null : new FileInfo(dataPath);
+                var version = file != null ? (file.FullName, file.LastWriteTimeUtc, file.Length) : ("bundled", DateTime.MinValue, 0L);
+                if (_cachedStatsVersion != version)
                 {
-                    var bundled = AchievementLabs.Core.BundledEventFiles.Read("Stats.json");
-                    if (bundled == null) return;
-                    json = bundled;
+                    var json = dataPath != null ? File.ReadAllText(dataPath) : AchievementLabs.Core.BundledEventFiles.Read("Stats.json");
+                    _cachedStats = json == null ? null : JObject.Parse(json);
+                    _cachedStatsVersion = version;
                 }
-                var allData = JObject.Parse(json);
-                _eventsDataForTitle = allData[TitleId] as JObject;
+                _eventsDataForTitle = _cachedStats?[TitleId]?.DeepClone() as JObject;
 
                 if (_eventsDataForTitle != null && _eventsDataForTitle["Enabled"]?.Value<bool>() != false)
                 {
@@ -732,7 +734,11 @@ namespace AchievementLabs.Desktop.Workflows
                     TitleMetadataInfo = BuildTitleMetadataInfo(_eventsDataForTitle);
                 }
             }
-            catch { }
+            catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException or Newtonsoft.Json.JsonException or ArgumentException)
+            {
+                _eventsDataForTitle = null;
+                EventDataInfo = "Could not load local stat definitions: " + error.Message;
+            }
         }
 
         private static bool IsEditableStatDefinition(JToken? statData)
@@ -1787,7 +1793,8 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             // Load template
-            var templateBody = ReadStatTemplate();
+            var payloadField = (string?)statObject["PayloadField"];
+            var templateBody = payloadField != null ? (string?)_eventsDataForTitle["StatTemplate"] : ReadStatTemplate();
             if (templateBody == null)
             {
                 _snackbarService.Show("Error", $"Event template {TitleId}.json not found.",
@@ -1852,6 +1859,11 @@ namespace AchievementLabs.Desktop.Workflows
                 // Validate every payload before the first request; no unresolved or wrong-title data is submitted.
                 for (var i = 0; i < requestBodies.Count; i++)
                 {
+                    if (payloadField != null)
+                    {
+                        var value = BuildStatValue(item.NewValue, item.Type, item.CurrentValue);
+                        requestBodies[i] = requestBodies[i].Replace("\"STATPAYLOADINPUT\"", value.ToString(Formatting.None), StringComparison.Ordinal);
+                    }
                     if (Regex.IsMatch(requestBodies[i], @"REPLACE[A-Z0-9_]+")) throw new InvalidDataException("Unresolved stat event placeholder.");
                     var parsed = JObject.Parse(requestBodies[i]);
                     if (parsed["data"]?["baseData"]?["titleId"]?.ToString() != TitleId) throw new InvalidDataException("Stat event title mismatch.");
@@ -2200,7 +2212,7 @@ namespace AchievementLabs.Desktop.Workflows
 
         private static bool IsStatMetadataProperty(string propertyName)
         {
-            return propertyName is "SuggestedValue" or "Confidence";
+            return propertyName is "SuggestedValue" or "Confidence" or "Type" or "PayloadField" or "DisplayName";
         }
 
         private string ApplyCommonReplacements(string requestbody, DateTime timestamp)

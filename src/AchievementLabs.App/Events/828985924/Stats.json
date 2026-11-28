@@ -1,0 +1,128 @@
+{
+  "828985924": {
+    "TitleName": "Resident Evil 6",
+    "ServiceConfigId": "fba20100-fe6c-4d5d-8377-f8f831695244",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "EnemyKilledCount.EnemyRoleId.0.KillTypeId.0": {
+        "Type": "Integer",
+        "PayloadField": "EnemyRoleId",
+        "SuggestedValue": 0,
+        "DisplayName": "Enemies Routed [EnemyRoleId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemyKilledCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemyKilledCount\",\"serviceConfigId\":\"fba20100-fe6c-4d5d-8377-f8f831695244\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"828985924\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EnemyRoleId\":\"STATPAYLOADINPUT\",\"KillTypeId\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "GetMedal": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Medals [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetMedal"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetMedal\",\"serviceConfigId\":\"fba20100-fe6c-4d5d-8377-f8f831695244\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"828985924\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetSkillPoint": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Skill Points [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetSkillPoint"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetSkillPoint\",\"serviceConfigId\":\"fba20100-fe6c-4d5d-8377-f8f831695244\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"828985924\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetTitle": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Titles [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetTitle"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetTitle\",\"serviceConfigId\":\"fba20100-fe6c-4d5d-8377-f8f831695244\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"828985924\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "EnemyKilledCount.EnemyRoleId.0.KillTypeId.0 [KillTypeId]": {
+        "Type": "Integer",
+        "PayloadField": "KillTypeId",
+        "SuggestedValue": 0,
+        "DisplayName": "Enemies Routed [KillTypeId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemyKilledCount"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemyKilledCount\",\"serviceConfigId\":\"fba20100-fe6c-4d5d-8377-f8f831695244\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"828985924\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EnemyRoleId\":0,\"KillTypeId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:F024294D.ResidentEvil6_8fty0by30jkny!App\",\"ver\":\"10.5.0.2_x64_!2023/03/30:07:55:18!0!re7.exe\",\"is1P\":1,\"asId\":1},\"metadata\":REPLACEMETADATA,\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    828985924
+  ]
+}

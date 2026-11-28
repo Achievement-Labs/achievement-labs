@@ -1,0 +1,82 @@
+{
+  "432277292": {
+    "TitleName": "6180 the moon",
+    "ServiceConfigId": "903e0100-bf7e-45e4-840a-130819c4072c",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "Dying.Count.1": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 1,
+        "DisplayName": "Deaths [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Dying"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Dying\",\"serviceConfigId\":\"903e0100-bf7e-45e4-840a-130819c4072c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"432277292\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Moon-Jump.Count.1": {
+        "Type": "Integer",
+        "PayloadField": "Count",
+        "SuggestedValue": 1,
+        "DisplayName": "Jumps [Count]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Moon-Jump"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Moon-Jump\",\"serviceConfigId\":\"903e0100-bf7e-45e4-840a-130819c4072c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"432277292\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "ablock.SumValue.1": {
+        "Type": "Integer",
+        "PayloadField": "SumValue",
+        "SuggestedValue": 1,
+        "DisplayName": "Broken blocks [SumValue]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ablock"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ablock\",\"serviceConfigId\":\"903e0100-bf7e-45e4-840a-130819c4072c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"432277292\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SumValue\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:57249TurtleCream.6180themoon_8nf6r1hgmjgha!App\",\"ver\":\"1.0.0.0_x64_!2024/01/01:00:00:00!0!game.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REDACTED_ACCOUNT_ID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    432277292
+  ]
+}

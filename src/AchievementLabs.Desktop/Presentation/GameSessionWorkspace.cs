@@ -163,9 +163,6 @@ public static class GameSessionWorkspace
         AppGlassTheme.Apply(owner);
         appearance.Configure(background,gameArt,image,backdrop,sideArt,all.OfType<Control>());
         _=new WideArtwork(owner,model,coverImage,gameArt,preview);
-        var settingsTabs=all.OfType<TabControl>().First(t=>t.Items.OfType<TabItem>().Any(i=>Equals(i.Header,"App")) && t.Items.OfType<TabItem>().Any(i=>Equals(i.Header,"Account")));
-        var appearanceTab=new TabItem {Header="Appearance",Name="AppearanceTab",Content=appearance.BuildSettings()};settingsTabs.Items.Add(appearanceTab);
-        foreach(var saveButton in all.OfType<Button>().Where(b=>string.Equals(b.Content?.ToString(),"Save all settings",StringComparison.OrdinalIgnoreCase)))saveButton.Click+=(_,_)=>appearance.Save();
         var refreshPlaytime=all.OfType<Button>().First(b=>b.Name=="RefreshXboxPlaytime");PlaytimeAutoRefresh.Attach(owner,model,refreshPlaytime,preview);
         spoofer.Bind(Visual.IsVisibleProperty,new Binding("IsVisible") {Source=sessionVisibility});sessionScroll.Bind(Visual.IsVisibleProperty,new Binding("IsVisible") {Source=sessionVisibility});
         var header=main.Children.OfType<Grid>().First(g=>Grid.GetRow(g)==0);
@@ -280,13 +277,30 @@ public static class GameSessionWorkspace
             appearance.Preferences.BackgroundMode="Game artwork";appearance.Preferences.PersistentGameArtwork=false;appearance.Apply();model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Home"});await Task.Delay(200);
             if(image.IsVisible || backdrop.IsVisible || sideArt.IsVisible)throw new Exception("Game artwork remained visible with persistence disabled outside the session.");Capture("home-artwork-off.png");
             appearance.Preferences.PersistentGameArtwork=true;appearance.Apply();
-            model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Settings"});settingsTabs.SelectedItem=appearanceTab;await Task.Delay(300);Capture("appearance-settings.png");
+            model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Settings"});var settingsTabs = owner.GetLogicalDescendants().OfType<TabControl>().Single(tab => tab.Name == "DesktopSettingsTabs");settingsTabs.SelectedItem=settingsTabs.Items.OfType<TabItem>().Single(tab => tab.Name == "AppearanceTab");await Task.Delay(300);Capture("appearance-settings.png");
             model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Achievements"});await Task.Delay(250);Capture("achievements-unified-button.png");
             if(all.OfType<Button>().Any(b=>Equals(b.Content,"Open Auto Unlock")&&b.IsVisible))throw new Exception("A separate Auto Unlock shortcut is still visible.");
             model.GetType().GetMethod("Navigate")!.Invoke(model,new object[]{"Spoofer"});sessionScroll.Offset=new Vector();
             File.WriteAllText(Path.Combine(outdir,"appearance-checks.txt"),"PASS: live transparency, custom background loading, OLED hides artwork and uses black surfaces, game-art persistence toggle, unified achievements shortcut, and appearance settings tab. No appearance preferences saved to the real account profile.\n");
             await CompletionOverview.CheckPreview(owner,model,root,outdir);
             await LibraryPresentation.CheckPreview(owner,model,root,outdir);
+            if (model is DesktopModel desktop)
+            {
+                desktop.SelectAllTitleSearchPlatforms(true);
+                desktop.OnlyVerifiedAchievementTitles=false;
+                foreach(var fixture in new[]{("556718860","lookup-black-flag.png"),("1717071867","lookup-zombi.png")})
+                {
+                    desktop.TitleSearch=fixture.Item1;
+                    await desktop.SearchTitlesAsync();
+                    var result=desktop.TitleSearchResults.Single(t=>t.TitleId==fixture.Item1);
+                    if(result.Support.Kind is "unsupported" or "unknown")throw new Exception("Enabled testing title incorrectly shown as unsupported.");
+                    await desktop.LoadTitleSupportDetailsAsync(result);
+                    if(result.SupportDetails.StartsWith("Could not"))throw new Exception("Mapping coverage failed to load.");
+                    desktop.Navigate("Tools");await Task.Delay(400);
+                    var details=root.GetLogicalDescendants().OfType<Expander>().First(e=>Equals(e.Header,"Achievement support details") && ReferenceEquals(e.DataContext,result));
+                    details.IsExpanded=true;await Task.Delay(300);Capture(fixture.Item2);
+                }
+            }
             File.WriteAllText(Path.Combine(outdir,"visual-checks-passed.txt"),"PASS: game session, appearance, dashboard, library actions and scrolling.");
             if(Environment.GetCommandLineArgs().Contains("--exit-after-visual-checks"))owner.Close();
             void Capture(string name){using var bitmap=new RenderTargetBitmap(new PixelSize((int)root.Bounds.Width,(int)root.Bounds.Height),new Vector(96,96));bitmap.Render(root);bitmap.Save(Path.Combine(outdir,name),new PngBitmapEncoderOptions());}
@@ -375,18 +389,29 @@ public static class GameSessionWorkspace
             list.Margin=new Thickness(0);list.MinHeight=140;list.MaxHeight=280;list.Background=AppearanceController.For(owner).Panel;
             list.ItemTemplate=new FuncDataTemplate<object>((row,scope)=>{
                 if(row is null)return null;
-                var line=new Grid {Name="AutoUnlockAchievementRow",ColumnDefinitions=new ColumnDefinitions("0.85*,1.4*,170,86"),ColumnSpacing=10,Margin=new Thickness(6,7)};
+                var line=new Grid {Name="AutoUnlockAchievementRow",ColumnDefinitions=new ColumnDefinitions("0.85*,1.4*,170,86,32"),ColumnSpacing=10,Margin=new Thickness(6,7)};
                 var name=new TextBlock {TextWrapping=TextWrapping.Wrap,FontSize=12,VerticalAlignment=VerticalAlignment.Center};name.Bind(TextBlock.TextProperty,new Binding("AchievementName"));line.Children.Add(name);
                 var description=new TextBlock {Name="AutoUnlockRowDescription",TextWrapping=TextWrapping.Wrap,FontSize=11,Foreground=Brush("#ADBFC4"),VerticalAlignment=VerticalAlignment.Center};description.Bind(TextBlock.TextProperty,new Binding("AchievementDescription"));Grid.SetColumn(description,1);line.Children.Add(description);
                 var delay=new NumericUpDown {Minimum=0,Maximum=10080,Increment=.5m,FontSize=13,FormatString="0.#",Padding=new Thickness(8,3)};ToolTip.SetTip(delay,"Delay in minutes");delay.Bind(NumericUpDown.ValueProperty,new Binding("DelayMinutes") {Mode=BindingMode.TwoWay});delay.Bind(InputElement.IsEnabledProperty,new Binding("CanEditDelay"));Grid.SetColumn(delay,2);line.Children.Add(delay);
                 var status=new TextBlock {FontSize=10,Foreground=Brush("#A7CDBB"),TextWrapping=TextWrapping.Wrap,VerticalAlignment=VerticalAlignment.Center};status.Bind(TextBlock.TextProperty,new Binding("Status"));Grid.SetColumn(status,3);line.Children.Add(status);
+                var remove = new Button { Name="RemoveAutoUnlockRow", Width=32, Height=32, MinWidth=0, MinHeight=0, Padding=new Thickness(0), Background=Brushes.Transparent, BorderBrush=Brushes.Transparent, BorderThickness=new Thickness(0), VerticalAlignment=VerticalAlignment.Center, HorizontalAlignment=HorizontalAlignment.Center, HorizontalContentAlignment=HorizontalAlignment.Center, VerticalContentAlignment=VerticalAlignment.Center, Foreground=Brush("#FF6B6B"), Content=new PathIcon { Width=12, Height=12, Data=Geometry.Parse("M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 Z") } };
+                remove.Classes.Add("queue-remove");
+                Avalonia.Automation.AutomationProperties.SetName(remove, "Remove achievement from queue");
+                ToolTip.SetTip(remove, "Remove this achievement from the saved queue");
+                remove.Bind(InputElement.IsEnabledProperty, new Binding("CanEditDelay"));
+                remove.Click += (_, _) => {
+                    if (row is AchievementLabs.Desktop.Workflows.AutoUnlockerViewModel.AutoUnlockQueueDisplay item && model is DesktopModel desktop)
+                        desktop.XboxQueue.RemoveQueueItem(item);
+                };
+                Grid.SetColumn(remove, 4);
+                line.Children.Add(remove);
                 line.SizeChanged+=(_,_)=>{
                     var narrow=line.Bounds.Width<700;
                     if(line.Tag is bool previous && previous==narrow)return;
-                    line.Tag=narrow;line.ColumnDefinitions=new ColumnDefinitions(narrow?"*,170,86":"0.85*,1.4*,170,86");
+                    line.Tag=narrow;line.ColumnDefinitions=new ColumnDefinitions(narrow?"*,170,86,32":"0.85*,1.4*,170,86,32");
                     line.RowDefinitions=new RowDefinitions(narrow?"Auto,Auto":"Auto");
                     Grid.SetRow(description,narrow?1:0);Grid.SetColumn(description,narrow?0:1);Grid.SetColumnSpan(description,narrow?3:1);description.Margin=narrow?new Thickness(0,5,0,0):new Thickness(0);
-                    Grid.SetColumn(delay,narrow?1:2);Grid.SetColumn(status,narrow?2:3);
+                    Grid.SetColumn(delay,narrow?1:2);Grid.SetColumn(status,narrow?2:3);Grid.SetColumn(remove,narrow?3:4);
                 };return line;
             });
             if(preview)list.Bind(ItemsControl.ItemsSourceProperty,new Binding {Source=new[]{new SampleRow("Welcome to the community",0,"Ready"),new SampleRow("A home of our own",9999.5m,"Waiting"),new SampleRow("Strength in numbers",10080,"Waiting")}});

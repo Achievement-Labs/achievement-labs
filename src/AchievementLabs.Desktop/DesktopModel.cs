@@ -18,6 +18,10 @@ public record Achievement(string Id, string Name, string Description, int Score,
     public string Status => !ProgressKnown ? "Not available" : Unlocked ? "Unlocked" : "Locked";
     public string Symbol => Unlocked ? "✓" : "◇";
     public string ScoreLabel => ScoreKnown ? $"{Score} G" : "Not available";
+    public bool? EventMappingAvailable { get; init; }
+    public bool HasEventMappingBadge => EventMappingAvailable.HasValue;
+    public string EventMappingLabel => EventMappingAvailable == true ? "✓ Mapped" : "⊗ Unsupported";
+    public string EventMappingColour => EventMappingAvailable == true ? "#86D7AC" : "#FF8B8B";
     public string CompactScoreLabel => ScoreKnown ? ScoreLabel : "—";
     public string BadgeForeground => Unlocked ? "#8BCBB0" : "#B9BEC8";
     public string BadgeBackground => Unlocked ? "#253B34" : "#2A303B";
@@ -137,7 +141,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
     public bool CanGoBack => pageHistory.Count > 0;
     public bool CanGoForward => pageForwardHistory.Count > 0;
     public void Navigate(string destination) {
-        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable in this desktop preview."; return; }
+        if (!HasWindowsLocalTools && destination is "SteamLibrary" or "SteamAchievements" or "SteamQueue" or "Epic" or "Ubisoft" or "Gfwl" or "Legacy") { Notice = "Local Windows game integrations are unavailable on this platform."; return; }
         if (destination == "Legacy") return;
         if (destination == page) return;
         if (page == "Achievements" && destination != "Achievements" && autoPresenceTask != null) StopPresence();
@@ -226,7 +230,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         ResetActions();
         if (busy) return;
         ResetGamePlaytime();
-        SelectedGame = game; achievements = []; Search = ""; Filter("All"); Navigate("Achievements");
+        SelectedGame = game; achievements = []; Search = ""; Filter("All"); Navigate("Achievements"); _ = RefreshWin8PageAsync();
         if (client == null || session == null) { GamePlaytimeText = "Xbox-recorded playtime: Unavailable"; return; }
         if (startAutoSpoof && AutoSpoof && !UsesLegacyEndpoint(game))
         {
@@ -251,7 +255,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
             {
                 using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
                 http.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", session.Authorization);
-                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", "en-GB");
+                http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", XboxResponseLanguage.Resolve(RegionOverride));
                 var reader = new AchievementLabs.MultiSelect.AchievementExport(http, xuid);
                 var rows = await reader.Achievements(new(game.Id, game.Name, game.Platform.Replace(" / ", ", "), game.Score), lifetime.Token);
                 loaded = rows.Select(a => new Achievement(a.Id, a.Name, a.Description,
@@ -264,7 +268,9 @@ public sealed partial class DesktopModel : Observable, IDisposable
                 try { response = await Task.Run(() => api.GetAchievementsForTitleAsync(xuid, game.Id), lifetime.Token); }
                 catch (Exception error) when (error is not OperationCanceledException) { primaryError = error; }
                 loaded = response == null ? [] : Map(response);
-                if (loaded.Length == 0)
+                // An empty/failed modern response must not silently open another
+                // edition's legacy list or expose its Windows 8 unlock controls.
+                if (loaded.Length == 0 && XboxTitleCatalog.Find(game.Id)?.SourceVersion != 2)
                 {
                     try
                     {
@@ -288,13 +294,15 @@ public sealed partial class DesktopModel : Observable, IDisposable
             if (version != selectionVersion || lifetime.IsCancellationRequested) return;
             bool progressComplete = CanReplaceAchievementProgress(game, loaded);
             if (!progressComplete) loaded = loaded.Select(a => a.Unlocked ? a : a with { ProgressKnown = false }).ToArray();
-            achievements = loaded;
+            achievements = ApplyEventMappingBadges(loaded);
             if (progressComplete) RememberCompletion(resolvedGame, loaded.Select(a => new AchievementLabs.MultiSelect.CompletionMarkers.Row(a.Id, a.Name, a.Unlocked, a.ProgressKnown)).ToArray());
             var updated = WithLibraryPresentation(progressComplete
                 ? resolvedGame with { Completed = loaded.Count(a => a.Unlocked), Total = loaded.Length, Score = loaded.Where(a => a.Unlocked).Sum(a => a.Score), ProgressKnown = loaded.All(a => a.ProgressKnown) }
                 : resolvedGame with { Total = loaded.Length > 0 ? loaded.Length : game.Total });
             RememberLibraryTotal(updated.Id, updated.Total);
+            var platformChanged = SelectedGame?.Platform != updated.Platform;
             SelectedGame = updated;
+            if (platformChanged) _ = RefreshWin8PageAsync();
             Games = Games.Select(g => g.Id == updated.Id ? updated : g).ToArray();
             Refresh(); Notice = progressComplete ? $"Loaded {loaded.Length} achievements for {game.Name}." : "Xbox returned incomplete achievement progress. Known library counts were retained; unconfirmed rows show Not available. Refresh to retry.";
             _ = LoadGamePlaytimeAsync(updated, version);
@@ -315,6 +323,7 @@ public sealed partial class DesktopModel : Observable, IDisposable
         achievements = Map(response);
         var title = response.achievements[0].titleAssociations.FirstOrDefault();
         SelectedGame = new Game(title?.id ?? Path.GetFileNameWithoutExtension(path), title?.name ?? Path.GetFileNameWithoutExtension(path), string.Join(" / ", response.achievements.SelectMany(a => a.platforms).Distinct(StringComparer.OrdinalIgnoreCase)), achievements.Count(a => a.Unlocked), achievements.Length, achievements.Where(a => a.Unlocked).Sum(a => a.Score), achievements.All(a => a.ProgressKnown));
+        _ = RefreshWin8PageAsync();
         GamePlaytimeText = "Xbox-recorded playtime: Unavailable for local export";
         Search = ""; Filter("All"); Navigate("Achievements"); Notice = $"Opened {achievements.Length} achievements from a local export.";
     }

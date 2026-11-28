@@ -13,7 +13,7 @@ public static class LocalCatalogueIntegrationTests
     }
     public static void Run()
     {
-        CheckUnapprovedMappings(); WindowPlacementTests.Run(); UpstreamEventCatalogueTests.Run();
+        CheckUnapprovedMappings(); WindowPlacementTests.Run(); UpstreamEventCatalogueTests.Run(); SignedEventCatalogTests.Run();
         using var client = new EventCatalogClient(true);
         foreach (var id in new[] { "1079518187", "1147540192", "1327376519", "136671143", "767263759" })
             Assert(client.BundledTitleIds.Contains(id), "Author-only local title retained: " + id);

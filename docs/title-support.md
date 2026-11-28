@@ -1,6 +1,6 @@
 # Complete event title catalog
 
-576 titles: **353 Supported**, **89 Partially Supported**, **134 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
+598 titles: **373 Supported**, **93 Partially Supported**, **132 Testing**, **0 Coming Soon**. This list covers event mappings; Xbox 360, GFWL, Steam, and other app tools use separate workflows.
 
 Supported classifications reflect the author’s corrections. Partially Supported titles have some confirmed working recipes but not all. Testing titles have leads but no confirmed unlocks; mapped counts do not indicate the game’s total achievements.
 
@@ -129,8 +129,14 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Alto's Adventure | Windows PC | 173777692 | 20 |
 | Animated Puzzles Star | Xbox One | 882816773 | 12 |
 | Apex Legends | Xbox One, Xbox Series X\|S | 175227487 | 12 |
+| Aragami | Xbox One, Xbox Series X\|S | 244952910 | 51 |
+| Aragami 2 | Xbox One, Xbox Series X\|S | 1678543324 | 44 |
 | Arcade Paradise | Windows PC, Xbox One, Xbox Series X\|S | 1741728886 | 54 |
 | ARK: Survival Evolved | Windows PC | 983730484 | 33 |
+| Armello | Xbox One, Xbox Series X\|S | 682100179 | 50 |
+| Assassin's Creed Chronicles: China | Xbox One, Xbox Series X\|S | 524641908 | 18 |
+| Assassin's Creed Chronicles: India | Xbox One, Xbox Series X\|S | 132590840 | 18 |
+| Assassin's Creed Chronicles: Russia | Xbox One, Xbox Series X\|S | 1445607414 | 17 |
 | ASTRONEER | Windows PC, Xbox One, Xbox Series X\|S | 568182861 | 57 |
 | Axiom Verge | Xbox One, Xbox Series X\|S | 55549300 | 29 |
 | Back to the Future: The Game - 30th Anniversary Edition | Xbox One | 975485641 | 59 |
@@ -146,8 +152,10 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Battlefield Hardline | Xbox One, Xbox Series X\|S | 301917535 | 62 |
 | Battlefield V | Xbox One, Xbox Series X\|S | 256364670 | 21 |
 | Beatsplosion for Kinect | Xbox One | 33016317 | 18 |
+| Bedlam | Xbox One, Xbox Series X\|S | 1056122017 | 24 |
 | Ben-Hur | Xbox One, Xbox Series X\|S | 529578794 | 10 |
 | BIOHAZARD 7 resident evil グロテスクVer. | Windows PC | 298354887 | 58 |
+| Bomber Crew | Xbox One, Xbox Series X\|S | 231858691 | 30 |
 | Bridge Constructor: The Walking Dead | Windows PC, Xbox One, Xbox Series X\|S | 2030417191 | 13 |
 | Bunny Factory | Windows PC, Xbox One, Xbox Series X\|S | 1945255835 | 37 |
 | Call of Duty: Black Ops III | Xbox One, Xbox Series X\|S | 80579825 | 98 |
@@ -187,6 +195,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | DRAGON BALL XENOVERSE 2 | Windows PC, Xbox One, Xbox Series X\|S | 1019460860 | 49 |
 | Dungeon of the Endless | Xbox One, Xbox Series X\|S | 429018095 | 29 |
 | Dungeon of the ENDLESS™ | Windows PC | 1959656817 | 30 |
+| Dungeons and Dragons: Sword Coast Legends | Xbox One, Xbox Series X\|S | 779561878 | 38 |
 | EA SPORTS FC™ 24 Xbox One | Xbox One, Xbox Series X\|S | 2098741842 | 45 |
 | EA SPORTS FC™ 24 Xbox Series X\|S | Xbox Series X\|S | 1852502655 | 45 |
 | EA SPORTS FC™ 25 Xbox One | Xbox One, Xbox Series X\|S | 1882096658 | 45 |
@@ -206,6 +215,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Fable Fortune | Windows PC, Xbox One, Xbox Series X\|S | 750338097 | 17 |
 | Fallout 4 | Windows PC, Xbox One, Xbox Series X\|S | 1256782258 | 84 |
 | Fallout 4 (PC) | Windows PC | 2146688994 | 84 |
+| Feist | Xbox One, Xbox Series X\|S | 218721783 | 40 |
 | FIFA 14 | Xbox One, Xbox Series X\|S | 1813362885 | 41 |
 | FIFA 15 | Xbox One, Xbox Series X\|S | 1689264723 | 45 |
 | FIFA 18 | Xbox One, Xbox Series X\|S | 433376346 | 44 |
@@ -238,9 +248,11 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Grand Theft Auto V | Xbox One, Xbox Series X\|S | 1050025307 | 77 |
 | Grand Theft Auto V (Xbox One) | Xbox One, Xbox Series X\|S | 972249091 | 77 |
 | Guitar Hero Live | Xbox One, Xbox Series X\|S | 453673951 | 50 |
+| Guns, Gore and Cannoli | Xbox One, Xbox Series X\|S | 1131124715 | 21 |
 | Halo 5: Forge | Windows PC | 766737132 | 25 |
+| Halo 5: Guardians | Xbox One, Xbox Series X\|S | 219630713 | 73 |
 | Halo Wars 2 | Windows PC | 1667928394 | 123 |
-| Halo Wars: Definitive Edition | Windows PC | 1030018025 | 69 |
+| Halo Wars: Definitive Edition (PC) | Windows PC | 1030018025 | 69 |
 | Halo: The Master Chief Collection | Windows PC | 1144039928 | 580 |
 | Halo: The Master Chief Collection (CN) | Xbox One | 812065290 | 396 |
 | Human Fall Flat | Windows PC, Xbox One, Xbox Series X\|S | 312881568 | 120 |
@@ -253,7 +265,10 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Killing Floor 2 | Xbox One, Xbox Series X\|S | 217258585 | 65 |
 | Lara Croft and the Temple of Osiris | Windows PC, Xbox One, Xbox Series X\|S | 1857859131 | 40 |
 | Late Shift | Windows PC, Xbox One, Xbox Series X\|S | 930893366 | 20 |
+| Layers of Fear (2016) | Xbox One, Xbox Series X\|S | 240478325 | 27 |
 | LEGO City Undercover | Xbox One, Xbox Series X\|S | 668438210 | 48 |
+| LIMBO | Xbox One, Xbox Series X\|S | 398011207 | 13 |
+| Lovers in a Dangerous Spacetime | Xbox One, Xbox Series X\|S | 28152906 | 28 |
 | Madden NFL 18 | Xbox One, Xbox Series X\|S | 506903100 | 28 |
 | Madden NFL 19 | Xbox One, Xbox Series X\|S | 717669198 | 28 |
 | Madden NFL 20 | Xbox One, Xbox Series X\|S | 148078765 | 28 |
@@ -281,6 +296,9 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Minecraft: Story Mode - Season Two | Windows PC | 148376670 | 30 |
 | Minecraft: Story Mode - Season Two - Episode 1 | Xbox One | 14233261 | 30 |
 | Mirror's Edge Catalyst | Xbox One, Xbox Series X\|S | 1824138520 | 49 |
+| Morphite | Xbox One, Xbox Series X\|S | 244792213 | 25 |
+| Nidhogg 2 | Xbox One, Xbox Series X\|S | 594585699 | 13 |
+| Night in the Woods | Xbox One, Xbox Series X\|S | 125341318 | 31 |
 | OCCULTIC;NINE | Xbox One, Xbox Series X\|S | 500760956 | 23 |
 | Ori and the Blind Forest | Xbox One, Xbox Series X\|S | 264259050 | 50 |
 | Ori and the Blind Forest: Definitive Edition | Windows PC | 559544937 | 57 |
@@ -295,7 +313,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Project CARS 3 | Xbox One, Xbox Series X\|S | 572054432 | 61 |
 | R.B.I. Baseball 16 | Xbox One, Xbox Series X\|S | 562694050 | 19 |
 | R.B.I. Baseball 17 | Xbox One, Xbox Series X\|S | 811152542 | 11 |
-| ReCore: Definitive Edition | Windows PC, Xbox One, Xbox Series X\|S | 852431422 | 74 |
+| ReCore | Windows PC, Xbox One, Xbox Series X\|S | 852431422 | 74 |
 | Red Faction Guerrilla Re-Mars-tered | Xbox One, Xbox Series X\|S | 753024882 | 57 |
 | RESIDENT EVIL 7 biohazard | Windows PC | 651668093 | 58 |
 | Rise of Nations: Extended Edition | Windows PC | 326835485 | 38 |
@@ -311,13 +329,14 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Slender: The Arrival (2015) | Xbox One, Xbox Series X\|S | 1166935255 | 20 |
 | Slime Rancher | Windows PC, Xbox One, Xbox Series X\|S | 625948041 | 57 |
 | Snake Pass | Windows PC, Xbox One | 595091631 | 34 |
-| Songbringer | Windows PC | 908546367 | 32 |
+| Songbringer | Windows PC, Xbox One, Xbox Series X\|S | 908546367 | 32 |
 | STAR WARS Battlefront | Xbox One, Xbox Series X\|S | 1681220621 | 63 |
 | STAR WARS Battlefront II | Xbox One, Xbox Series X\|S | 833960563 | 43 |
 | Stardew Valley | Xbox One, Xbox Series X\|S | 306230746 | 49 |
 | SUBJECT 13 | Windows PC, Xbox One, Xbox Series X\|S | 208741763 | 13 |
 | Super Night Riders | Xbox One, Xbox Series X\|S | 900300132 | 20 |
 | Supermarket Shriek | Windows PC, Xbox One, Xbox Series X\|S | 979032440 | 42 |
+| Surviving Mars | Xbox One, Xbox Series X\|S | 405775731 | 80 |
 | T-Kara Puzzles | Windows PC, Mobile, Xbox One | 869284932 | 15 |
 | Tales from the Borderlands - Episode 1: Zer0 Sum | Xbox One, Xbox Series X\|S | 2141647881 | 35 |
 | The Bunker | Windows PC, Xbox One, Xbox Series X\|S | 181110324 | 28 |
@@ -345,6 +364,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Thimbleweed Park | Windows PC, Xbox One, Xbox Series X\|S | 1015340672 | 33 |
 | Titanfall | Xbox One, Xbox Series X\|S | 1292135256 | 88 |
 | Titanfall 2 | Xbox One, Xbox Series X\|S | 1145574011 | 50 |
+| Todd Howard | Xbox One | 1005167472 | 1 |
 | Tom Clancy's The Division | Xbox One, Xbox Series X\|S | 74304278 | 65 |
 | Tomb Raider: Definitive Edition | Windows PC, Xbox One, Xbox Series X\|S | 826545257 | 50 |
 | Train Sim World® 4 | Windows PC, Xbox One, Xbox Series X\|S | 1686524250 | 260 |
@@ -367,6 +387,7 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Title | Platform | Title ID | Mapped achievements |
 |---|---|---|---:|
 | 1001 Spikes | Xbox One, Xbox Series X\|S | 1798197019 | 10 |
+| [PROTOTYPE] | Xbox One, Xbox Series X\|S | 278981929 | 40 |
 | Air Guitar Warrior for Kinect | Xbox One | 1053016727 | 22 |
 | Blue Estate | Xbox One, Xbox Series X\|S | 2038811741 | 27 |
 | Boom Ball 2 for Kinect | Xbox One | 412294483 | 22 |
@@ -392,11 +413,12 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Gears of War: Ultimate Edition | Xbox One, Xbox Series X\|S | 1475571605 | 56 |
 | Gears of War: Ultimate Edition for Windows 10 | Windows PC | 1751973977 | 56 |
 | Geometry Wars™ 3: Dimensions Evolved | Xbox One, Xbox Series X\|S | 945174237 | 30 |
-| Halo 5: Guardians | Xbox One, Xbox Series X\|S | 219630713 | 73 |
+| Grindstone | Xbox Series X\|S | 1863069160 | 48 |
 | Halo: Spartan Assault | Xbox One, Xbox Series X\|S | 682562723 | 30 |
 | Happy Dungeons | Xbox One | 928096970 | 42 |
 | Happy Wars | Windows PC | 1761060600 | 57 |
 | Homefront®: The Revolution | Xbox One, Xbox Series X\|S | 530599647 | 74 |
+| KALIMBA | Xbox One, Xbox Series X\|S | 1674561712 | 42 |
 | Killer Instinct | Windows PC | 58472989 | 464 |
 | Kinect Sports Rivals | Xbox One | 1840996916 | 60 |
 | LEGO Batman 3: Beyond Gotham | Xbox One, Xbox Series X\|S | 101393300 | 70 |
@@ -408,8 +430,8 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | LEGO STAR WARS: The Force Awakens | Xbox One, Xbox Series X\|S | 565406974 | 64 |
 | LEGO The Hobbit | Xbox One, Xbox Series X\|S | 1764536463 | 39 |
 | Microsoft Solitaire Collection | Windows PC | 85494077 | 73 |
-| Minecraft | Apple TV | 1835298427 | 121 |
 | Minecraft for Android | Android | 1739947436 | 121 |
+| Minecraft for Apple TV | Apple TV | 1835298427 | 121 |
 | Minecraft for iOS | iOS | 1810924247 | 134 |
 | Minecraft for Kindle Fire | Kindle Fire | 1944307183 | 121 |
 | Minecraft for Nintendo Switch | Nintendo Switch | 2047319603 | 119 |
@@ -417,10 +439,12 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Minecraft: Xbox One Edition | Durango | 345903534 | 87 |
 | MONOPOLY PLUS | Xbox One, Xbox Series X\|S | 1918441274 | 15 |
 | NBA LIVE 14 | Xbox One, Xbox Series X\|S | 1616270757 | 2 |
+| Neverwinter | Xbox One, Xbox Series X\|S | 407534069 | 121 |
 | Peggle 2 | Xbox One, Xbox Series X\|S | 848717329 | 34 |
 | Phantom Dust | Windows PC, Xbox One | 267248679 | 45 |
 | Pixel Piracy | Xbox One, Xbox Series X\|S | 819060983 | 12 |
 | Project Spark | Xbox One, Xbox Series X\|S | 1624350228 | 137 |
+| PROTOTYPE 2 | Xbox One, Xbox Series X\|S | 1935747145 | 43 |
 | Quantum Break | Windows PC | 333628240 | 0 |
 | R.B.I. Baseball 14 | Xbox One, Xbox Series X\|S | 137470980 | 16 |
 | R.B.I. Baseball 15 | Xbox One, Xbox Series X\|S | 1412270296 | 19 |
@@ -438,20 +462,20 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | Tapping Skill Test | Xbox One | 875079140 | 9 |
 | Terraria | Xbox One, Xbox Series X\|S | 389597738 | 38 |
 | The Amazing Spider-Man 2™ | Xbox One, Xbox Series X\|S | 1999803984 | 46 |
-| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | 1285166951 | 179 |
+| The Elder Scrolls Online | Windows PC, Xbox One, Xbox Series X\|S | 1285166951 | 178 |
 | The Escapists | Xbox One | 1128640842 | 19 |
 | The Escapists 2 | Xbox One | 759485819 | 56 |
 | The Escapists: The Walking Dead | Windows PC | 199875921 | 19 |
 | The LEGO Movie Videogame | Xbox One, Xbox Series X\|S | 1755825192 | 48 |
-| Title 2076385443 |  | 2076385443 | 142 |
 | Title 2130778777 |  | 2130778777 | 19 |
-| Title 349397095 |  | 349397095 | 17 |
 | Tony Hawk's Pro Skater 5 | Xbox One, Xbox Series X\|S | 32122245 | 45 |
 | Train Sim World® 2 | Windows PC, Xbox One, Xbox Series X\|S | 1763742865 | 431 |
+| Train Sim World® 2020 | Windows PC | 2076385443 | 142 |
 | Train Sim World® 2020 | Xbox One, Xbox Series X\|S | 974917521 | 187 |
 | Train Sim World® 3 | Windows PC, Xbox One, Xbox Series X\|S | 1669996905 | 212 |
 | Train Sim World® 5: Free Starter Pack | Windows PC, Xbox One, Xbox Series X\|S | 1935604508 | 84 |
 | Train Sim World® 6: Free Starter Pack | Windows PC, Xbox One, Xbox Series X\|S | 2063484815 | 19 |
+| Train Simulator World | Windows PC | 349397095 | 17 |
 | Transformers: Rise of the Dark Spark | Xbox One, Xbox Series X\|S | 1529724759 | 50 |
 | Warframe | Xbox One, Xbox Series X\|S | 1482870140 | 102 |
 | Zoo Tycoon | Xbox One, Xbox Series X\|S | 711381438 | 48 |
@@ -463,7 +487,6 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | 7 Days to Die | Xbox One, Xbox Series X\|S | 60633334 | 43 |
 | 7 Days to Die (Game Preview) | Windows PC | 1745806870 | 43 |
 | Agents of Mayhem | Xbox One, Xbox Series X\|S | 1835497756 | 49 |
-| Assassin's Creed Chronicles: Russia | Xbox One, Xbox Series X\|S | 1445607414 | 17 |
 | Assassin's Creed IV Black Flag | Xbox One, Xbox Series X\|S | 556718860 | 60 |
 | Assassin's Creed Unity | Xbox One, Xbox Series X\|S | 1998461943 | 57 |
 | Assassin's Creed® The Ezio Collection | Xbox One, Xbox Series X\|S | 514291876 | 149 |
@@ -525,7 +548,6 @@ Supported classifications reflect the author’s corrections. Partially Supporte
 | L.A. Noire (Japan) | Xbox One, Xbox Series X\|S | 985429182 | 62 |
 | LEGO Bricktales | Xbox One, Xbox Series X\|S | 2005013689 | 21 |
 | LEGO Worlds | Xbox One, Xbox Series X\|S | 867642949 | 71 |
-| LIMBO | Xbox One, Xbox Series X\|S | 398011207 | 13 |
 | Little Nightmares | Xbox One, Xbox Series X\|S | 572268056 | 22 |
 | Lords of the Fallen (2014) | Xbox One, Xbox Series X\|S | 1271641024 | 56 |
 | Mad Max | Xbox One, Xbox Series X\|S | 2029730324 | 49 |

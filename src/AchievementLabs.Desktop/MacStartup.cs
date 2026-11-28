@@ -9,6 +9,12 @@ internal static class MacStartup
     private static string? log;
     internal static void Begin()
     {
+        if (Environment.GetEnvironmentVariable("LABS_STARTUP_TRACE") is { Length: > 0 } tracePath)
+        {
+            log = tracePath;
+            Stage("Starting");
+            return;
+        }
         if (!OperatingSystem.IsMacOS()) return;
         try
         {

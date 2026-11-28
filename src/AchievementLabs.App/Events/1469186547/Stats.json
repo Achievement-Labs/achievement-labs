@@ -1,0 +1,220 @@
+{
+  "1469186547": {
+    "TitleName": "Resident Evil 0",
+    "ServiceConfigId": "7c840100-30d0-40c7-b3e7-8da4579201f3",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "DefeatEnemy.EnemyId.67": {
+        "Type": "Integer",
+        "PayloadField": "EnemyId",
+        "SuggestedValue": 67,
+        "DisplayName": "Mimicry Marcus Kills [EnemyId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DefeatEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DefeatEnemy\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"EnemyId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "DefeatEnemy.PlayerId.1": {
+        "Type": "Integer",
+        "PayloadField": "PlayerId",
+        "SuggestedValue": 1,
+        "DisplayName": "Rebecca's Kills [PlayerId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DefeatEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DefeatEnemy\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayerId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "DefeatEnemy.PlayerId.2": {
+        "Type": "Integer",
+        "PayloadField": "PlayerId",
+        "SuggestedValue": 2,
+        "DisplayName": "Billy's Kills [PlayerId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DefeatEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DefeatEnemy\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayerId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "DefeatEnemy.WeaponId.1": {
+        "Type": "Integer",
+        "PayloadField": "WeaponId",
+        "SuggestedValue": 1,
+        "DisplayName": "Knife Kills [WeaponId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DefeatEnemy"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DefeatEnemy\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"WeaponId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "GetDefeatEnemyEventNum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Total Kills [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetDefeatEnemyEventNum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetDefeatEnemyEventNum\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetGameClearEventNum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Times Cleared [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetGameClearEventNum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetGameClearEventNum\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetGetLeechCrystalTotalNum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Leech Charms Collected [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetGetLeechCrystalTotalNum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetGetLeechCrystalTotalNum\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetPrepareHerbEventNum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Combined Herbs [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetPrepareHerbEventNum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetPrepareHerbEventNum\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GetStompZombieEventNum": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Zombie Stomps [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GetStompZombieEventNum"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GetStompZombieEventNum\",\"serviceConfigId\":\"7c840100-30d0-40c7-b3e7-8da4579201f3\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1469186547\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:F024294D.ResidentEvilZero_8fty0by30jkny!App\",\"is1P\":1,\"asId\":1},\"metadata\":REPLACEMETADATA,\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1469186547
+  ]
+}

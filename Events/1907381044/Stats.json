@@ -1,0 +1,151 @@
+{
+  "1907381044": {
+    "TitleName": "Project Cars",
+    "ServiceConfigId": "73940100-ce28-4018-8964-96c471b05334",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "AccoladesWon": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Accolades Won [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AccoladesWon"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AccoladesWon\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "AchievementUnlocked.AchievementId.2": {
+        "Type": "Integer",
+        "PayloadField": "AchievementId",
+        "SuggestedValue": 2,
+        "DisplayName": "Zero To Hero [AchievementId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "AchievementUnlocked.AchievementId.3": {
+        "Type": "Integer",
+        "PayloadField": "AchievementId",
+        "SuggestedValue": 3,
+        "DisplayName": "Defending Champ [AchievementId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "AchievementUnlocked.AchievementId.4": {
+        "Type": "Integer",
+        "PayloadField": "AchievementId",
+        "SuggestedValue": 4,
+        "DisplayName": "Triple Crown [AchievementId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"AchievementId\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "CompletedOnlineRaces": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Online Races Completed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CompletedOnlineRaces"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CompletedOnlineRaces\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "OnlinePublicPodiumFinishes": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Online Races Finished on the Podium [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "OnlinePublicPodiumFinishes"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"OnlinePublicPodiumFinishes\",\"serviceConfigId\":\"73940100-ce28-4018-8964-96c471b05334\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1907381044\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:33207SlightlyMadStudios.ProjectCars_exkx9nkaaw33e!App\",\"ver\":\"1\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:11111111111111111\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1907381044
+  ]
+}

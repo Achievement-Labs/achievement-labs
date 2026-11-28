@@ -1,0 +1,82 @@
+{
+  "284143677": {
+    "TitleName": "Momodora: Reverie Under the Moonlight",
+    "ServiceConfigId": "e3dc0100-6405-43e9-9c39-b61710efb03d",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "StatEnemyKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Enemies Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatEnemyKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatEnemyKilled\",\"serviceConfigId\":\"e3dc0100-6405-43e9-9c39-b61710efb03d\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"284143677\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "StatKahoKilled": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Kaho Killed [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatKahoKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatKahoKilled\",\"serviceConfigId\":\"e3dc0100-6405-43e9-9c39-b61710efb03d\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"284143677\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "StatMoneyEarned": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Money Earned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatMoneyEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatMoneyEarned\",\"serviceConfigId\":\"e3dc0100-6405-43e9-9c39-b61710efb03d\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"284143677\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"10.0.18362.0.amd64fre\"},\"app\":{\"id\":\"U:ActiveGamingMediaInc.MomodoraJP_4tj796bhrrsp0!App\",\"ver\":\"1\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"ANONYMIZED\",\"devModel\":\"ANONYMIZED\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    284143677
+  ]
+}

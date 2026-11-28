@@ -45,7 +45,19 @@ public sealed partial class DesktopModel
     public bool CanDisconnect => !CompletionScanRunning && !TotalsRunning && !PresenceRunning && !QueueActive && !busy && !WorkflowBusy && session != null;
     public string EventsDirectory { get => eventsDirectory; set { eventsDirectory = value; Changed(); } }
     public string SessionPath { get => sessionPath; set { sessionPath = value; Changed(); } }
-    public bool RegionOverride { get => regionOverride; set { regionOverride = value; Changed(); } }
+    public bool RegionOverride
+    {
+        get => regionOverride;
+        set
+        {
+            if (regionOverride == value) return;
+            regionOverride = value;
+            client?.SetRegionOverride(value);
+            queueAccount.RegionOverride = value;
+            if (windows8 != null) windows8.ForceEnglish = value;
+            Changed();
+        }
+    }
     public bool MintAccent { get => mintAccent; set { mintAccent = value; Changed(); } }
     public CatalogFinding[] CatalogFindings { get => findings; private set { findings = value; Changed(); } }
     public string CatalogSummary { get => catalogSummary; private set { catalogSummary = value; Changed(); } }

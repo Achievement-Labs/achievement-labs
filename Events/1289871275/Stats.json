@@ -1,0 +1,145 @@
+{
+  "1289871275": {
+    "TitleName": "Forza Horizon 3",
+    "ServiceConfigId": "19020100-9575-4c2b-9916-3d664ce1dfab",
+    "Stats": {
+      "Cars Owned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTFH3",
+            "Replacement": "Microsoft.XboxLive.T1289871275.CarAddedToGarage"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuildNum\":4,\"CarId\":4,\"Manufacturer\":4,\"NumCarsInGarage\":4,\"Track\":4,\"IsHorizonEdition\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CarAddedToGarage\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuildNum\":156858,\"CarId\":2660,\"Manufacturer\":22,\"NumCarsInGarage\":REPLACEVALUE,\"Track\":552,\"IsHorizonEdition\":0}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "credited shape (ach 43); field = running total"
+      },
+      "Fans Earned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTFH3",
+            "Replacement": "Microsoft.XboxLive.T1289871275.CurrencyChanged"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuildNum\":4,\"Delta\":4,\"Total\":4,\"Track\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CurrencyChanged\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuildNum\":156858,\"CurrencyType\":\"Fans\",\"Delta\":1,\"Total\":REPLACEVALUE,\"Track\":552}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "credited shape with CurrencyType Stars; 'Fans' is a currency type in stateflow (currency.has_currency type=Fans); Fans value untested"
+      },
+      "XP Earned": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTFH3",
+            "Replacement": "Microsoft.XboxLive.T1289871275.XPGained"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BuildNum\":4,\"Amount\":4,\"InCarClub\":4,\"Wristband\":4,\"Track\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"XPGained\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"00000000-0000-0000-0000-000000000000\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BuildNum\":156858,\"Amount\":REPLACEVALUE,\"InCarClub\":0,\"Source\":\"Event\",\"Wristband\":0,\"Track\":552}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "FH3 exe field list; same event credited in FH2 block with Source string 'Event'"
+      },
+      "CarsInGarage": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Cars Owned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CarsInGarage"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CarsInGarage\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CurrencyEarned.CurrencyType.Fans": {
+        "Type": "String",
+        "PayloadField": "CurrencyType",
+        "SuggestedValue": "Fans",
+        "DisplayName": "Fans Earned [CurrencyType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CurrencyEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CurrencyEarned\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CurrencyType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "XPGained": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "XP Earned [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "XPGained"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"XPGained\",\"serviceConfigId\":\"19020100-9575-4c2b-9916-3d664ce1dfab\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1289871275\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\"},\"app\":{\"id\":\"U:Microsoft.OpusPG_1.0.125.2_x64__8wekyb3d8bbwe!OpusReleaseFinal\",\"ver\":\"1.0.125.2_x64_!2018/06/05:22:52:33!60EF05C!forza_x64_release_final.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1289871275
+  ]
+}

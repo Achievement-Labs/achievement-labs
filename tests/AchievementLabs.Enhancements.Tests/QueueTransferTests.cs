@@ -7,6 +7,12 @@ public static class QueueTransferTests
   var value=new QueueTransfer { OwnerXuid="42",Games=[new TransferGame { TitleId="7",Name="Game",Items=[new TransferAchievement { AchievementId="1",Name="Example",DelaySeconds=120,RemainingDelaySeconds=23 }] }] };
   var text=JsonConvert.SerializeObject(value);var restored=QueueTransfer.Parse(text,"42");
   if(restored.Games[0].Items[0].RemainingDelaySeconds!=23||text.Contains("authorization"))throw new Exception("Portable queue round trip failed");
+  var win8Stamp=new DateTimeOffset(2024,1,2,20,4,5,123,TimeSpan.Zero);
+  value.Games[0].Windows8StartDate="2024-01-02";value.Games[0].Windows8StartTime="15:04:05.123";
+  value.Games[0].Windows8BaseTimestampUtc=win8Stamp;value.Games[0].Items[0].Windows8TimestampUtc=win8Stamp;
+  var win8Restored=QueueTransfer.Parse(JsonConvert.SerializeObject(value),"42");
+  if(win8Restored.Games[0].Windows8BaseTimestampUtc!=win8Stamp||win8Restored.Games[0].Items[0].Windows8TimestampUtc!=win8Stamp)
+   throw new Exception("Windows 8 queue sync lost its timestamp or milliseconds");
   bool rejected=false;try{QueueTransfer.Parse(text,"43");}catch(System.IO.InvalidDataException){rejected=true;}if(!rejected)throw new Exception("Wrong account accepted");
   restored.Games[0].Items[0].DelaySeconds=-1;rejected=false;try{restored.Validate("42");}catch(System.IO.InvalidDataException){rejected=true;}if(!rejected)throw new Exception("Invalid delay accepted");
   var many=QueueTransfer.Parse(text,"42");for(var i=2;i<30;i++)many.Games[0].Items.Add(new TransferAchievement { AchievementId=i.ToString(),Name="Unicode 🎮 achievement "+i,DelaySeconds=120 });

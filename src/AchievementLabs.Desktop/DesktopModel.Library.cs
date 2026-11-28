@@ -61,19 +61,12 @@ public sealed partial class DesktopModel
         var hex = id.ToString("X8");
         return hex == "4E4D0FA1" || (id & 0xFFFF) is >= 0x0FA0 and <= 0x0FFF;
     }
-    // Xbox's PC title history can use a modern alias while legacy achievements use the original title ID.
-    private static readonly Dictionary<string, string> Windows8ModernAliases = new(StringComparer.Ordinal)
-    {
-        ["2024867567"] = "1297292152", // Cold Alley
-        ["1791554324"] = "1297292148", // Fishdom 3
-        ["1941986744"] = "1297292157", // Halo: Spartan Assault
-        ["2122543949"] = "1297292194", // Halo: Spartan Strike
-        ["1679995514"] = "1297292136"  // TY the Tasmanian Tiger
-    };
-    public static string ResolveWindows8TitleId(string titleId) => Windows8ModernAliases.TryGetValue(titleId, out var legacyId) ? legacyId : titleId;
+    public static string ResolveWindows8TitleId(string titleId) =>
+        AchievementLabs.Core.XboxTitleCatalog.ResolveWindows8TitleId(titleId);
     public static bool IsKnownWindows8Title(string titleId)
     {
         var legacyId = ResolveWindows8TitleId(titleId);
+        if (AchievementLabs.Core.XboxTitleCatalog.Find(legacyId)?.Platforms.Contains("Windows8") == true) return true;
         return LegacyXboxTitleCatalog.KnownTitles.Any(title => title.Platform == "Windows 8" &&
             (title.ProductionTitleIdDecimal == legacyId || title.PartnerTitleIdDecimal == legacyId));
     }

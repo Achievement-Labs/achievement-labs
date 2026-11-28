@@ -14,10 +14,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(LabsPortableDesktop)' != 'true'">
-    <Version>1.3.4</Version>
-    <AssemblyVersion>1.3.4.0</AssemblyVersion>
-    <FileVersion>1.3.4.0</FileVersion>
-    <InformationalVersion>1.3.4</InformationalVersion>
+    <Version>1.3.8</Version>
+    <AssemblyVersion>1.3.8.0</AssemblyVersion>
+    <FileVersion>1.3.8.0</FileVersion>
+    <InformationalVersion>1.3.8</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup><ProjectReference Include="../AchievementLabs.Enhancements/AchievementLabs.Enhancements.csproj" /></ItemGroup>
@@ -79,17 +79,22 @@
   <Error Condition="'@(ForbiddenReleaseFile)' != ''" Text="Private/source files found in release: @(ForbiddenReleaseFile)" />
 </Target>
 <PropertyGroup Condition="'$(LabsMacOS)' == 'true'">
-  <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>0.1.1.1</AssemblyVersion><FileVersion>0.1.1.1</FileVersion><InformationalVersion>0.1.1-macos-preview.1</InformationalVersion>
+  <DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants><AssemblyVersion>1.1.0.0</AssemblyVersion><FileVersion>1.1.0.0</FileVersion><InformationalVersion>1.1.0-macos</InformationalVersion>
 </PropertyGroup>
 <ItemGroup Condition="'$(LabsPortableDesktop)' == 'true'">
   <Content Remove="../../gfwlam/**/*.*;../../uplayachievements/**/*.*;../../tools/Submit-ColdAlleyAchievements.ps1" />
 </ItemGroup>
 <PropertyGroup Condition="'$(LabsLinux)' == 'true'">
   <DefineConstants>$(DefineConstants);LABS_LINUX</DefineConstants>
-  <AssemblyVersion>0.1.1.1</AssemblyVersion><FileVersion>0.1.1.1</FileVersion><InformationalVersion>0.1.1-linux-preview.1</InformationalVersion>
+  <AssemblyVersion>1.1.0.0</AssemblyVersion><FileVersion>1.1.0.0</FileVersion><InformationalVersion>1.1.0-linux</InformationalVersion>
 </PropertyGroup>
 <ItemGroup Condition="'$(LabsLinux)' == 'true'">
   <Content Include="../../tools/linux/microsoft-signin.py" Link="Helpers/microsoft-signin.py" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+</ItemGroup>
+<ItemGroup Condition="'$(LabsPortableDesktop)' != 'true'">
+  <Content Include="../../tools/Windows8License/**/*" LinkBase="tools/Windows8License" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  <Content Include="../../tools/Acquire-Windows8License.ps1" Link="tools/Acquire-Windows8License.ps1" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  <Content Remove="../../tools/Windows8License/runtime/jetpack-auth-investigation/ActivateHelper.cs" Condition="'$(LabsSingleFile)' == 'true'" />
 </ItemGroup>
 </Project>
 

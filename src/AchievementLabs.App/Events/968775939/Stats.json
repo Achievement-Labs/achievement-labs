@@ -1,0 +1,189 @@
+{
+  "968775939": {
+    "TitleName": "EVERSPACE™",
+    "ServiceConfigId": "161d0100-b62d-47b9-8a16-b0f339be5903",
+    "Stats": {
+      "Wins (Hard)": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinsHard"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinsHard\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "event-catalog: runs completed hard; partC Count Int32"
+      },
+      "Wins (Normal)": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinsNormal"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinsNormal\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "event-catalog: runs completed normal; partC Count Int32"
+      },
+      "Credits Record": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CreditsRecord"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CreditsRecord\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "event-catalog: credits in a run; partC Count Int32"
+      },
+      "Defeats Record": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillsRecord"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Count\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillsRecord\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Count\":REPLACEVALUE},\"measurements\":{}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "event-catalog: highest kills in a run (Defeats Record = enemies defeated); partC Count Int32"
+      },
+      "CreditsRecordStatRule": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Credits Record [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CreditsRecordStatRule"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CreditsRecordStatRule\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "KillsRecordStatRule": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Defeats Record [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "KillsRecordStatRule"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"KillsRecordStatRule\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "WinsHardStatRule": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Wins (Hard) [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinsHardStatRule"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinsHardStatRule\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "WinsNormalStatRule": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Wins (Normal) [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "WinsNormalStatRule"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"WinsNormalStatRule\",\"serviceConfigId\":\"161d0100-b62d-47b9-8a16-b0f339be5903\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"968775939\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:ROCKFISHGames.EVERSPACE_1.2.10.2_x64__wm11qtfe9fmzj!AppEVERSPACE\",\"ver\":\"1.2.10.2_x64_!2018/05/14:18:24:01!3F7ABC3!rsg-uwp64-shipping.exe\",\"is1P\":2,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    968775939
+  ]
+}

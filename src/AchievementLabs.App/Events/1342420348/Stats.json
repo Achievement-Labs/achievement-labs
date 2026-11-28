@@ -1,0 +1,82 @@
+{
+  "1342420348": {
+    "TitleName": "FINAL FANTASY 零式 HD [JP]",
+    "ServiceConfigId": "c1a20100-7c32-4069-b293-d2c25003b57c",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "Action-OpenDifficulty-AttackHit-DealDamage.IsPlayerControl.1": {
+        "Type": "Integer",
+        "PayloadField": "IsPlayerControl",
+        "SuggestedValue": 1,
+        "DisplayName": "累計与ダメージ値 [IsPlayerControl]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Action-OpenDifficulty-AttackHit-DealDamage"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Action-OpenDifficulty-AttackHit-DealDamage\",\"serviceConfigId\":\"c1a20100-7c32-4069-b293-d2c25003b57c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1342420348\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsPlayerControl\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "EnemiesDefeated-PlayerControlTotalCount-OpenDifficulty": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "累計敵撃破数 [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemiesDefeated-PlayerControlTotalCount-OpenDifficulty"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemiesDefeated-PlayerControlTotalCount-OpenDifficulty\",\"serviceConfigId\":\"c1a20100-7c32-4069-b293-d2c25003b57c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1342420348\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "EnemiesDefeated-WithKillSight-OpenDifficulty.IsKillSightKill.1": {
+        "Type": "Integer",
+        "PayloadField": "IsKillSightKill",
+        "SuggestedValue": 1,
+        "DisplayName": "累計キルサイト撃破数 [IsKillSightKill]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemiesDefeated-WithKillSight-OpenDifficulty"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemiesDefeated-WithKillSight-OpenDifficulty\",\"serviceConfigId\":\"c1a20100-7c32-4069-b293-d2c25003b57c\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1342420348\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsKillSightKill\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"10.0.19045.0.amd64fre\"},\"app\":{\"id\":\"U:39EA002F.SUZAKU-J_n746a19ndrrjg!App\",\"ver\":\"1.1.0.1_x64_!suzaku.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"ANONYMIZED\",\"devModel\":\"ANONYMIZED\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1342420348
+  ]
+}

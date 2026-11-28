@@ -118,7 +118,8 @@ def project(repo):
         if not devices and isinstance(names.get(key, {}).get('platform'), str):
             devices = platforms([p.strip() for p in names[key]['platform'].split(',') if p.strip()])
         path = events / key / (key + '.json')
-        template = path.read_bytes() if path.exists() else None
+        # Git stores template text with LF. Hash that representation on every checkout.
+        template = path.read_bytes().replace(b'\r\n', b'\n') if path.exists() else None
         active = key in listed and block.get('Enabled') is not False
         if active and template is None:
             raise ValueError('Active title template is missing: ' + key)

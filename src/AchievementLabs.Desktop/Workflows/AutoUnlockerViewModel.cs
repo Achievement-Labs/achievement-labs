@@ -65,6 +65,7 @@ namespace AchievementLabs.Desktop.Workflows
                 || _state.Queue.Any(i => i.EventRequestIndex < 0 || !double.IsFinite(i.DelaySeconds) || i.DelaySeconds < 0))
                 throw new InvalidDataException("This game's checkpoint is invalid. Rebuild the game queue.");
             GameName = _state.GameName; TitleId = _state.TitleId;
+            Windows8StartDate = _state.Windows8StartDate; Windows8StartTime = _state.Windows8StartTime;
             SpeedMultiplier = _state.SpeedMultiplier;
             PopulateQueueDisplay(); UpdateProgressText();
             await StartAutoUnlockProcess(token);
@@ -72,6 +73,8 @@ namespace AchievementLabs.Desktop.Workflows
                 throw new AchievementLabs.Core.BuildQueueHandoffException(mirrorFailure + " The build queue is paused.");
             if (!PresenceCleanupSucceeded)
                 throw new AchievementLabs.Core.BuildQueueHandoffException("The previous title's presence could not be stopped. The build queue is paused; check the Xbox connection before resuming.");
+            if (HadFailure && _state.IsWindows8 && StatusText.Contains("Windows 8 token is missing or expired", StringComparison.Ordinal))
+                throw new AchievementLabs.Core.BuildQueueHandoffException(StatusText + " The build queue is paused.");
             return token.IsCancellationRequested || _state.Queue.Any(e => e.EventSubmissionPendingVerification && !e.Completed) ? AchievementLabs.Core.BuildQueueItemStatus.Paused
                 : HadFailure ? AchievementLabs.Core.BuildQueueItemStatus.Failed
                 : _state.Queue.All(i => i.Completed) ? AchievementLabs.Core.BuildQueueItemStatus.Completed
@@ -92,6 +95,7 @@ namespace AchievementLabs.Desktop.Workflows
                 _lastKnownXauth = account.XAUTH;
                 _xboxRestAPI = new XboxApiClient(account.XAUTH);
             }
+            _xboxRestAPI.SetRegionOverride(account.RegionOverride);
             return _xboxRestAPI;
         }
 
@@ -107,6 +111,7 @@ namespace AchievementLabs.Desktop.Workflows
         {
             this.account = account;
             _snackbarService = snackbarService;
+            QueueItems.CollectionChanged += QueueSearchItemsChanged;
         }
 
         #region Observable Properties
@@ -114,6 +119,9 @@ namespace AchievementLabs.Desktop.Workflows
         // Desktop supplies the same connected-session sender used by the achievement tab.
         public Func<string, string, CancellationToken, Task<bool>>? SendEventAchievementAsync { get; set; }
         public Func<string, CancellationToken, Task<AchievementsResponse?>>? ReadQueueAchievementsAsync { get; set; }
+        public Func<string, string, CancellationToken, Task<AchievementsResponse?>>? ReadAchievementsForAccountAsync { get; set; }
+        public Func<string, string, DateTimeOffset?, CancellationToken, Task>? SendWindows8AchievementAsync { get; set; }
+        public Func<string, CancellationToken, Task>? EnsureWindows8TokenAsync { get; set; }
         public Func<TimeSpan, CancellationToken, Task> VerificationDelayAsync { get; set; } = (duration, ct) => Task.Delay(duration, ct);
         public static bool UsesEvents(IEnumerable<OneCoreAchievementResponse> achievements) =>
             achievements.Any(a => a.progression?.requirements?.Any(r =>
@@ -124,11 +132,12 @@ namespace AchievementLabs.Desktop.Workflows
             if (_state == null) return;
             if (response.achievements.Count == 0)
                 throw new InvalidOperationException("Could not verify the saved queue's achievement metadata. Refresh the game and try again.");
-            _state.IsEventBased = UsesEvents(response.achievements);
+            _state.IsWindows8 = DesktopModel.IsKnownWindows8Title(_state.TitleId);
+            _state.IsEventBased = !_state.IsWindows8 && UsesEvents(response.achievements);
             var scid = response.achievements.Select(a => a.serviceConfigId)
                 .FirstOrDefault(id => !string.IsNullOrWhiteSpace(id) && id != Guid.Empty.ToString());
             if (scid != null) _state.ServiceConfigId = scid;
-            if (_state.IsEventBased)
+            if (_state.IsEventBased || _state.IsWindows8)
             {
                 for (var index = 0; index < _state.Queue.Count; index++)
                 {
@@ -165,6 +174,12 @@ namespace AchievementLabs.Desktop.Workflows
         [ObservableProperty] private bool _isInitialized = false;
         [ObservableProperty] private string _referenceGamertag = "";
         [ObservableProperty] private string _titleId = "";
+        [ObservableProperty] private string _windows8StartDate = "";
+        [ObservableProperty] private string _windows8StartTime = "";
+        public bool IsWindows8Title => DesktopModel.IsKnownWindows8Title(TitleId);
+        public bool CanEditWindows8Start => IsConfigEnabled && _state == null && !IsRunning;
+        partial void OnTitleIdChanged(string value) => OnPropertyChanged(nameof(IsWindows8Title));
+        partial void OnIsConfigEnabledChanged(bool value) => OnPropertyChanged(nameof(CanEditWindows8Start));
         [ObservableProperty] private string _statusText = "Idle";
         [ObservableProperty] private string _startStopButtonText = "Start Auto Unlock";
         [ObservableProperty] private bool _isRunning = false;
@@ -179,6 +194,33 @@ namespace AchievementLabs.Desktop.Workflows
         [ObservableProperty] private double _speedMultiplier = 1.0;
         [ObservableProperty] private string _speedDisplay = "Speed: 1.0x (Real Time)";
         [ObservableProperty] private ObservableCollection<AutoUnlockQueueDisplay> _queueItems = new();
+        [ObservableProperty] private string _queueSearch = "";
+
+        public IEnumerable<AutoUnlockQueueDisplay> VisibleQueueItems
+        {
+            get
+            {
+                var query = (QueueSearch ?? "").Trim();
+                return query.Length == 0 ? QueueItems : QueueItems.Where(item =>
+                    item.AchievementName.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                    (item.AchievementDescription ?? "").Contains(query, StringComparison.OrdinalIgnoreCase) ||
+                    item.AchievementId.Contains(query, StringComparison.OrdinalIgnoreCase)).ToArray();
+            }
+        }
+
+        partial void OnQueueSearchChanged(string value) => OnPropertyChanged(nameof(VisibleQueueItems));
+        partial void OnQueueItemsChanging(ObservableCollection<AutoUnlockQueueDisplay> value) =>
+            QueueItems.CollectionChanged -= QueueSearchItemsChanged;
+        partial void OnQueueItemsChanged(ObservableCollection<AutoUnlockQueueDisplay> value)
+        {
+            value.CollectionChanged += QueueSearchItemsChanged;
+            OnPropertyChanged(nameof(VisibleQueueItems));
+        }
+
+        private void QueueSearchItemsChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs args)
+        {
+            if (!string.IsNullOrWhiteSpace(QueueSearch)) OnPropertyChanged(nameof(VisibleQueueItems));
+        }
         [ObservableProperty] private bool _hasExistingState = false;
         [ObservableProperty] private string _existingStateInfo = "";
 
@@ -193,6 +235,8 @@ namespace AchievementLabs.Desktop.Workflows
             public string AchievementDescription { get; set; } = "";
             public string AchievementId { get; set; } = "";
             public int Gamerscore { get; set; }
+            public string TimestampLabel { get; set; } = "";
+            public bool HasTimestamp => TimestampLabel.Length > 0;
             private bool canEditDelay;
             public bool CanEditDelay { get => canEditDelay; set => SetProperty(ref canEditDelay, value); }
             internal Action<int, decimal>? DelayChanged { get; set; }
@@ -204,6 +248,7 @@ namespace AchievementLabs.Desktop.Workflows
                     var normalized = Math.Max(0, value);
                     if (_delayMinutes == normalized) return;
                     _delayMinutes = normalized;
+                    OnPropertyChanged();
                     DelayChanged?.Invoke(Index - 1, normalized);
                 }
             }
@@ -288,12 +333,14 @@ namespace AchievementLabs.Desktop.Workflows
             }
 
             _state = state;
+            OnPropertyChanged(nameof(CanEditWindows8Start));
             if (state.OwnerXuid != account.XUIDOnly) { StatusText = "Rebuild this saved queue for the connected account before resuming."; return; }
             RefreshTokenOnFailure = state.RefreshTokenOnFailure;
             NotifyOnFailure = state.NotifyOnFailure;
             StopOnFailure = state.StopOnFailure;
             ReferenceGamertag = state.ReferenceGamertag;
             TitleId = state.TitleId;
+            Windows8StartDate = state.Windows8StartDate; Windows8StartTime = state.Windows8StartTime;
             GameName = $"Game: {state.GameName}";
             ReferenceInfo = $"Reference User: {state.ReferenceGamertag} ({state.ReferenceXuid})";
             SpeedMultiplier = state.SpeedMultiplier;
@@ -317,6 +364,8 @@ namespace AchievementLabs.Desktop.Workflows
             ExistingStateInfo = "";
             QueueItems.Clear();
             _state = null;
+            OnPropertyChanged(nameof(CanEditWindows8Start));
+            Windows8StartDate = ""; Windows8StartTime = "";
             StatusText = "Idle";
             GameName = "Game: None";
             ReferenceInfo = "Reference User: None";
@@ -347,6 +396,11 @@ namespace AchievementLabs.Desktop.Workflows
 
             try
             {
+                if (DesktopModel.IsKnownWindows8Title(TitleId)) TitleId = DesktopModel.ResolveWindows8TitleId(TitleId);
+                var isWindows8 = DesktopModel.IsKnownWindows8Title(TitleId);
+                DateTimeOffset? windows8BaseTime = null;
+                if (isWindows8 && (!string.IsNullOrWhiteSpace(Windows8StartDate) || !string.IsNullOrWhiteSpace(Windows8StartTime)))
+                    windows8BaseTime = Windows8UnlockRequest.ResolveLocalTimestamp(Windows8StartDate, Windows8StartTime, DateTimeOffset.UtcNow);
                 if (account.EnsureAuthorizationAsync != null) await account.EnsureAuthorizationAsync(CancellationToken.None);
                 // Step 1: Resolve reference gamertag to XUID
                 var profileData = await GetRestAPI().GetGamertagProfileAsync(ReferenceGamertag);
@@ -376,7 +430,11 @@ namespace AchievementLabs.Desktop.Workflows
                 StatusText = "Fetching reference user achievements...";
 
                 // Step 2: Fetch reference user's achievements for this title
-                var refAchievements = await GetRestAPI().GetAchievementsForTitleAsync(refXuid, TitleId);
+                var refAchievements = isWindows8
+                    ? await ReadWindows8ReferenceForQueueAsync(refXuid, refGamertagResolved, TitleId, CancellationToken.None)
+                    : ReadAchievementsForAccountAsync != null
+                        ? await ReadAchievementsForAccountAsync(refXuid, TitleId, CancellationToken.None)
+                        : await GetRestAPI().GetAchievementsForTitleAsync(refXuid, TitleId);
                 if (refAchievements == null || refAchievements.achievements.Count == 0)
                 {
                     _snackbarService.Show("Error", "No achievements found for this title on the reference user.",
@@ -389,7 +447,7 @@ namespace AchievementLabs.Desktop.Workflows
                 // Get service config ID from achievements
                 var serviceConfigId = refAchievements.achievements[0].serviceConfigId;
 
-                bool isEventBased = UsesEvents(refAchievements.achievements);
+                bool isEventBased = !isWindows8 && UsesEvents(refAchievements.achievements);
 
                 HashSet<string> licensedIds = [];
                 if (isEventBased)
@@ -401,16 +459,17 @@ namespace AchievementLabs.Desktop.Workflows
                 }
 
                 // Step 3: Get game info for display
-                var gameInfo = await GetRestAPI().GetGameTitleAsync(account.XUIDOnly, TitleId);
-                var gameName = gameInfo?.Titles?.FirstOrDefault()?.Name ?? $"Title {TitleId}";
-                GameName = $"Game: {gameName}" + (isEventBased ? " [Event-Based]" : "");
+                var gameName = isWindows8
+                    ? AchievementLabs.Core.XboxTitleCatalog.Find(TitleId)?.Name ?? $"Title {TitleId}"
+                    : (await GetRestAPI().GetGameTitleAsync(account.XUIDOnly, TitleId))?.Titles?.FirstOrDefault()?.Name ?? $"Title {TitleId}";
+                GameName = $"Game: {gameName}" + (isWindows8 ? " [Windows 8]" : isEventBased ? " [Event-Based]" : "");
 
                 // Step 4: Filter only unlocked achievements from reference user, sorted by unlock time
                 var refUnlocked = refAchievements.achievements
-                    .Where(a => a.progressState == "Achieved" && !string.IsNullOrWhiteSpace(a.progression?.timeUnlocked))
+                    .Where(a => a.progressState == "Achieved" && (isWindows8 || !string.IsNullOrWhiteSpace(a.progression?.timeUnlocked)))
                     .OrderBy(a =>
                     {
-                        if (DateTime.TryParse(a.progression!.timeUnlocked, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
+                        if (DateTime.TryParse(a.progression?.timeUnlocked, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
                             return dt;
                         return DateTime.MaxValue;
                     })
@@ -427,7 +486,9 @@ namespace AchievementLabs.Desktop.Workflows
 
                 // Step 5: Fetch current user's achievements to know which are already unlocked
                 StatusText = "Fetching your achievements...";
-                var myAchievements = await GetRestAPI().GetAchievementsForTitleAsync(account.XUIDOnly, TitleId);
+                var myAchievements = ReadAchievementsForAccountAsync != null
+                    ? await ReadAchievementsForAccountAsync(account.XUIDOnly, TitleId, CancellationToken.None)
+                    : await GetRestAPI().GetAchievementsForTitleAsync(account.XUIDOnly, TitleId);
                 var myUnlockedIds = new HashSet<string>();
                 if (myAchievements != null)
                 {
@@ -449,14 +510,12 @@ namespace AchievementLabs.Desktop.Workflows
                     // For event-based games, skip achievements that don't have event data
                     if (isEventBased && !licensedIds.Contains(achievement.id)) continue;
 
-                    DateTime unlockTime = DateTime.MinValue;
-                    if (DateTime.TryParse(achievement.progression!.timeUnlocked, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
-                        unlockTime = dt;
+                    DateTime? unlockTime = DateTime.TryParse(achievement.progression?.timeUnlocked, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ? dt : null;
 
                     double delaySeconds = 0;
-                    if (previousUnlockTime.HasValue && unlockTime > previousUnlockTime.Value)
+                    if (previousUnlockTime.HasValue && unlockTime.HasValue && unlockTime.Value > previousUnlockTime.Value)
                     {
-                        var referenceDelay = (unlockTime - previousUnlockTime.Value).TotalSeconds;
+                        var referenceDelay = (unlockTime.Value - previousUnlockTime.Value).TotalSeconds;
                         delaySeconds = AddReferenceTimingVariation(referenceDelay);
                     }
 
@@ -486,7 +545,7 @@ namespace AchievementLabs.Desktop.Workflows
                         Completed = false
                     });
 
-                    previousUnlockTime = unlockTime;
+                    if (unlockTime.HasValue) previousUnlockTime = unlockTime;
                 }
 
                 if (queue.Count == 0)
@@ -516,14 +575,24 @@ namespace AchievementLabs.Desktop.Workflows
                     StopOnFailure = StopOnFailure,
                     SpeedMultiplier = SpeedMultiplier,
                     UseFakeSignature = account.Settings.FakeSignatureEnabled,
-                    IsEventBased = isEventBased
+                    IsEventBased = isEventBased,
+                    IsWindows8 = isWindows8,
+                    Windows8StartDate = isWindows8 ? Windows8StartDate : "",
+                    Windows8StartTime = isWindows8 ? Windows8StartTime : "",
+                    Windows8BaseTimestampUtc = windows8BaseTime
                 };
+                OnPropertyChanged(nameof(CanEditWindows8Start));
+                ApplyWindows8Schedule(_state);
                 SaveState();
 
                 PopulateQueueDisplay();
                 UpdateProgressText();
 
-                StatusText = $"Queue built: {queue.Count} achievements to unlock. Press Start to begin.";
+                StatusText = isWindows8
+                    ? $"Queue built: {queue.Count} Windows 8 achievements." + (windows8BaseTime is { } start
+                        ? $" First timestamp: {start.ToLocalTime():yyyy-MM-dd HH:mm:ss.fff} local; later timestamps follow the queue delays."
+                        : " Timestamps will use each request's current time.") + " Get this game's license and token or open its signed pop.bin before starting."
+                    : $"Queue built: {queue.Count} achievements to unlock. Press Start to begin.";
                 QueueReady = true;
                 IsConfigEnabled = true;
                 HasExistingState = true;
@@ -607,11 +676,17 @@ namespace AchievementLabs.Desktop.Workflows
                     : await GetRestAPI().GetAchievementsForTitleAsync(account.XUIDOnly, _state.TitleId, token);
                 if (metadata == null) throw new InvalidOperationException("Unable to verify queue achievement metadata.");
                 ValidateQueueMetadata(metadata);
+                ValidateWindows8Schedule(_state);
                 await PrepareEventMappingsAsync(token);
                 SaveState();
                 await WaitForCredentialsAsync(_state.IsEventBased && _state.Queue.Any(e => !e.Completed && !e.EventSubmissionPendingVerification), token);
+                if (_state.IsWindows8 && _state.Queue.Any(e => !e.Completed && !e.EventSubmissionPendingVerification))
+                {
+                    if (EnsureWindows8TokenAsync == null) throw new InvalidOperationException("Windows 8 token validation is unavailable in this build.");
+                    await EnsureWindows8TokenAsync(_state.TitleId, token);
+                }
                 var nextEntry = _state.Queue.Skip(_state.CurrentIndex).FirstOrDefault(e => !e.Completed);
-                if (nextEntry != null && !nextEntry.EventSubmissionPendingVerification)
+                if (nextEntry != null && !nextEntry.EventSubmissionPendingVerification && !_state.IsWindows8)
                 {
                     account.SpoofedTitleID = _state.TitleId;
                     account.SpoofingStatus = 1;
@@ -721,7 +796,7 @@ namespace AchievementLabs.Desktop.Workflows
                 // Unlock the achievement
                 await WaitForCredentialsAsync(_state.IsEventBased && !entry.EventSubmissionPendingVerification, token);
                 token.ThrowIfCancellationRequested();
-                if (!entry.EventSubmissionPendingVerification && account.SpoofingStatus != 1)
+                if (!entry.EventSubmissionPendingVerification && !_state.IsWindows8 && account.SpoofingStatus != 1)
                 {
                     account.SpoofedTitleID = _state.TitleId;
                     account.SpoofingStatus = 1;
@@ -754,10 +829,20 @@ namespace AchievementLabs.Desktop.Workflows
                             });
                             var verification = await VerifyEventAchievementAsync(entry, token);
                             unlockSuccess = verification.Confirmed;
-                            if (!unlockSuccess) unlockError = $"Events accepted, unlock unconfirmed. {verification.Progress}";
+                            if (!unlockSuccess) unlockError = $"Request accepted, unlock unconfirmed. {verification.Progress}";
                         }
                         if (!unlockSuccess && string.IsNullOrEmpty(unlockError))
                             unlockError = "Event-based unlock failed (see snackbar for details)";
+                    }
+                    else if (_state.IsWindows8)
+                    {
+                        if (SendWindows8AchievementAsync == null) throw new InvalidOperationException("Windows 8 submission is unavailable in this build.");
+                        await SendWindows8AchievementAsync(_state.TitleId, entry.AchievementId, entry.Windows8TimestampUtc, token);
+                        entry.EventSubmissionPendingVerification = true;
+                        SaveState();
+                        var verification = await VerifyEventAchievementAsync(entry, token);
+                        unlockSuccess = verification.Confirmed;
+                        if (!unlockSuccess) unlockError = $"Windows 8 request accepted, unlock unconfirmed. {verification.Progress}";
                     }
                     else
                     {
@@ -825,7 +910,7 @@ namespace AchievementLabs.Desktop.Workflows
                         _state.IsRunning = false;
                         SaveState();
                         Avalonia.Threading.Dispatcher.UIThread.Invoke(() => {
-                            StatusText = $"Queue paused: {entry.AchievementName} is not confirmed unlocked. {entry.LastVerificationProgress} Refresh progress or resume to check again; events will not be resent automatically.";
+                            StatusText = $"Queue paused: {entry.AchievementName} is not confirmed unlocked. {entry.LastVerificationProgress} Refresh progress or resume to check again; the accepted request will not be resent automatically.";
                             UpdateQueueItemStatus(_state.CurrentIndex, "Unconfirmed · " + entry.LastVerificationProgress);
                             if (NotifyOnFailure) FailureNotification?.Invoke(StatusText);
                         });
@@ -909,6 +994,22 @@ namespace AchievementLabs.Desktop.Workflows
             catch { /* Optional display metadata must never prevent loading an existing queue. */ }
         }
 
+        public void RemoveQueueItem(AutoUnlockQueueDisplay item)
+        {
+            if (IsRunning || _state == null || !QueueItems.Contains(item)) return;
+            int index = item.Index - 1;
+            if (index < 0 || index >= _state.Queue.Count || _state.Queue[index].AchievementId != item.AchievementId) return;
+            try
+            {
+                AchievementLabs.MultiSelect.QueueTools.Remove(this, _state, [_state.Queue[index]]);
+            }
+            catch
+            {
+                try { SaveState(); } catch { }
+                StatusText = "Could not save the queue edit. The previous queue was restored.";
+            }
+        }
+
         private void PopulateQueueDisplay()
         {
             if (_state == null) return;
@@ -926,6 +1027,7 @@ namespace AchievementLabs.Desktop.Workflows
                     Gamerscore = entry.Gamerscore,
                     CanEditDelay = !IsRunning,
                     DelayMinutes = (decimal)(entry.DelaySeconds / 60.0),
+                    TimestampLabel = entry.Windows8TimestampUtc is { } stamp ? "Request: " + stamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss.fff") + " local" : "",
                     Status = entry.Completed ? "Unlocked" : entry.EventSubmissionPendingVerification ? "Unconfirmed · " + entry.LastVerificationProgress : (i < _state.CurrentIndex ? "Skipped" : "Pending")
                 };
                 item.DelayChanged = UpdateQueueDelay;
@@ -981,6 +1083,7 @@ namespace AchievementLabs.Desktop.Workflows
                     Gamerscore = item.Gamerscore,
                     CanEditDelay = item.CanEditDelay,
                     DelayMinutes = item.DelayMinutes,
+                    TimestampLabel = item.TimestampLabel,
                     DelayChanged = UpdateQueueDelay,
                     Status = status
                 };
@@ -998,15 +1101,52 @@ namespace AchievementLabs.Desktop.Workflows
             return Math.Max(1, referenceDelaySeconds + signedVariation);
         }
 
+        private static void ApplyWindows8Schedule(AutoUnlockState state)
+        {
+            if (!state.IsWindows8) return;
+            var schedule = state.Windows8BaseTimestampUtc is { } start
+                ? Windows8UnlockRequest.Schedule(start, state.Queue.Select(entry => entry.DelaySeconds).ToArray())
+                : [];
+            foreach (var stamp in schedule) Windows8UnlockRequest.ValidateTimestamp(stamp, DateTimeOffset.UtcNow);
+            for (var index = 0; index < state.Queue.Count; index++)
+                state.Queue[index].Windows8TimestampUtc = schedule.Length == 0 ? null : schedule[index];
+        }
+
+        private static void ValidateWindows8Schedule(AutoUnlockState state)
+        {
+            if (!state.IsWindows8) return;
+            var schedule = state.Windows8BaseTimestampUtc is { } start
+                ? Windows8UnlockRequest.Schedule(start, state.Queue.Select(entry => entry.DelaySeconds).ToArray())
+                : [];
+            for (var index = 0; index < state.Queue.Count; index++)
+            {
+                if (state.Queue[index].Windows8TimestampUtc != (schedule.Length == 0 ? null : schedule[index]))
+                    throw new InvalidDataException("The Windows 8 queue timestamps no longer match its delays. Rebuild the queue.");
+                if (schedule.Length > 0) Windows8UnlockRequest.ValidateTimestamp(schedule[index], DateTimeOffset.UtcNow);
+            }
+        }
+
         private void UpdateQueueDelay(int queueIndex, decimal delayMinutes)
         {
             if (_state == null || IsRunning || queueIndex < 0 || queueIndex >= _state.Queue.Count) return;
 
             var delaySeconds = (double)delayMinutes * 60.0;
+            var previousDelay = _state.Queue[queueIndex].DelaySeconds;
             _state.Queue[queueIndex].DelaySeconds = delaySeconds;
+            try { ApplyWindows8Schedule(_state); }
+            catch (Exception error) when (error is InvalidDataException or ArgumentOutOfRangeException)
+            {
+                _state.Queue[queueIndex].DelaySeconds = previousDelay;
+                ApplyWindows8Schedule(_state);
+                var display = QueueItems[queueIndex];
+                display.DelayChanged = null; display.DelayMinutes = (decimal)(previousDelay / 60.0); display.DelayChanged = UpdateQueueDelay;
+                StatusText = error.Message;
+                return;
+            }
             if (_state.CurrentIndex == queueIndex)
                 _state.RemainingDelaySeconds = delaySeconds;
             SaveState();
+            if (_state.IsWindows8 && _state.Windows8BaseTimestampUtc != null) PopulateQueueDisplay();
             UpdateCompletionEstimate();
         }
 
@@ -1052,12 +1192,26 @@ namespace AchievementLabs.Desktop.Workflows
             if (entry.EventSubmissionPendingVerification) return true;
 
             if (EventCatalog == null) return false;
-            var requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, entry.AchievementId, account.XUIDOnly, token)).Payloads.ToList();
+            // Catalog refreshes can land mid-queue. Read the recipe fingerprint around the payload build so both come from
+            // the same catalog snapshot, then resume only if it matches the one the checkpoint started with.
+            List<string> requestBodies; string? fingerprint; int attempt = 0;
+            do
+            {
+                fingerprint = EventCatalog.PayloadFingerprint(_state.TitleId, entry.AchievementId);
+                requestBodies = (await EventCatalog.GetPayloadsAsync(_state.TitleId, entry.AchievementId, account.XUIDOnly, token)).Payloads.ToList();
+            } while (++attempt < 3 && fingerprint != EventCatalog.PayloadFingerprint(_state.TitleId, entry.AchievementId));
             if (requestBodies.Count == 0) return false;
+            var start = AchievementLabs.Core.EventCheckpoint.Resume(entry, fingerprint, requestBodies.Count, out var checkpointReset);
+            if (checkpointReset != null)
+            {
+                System.Diagnostics.Trace.TraceWarning(checkpointReset);
+                StatusText = checkpointReset;
+                SaveState();
+            }
             if (entry.EventRequestIndex > requestBodies.Count) throw new InvalidDataException("The event checkpoint no longer matches this achievement's payloads.");
 
             // Send all request(s)
-            for (int reqIdx = entry.EventRequestIndex; reqIdx < requestBodies.Count; reqIdx++)
+            for (int reqIdx = start; reqIdx < requestBodies.Count; reqIdx++)
             {
                 await WaitForCredentialsAsync(true, token);
                 token.ThrowIfCancellationRequested();
@@ -1076,7 +1230,7 @@ namespace AchievementLabs.Desktop.Workflows
                 {
                     throw new HttpRequestException($"Event request {reqIdx + 1}/{requestBodies.Count} failed: HTTP {statusCode}.", null, (System.Net.HttpStatusCode)statusCode);
                 }
-                entry.EventRequestIndex = reqIdx + 1;
+                AchievementLabs.Core.EventCheckpoint.Advance(entry, reqIdx + 1, fingerprint);
                 SaveState();
             }
 
@@ -1085,11 +1239,13 @@ namespace AchievementLabs.Desktop.Workflows
             return true;
         }
 
+        public bool WaitForLateConfirmation { get; set; } = true;
+
         private async Task<AchievementLabs.Core.AchievementVerificationResult> VerifyEventAchievementAsync(AutoUnlockQueueEntry entry, CancellationToken token)
         {
             var state = _state ?? throw new InvalidOperationException("Queue is unavailable.");
             var owner = account.XUIDOnly;
-            var result = await AchievementLabs.Core.AchievementUnlockVerifier.VerifyAsync(async ct => {
+            async Task<AchievementLabs.Core.AchievementProgressSnapshot?> Read(CancellationToken ct) {
                 if (_state != state || account.XUIDOnly != owner || state.OwnerXuid != owner)
                     throw new InvalidOperationException("Queue account changed during verification.");
                 var response = ReadQueueAchievementsAsync != null
@@ -1108,8 +1264,16 @@ namespace AchievementLabs.Desktop.Workflows
                 entry.LastVerificationProgress = progress;
                 SaveState();
                 return new AchievementLabs.Core.AchievementProgressSnapshot(row.progressState, progress);
-            }, token, VerificationDelayAsync);
-            return result;
+            }
+            if (!WaitForLateConfirmation) return await AchievementLabs.Core.AchievementUnlockVerifier.VerifyAsync(Read, token, VerificationDelayAsync);
+            return await AchievementLabs.Core.AchievementUnlockVerifier.WatchAsync(Read, token, VerificationDelayAsync, result => {
+                entry.LastVerificationProgress = result.Progress;
+                SaveState();
+                Avalonia.Threading.Dispatcher.UIThread.Invoke(() => {
+                    StatusText = "Waiting for Xbox confirmation. Auto Unlock will continue when unlocked. " + result.Progress;
+                    UpdateQueueItemStatus(state.CurrentIndex, "Verifying · " + result.Progress);
+                });
+            });
         }
 
         private async Task WaitForCredentialsAsync(bool needsEvents, CancellationToken token)

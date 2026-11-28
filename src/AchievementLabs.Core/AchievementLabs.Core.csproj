@@ -13,8 +13,8 @@
  </ItemGroup>
 <ItemGroup><Compile Include="../AchievementLabs.App/Services/Epic/*.cs;../AchievementLabs.App/Services/Ubisoft/*.cs" LinkBase="Shared/Platforms" /></ItemGroup><ItemGroup>
 <Compile Include="../AchievementLabs.App/Services/Steam/*.cs" LinkBase="Shared/Steam"/>
-<Compile Include="../../vendor/SteamAchievementManager/SAM.API/**/*.cs" Exclude="../../vendor/SteamAchievementManager/SAM.API/GlobalSuppressions.cs;../../vendor/SteamAchievementManager/SAM.API/bin/**/*.cs;../../vendor/SteamAchievementManager/SAM.API/obj/**/*.cs" LinkBase="Shared/SAM"/>
-<Compile Include="../../vendor/SteamAchievementManager/SAM.Game/KeyValue.cs;../../vendor/SteamAchievementManager/SAM.Game/KeyValueType.cs;../../vendor/SteamAchievementManager/SAM.Game/StreamHelpers.cs;../../vendor/SteamAchievementManager/SAM.Game/InvariantShorthand.cs" LinkBase="Shared/SAMGame"/>
+<Compile Include="../../src/Shared/Steam/SAM.API/**/*.cs" Exclude="../../src/Shared/Steam/SAM.API/GlobalSuppressions.cs;../../src/Shared/Steam/SAM.API/bin/**/*.cs;../../src/Shared/Steam/SAM.API/obj/**/*.cs" LinkBase="Shared/SAM"/>
+<Compile Include="../../src/Shared/Steam/SAM.Game/KeyValue.cs;../../src/Shared/Steam/SAM.Game/KeyValueType.cs;../../src/Shared/Steam/SAM.Game/StreamHelpers.cs;../../src/Shared/Steam/SAM.Game/InvariantShorthand.cs" LinkBase="Shared/SAMGame"/>
 </ItemGroup><ItemGroup><Compile Include="../AchievementLabs.App/Services/LegacyXbox/Win8/*.cs;../AchievementLabs.App/Services/LegacyXbox/Ty/*.cs;../AchievementLabs.App/Services/Gfwl/*.cs;../AchievementLabs.App/Services/Xbox360/*.cs" LinkBase="Shared/Legacy"/></ItemGroup><ItemGroup><Compile Include="../AchievementLabs.App/Services/LegacyXbox/*.cs" LinkBase="Shared/LegacyBridge"/></ItemGroup><ItemGroup><EmbeddedResource Include="../../catalog/achievement-totals.json" LogicalName="AchievementLabs.SharedTotals.json"/></ItemGroup><PropertyGroup><LabsEventsSource Condition="'$(LabsEventsSource)' == ''">$(MSBuildThisFileDirectory)../AchievementLabs.App/Events</LabsEventsSource></PropertyGroup><ItemGroup><EmbeddedResource Include="../../site/assets/games.json" LogicalName="AchievementLabs.LocalPublicCatalog.json"/></ItemGroup><ItemGroup Condition="Exists('../AchievementLabs.App/Services/Xbox360/Xbox360ConSigningMaterial.cs')"><Compile Remove="Xbox360ConSigningMaterial.cs" /></ItemGroup><ItemGroup Condition="'$(LabsXbox360SigningFile)' != ''"><EmbeddedResource Include="$(LabsXbox360SigningFile)" LogicalName="AchievementLabs.Xbox360.LocalConIdentity" /></ItemGroup><PropertyGroup Condition="'$(LabsMacOS)' == 'true'"><DefineConstants>$(DefineConstants);LABS_MACOS</DefineConstants></PropertyGroup><PropertyGroup Condition="'$(LabsLinux)' == 'true'"><DefineConstants>$(DefineConstants);LABS_LINUX</DefineConstants></PropertyGroup>
  <Target Name="CompressEventsBundle" BeforeTargets="AssignTargetPaths">
   <PropertyGroup>
@@ -28,4 +28,11 @@
    <FileWrites Include="$(EventBundlePath)" />
   </ItemGroup>
  </Target>
-<ItemGroup><EmbeddedResource Include="../../catalog/public-metadata.json" LogicalName="AchievementLabs.PublicMetadata.json"/></ItemGroup></Project>
+<ItemGroup><EmbeddedResource Include="../../catalog/public-metadata.json" LogicalName="AchievementLabs.PublicMetadata.json"/></ItemGroup>
+ <!-- Optional signed-catalog snapshot (manifest + title bundles), pinned by the release build: -p:LabsCatalogSnapshot=<dist folder>. -->
+ <ItemGroup Condition="'$(LabsCatalogSnapshot)' != ''">
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/manifest.json" LogicalName="AchievementLabs.CatalogSnapshot/manifest.json" />
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/manifest.json.sig" Condition="Exists('$(LabsCatalogSnapshot)/manifest.json.sig')" LogicalName="AchievementLabs.CatalogSnapshot/manifest.json.sig" />
+  <EmbeddedResource Include="$(LabsCatalogSnapshot)/titles/*.json" LogicalName="AchievementLabs.CatalogSnapshot/titles/%(Filename)%(Extension)" />
+ </ItemGroup>
+</Project>

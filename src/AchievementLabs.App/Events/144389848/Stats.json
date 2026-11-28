@@ -1,0 +1,145 @@
+{
+  "144389848": {
+    "TitleName": "Destiny 2",
+    "ServiceConfigId": "bcc90100-31ff-42bd-b545-90cd089b36d8",
+    "Stats": {
+      "Character Power": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"REPLACETITLE\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T144389848.UpdateCharacterPower\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"CharacterPower\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {\n                \"PlayerSessionId\": \"{00000000-0000-0000-0000-000000000000}\",\n                \"UserId\": \"1\"\n            },\n            \"name\": \"REPLACENAME\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {},\n            \"serviceConfigId\": \"bcc90100-31ff-42bd-b545-90cd089b36d8\",\n            \"titleId\": 144389848,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"CharacterPower\":REPLACEVALUE},\"name\":\"UpdateCharacterPower\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"titleId\":144389848,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 404,
+        "Confidence": "CAPTURE"
+      },
+      "Character Age (Years)": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"REPLACETITLE\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T144389848.UpdateCharacterAgeInYears\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"CharacterAgeInYears\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {\n                \"PlayerSessionId\": \"{00000000-0000-0000-0000-000000000000}\",\n                \"UserId\": \"1\"\n            },\n            \"name\": \"REPLACENAME\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {},\n            \"serviceConfigId\": \"bcc90100-31ff-42bd-b545-90cd089b36d8\",\n            \"titleId\": 144389848,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"CharacterAgeInYears\":REPLACEVALUE},\"name\":\"UpdateCharacterAgeInYears\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"titleId\":144389848,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 0,
+        "Confidence": "CAPTURE"
+      },
+      "Active Triumph Score": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"name\": \"REPLACETITLE\"",
+            "Replacement": "\"name\": \"Microsoft.XboxLive.T144389848.UpdateActiveTriumphScore\""
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"metadata\": {\n            \"f\": {\n                \"baseData\": {\n                    \"f\": {\n                        \"ver\": 2\n                    }\n                }\n            },\n            \"privTags\": 33554432,\n            \"policies\": 0\n        }",
+            "Replacement": "\"metadata\": {\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"ActiveTriumphScore\":4}},\"ver\":2}}},\"privTags\":33554432,\"policies\":4}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"data\": {\n        \"baseType\": \"Microsoft.XboxLive.InGame\",\n        \"baseData\": {\n            \"measurements\": {\n                \"PlayerSessionId\": \"{00000000-0000-0000-0000-000000000000}\",\n                \"UserId\": \"1\"\n            },\n            \"name\": \"REPLACENAME\",\n            \"playerSessionId\": \"11111111-1111-1111-1111-111111111111\",\n            \"properties\": {},\n            \"serviceConfigId\": \"bcc90100-31ff-42bd-b545-90cd089b36d8\",\n            \"titleId\": 144389848,\n            \"userId\": \"REPLACEXUID\",\n            \"ver\": 1\n        }\n    }",
+            "Replacement": "\"data\": {\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"measurements\":{\"ActiveTriumphScore\":REPLACEVALUE},\"name\":\"UpdateActiveTriumphScore\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"properties\":{},\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"titleId\":144389848,\"userId\":\"REPLACEXUID\",\"ver\":1}}"
+          }
+        },
+        "SuggestedValue": 740,
+        "Confidence": "CAPTURE"
+      },
+      "ActiveTriumphScore": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Active Triumph Score [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "ActiveTriumphScore"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"ActiveTriumphScore\",\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"144389848\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CharacterAgeInYears": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Character Age in Years [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CharacterAgeInYears"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CharacterAgeInYears\",\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"144389848\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "CharacterPower": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Character Power [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CharacterPower"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CharacterPower\",\"serviceConfigId\":\"bcc90100-31ff-42bd-b545-90cd089b36d8\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"144389848\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"1\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Bungie.Destiny2PCbasegame_0.3.29627.0_x64__8xb1a0vv8ay84!Destiny2\",\"ver\":\"0.3.29627.0_x64_!2024/06/13:00:35:51!7368303!destiny2.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    144389848
+  ]
+}

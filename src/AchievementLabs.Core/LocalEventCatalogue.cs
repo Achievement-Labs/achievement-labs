@@ -41,6 +41,9 @@ internal sealed class LocalEventCatalogue
     private static bool HasResource(string path) => BundledEventFiles.Contains(path);
     private static string Resource(string path) => BundledEventFiles.Read(path)
         ?? throw new InvalidDataException("Local event file is missing: " + path);
+    public string? Fingerprint(string id, string achievementId) => EventCheckpoint.Fingerprint(
+        storage.ReadTitleAsync(id, CancellationToken.None).GetAwaiter().GetResult()["Achievements"]?[achievementId],
+        storage.ReadTemplateAsync(id, CancellationToken.None).GetAwaiter().GetResult());
     public bool Contains(string id) => id != "345903534" && supported.Contains(id) && data[id] is JObject;
     public Task<EventTitleMapping> TitleAsync(string id, CancellationToken ct)
     {

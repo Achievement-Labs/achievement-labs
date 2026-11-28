@@ -1,0 +1,128 @@
+{
+  "472512000": {
+    "TitleName": "Resident Evil Revelations",
+    "ServiceConfigId": "e1c40100-ceca-48d9-9b3f-2de51c29f600",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "HeroDefeat.Type.1": {
+        "Type": "Integer",
+        "PayloadField": "Type",
+        "SuggestedValue": 1,
+        "DisplayName": "Enemies defeated [Type]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroDefeat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroDefeat\",\"serviceConfigId\":\"e1c40100-ceca-48d9-9b3f-2de51c29f600\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"472512000\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroDefeat.Type.2": {
+        "Type": "Integer",
+        "PayloadField": "Type",
+        "SuggestedValue": 2,
+        "DisplayName": "Ooze headshot kills [Type]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroDefeat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroDefeat\",\"serviceConfigId\":\"e1c40100-ceca-48d9-9b3f-2de51c29f600\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"472512000\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroDefeat.Type.3": {
+        "Type": "Integer",
+        "PayloadField": "Type",
+        "SuggestedValue": 3,
+        "DisplayName": "Enemies finished with physical attacks [Type]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroDefeat"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroDefeat\",\"serviceConfigId\":\"e1c40100-ceca-48d9-9b3f-2de51c29f600\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"472512000\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroTime.Type.4": {
+        "Type": "Integer",
+        "PayloadField": "Type",
+        "SuggestedValue": 4,
+        "DisplayName": "The Ghost Ship clear time [Type]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroTime"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroTime\",\"serviceConfigId\":\"e1c40100-ceca-48d9-9b3f-2de51c29f600\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"472512000\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "HeroTime.Type.6": {
+        "Type": "Integer",
+        "PayloadField": "Type",
+        "SuggestedValue": 6,
+        "DisplayName": "The Ghost Ship: Chaos clear time [Type]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "HeroTime"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"HeroTime\",\"serviceConfigId\":\"e1c40100-ceca-48d9-9b3f-2de51c29f600\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"472512000\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:F024294D.ResidentEvilRevelations_8fty0by30jkny!\",\"ver\":\"\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:00000000-0000-0000-0000-000000000000\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    472512000
+  ]
+}

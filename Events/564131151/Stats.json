@@ -1,0 +1,105 @@
+{
+  "564131151": {
+    "TitleName": "Kerbal Space Program Enhanced Edition",
+    "ServiceConfigId": "01f70100-7d7a-478c-8d1d-ad5b219ff54f",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "EVAComplete.Complete.1": {
+        "Type": "Integer",
+        "PayloadField": "Complete",
+        "SuggestedValue": 1,
+        "DisplayName": "EVAs [Complete]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EVAComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EVAComplete\",\"serviceConfigId\":\"01f70100-7d7a-478c-8d1d-ad5b219ff54f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"564131151\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Complete\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "LandingsComplete.Completed.1": {
+        "Type": "Integer",
+        "PayloadField": "Completed",
+        "SuggestedValue": 1,
+        "DisplayName": "Returns to Kerbin [Completed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LandingsComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LandingsComplete\",\"serviceConfigId\":\"01f70100-7d7a-478c-8d1d-ad5b219ff54f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"564131151\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Completed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "LaunchPadLaunch.Launched.1": {
+        "Type": "Integer",
+        "PayloadField": "Launched",
+        "SuggestedValue": 1,
+        "DisplayName": "Launch Pad Launches [Launched]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LaunchPadLaunch"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LaunchPadLaunch\",\"serviceConfigId\":\"01f70100-7d7a-478c-8d1d-ad5b219ff54f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"564131151\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Launched\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "LaunchRunwayLaunch.Launched.1": {
+        "Type": "Integer",
+        "PayloadField": "Launched",
+        "SuggestedValue": 1,
+        "DisplayName": "Runway Launches [Launched]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LaunchRunwayLaunch"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LaunchRunwayLaunch\",\"serviceConfigId\":\"01f70100-7d7a-478c-8d1d-ad5b219ff54f\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"564131151\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Launched\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:PrivateDivision.4ac67d45-4632-4750-b8a0-6ae4c14948_hv3d7yfbgr2rp!Game\",\"ver\":\"1.0.1.14_x64_!KerbalSpaceProgramEnhancedEdition.exe\",\"is1P\":0,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    564131151
+  ]
+}

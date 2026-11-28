@@ -14,6 +14,7 @@ public interface IMirrorHost
     /// <summary>Reads the connected account's achievements for a title. Challenges are excluded.</summary>
     Task<(IReadOnlyList<MirrorAchievement> Achievements, string TitleName)> ReadXboxAsync(string titleId, CancellationToken cancellationToken);
     Task UnlockXboxAsync(string titleId, string achievementId, CancellationToken cancellationToken);
+    Task EnsureXboxWriteReadyAsync(string titleId, CancellationToken cancellationToken) => Task.CompletedTask;
     Task<bool> IsXboxPresenceInTitleAsync(string titleId, CancellationToken cancellationToken);
 
     /// <summary>Reads Steam achievements through the local Steam client (used to verify Steam unlocks).</summary>

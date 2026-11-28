@@ -1,0 +1,1153 @@
+{
+  "1047964830": {
+    "Stats": {
+      "MatchCompleted": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchCompleted\":4,\"GamePlayed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchCompleted\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MatchCompleted\":\"REPLACEVALUE\",\"GamePlayed\":25}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "MatchCompleted"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"MatchCompleted\":4,\"GamePlayed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchCompleted\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"MatchCompleted\":\"REPLACEVALUE\",\"GamePlayed\":25}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":\"REPLACEVALUE\",\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"MatchCompleted25\",\"AchievementName\":\"MatchCompleted25\",\"Source\":\"MatchCompleted25\"}}}"
+          }
+        },
+        "SuggestedValue": 25,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "SurpriseBoxOpened": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LuggageUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"SurpriseBoxOpened\":4,\"LuggageUnlocked\":4,\"LuggageEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LuggageUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"SurpriseBoxOpened\":\"REPLACEVALUE\",\"LuggageUnlocked\":50,\"LuggageEarned\":50}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LuggageUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"SurpriseBoxOpened\":4,\"LuggageUnlocked\":4,\"LuggageEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LuggageUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"SurpriseBoxOpened\":\"REPLACEVALUE\",\"LuggageUnlocked\":50,\"LuggageEarned\":50}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":\"REPLACEVALUE\",\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"SurpriseBoxOpened50\",\"AchievementName\":\"SurpriseBoxOpened50\",\"Source\":\"SurpriseBoxOpened50\"}}}"
+          }
+        },
+        "SuggestedValue": 50,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "PowerupUsed": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerProgressed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PowerupUsed\":4,\"PowerupsUsed\":4,\"PlayerProgressed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerProgressed\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PowerupUsed\":\"REPLACEVALUE\",\"PowerupsUsed\":50,\"PlayerProgressed\":50}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerProgressed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PowerupUsed\":4,\"PowerupsUsed\":4,\"PlayerProgressed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerProgressed\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PowerupUsed\":\"REPLACEVALUE\",\"PowerupsUsed\":50,\"PlayerProgressed\":50}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":\"REPLACEVALUE\",\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"PowerupUsed50\",\"AchievementName\":\"PowerupUsed50\",\"Source\":\"PowerupUsed50\"}}}"
+          }
+        },
+        "SuggestedValue": 50,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "BingoCornerCalled": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CallBingoCorners"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"BingoCornerCalled\":4,\"CallBingoCorners\":4,\"BingosEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CallBingoCorners\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"BingoCornerCalled\":\"REPLACEVALUE\",\"CallBingoCorners\":20,\"BingosEarned\":20}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CallBingoCorners"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"BingoCornerCalled\":4,\"CallBingoCorners\":4,\"BingosEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CallBingoCorners\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"BingoCornerCalled\":\"REPLACEVALUE\",\"CallBingoCorners\":20,\"BingosEarned\":20}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":\"REPLACEVALUE\",\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"BingoCornerCalled20\",\"AchievementName\":\"BingoCornerCalled20\",\"Source\":\"BingoCornerCalled20\"}}}"
+          }
+        },
+        "SuggestedValue": 20,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "CellDaubed": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaubCells"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CellDaubed\":4,\"DaubCells\":4,\"DaubsPlayed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaubCells\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CellDaubed\":\"REPLACEVALUE\",\"DaubCells\":500,\"DaubsPlayed\":500}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "DaubCells"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"CellDaubed\":4,\"DaubCells\":4,\"DaubsPlayed\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"DaubCells\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"CellDaubed\":\"REPLACEVALUE\",\"DaubCells\":500,\"DaubsPlayed\":500}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":\"REPLACEVALUE\",\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"CellDaubed500\",\"AchievementName\":\"CellDaubed500\",\"Source\":\"CellDaubed500\"}}}"
+          }
+        },
+        "SuggestedValue": 500,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "PowerBingoCalled": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PowerBingosEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PowerBingoCalled\":4,\"PowerBingosEarned\":4,\"PowerBingo\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PowerBingosEarned\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PowerBingoCalled\":\"REPLACEVALUE\",\"PowerBingosEarned\":30,\"PowerBingo\":30}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PowerBingosEarned"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PowerBingoCalled\":4,\"PowerBingosEarned\":4,\"PowerBingo\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PowerBingosEarned\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PowerBingoCalled\":\"REPLACEVALUE\",\"PowerBingosEarned\":30,\"PowerBingo\":30}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":\"REPLACEVALUE\",\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"PowerBingoCalled30\",\"AchievementName\":\"PowerBingoCalled30\",\"Source\":\"PowerBingoCalled30\"}}}"
+          }
+        },
+        "SuggestedValue": 30,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "PowerMeterChargedWithin10Seconds": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarChargedWithinSeconds"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PowerMeterChargedWithin10Seconds\":4,\"BarChargedWithinSeconds\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BarChargedWithinSeconds\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PowerMeterChargedWithin10Seconds\":\"REPLACEVALUE\",\"BarChargedWithinSeconds\":10}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BarChargedWithinSeconds"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PowerMeterChargedWithin10Seconds\":4,\"BarChargedWithinSeconds\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BarChargedWithinSeconds\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PowerMeterChargedWithin10Seconds\":\"REPLACEVALUE\",\"BarChargedWithinSeconds\":10}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"PowerMeterChargedWithin10Seconds\",\"AchievementName\":\"PowerMeterChargedWithin10Seconds\",\"Source\":\"PowerMeterChargedWithin10Seconds\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "CoinSpent": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CoinSpent"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CoinSpent\":4,\"CoinsSpent\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CoinSpent\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CoinSpent\":\"REPLACEVALUE\",\"CoinsSpent\":1000}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CoinSpent"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"CoinSpent\":4,\"CoinsSpent\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CoinSpent\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"CoinSpent\":\"REPLACEVALUE\",\"CoinsSpent\":1000}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"CoinSpent1000\",\"AchievementName\":\"CoinSpent1000\",\"Source\":\"CoinSpent1000\"}}}"
+          }
+        },
+        "SuggestedValue": 1000,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "Currency_Xp": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLeveledUp"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PlayerLevel\":4,\"PlayerLeveledUp\":4,\"PlayerProgressed\":4,\"LevelCompleted\":4,\"XpEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLeveledUp\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayerLevel\":10,\"PlayerLeveledUp\":10,\"PlayerProgressed\":\"REPLACEVALUE\",\"LevelCompleted\":10,\"XpEarned\":\"REPLACEVALUE\"}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLeveledUp"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"PlayerLevel\":4,\"PlayerLeveledUp\":4,\"PlayerProgressed\":4,\"LevelCompleted\":4,\"XpEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLeveledUp\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"PlayerLevel\":10,\"PlayerLeveledUp\":10,\"PlayerProgressed\":\"REPLACEVALUE\",\"LevelCompleted\":10,\"XpEarned\":\"REPLACEVALUE\"}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":\"REPLACEVALUE\",\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":10,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"Level10\",\"AchievementName\":\"Level10\",\"Source\":\"Level10\"}}}"
+          }
+        },
+        "SuggestedValue": 1386,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "Completed_Collection_Count": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectionComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Completed_Collection_Count\":4,\"CollectionComplete\":4,\"CollectionCompleted\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CollectionComplete\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Completed_Collection_Count\":\"REPLACEVALUE\",\"CollectionComplete\":1,\"CollectionCompleted\":1}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CollectionComplete"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Completed_Collection_Count\":4,\"CollectionComplete\":4,\"CollectionCompleted\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CollectionComplete\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Completed_Collection_Count\":\"REPLACEVALUE\",\"CollectionComplete\":1,\"CollectionCompleted\":1}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"CollectionCompleted1\",\"AchievementName\":\"CollectionCompleted1\",\"Source\":\"CollectionCompleted1\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "Called4BingoAtTheSameTime": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CallBingoAfterMultipleLines"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Called4BingoAtTheSameTime\":4,\"CallBingoAfterMultipleLines\":4,\"BingosEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CallBingoAfterMultipleLines\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Called4BingoAtTheSameTime\":\"REPLACEVALUE\",\"CallBingoAfterMultipleLines\":4,\"BingosEarned\":4}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CallBingoAfterMultipleLines"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Called4BingoAtTheSameTime\":4,\"CallBingoAfterMultipleLines\":4,\"BingosEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CallBingoAfterMultipleLines\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Called4BingoAtTheSameTime\":\"REPLACEVALUE\",\"CallBingoAfterMultipleLines\":4,\"BingosEarned\":4}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":4,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"Called4BingoAtTheSameTime\",\"AchievementName\":\"Called4BingoAtTheSameTime\",\"Source\":\"Called4BingoAtTheSameTime\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "DestinationStreak": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BingoMatchInEveryDestination"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"DestinationStreak\":4,\"BingoMatchInEveryDestination\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BingoMatchInEveryDestination\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"DestinationStreak\":\"REPLACEVALUE\",\"BingoMatchInEveryDestination\":10,\"DestinationPatternEarned\":10}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "BingoMatchInEveryDestination"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"DestinationStreak\":4,\"BingoMatchInEveryDestination\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"BingoMatchInEveryDestination\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"DestinationStreak\":\"REPLACEVALUE\",\"BingoMatchInEveryDestination\":10,\"DestinationPatternEarned\":10}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":\"REPLACEVALUE\"}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"DestinationStreak\",\"AchievementName\":\"DestinationStreak\",\"Source\":\"DestinationStreak\"}}}"
+          }
+        },
+        "SuggestedValue": 10,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "UnlockedATravelPattern": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LuggageUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"UnlockedATravelPattern\":4,\"LuggageUnlocked\":4,\"DestinationPatternEarned\":4,\"TravelPattern\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LuggageUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"UnlockedATravelPattern\":\"REPLACEVALUE\",\"LuggageUnlocked\":1,\"DestinationPatternEarned\":1,\"TravelPattern\":1}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "LuggageUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"UnlockedATravelPattern\":4,\"LuggageUnlocked\":4,\"DestinationPatternEarned\":4,\"TravelPattern\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"LuggageUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"UnlockedATravelPattern\":\"REPLACEVALUE\",\"LuggageUnlocked\":1,\"DestinationPatternEarned\":1,\"TravelPattern\":1}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":\"REPLACEVALUE\"}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"UnlockedATravelPattern\",\"AchievementName\":\"UnlockedATravelPattern\",\"Source\":\"UnlockedATravelPattern\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "Had5BallThatCouldNotBeDaubed": {
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CannotDaubNumberInARow"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Had5BallThatCouldNotBeDaubed\":4,\"CannotDaubNumberInARow\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CannotDaubNumberInARow\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Had5BallThatCouldNotBeDaubed\":\"REPLACEVALUE\",\"CannotDaubNumberInARow\":5}}}"
+          }
+        },
+        "Request2": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CannotDaubNumberInARow"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"Had5BallThatCouldNotBeDaubed\":4,\"CannotDaubNumberInARow\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CannotDaubNumberInARow\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"Had5BallThatCouldNotBeDaubed\":\"REPLACEVALUE\",\"CannotDaubNumberInARow\":5}}}"
+          }
+        },
+        "Request3": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletion"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"measurements\":{\"f\":{\"LuggageEarned\":4,\"Destination\":4,\"TimePlayed\":4,\"KeysInInventory\":4,\"XpEarned\":4,\"CoinsEarned\":4,\"KeysEarned\":4,\"TicketsEarned\":4,\"CardsPlayed\":4,\"BingosEarned\":4,\"DaubsPlayed\":4,\"PowerBingosEarned\":4,\"PowerPatternUnlocked\":4,\"PlayerLevel\":4,\"PowerupsEarned\":4,\"MatchCompleted\":4,\"PowerCardTierReached\":4,\"PowerupsUsed\":4,\"DestinationPatternEarned\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletion\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"measurements\":{\"LuggageEarned\":0,\"Destination\":0,\"TimePlayed\":0,\"KeysInInventory\":0,\"XpEarned\":0,\"CoinsEarned\":0,\"KeysEarned\":0,\"TicketsEarned\":0,\"CardsPlayed\":0,\"BingosEarned\":0,\"DaubsPlayed\":0,\"PowerBingosEarned\":0,\"PowerPatternUnlocked\":0,\"PlayerLevel\":0,\"PowerupsEarned\":0,\"MatchCompleted\":0,\"PowerCardTierReached\":0,\"PowerupsUsed\":0,\"DestinationPatternEarned\":0}}}"
+          }
+        },
+        "Request4": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "AchievementUnlocked"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"Type\":4,\"AchievementName\":4,\"Source\":4}}}}},\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"AchievementUnlocked\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Type\":\"Had5BallThatCouldNotBeDaubed\",\"AchievementName\":\"Had5BallThatCouldNotBeDaubed\",\"Source\":\"Had5BallThatCouldNotBeDaubed\"}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "static dump workflow; multi-shape test"
+      },
+      "Games Played": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Microsoft.XboxLive.T1047964830.MatchCompleted"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"MatchCompleted\":4,\"GamePlayed\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"MatchCompleted\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"MatchCompleted\":REPLACEVALUE,\"GamePlayed\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats.MatchCompleted R1 (FullySupported false, untested); alt GameCompletion snapshot"
+      },
+      "Player Level": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Microsoft.XboxLive.T1047964830.PlayerLeveledUp"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"PlayerLevel\":4,\"PlayerLeveledUp\":4,\"LevelCompleted\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLeveledUp\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PlayerLevel\":REPLACEVALUE,\"PlayerLeveledUp\":REPLACEVALUE,\"LevelCompleted\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats.Currency_Xp R1 shape (untested); GameCompletion also carries PlayerLevel"
+      },
+      "Coins Spent": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Microsoft.XboxLive.T1047964830.CoinSpent"
+          },
+          "MetaDataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"f\":{\"baseData\":{\"f\":{\"properties\":{\"f\":{\"CoinSpent\":4,\"CoinsSpent\":4}}}}},\"policies\":0}"
+          },
+          "DataReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CoinSpent\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"CoinSpent\":REPLACEVALUE,\"CoinsSpent\":REPLACEVALUE}}}"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "block Stats.CoinSpent R1 (untested)"
+      },
+      "CoinsSpent": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Coins Spent [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "CoinsSpent"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"CoinsSpent\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "GamesPlayed": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Games Played [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GamesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GamesPlayed\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PlayerLeveledUp": {
+        "Type": "Integer",
+        "PayloadField": "Max",
+        "SuggestedValue": "",
+        "DisplayName": "Player Level [Max]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerLeveledUp"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerLeveledUp\",\"serviceConfigId\":\"06430100-7c3e-4160-b1d1-68ab3e76ac9e\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1047964830\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Max\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "TitleName": "Microsoft Bingo",
+    "ServiceConfigId": "06430100-7c3e-4160-b1d1-68ab3e76ac9e",
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.MicrosoftBingo_8wekyb3d8bbwe!frima.MicrosoftBingo\",\"ver\":\"2.6.10262.0\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:5F885A49-7DE3-47FE-8CFD-B9E228D065FE\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\",\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1047964830
+  ]
+}

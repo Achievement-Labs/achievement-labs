@@ -39,6 +39,7 @@ public static class UpstreamEventCatalogueTests
                     Put("Events/"+title.Name+"/Data.json",new JObject { [title.Name]=title.Value.DeepClone(),["SupportedTitleIDs"]=new JArray(title.Name) }.ToString());
                 }
                 index["SupportedTitleIDs"]=data["SupportedTitleIDs"]!.DeepClone();Put("Events/index.json",index.ToString());
+                Put("Events/99/Stats.json","{\"99\":{\"Stats\":{}},\"SupportedTitleIDs\":[\"99\"]}");
                 Put("Events/99/99.json",Template("99"));Put("Events/101/101.json",Template("101"));Put("Events/102/102.json",Template("999"));
             } else { Put("Events/Data.json",data.ToString()); Put("Events/99.json",Template("99")); Put("Events/101.json",Template("101")); Put("Events/102.json",Template("999")); }
             if(unsafePath)Put("Events/../escape.json","{}");
@@ -84,7 +85,9 @@ public static class UpstreamEventCatalogueTests
             var fixture=new Fixture{Archive=Zip(data)};using var http=new HttpClient(fixture);
             var catalogue=new UpstreamEventCatalogue(path,new[]{"99","345903534"});catalogue.RefreshAsync(http,true).GetAwaiter().GetResult();
             Assert(catalogue.TitleIds.SequenceEqual(new[]{"101"}) && !catalogue.Contains("99"),"Only new structurally valid titles imported; reserved mappings protected");
-            Assert(catalogue.Status.Contains("2 entries skipped"),"Wrong title and missing template reported");
+            Assert(catalogue.SkippedEntries.Count(entry => entry.Reason.StartsWith("Validation failed:")) == 2
+                && catalogue.SkippedEntries.Any(entry => entry.TitleId == "99" && entry.Reason.Contains("Protected")),
+                "Invalid entries and intentionally protected entries are reported separately");
             var payload=catalogue.PayloadsAsync("101","1","0",default).GetAwaiter().GetResult();
             Assert(JObject.Parse(payload.Payloads[0])["data"]!["baseData"]!["properties"]!["AchievementID"]!.ToString()=="1","Cached ordinary replacement builds offline");
             var valid=File.ReadAllText(path); Assert(((JObject)JObject.Parse(valid)["data"]!).Properties().Last().Name=="SupportedTitleIDs","Data ordering maintained");

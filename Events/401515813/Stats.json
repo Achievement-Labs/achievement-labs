@@ -1,0 +1,233 @@
+{
+  "401515813": {
+    "TitleName": "Enter The Gungeon",
+    "ServiceConfigId": "6e400100-6c4b-4626-abe6-631f17eea525",
+    "Stats": {
+      "Pasts Killed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEFULLEVENT",
+            "Replacement": "Microsoft.XboxLive.T401515813.PAST_KILLED"
+          },
+          "NameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEBASENAME",
+            "Replacement": "PAST_KILLED"
+          },
+          "ValueReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"Calls\": 1",
+            "Replacement": "\"Calls\": REPLACEVALUE"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: Gungeon TrackedStats enum name as event (same path as achievements: WriteInGameEvent name+{Calls}); stat routing unproven"
+      },
+      "Enemies Killed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEFULLEVENT",
+            "Replacement": "Microsoft.XboxLive.T401515813.ENEMIES_KILLED"
+          },
+          "NameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEBASENAME",
+            "Replacement": "ENEMIES_KILLED"
+          },
+          "ValueReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"Calls\": 1",
+            "Replacement": "\"Calls\": REPLACEVALUE"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: Gungeon TrackedStats enum name as event (same path as achievements: WriteInGameEvent name+{Calls}); stat routing unproven"
+      },
+      "Tables Flipped": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEFULLEVENT",
+            "Replacement": "Microsoft.XboxLive.T401515813.TABLES_FLIPPED"
+          },
+          "NameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEBASENAME",
+            "Replacement": "TABLES_FLIPPED"
+          },
+          "ValueReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"Calls\": 1",
+            "Replacement": "\"Calls\": REPLACEVALUE"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: Gungeon TrackedStats enum name as event (same path as achievements: WriteInGameEvent name+{Calls}); stat routing unproven"
+      },
+      "Number of Deaths": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEFULLEVENT",
+            "Replacement": "Microsoft.XboxLive.T401515813.NUMBER_DEATHS"
+          },
+          "NameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEBASENAME",
+            "Replacement": "NUMBER_DEATHS"
+          },
+          "ValueReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"Calls\": 1",
+            "Replacement": "\"Calls\": REPLACEVALUE"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: Gungeon TrackedStats enum name as event (same path as achievements: WriteInGameEvent name+{Calls}); stat routing unproven"
+      },
+      "Beast Mode Games Completed": {
+        "Request1": {
+          "EventReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEFULLEVENT",
+            "Replacement": "Microsoft.XboxLive.T401515813.BEAST_MODE"
+          },
+          "NameReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEBASENAME",
+            "Replacement": "BEAST_MODE"
+          },
+          "ValueReplacement": {
+            "ReplacementType": "Replace",
+            "Target": "\"Calls\": 1",
+            "Replacement": "\"Calls\": REPLACEVALUE"
+          }
+        },
+        "SuggestedValue": 1,
+        "Confidence": "WEAK: Gungeon TrackedStats enum name as event (same path as achievements: WriteInGameEvent name+{Calls}); stat routing unproven"
+      },
+      "COMPLETEGAMEWITHBEASTMODE.Calls.1": {
+        "Type": "Integer",
+        "PayloadField": "Calls",
+        "SuggestedValue": 1,
+        "DisplayName": "Beast Mode Games Completed [Calls]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "COMPLETEGAMEWITHBEASTMODE"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"COMPLETEGAMEWITHBEASTMODE\",\"serviceConfigId\":\"6e400100-6c4b-4626-abe6-631f17eea525\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"401515813\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Calls\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "Deaths.Calls.1": {
+        "Type": "Integer",
+        "PayloadField": "Calls",
+        "SuggestedValue": 1,
+        "DisplayName": "Number of Deaths [Calls]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "Deaths"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"Deaths\",\"serviceConfigId\":\"6e400100-6c4b-4626-abe6-631f17eea525\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"401515813\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Calls\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "EnemiesKilled.Calls.1": {
+        "Type": "Integer",
+        "PayloadField": "Calls",
+        "SuggestedValue": 1,
+        "DisplayName": "Enemies Killed [Calls]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemiesKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemiesKilled\",\"serviceConfigId\":\"6e400100-6c4b-4626-abe6-631f17eea525\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"401515813\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Calls\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PastsKilled.Calls.1": {
+        "Type": "Integer",
+        "PayloadField": "Calls",
+        "SuggestedValue": 1,
+        "DisplayName": "Pasts Killed [Calls]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PastsKilled"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PastsKilled\",\"serviceConfigId\":\"6e400100-6c4b-4626-abe6-631f17eea525\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"401515813\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Calls\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "TablesFlipped.Calls.1": {
+        "Type": "Integer",
+        "PayloadField": "Calls",
+        "SuggestedValue": 1,
+        "DisplayName": "Tables Flipped [Calls]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "TablesFlipped"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"TablesFlipped\",\"serviceConfigId\":\"6e400100-6c4b-4626-abe6-631f17eea525\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"401515813\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Calls\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatsMode": "EventBased",
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":281587075381460992,\"eventFlags\":514,\"pgName\":\"XBOX\",\"dvcSample\":42.97,\"flags\":52412023344,\"edition\":48,\"epoch\":\"7600054\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":78,\"name\":\"Windows\",\"ver\":\"10.0.26200.9550.amd64fre.ge_release.240331-1435\",\"expId\":\"RS:407D5,MD:283BAEF,ME:3A53D55,ME:3A53F1C,MD:3A53F34,ME:3536BD9,MD:2FE0A31,MD:2FE0A40,MD:2FE0A4F,MD:37B239D,PD:3536CF8,PD:33CDA4D,MD:36AF640,MD:9999,CD:2608D\"},\"app\":{\"id\":\"U:DevolverDigital.57610FDDAB1AC_2.1.11.2_x64__6kzv4j18v0c96!App\",\"ver\":\"2.1.11.2_x64_!2019/09/17:20:06:24!0!enter the gungeon.exe\",\"is1P\":2,\"asId\":98743},\"device\":{\"localId\":\"s:REPLACESESSIONGUID\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"System manufacturer\",\"devModel\":\"System Product Name\",\"ticketKeys\":[\"15484350457\",\"15484350462\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"-04:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    401515813
+  ]
+}

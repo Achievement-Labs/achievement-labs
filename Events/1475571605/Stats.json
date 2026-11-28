@@ -1,0 +1,197 @@
+{
+  "1475571605": {
+    "TitleName": "Gears of War: Ultimate Edition",
+    "ServiceConfigId": "8e4a0100-1d0e-4885-b99e-7f3f57f36f95",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "EnemyDBNO.IsMP.1": {
+        "Type": "Integer",
+        "PayloadField": "IsMP",
+        "SuggestedValue": 1,
+        "DisplayName": "Downs [IsMP]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemyDBNO"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemyDBNO\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMP\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "EnemyDefeated.IsMP.1": {
+        "Type": "Integer",
+        "PayloadField": "IsMP",
+        "SuggestedValue": 1,
+        "DisplayName": "Players Killed [IsMP]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "EnemyDefeated"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"EnemyDefeated\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMP\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerRevived.IsMP.1.ReviveType.0": {
+        "Type": "Integer",
+        "PayloadField": "IsMP",
+        "SuggestedValue": 1,
+        "DisplayName": "Revives [IsMP]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerRevived"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerRevived\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMP\":\"STATPAYLOADINPUT\",\"ReviveType\":0},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatsColumnSkill.Category.1.SubCategory.1": {
+        "Type": "Integer",
+        "PayloadField": "Category",
+        "SuggestedValue": 1,
+        "DisplayName": "Player Level [Category]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatsColumnSkill"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatsColumnSkill\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Category\":\"STATPAYLOADINPUT\",\"SubCategory\":1},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatsColumnTotalGamesPlayed.ActionId.18.ResultType.2": {
+        "Type": "Integer",
+        "PayloadField": "ActionId",
+        "SuggestedValue": 18,
+        "DisplayName": "Matches Completed [ActionId]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatsColumnTotalGamesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatsColumnTotalGamesPlayed\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ActionId\":\"STATPAYLOADINPUT\",\"ResultType\":2},\"measurements\":{}}}"
+          }
+        }
+      },
+      "PlayerRevived.IsMP.1.ReviveType.0 [ReviveType]": {
+        "Type": "Integer",
+        "PayloadField": "ReviveType",
+        "SuggestedValue": 0,
+        "DisplayName": "Revives [ReviveType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PlayerRevived"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PlayerRevived\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"IsMP\":1,\"ReviveType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatsColumnSkill.Category.1.SubCategory.1 [SubCategory]": {
+        "Type": "Integer",
+        "PayloadField": "SubCategory",
+        "SuggestedValue": 1,
+        "DisplayName": "Player Level [SubCategory]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatsColumnSkill"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatsColumnSkill\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"Category\":1,\"SubCategory\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "StatsColumnTotalGamesPlayed.ActionId.18.ResultType.2 [ResultType]": {
+        "Type": "Integer",
+        "PayloadField": "ResultType",
+        "SuggestedValue": 2,
+        "DisplayName": "Matches Completed [ResultType]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatsColumnTotalGamesPlayed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatsColumnTotalGamesPlayed\",\"serviceConfigId\":\"8e4a0100-1d0e-4885-b99e-7f3f57f36f95\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1475571605\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"ActionId\":18,\"ResultType\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:Microsoft.dd1b24e1-a56f-4bc3-a7ae-9bf5c376501f_8wekyb3d8bbwe!App\",\"ver\":\"1.10.0.0_x64_!2016/05/05:08:10:46!0!wargameue.exe\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"w:11111111-1111-1111-1111-111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1475571605
+  ]
+}

@@ -10,12 +10,17 @@ public sealed partial class DesktopModel
     private BuildQueueViewModel? xboxBuildQueue;
     public BuildQueueViewModel XboxBuildQueue => xboxBuildQueue ??= ObserveBuildQueuePreferences(ObserveWorkflow(new BuildQueueViewModel(queueAccount, new NativeNotices(message => Notice = message), eventCatalog) { ConfigureRunner = runner => {
         runner.ReadQueueAchievementsAsync = ReadQueueAchievementsAsync;
+        runner.ReadAchievementsForAccountAsync = ReadAchievementsForAccountAsync;
+        runner.ReadWindows8ReferenceAsync = ReadWindows8ReferenceAsync;
+        runner.ReadWindows8CatalogAsync = ReadWindows8CatalogAsync;
+        runner.SendWindows8AchievementAsync = SendWindows8AchievementAsync;
+        runner.EnsureWindows8TokenAsync = EnsureWindows8TokenAsync;
         runner.PresenceGate = requests;
         runner.MirrorUnlockAsync = MirrorXboxAppUnlockAsync; runner.MirrorExpect = MirrorExpectXbox; runner.MirrorCancel = MirrorCancelXbox;
         runner.FailureNotification = message => AutoUnlockFailure?.Invoke(message);
         runner.CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } };
-    } }));
-    public AutoUnlockerViewModel XboxQueue => xboxQueue ??= ObserveAutoUnlockPreferences(new AutoUnlockerViewModel(new NativeNotices(message => Notice = message), queueAccount) { EventCatalog = eventCatalog, CanDeleteSavedQueue = () => !QueueActive && xboxBuildQueue?.IsAdding != true, AppendSavedGameAsync = state => XboxBuildQueue.AddSavedGameAsync(state), ReadQueueAchievementsAsync = ReadQueueAchievementsAsync, ExternalPresenceActive = () => PresenceRunning, PresenceGate = requests, MirrorUnlockAsync = MirrorXboxAppUnlockAsync, MirrorExpect = MirrorExpectXbox, MirrorCancel = MirrorCancelXbox, FailureNotification = message => AutoUnlockFailure?.Invoke(message), CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } } });
+    }, ReadAchievementsForAccountAsync = ReadAchievementsForAccountAsync, ReadWindows8ReferenceAsync = ReadWindows8ReferenceAsync, ReadWindows8CatalogAsync = ReadWindows8CatalogAsync }));
+    public AutoUnlockerViewModel XboxQueue => xboxQueue ??= ObserveAutoUnlockPreferences(new AutoUnlockerViewModel(new NativeNotices(message => Notice = message), queueAccount) { EventCatalog = eventCatalog, CanDeleteSavedQueue = () => !QueueActive && xboxBuildQueue?.IsAdding != true, AppendSavedGameAsync = state => XboxBuildQueue.AddSavedGameAsync(state), ReadQueueAchievementsAsync = ReadQueueAchievementsAsync, ReadAchievementsForAccountAsync = ReadAchievementsForAccountAsync, ReadWindows8ReferenceAsync = ReadWindows8ReferenceAsync, ReadWindows8CatalogAsync = ReadWindows8CatalogAsync, SendWindows8AchievementAsync = SendWindows8AchievementAsync, EnsureWindows8TokenAsync = EnsureWindows8TokenAsync, ExternalPresenceActive = () => PresenceRunning, PresenceGate = requests, MirrorUnlockAsync = MirrorXboxAppUnlockAsync, MirrorExpect = MirrorExpectXbox, MirrorCancel = MirrorCancelXbox, FailureNotification = message => AutoUnlockFailure?.Invoke(message), CompletionNotification = message => { if (NotifyAutoUnlockCompletion) { AutoUnlockCompleted?.Invoke(message); NotifyWindows("Auto unlock complete", message); } } });
     public SteamAutoUnlockerViewModel SteamQueue => steamQueue ??= ObserveWorkflow(new SteamAutoUnlockerViewModel(steam, new NativeNotices(message => Notice = message)) { MirrorUnlockAsync = MirrorSteamAppUnlockAsync, MirrorExpect = MirrorExpectSteam, MirrorCancel = MirrorCancelSteam });
     public string QueueOwnerXuid => queueAccount.XUIDOnly;
     public bool IsQueues => page == "Queues";
@@ -43,11 +48,46 @@ public sealed partial class DesktopModel
         await XboxQueue.LoadSavedQueueForTitleAsync(titleId);
     }
     private async Task<AchievementsResponse?> ReadQueueAchievementsAsync(string titleId, CancellationToken ct)
+        => await ReadAchievementsForAccountAsync(session?.Xuid ?? throw new InvalidOperationException("Connect an Xbox account first."), titleId, ct);
+
+    private async Task<AchievementsResponse?> ReadWindows8ReferenceAsync(string referenceXuid, string titleId, CancellationToken ct)
     {
+        await EnsureAuthorizationFreshAsync(ct);
         var active = session ?? throw new InvalidOperationException("Connect an Xbox account first.");
-        var api = client ?? throw new InvalidOperationException("Xbox client is unavailable.");
+        using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+        var response = await Windows8Achievements.ReadReferenceQueueAsync(http, active.Authorization, active.Xuid,
+            referenceXuid, ResolveWindows8TitleId(titleId), ct);
+        if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");
+        return response;
+    }
+
+    private async Task<AchievementsResponse?> ReadWindows8CatalogAsync(string titleId, CancellationToken ct)
+    {
+        await EnsureAuthorizationFreshAsync(ct);
+        var active = session ?? throw new InvalidOperationException("Connect an Xbox account first.");
+        using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+        var response = await Windows8Achievements.ReadCatalogQueueAsync(http, active.Authorization, active.Xuid,
+            ResolveWindows8TitleId(titleId), ct);
+        if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");
+        return response;
+    }
+
+    private async Task<AchievementsResponse?> ReadAchievementsForAccountAsync(string xuid, string titleId, CancellationToken ct)
+    {
+        await EnsureAuthorizationFreshAsync(ct);
+        var active = session ?? throw new InvalidOperationException("Connect an Xbox account first.");
         ct.ThrowIfCancellationRequested();
-        var response = await api.GetAchievementsForTitleAsync(active.Xuid, titleId, ct);
+        AchievementsResponse? response;
+        if (IsKnownWindows8Title(titleId))
+        {
+            using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
+            response = await Windows8Achievements.ReadQueueAsync(http, active.Authorization, xuid, ResolveWindows8TitleId(titleId), ct);
+        }
+        else
+        {
+            var api = client ?? throw new InvalidOperationException("Xbox client is unavailable.");
+            response = await api.GetAchievementsForTitleAsync(xuid, titleId, ct);
+        }
         ct.ThrowIfCancellationRequested();
         if (session?.Xuid != active.Xuid) throw new InvalidOperationException("The connected Xbox account changed.");
         return response;

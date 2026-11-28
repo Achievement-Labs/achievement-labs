@@ -17,6 +17,12 @@ static class Test
  static void Submit(Window d)=>Click(Desc<Button>(d).Single(b=>(b.Content as string)=="Unlock / retry selected"));
  public static void Main(string[] args)
  {
+  if(args.Contains("--win8-license")){Windows8LicenseTests.Run();return;}
+  if(args.Contains("--win8-timestamps")){Windows8TimestampTests.Run();return;}
+  if(args.Contains("--win8-queue")){AppBuilder.Configure<Application>().UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();Windows8QueueTests.Run();return;}
+  if(args.Contains("--win8-reference")){Windows8ReferenceTests.Run();return;}
+  if(args.Contains("--title-status")){TitleStatusTests.Run();return;}
+  if(args.Contains("--signed-catalog")){SignedEventCatalogTests.Run();return;}
   if(args.Contains("--startup-mode"))
   {
    var configure=typeof(AchievementLabs.Desktop.MainWindow).Assembly.GetType("AchievementLabs.Desktop.Program")!.GetMethod("ConfigureStartup",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Static)!;
@@ -31,6 +37,11 @@ static class Test
    Console.WriteLine("PASS: ordinary startup enables normal Xbox attachment; only explicit preview/test arguments isolate the 360 page.");return;
   }
   AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--force-english")){ForceEnglishTests.RunAsync().GetAwaiter().GetResult();return;}
+  if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
+  // The default (verify -Full) run includes the catalog suites: the signed catalog and the --port integration path.
+  if(args.Length==0){SignedEventCatalogTests.Run();PortTests.Run();}
+  if(args.Length==3 && args[0]=="--event-stats-catalog"){EventStatsCatalogChecks.RunAsync(args[1],args[2]).GetAwaiter().GetResult();return;}
   if(args.Length==2 && args[0]=="--release-ui"){ReleaseUiChecks.Run(args[1]);return;}
   if(args.Contains("--bundled-stats")){BundledStatsChecks.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--event-verification")){AppBuilder.Configure<Application>().UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();EventVerificationTests.Run();return;}
@@ -45,6 +56,7 @@ static class Test
   if(args.Contains("--exophase-360")){Exophase360Tests.Run();return;}
   if(args.Length==2 && args[0]=="--exophase-live"){using var exo=new AchievementLabs.Services.Xbox360.Exophase360Client();try{var games=exo.FindGamesAsync(args[1],false).GetAwaiter().GetResult();Console.WriteLine($"Live public Exophase lookup: {games.Count} Xbox 360 games.");}catch(Exception e){Console.WriteLine("Live lookup unavailable: "+e.Message);Environment.ExitCode=2;}return;}
   if(args.Contains("--xbox360-preview")){Xbox360TimestampTests.Run();return;}
+  if(args.Contains("--deferred-workspaces")){DeferredWorkspaceTests.Run();return;}
   if(args.Contains("--xbox-title-catalog")){XboxTitleCatalogTests.RunAsync().GetAwaiter().GetResult();return;}
   if(args.Contains("--title-search")){TitleSearchTests.Run();return;}
   if(args.Contains("--library-cache")){LibraryCacheTests.RunAsync().GetAwaiter().GetResult();return;}
@@ -64,6 +76,7 @@ static class Test
   if(args.Contains("--integration") || args.Contains("--scroll"))
   {
    AppContext.SetSwitch("AchievementLabs.OfflineChecks", true);
+  if(args.Contains("--split-stats")){SplitStatsCatalogChecks.RunAsync().GetAwaiter().GetResult();return;}
    string testRoot=Environment.GetEnvironmentVariable("AL_TEST_ROOT")??AppContext.BaseDirectory;
    string root=System.IO.Path.GetFullPath(testRoot);
    System.Runtime.Loader.AssemblyLoadContext.Default.Resolving+=(_,name)=>
@@ -76,6 +89,9 @@ static class Test
    var appType=assembly.GetTypes().Single(t=>t.Name=="App" && typeof(Application).IsAssignableFrom(t));
    AppBuilder.Configure(()=> (Application)Activator.CreateInstance(appType)!).UseHeadless(new AvaloniaHeadlessPlatformOptions()).SetupWithoutStarting();
    var window=(Window)Activator.CreateInstance(assembly.GetTypes().Single(t=>t.Name=="MainWindow"))!;
+   ((AchievementLabs.Desktop.DesktopModel)window.DataContext!).Navigate("Settings");
+   Dispatcher.UIThread.RunJobs();
+   ((AchievementLabs.Desktop.DesktopModel)window.DataContext!).GoBack();
    var saveAll = Desc<Button>(window).Single(b=>b.Name=="SaveAllSettings");
    Assert(Desc<Button>(window).Any(b=>b.Name=="UnlockXbox360Selected" && !b.IsEnabled),"360 unlock is one explicit action and starts gated");
    Assert(!Desc<Button>(window).Any(b=>b.Name is "StageXbox360Review" or "SaveXbox360WorkingCopy"),"Separate stage/save actions removed from normal 360 workflow");
@@ -100,6 +116,17 @@ static class Test
    var settingsTabs=Desc<TabControl>(window).Single(t=>t.Name=="DesktopSettingsTabs");
    Assert(settingsTabs.Items.OfType<TabItem>().Select(t=>t.Header?.ToString()).SequenceEqual(new[]{"Account","Sync","Library","App","Debug","Guides","Appearance"}),"Desktop settings categories are explicit and complete");
    Assert(Desc<Button>(window).Count(b=>b.Name=="SaveAllSettings")==1,"One global save remains accessible above settings tabs");
+   {
+       var desktop=(AchievementLabs.Desktop.DesktopModel)window.DataContext!;var queue=desktop.XboxQueue;
+       var stateField=queue.GetType().GetField("_state",System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance)!;
+       var oldState=stateField.GetValue(queue);
+       stateField.SetValue(queue,new AchievementLabs.Models.AutoUnlockState { CurrentIndex=1, IsRunning=true, Queue=new(){new(){Completed=true},new(){}} });
+       queue.IsRunning=true;
+       Dispatcher.UIThread.RunJobs();
+       Assert(Desc<Button>(window).Single(b=>b.Name=="RemoveCompletedQueueAchievements").IsEffectivelyEnabled,"Remove completed is clickable during Auto Unlock even when CanQuery is false");
+       queue.IsRunning=false;stateField.SetValue(queue,oldState);
+   }
+
    using (var routeClient = new AchievementLabs.Core.EventCatalogClient(true)) {
        Assert(!routeClient.BundledTitleIds.Contains("345903534"),"Legacy Minecraft uses upstream route rather than Bedrock bundled data");
        Assert(routeClient.BundledTitleIds.Contains("1828326430"),"Other Minecraft editions retain bundled route");
@@ -238,6 +265,21 @@ static class Test
     typedModel.XboxQueue.IsRunning=true;typedModel.XboxQueue.IsConfigEnabled=false;Dispatcher.UIThread.RunJobs();
     Assert(queueList.IsEnabled && !typedModel.XboxQueue.QueueItems[0].CanEditDelay,"Running queue list remains enabled while delay controls are locked");
     typedModel.XboxQueue.IsRunning=false;typedModel.XboxQueue.IsConfigEnabled=true;
+    var xq=typedModel.XboxQueue;xq.QueueItems.Clear();
+    xq.QueueItems.Add(new AchievementLabs.Desktop.Workflows.AutoUnlockerViewModel.AutoUnlockQueueDisplay { AchievementName="Dragon Slayer", AchievementDescription="Defeat the boss", AchievementId="11" });
+    xq.QueueItems.Add(new AchievementLabs.Desktop.Workflows.AutoUnlockerViewModel.AutoUnlockQueueDisplay { AchievementName="Collector", AchievementDescription="Find every gem", AchievementId="22" });
+    int Shown()=>((System.Collections.IEnumerable)queueList.ItemsSource!).Cast<object>().Count();
+    xq.QueueSearch="dragon";Dispatcher.UIThread.RunJobs();Assert(Shown()==1,"Xbox queue search filters by name");
+    xq.QueueSearch="gem";Dispatcher.UIThread.RunJobs();Assert(Shown()==1,"Xbox queue search filters by description");
+    xq.QueueSearch="22";xq.QueueItems.Add(new AchievementLabs.Desktop.Workflows.AutoUnlockerViewModel.AutoUnlockQueueDisplay { AchievementName="Other", AchievementId="220" });Dispatcher.UIThread.RunJobs();Assert(Shown()==2,"Xbox queue search follows ID and items added while searching");
+    xq.QueueSearch="";Dispatcher.UIThread.RunJobs();Assert(Shown()==3,"Clearing Xbox queue search shows every item");
+    var sq=typedModel.SteamQueue;sq.QueueItems.Clear();
+    sq.QueueItems.Add(new AchievementLabs.Models.SteamAutoUnlockQueueItem { Id="ACH_WIN", Name="Winner", Description="Win a match" });
+    sq.QueueItems.Add(new AchievementLabs.Models.SteamAutoUnlockQueueItem { Id="ACH_LOSE", Name="Loser", Description="Lose a match" });
+    sq.QueueSearch="ach_win";Assert(sq.VisibleQueueItems.Count()==1,"Steam queue search filters by ID");
+    sq.QueueSearch="match";Assert(sq.VisibleQueueItems.Count()==2,"Steam queue search filters by description");
+    sq.QueueSearch="";Assert(ReferenceEquals(sq.VisibleQueueItems,sq.QueueItems),"Empty Steam queue search shows the live queue");
+    xq.QueueItems.Clear();sq.QueueItems.Clear();
     window.Show();var export=ExportAllView.Show(window,model);Dispatcher.UIThread.RunJobs();
     var dialog=window.OwnedWindows.Single();
     Assert(Desc<ProgressBar>(dialog).Any(b=>b.Name=="AllAchievementsProgress"),"Export progress bar present");

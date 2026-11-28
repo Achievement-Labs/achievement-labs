@@ -8,6 +8,7 @@ using AchievementLabs.Models;
 namespace AchievementLabs.Services.Xbox360;
 
 public sealed record Xbox360ReferenceUnlock(string Name, DateTimeOffset? Time);
+public sealed record ExophaseAwardIdentity(string Id, string Name, int Points);
 public sealed record Xbox360TimestampPreviewRow(string Name, string AchievementId, string CurrentState,
     string ProposedState, string TimeUtc, string Result);
 
@@ -64,6 +65,30 @@ public static class Xbox360TimestampPreview
                 throw new InvalidDataException("A timestamp is before Xbox 360 launch or in the future.");
             result.Add(new(name.Trim(), time));
         }
+    }
+
+    /// <summary>Optional award metadata from a saved Exophase HTML page. These IDs are not assumed to be Xbox IDs.</summary>
+    public static IReadOnlyList<ExophaseAwardIdentity> ParseAwardIdentities(string text)
+    {
+        if (Encoding.UTF8.GetByteCount(text) > 2 * 1024 * 1024 || text.TrimStart().StartsWith('{')) return [];
+        var result = new List<ExophaseAwardIdentity>();
+        foreach (Match item in Regex.Matches(text, @"<li\b(?<attrs>[^>]*)>(?<body>.*?)</li\s*>",
+            RegexOptions.IgnoreCase | RegexOptions.Singleline, RegexTimeout))
+        {
+            var attrs = item.Groups["attrs"].Value;
+            if (!(Attribute(attrs, "class") ?? "").Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries)
+                    .Contains("earned", StringComparer.OrdinalIgnoreCase)) continue;
+            var id = Attribute(attrs, "data-award-id");
+            var points = Attribute(attrs, "data-points");
+            if (id == null || points == null || !int.TryParse(points, NumberStyles.None, CultureInfo.InvariantCulture, out var score)) continue;
+            var title = Regex.Match(item.Groups["body"].Value, "award-title[^>]*>\\s*<a\\b[^>]*>(?<name>.*?)</a>",
+                RegexOptions.IgnoreCase | RegexOptions.Singleline, RegexTimeout);
+            if (!title.Success) continue;
+            var name = WebUtility.HtmlDecode(Regex.Replace(title.Groups["name"].Value, "<[^>]+>", "", RegexOptions.None, RegexTimeout)).Trim();
+            if (id.Length is > 0 and <= 32 && name.Length is > 0 and <= 500 && score > 0)
+                result.Add(new(id, name, score));
+        }
+        return result;
     }
 
     private static string? Attribute(string attrs, string name)

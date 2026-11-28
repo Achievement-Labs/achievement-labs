@@ -1,0 +1,82 @@
+{
+  "1935747145": {
+    "TitleName": "Prototype®2",
+    "ServiceConfigId": "e3580100-1966-4bf5-8742-fbbe73612849",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "StatBioBombKillsNew": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Most Bio-Bomb kills in 30 seconds [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatBioBombKillsNew"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatBioBombKillsNew\",\"serviceConfigId\":\"e3580100-1966-4bf5-8742-fbbe73612849\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1935747145\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "StatDevastatorKills": {
+        "Type": "Integer",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Most kills with one Devastator Attack [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatDevastatorKills"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatDevastatorKills\",\"serviceConfigId\":\"e3580100-1966-4bf5-8742-fbbe73612849\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1935747145\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "StatLongestGlideHero": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Longest time spent in the air [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "StatLongestGlideHero"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"StatLongestGlideHero\",\"serviceConfigId\":\"e3580100-1966-4bf5-8742-fbbe73612849\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"1935747145\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":514,\"pgName\":\"XBOX\",\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"dataType\":33554432,\"isRequired\":false},\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"10.0.18362.0.amd64fre\"},\"app\":{\"id\":\"U:38985CA0.744c35d8-d49f-4319-8eb0-46af023df8fa_5bkah9njm3e9g!App\",\"ver\":\"1\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"ANONYMIZED\",\"devModel\":\"ANONYMIZED\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:REPLACEXUID\"},\"loc\":{\"tz\":\"00:00\"},\"metadata\":REPLACEMETADATA},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    1935747145
+  ]
+}

@@ -5,6 +5,9 @@ param(
     [switch]$RefreshCatalog,
     [switch]$UpdateTest,
     [string]$EventsSource = (Join-Path $PSScriptRoot '../src/AchievementLabs.App/Events'),
+    # Optional local dist folder from Achievement-Labs/achievement-labs-catalog (manifest.json + titles/).
+    # When set, the exe bundles that signed-catalog snapshot pinned to its manifest revision. Events/ bundling is unchanged.
+    [string]$CatalogDist = '',
     [ValidateRange(0,65534)][int]$BuildRevision = 0,
     [string]$BuildRoot = '',
     [string]$PackagesDirectory = '',
@@ -44,6 +47,30 @@ foreach ($taskEventId in $taskEventIds) {
         if (-not (Test-Path -LiteralPath (Join-Path $taskEventsSource $taskEventFile))) { throw "Bundled event file is missing: $taskEventFile" }
     }
 }
+$taskCatalogOptions = @()
+if (-not [string]::IsNullOrWhiteSpace($CatalogDist)) {
+    $taskCatalogDist = [System.IO.Path]::GetFullPath($CatalogDist)
+    # Accept either the published v1 folder itself or a dist root containing v1/.
+    if (-not (Test-Path -LiteralPath (Join-Path $taskCatalogDist 'manifest.json')) -and (Test-Path -LiteralPath (Join-Path $taskCatalogDist 'v1/manifest.json'))) { $taskCatalogDist = Join-Path $taskCatalogDist 'v1' }
+    $taskCatalogManifest = Join-Path $taskCatalogDist 'manifest.json'
+    if (-not (Test-Path -LiteralPath $taskCatalogManifest)) { throw "Catalog snapshot manifest is missing: $taskCatalogManifest" }
+    $taskCatalog = Get-Content -LiteralPath $taskCatalogManifest -Raw | ConvertFrom-Json
+    if ($taskCatalog.schema -ne 1 -or $null -eq $taskCatalog.revision) { throw 'Catalog snapshot manifest has an unsupported schema or no revision.' }
+    foreach ($taskCatalogTitle in $taskCatalog.titles.PSObject.Properties) {
+        $taskEntry = $taskCatalogTitle.Value
+        if ($taskCatalogTitle.Name -notmatch '^[0-9]{1,10}$') { throw "Catalog snapshot has an invalid title id: $($taskCatalogTitle.Name)" }
+        if ([int64]$taskEntry.revision -gt [int64]$taskCatalog.revision) { throw "Catalog snapshot title $($taskCatalogTitle.Name) has a revision above the manifest revision." }
+        if (-not $taskEntry.enabled) { continue }
+        # Only titles/<id>.<12 hex>.json is allowed: no traversal, absolute paths or other folders.
+        if ([string]$taskEntry.path -cnotmatch ('^titles/' + $taskCatalogTitle.Name + '\.[0-9a-f]{12}\.json$')) { throw "Catalog snapshot title path is not allowed: $($taskEntry.path)" }
+        $taskTitleFile = Join-Path $taskCatalogDist $taskEntry.path
+        if (-not (Test-Path -LiteralPath $taskTitleFile)) { throw "Catalog snapshot title is missing: $($taskEntry.path)" }
+        $taskTitleHash = (Get-FileHash -LiteralPath $taskTitleFile -Algorithm SHA256).Hash.ToLowerInvariant()
+        if ($taskTitleHash -ne $taskEntry.sha256 -or (Get-Item -LiteralPath $taskTitleFile).Length -ne $taskEntry.size) { throw "Catalog snapshot title does not match its manifest: $($taskEntry.path)" }
+    }
+    $taskCatalogOptions = @("-p:LabsCatalogSnapshot=$taskCatalogDist")
+    Write-Output "Bundling catalog snapshot revision $($taskCatalog.revision)."
+}
 $taskSigningOptions = @()
 if (-not [string]::IsNullOrWhiteSpace($Xbox360SigningFile)) {
     if (-not (Test-Path -LiteralPath $Xbox360SigningFile)) { throw 'The Xbox 360 signing file was not found.' }
@@ -68,7 +95,15 @@ foreach ($taskHelper in @(
     & dotnet publish (Join-Path $taskRoot "src/$($taskHelper.Project)") -c Release -m:1 -nr:false -r $taskHelper.Rid --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false "-p:Platform=$($taskHelper.Platform)" -p:NuGetAudit=false @taskBuildOptions -o (Join-Path $taskHelpers $taskHelper.Folder) -v:q
     if ($LASTEXITCODE -ne 0) { throw "Helper publish failed: $($taskHelper.Project)" }
 }
-& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -m:1 -nr:false -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$taskEventsSource" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions @taskSigningOptions -o $taskOutput -v:q
+$taskActivationPath = 'tools/Windows8License/runtime/jetpack-auth-investigation'
+$taskActivationSource = Join-Path $taskRoot "$taskActivationPath/ActivateHelper.cs"
+$taskActivationOutput = Join-Path $taskHelpers "$taskActivationPath/ActivateHelper.dll"
+$taskFrameworkCompiler = Join-Path $env:WINDIR 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
+New-Item -ItemType Directory -Path (Split-Path -Parent $taskActivationOutput) -Force | Out-Null
+& $taskFrameworkCompiler /nologo /target:library /optimize+ "/out:$taskActivationOutput" $taskActivationSource
+if ($LASTEXITCODE -ne 0) { throw 'Windows 8 activation helper compilation failed.' }
+
+& dotnet publish (Join-Path $taskRoot 'src/AchievementLabs.Desktop') -c Release -m:1 -nr:false -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:PublishTrimmed=false -p:DebugType=None -p:DebugSymbols=false -p:LabsSingleFile=true "-p:LabsHelperDirectory=$taskHelpers" "-p:LabsEventsSource=$taskEventsSource" "-p:Version=$Version" "-p:AssemblyVersion=$Version.$BuildRevision" "-p:FileVersion=$Version.$BuildRevision" "-p:InformationalVersion=$Version" -p:UsedAvaloniaProducts= -p:NuGetAudit=false @taskBuildOptions @taskSigningOptions @taskCatalogOptions -o $taskOutput -v:q
 if ($LASTEXITCODE -ne 0) { throw 'Release publish failed.' }
 $taskCoreSearch = if ([string]::IsNullOrWhiteSpace($BuildRoot)) { Join-Path $taskRoot 'src/AchievementLabs.Core/obj/Release' } else { Join-Path $taskWork 'build/obj' }
 $taskCore = Get-ChildItem -LiteralPath $taskCoreSearch -Recurse -Filter AchievementLabs.Core.dll | Sort-Object LastWriteTimeUtc -Descending | Select-Object -First 1

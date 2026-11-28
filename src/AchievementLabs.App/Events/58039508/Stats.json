@@ -1,0 +1,82 @@
+{
+  "58039508": {
+    "TitleName": "Bridge Constructor Portal",
+    "ServiceConfigId": "d7460100-46a4-46b3-b31f-74ac03759cd4",
+    "StatsMode": "EventBased",
+    "Stats": {
+      "GameCompletionDecimalFraction": {
+        "Type": "Double",
+        "PayloadField": "Value",
+        "SuggestedValue": "",
+        "DisplayName": "Overall Progress [Value]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "GameCompletionDecimalFraction"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"GameCompletionDecimalFraction\",\"serviceConfigId\":\"d7460100-46a4-46b3-b31f-74ac03759cd4\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"58039508\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{},\"measurements\":{\"Value\":\"STATPAYLOADINPUT\"}}}"
+          }
+        }
+      },
+      "PortalsPassed": {
+        "Type": "Integer",
+        "PayloadField": "PortalsPassed",
+        "SuggestedValue": "",
+        "DisplayName": "Portals Passed [PortalsPassed]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "PortalsPassed"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"PortalsPassed\",\"serviceConfigId\":\"d7460100-46a4-46b3-b31f-74ac03759cd4\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"58039508\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"PortalsPassed\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      },
+      "VehiclesDelivered": {
+        "Type": "Integer",
+        "PayloadField": "VehiclesDelivered",
+        "SuggestedValue": "",
+        "DisplayName": "Vehicles Delivered [VehiclesDelivered]",
+        "Request1": {
+          "EventName": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEEVENTNAME",
+            "Replacement": "VehiclesDelivered"
+          },
+          "Metadata": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEMETADATA",
+            "Replacement": "{\"policies\":0}"
+          },
+          "Data": {
+            "ReplacementType": "Replace",
+            "Target": "REPLACEDATA",
+            "Replacement": "{\"baseType\":\"Microsoft.XboxLive.InGame\",\"baseData\":{\"name\":\"VehiclesDelivered\",\"serviceConfigId\":\"d7460100-46a4-46b3-b31f-74ac03759cd4\",\"playerSessionId\":\"REPLACESESSIONGUID\",\"titleId\":\"58039508\",\"userId\":\"REPLACEXUID\",\"ver\":1,\"properties\":{\"VehiclesDelivered\":\"STATPAYLOADINPUT\"},\"measurements\":{}}}"
+          }
+        }
+      }
+    },
+    "StatTemplate": "{\"ver\":\"4.0\",\"name\":\"REPLACEEVENTNAME\",\"time\":\"REPLACETIME\",\"iKey\":\"o:0890af88a9ed4cc886a14f5e174a2827\",\"ext\":{\"utc\":{\"shellId\":1,\"eventFlags\":1,\"pgName\":\"XBOX\",\"flags\":1,\"epoch\":\"1\",\"seq\":REPLACESEQ},\"privacy\":{\"isRequired\":false},\"metadata\":REPLACEMETADATA,\"os\":{\"bootId\":1,\"name\":\"Windows\",\"ver\":\"1\",\"expId\":\"1\"},\"app\":{\"id\":\"U:HeadupGames.BridgeConstructorPortal_zedvb25zy7eke!App\",\"ver\":\"!App\",\"is1P\":1,\"asId\":1},\"device\":{\"localId\":\"s:11111111-1111-1111-1111-111111111111\",\"deviceClass\":\"Windows.Desktop\"},\"protocol\":{\"devMake\":\"1\",\"devModel\":\"1\",\"ticketKeys\":[\"1\"]},\"user\":{\"localId\":\"m:1111111111111111\"},\"loc\":{\"tz\":\"00:00\"}},\"data\":REPLACEDATA}"
+  },
+  "SupportedTitleIDs": [
+    58039508
+  ]
+}

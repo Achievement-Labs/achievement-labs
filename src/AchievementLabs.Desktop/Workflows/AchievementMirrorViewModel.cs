@@ -323,6 +323,11 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         try
         {
             var titleId = titleNumber.ToString();
+            if (DesktopModel.IsKnownWindows8Title(titleId))
+            {
+                titleId = DesktopModel.ResolveWindows8TitleId(titleId);
+                XboxTitleIdText = titleId;
+            }
             var steamTask = ReadSteamForScanAsync(appId, SteamIdText.Trim(), lifetime.Token);
             var xboxTask = host.ReadXboxAsync(titleId, lifetime.Token);
             await Task.WhenAll(steamTask, xboxTask);
@@ -359,7 +364,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         if (!pair.ReadyToMonitor) { Status = $"{pair.UnresolvedCount} achievement(s) still need review. Pick a match or choose \"No equivalent\" for each."; return; }
         if (pair.Direction == MirrorDirection.SteamToXbox && !SteamWebApi.IsSteamId64(pair.SteamId)) { Status = "Scan again with your SteamID64 filled in."; return; }
         var clash = runners.Values.FirstOrDefault(r => r.Pair != pair && r.Status != MirrorStatus.Idle
-            && (r.Pair.SteamAppId == pair.SteamAppId || r.Pair.XboxTitleId == pair.XboxTitleId));
+            && (r.Pair.SteamAppId == pair.SteamAppId || SameXboxTitle(r.Pair.XboxTitleId, pair.XboxTitleId)));
         if (clash != null) { Status = $"{clash.Pair.DisplayName} already mirrors this game. Stop it first."; return; }
         if (PresenceConflictMessage(pair) is { } conflict)
         {
@@ -370,6 +375,8 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         Status = "Reading the current unlocks so nothing already earned is copied…";
         try
         {
+            if (pair.Direction == MirrorDirection.SteamToXbox)
+                await host.EnsureXboxWriteReadyAsync(pair.XboxTitleId, lifetime.Token);
             ResetSources(pair);
             if (idlePausedApp == pair.SteamAppId) idlePausedApp = 0;
             IReadOnlyList<MirrorAchievement> baseline;
@@ -420,7 +427,12 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         var runner = SelectedRunner;
         if (runner == null || runner.Status != MirrorStatus.Stopped) return;
         if (PresenceConflictMessage(runner.Pair) is { } conflict) { Status = conflict; return; }
-        try { await runner.ResumeAsync(send, lifetime.Token); }
+        try
+        {
+            if (send && runner.Pair.Direction == MirrorDirection.SteamToXbox)
+                await host.EnsureXboxWriteReadyAsync(runner.Pair.XboxTitleId, lifetime.Token);
+            await runner.ResumeAsync(send, lifetime.Token);
+        }
         catch (InvalidOperationException error) { Status = error.Message; }
         EnsureLoop(); UpdateWatcher(); RefreshRunnerState();
     }
@@ -444,8 +456,11 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
 
     // ---- Hooks for unlocks Achievement Labs makes itself ----
 
+    private static bool SameXboxTitle(string first, string second) =>
+        DesktopModel.ResolveWindows8TitleId(first) == DesktopModel.ResolveWindows8TitleId(second);
+
     private MirrorRunner? AppUnlockRunner(MirrorDirection direction, string titleId, long appId) => runners.Values.FirstOrDefault(r =>
-        r.Status != MirrorStatus.Idle && r.Pair.Direction == direction && (direction == MirrorDirection.XboxToSteam ? r.Pair.XboxTitleId == titleId : r.Pair.SteamAppId == appId));
+        r.Status != MirrorStatus.Idle && r.Pair.Direction == direction && (direction == MirrorDirection.XboxToSteam ? SameXboxTitle(r.Pair.XboxTitleId, titleId) : r.Pair.SteamAppId == appId));
 
     /// <summary>Call before Achievement Labs unlocks an Xbox achievement (see <see cref="MirrorRunner.ExpectAppUnlock"/>).</summary>
     public void ExpectXboxAppUnlock(string titleId, string achievementId, string name) => AppUnlockRunner(MirrorDirection.XboxToSteam, titleId, 0)?.ExpectAppUnlock(achievementId, name);
@@ -457,7 +472,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     /// <summary>Achievement Labs unlocked an Xbox achievement. Returns false if mirroring it failed.</summary>
     public Task<bool> ReportXboxAppUnlockAsync(string titleId, string achievementId, string name, CancellationToken cancellationToken)
     {
-        var runner = runners.Values.FirstOrDefault(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.XboxToSteam && r.Pair.XboxTitleId == titleId);
+        var runner = runners.Values.FirstOrDefault(r => r.Status != MirrorStatus.Idle && r.Pair.Direction == MirrorDirection.XboxToSteam && SameXboxTitle(r.Pair.XboxTitleId, titleId));
         return runner == null ? Task.FromResult(true) : runner.ReportAppUnlockAsync(achievementId, name, cancellationToken);
     }
 
@@ -481,10 +496,10 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
         var issues = new List<MirrorPreflightIssue>();
         foreach (var (titleId, titleName, ids) in queues)
         {
-            var runner = active.FirstOrDefault(r => r.Pair.XboxTitleId == titleId);
+            var runner = active.FirstOrDefault(r => SameXboxTitle(r.Pair.XboxTitleId, titleId));
             if (runner == null)
             {
-                var saved = Pairs.FirstOrDefault(p => p.Direction == MirrorDirection.XboxToSteam && p.XboxTitleId == titleId);
+                var saved = Pairs.FirstOrDefault(p => p.Direction == MirrorDirection.XboxToSteam && SameXboxTitle(p.XboxTitleId, titleId));
                 issues.Add(new(titleName, saved == null ? "Not paired in Achievement Mirror, so its unlocks won't reach Steam." : "Paired, but mirroring isn't running for it, so its unlocks won't reach Steam.", false));
                 continue;
             }
@@ -761,7 +776,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     private string? playingSource;
 
     /// <summary>Steam → Xbox pairs show the game on Xbox; with "Show me in the game" on, Xbox → Steam pairs do too.</summary>
-    private static bool UsesXboxPresence(MirrorPair pair) => pair.Direction == MirrorDirection.SteamToXbox || pair.ShowInGame;
+    private static bool UsesXboxPresence(MirrorPair pair) => !DesktopModel.IsKnownWindows8Title(pair.XboxTitleId) && (pair.Direction == MirrorDirection.SteamToXbox || pair.ShowInGame);
 
     private string? PresenceConflictMessage(MirrorPair pair) =>
         UsesXboxPresence(pair) && host.XboxPresenceConflict(pair.XboxTitleId) is { } other
@@ -771,6 +786,7 @@ public sealed partial class AchievementMirrorViewModel : ObservableObject, IDisp
     /// <summary>Before each Steam → Xbox unlock: make sure Xbox shows you in the game, if only briefly.</summary>
     private async Task EnsurePresenceForUnlockAsync(MirrorPair pair, CancellationToken token)
     {
+        if (!UsesXboxPresence(pair)) return;
         if (PresenceConflictMessage(pair) is { } conflict) throw new InvalidOperationException(conflict);
         presenceBurstUntil[pair.Id] = DateTimeOffset.Now + PresenceBurst;
         if (host.XboxPresenceShows(pair.XboxTitleId)) return;

@@ -80,7 +80,7 @@ def build(release,archive,reserved):
             if name.startswith('/') or any(p in ('.','..') for p in name.split('/')) or not name.startswith('Events/'): raise ValueError('Unexpected path')
             if info.is_dir(): continue
             short=name[7:]
-            if ('/' in short and not re.fullmatch(r'[0-9]{1,10}/(?:Data|[0-9]{1,10})\.json',short)) or short.lower() in entries: raise ValueError('Ambiguous archive')
+            if ('/' in short and not re.fullmatch(r'[0-9]{1,10}/(?:Data|Stats|[0-9]{1,10})\.json',short)) or short.lower() in entries: raise ValueError('Ambiguous archive')
             entries[short.lower()]=info
         indexed='index.json' in entries
         info=entries['index.json' if indexed else 'data.json']

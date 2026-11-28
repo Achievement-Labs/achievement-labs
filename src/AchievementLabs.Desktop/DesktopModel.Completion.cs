@@ -165,7 +165,7 @@ public sealed partial class DesktopModel
         {
             using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
             http.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", connected.Authorization);
-            http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", "en-GB");
+            http.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Language", XboxResponseLanguage.Resolve(RegionOverride));
             var engine = new AchievementExport(http, connected.Xuid);
             foreach (var game in pending)
             {

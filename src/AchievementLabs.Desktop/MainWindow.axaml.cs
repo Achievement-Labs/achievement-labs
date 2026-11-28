@@ -1,3 +1,4 @@
+using Avalonia.LogicalTree;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input.Platform;
 using Avalonia.Input;
@@ -21,10 +22,25 @@ public partial class MainWindow : Window
     private readonly DispatcherTimer xboxPresenceTimer = new() { Interval = TimeSpan.FromSeconds(2) };
     private readonly DispatcherTimer tokenMaintenanceTimer = new() { Interval = AchievementLabs.Core.XboxTokenMaintenancePolicy.CheckInterval };
 
+    private void SettingsWorkspaceCreated(object? sender, EventArgs args)
+    {
+        if (sender is not DeferredWorkspace { Content: Control settings }) return;
+        var appearance = Presentation.AppearanceController.For(this);
+        var controls = settings.GetLogicalDescendants().ToArray();
+        var tabs = controls.OfType<TabControl>().Single(tab => tab.Name == "DesktopSettingsTabs");
+        tabs.Items.Add(new TabItem { Header = "Appearance", Name = "AppearanceTab", Content = appearance.BuildSettings() });
+        controls.OfType<Button>().Single(button => button.Name == "SaveAllSettings").Click += (_, _) => appearance.Save();
+        AchievementLabs.MultiSelect.EventTokenView.Attach(this, settings);
+        ApplyMacPlatformControls(settings);
+    }
+
     public MainWindow()
     {
         MacStartup.Stage("Loading main window");
-        InitializeComponent(); DataContext = model;
+        InitializeComponent();
+        MacStartup.Stage("Window XAML loaded");
+        DataContext = model;
+        MacStartup.Stage("Model bindings installed");
         model.UpdatePrompt = PromptAppUpdateAsync;
         ConfigurePlatformSidebar();
         AddHandler(KeyDownEvent, NavigationKeyDown, Avalonia.Interactivity.RoutingStrategies.Tunnel, true);
@@ -44,7 +60,9 @@ public partial class MainWindow : Window
         };
         AchievementLabs.MultiSelect.BatchPicker.Attach(this);
         Presentation.GameSessionWorkspace.Attach(this);
+        MacStartup.Stage("Workspace attached");
         StartOverlay();
+        MacStartup.Stage("Overlay initialized");
         ApplyMacPlatformControls();
         AchievementLabs.MultiSelect.SearchClearButtons.Attach(this);
         Workflows.NativeClipboard.WriteAsync = async text => { try { if (Clipboard != null) await Clipboard.SetTextAsync(text); } catch { model.Notice = "Could not copy to the clipboard."; } };
@@ -52,6 +70,7 @@ public partial class MainWindow : Window
         var offlineChecks = AppContext.TryGetSwitch("AchievementLabs.OfflineChecks", out var offline) && offline;
         var local360Preview = Environment.GetCommandLineArgs().Contains("--xbox360-local-test") || AppContext.TryGetSwitch("AchievementLabs.StartOnXbox360",out var start360) && start360;
         if (!offlineChecks || local360Preview) model.RestoreXbox360SigningData();
+        MacStartup.Stage("Xbox 360 setup finished");
         var startupWindowCheck = Environment.GetCommandLineArgs().Contains("--window-startup-test");
         if (!offlineChecks && !Environment.GetCommandLineArgs().Contains("--smoke-test") && !Environment.GetCommandLineArgs().Contains("--release-smoke-test"))
         {
@@ -582,6 +601,52 @@ public partial class MainWindow : Window
     private async void CompleteBrowserLogin(object? s, RoutedEventArgs e) => await model.CompleteBrowserLoginAsync();
     private async void UnlockSelected(object? s, RoutedEventArgs e) => await model.UnlockSelectedAsync();
     private async void UnlockAll(object? s, RoutedEventArgs e) => await model.UnlockAllAsync();
+    private async void LaunchWin8Game(object? s, RoutedEventArgs e) => await model.LaunchWin8GameAsync();
+    private async void GrabWin8Token(object? s, RoutedEventArgs e) => await model.GrabWin8TokenAsync();
+    private async void AcquireWin8Token(object? s, RoutedEventArgs e) => await model.AcquireWin8TokenAsync();
+    private void RandomizeWin8Time(object? s, RoutedEventArgs e) => model.RandomizeWin8Time();
+    private async void AcquireWin8QueueToken(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        if ((string?)button.Tag == "build") await model.XboxBuildQueue.AcquireWindows8TokenAsync();
+        else await model.XboxQueue.AcquireWindows8TokenAsync();
+    }
+    private async void OpenWin8Receipt(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        try
+        {
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select this game's signed pop.bin", AllowMultiple = false,
+                FileTypeFilter = [new FilePickerFileType("Windows 8 receipt") { Patterns = ["*.bin"] }]
+            });
+            if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+            switch ((string?)button.Tag)
+            {
+                case "build": await model.XboxBuildQueue.AcquireWindows8TokenAsync(path); break;
+                case "auto": await model.XboxQueue.AcquireWindows8TokenAsync(path); break;
+                default: await model.AcquireWin8TokenAsync(path); break;
+            }
+        }
+        catch (Exception error) { model.Notice = error.Message; }
+    }
+    private async void ImportWin8QueueReference(object? sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        try
+        {
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Select saved reference achievements page or JSON", AllowMultiple = false,
+                FileTypeFilter = [new FilePickerFileType("Saved page or JSON") { Patterns = ["*.html", "*.htm", "*.json"] }]
+            });
+            if (files.FirstOrDefault()?.TryGetLocalPath() is not { } path) return;
+            if ((string?)button.Tag == "build") await model.XboxBuildQueue.ImportWindows8ReferenceAsync(path);
+            else await model.XboxQueue.ImportWindows8ReferenceAsync(path);
+        }
+        catch (Exception error) { model.Notice = error.Message; }
+    }
     private async void ExportVerifiedTotals(object? sender, RoutedEventArgs e)
     {
         var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions { Title = "Export all cached successful totals", SuggestedFileName = "achievement-verified-totals.csv", DefaultExtension = "csv" });
