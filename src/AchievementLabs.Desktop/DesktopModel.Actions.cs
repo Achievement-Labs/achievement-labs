@@ -80,12 +80,13 @@ public sealed partial class DesktopModel
     }
     private async Task SubmitAchievementsAsync(string[] ids)
     {
-        if(client==null || session==null || SelectedGame==null)return;
+        if(client==null || session==null || SelectedGame==null) { UnlockDiagnosticsLog.Write($"abort: client={client!=null} session={session!=null} game={SelectedGame!=null}"); return; }
         var game=SelectedGame;var source=definitions;var useEvents=eventBased;
+        UnlockDiagnosticsLog.Write($"submit: title={game.Id} ids=[{string.Join(",", ids)}] eventBased={useEvents} supported={eventTitleSupported}");
         Busy(true);ActionReports.Clear();ActionSummary="Sending selected achievements together…";
         try {
             await EnsureAuthorizationFreshAsync(lifetime.Token);
-            if(useEvents) { try { await EnsureEventTokenAsync(lifetime.Token); } catch(InvalidOperationException error) { ActionSummary=error.Message;if(EventTokenRequired!=null)await EventTokenRequired();return; } }
+            if(useEvents) { try { await EnsureEventTokenAsync(lifetime.Token); } catch(InvalidOperationException error) { UnlockDiagnosticsLog.Write("event token unavailable: " + error.Message); ActionSummary=error.Message;if(EventTokenRequired!=null)await EventTokenRequired();return; } }
             await requests.WaitAsync(lifetime.Token);
             try {
                 var account=session;if(account==null)return;
@@ -96,8 +97,11 @@ public sealed partial class DesktopModel
                         if(session?.Xuid!=account.Xuid)throw new OperationCanceledException();
                         if(useEvents) {
                             var payloads=await eventCatalog.GetPayloadsAsync(game.Id,id,account.Xuid,lifetime.Token);
+                            int payloadCount=payloads.Payloads.Length;
+                            UnlockDiagnosticsLog.Write($"payloads: title={game.Id} achievement={id} count={payloadCount}");
                             foreach(var payload in payloads.Payloads) {
                                 lifetime.Token.ThrowIfCancellationRequested();var result=await api.UnlockEventBasedAchievementWithDiagnostics(account.EventsToken,payload);
+                                UnlockDiagnosticsLog.WriteResult("send", game.Id, id, result.StatusCode, result.ReasonPhrase, result.ResponseBody);
                                 if(result.StatusCode is 401 or 403) { MirrorCancelXbox(game.Id,id); return(definition.name,"Authorization rejected; refresh the event token.",true); }
                                 if(result.StatusCode<200 || result.StatusCode>=300)throw new HttpRequestException($"HTTP {result.StatusCode} {result.ReasonPhrase}");
                             }
@@ -109,7 +113,7 @@ public sealed partial class DesktopModel
                             return(definition.name,"Request accepted · Achievement Mirror couldn't copy it to Steam; see Achievement Mirror",false);
                         return(definition.name,"Request accepted; refresh Xbox progress to verify.",false);
                     } catch(OperationCanceledException) { MirrorCancelXbox(game.Id,id); throw; }
-                    catch(Exception error) { MirrorCancelXbox(game.Id,id); return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }
+                    catch(Exception error) { MirrorCancelXbox(game.Id,id); UnlockDiagnosticsLog.Write($"failed: title={game.Id} achievement={id}: {error.Message}"); return(definition.name,"Request not confirmed · "+error.Message+" · refresh before retrying",false); }
                 }
                 foreach(var batch in ids.Distinct().Chunk(3)) {
                     var results=await Task.WhenAll(batch.Select(Send));
